@@ -1,999 +1,1573 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Akar Town — Exclusive Real Estate</title>
-  <meta name="description" content="Akar Town — Discover exceptional luxury properties across Egypt's finest locations.">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Akar Town — Exclusive Real Estate</title>
+    <meta
+      name="description"
+      content="Akar Town — Discover exceptional luxury properties across Egypt's finest locations."
+    />
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,200;9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Noto+Kufi+Arabic:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Swiper CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <!-- Swiper CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
 
-<style>
-/* ─────────────────────────────────────────────
+    <style>
+      /* ─────────────────────────────────────────────
    DESIGN TOKENS
 ───────────────────────────────────────────── */
-:root {
-  --bg:           #FAF8F5;
-  --ink:          #0D0D0D;
-  --ink-60:       rgba(13,13,13,.60);
-  --ink-30:       rgba(13,13,13,.30);
-  --ink-10:       rgba(13,13,13,.10);
-  --gold:         #C9A96E;
-  --gold-lt:      #E4C99A;
-  --gold-dk:      #A07C40;
-  --red:          #CC2222;
-  --white:        #FFFFFF;
+      :root {
+        --bg: #faf8f5;
+        --ink: #0d0d0d;
+        --ink-60: rgba(13, 13, 13, 0.6);
+        --ink-30: rgba(13, 13, 13, 0.3);
+        --ink-10: rgba(13, 13, 13, 0.1);
+        --gold: #c9a96e;
+        --gold-lt: #e4c99a;
+        --gold-dk: #a07c40;
+        --red: #cc2222;
+        --white: #ffffff;
 
-  --glass-bg:     rgba(250,248,245,.72);
-  --glass-border: rgba(255,255,255,.55);
-  --glass-dark:   rgba(13,13,13,.08);
+        --glass-bg: rgba(250, 248, 245, 0.72);
+        --glass-border: rgba(255, 255, 255, 0.55);
+        --glass-dark: rgba(13, 13, 13, 0.08);
 
-  --font-serif:   'Cormorant Garamond', Georgia, serif;
-  --font-sans:    'DM Sans', system-ui, sans-serif;
+        --font-body-ltr: "Archivo", system-ui, sans-serif;
+        --font-body-rtl: "Noto Kufi Arabic", system-ui, sans-serif;
 
-  --nav-h:        80px;
-  --thumb-w:      260px;
-  --ease-smooth:  cubic-bezier(.76,0,.24,1);
-  --ease-out-ex:  cubic-bezier(.16,1,.3,1);
-}
+        --nav-h: 62px;
+        --thumb-w: 300px;
+        --ease-smooth: cubic-bezier(0.76, 0, 0.24, 1);
+        --ease-out-ex: cubic-bezier(0.16, 1, 0.3, 1);
+      }
 
-/* ─────────────────────────────────────────────
-   RESET
+      /* ─────────────────────────────────────────────
+   RESET & GLOBAL FONT BASE
 ───────────────────────────────────────────── */
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { -webkit-font-smoothing:antialiased; overflow-x:hidden; }
-body {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: var(--font-sans);
-  overflow-x: hidden;
-  min-height: 100vh;
-}
-button { border:none; background:none; cursor:pointer; font-family:inherit; }
-a { text-decoration:none; }
-img { display:block; }
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-/* ─────────────────────────────────────────────
+      html {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+        /* Set on html so every element (including form controls) inherits */
+        font-family: var(--font-body-ltr);
+        font-size: 16px;
+        font-kerning: normal;
+        text-rendering: optimizeLegibility;
+        font-feature-settings:
+          "kern" 1,
+          "liga" 1,
+          "calt" 1;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: inherit;
+        overflow-x: hidden;
+        min-height: 100vh;
+        line-height: 1.6;
+      }
+
+      /* Form controls do NOT inherit font from body by default in most browsers */
+      input,
+      textarea,
+      select,
+      button,
+      optgroup,
+      option {
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+        color: inherit;
+      }
+
+      button {
+        border: none;
+        background: none;
+        cursor: pointer;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      img,
+      svg,
+      video {
+        display: block;
+        max-width: 100%;
+      }
+
+      /* RTL / Arabic — apply to any element with dir="rtl" or lang="ar" */
+      [dir="rtl"],
+      [lang="ar"],
+      :lang(ar) {
+        font-family: var(--font-body-rtl);
+        direction: rtl;
+        text-align: right;
+      }
+
+      /* Brand text selection */
+      ::selection {
+        background: var(--gold);
+        color: var(--ink);
+      }
+      ::-moz-selection {
+        background: var(--gold);
+        color: var(--ink);
+      }
+
+      /* ─────────────────────────────────────────────
    NAVBAR
 ───────────────────────────────────────────── */
-.navbar {
-  position: fixed;
-  inset: 0 0 auto 0;
-  z-index: 200;
-  height: var(--nav-h);
-  padding: 0 48px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--glass-bg);
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-  border-bottom: 1px solid var(--glass-border);
-  box-shadow: 0 1px 0 var(--glass-border), 0 8px 40px var(--glass-dark);
-}
+      /* ── Transparent overlay — becomes dark glass on scroll ── */
+      .navbar {
+        position: fixed;
+        inset: 0 0 auto 0;
+        z-index: 200;
+        height: var(--nav-h);
+        padding: 0 48px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: transparent;
+        border-bottom: 1px solid transparent;
+        transition:
+          background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+          border-color 0.5s ease,
+          box-shadow 0.5s ease;
+      }
 
-.navbar__logo {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
+      .navbar.is-scrolled {
+        background: rgba(8, 8, 8, 0.82);
+        backdrop-filter: blur(48px) saturate(180%);
+        -webkit-backdrop-filter: blur(48px) saturate(180%);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.04),
+          0 8px 40px rgba(0, 0, 0, 0.4);
+      }
 
-.navbar__nav {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  list-style: none;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
+      .navbar__logo {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+      }
 
-.navbar__nav a {
-  font-family: var(--font-sans);
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--ink-60);
-  position: relative;
-  transition: color .3s ease;
-}
+      /* Right-side group: links + divider + CTA */
+      .navbar__right {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+      }
 
-.navbar__nav a::after {
-  content: '';
-  position: absolute;
-  bottom: -3px; left: 0;
-  width: 0; height: 1px;
-  background: var(--gold);
-  transition: width .4s var(--ease-smooth);
-}
+      .navbar__nav {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        list-style: none;
+      }
 
-.navbar__nav a:hover { color: var(--ink); }
-.navbar__nav a:hover::after { width: 100%; }
+      .navbar__nav a {
+        font-family: var(--font-body-ltr);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.9);
+        position: relative;
+        transition: color 0.25s ease;
+      }
 
-.navbar__actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+      .navbar__nav a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--gold);
+        transition: width 0.38s var(--ease-smooth);
+      }
 
-.btn-nav {
-  font-family: var(--font-sans);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  padding: 10px 22px;
-  border-radius: 5px;
-  transition: all .3s ease;
-  display: inline-flex;
-  align-items: center;
-}
+      .navbar__nav a:hover {
+        color: rgba(255, 255, 255, 0.95);
+      }
+      .navbar__nav a:hover::after {
+        width: 100%;
+      }
 
-.btn-nav--outline {
-  color: var(--ink);
-  border: 1px solid var(--ink-30);
-}
-.btn-nav--outline:hover {
-  background: var(--ink);
-  color: var(--white);
-  border-color: var(--ink);
-  transform: translateY(-1px);
-}
+      /* Thin vertical divider between links and CTA */
+      .navbar__sep {
+        width: 1px;
+        height: 18px;
+        background: rgba(255, 255, 255, 0.15);
+        flex-shrink: 0;
+      }
 
-/* ─────────────────────────────────────────────
+      .navbar__actions {
+        display: flex;
+        align-items: center;
+      }
+
+      /* Scale down btn-slide when used inside the navbar */
+      .navbar__actions .btn-slide {
+        font-size: 11px;
+        padding: 9px 20px;
+        letter-spacing: 0.06em;
+      }
+
+      .btn-nav {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--font-body-ltr);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 9px 22px;
+        line-height: 1;
+        border-radius: 2px;
+        white-space: nowrap;
+        cursor: pointer;
+        border: none;
+        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      /* CTA — gold pill on transparent/dark navbar */
+      .btn-nav--outline {
+        color: var(--ink);
+        background: var(--gold);
+        box-shadow: 0 0 0 0 rgba(201, 169, 110, 0);
+      }
+      .btn-nav--outline:hover {
+        background: var(--gold-lt);
+        box-shadow: 0 4px 24px rgba(201, 169, 110, 0.45);
+        transform: translateY(-1px);
+      }
+
+      /* ─────────────────────────────────────────────
    HERO SHELL
 ───────────────────────────────────────────── */
-.hero {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  min-height: 640px;
-  display: flex;
-  padding-top: var(--nav-h);
-  overflow: hidden;
-}
+      .hero {
+        position: relative;
+        width: 100%;
+        height: 88vh;
+        min-height: 580px;
+        overflow: hidden;
+      }
 
-/* ─────────────────────────────────────────────
+      /* ─────────────────────────────────────────────
    THUMBNAILS SIDEBAR
+   Absolutely positioned over the full-width stage
+   so the hero image bleeds through as a backdrop.
 ───────────────────────────────────────────── */
-.hero__thumbs {
-  position: relative;
-  z-index: 30;
-  width: var(--thumb-w);
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 32px 20px;
-  gap: 6px;
-  background: var(--glass-bg);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border-right: 1px solid var(--glass-border);
-  box-shadow: 1px 0 0 var(--glass-border);
-}
+      .hero__thumbs {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 30;
+        width: var(--thumb-w);
+        display: flex;
+        flex-direction: column;
+        padding: calc(var(--nav-h) + 12px) 12px 20px 44px;
+        gap: 5px;
 
-.thumb-item {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  padding: 12px 14px;
-  border-radius: 14px;
-  cursor: pointer;
-  border: 1px solid transparent;
-  overflow: hidden;
-  transition: all .45s var(--ease-smooth);
-  outline: none;
-}
+        /* ── Liquid glass ── */
+        background: linear-gradient(
+          170deg,
+          color-mix(in oklab, #000 38%, transparent) 0%,
+          color-mix(in oklab, #000 22%, transparent) 55%,
+          color-mix(in oklab, #000 32%, transparent) 100%
+        );
+        backdrop-filter: blur(60px) saturate(130%) brightness(0.72);
+        -webkit-backdrop-filter: blur(60px) saturate(130%) brightness(0.72);
+        /* Soft right-edge separator */
+        box-shadow:
+          inset -1px 0 0 color-mix(in oklab, #fff 14%, transparent),
+          4px 0 32px rgba(0, 0, 0, 0.18);
+      }
 
-.thumb-item::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 14px;
-  background: rgba(201,169,110,0);
-  transition: background .45s ease;
-}
+      /* Top + bottom fade-out vignette */
+      .hero__thumbs::before,
+      .hero__thumbs::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 72px;
+        pointer-events: none;
+        z-index: 1;
+      }
+      .hero__thumbs::before {
+        top: 0;
+        background: linear-gradient(
+          to bottom,
+          color-mix(in oklab, #000 38%, transparent) 0%,
+          transparent 100%
+        );
+      }
+      .hero__thumbs::after {
+        bottom: 0;
+        background: linear-gradient(
+          to top,
+          color-mix(in oklab, #000 38%, transparent) 0%,
+          transparent 100%
+        );
+      }
 
-.thumb-item:hover::after { background: rgba(201,169,110,.06); }
+      /* ── Items ── */
+      .thumb-item {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 8px 10px;
+        border-radius: 11px;
+        cursor: pointer;
+        border: 1px solid transparent;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        outline: none;
+      }
 
-.thumb-item.is-active {
-  border-color: var(--gold);
-  background: rgba(201,169,110,.07);
-  box-shadow: 0 0 0 1px rgba(201,169,110,.35), 0 6px 28px rgba(201,169,110,.18);
-}
+      .thumb-item::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 11px;
+        background: transparent;
+        transition: background 0.4s ease;
+      }
 
-.thumb-item__img-wrap {
-  width: 52px;
-  height: 52px;
-  border-radius: 10px;
-  overflow: hidden;
-  flex-shrink: 0;
-  transition: all .45s var(--ease-smooth);
-}
+      .thumb-item:hover::before {
+        background: color-mix(in oklab, #fff 8%, transparent);
+      }
 
-.thumb-item.is-active .thumb-item__img-wrap {
-  width: 62px;
-  height: 62px;
-}
+      .thumb-item.is-active {
+        border-color: color-mix(in oklab, var(--gold) 55%, transparent);
+        background: color-mix(in oklab, var(--gold) 14%, transparent);
+      }
 
-.thumb-item__img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform .6s ease;
-  will-change: transform;
-}
+      /* ── Thumbnail image ── */
+      .thumb-item__img-wrap {
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+        overflow: hidden;
+        flex-shrink: 0;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+      }
 
-.thumb-item:hover .thumb-item__img-wrap img { transform: scale(1.1); }
+      .thumb-item.is-active .thumb-item__img-wrap {
+        width: 54px;
+        height: 54px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+      }
 
-.thumb-item__meta {
-  flex: 1;
-  min-width: 0;
-}
+      .thumb-item__img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+        will-change: transform;
+      }
 
-.thumb-item__num {
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 4px;
-}
+      .thumb-item:hover .thumb-item__img-wrap img {
+        transform: scale(1.08);
+      }
 
-.thumb-item__name {
-  font-family: var(--font-serif);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--ink);
-  line-height: 1.25;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+      /* ── Text meta ── */
+      .thumb-item__meta {
+        flex: 1;
+        min-width: 0;
+      }
 
-.thumb-item__bar {
-  position: absolute;
-  top: 14px; right: 0;
-  width: 3px;
-  height: 0;
-  background: var(--gold);
-  border-radius: 2px 0 0 2px;
-  transition: height .45s var(--ease-smooth);
-}
+      .thumb-item__num {
+        font-family: var(--font-body-ltr);
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 4px;
+        font-variant-numeric: tabular-nums;
+      }
 
-.thumb-item.is-active .thumb-item__bar { height: calc(100% - 28px); }
+      .thumb-item__name {
+        font-family: var(--font-body-ltr);
+        font-size: 15px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.88);
+        line-height: 1.25;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
 
-/* ─────────────────────────────────────────────
+      .thumb-item.is-active .thumb-item__name {
+        color: var(--white);
+        font-weight: 500;
+      }
+
+      /* ── Active bar ── */
+      .thumb-item__bar {
+        position: absolute;
+        top: 10px;
+        right: 0;
+        width: 2.5px;
+        height: 0;
+        background: linear-gradient(to bottom, var(--gold-lt), var(--gold));
+        border-radius: 2px 0 0 2px;
+        transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .thumb-item.is-active .thumb-item__bar {
+        height: calc(100% - 20px);
+      }
+
+      /* ── "More projects" link at bottom of sidebar ── */
+      .thumb-more {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        text-decoration: none;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: color-mix(in oklab, var(--gold) 8%, transparent);
+        transition:
+          background 0.3s ease,
+          border-color 0.3s ease;
+        margin-top: 4px;
+      }
+
+      .thumb-more:hover {
+        background: color-mix(in oklab, var(--gold) 16%, transparent);
+        border-color: color-mix(in oklab, var(--gold) 40%, transparent);
+      }
+
+      .thumb-more__count {
+        font-family: var(--font-body-ltr);
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--gold);
+        letter-spacing: 0.02em;
+        min-width: 28px;
+      }
+
+      .thumb-more__label {
+        font-family: var(--font-body-ltr);
+        font-size: 12px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.7);
+        flex: 1;
+      }
+
+      .thumb-more__arrow {
+        width: 14px;
+        height: 14px;
+        color: rgba(255, 255, 255, 0.4);
+        flex-shrink: 0;
+        transition:
+          transform 0.3s ease,
+          color 0.3s ease;
+      }
+
+      .thumb-more:hover .thumb-more__arrow {
+        transform: translateX(3px);
+        color: var(--gold);
+      }
+
+      /* ─────────────────────────────────────────────
    HERO STAGE
 ───────────────────────────────────────────── */
-.hero__stage {
-  position: relative;
-  flex: 1;
-  overflow: hidden;
-  perspective: 2400px;
-  perspective-origin: 50% 50%;
-}
+      .hero__stage {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
 
-/* Swiper overrides — stacked absolute slides */
-#heroSwiper {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
+      /* Swiper overrides — stacked absolute slides */
+      #heroSwiper {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
 
-#heroSwiper .swiper-wrapper {
-  display: block !important;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transform: none !important;
-}
+      #heroSwiper .swiper-wrapper {
+        display: block !important;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform: none !important;
+      }
 
-#heroSwiper .swiper-slide {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  overflow: hidden;
-  will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
+      #heroSwiper .swiper-slide {
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        overflow: hidden;
+        will-change: clip-path, transform;
+      }
 
-/* ─────────────────────────────────────────────
+      /* ─────────────────────────────────────────────
    SLIDE BACKGROUND
 ───────────────────────────────────────────── */
-.slide-bg {
-  position: absolute;
-  inset: -6%;
-  width: 112%;
-  height: 112%;
-  background-size: cover;
-  background-position: center;
-  will-change: transform;
-}
+      .slide-bg {
+        position: absolute;
+        inset: -5% 0; /* vertical bleed only — no horizontal overflow */
+        width: 100%;
+        height: 110%;
+        background-size: cover;
+        background-position: center center;
+        will-change: transform;
+      }
 
-/* Cinematic overlay — gradient from left */
-.slide-overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(105deg,
-      rgba(5,5,5,.72)  0%,
-      rgba(5,5,5,.38) 44%,
-      rgba(5,5,5,.08) 75%,
-      rgba(5,5,5,.00) 100%
-    ),
-    linear-gradient(0deg,
-      rgba(5,5,5,.55) 0%,
-      rgba(5,5,5,.00) 40%
-    );
-}
+      /* Cinematic overlay — gradient from left */
+      .slide-overlay {
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(
+            105deg,
+            rgba(5, 5, 5, 0.72) 0%,
+            rgba(5, 5, 5, 0.38) 44%,
+            rgba(5, 5, 5, 0.08) 75%,
+            rgba(5, 5, 5, 0) 100%
+          ),
+          linear-gradient(180deg, rgba(5, 5, 5, 0.45) 0%, rgba(5, 5, 5, 0) 22%),
+          linear-gradient(0deg, rgba(5, 5, 5, 0.55) 0%, rgba(5, 5, 5, 0) 40%);
+      }
 
-/* Cylinder-roll shading veil — darkens slide as it rotates around the drum */
-.slide-edge-light {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  pointer-events: none;
-  opacity: 0;
-  will-change: opacity;
-}
+      /* Cylinder-roll shading veil — darkens slide as it rotates around the drum */
+      .slide-edge-light {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+        pointer-events: none;
+        opacity: 0;
+        will-change: opacity;
+      }
 
-/* ─────────────────────────────────────────────
+      /* ─────────────────────────────────────────────
    SLIDE CONTENT
 ───────────────────────────────────────────── */
-.slide-content {
-  position: absolute;
-  bottom: 88px;
-  left: 64px;
-  max-width: 560px;
-  z-index: 5;
-}
+      .slide-content {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: calc(var(--thumb-w) + 48px);
+        right: 48px;
+        max-width: none;
+        z-index: 5;
+      }
 
-.slide-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 22px;
-  will-change: transform, opacity, filter;
-}
+      .slide-eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 22px;
+        will-change: transform, opacity, filter;
+      }
 
-.slide-eyebrow__rule {
-  width: 28px;
-  height: 1px;
-  background: var(--gold);
-  flex-shrink: 0;
-}
+      .slide-eyebrow__rule {
+        width: 28px;
+        height: 1px;
+        background: var(--gold);
+        flex-shrink: 0;
+      }
 
-.slide-eyebrow__label {
-  font-size: 10px;
-  font-weight: 400;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  color: var(--gold-lt);
-}
+      .slide-eyebrow__label {
+        font-family: var(--font-body-ltr);
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: var(--gold-lt);
+      }
 
-.slide-title {
-  font-family: var(--font-serif);
-  font-size: clamp(40px, 5.2vw, 76px);
-  font-weight: 300;
-  line-height: 1.02;
-  color: var(--white);
-  margin-bottom: 14px;
-  will-change: transform, opacity, filter;
-}
+      .slide-title {
+        font-family: var(--font-body-ltr);
+        font-size: clamp(40px, 5.2vw, 76px);
+        font-weight: 300;
+        line-height: 1.02;
+        letter-spacing: -0.02em;
+        color: var(--white);
+        margin-bottom: 14px;
+        will-change: transform, opacity, filter;
+      }
 
-.slide-tagline {
-  font-family: var(--font-serif);
-  font-size: clamp(17px, 1.7vw, 22px);
-  font-weight: 300;
-  font-style: italic;
-  color: rgba(255,255,255,.68);
-  margin-bottom: 14px;
-  will-change: transform, opacity, filter;
-}
+      .slide-tagline {
+        font-family: var(--font-body-ltr);
+        font-size: clamp(17px, 1.7vw, 22px);
+        font-weight: 300;
+        font-style: italic;
+        letter-spacing: 0.01em;
+        color: rgba(255, 255, 255, 0.68);
+        margin-bottom: 14px;
+        will-change: transform, opacity, filter;
+      }
 
-.slide-location {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  margin-bottom: 38px;
-  will-change: transform, opacity, filter;
-}
+      .slide-location {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        margin-bottom: 38px;
+        will-change: transform, opacity, filter;
+      }
 
-.slide-location__icon {
-  width: 13px;
-  height: 13px;
-  flex-shrink: 0;
-  opacity: .55;
-  color: var(--white);
-}
+      .slide-location__icon {
+        width: 13px;
+        height: 13px;
+        flex-shrink: 0;
+        opacity: 0.55;
+        color: var(--white);
+      }
 
-.slide-location__text {
-  font-size: 11px;
-  font-weight: 300;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.55);
-}
+      .slide-location__text {
+        font-family: var(--font-body-ltr);
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.55);
+      }
 
-.slide-ctas {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  will-change: transform, opacity, filter;
-}
+      .slide-ctas {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        will-change: transform, opacity, filter;
+      }
 
-/* CTA Buttons */
-.btn-slide {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: .13em;
-  text-transform: uppercase;
-  padding: 14px 30px;
-  border-radius: 7px;
-  transition: transform .3s ease, box-shadow .3s ease, background .3s ease;
-  cursor: pointer;
-}
+      /* ── CTA BUTTONS ─────────────────────────────────────────────────────────
+   Base — pill shape, Archivo, expo ease.
+   Primary  (.btn-slide--fill)  : gold liquid-glass accent
+   Secondary(.btn-slide--ghost) : neutral liquid-glass (white-toned)
+──────────────────────────────────────────────────────────────────────── */
+      .btn-slide {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--font-body-ltr);
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.03em;
+        padding: 13px 26px;
+        line-height: 1;
+        border-radius: 100px;
+        white-space: nowrap;
+        cursor: pointer;
+        border: none;
+        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        text-decoration: none;
+      }
 
-.btn-slide:hover { transform: translateY(-2px); }
+      .btn-slide:hover {
+        transform: translateY(-2px);
+      }
 
-.btn-slide--fill {
-  background: var(--gold);
-  color: var(--ink);
-  box-shadow: 0 4px 20px rgba(201,169,110,.35);
-}
+      /* PRIMARY — gold liquid glass */
+      .btn-slide--fill {
+        background:
+          linear-gradient(
+            50.5deg,
+            color-mix(in oklab, #fff 42%, transparent) 0%,
+            color-mix(in oklab, #fff 8%, transparent) 45%,
+            transparent 70%
+          ),
+          color-mix(in oklab, var(--gold) 52%, transparent);
+        backdrop-filter: blur(80px) saturate(280%) brightness(1.18)
+          contrast(1.05);
+        -webkit-backdrop-filter: blur(80px) saturate(280%) brightness(1.18)
+          contrast(1.05);
+        box-shadow:
+          inset 0 1.5px 0 color-mix(in oklab, #fff 70%, transparent),
+          inset 0 -1px 0 color-mix(in oklab, var(--gold) 30%, transparent),
+          inset 0 0 0 1px color-mix(in oklab, #fff 18%, transparent),
+          0 0 0 1px rgba(0, 0, 0, 0.08);
+        color: var(--white);
+      }
 
-.btn-slide--fill:hover {
-  background: var(--gold-lt);
-  box-shadow: 0 10px 36px rgba(201,169,110,.52);
-}
+      .btn-slide--fill:hover {
+        background:
+          linear-gradient(
+            50.5deg,
+            color-mix(in oklab, #fff 52%, transparent) 0%,
+            color-mix(in oklab, #fff 12%, transparent) 45%,
+            transparent 70%
+          ),
+          color-mix(in oklab, var(--gold) 70%, transparent);
+        box-shadow:
+          inset 0 1.5px 0 color-mix(in oklab, #fff 80%, transparent),
+          inset 0 -1px 0 color-mix(in oklab, var(--gold) 40%, transparent),
+          inset 0 0 0 1px color-mix(in oklab, #fff 25%, transparent),
+          0 0 0 1px rgba(0, 0, 0, 0.06),
+          0 10px 36px rgba(201, 169, 110, 0.42);
+      }
 
-.btn-slide--fill svg { transition: transform .3s ease; }
-.btn-slide--fill:hover svg { transform: translateX(3px); }
+      .btn-slide--fill svg {
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .btn-slide--fill:hover svg {
+        transform: translateX(4px);
+      }
 
-.btn-slide--ghost {
-  color: var(--white);
-  border: 1px solid rgba(255,255,255,.38);
-  background: rgba(255,255,255,.08);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
+      /* SECONDARY — neutral liquid glass */
+      .btn-slide--ghost {
+        background:
+          linear-gradient(
+            50.5deg,
+            color-mix(in oklab, #fff 28%, transparent) 0%,
+            color-mix(in oklab, #fff 6%, transparent) 45%,
+            transparent 70%
+          ),
+          color-mix(in oklab, #fff 10%, transparent);
+        backdrop-filter: blur(80px) saturate(200%) brightness(1.1);
+        -webkit-backdrop-filter: blur(80px) saturate(200%) brightness(1.1);
+        box-shadow:
+          inset 0 1.5px 0 color-mix(in oklab, #fff 55%, transparent),
+          inset 0 -1px 0 color-mix(in oklab, #fff 10%, transparent),
+          inset 0 0 0 1px color-mix(in oklab, #fff 16%, transparent),
+          0 0 0 1px rgba(0, 0, 0, 0.06);
+        color: var(--white);
+      }
 
-.btn-slide--ghost:hover {
-  background: rgba(255,255,255,.18);
-  border-color: rgba(255,255,255,.7);
-  box-shadow: 0 8px 28px rgba(0,0,0,.18);
-}
+      .btn-slide--ghost:hover {
+        background:
+          linear-gradient(
+            50.5deg,
+            color-mix(in oklab, #fff 38%, transparent) 0%,
+            color-mix(in oklab, #fff 10%, transparent) 45%,
+            transparent 70%
+          ),
+          color-mix(in oklab, #fff 16%, transparent);
+        box-shadow:
+          inset 0 1.5px 0 color-mix(in oklab, #fff 72%, transparent),
+          inset 0 -1px 0 color-mix(in oklab, #fff 14%, transparent),
+          inset 0 0 0 1px color-mix(in oklab, #fff 22%, transparent),
+          0 0 0 1px rgba(0, 0, 0, 0.05),
+          0 10px 28px rgba(0, 0, 0, 0.18);
+      }
 
-/* ─────────────────────────────────────────────
-   NAVIGATION ARROWS
+      /* ─────────────────────────────────────────────
+   RIGHT CONTROL STRIP
 ───────────────────────────────────────────── */
-.hero__nav {
-  position: absolute;
-  bottom: 44px;
-  right: 52px;
-  display: flex;
-  gap: 10px;
-  z-index: 40;
-}
+      .hero__controls {
+        position: absolute;
+        right: 44px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        z-index: 40;
+      }
 
-.nav-btn {
-  position: relative;
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 4px 20px rgba(0,0,0,.1);
-  color: var(--ink);
-  cursor: pointer;
-  transition: background .35s ease, border-color .35s ease, box-shadow .35s ease, transform .25s ease;
-  outline: none;
-}
+      .nav-btn {
+        position: relative;
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        color: var(--ink);
+        cursor: pointer;
+        transition:
+          background 0.35s ease,
+          border-color 0.35s ease,
+          box-shadow 0.35s ease,
+          transform 0.25s ease;
+        outline: none;
+      }
 
-.nav-btn:hover {
-  background: var(--gold);
-  border-color: var(--gold);
-  box-shadow: 0 8px 32px rgba(201,169,110,.42);
-  transform: scale(1.06);
-}
+      .nav-btn:hover {
+        background: var(--gold);
+        border-color: var(--gold);
+        box-shadow: 0 8px 32px rgba(201, 169, 110, 0.42);
+        transform: scale(1.06);
+      }
 
-.nav-btn:hover svg { color: var(--ink); }
+      .nav-btn:hover svg {
+        color: var(--ink);
+      }
 
-.nav-btn:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 3px;
-}
+      .nav-btn:focus-visible {
+        outline: 2px solid var(--gold);
+        outline-offset: 3px;
+      }
 
-.nav-btn svg {
-  width: 18px;
-  height: 18px;
-  transition: transform .25s ease, color .3s ease;
-}
+      .nav-btn svg {
+        width: 18px;
+        height: 18px;
+        transition:
+          transform 0.25s ease,
+          color 0.3s ease;
+      }
 
-.nav-btn--prev:hover svg { transform: translateX(-2px); }
-.nav-btn--next:hover svg { transform: translateX(2px); }
+      .nav-btn--prev:hover svg {
+        transform: translateX(-2px);
+      }
+      .nav-btn--next:hover svg {
+        transform: translateX(2px);
+      }
 
-/* Magnetic wrapper */
-.nav-btn__mag {
-  position: absolute;
-  inset: -14px;
-}
+      /* Magnetic wrapper */
+      .nav-btn__mag {
+        position: absolute;
+        inset: -14px;
+      }
 
-/* ─────────────────────────────────────────────
+      /* ─────────────────────────────────────────────
    PROGRESS INDICATOR
 ───────────────────────────────────────────── */
-.hero__progress {
-  position: absolute;
-  bottom: 58px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  z-index: 40;
-  user-select: none;
-}
+      .hero__progress {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        user-select: none;
+      }
 
-.progress__num {
-  font-family: var(--font-serif);
-  font-size: 20px;
-  font-weight: 300;
-  color: var(--white);
-  min-width: 26px;
-  line-height: 1;
-}
+      .progress__num {
+        font-family: var(--font-body-ltr);
+        font-size: 13px;
+        font-weight: 300;
+        color: var(--white);
+        line-height: 1;
+        font-variant-numeric: tabular-nums;
+        letter-spacing: 0.06em;
+      }
 
-.progress__track {
-  width: 140px;
-  height: 1px;
-  background: rgba(255,255,255,.22);
-  position: relative;
-  overflow: hidden;
-}
+      .progress__track {
+        width: 1px;
+        height: 110px;
+        background: rgba(255, 255, 255, 0.2);
+        position: relative;
+        overflow: hidden;
+      }
 
-.progress__fill {
-  position: absolute;
-  inset: 0 auto 0 0;
-  background: var(--gold);
-  transform-origin: left;
-  transform: scaleX(0);
-  will-change: transform;
-}
+      .progress__fill {
+        position: absolute;
+        inset: 0 0 auto 0;
+        background: var(--gold);
+        transform-origin: top;
+        transform: scaleY(0);
+        will-change: transform;
+      }
 
-.progress__total {
-  font-family: var(--font-serif);
-  font-size: 13px;
-  font-weight: 300;
-  color: rgba(255,255,255,.42);
-  min-width: 20px;
-  line-height: 1;
-}
+      .progress__total {
+        font-family: var(--font-body-ltr);
+        font-size: 11px;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.35);
+        line-height: 1;
+        font-variant-numeric: tabular-nums;
+        letter-spacing: 0.06em;
+      }
 
-/* ─────────────────────────────────────────────
+      /* ─────────────────────────────────────────────
    LIQUID GLASS DETAIL — decorative corner
 ───────────────────────────────────────────── */
-.hero__glass-tag {
-  position: absolute;
-  top: 28px;
-  right: 40px;
-  z-index: 40;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  border-radius: 100px;
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 4px 20px var(--glass-dark);
-}
+      .hero__glass-tag {
+        position: absolute;
+        top: calc(var(--nav-h) + 20px);
+        right: 44px;
+        z-index: 40;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        border-radius: 100px;
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 4px 20px var(--glass-dark);
+      }
 
-.hero__glass-tag__dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--gold);
-  animation: pulse 2.2s ease-in-out infinite;
-}
+      .hero__glass-tag__dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--gold);
+        animation: pulse 2.2s ease-in-out infinite;
+      }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: .5; transform: scale(.7); }
-}
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(0.7);
+        }
+      }
 
-.hero__glass-tag__text {
-  font-size: 10px;
-  font-weight: 400;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--ink-60);
-}
+      .hero__glass-tag__text {
+        font-family: var(--font-body-ltr);
+        font-size: 9.5px;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--ink-60);
+      }
 
-/* ─────────────────────────────────────────────
+      /* ─────────────────────────────────────────────
    RESPONSIVE
 ───────────────────────────────────────────── */
-@media (max-width: 1100px) {
-  :root { --thumb-w: 210px; }
-  .slide-content { left: 44px; }
-}
+      @media (max-width: 1100px) {
+        :root {
+          --thumb-w: 210px;
+        }
+      }
 
-@media (max-width: 768px) {
-  .navbar { padding: 0 20px; }
-  .navbar__nav { display: none; }
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 0 20px;
+        }
+        .navbar__nav,
+        .navbar__sep {
+          display: none;
+        }
 
-  .hero {
-    flex-direction: column;
-    height: auto;
-    min-height: 100dvh;
-  }
+        /* Thumbs becomes a bottom overlay strip */
+        .hero__thumbs {
+          top: auto;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          width: 100%;
+          height: 90px;
+          flex-direction: row;
+          justify-content: flex-start;
+          padding: 10px 16px;
+          gap: 10px;
+          overflow-x: auto;
+          overflow-y: hidden;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+          /* Override vignette pseudos for horizontal layout */
+        }
 
-  .hero__thumbs {
-    width: 100%;
-    height: 90px;
-    flex-direction: row;
-    justify-content: flex-start;
-    order: 2;
-    padding: 10px 16px;
-    gap: 10px;
-    border-right: none;
-    border-top: 1px solid var(--glass-border);
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    flex-shrink: 0;
-  }
+        .hero__thumbs::before,
+        .hero__thumbs::after {
+          width: 48px;
+          height: 100%;
+          top: 0;
+          bottom: 0;
+        }
+        .hero__thumbs::before {
+          left: 0;
+          right: auto;
+          background: linear-gradient(
+            to right,
+            color-mix(in oklab, #000 38%, transparent) 0%,
+            transparent 100%
+          );
+        }
+        .hero__thumbs::after {
+          right: 0;
+          left: auto;
+          background: linear-gradient(
+            to left,
+            color-mix(in oklab, #000 38%, transparent) 0%,
+            transparent 100%
+          );
+        }
 
-  .hero__thumbs::-webkit-scrollbar { display: none; }
+        .hero__thumbs::-webkit-scrollbar {
+          display: none;
+        }
 
-  .thumb-item {
-    flex-direction: row;
-    flex-shrink: 0;
-    width: auto;
-    min-width: 140px;
-    padding: 8px 10px;
-    border-radius: 10px;
-    gap: 10px;
-  }
+        .thumb-item {
+          flex-direction: row;
+          flex-shrink: 0;
+          width: auto;
+          min-width: 130px;
+          padding: 7px 10px;
+          border-radius: 10px;
+          gap: 10px;
+        }
 
-  .thumb-item__bar { display: none; }
+        .thumb-item__bar {
+          display: none;
+        }
 
-  .thumb-item__img-wrap,
-  .thumb-item.is-active .thumb-item__img-wrap {
-    width: 40px;
-    height: 40px;
-  }
+        .thumb-item__img-wrap,
+        .thumb-item.is-active .thumb-item__img-wrap {
+          width: 40px;
+          height: 40px;
+        }
 
-  .hero__stage {
-    order: 1;
-    flex: 1;
-    min-height: calc(100dvh - 90px - var(--nav-h));
-  }
+        /* Stage fills full hero — thumbs overlay on top */
+        .hero__stage {
+          inset: 0;
+        }
 
-  .slide-content { left: 22px; right: 22px; bottom: 70px; }
-  .slide-title { font-size: 34px; }
+        /* Slide content: clear sidebar width gone, clear bottom thumb strip */
+        .slide-content {
+          left: 20px;
+          right: 20px;
+          top: 50%;
+          transform: translateY(-50%);
+          bottom: auto;
+          max-width: none;
+        }
+        .slide-title {
+          font-size: 34px;
+        }
 
-  .hero__nav { bottom: 12px; right: 20px; }
-  .hero__progress { bottom: 22px; }
-  .hero__glass-tag { top: 14px; right: 16px; }
-}
+        .hero__nav {
+          bottom: calc(90px + 14px);
+          right: 20px;
+        }
+        .hero__progress {
+          bottom: calc(90px + 24px);
+        }
+        .hero__glass-tag {
+          top: 14px;
+          right: 16px;
+        }
+      }
 
-/* ─────────────────────────────────────────────
+      /* ─────────────────────────────────────────────
    REDUCED MOTION
 ───────────────────────────────────────────── */
-@media (prefers-reduced-motion: reduce) {
-  .slide-bg,
-  .slide-edge-light,
-  .slide-content * {
-    transition: none !important;
-    animation: none !important;
-    transform: none !important;
-  }
-}
+      @media (prefers-reduced-motion: reduce) {
+        .slide-bg,
+        .slide-content * {
+          transition: none !important;
+          animation: none !important;
+          transform: none !important;
+        }
+      }
 
-/* ─────────────────────────────────────────────
+      /* ─────────────────────────────────────────────
+   SWIPER LIBRARY FONT RESET
+   Swiper injects its own stylesheet; ensure all
+   its text nodes (pagination, a11y) inherit ours.
+───────────────────────────────────────────── */
+      .swiper,
+      .swiper-wrapper,
+      .swiper-slide,
+      .swiper-pagination,
+      .swiper-pagination-bullet,
+      .swiper-button-next,
+      .swiper-button-prev,
+      .swiper-scrollbar,
+      .swiper-notification {
+        font-family: var(--font-body-ltr);
+      }
+
+      /* ─────────────────────────────────────────────
    LOADING SCREEN
 ───────────────────────────────────────────── */
-.loader {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: var(--bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 24px;
-  pointer-events: none;
-}
+      .loader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: var(--bg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 24px;
+        pointer-events: none;
+        font-family: var(--font-body-ltr);
+      }
 
-.loader__logo {
-  opacity: 0;
-}
+      .loader__logo {
+        opacity: 0;
+      }
 
-.loader__bar-track {
-  width: 120px;
-  height: 1px;
-  background: var(--ink-10);
-  overflow: hidden;
-}
+      .loader__bar-track {
+        width: 120px;
+        height: 1px;
+        background: var(--ink-10);
+        overflow: hidden;
+      }
 
-.loader__bar {
-  width: 0%;
-  height: 100%;
-  background: var(--gold);
-  transition: width .6s var(--ease-out-ex);
-}
+      .loader__bar {
+        width: 0%;
+        height: 100%;
+        background: var(--gold);
+        transition: width 0.6s var(--ease-out-ex);
+      }
 
-/* ─────────────────────────────────────────────
-   SCROLL HINT
+      /* ─────────────────────────────────────────────
+ /* ─────────────────────────────────────────────
+   TYPOGRAPHY UTILITIES
+   Reusable classes for every future section.
 ───────────────────────────────────────────── */
-.scroll-hint {
-  position: absolute;
-  bottom: 54px;
-  left: 64px;
-  z-index: 40;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  opacity: 0;
-}
 
-.scroll-hint__line {
-  width: 1px;
-  height: 44px;
-  background: linear-gradient(to bottom, var(--gold), transparent);
-  animation: scrollLine 2s ease-in-out infinite;
-}
+      /* Display headings */
+      .t-display {
+        font-family: var(--font-body-ltr);
+        font-weight: 300;
+        line-height: 1.04;
+        letter-spacing: -0.02em;
+      }
+      .t-display--xl {
+        font-size: clamp(48px, 6vw, 88px);
+      }
+      .t-display--lg {
+        font-size: clamp(36px, 4.4vw, 64px);
+      }
+      .t-display--md {
+        font-size: clamp(28px, 3vw, 44px);
+      }
 
-@keyframes scrollLine {
-  0% { transform: scaleY(0); transform-origin: top; }
-  45% { transform: scaleY(1); transform-origin: top; }
-  55% { transform: scaleY(1); transform-origin: bottom; }
-  100% { transform: scaleY(0); transform-origin: bottom; }
-}
+      /* Italic / taglines */
+      .t-italic {
+        font-family: var(--font-body-ltr);
+        font-weight: 300;
+        font-style: italic;
+        letter-spacing: 0.01em;
+      }
 
-.scroll-hint__label {
-  font-size: 9px;
-  font-weight: 400;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.42);
-  writing-mode: vertical-lr;
-}
-</style>
-</head>
-<body>
+      /* UI labels — Archivo uppercase */
+      .t-label {
+        font-family: var(--font-body-ltr);
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+      .t-label--sm {
+        font-size: 9px;
+        letter-spacing: 0.2em;
+      }
+      .t-label--lg {
+        font-size: 12px;
+        letter-spacing: 0.18em;
+      }
 
-<!-- ─── LOADER ─── -->
-<div class="loader" id="loader" aria-hidden="true">
-  <div class="loader__logo">
-    <svg width="160" viewBox="0 0 2185 380" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M90.97 258.84H160.93L236.12 169.2V379.42H296.66V5.21997L90.97 258.84Z" fill="#0D0D0D"/>
-      <path d="M64.78 291.12L0 371H66.84L133.85 291.12H64.78Z" fill="#CC2222"/>
-      <path d="M390.87 186.6L544.58 373.2H472.34L339.38 212.73L317.86 187.07L339.38 160.95L472.34 0.00999451H544.58L390.87 186.61V186.6Z" fill="#0D0D0D"/>
-      <path d="M772.951 153.462L752.741 160.698C739.129 146.227 720.111 138.991 695.632 138.991C677.085 138.991 661.976 143.759 650.277 153.268C638.606 162.805 632.756 174.92 632.756 189.613C632.756 204.306 638.55 217.086 650.111 226.429C661.671 235.772 677.279 240.429 696.935 240.429C720.665 240.429 739.351 233.082 752.935 218.362L772.036 228.924C762.388 240.179 751.465 248.302 739.295 253.32C727.125 258.338 712.57 260.833 695.632 260.833C671.901 260.833 652.162 254.9 636.471 243.035C618.534 229.423 609.58 211.625 609.58 189.613C609.58 167.601 618.673 150.302 636.831 136.579C652.661 124.575 672.261 118.587 695.632 118.587C729.259 118.587 755.042 130.203 772.978 153.462H772.951Z" fill="#0D0D0D"/>
-      <path d="M1015.47 189.71C1015.47 211.722 1006.43 229.52 988.385 243.132C972.555 254.997 952.899 260.93 929.418 260.93C905.937 260.93 885.893 254.942 870.064 242.938C852.016 229.326 842.978 211.611 842.978 189.71C842.978 167.809 852.127 150.51 870.424 136.676C886.503 124.561 906.159 118.49 929.391 118.49C952.622 118.49 972.361 124.561 988.191 136.676C1006.38 150.538 1015.44 168.197 1015.44 189.71H1015.47ZM992.294 189.71C992.294 174.019 985.612 161.266 972.278 151.508C960.773 143.108 946.495 138.894 929.446 138.894C910.761 138.894 895.569 143.69 883.814 153.255C872.06 162.847 866.21 174.989 866.21 189.71C866.21 204.431 871.949 217.183 883.454 226.526C894.959 235.869 910.289 240.526 929.446 240.526C948.602 240.526 963.711 235.841 975.161 226.443C986.583 217.045 992.321 204.791 992.321 189.71H992.294Z" fill="#0D0D0D"/>
-      <path d="M1269.99 256.841H1247.73V147.058H1247.18L1177.45 234.607L1108.29 147.058H1107.73V256.841H1085.47V122.579H1113.28L1177.62 203.724L1242.24 122.579H1269.97V256.841H1269.99Z" fill="#0D0D0D"/>
-      <path d="M1446.45 122.607C1460.17 122.607 1471.04 126.405 1479.11 134.001C1487.15 141.597 1491.17 151.771 1491.17 164.496C1491.17 177.858 1486.98 188.06 1478.64 195.102C1470.29 202.144 1458.15 205.664 1442.18 205.664H1362.25V256.841H1339.99V122.579H1446.45V122.607ZM1442.57 185.676C1459.76 185.676 1468.35 178.746 1468.35 164.912C1468.35 150.08 1459.26 142.65 1441.1 142.65H1362.28V185.676H1442.6H1442.57Z" fill="#0D0D0D"/>
-      <path d="M1731.22 256.841H1706.88L1691.41 226.789H1600.98L1585.51 256.841H1561.17L1632.19 122.579H1660.19L1731.22 256.841ZM1680.6 206.773L1646.39 141.708L1611.76 206.773H1680.6Z" fill="#0D0D0D"/>
-      <path d="M1953.67 256.841H1925.97L1823.48 146.726V256.841H1801.22V122.579H1828.86L1931.43 232.75V122.579H1953.69V256.841H1953.67Z" fill="#0D0D0D"/>
-      <path d="M2192.83 122.579L2119.39 203.807V256.841H2097.13V203.807L2023.69 122.579H2051.44L2108.39 185.288L2165.08 122.579H2192.83Z" fill="#0D0D0D"/>
-    </svg>
-  </div>
-  <div class="loader__bar-track">
-    <div class="loader__bar" id="loaderBar"></div>
-  </div>
-</div>
+      /* Body copy — Archivo regular */
+      .t-body {
+        font-family: var(--font-body-ltr);
+        font-size: clamp(15px, 1.1vw, 17px);
+        font-weight: 300;
+        line-height: 1.72;
+        color: var(--ink-60);
+      }
+      .t-body--sm {
+        font-size: 13px;
+        line-height: 1.65;
+      }
 
-<!-- ─── NAVBAR ─── -->
-<nav class="navbar" role="navigation" aria-label="Main navigation">
-  <a href="/" class="navbar__logo" aria-label="Akar Town — Home">
-    <svg width="130" viewBox="0 0 2185 380" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M90.97 258.84H160.93L236.12 169.2V379.42H296.66V5.21997L90.97 258.84Z" fill="#0D0D0D"/>
-      <path d="M64.78 291.12L0 371H66.84L133.85 291.12H64.78Z" fill="#CC2222"/>
-      <path d="M390.87 186.6L544.58 373.2H472.34L339.38 212.73L317.86 187.07L339.38 160.95L472.34 0.00999451H544.58L390.87 186.61V186.6Z" fill="#0D0D0D"/>
-      <path d="M772.951 153.462L752.741 160.698C739.129 146.227 720.111 138.991 695.632 138.991C677.085 138.991 661.976 143.759 650.277 153.268C638.606 162.805 632.756 174.92 632.756 189.613C632.756 204.306 638.55 217.086 650.111 226.429C661.671 235.772 677.279 240.429 696.935 240.429C720.665 240.429 739.351 233.082 752.935 218.362L772.036 228.924C762.388 240.179 751.465 248.302 739.295 253.32C727.125 258.338 712.57 260.833 695.632 260.833C671.901 260.833 652.162 254.9 636.471 243.035C618.534 229.423 609.58 211.625 609.58 189.613C609.58 167.601 618.673 150.302 636.831 136.579C652.661 124.575 672.261 118.587 695.632 118.587C729.259 118.587 755.042 130.203 772.978 153.462H772.951Z" fill="#0D0D0D"/>
-      <path d="M1015.47 189.71C1015.47 211.722 1006.43 229.52 988.385 243.132C972.555 254.997 952.899 260.93 929.418 260.93C905.937 260.93 885.893 254.942 870.064 242.938C852.016 229.326 842.978 211.611 842.978 189.71C842.978 167.809 852.127 150.51 870.424 136.676C886.503 124.561 906.159 118.49 929.391 118.49C952.622 118.49 972.361 124.561 988.191 136.676C1006.38 150.538 1015.44 168.197 1015.44 189.71H1015.47ZM992.294 189.71C992.294 174.019 985.612 161.266 972.278 151.508C960.773 143.108 946.495 138.894 929.446 138.894C910.761 138.894 895.569 143.69 883.814 153.255C872.06 162.847 866.21 174.989 866.21 189.71C866.21 204.431 871.949 217.183 883.454 226.526C894.959 235.869 910.289 240.526 929.446 240.526C948.602 240.526 963.711 235.841 975.161 226.443C986.583 217.045 992.321 204.791 992.321 189.71H992.294Z" fill="#0D0D0D"/>
-      <path d="M1269.99 256.841H1247.73V147.058H1247.18L1177.45 234.607L1108.29 147.058H1107.73V256.841H1085.47V122.579H1113.28L1177.62 203.724L1242.24 122.579H1269.97V256.841H1269.99Z" fill="#0D0D0D"/>
-      <path d="M1446.45 122.607C1460.17 122.607 1471.04 126.405 1479.11 134.001C1487.15 141.597 1491.17 151.771 1491.17 164.496C1491.17 177.858 1486.98 188.06 1478.64 195.102C1470.29 202.144 1458.15 205.664 1442.18 205.664H1362.25V256.841H1339.99V122.579H1446.45V122.607ZM1442.57 185.676C1459.76 185.676 1468.35 178.746 1468.35 164.912C1468.35 150.08 1459.26 142.65 1441.1 142.65H1362.28V185.676H1442.6H1442.57Z" fill="#0D0D0D"/>
-      <path d="M1731.22 256.841H1706.88L1691.41 226.789H1600.98L1585.51 256.841H1561.17L1632.19 122.579H1660.19L1731.22 256.841ZM1680.6 206.773L1646.39 141.708L1611.76 206.773H1680.6Z" fill="#0D0D0D"/>
-      <path d="M1953.67 256.841H1925.97L1823.48 146.726V256.841H1801.22V122.579H1828.86L1931.43 232.75V122.579H1953.69V256.841H1953.67Z" fill="#0D0D0D"/>
-      <path d="M2192.83 122.579L2119.39 203.807V256.841H2097.13V203.807L2023.69 122.579H2051.44L2108.39 185.288L2165.08 122.579H2192.83Z" fill="#0D0D0D"/>
-    </svg>
-  </a>
+      /* Arabic body copy */
+      .t-body-ar {
+        font-family: var(--font-body-rtl);
+        font-size: clamp(15px, 1.1vw, 17px);
+        font-weight: 400;
+        line-height: 1.85;
+        direction: rtl;
+        text-align: right;
+      }
 
-  <ul class="navbar__nav" role="list">
-    <li><a href="#">Properties</a></li>
-    <li><a href="#">Projects</a></li>
-    <li><a href="#">About</a></li>
-    <li><a href="#">Contact</a></li>
-  </ul>
+      /* Tabular numerals — for stats, prices, counters */
+      .t-num {
+        font-family: var(--font-body-ltr);
+        font-variant-numeric: tabular-nums;
+      }
 
-  <div class="navbar__actions">
-    <button class="btn-nav btn-nav--outline">Get in Touch</button>
-  </div>
-</nav>
+      /* Gold rule eyebrow — matches hero pattern */
+      .t-eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-family: var(--font-body-ltr);
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+      .t-eyebrow::before {
+        content: "";
+        display: block;
+        width: 28px;
+        height: 1px;
+        background: currentColor;
+        flex-shrink: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ─── LOADER ─── -->
+    <div class="loader" id="loader" aria-hidden="true">
+      <div class="loader__logo">
+        <svg
+          width="160"
+          viewBox="0 0 2185 380"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M90.97 258.84H160.93L236.12 169.2V379.42H296.66V5.21997L90.97 258.84Z"
+            fill="#FFFFFF"
+          />
+          <path
+            d="M64.78 291.12L0 371H66.84L133.85 291.12H64.78Z"
+            fill="#CC2222"
+          />
+          <path
+            d="M390.87 186.6L544.58 373.2H472.34L339.38 212.73L317.86 187.07L339.38 160.95L472.34 0.00999451H544.58L390.87 186.61V186.6Z"
+            fill="#FFFFFF"
+          />
+          <path
+            d="M772.951 153.462L752.741 160.698C739.129 146.227 720.111 138.991 695.632 138.991C677.085 138.991 661.976 143.759 650.277 153.268C638.606 162.805 632.756 174.92 632.756 189.613C632.756 204.306 638.55 217.086 650.111 226.429C661.671 235.772 677.279 240.429 696.935 240.429C720.665 240.429 739.351 233.082 752.935 218.362L772.036 228.924C762.388 240.179 751.465 248.302 739.295 253.32C727.125 258.338 712.57 260.833 695.632 260.833C671.901 260.833 652.162 254.9 636.471 243.035C618.534 229.423 609.58 211.625 609.58 189.613C609.58 167.601 618.673 150.302 636.831 136.579C652.661 124.575 672.261 118.587 695.632 118.587C729.259 118.587 755.042 130.203 772.978 153.462H772.951Z"
+            fill="#FFFFFF"
+          />
+          <path
+            d="M1015.47 189.71C1015.47 211.722 1006.43 229.52 988.385 243.132C972.555 254.997 952.899 260.93 929.418 260.93C905.937 260.93 885.893 254.942 870.064 242.938C852.016 229.326 842.978 211.611 842.978 189.71C842.978 167.809 852.127 150.51 870.424 136.676C886.503 124.561 906.159 118.49 929.391 118.49C952.622 118.49 972.361 124.561 988.191 136.676C1006.38 150.538 1015.44 168.197 1015.44 189.71H1015.47ZM992.294 189.71C992.294 174.019 985.612 161.266 972.278 151.508C960.773 143.108 946.495 138.894 929.446 138.894C910.761 138.894 895.569 143.69 883.814 153.255C872.06 162.847 866.21 174.989 866.21 189.71C866.21 204.431 871.949 217.183 883.454 226.526C894.959 235.869 910.289 240.526 929.446 240.526C948.602 240.526 963.711 235.841 975.161 226.443C986.583 217.045 992.321 204.791 992.321 189.71H992.294Z"
+            fill="#FFFFFF"
+          />
+          <path
+            d="M1269.99 256.841H1247.73V147.058H1247.18L1177.45 234.607L1108.29 147.058H1107.73V256.841H1085.47V122.579H1113.28L1177.62 203.724L1242.24 122.579H1269.97V256.841H1269.99Z"
+            fill="#FFFFFF"
+          />
+          <path
+            d="M1446.45 122.607C1460.17 122.607 1471.04 126.405 1479.11 134.001C1487.15 141.597 1491.17 151.771 1491.17 164.496C1491.17 177.858 1486.98 188.06 1478.64 195.102C1470.29 202.144 1458.15 205.664 1442.18 205.664H1362.25V256.841H1339.99V122.579H1446.45V122.607ZM1442.57 185.676C1459.76 185.676 1468.35 178.746 1468.35 164.912C1468.35 150.08 1459.26 142.65 1441.1 142.65H1362.28V185.676H1442.6H1442.57Z"
+            fill="#FFFFFF"
+          />
+          <path
+            d="M1731.22 256.841H1706.88L1691.41 226.789H1600.98L1585.51 256.841H1561.17L1632.19 122.579H1660.19L1731.22 256.841ZM1680.6 206.773L1646.39 141.708L1611.76 206.773H1680.6Z"
+            fill="#FFFFFF"
+          />
+          <path
+            d="M1953.67 256.841H1925.97L1823.48 146.726V256.841H1801.22V122.579H1828.86L1931.43 232.75V122.579H1953.69V256.841H1953.67Z"
+            fill="#FFFFFF"
+          />
+          <path
+            d="M2192.83 122.579L2119.39 203.807V256.841H2097.13V203.807L2023.69 122.579H2051.44L2108.39 185.288L2165.08 122.579H2192.83Z"
+            fill="#FFFFFF"
+          />
+        </svg>
+      </div>
+      <div class="loader__bar-track">
+        <div class="loader__bar" id="loaderBar"></div>
+      </div>
+    </div>
 
-<!-- ─── HERO ─── -->
-<section class="hero" aria-label="Featured luxury properties" aria-roledescription="carousel">
+    <!-- ─── NAVBAR ─── -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+      <a href="/" class="navbar__logo" aria-label="Akar Town — Home">
+        <svg
+          width="230"
+          viewBox="0 0 2185 380"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M90.97 258.84H160.93L236.12 169.2V379.42H296.66V5.21997L90.97 258.84Z"
+            fill="white"
+          />
+          <path
+            d="M64.78 291.12L0 371H66.84L133.85 291.12H64.78Z"
+            fill="#FF0000"
+          />
+          <path
+            d="M390.87 186.6L544.58 373.2H472.34L339.38 212.73L317.86 187.07L339.38 160.95L472.34 0.00999451H544.58L390.87 186.61V186.6Z"
+            fill="white"
+          />
+          <path
+            d="M772.951 153.462L752.741 160.698C739.129 146.227 720.111 138.991 695.632 138.991C677.085 138.991 661.976 143.759 650.277 153.268C638.606 162.805 632.756 174.92 632.756 189.613C632.756 204.306 638.55 217.086 650.111 226.429C661.671 235.772 677.279 240.429 696.935 240.429C720.665 240.429 739.351 233.082 752.935 218.362L772.036 228.924C762.388 240.179 751.465 248.302 739.295 253.32C727.125 258.338 712.57 260.833 695.632 260.833C671.901 260.833 652.162 254.9 636.471 243.035C618.534 229.423 609.58 211.625 609.58 189.613C609.58 167.601 618.673 150.302 636.831 136.579C652.661 124.575 672.261 118.587 695.632 118.587C729.259 118.587 755.042 130.203 772.978 153.462H772.951Z"
+            fill="white"
+          />
+          <path
+            d="M1015.47 189.71C1015.47 211.722 1006.43 229.52 988.385 243.132C972.555 254.997 952.899 260.93 929.418 260.93C905.937 260.93 885.893 254.942 870.064 242.938C852.016 229.326 842.978 211.611 842.978 189.71C842.978 167.809 852.127 150.51 870.424 136.676C886.503 124.561 906.159 118.49 929.391 118.49C952.622 118.49 972.361 124.561 988.191 136.676C1006.38 150.538 1015.44 168.197 1015.44 189.71H1015.47ZM992.294 189.71C992.294 174.019 985.612 161.266 972.278 151.508C960.773 143.108 946.495 138.894 929.446 138.894C910.761 138.894 895.569 143.69 883.814 153.255C872.06 162.847 866.21 174.989 866.21 189.71C866.21 204.431 871.949 217.183 883.454 226.526C894.959 235.869 910.289 240.526 929.446 240.526C948.602 240.526 963.711 235.841 975.161 226.443C986.583 217.045 992.321 204.791 992.321 189.71H992.294Z"
+            fill="white"
+          />
+          <path
+            d="M1269.99 256.841H1247.73V147.058H1247.18L1177.45 234.607L1108.29 147.058H1107.73V256.841H1085.47V122.579H1113.28L1177.62 203.724L1242.24 122.579H1269.97V256.841H1269.99Z"
+            fill="white"
+          />
+          <path
+            d="M1446.45 122.607C1460.17 122.607 1471.04 126.405 1479.11 134.001C1487.15 141.597 1491.17 151.771 1491.17 164.496C1491.17 177.858 1486.98 188.06 1478.64 195.102C1470.29 202.144 1458.15 205.664 1442.18 205.664H1362.25V256.841H1339.99V122.579H1446.45V122.607ZM1442.57 185.676C1459.76 185.676 1468.35 178.746 1468.35 164.912C1468.35 150.08 1459.26 142.65 1441.1 142.65H1362.28V185.676H1442.6H1442.57Z"
+            fill="white"
+          />
+          <path
+            d="M1731.22 256.841H1706.88L1691.41 226.789H1600.98L1585.51 256.841H1561.17L1632.19 122.579H1660.19L1731.22 256.841ZM1680.6 206.773L1646.39 141.708L1611.76 206.773H1680.6Z"
+            fill="white"
+          />
+          <path
+            d="M1953.67 256.841H1925.97L1823.48 146.726V256.841H1801.22V122.579H1828.86L1931.43 232.75V122.579H1953.69V256.841H1953.67Z"
+            fill="white"
+          />
+          <path
+            d="M2192.83 122.579L2119.39 203.807V256.841H2097.13V203.807L2023.69 122.579H2051.44L2108.39 185.288L2165.08 122.579H2192.83Z"
+            fill="white"
+          />
+        </svg>
+      </a>
 
-  <!-- Thumbnails -->
-  <aside class="hero__thumbs" role="tablist" aria-label="Project thumbnails" id="heroThumbs">
-    <!-- JS generated -->
-  </aside>
+      <div class="navbar__right">
+        <ul class="navbar__nav" role="list">
+          <li><a href="#">Properties</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="navbar__sep" aria-hidden="true"></div>
+        <div class="navbar__actions">
+          <button class="btn-slide btn-slide--fill">Get in Touch</button>
+        </div>
+      </div>
+    </nav>
 
-  <!-- Stage -->
-  <div class="hero__stage" id="heroStage">
-
-    <!-- Swiper -->
-    <div class="swiper" id="heroSwiper" aria-live="off">
-      <div class="swiper-wrapper" id="swiperWrapper">
+    <!-- ─── HERO ─── -->
+    <section
+      class="hero"
+      aria-label="Featured luxury properties"
+      aria-roledescription="carousel"
+    >
+      <!-- Thumbnails -->
+      <aside
+        class="hero__thumbs"
+        role="tablist"
+        aria-label="Project thumbnails"
+        id="heroThumbs"
+      >
         <!-- JS generated -->
+      </aside>
+
+      <!-- Stage -->
+      <div class="hero__stage" id="heroStage">
+        <!-- Swiper -->
+        <div class="swiper" id="heroSwiper" aria-live="off">
+          <div class="swiper-wrapper" id="swiperWrapper">
+            <!-- JS generated -->
+          </div>
+        </div>
+
+        <!-- Live status for screen readers -->
+        <div
+          aria-live="polite"
+          aria-atomic="true"
+          class="sr-only"
+          id="srAnnouncer"
+          style="
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+          "
+        ></div>
+
+        <!-- Glass badge -->
+        <div class="hero__glass-tag" aria-hidden="true">
+          <div class="hero__glass-tag__dot"></div>
+          <span class="hero__glass-tag__text">Exclusive Collection 2025</span>
+        </div>
+
+        <!-- Right control strip: prev → progress → next -->
+        <div class="hero__controls">
+          <button
+            class="nav-btn nav-btn--prev"
+            id="heroPrev"
+            aria-label="Previous property"
+          >
+            <div class="nav-btn__mag"></div>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <polyline points="15,18 9,12 15,6" />
+            </svg>
+          </button>
+
+          <div class="hero__progress" aria-label="Slide progress" role="status">
+            <span class="progress__num" id="progCurrent">01</span>
+            <div class="progress__track">
+              <div class="progress__fill" id="progFill"></div>
+            </div>
+            <span class="progress__total" id="progTotal">05</span>
+          </div>
+
+          <button
+            class="nav-btn nav-btn--next"
+            id="heroNext"
+            aria-label="Next property"
+          >
+            <div class="nav-btn__mag"></div>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <polyline points="9,18 15,12 9,6" />
+            </svg>
+          </button>
+        </div>
       </div>
-    </div>
+      <!-- /stage -->
+    </section>
 
-    <!-- Live status for screen readers -->
-    <div aria-live="polite" aria-atomic="true" class="sr-only" id="srAnnouncer" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)"></div>
+    <!-- ─── SCRIPTS ─── -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/CustomEase.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-    <!-- Glass badge -->
-    <div class="hero__glass-tag" aria-hidden="true">
-      <div class="hero__glass-tag__dot"></div>
-      <span class="hero__glass-tag__text">Exclusive Collection 2025</span>
-    </div>
-
-    <!-- Scroll hint -->
-    <div class="scroll-hint" id="scrollHint" aria-hidden="true">
-      <div class="scroll-hint__line"></div>
-      <span class="scroll-hint__label">Scroll</span>
-    </div>
-
-    <!-- Navigation Arrows -->
-    <div class="hero__nav" role="group" aria-label="Slider navigation">
-      <button class="nav-btn nav-btn--prev" id="heroPrev" aria-label="Previous property">
-        <div class="nav-btn__mag"></div>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polyline points="15,18 9,12 15,6"/>
-        </svg>
-      </button>
-      <button class="nav-btn nav-btn--next" id="heroNext" aria-label="Next property">
-        <div class="nav-btn__mag"></div>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polyline points="9,18 15,12 9,6"/>
-        </svg>
-      </button>
-    </div>
-
-    <!-- Progress -->
-    <div class="hero__progress" aria-label="Slide progress" role="status">
-      <span class="progress__num" id="progCurrent">01</span>
-      <div class="progress__track">
-        <div class="progress__fill" id="progFill"></div>
-      </div>
-      <span class="progress__total" id="progTotal">05</span>
-    </div>
-
-  </div><!-- /stage -->
-</section>
-
-<!-- ─── SCRIPTS ─── -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/CustomEase.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-<script>
-/* ══════════════════════════════════════════════
+    <script>
+      /* ══════════════════════════════════════════════
    AKAR TOWN — HERO SLIDER
-   Swiper.js + GSAP | Book-Flip Transition
+   Swiper.js + GSAP | Magazine Page Curl
 ══════════════════════════════════════════════ */
 
-/* ── GSAP Custom Eases ── */
-CustomEase.create('roll',     '0.76, 0, 0.24, 1');   /* drum-roll S-curve */
-CustomEase.create('text.in',  '0.16, 1, 0.3, 1');
-CustomEase.create('smooth',   '0.76, 0, 0.24, 1');
+      CustomEase.create("text.in", "0.16, 1, 0.3, 1");
+      CustomEase.create("smooth", "0.76, 0, 0.24, 1");
 
-/* ── Slide Data ── */
-const SLIDES = [
-  {
-    title:   'The Pinnacle Residences',
-    tagline: 'Where Sky Meets Luxury',
-    location:'Cairo, Egypt',
-    image:   'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1400&auto=format&fit=crop&q=80',
-    thumb:   'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=300&auto=format&fit=crop&q=70',
-  },
-  {
-    title:   'Al Noor Villas',
-    tagline: 'Timeless Living, Reimagined',
-    location:'New Cairo, Egypt',
-    image:   'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1400&auto=format&fit=crop&q=80',
-    thumb:   'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=300&auto=format&fit=crop&q=70',
-  },
-  {
-    title:   'Maaya Heights',
-    tagline: 'Elevated Beyond Expectation',
-    location:'6th of October, Egypt',
-    image:   'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1400&auto=format&fit=crop&q=80',
-    thumb:   'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=300&auto=format&fit=crop&q=70',
-  },
-  {
-    title:   'Sky Gardens',
-    tagline: 'Nature Meets Architecture',
-    location:'North Coast, Egypt',
-    image:   'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1400&auto=format&fit=crop&q=80',
-    thumb:   'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=300&auto=format&fit=crop&q=70',
-  },
-  {
-    title:   'The Boulevard',
-    tagline: 'Live at the Center of Everything',
-    location:'Sheikh Zayed, Egypt',
-    image:   'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1400&auto=format&fit=crop&q=80',
-    thumb:   'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=300&auto=format&fit=crop&q=70',
-  },
-];
+      const SLIDES = [
+        {
+          title: "The Pinnacle Residences",
+          tagline: "Where Sky Meets Luxury",
+          location: "Cairo, Egypt",
+          image:
+            "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1920&auto=format&fit=crop&q=90",
+          thumb:
+            "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=300&auto=format&fit=crop&q=70",
+        },
+        {
+          title: "Al Noor Villas",
+          tagline: "Timeless Living, Reimagined",
+          location: "New Cairo, Egypt",
+          image:
+            "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1920&auto=format&fit=crop&q=90",
+          thumb:
+            "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=300&auto=format&fit=crop&q=70",
+        },
+        {
+          title: "Maaya Heights",
+          tagline: "Elevated Beyond Expectation",
+          location: "6th of October, Egypt",
+          image:
+            "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&auto=format&fit=crop&q=90",
+          thumb:
+            "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=300&auto=format&fit=crop&q=70",
+        },
+        {
+          title: "Sky Gardens",
+          tagline: "Nature Meets Architecture",
+          location: "North Coast, Egypt",
+          image:
+            "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1920&auto=format&fit=crop&q=90",
+          thumb:
+            "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=300&auto=format&fit=crop&q=70",
+        },
+        {
+          title: "The Boulevard",
+          tagline: "Live at the Center of Everything",
+          location: "Sheikh Zayed, Egypt",
+          image:
+            "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1920&auto=format&fit=crop&q=90",
+          thumb:
+            "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=300&auto=format&fit=crop&q=70",
+        },
+        {
+          title: "Azure Coast Estates",
+          tagline: "Where the Sea Becomes Home",
+          location: "Ain Sokhna, Egypt",
+          image:
+            "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=1920&auto=format&fit=crop&q=90",
+          thumb:
+            "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=300&auto=format&fit=crop&q=70",
+        },
+        {
+          title: "Azure Coast Estates",
+          tagline: "Where the Sea Becomes Home",
+          location: "Ain Sokhna, Egypt",
+          image:
+            "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=1920&auto=format&fit=crop&q=90",
+          thumb:
+            "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=300&auto=format&fit=crop&q=70",
+        },
+      ];
 
-const AUTOPLAY_MS  = 7000;
-const ROLL_MS      = 920;
-const REDUCED      = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const AUTOPLAY_MS = 7000;
+      const CURL_MS = 1080;
+      const REDUCED = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
 
-/* ── State ── */
-let activeIdx    = 0;
-let isAnimating  = false;
-let autoTimer    = null;
-let progTween    = null;
-let swiper       = null;
+      let activeIdx = 0;
+      let isAnimating = false;
+      let autoTimer = null;
+      let progTween = null;
+      let swiper = null;
 
-/* ── DOM refs ── */
-const thumbsWrap = document.getElementById('heroThumbs');
-const swiperWrap = document.getElementById('swiperWrapper');
-const progCurrent= document.getElementById('progCurrent');
-const progTotal  = document.getElementById('progTotal');
-const progFill   = document.getElementById('progFill');
-const prevBtn    = document.getElementById('heroPrev');
-const nextBtn    = document.getElementById('heroNext');
-const srAnnouncer= document.getElementById('srAnnouncer');
-const loaderEl   = document.getElementById('loader');
-const loaderBar  = document.getElementById('loaderBar');
-const scrollHint = document.getElementById('scrollHint');
+      const thumbsWrap = document.getElementById("heroThumbs");
+      const swiperWrap = document.getElementById("swiperWrapper");
+      const progCurrent = document.getElementById("progCurrent");
+      const progTotal = document.getElementById("progTotal");
+      const progFill = document.getElementById("progFill");
+      const prevBtn = document.getElementById("heroPrev");
+      const nextBtn = document.getElementById("heroNext");
+      const srAnnouncer = document.getElementById("srAnnouncer");
+      const loaderEl = document.getElementById("loader");
+      const loaderBar = document.getElementById("loaderBar");
+      const scrollHint = document.getElementById("scrollHint");
 
-/* ════════════════════════════════════
+      /* ════════════════════════════════════
    BUILD DOM
 ═════════════════════════════════════ */
-function buildDOM() {
-  /* Slides */
-  SLIDES.forEach((data, i) => {
-    const slide = document.createElement('div');
-    slide.className  = 'swiper-slide';
-    slide.dataset.idx = i;
-    slide.setAttribute('role', 'tabpanel');
-    slide.setAttribute('aria-label', data.title);
-    slide.setAttribute('aria-roledescription', 'slide');
-
-    slide.innerHTML = `
+      function buildDOM() {
+        SLIDES.forEach((data, i) => {
+          const slide = document.createElement("div");
+          slide.className = "swiper-slide";
+          slide.dataset.idx = i;
+          slide.setAttribute("role", "tabpanel");
+          slide.setAttribute("aria-label", data.title);
+          slide.setAttribute("aria-roledescription", "slide");
+          slide.innerHTML = `
       <div class="slide-bg" style="background-image:url('${data.image}')" aria-hidden="true"></div>
       <div class="slide-overlay" aria-hidden="true"></div>
-      <div class="slide-edge-light" aria-hidden="true"></div>
       <div class="slide-content">
         <div class="slide-eyebrow">
           <span class="slide-eyebrow__rule"></span>
@@ -1016,521 +1590,665 @@ function buildDOM() {
           </a>
           <a href="#" class="btn-slide btn-slide--ghost" aria-label="View details of ${data.title}">View Details</a>
         </div>
-      </div>
-    `;
+      </div>`;
+          swiperWrap.appendChild(slide);
+        });
 
-    swiperWrap.appendChild(slide);
-  });
+        const MAX_THUMBS = 6;
+        const visibleSlides = SLIDES.slice(0, MAX_THUMBS);
+        const hiddenCount = SLIDES.length - MAX_THUMBS;
 
-  /* Thumbnails */
-  SLIDES.forEach((data, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'thumb-item' + (i === 0 ? ' is-active' : '');
-    btn.dataset.idx = i;
-    btn.setAttribute('role', 'tab');
-    btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
-    btn.setAttribute('aria-label', `View ${data.title}`);
-    btn.setAttribute('tabindex', i === 0 ? '0' : '-1');
-
-    btn.innerHTML = `
+        visibleSlides.forEach((data, i) => {
+          const btn = document.createElement("button");
+          btn.className = "thumb-item" + (i === 0 ? " is-active" : "");
+          btn.dataset.idx = i;
+          btn.setAttribute("role", "tab");
+          btn.setAttribute("aria-selected", i === 0 ? "true" : "false");
+          btn.setAttribute("aria-label", `View ${data.title}`);
+          btn.setAttribute("tabindex", i === 0 ? "0" : "-1");
+          btn.innerHTML = `
       <div class="thumb-item__img-wrap">
-        <img src="${data.thumb}" alt="${data.title}" loading="${i === 0 ? 'eager' : 'lazy'}">
+        <img src="${data.thumb}" alt="${data.title}" loading="${i === 0 ? "eager" : "lazy"}">
       </div>
       <div class="thumb-item__meta">
         <div class="thumb-item__num">0${i + 1}</div>
         <div class="thumb-item__name">${data.title}</div>
       </div>
-      <div class="thumb-item__bar"></div>
-    `;
+      <div class="thumb-item__bar"></div>`;
+          btn.addEventListener("click", () => navigate(i, false, null));
+          btn.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              navigate(i, false, null);
+            }
+          });
+          thumbsWrap.appendChild(btn);
+        });
 
-    btn.addEventListener('click', () => navigate(i));
-    btn.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navigate(i); }
-    });
+        if (hiddenCount > 0) {
+          const moreLink = document.createElement("a");
+          moreLink.href = "#projects";
+          moreLink.className = "thumb-more";
+          moreLink.setAttribute(
+            "aria-label",
+            `Explore ${hiddenCount} more projects`,
+          );
+          moreLink.innerHTML = `
+      <span class="thumb-more__count">+${hiddenCount}</span>
+      <span class="thumb-more__label">More Projects</span>
+      <svg class="thumb-more__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+          thumbsWrap.appendChild(moreLink);
+        }
+      }
 
-    thumbsWrap.appendChild(btn);
-  });
-}
-
-/* ════════════════════════════════════
+      /* ════════════════════════════════════
    HELPERS
 ═════════════════════════════════════ */
-const getSlide = (i) => document.querySelector(`.swiper-slide[data-idx="${i}"]`);
-const getThumb = (i) => document.querySelector(`.thumb-item[data-idx="${i}"]`);
+      const getSlide = (i) =>
+        document.querySelector(`.swiper-slide[data-idx="${i}"]`);
+      const getThumb = (i) =>
+        document.querySelector(`.thumb-item[data-idx="${i}"]`);
+      function pad(n) {
+        return String(n + 1).padStart(2, "0");
+      }
+      function setProgress(i) {
+        progCurrent.textContent = pad(i);
+      }
+      function announce(text) {
+        srAnnouncer.textContent = "";
+        requestAnimationFrame(() => {
+          srAnnouncer.textContent = text;
+        });
+      }
 
-function pad(n) { return String(n + 1).padStart(2, '0'); }
-
-function setProgress(i) {
-  progCurrent.textContent = pad(i);
-}
-
-function announce(text) {
-  srAnnouncer.textContent = '';
-  requestAnimationFrame(() => { srAnnouncer.textContent = text; });
-}
-
-/* ════════════════════════════════════
-   AUTOPLAY PROGRESS BAR
+      /* ════════════════════════════════════
+   PROGRESS BAR + AUTOPLAY
 ═════════════════════════════════════ */
-function startProgBar() {
-  if (progTween) progTween.kill();
-  gsap.set(progFill, { scaleX: 0, transformOrigin: 'left' });
-  progTween = gsap.to(progFill, {
-    scaleX: 1,
-    duration: AUTOPLAY_MS / 1000,
-    ease: 'none',
-  });
-}
+      function startProgBar() {
+        if (progTween) progTween.kill();
+        gsap.set(progFill, { scaleX: 0, transformOrigin: "left" });
+        progTween = gsap.to(progFill, {
+          scaleX: 1,
+          duration: AUTOPLAY_MS / 1000,
+          ease: "none",
+        });
+      }
+      function pauseProgBar() {
+        if (progTween) progTween.pause();
+      }
+      function resumeProgBar() {
+        if (progTween) progTween.resume();
+      }
 
-function pauseProgBar() {
-  if (progTween) progTween.pause();
-}
+      function startAutoplay() {
+        clearAutoplay();
+        startProgBar();
+        autoTimer = setTimeout(
+          () => navigate((activeIdx + 1) % SLIDES.length, false, true),
+          AUTOPLAY_MS,
+        );
+      }
+      function clearAutoplay() {
+        if (autoTimer) {
+          clearTimeout(autoTimer);
+          autoTimer = null;
+        }
+        pauseProgBar();
+      }
+      function pauseAutoplay() {
+        clearAutoplay();
+      }
+      function resumeAutoplay() {
+        startAutoplay();
+      }
 
-function resumeProgBar() {
-  if (progTween) progTween.resume();
-}
-
-/* ════════════════════════════════════
-   AUTOPLAY
-═════════════════════════════════════ */
-function startAutoplay() {
-  clearAutoplay();
-  startProgBar();
-  autoTimer = setTimeout(() => {
-    navigate((activeIdx + 1) % SLIDES.length);
-  }, AUTOPLAY_MS);
-}
-
-function clearAutoplay() {
-  if (autoTimer) { clearTimeout(autoTimer); autoTimer = null; }
-  pauseProgBar();
-}
-
-function pauseAutoplay() { clearAutoplay(); }
-function resumeAutoplay() { startAutoplay(); }
-
-/* ════════════════════════════════════
+      /* ════════════════════════════════════
    TEXT ANIMATIONS
 ═════════════════════════════════════ */
-function textIn(slideEl) {
-  if (REDUCED) return;
-  const els = [
-    slideEl.querySelector('.slide-eyebrow'),
-    slideEl.querySelector('.slide-title'),
-    slideEl.querySelector('.slide-tagline'),
-    slideEl.querySelector('.slide-location'),
-    slideEl.querySelector('.slide-ctas'),
-  ].filter(Boolean);
+      function textIn(slideEl) {
+        if (REDUCED) return;
+        const els = [
+          slideEl.querySelector(".slide-eyebrow"),
+          slideEl.querySelector(".slide-title"),
+          slideEl.querySelector(".slide-tagline"),
+          slideEl.querySelector(".slide-location"),
+          slideEl.querySelector(".slide-ctas"),
+        ].filter(Boolean);
+        gsap.killTweensOf(els);
+        gsap.set(els, { opacity: 0, y: 28, filter: "blur(10px)" });
+        const tl = gsap.timeline();
+        els.forEach((el, i) =>
+          tl.to(
+            el,
+            {
+              opacity: 1,
+              y: 0,
+              filter: "blur(0px)",
+              duration: 0.78,
+              ease: "text.in",
+            },
+            i * 0.11,
+          ),
+        );
+        return tl;
+      }
+      function textOut(slideEl) {
+        if (REDUCED) return;
+        const els = slideEl.querySelectorAll(
+          ".slide-eyebrow,.slide-title,.slide-tagline,.slide-location,.slide-ctas",
+        );
+        gsap.killTweensOf(els);
+        return gsap.to([...els].reverse(), {
+          opacity: 0,
+          y: -16,
+          filter: "blur(6px)",
+          duration: 0.35,
+          ease: "power2.in",
+          stagger: 0.06,
+        });
+      }
 
-  gsap.killTweensOf(els);
-  gsap.set(els, { opacity: 0, y: 28, filter: 'blur(10px)' });
+      /* ════════════════════════════════════
+   MAGAZINE PAGE CURL TRANSITION
 
-  const tl = gsap.timeline();
-  els.forEach((el, i) => {
-    tl.to(el, {
-      opacity: 1, y: 0, filter: 'blur(0px)',
-      duration: 0.78,
-      ease: 'text.in',
-    }, i * 0.11);
-  });
+   Four visual layers (back to front):
+   z=1  toSlide   — incoming slide, full width, revealed underneath
+   z=2  fromSlide — clipped CSS polygon to the "flat" area not yet peeled
+   z=3  curlBack  — papery back-of-page visible as the leaf curls over
+   z=4  canvas    — frame-accurate soft shadow + specular crease highlight
 
-  return tl;
-}
-
-function textOut(slideEl) {
-  if (REDUCED) return;
-  const els = slideEl.querySelectorAll('.slide-eyebrow, .slide-title, .slide-tagline, .slide-location, .slide-ctas');
-  gsap.killTweensOf(els);
-  return gsap.to([...els].reverse(), {
-    opacity: 0, y: -16, filter: 'blur(6px)',
-    duration: 0.35, ease: 'power2.in', stagger: 0.06,
-  });
-}
-
-/* ════════════════════════════════════
-   ROLLER / DRUM TRANSITION
-   Both slides rotate around their own
-   centre axis — like a spinning barrel.
-   fromSlide rolls off; toSlide rolls on.
+   The fold line is intentionally diagonal: bottom-right corner leads on a
+   forward turn, top-right corner leads on reverse, matching the physics of
+   a thick glossy magazine page being turned from a corner outward.
 ═════════════════════════════════════ */
-function doRoll(fromIdx, toIdx) {
-  const fromSlide  = getSlide(fromIdx);
-  const toSlide    = getSlide(toIdx);
-  if (!fromSlide || !toSlide) return;
+      function doPageCurl(fromIdx, toIdx, forward) {
+        const fromSlide = getSlide(fromIdx);
+        const toSlide = getSlide(toIdx);
+        if (!fromSlide || !toSlide) return;
 
-  const fromBg    = fromSlide.querySelector('.slide-bg');
-  const toBg      = toSlide.querySelector('.slide-bg');
-  const fromShade = fromSlide.querySelector('.slide-edge-light');
-  const toShade   = toSlide.querySelector('.slide-edge-light');
+        const heroStage = document.getElementById("heroStage");
+        let W = heroStage.offsetWidth;
+        let H = heroStage.offsetHeight;
 
-  /* dir: -1 = going forward (next), roll left
-          +1 = going back (prev),    roll right */
-  const dir  = toIdx > fromIdx ? -1 : 1;
-  const DUR  = ROLL_MS / 1000;        // total roll duration in seconds
-  const PERSP = 1600;                 // perspective distance — tighter = more dramatic
+        /* Layer order */
+        gsap.set(toSlide, {
+          zIndex: 1,
+          display: "block",
+          visibility: "visible",
+        });
+        gsap.set(fromSlide, { zIndex: 2 });
 
-  /* ── Initial state ── */
-  /* toSlide starts edge-on from the incoming direction */
-  gsap.set(toSlide, {
-    zIndex: 1,
-    display: 'block',
-    visibility: 'visible',
-    rotationY: dir * -90,            // incoming: edge-on from the other side
-    transformPerspective: PERSP,
-    transformOrigin: 'center center',
-  });
-  gsap.set(fromSlide, {
-    zIndex: 2,
-    rotationY: 0,
-    transformPerspective: PERSP,
-    transformOrigin: 'center center',
-  });
-  gsap.set(toBg,   { scale: 1.055, x: dir * 20 });
-  gsap.set(toShade,   { opacity: 0.65 }); /* incoming starts dark — in shadow */
-  gsap.set(fromShade, { opacity: 0 });
+        /* Back-of-page element — warm paper tone, bright specular near the crease */
+        const curlBack = document.createElement("div");
+        curlBack.setAttribute("aria-hidden", "true");
+        curlBack.style.cssText =
+          "position:absolute;inset:0;z-index:3;pointer-events:none;will-change:clip-path,background;";
+        heroStage.appendChild(curlBack);
 
-  /* Text out */
-  textOut(fromSlide);
+        /* Canvas for shadow cast on toSlide + specular crease line */
+        const cnv = document.createElement("canvas");
+        cnv.setAttribute("aria-hidden", "true");
+        cnv.width = W;
+        cnv.height = H;
+        cnv.style.cssText =
+          "position:absolute;inset:0;z-index:4;pointer-events:none;";
+        heroStage.appendChild(cnv);
+        const ctx = cnv.getContext("2d");
 
-  /* Preload upcoming */
-  const preImg = new Image();
-  preImg.src = SLIDES[(toIdx + 1) % SLIDES.length].image;
+        /* Preload next image while animating */
+        new Image().src = SLIDES[(toIdx + 1) % SLIDES.length].image;
 
-  const tl = gsap.timeline({
-    onComplete: () => {
-      gsap.set(fromSlide, {
-        display: 'none', visibility: 'hidden',
-        zIndex: 0, rotationY: 0, opacity: 1,
-      });
-      gsap.set(toSlide, { zIndex: 2 });
-      gsap.set([fromShade, toShade], { opacity: 0 });
-      isAnimating = false;
-      textIn(toSlide);
-      startAutoplay();
-    }
-  });
+        textOut(fromSlide);
 
-  if (REDUCED) {
-    /* Simple crossfade for reduced motion */
-    gsap.set([fromShade, toShade], { opacity: 0 });
-    gsap.set(toSlide, { rotationY: 0 });
-    tl.to(fromSlide, { opacity: 0, duration: 0.4, ease: 'power2.inOut' }, 0)
-      .to(toSlide,   { opacity: 1, duration: 0.4, ease: 'power2.inOut' }, 0)
-      .add(() => { gsap.set(fromSlide, { opacity: 1 }); });
+        const state = { p: 0 };
 
-  } else {
-    /* ── CYLINDER DRUM ROLL ── */
-    tl
-      /* 1. FROM slide rolls off — rotates to edge */
-      .to(fromSlide, {
-        rotationY: dir * 90,           /* rolls off to the side */
-        duration: DUR,
-        ease: 'power3.inOut',
-        onComplete: () => {
-          gsap.set(fromSlide, { visibility: 'hidden' });
-        },
-      }, 0)
+        const tl = gsap.timeline({
+          onComplete() {
+            cnv.remove();
+            curlBack.remove();
+            fromSlide.style.clipPath = "";
+            fromSlide.style.transform = "";
+            gsap.set(fromSlide, {
+              display: "none",
+              visibility: "hidden",
+              zIndex: 0,
+            });
+            gsap.set(toSlide, { zIndex: 2 });
+            isAnimating = false;
+            textIn(toSlide);
+            startAutoplay();
+          },
+        });
 
-      /* 2. TO slide rolls on — comes from edge to face-on */
-      .to(toSlide, {
-        rotationY: 0,                  /* rolls into full view */
-        duration: DUR,
-        ease: 'power3.inOut',
-      }, 0)
+        if (REDUCED) {
+          gsap.set(toSlide, { opacity: 0 });
+          tl.to(fromSlide, { opacity: 0, duration: 0.4 })
+            .to(toSlide, { opacity: 1, duration: 0.4 }, 0)
+            .add(() => gsap.set(fromSlide, { opacity: 1 }));
+          return;
+        }
 
-      /* 3. FROM shade: grows as it rotates away (into shadow) */
-      .to(fromShade, {
-        opacity: 0.72,
-        duration: DUR * 0.5,
-        ease: 'power2.in',
-      }, 0)
+        tl.to(state, {
+          p: 1,
+          duration: CURL_MS / 1000,
+          /* slow corner-peel → fast sweep → gentle settle */
+          ease: "power3.inOut",
+          onUpdate() {
+            renderFrame(state.p);
+          },
+        });
 
-      /* 4. TO shade: starts dark, clears as it faces front (out of shadow) */
-      .to(toShade, {
-        opacity: 0,
-        duration: DUR * 0.72,
-        ease: 'power2.out',
-      }, DUR * 0.28)
+        /* ── Fold geometry ──────────────────────────────────────────────────────
+     Larger bow (0.20×W) gives a pronounced diagonal — the corner visibly
+     leads the rest of the leaf, matching the physics of a stiff magazine page.
+  ──────────────────────────────────────────────────────────────────────── */
+        function getFold(p) {
+          const center = forward ? W * (1 - p) : W * p;
+          const bow = Math.sin(p * Math.PI) * W * 0.2;
+          const topX = forward
+            ? Math.max(0, center + bow * 0.62)
+            : Math.min(W, center - bow * 0.62);
+          const bottomX = forward
+            ? Math.max(0, center - bow * 0.55)
+            : Math.min(W, center + bow * 0.55);
+          return { topX, bottomX };
+        }
 
-      /* 5. TO bg: Ken Burns zoom + drift settles */
-      .to(toBg, {
-        scale: 1,
-        x: 0,
-        duration: DUR * 1.15,
-        ease: 'smooth',
-      }, 0)
+        /* ── Master render ──────────────────────────────────────────────────── */
+        function renderFrame(p) {
+          W = heroStage.offsetWidth;
+          H = heroStage.offsetHeight;
+          if (cnv.width !== W || cnv.height !== H) {
+            cnv.width = W;
+            cnv.height = H;
+          } else {
+            ctx.clearRect(0, 0, W, H);
+          }
 
-      /* 6. FROM bg: drifts in the roll direction (parallax) */
-      .to(fromBg, {
-        x: dir * -50,
-        duration: DUR,
-        ease: 'power3.inOut',
-      }, 0);
-  }
-}
+          const pk = Math.sin(p * Math.PI);
+          const { topX, bottomX } = getFold(p);
 
-/* ════════════════════════════════════
+          /* fromSlide: clip to the flat region + subtle bow warp */
+          if (forward) {
+            fromSlide.style.clipPath = `polygon(0 0,${topX}px 0,${bottomX}px 100%,0 100%)`;
+            fromSlide.style.transform = `perspective(2800px) rotateY(${pk * 3.2}deg)`;
+            fromSlide.style.transformOrigin = "left center";
+          } else {
+            fromSlide.style.clipPath = `polygon(${topX}px 0,100% 0,100% 100%,${bottomX}px 100%)`;
+            fromSlide.style.transform = `perspective(2800px) rotateY(${-pk * 3.2}deg)`;
+            fromSlide.style.transformOrigin = "right center";
+          }
+
+          /* curlBack: warm dark shadow — peaks at 0.52 alpha so the hero image
+             bleeds through and gives weight instead of a blinding white flash   */
+          const sa = (0.1 + pk * 0.42).toFixed(3);
+          if (forward) {
+            curlBack.style.clipPath = `polygon(${topX}px 0,100% 0,100% 100%,${bottomX}px 100%)`;
+            curlBack.style.background = `linear-gradient(to right,
+        rgba(210,195,178,${sa})  0%,
+        rgba(175,162,145,0.32)  24%,
+        rgba(140,130,116,0.18)  55%,
+        rgba(100,92,80,0.07)    80%,
+        rgba(60,55,48,0.02)    100%)`;
+          } else {
+            curlBack.style.clipPath = `polygon(0 0,${topX}px 0,${bottomX}px 100%,0 100%)`;
+            curlBack.style.background = `linear-gradient(to left,
+        rgba(210,195,178,${sa})  0%,
+        rgba(175,162,145,0.32)  24%,
+        rgba(140,130,116,0.18)  55%,
+        rgba(100,92,80,0.07)    80%,
+        rgba(60,55,48,0.02)    100%)`;
+          }
+
+          drawShadow(p, pk, topX, bottomX);
+          drawSpecular(p, pk, topX, bottomX);
+          drawPageEdge(pk, topX, bottomX);
+        }
+
+        /* Deep shadow on the revealed slide — wider band, steeper gradient */
+        function drawShadow(p, pk, topX, bottomX) {
+          const sw = Math.round(W * 0.13);
+          const leadX = forward
+            ? Math.min(topX, bottomX)
+            : Math.max(topX, bottomX);
+          const x0 = forward ? leadX : leadX - sw;
+          const x1 = forward ? leadX + sw : leadX;
+          const g = ctx.createLinearGradient(x0, 0, x1, 0);
+          g.addColorStop(0, `rgba(0,0,0,${(pk * 0.75).toFixed(3)})`);
+          g.addColorStop(0.15, `rgba(0,0,0,${(pk * 0.44).toFixed(3)})`);
+          g.addColorStop(0.5, `rgba(0,0,0,${(pk * 0.15).toFixed(3)})`);
+          g.addColorStop(1, "rgba(0,0,0,0)");
+          ctx.fillStyle = g;
+          ctx.fillRect(Math.min(x0, x1), 0, sw, H);
+        }
+
+        /* Specular strip on the flat page just before the crease */
+        function drawSpecular(p, pk, topX, bottomX) {
+          const sw = 16;
+          ctx.save();
+          ctx.beginPath();
+          if (forward) {
+            ctx.moveTo(topX, 0);
+            ctx.lineTo(topX - sw, 0);
+            ctx.lineTo(bottomX - sw, H);
+            ctx.lineTo(bottomX, H);
+          } else {
+            ctx.moveTo(topX, 0);
+            ctx.lineTo(topX + sw, 0);
+            ctx.lineTo(bottomX + sw, H);
+            ctx.lineTo(bottomX, H);
+          }
+          ctx.closePath();
+          ctx.clip();
+          const x0 = forward ? topX : topX + sw;
+          const x1 = forward ? topX - sw : topX;
+          const g = ctx.createLinearGradient(x0, 0, x1, 0);
+          g.addColorStop(0, `rgba(255,255,255,${(pk * 0.48).toFixed(3)})`);
+          g.addColorStop(0.45, `rgba(255,255,255,${(pk * 0.14).toFixed(3)})`);
+          g.addColorStop(1, "rgba(255,255,255,0)");
+          ctx.fillStyle = g;
+          ctx.fillRect(0, 0, W, H);
+          ctx.restore();
+
+          /* hairline crease */
+          ctx.save();
+          ctx.beginPath();
+          ctx.moveTo(topX, 0);
+          ctx.lineTo(bottomX, H);
+          ctx.strokeStyle = `rgba(255,255,255,${(pk * 0.38).toFixed(3)})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+          ctx.restore();
+        }
+
+        /* Dark stripe at the fold line — simulates physical page thickness/edge */
+        function drawPageEdge(pk, topX, bottomX) {
+          const ew = 2 + pk * 4;
+          ctx.save();
+          ctx.beginPath();
+          if (forward) {
+            ctx.moveTo(topX, 0);
+            ctx.lineTo(topX + ew, 0);
+            ctx.lineTo(bottomX + ew, H);
+            ctx.lineTo(bottomX, H);
+          } else {
+            ctx.moveTo(topX, 0);
+            ctx.lineTo(topX - ew, 0);
+            ctx.lineTo(bottomX - ew, H);
+            ctx.lineTo(bottomX, H);
+          }
+          ctx.closePath();
+          ctx.fillStyle = `rgba(20,14,8,${(pk * 0.6).toFixed(3)})`;
+          ctx.fill();
+          ctx.restore();
+        }
+      }
+
+      /* ════════════════════════════════════
    NAVIGATE
+   forward: true  = next (curl right→left)
+            false = prev  (curl left→right)
+            null  = infer from index delta
 ═════════════════════════════════════ */
-function navigate(toIdx, fromExternal = false) {
-  if (isAnimating || toIdx === activeIdx) return;
-  isAnimating = true;
+      function navigate(toIdx, fromExternal = false, forward = null) {
+        if (isAnimating || toIdx === activeIdx) return;
+        isAnimating = true;
 
-  const fromIdx = activeIdx;
-  activeIdx = toIdx;
+        const fromIdx = activeIdx;
+        activeIdx = toIdx;
+        const goForward = forward !== null ? forward : toIdx > fromIdx;
 
-  /* ARIA + thumbs */
-  const fromThumb = getThumb(fromIdx);
-  const toThumb   = getThumb(toIdx);
-  if (fromThumb) {
-    fromThumb.classList.remove('is-active');
-    fromThumb.setAttribute('aria-selected', 'false');
-    fromThumb.setAttribute('tabindex', '-1');
-  }
-  if (toThumb) {
-    toThumb.classList.add('is-active');
-    toThumb.setAttribute('aria-selected', 'true');
-    toThumb.setAttribute('tabindex', '0');
-    /* Scroll thumb into view on mobile */
-    toThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-  }
+        const fromThumb = getThumb(fromIdx);
+        const toThumb = getThumb(toIdx);
+        if (fromThumb) {
+          fromThumb.classList.remove("is-active");
+          fromThumb.setAttribute("aria-selected", "false");
+          fromThumb.setAttribute("tabindex", "-1");
+        }
+        if (toThumb) {
+          toThumb.classList.add("is-active");
+          toThumb.setAttribute("aria-selected", "true");
+          toThumb.setAttribute("tabindex", "0");
+          toThumb.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "center",
+          });
+        }
 
-  /* Progress number */
-  setProgress(toIdx);
+        setProgress(toIdx);
+        announce(
+          `Showing ${SLIDES[toIdx].title}, property ${toIdx + 1} of ${SLIDES.length}`,
+        );
+        if (swiper && !fromExternal) swiper.slideTo(toIdx, 0, false);
+        clearAutoplay();
+        doPageCurl(fromIdx, toIdx, goForward);
+      }
 
-  /* Screen reader */
-  announce(`Showing ${SLIDES[toIdx].title}, property ${toIdx + 1} of ${SLIDES.length}`);
-
-  /* Update Swiper silently */
-  if (swiper && !fromExternal) swiper.slideTo(toIdx, 0, false);
-
-  /* Pause autoplay bar while animating */
-  clearAutoplay();
-
-  /* Run the roll */
-  doRoll(fromIdx, toIdx);
-}
-
-/* ════════════════════════════════════
+      /* ════════════════════════════════════
    SWIPER INIT
 ═════════════════════════════════════ */
-function initSwiper() {
-  swiper = new Swiper('#heroSwiper', {
-    virtualTranslate: true,   /* Swiper calculates but doesn't apply CSS transforms */
-    speed: 0,                 /* GSAP owns the animation, not Swiper */
-    allowTouchMove: true,
-    threshold: 20,
-    longSwipesRatio: 0.2,
-    keyboard: { enabled: false },  /* We handle keyboard ourselves */
-
-    on: {
-      init(sw) {
-        /* Make first slide visible, hide rest */
-        const slides = sw.slides;
-        slides.forEach((sl, i) => {
-          if (i === 0) {
-            gsap.set(sl, { zIndex: 2, display: 'block', visibility: 'visible' });
-          } else {
-            gsap.set(sl, { zIndex: 0, display: 'none', visibility: 'hidden' });
-          }
+      function initSwiper() {
+        swiper = new Swiper("#heroSwiper", {
+          virtualTranslate: true,
+          speed: 0,
+          allowTouchMove: true,
+          threshold: 20,
+          longSwipesRatio: 0.2,
+          keyboard: { enabled: false },
+          on: {
+            init(sw) {
+              sw.slides.forEach((sl, i) => {
+                if (i === 0)
+                  gsap.set(sl, {
+                    zIndex: 2,
+                    display: "block",
+                    visibility: "visible",
+                  });
+                else
+                  gsap.set(sl, {
+                    zIndex: 0,
+                    display: "none",
+                    visibility: "hidden",
+                  });
+              });
+            },
+            slideChangeTransitionStart(sw) {
+              if (!isAnimating) navigate(sw.activeIndex, true, null);
+            },
+            setTranslate(sw, translate) {
+              if (isAnimating) return;
+              const sl = sw.slides[activeIdx];
+              if (sl) {
+                const bg = sl.querySelector(".slide-bg");
+                if (bg) gsap.set(bg, { x: translate * 0.08 });
+              }
+            },
+            touchEnd(sw) {
+              const sl = sw.slides[activeIdx];
+              if (sl) {
+                const bg = sl.querySelector(".slide-bg");
+                if (bg) gsap.to(bg, { x: 0, duration: 0.5, ease: "smooth" });
+              }
+            },
+          },
         });
-      },
+      }
 
-      slideChangeTransitionStart(sw) {
-        /* Swiper detected a swipe — sync our navigate */
-        if (!isAnimating) {
-          navigate(sw.activeIndex, true);
-        }
-      },
-
-      setTranslate(sw, translate) {
-        /* During interactive drag — subtle parallax feedback */
-        if (isAnimating) return;
-        const activeSlide = sw.slides[activeIdx];
-        if (!activeSlide) return;
-        const bg = activeSlide.querySelector('.slide-bg');
-        if (bg) {
-          const progress = Math.abs(translate / sw.width);
-          gsap.set(bg, { x: translate * 0.08 });
-          /* Reset if drag released */
-        }
-      },
-
-      touchEnd(sw) {
-        /* Reset parallax if swipe didn't trigger navigation */
-        const activeSlide = sw.slides[activeIdx];
-        if (!activeSlide) return;
-        const bg = activeSlide.querySelector('.slide-bg');
-        if (bg) {
-          gsap.to(bg, { x: 0, duration: 0.5, ease: 'smooth' });
-        }
-      },
-    },
-  });
-}
-
-/* ════════════════════════════════════
+      /* ════════════════════════════════════
    EVENT LISTENERS
 ═════════════════════════════════════ */
-/* Button clicks */
-prevBtn.addEventListener('click', () => {
-  navigate((activeIdx - 1 + SLIDES.length) % SLIDES.length);
-});
+      prevBtn.addEventListener("click", () =>
+        navigate((activeIdx - 1 + SLIDES.length) % SLIDES.length, false, false),
+      );
+      nextBtn.addEventListener("click", () =>
+        navigate((activeIdx + 1) % SLIDES.length, false, true),
+      );
 
-nextBtn.addEventListener('click', () => {
-  navigate((activeIdx + 1) % SLIDES.length);
-});
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft")
+          navigate(
+            (activeIdx - 1 + SLIDES.length) % SLIDES.length,
+            false,
+            false,
+          );
+        if (e.key === "ArrowRight")
+          navigate((activeIdx + 1) % SLIDES.length, false, true);
+      });
 
-/* Keyboard */
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowLeft')  navigate((activeIdx - 1 + SLIDES.length) % SLIDES.length);
-  if (e.key === 'ArrowRight') navigate((activeIdx + 1) % SLIDES.length);
-});
+      const stage = document.getElementById("heroStage");
+      stage.addEventListener("mouseenter", pauseAutoplay);
+      stage.addEventListener("mouseleave", resumeAutoplay);
+      stage.addEventListener("touchstart", pauseAutoplay, { passive: true });
+      stage.addEventListener("touchend", resumeAutoplay, { passive: true });
 
-/* Pause on hover */
-const stage = document.getElementById('heroStage');
-stage.addEventListener('mouseenter', pauseAutoplay);
-stage.addEventListener('mouseleave', resumeAutoplay);
+      document.querySelectorAll(".nav-btn").forEach((btn) => {
+        btn.addEventListener("mousemove", (e) => {
+          const r = btn.getBoundingClientRect();
+          const dx = (e.clientX - r.left - r.width / 2) * 0.35;
+          const dy = (e.clientY - r.top - r.height / 2) * 0.35;
+          gsap.to(btn, {
+            x: dx,
+            y: dy,
+            duration: 0.3,
+            ease: "power2.out",
+            overwrite: true,
+          });
+        });
+        btn.addEventListener("mouseleave", () => {
+          gsap.to(btn, {
+            x: 0,
+            y: 0,
+            duration: 0.5,
+            ease: "elastic.out(1,0.4)",
+            overwrite: true,
+          });
+        });
+      });
 
-/* Pause on touch start */
-stage.addEventListener('touchstart', pauseAutoplay, { passive: true });
-stage.addEventListener('touchend',   resumeAutoplay, { passive: true });
-
-/* Magnetic effect on nav buttons */
-document.querySelectorAll('.nav-btn').forEach(btn => {
-  const mag = btn.querySelector('.nav-btn__mag');
-  btn.addEventListener('mousemove', (e) => {
-    const r = btn.getBoundingClientRect();
-    const cx = r.left + r.width  / 2;
-    const cy = r.top  + r.height / 2;
-    const dx = (e.clientX - cx) * 0.35;
-    const dy = (e.clientY - cy) * 0.35;
-    gsap.to(btn, { x: dx, y: dy, duration: 0.3, ease: 'power2.out', overwrite: true });
-  });
-  btn.addEventListener('mouseleave', () => {
-    gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.4)', overwrite: true });
-  });
-});
-
-/* ════════════════════════════════════
+      /* ════════════════════════════════════
    LOADER
 ═════════════════════════════════════ */
-function runLoader() {
-  return new Promise((resolve) => {
-    const tl = gsap.timeline({
-      onComplete: resolve
-    });
-
-    /* Logo fade in */
-    tl.to(loaderEl.querySelector('.loader__logo'), {
-      opacity: 1, y: 0,
-      duration: 0.7, ease: 'smooth',
-    }, 0.2);
-
-    /* Bar fills */
-    tl.to(loaderBar, {
-      width: '100%',
-      duration: 1.2,
-      ease: 'power2.inOut',
-    }, 0.4);
-
-    /* Loader fades out */
-    tl.to(loaderEl, {
-      opacity: 0,
-      duration: 0.5,
-      ease: 'power2.inOut',
-      onComplete: () => {
-        loaderEl.style.display = 'none';
+      function runLoader() {
+        return new Promise((resolve) => {
+          const tl = gsap.timeline({ onComplete: resolve });
+          tl.to(
+            loaderEl.querySelector(".loader__logo"),
+            { opacity: 1, y: 0, duration: 0.7, ease: "smooth" },
+            0.2,
+          );
+          tl.to(
+            loaderBar,
+            { width: "100%", duration: 1.2, ease: "power2.inOut" },
+            0.4,
+          );
+          tl.to(
+            loaderEl,
+            {
+              opacity: 0,
+              duration: 0.5,
+              ease: "power2.inOut",
+              onComplete() {
+                loaderEl.style.display = "none";
+              },
+            },
+            1.8,
+          );
+        });
       }
-    }, 1.8);
-  });
-}
 
-/* ════════════════════════════════════
+      /* ════════════════════════════════════
    ENTRY ANIMATION
 ═════════════════════════════════════ */
-function entryAnimation() {
-  const firstSlide = getSlide(0);
-  const navbar     = document.querySelector('.navbar');
-  const thumbItems = document.querySelectorAll('.thumb-item');
-  const glassTag   = document.querySelector('.hero__glass-tag');
+      function entryAnimation() {
+        const firstSlide = getSlide(0);
+        const navbar = document.querySelector(".navbar");
+        const thumbItems = document.querySelectorAll(".thumb-item");
+        const glassTag = document.querySelector(".hero__glass-tag");
 
-  const tl = gsap.timeline({
-    onComplete: () => {
-      textIn(firstSlide);
-      startAutoplay();
+        const tl = gsap.timeline({
+          onComplete() {
+            textIn(firstSlide);
+            startAutoplay();
+            gsap.to(scrollHint, { opacity: 1, duration: 0.6, delay: 1.2 });
+            gsap.to(scrollHint, { opacity: 0, duration: 0.6, delay: 5 });
+          },
+        });
 
-      /* Scroll hint */
-      gsap.to(scrollHint, { opacity: 1, duration: 0.6, delay: 1.2 });
-      gsap.to(scrollHint, { opacity: 0, duration: 0.6, delay: 5 });
-    }
-  });
+        gsap.set(navbar, { y: -20, opacity: 0 });
+        tl.to(navbar, { y: 0, opacity: 1, duration: 0.7, ease: "smooth" }, 0);
 
-  /* Navbar */
-  gsap.set(navbar, { y: -20, opacity: 0 });
-  tl.to(navbar, { y: 0, opacity: 1, duration: 0.7, ease: 'smooth' }, 0);
+        if (firstSlide) {
+          const bg = firstSlide.querySelector(".slide-bg");
+          gsap.set(bg, { scale: 1.08 });
+          tl.to(bg, { scale: 1, duration: 1.6, ease: "smooth" }, 0.3);
+        }
 
-  /* Hero image reveal */
-  if (firstSlide) {
-    const bg = firstSlide.querySelector('.slide-bg');
-    gsap.set(bg, { scale: 1.08 });
-    tl.to(bg, { scale: 1, duration: 1.6, ease: 'smooth' }, 0.3);
-  }
+        gsap.set(thumbItems, { x: -20, opacity: 0 });
+        tl.to(
+          thumbItems,
+          { x: 0, opacity: 1, duration: 0.6, ease: "smooth", stagger: 0.08 },
+          0.5,
+        );
 
-  /* Thumbs stagger in */
-  gsap.set(thumbItems, { x: -20, opacity: 0 });
-  tl.to(thumbItems, {
-    x: 0, opacity: 1,
-    duration: 0.6, ease: 'smooth',
-    stagger: 0.08,
-  }, 0.5);
+        if (glassTag) {
+          gsap.set(glassTag, { y: -10, opacity: 0 });
+          tl.to(
+            glassTag,
+            { y: 0, opacity: 1, duration: 0.6, ease: "smooth" },
+            0.8,
+          );
+        }
 
-  /* Glass tag */
-  if (glassTag) {
-    gsap.set(glassTag, { y: -10, opacity: 0 });
-    tl.to(glassTag, { y: 0, opacity: 1, duration: 0.6, ease: 'smooth' }, 0.8);
-  }
+        const progEls = [progCurrent, progFill.parentElement, progTotal];
+        gsap.set(progEls, { opacity: 0 });
+        tl.to(progEls, { opacity: 1, duration: 0.5, stagger: 0.1 }, 0.9);
 
-  /* Progress */
-  const progEls = [progCurrent, progFill.parentElement, progTotal];
-  gsap.set(progEls, { opacity: 0 });
-  tl.to(progEls, { opacity: 1, duration: 0.5, stagger: 0.1 }, 0.9);
+        const navBtns = document.querySelectorAll(".nav-btn");
+        gsap.set(navBtns, { scale: 0.8, opacity: 0 });
+        tl.to(
+          navBtns,
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 0.5,
+            ease: "back.out(1.4)",
+            stagger: 0.1,
+          },
+          1.0,
+        );
+      }
 
-  /* Nav buttons */
-  const navBtns = document.querySelectorAll('.nav-btn');
-  gsap.set(navBtns, { scale: 0.8, opacity: 0 });
-  tl.to(navBtns, { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(1.4)', stagger: 0.1 }, 1.0);
-}
-
-/* ════════════════════════════════════
+      /* ════════════════════════════════════
    INIT
 ═════════════════════════════════════ */
-async function init() {
-  /* Initial state — hide loader logo for entrance */
-  gsap.set(loaderEl.querySelector('.loader__logo'), { opacity: 0, y: 10 });
+      async function init() {
+        gsap.set(loaderEl.querySelector(".loader__logo"), {
+          opacity: 0,
+          y: 10,
+        });
+        buildDOM();
+        progTotal.textContent = String(SLIDES.length).padStart(2, "0");
+        setProgress(0);
+        initSwiper();
+        await runLoader();
+        entryAnimation();
+      }
 
-  /* Build slide & thumb DOM */
-  buildDOM();
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", init);
+      } else {
+        init();
+      }
 
-  /* Set progress total */
-  progTotal.textContent = String(SLIDES.length).padStart(2, '0');
-  setProgress(0);
-
-  /* Init Swiper */
-  initSwiper();
-
-  /* Run loader then entry */
-  await runLoader();
-  entryAnimation();
-}
-
-/* Start when DOM ready */
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
-} else {
-  init();
-}
-</script>
-
-</body>
+      /* Navbar scroll state */
+      (function () {
+        const nav = document.querySelector(".navbar");
+        const onScroll = () =>
+          nav.classList.toggle("is-scrolled", window.scrollY > 40);
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+      })();
+    </script>
+  </body>
 </html>

@@ -47,7 +47,11 @@
         --font-body-rtl: "Noto Kufi Arabic", system-ui, sans-serif;
 
         --nav-h: 62px;
+<<<<<<< HEAD
         --thumb-w: 124px;
+=======
+        --thumb-w: 300px;
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
         --ease-smooth: cubic-bezier(0.76, 0, 0.24, 1);
         --ease-out-ex: cubic-bezier(0.16, 1, 0.3, 1);
       }
@@ -162,6 +166,12 @@
         backdrop-filter: blur(48px) saturate(180%);
         -webkit-backdrop-filter: blur(48px) saturate(180%);
         border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+<<<<<<< HEAD
+=======
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.04),
+          0 8px 40px rgba(0, 0, 0, 0.4);
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
       }
 
       .navbar__logo {
@@ -255,9 +265,17 @@
       .btn-nav--outline {
         color: var(--ink);
         background: var(--gold);
+<<<<<<< HEAD
       }
       .btn-nav--outline:hover {
         background: var(--gold-lt);
+=======
+        box-shadow: 0 0 0 0 rgba(201, 169, 110, 0);
+      }
+      .btn-nav--outline:hover {
+        background: var(--gold-lt);
+        box-shadow: 0 4px 24px rgba(201, 169, 110, 0.45);
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
         transform: translateY(-1px);
       }
 
@@ -286,6 +304,7 @@
         width: var(--thumb-w);
         display: flex;
         flex-direction: column;
+<<<<<<< HEAD
         align-items: flex-start;
         padding: calc(var(--nav-h) + 16px) 12px 20px 48px;
         gap: 8px;
@@ -302,6 +321,24 @@
         box-shadow:
           inset -1px 0 0 color-mix(in oklab, #fff 10%, transparent),
           4px 0 24px rgba(0, 0, 0, 0.1);
+=======
+        padding: calc(var(--nav-h) + 12px) 12px 20px 44px;
+        gap: 5px;
+
+        /* ── Liquid glass ── */
+        background: linear-gradient(
+          170deg,
+          color-mix(in oklab, #000 38%, transparent) 0%,
+          color-mix(in oklab, #000 22%, transparent) 55%,
+          color-mix(in oklab, #000 32%, transparent) 100%
+        );
+        backdrop-filter: blur(60px) saturate(130%) brightness(0.72);
+        -webkit-backdrop-filter: blur(60px) saturate(130%) brightness(0.72);
+        /* Soft right-edge separator */
+        box-shadow:
+          inset -1px 0 0 color-mix(in oklab, #fff 14%, transparent),
+          4px 0 32px rgba(0, 0, 0, 0.18);
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
       }
 
       /* Top + bottom fade-out vignette */
@@ -338,15 +375,24 @@
         z-index: 2;
         display: flex;
         align-items: center;
+<<<<<<< HEAD
         justify-content: center;
         gap: 0;
         padding: 5px;
         border-radius: 12px;
+=======
+        gap: 11px;
+        padding: 8px 10px;
+        border-radius: 11px;
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
         cursor: pointer;
         border: 1px solid transparent;
         transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         outline: none;
+<<<<<<< HEAD
         width: 64px;
+=======
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
       }
 
       .thumb-item::before {
@@ -369,9 +415,15 @@
 
       /* ── Thumbnail image ── */
       .thumb-item__img-wrap {
+<<<<<<< HEAD
         width: 54px;
         height: 54px;
         border-radius: 10px;
+=======
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
         overflow: hidden;
         flex-shrink: 0;
         transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -381,6 +433,7 @@
       .thumb-item.is-active .thumb-item__img-wrap {
         width: 54px;
         height: 54px;
+<<<<<<< HEAD
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.55), 0 0 0 2px var(--gold);
       }
 
@@ -427,6 +480,51 @@
         text-overflow: ellipsis;
       }
 
+=======
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+      }
+
+      .thumb-item__img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+        will-change: transform;
+      }
+
+      .thumb-item:hover .thumb-item__img-wrap img {
+        transform: scale(1.08);
+      }
+
+      /* ── Text meta ── */
+      .thumb-item__meta {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .thumb-item__num {
+        font-family: var(--font-body-ltr);
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 4px;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .thumb-item__name {
+        font-family: var(--font-body-ltr);
+        font-size: 15px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.88);
+        line-height: 1.25;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
       .thumb-item.is-active .thumb-item__name {
         color: var(--white);
         font-weight: 500;
@@ -705,6 +803,14 @@
           contrast(1.05);
         -webkit-backdrop-filter: blur(80px) saturate(280%) brightness(1.18)
           contrast(1.05);
+<<<<<<< HEAD
+=======
+        box-shadow:
+          inset 0 1.5px 0 color-mix(in oklab, #fff 70%, transparent),
+          inset 0 -1px 0 color-mix(in oklab, var(--gold) 30%, transparent),
+          inset 0 0 0 1px color-mix(in oklab, #fff 18%, transparent),
+          0 0 0 1px rgba(0, 0, 0, 0.08);
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
         color: var(--white);
       }
 
@@ -717,6 +823,15 @@
             transparent 70%
           ),
           color-mix(in oklab, var(--gold) 70%, transparent);
+<<<<<<< HEAD
+=======
+        box-shadow:
+          inset 0 1.5px 0 color-mix(in oklab, #fff 80%, transparent),
+          inset 0 -1px 0 color-mix(in oklab, var(--gold) 40%, transparent),
+          inset 0 0 0 1px color-mix(in oklab, #fff 25%, transparent),
+          0 0 0 1px rgba(0, 0, 0, 0.06),
+          0 10px 36px rgba(201, 169, 110, 0.42);
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
       }
 
       .btn-slide--fill svg {
@@ -738,6 +853,14 @@
           color-mix(in oklab, #fff 10%, transparent);
         backdrop-filter: blur(80px) saturate(200%) brightness(1.1);
         -webkit-backdrop-filter: blur(80px) saturate(200%) brightness(1.1);
+<<<<<<< HEAD
+=======
+        box-shadow:
+          inset 0 1.5px 0 color-mix(in oklab, #fff 55%, transparent),
+          inset 0 -1px 0 color-mix(in oklab, #fff 10%, transparent),
+          inset 0 0 0 1px color-mix(in oklab, #fff 16%, transparent),
+          0 0 0 1px rgba(0, 0, 0, 0.06);
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
         color: var(--white);
       }
 
@@ -750,6 +873,15 @@
             transparent 70%
           ),
           color-mix(in oklab, #fff 16%, transparent);
+<<<<<<< HEAD
+=======
+        box-shadow:
+          inset 0 1.5px 0 color-mix(in oklab, #fff 72%, transparent),
+          inset 0 -1px 0 color-mix(in oklab, #fff 14%, transparent),
+          inset 0 0 0 1px color-mix(in oklab, #fff 22%, transparent),
+          0 0 0 1px rgba(0, 0, 0, 0.05),
+          0 10px 28px rgba(0, 0, 0, 0.18);
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
       }
 
       /* ─────────────────────────────────────────────
@@ -779,11 +911,19 @@
         backdrop-filter: blur(20px) saturate(180%);
         -webkit-backdrop-filter: blur(20px) saturate(180%);
         border: 1px solid var(--glass-border);
+<<<<<<< HEAD
+=======
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
         color: var(--ink);
         cursor: pointer;
         transition:
           background 0.35s ease,
           border-color 0.35s ease,
+<<<<<<< HEAD
+=======
+          box-shadow 0.35s ease,
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
           transform 0.25s ease;
         outline: none;
       }
@@ -791,6 +931,10 @@
       .nav-btn:hover {
         background: var(--gold);
         border-color: var(--gold);
+<<<<<<< HEAD
+=======
+        box-shadow: 0 8px 32px rgba(201, 169, 110, 0.42);
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
         transform: scale(1.06);
       }
 
@@ -926,7 +1070,11 @@
 ───────────────────────────────────────────── */
       @media (max-width: 1100px) {
         :root {
+<<<<<<< HEAD
           --thumb-w: 124px;
+=======
+          --thumb-w: 210px;
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
         }
       }
 
@@ -1308,6 +1456,7 @@
         max-width: 420px;
       }
 
+<<<<<<< HEAD
       /* ── Slider viewport ── */
       .props__vp {
         overflow: hidden;
@@ -1316,6 +1465,8 @@
         margin-bottom: -80px;
       }
 
+=======
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
       /* ── Split card ── */
       .prop-card {
         display: grid;
@@ -1353,11 +1504,14 @@
         transform: scale(1.03);
       }
 
+<<<<<<< HEAD
       /* Hide thumb arrows — property navigation is in the unified nav bar */
       .prop-thumb-arrows {
         display: none;
       }
 
+=======
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
       /*
        * Thumbnail strip — spans from 26% inside the image to 230px
        * past the gallery right edge, into the (otherwise empty)
@@ -1698,6 +1852,14 @@
           color-mix(in oklab, var(--gold) 52%, transparent);
         backdrop-filter: blur(80px) saturate(280%) brightness(1.18) contrast(1.05);
         -webkit-backdrop-filter: blur(80px) saturate(280%) brightness(1.18) contrast(1.05);
+<<<<<<< HEAD
+=======
+        box-shadow:
+          inset 0 1.5px 0 color-mix(in oklab, #fff 70%, transparent),
+          inset 0 -1px 0 color-mix(in oklab, var(--gold) 30%, transparent),
+          inset 0 0 0 1px color-mix(in oklab, #fff 18%, transparent),
+          0 0 0 1px rgba(0,0,0,.08);
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
         color: var(--white);
       }
 
@@ -1711,6 +1873,15 @@
         background:
           linear-gradient(50.5deg, color-mix(in oklab, #fff 52%, transparent) 0%, color-mix(in oklab, #fff 12%, transparent) 45%, transparent 70%),
           color-mix(in oklab, var(--gold) 70%, transparent);
+<<<<<<< HEAD
+=======
+        box-shadow:
+          inset 0 1.5px 0 color-mix(in oklab, #fff 80%, transparent),
+          inset 0 -1px 0 color-mix(in oklab, var(--gold) 40%, transparent),
+          inset 0 0 0 1px color-mix(in oklab, #fff 25%, transparent),
+          0 0 0 1px rgba(0,0,0,.06),
+          0 10px 36px rgba(201, 169, 110, 0.42);
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
         transform: translateY(-2px);
         color: var(--white);
       }
@@ -1741,11 +1912,16 @@
       .props__footer {
         display: flex;
         justify-content: center;
+<<<<<<< HEAD
         margin-top: 60px;
+=======
+        margin-top: 80px;
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
         padding-top: 60px;
         border-top: 1px solid var(--ink-10);
       }
 
+<<<<<<< HEAD
       /* ── Unified slider navigation ── */
       .props__slider-nav {
         display: flex;
@@ -1803,6 +1979,18 @@
       .btn-slide--outline:hover {
         background: rgba(201,169,110,.26);
         border-color: var(--gold);
+=======
+      /* ── btn-slide--outline — pill outline for light-bg secondary actions ── */
+      .btn-slide--outline {
+        background: rgba(201,169,110,.06);
+        border: 1.5px solid rgba(201,169,110,.45);
+        color: var(--gold-dk);
+      }
+      .btn-slide--outline:hover {
+        background: rgba(201,169,110,.13);
+        border-color: var(--gold);
+        box-shadow: 0 8px 28px rgba(201,169,110,.25);
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
       }
       .btn-slide--outline svg {
         transition: transform 0.3s cubic-bezier(0.16,1,.3,1);
@@ -1825,8 +2013,13 @@
         cursor: pointer;
         text-decoration: none;
         transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+<<<<<<< HEAD
         background: rgba(201,169,110,.15);
         border: 1.5px solid rgba(201,169,110,.72);
+=======
+        background: rgba(201,169,110,.06);
+        border: 1.5px solid rgba(201,169,110,.45);
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
         color: var(--gold-dk);
       }
 
@@ -1837,8 +2030,14 @@
       }
 
       .btn-view-all:hover {
+<<<<<<< HEAD
         background: rgba(201,169,110,.26);
         border-color: var(--gold);
+=======
+        background: rgba(201,169,110,.13);
+        border-color: var(--gold);
+        box-shadow: 0 8px 28px rgba(201,169,110,.25);
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
         transform: translateY(-2px);
         color: var(--gold-dk);
       }
@@ -2177,6 +2376,13 @@
       .pgal-card:nth-child(2) { grid-column: 3;     grid-row: 1 / 3; }
       .pgal-card:nth-child(3) { grid-column: 1;     grid-row: 2; }
       .pgal-card:nth-child(4) { grid-column: 2;     grid-row: 2; }
+<<<<<<< HEAD
+=======
+      .pgal-card:nth-child(5) { grid-column: 1;     grid-row: 3 / 5; }
+      .pgal-card:nth-child(6) { grid-column: 2 / 4; grid-row: 3; }
+      .pgal-card:nth-child(7) { grid-column: 2;     grid-row: 4; }
+      .pgal-card:nth-child(8) { grid-column: 3;     grid-row: 4; }
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
 
       /* Card base */
       .pgal-card {
@@ -2223,10 +2429,17 @@
         -webkit-backdrop-filter: blur(18px);
       }
 
+<<<<<<< HEAD
       /* Landscape: left panel, ~58% width, full height */
       .pgal-card[data-type="landscape"] .pgal-card__panel {
         top: 0; bottom: 0; left: 0;
         width: 58%;
+=======
+      /* Landscape: left panel, ~44% width, full height */
+      .pgal-card[data-type="landscape"] .pgal-card__panel {
+        top: 0; bottom: 0; left: 0;
+        width: 44%;
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
         justify-content: center;
         border-radius: 0 12px 12px 0;
       }
@@ -2348,6 +2561,55 @@
 
       .pgal-card__cta:hover svg { transform: translateX(3px); }
 
+<<<<<<< HEAD
+=======
+      /* 3 action icon buttons */
+      .pgal-card__actions {
+        display: flex;
+        gap: 6px;
+        border-top: 1px solid rgba(13,13,13,0.08);
+        padding-top: 10px;
+        margin-top: 2px;
+      }
+
+      .pgal-action {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        height: 32px;
+        border: 1px solid rgba(13,13,13,0.1);
+        border-radius: 6px;
+        background: transparent;
+        cursor: pointer;
+        font-family: var(--font-body-ltr);
+        font-size: 9.5px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        color: var(--ink-60);
+        transition: all 0.22s ease;
+      }
+
+      .pgal-action svg {
+        width: 13px; height: 13px;
+        stroke: currentColor; fill: none;
+        stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+        flex-shrink: 0;
+        transition: stroke 0.22s ease;
+      }
+
+      .pgal-action:hover { border-color: var(--gold); color: var(--gold-dk, #a07c40); }
+      .pgal-action:hover svg { stroke: var(--gold); }
+
+      /* Fav active */
+      .pgal-action.pgal-fav.is-fav { border-color: #e63b3b; color: #e63b3b; }
+      .pgal-action.pgal-fav.is-fav svg { stroke: #e63b3b; fill: #e63b3b; }
+
+      /* Compare active */
+      .pgal-action.pgal-compare-btn.is-compared { border-color: var(--gold); background: var(--gold); color: #fff; }
+      .pgal-action.pgal-compare-btn.is-compared svg { stroke: #fff; }
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
 
       /* ── Compare sidebar ── */
       .cmp-bar {
@@ -2565,6 +2827,7 @@
         opacity: 0;
         transform: translateY(24px);
       }
+<<<<<<< HEAD
 
       /* ── Gallery card action buttons (fav / gallery / compare) ── */
       .pgal-card__actions {
@@ -3091,6 +3354,8 @@
 
         .locs__footer { padding: 36px 24px; }
       }
+=======
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
     </style>
   </head>
   <body>
@@ -3206,7 +3471,10 @@
         <ul class="navbar__nav" role="list">
           <li><a href="listings.html">Properties</a></li>
           <li><a href="#">Projects</a></li>
+<<<<<<< HEAD
           <li><a href="#locations">Locations</a></li>
+=======
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
           <li><a href="#">About</a></li>
           <li><a href="#">Contact</a></li>
         </ul>
@@ -3333,12 +3601,18 @@
           </div>
         </header>
 
+<<<<<<< HEAD
         <!-- Slider viewport (clips horizontal slide) -->
         <div class="props__vp">
 
         <!-- Split card -->
         <div class="prop-card props-reveal" id="propCard">
 
+=======
+        <!-- Split card -->
+        <div class="prop-card props-reveal" id="propCard">
+
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
           <!-- Left: Gallery -->
           <div class="prop-card__gallery">
             <div class="prop-card__img-wrap">
@@ -3360,9 +3634,24 @@
           <!-- Right: Info -->
           <div class="prop-card__info">
 
+<<<<<<< HEAD
             <!-- Top: badges only -->
             <div class="prop-card__top">
               <div class="prop-badges" id="propBadges"></div>
+=======
+            <!-- Top: badges + property nav -->
+            <div class="prop-card__top">
+              <div class="prop-badges" id="propBadges"></div>
+              <div class="prop-nav">
+                <span class="prop-counter" id="propCounter">01 / 05</span>
+                <button class="prop-arrow" id="propPrev" aria-label="Previous property">
+                  <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"/></svg>
+                </button>
+                <button class="prop-arrow" id="propNext" aria-label="Next property">
+                  <svg viewBox="0 0 24 24"><polyline points="9,18 15,12 9,6"/></svg>
+                </button>
+              </div>
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
             </div>
 
             <h3 class="prop-title" id="propTitle"></h3>
@@ -3438,6 +3727,7 @@
           <!-- /info -->
         </div>
         <!-- /prop-card -->
+<<<<<<< HEAD
         </div><!-- /props__vp -->
 
         <!-- Unified slider nav -->
@@ -3456,6 +3746,8 @@
             <svg viewBox="0 0 24 24"><polyline points="9,18 15,12 9,6"/></svg>
           </button>
         </div>
+=======
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
 
         <!-- View All -->
         <div class="props__footer props-reveal">
@@ -3653,6 +3945,7 @@
               <h3 class="pgal-card__title pgal-text">Lumière Penthouse</h3>
               <p class="pgal-card__location pgal-text"><svg viewBox="0 0 24 24"><path d="M12 21s-8-7.5-8-12a8 8 0 0116 0c0 4.5-8 12-8 12z"/><circle cx="12" cy="9" r="2.5"/></svg>New Cairo, Egypt</p>
               <div class="pgal-card__specs pgal-text">
+<<<<<<< HEAD
                 <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>Residential Tower</span>
                 <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>120 Units</span>
                 <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Q2 2026</span>
@@ -3670,6 +3963,19 @@
               <button class="pgal-action pgal-compare-btn" aria-label="Add to compare" title="Compare">
                 <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
               </button>
+=======
+                <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><path d="M2 9V19M22 9V19M2 14H22M6 14V10a1 1 0 011-1h4a1 1 0 011 1v4"/></svg>4 Beds</span>
+                <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><path d="M4 12h16v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4z"/><path d="M4 12V7a2 2 0 012-2h2v7"/></svg>4 Baths</span>
+                <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1.5"/><path d="M3 9h18M9 3v18"/></svg>680 m²</span>
+              </div>
+              <p class="pgal-card__price pgal-text">EGP 85,000,000</p>
+              <a href="property-detail.html" class="pgal-card__cta pgal-cta">View Property <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <div class="pgal-card__actions pgal-text">
+                <button class="pgal-action pgal-fav" aria-label="Favourite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+                <button class="pgal-action pgal-gallery-btn" aria-label="Gallery"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></button>
+                <button class="pgal-action pgal-compare-btn" aria-label="Compare"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></button>
+              </div>
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
             </div>
           </article>
 
@@ -3682,6 +3988,7 @@
               <h3 class="pgal-card__title pgal-text">The Crown Tower</h3>
               <p class="pgal-card__location pgal-text"><svg viewBox="0 0 24 24"><path d="M12 21s-8-7.5-8-12a8 8 0 0116 0c0 4.5-8 12-8 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Zamalek, Cairo</p>
               <div class="pgal-card__specs pgal-text">
+<<<<<<< HEAD
                 <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>Mixed-Use Tower</span>
                 <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>85 Units</span>
                 <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Q1 2025</span>
@@ -3699,6 +4006,19 @@
               <button class="pgal-action pgal-compare-btn" aria-label="Add to compare" title="Compare">
                 <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
               </button>
+=======
+                <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><path d="M2 9V19M22 9V19M2 14H22M6 14V10a1 1 0 011-1h4a1 1 0 011 1v4"/></svg>3 Beds</span>
+                <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><path d="M4 12h16v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4z"/><path d="M4 12V7a2 2 0 012-2h2v7"/></svg>3 Baths</span>
+                <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1.5"/><path d="M3 9h18M9 3v18"/></svg>520 m²</span>
+              </div>
+              <p class="pgal-card__price pgal-text">EGP 62,000,000</p>
+              <a href="property-detail.html" class="pgal-card__cta pgal-cta">View Property <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <div class="pgal-card__actions pgal-text">
+                <button class="pgal-action pgal-fav" aria-label="Favourite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+                <button class="pgal-action pgal-gallery-btn" aria-label="Gallery"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></button>
+                <button class="pgal-action pgal-compare-btn" aria-label="Compare"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></button>
+              </div>
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
             </div>
           </article>
 
@@ -3710,6 +4030,7 @@
               <span class="pgal-card__badge pgal-text">New Launch</span>
               <h3 class="pgal-card__title pgal-text">Meridian Residence</h3>
               <p class="pgal-card__location pgal-text"><svg viewBox="0 0 24 24"><path d="M12 21s-8-7.5-8-12a8 8 0 0116 0c0 4.5-8 12-8 12z"/><circle cx="12" cy="9" r="2.5"/></svg>6th of October, Egypt</p>
+<<<<<<< HEAD
               <div class="pgal-card__specs pgal-text">
                 <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>Villa Compound</span>
                 <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>45 Units</span>
@@ -3728,6 +4049,15 @@
               <button class="pgal-action pgal-compare-btn" aria-label="Add to compare" title="Compare">
                 <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
               </button>
+=======
+              <p class="pgal-card__price pgal-text">EGP 28,000,000</p>
+              <a href="property-detail.html" class="pgal-card__cta pgal-cta">View Property <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <div class="pgal-card__actions pgal-text">
+                <button class="pgal-action pgal-fav" aria-label="Favourite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+                <button class="pgal-action pgal-gallery-btn" aria-label="Gallery"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></button>
+                <button class="pgal-action pgal-compare-btn" aria-label="Compare"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></button>
+              </div>
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
             </div>
           </article>
 
@@ -3739,6 +4069,7 @@
               <span class="pgal-card__badge pgal-text">For Sale</span>
               <h3 class="pgal-card__title pgal-text">Aqua Terrace</h3>
               <p class="pgal-card__location pgal-text"><svg viewBox="0 0 24 24"><path d="M12 21s-8-7.5-8-12a8 8 0 0116 0c0 4.5-8 12-8 12z"/><circle cx="12" cy="9" r="2.5"/></svg>North Coast, Egypt</p>
+<<<<<<< HEAD
               <div class="pgal-card__specs pgal-text">
                 <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>Coastal Resort</span>
                 <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>60 Units</span>
@@ -3757,6 +4088,15 @@
               <button class="pgal-action pgal-compare-btn" aria-label="Add to compare" title="Compare">
                 <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
               </button>
+=======
+              <p class="pgal-card__price pgal-text">EGP 35,000,000</p>
+              <a href="property-detail.html" class="pgal-card__cta pgal-cta">View Property <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <div class="pgal-card__actions pgal-text">
+                <button class="pgal-action pgal-fav" aria-label="Favourite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+                <button class="pgal-action pgal-gallery-btn" aria-label="Gallery"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></button>
+                <button class="pgal-action pgal-compare-btn" aria-label="Compare"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></button>
+              </div>
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
             </div>
           </article>
 
@@ -3769,6 +4109,7 @@
               <h3 class="pgal-card__title pgal-text">Ivory Mansions</h3>
               <p class="pgal-card__location pgal-text"><svg viewBox="0 0 24 24"><path d="M12 21s-8-7.5-8-12a8 8 0 0116 0c0 4.5-8 12-8 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Sheikh Zayed, Egypt</p>
               <div class="pgal-card__specs pgal-text">
+<<<<<<< HEAD
                 <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>Gated Community</span>
                 <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>30 Plots</span>
                 <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Q2 2025</span>
@@ -3786,6 +4127,77 @@
               <button class="pgal-action pgal-compare-btn" aria-label="Add to compare" title="Compare">
                 <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
               </button>
+=======
+                <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><path d="M2 9V19M22 9V19M2 14H22M6 14V10a1 1 0 011-1h4a1 1 0 011 1v4"/></svg>5 Beds</span>
+                <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1.5"/><path d="M3 9h18M9 3v18"/></svg>920 m²</span>
+              </div>
+              <p class="pgal-card__price pgal-text">EGP 110,000,000</p>
+              <a href="property-detail.html" class="pgal-card__cta pgal-cta">View Property <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <div class="pgal-card__actions pgal-text">
+                <button class="pgal-action pgal-fav" aria-label="Favourite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+                <button class="pgal-action pgal-gallery-btn" aria-label="Gallery"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></button>
+                <button class="pgal-action pgal-compare-btn" aria-label="Compare"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 6: landscape -->
+          <article class="pgal-card pgal-reveal" data-id="6" data-title="Azure Shore Estate" data-thumb="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=200&auto=format&fit=crop&q=80" data-images="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=1400&auto=format&fit=crop&q=90,https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1400&auto=format&fit=crop&q=90,https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1400&auto=format&fit=crop&q=90">
+            <img class="pgal-card__img" src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=1400&auto=format&fit=crop&q=90" alt="Azure Shore Estate" loading="lazy"/>
+            <div class="pgal-card__dim"></div>
+            <div class="pgal-card__panel">
+              <span class="pgal-card__badge pgal-text">Beachfront</span>
+              <h3 class="pgal-card__title pgal-text">Azure Shore Estate</h3>
+              <p class="pgal-card__location pgal-text"><svg viewBox="0 0 24 24"><path d="M12 21s-8-7.5-8-12a8 8 0 0116 0c0 4.5-8 12-8 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Ain Sokhna, Egypt</p>
+              <div class="pgal-card__specs pgal-text">
+                <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><path d="M2 9V19M22 9V19M2 14H22M6 14V10a1 1 0 011-1h4a1 1 0 011 1v4"/></svg>6 Beds</span>
+                <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><path d="M4 12h16v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4z"/><path d="M4 12V7a2 2 0 012-2h2v7"/></svg>7 Baths</span>
+                <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1.5"/><path d="M3 9h18M9 3v18"/></svg>1,200 m²</span>
+              </div>
+              <p class="pgal-card__price pgal-text">EGP 95,000,000</p>
+              <a href="property-detail.html" class="pgal-card__cta pgal-cta">View Property <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <div class="pgal-card__actions pgal-text">
+                <button class="pgal-action pgal-fav" aria-label="Favourite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+                <button class="pgal-action pgal-gallery-btn" aria-label="Gallery"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></button>
+                <button class="pgal-action pgal-compare-btn" aria-label="Compare"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 7: square -->
+          <article class="pgal-card pgal-reveal" data-id="7" data-title="Solaris Heights" data-thumb="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=200&auto=format&fit=crop&q=80" data-images="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1400&auto=format&fit=crop&q=90,https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1400&auto=format&fit=crop&q=90,https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1400&auto=format&fit=crop&q=90">
+            <img class="pgal-card__img" src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=900&auto=format&fit=crop&q=90" alt="Solaris Heights" loading="lazy"/>
+            <div class="pgal-card__dim"></div>
+            <div class="pgal-card__panel">
+              <span class="pgal-card__badge pgal-text">Off-Plan</span>
+              <h3 class="pgal-card__title pgal-text">Solaris Heights</h3>
+              <p class="pgal-card__location pgal-text"><svg viewBox="0 0 24 24"><path d="M12 21s-8-7.5-8-12a8 8 0 0116 0c0 4.5-8 12-8 12z"/><circle cx="12" cy="9" r="2.5"/></svg>New Capital, Egypt</p>
+              <p class="pgal-card__price pgal-text">EGP 18,500,000</p>
+              <a href="property-detail.html" class="pgal-card__cta pgal-cta">View Property <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <div class="pgal-card__actions pgal-text">
+                <button class="pgal-action pgal-fav" aria-label="Favourite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+                <button class="pgal-action pgal-gallery-btn" aria-label="Gallery"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></button>
+                <button class="pgal-action pgal-compare-btn" aria-label="Compare"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 8: square -->
+          <article class="pgal-card pgal-reveal" data-id="8" data-title="Crest Villa" data-thumb="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=200&auto=format&fit=crop&q=80" data-images="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1400&auto=format&fit=crop&q=90,https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1400&auto=format&fit=crop&q=90,https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=1400&auto=format&fit=crop&q=90">
+            <img class="pgal-card__img" src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=900&auto=format&fit=crop&q=90" alt="Crest Villa" loading="lazy"/>
+            <div class="pgal-card__dim"></div>
+            <div class="pgal-card__panel">
+              <span class="pgal-card__badge pgal-text">Ready</span>
+              <h3 class="pgal-card__title pgal-text">Crest Villa</h3>
+              <p class="pgal-card__location pgal-text"><svg viewBox="0 0 24 24"><path d="M12 21s-8-7.5-8-12a8 8 0 0116 0c0 4.5-8 12-8 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Maadi, Cairo</p>
+              <p class="pgal-card__price pgal-text">EGP 42,000,000</p>
+              <a href="property-detail.html" class="pgal-card__cta pgal-cta">View Property <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <div class="pgal-card__actions pgal-text">
+                <button class="pgal-action pgal-fav" aria-label="Favourite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+                <button class="pgal-action pgal-gallery-btn" aria-label="Gallery"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></button>
+                <button class="pgal-action pgal-compare-btn" aria-label="Compare"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></button>
+              </div>
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
             </div>
           </article>
 
@@ -3793,6 +4205,7 @@
       </div>
     </section>
 
+<<<<<<< HEAD
     <!-- ─── LOCATIONS ─── -->
     <section class="locs" id="locations">
 
@@ -3948,6 +4361,8 @@
 
     </section>
 
+=======
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
     <!-- ─── COMPARE SIDEBAR ─── -->
     <aside class="cmp-bar" id="cmpBar" aria-label="Property comparison">
       <button class="cmp-bar__toggle" id="cmpToggle" hidden>
@@ -4329,6 +4744,7 @@
         /* Preload next image while animating */
         new Image().src = SLIDES[(toIdx + 1) % SLIDES.length].image;
 
+<<<<<<< HEAD
         const state = { p: 0 };
 
         const tl = gsap.timeline({
@@ -4408,6 +4824,89 @@
             fromSlide.style.transformOrigin = "right center";
           }
 
+=======
+        textOut(fromSlide);
+
+        const state = { p: 0 };
+
+        const tl = gsap.timeline({
+          onComplete() {
+            cnv.remove();
+            curlBack.remove();
+            fromSlide.style.clipPath = "";
+            fromSlide.style.transform = "";
+            gsap.set(fromSlide, {
+              display: "none",
+              visibility: "hidden",
+              zIndex: 0,
+            });
+            gsap.set(toSlide, { zIndex: 2 });
+            isAnimating = false;
+            textIn(toSlide);
+            startAutoplay();
+          },
+        });
+
+        if (REDUCED) {
+          gsap.set(toSlide, { opacity: 0 });
+          tl.to(fromSlide, { opacity: 0, duration: 0.4 })
+            .to(toSlide, { opacity: 1, duration: 0.4 }, 0)
+            .add(() => gsap.set(fromSlide, { opacity: 1 }));
+          return;
+        }
+
+        tl.to(state, {
+          p: 1,
+          duration: CURL_MS / 1000,
+          /* slow corner-peel → fast sweep → gentle settle */
+          ease: "power3.inOut",
+          onUpdate() {
+            renderFrame(state.p);
+          },
+        });
+
+        /* ── Fold geometry ──────────────────────────────────────────────────────
+     Larger bow (0.20×W) gives a pronounced diagonal — the corner visibly
+     leads the rest of the leaf, matching the physics of a stiff magazine page.
+  ──────────────────────────────────────────────────────────────────────── */
+        function getFold(p) {
+          const center = forward ? W * (1 - p) : W * p;
+          const bow = Math.sin(p * Math.PI) * W * 0.2;
+          const topX = forward
+            ? Math.max(0, center + bow * 0.62)
+            : Math.min(W, center - bow * 0.62);
+          const bottomX = forward
+            ? Math.max(0, center - bow * 0.55)
+            : Math.min(W, center + bow * 0.55);
+          return { topX, bottomX };
+        }
+
+        /* ── Master render ──────────────────────────────────────────────────── */
+        function renderFrame(p) {
+          W = heroStage.offsetWidth;
+          H = heroStage.offsetHeight;
+          if (cnv.width !== W || cnv.height !== H) {
+            cnv.width = W;
+            cnv.height = H;
+          } else {
+            ctx.clearRect(0, 0, W, H);
+          }
+
+          const pk = Math.sin(p * Math.PI);
+          const { topX, bottomX } = getFold(p);
+
+          /* fromSlide: clip to the flat region + subtle bow warp */
+          if (forward) {
+            fromSlide.style.clipPath = `polygon(0 0,${topX}px 0,${bottomX}px 100%,0 100%)`;
+            fromSlide.style.transform = `perspective(2800px) rotateY(${pk * 3.2}deg)`;
+            fromSlide.style.transformOrigin = "left center";
+          } else {
+            fromSlide.style.clipPath = `polygon(${topX}px 0,100% 0,100% 100%,${bottomX}px 100%)`;
+            fromSlide.style.transform = `perspective(2800px) rotateY(${-pk * 3.2}deg)`;
+            fromSlide.style.transformOrigin = "right center";
+          }
+
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
           /* curlBack: warm dark shadow — peaks at 0.52 alpha so the hero image
              bleeds through and gives weight instead of a blinding white flash   */
           const sa = (0.1 + pk * 0.42).toFixed(3);
@@ -4901,8 +5400,29 @@
         ];
 
         let propIdx = 0;
+<<<<<<< HEAD
         let isPropAnim = false;
 
+=======
+        let imgIdx = 0;
+        let isPropAnim = false;
+        let isImgAnim = false;
+        let imgAutoTimer = null;
+        const IMG_AUTO_MS = 3800;
+
+        function startImgAutoplay() {
+          clearImgAutoplay();
+          imgAutoTimer = setTimeout(() => {
+            const prop = PROPS[propIdx];
+            switchImg((imgIdx + 1) % prop.images.length);
+          }, IMG_AUTO_MS);
+        }
+
+        function clearImgAutoplay() {
+          if (imgAutoTimer) { clearTimeout(imgAutoTimer); imgAutoTimer = null; }
+        }
+
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
         const mainImg = document.getElementById("propMainImg");
         const thumbsEl = document.getElementById("propThumbs");
         const badgesEl = document.getElementById("propBadges");
@@ -4914,6 +5434,7 @@
         const priceEl = document.getElementById("propPrice");
         const locationEl = document.getElementById("propLocationText");
         const counterEl = document.getElementById("propCounter");
+<<<<<<< HEAD
         const totalEl = document.getElementById("propTotal");
         const fillEl = document.getElementById("propFill");
         const propCard = document.getElementById("propCard");
@@ -4933,10 +5454,39 @@
             img.loading = i === 0 ? "eager" : "lazy";
             btn.appendChild(img);
             btn.addEventListener("click", () => switchPropByThumb(i));
+=======
+        const propPrevBtn = document.getElementById("propPrev");
+        const propNextBtn = document.getElementById("propNext");
+        const thumbPrevBtn = document.getElementById("thumbPrev");
+        const thumbNextBtn = document.getElementById("thumbNext");
+
+        const specsEl = document.querySelector(".prop-specs");
+        const priceRowEl = document.querySelector(".prop-price-row");
+        const locationRowEl = document.querySelector(".prop-location");
+        const INFO_ELS = [badgesEl, titleEl, locationRowEl, descEl, specsEl, priceRowEl];
+
+        function fmtCounter(i, total) {
+          return String(i + 1).padStart(2, "0") + " / " + String(total).padStart(2, "0");
+        }
+
+        function buildThumbs(prop) {
+          thumbsEl.innerHTML = "";
+          prop.images.forEach((src, i) => {
+            const btn = document.createElement("button");
+            btn.className = "prop-thumb" + (i === imgIdx ? " is-active" : "");
+            btn.setAttribute("aria-label", "View image " + (i + 1));
+            const img = document.createElement("img");
+            img.src = src;
+            img.alt = "";
+            img.loading = "lazy";
+            btn.appendChild(img);
+            btn.addEventListener("click", () => switchImg(i));
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
             thumbsEl.appendChild(btn);
           });
         }
 
+<<<<<<< HEAD
         /* ── Flying-clone: thumb → main image + info update ── */
         function switchPropByThumb(newIdx) {
           if (isPropAnim || newIdx === propIdx) return;
@@ -5025,6 +5575,77 @@
         }
 
         /* ── Populate content (used by navProp) ── */
+=======
+        function switchImg(newIdx) {
+          const prop = PROPS[propIdx];
+          if (isImgAnim || newIdx === imgIdx || newIdx < 0 || newIdx >= prop.images.length) return;
+          isImgAnim = true;
+          clearImgAutoplay();
+
+          const thumbBtns = thumbsEl.querySelectorAll(".prop-thumb");
+          const srcThumb = thumbBtns[newIdx];
+          const mainWrap = mainImg.closest(".prop-card__img-wrap");
+
+          if (srcThumb && mainWrap) {
+            const tr = srcThumb.getBoundingClientRect();
+            const mr = mainWrap.getBoundingClientRect();
+
+            /* flying clone */
+            const clone = document.createElement("img");
+            clone.src = prop.images[newIdx];
+            clone.style.cssText = [
+              "position:fixed",
+              `top:${tr.top}px`,
+              `left:${tr.left}px`,
+              `width:${tr.width}px`,
+              `height:${tr.height}px`,
+              "object-fit:cover",
+              "border-radius:8px",
+              "z-index:9999",
+              "pointer-events:none",
+              "will-change:transform",
+            ].join(";");
+            document.body.appendChild(clone);
+
+            /* dim current main image */
+            gsap.to(mainImg, { opacity: 0, duration: 0.25, ease: "power2.in" });
+
+            /* fly clone thumb → main */
+            gsap.to(clone, {
+              top: mr.top,
+              left: mr.left,
+              width: mr.width,
+              height: mr.height,
+              borderRadius: "14px",
+              duration: 0.72,
+              ease: "power3.inOut",
+              onComplete() {
+                clone.remove();
+                mainImg.src = prop.images[newIdx];
+                imgIdx = newIdx;
+                thumbBtns.forEach((t, ti) => t.classList.toggle("is-active", ti === imgIdx));
+                gsap.fromTo(mainImg, { opacity: 0 }, { opacity: 1, duration: 0.22, ease: "power2.out" });
+                isImgAnim = false;
+                startImgAutoplay();
+              },
+            });
+          } else {
+            /* fallback crossfade */
+            gsap.to(mainImg, {
+              opacity: 0, scale: 1.04, duration: 0.28, ease: "power2.in",
+              onComplete() {
+                mainImg.src = prop.images[newIdx];
+                imgIdx = newIdx;
+                thumbBtns.forEach((t, ti) => t.classList.toggle("is-active", ti === imgIdx));
+                gsap.fromTo(mainImg, { opacity: 0, scale: 1.04 }, { opacity: 1, scale: 1, duration: 0.45, ease: "power2.out" });
+                isImgAnim = false;
+                startImgAutoplay();
+              },
+            });
+          }
+        }
+
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
         function populateCard(prop) {
           badgesEl.innerHTML = prop.badges
             .map((b) => `<span class="prop-badge ${b.cls}">${b.label}</span>`)
@@ -5036,6 +5657,7 @@
           areaEl.textContent = prop.area;
           priceEl.textContent = prop.price;
           locationEl.textContent = prop.location;
+<<<<<<< HEAD
           if (counterEl) counterEl.textContent = String(propIdx + 1).padStart(2, "0");
           if (totalEl) totalEl.textContent = String(PROPS.length).padStart(2, "0");
           if (fillEl) fillEl.style.width = ((propIdx + 1) / PROPS.length * 100) + "%";
@@ -5049,11 +5671,23 @@
         }
 
         /* ── Sequential card-slide navigation (prev / next arrows) ── */
+=======
+          counterEl.textContent = fmtCounter(propIdx, PROPS.length);
+          propPrevBtn.disabled = propIdx === 0;
+          propNextBtn.disabled = propIdx === PROPS.length - 1;
+          imgIdx = 0;
+          mainImg.src = prop.images[0];
+          mainImg.alt = prop.title;
+          buildThumbs(prop);
+        }
+
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
         function navProp(newIdx) {
           if (isPropAnim || newIdx === propIdx || newIdx < 0 || newIdx >= PROPS.length) return;
           isPropAnim = true;
           const dir = newIdx > propIdx ? 1 : -1;
 
+<<<<<<< HEAD
           gsap.to(propCard, {
             x: dir * -72,
             opacity: 0,
@@ -5083,6 +5717,66 @@
         /* Init */
         buildThumbs();
         populateCard(PROPS[0]);
+=======
+          const tl = gsap.timeline({
+            onComplete() {
+              isPropAnim = false;
+            },
+          });
+
+          tl.to(INFO_ELS, {
+            y: dir * -22,
+            opacity: 0,
+            duration: 0.3,
+            stagger: 0.04,
+            ease: "power2.in",
+          }, 0);
+
+          tl.to(mainImg, { opacity: 0, scale: 1.05, duration: 0.34, ease: "power2.in" }, 0.05);
+          tl.to(thumbsEl, { opacity: 0, y: 8, duration: 0.22, ease: "power2.in" }, 0);
+
+          tl.call(() => {
+            propIdx = newIdx;
+            populateCard(PROPS[propIdx]);
+          });
+
+          tl.fromTo(
+            mainImg,
+            { opacity: 0, scale: 1.05 },
+            { opacity: 1, scale: 1, duration: 0.55, ease: "power2.out" },
+          );
+          tl.fromTo(
+            thumbsEl,
+            { opacity: 0, y: 8 },
+            { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+            "<",
+          );
+          tl.fromTo(
+            INFO_ELS,
+            { y: dir * 22, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.48, stagger: 0.06, ease: "power3.out" },
+            "<0.08",
+          );
+
+          tl.call(() => { isImgAnim = false; startImgAutoplay(); });
+        }
+
+        propPrevBtn.addEventListener("click", () => { clearImgAutoplay(); navProp(propIdx - 1); });
+        propNextBtn.addEventListener("click", () => { clearImgAutoplay(); navProp(propIdx + 1); });
+        thumbPrevBtn.addEventListener("click", () => switchImg(imgIdx - 1));
+        thumbNextBtn.addEventListener("click", () => switchImg(imgIdx + 1));
+
+        /* Pause on hover */
+        const propsSection = document.getElementById("properties");
+        if (propsSection) {
+          propsSection.addEventListener("mouseenter", clearImgAutoplay);
+          propsSection.addEventListener("mouseleave", startImgAutoplay);
+        }
+
+        /* Init */
+        populateCard(PROPS[0]);
+        startImgAutoplay();
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
 
         /* Scroll reveal */
         const revealEls = document.querySelectorAll(".props-reveal");
@@ -5475,6 +6169,7 @@
         });
       })();
     </script>
+<<<<<<< HEAD
     <!-- Locations: scroll reveal -->
     <script>
       (() => {
@@ -5519,5 +6214,7 @@
         });
       })();
     </script>
+=======
+>>>>>>> 689c461a00f12cb1297489b8ee73a943587e7a64
   </body>
 </html>

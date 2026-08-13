@@ -1150,8 +1150,8 @@
         opacity: 0;
         transform: translateY(16px) scale(0.97);
         transition:
-          opacity 0.55s 0.1s cubic-bezier(0.16, 1, 0.3, 1),
-          transform 0.65s 0.1s cubic-bezier(0.16, 1, 0.3, 1);
+          opacity 0.3s 0.05s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.35s 0.05s cubic-bezier(0.16, 1, 0.3, 1);
       }
       #splash.sp-ready .sp-logo-frame {
         opacity: 1;
@@ -1173,7 +1173,7 @@
         z-index: 1;
         pointer-events: none;
         opacity: 0;
-        transition: opacity 1s ease;
+        transition: opacity 0.4s ease;
       }
       .sp-panel-l { left: 0; }
       .sp-panel-r { right: 0; }
@@ -1182,7 +1182,7 @@
       }
       #splash.sp-exit .sp-panel {
         opacity: 1;
-        transition: transform 0.7s cubic-bezier(0.76, 0, 0.24, 1);
+        transition: transform 0.45s cubic-bezier(0.76, 0, 0.24, 1);
       }
       #splash.sp-exit .sp-panel-l {
         transform: translateX(-100%);
@@ -4066,7 +4066,7 @@
         });
       });
 
-      var speeds = [0.38, 0.28, 0.44, 0.32, 0.40];
+      var speeds = [5.0, 3.8, 5.8, 4.2, 4.8];
       var offsets = [0, 0, 0, 0, 0];
       var cardH = 234;
       var totalH = cardH * COLS[0].length;
@@ -4083,7 +4083,7 @@
 
       var readyTimer = setTimeout(function () {
         splash.classList.add("sp-ready");
-      }, 2000);
+      }, 600);
 
       function exitSplash() {
         clearTimeout(readyTimer);
@@ -4093,7 +4093,7 @@
         setTimeout(function () { splash.style.display = "none"; }, 800);
       }
 
-      var exitTimer = setTimeout(exitSplash, 3300);
+      var exitTimer = setTimeout(exitSplash, 1800);
 
       splash.addEventListener("click", exitSplash);
       document.addEventListener("keydown", function onKey(e) {

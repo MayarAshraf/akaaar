@@ -1,0 +1,2665 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Properties — Akar Town</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Kufi+Arabic:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ─── TOKENS ─── */
+      :root {
+        --bg: #faf8f5;
+        --ink: #0d0d0d;
+        --ink-60: rgba(13, 13, 13, 0.6);
+        --ink-30: rgba(13, 13, 13, 0.3);
+        --ink-10: rgba(13, 13, 13, 0.1);
+        --gold: #c9a96e;
+        --gold-lt: #e4c99a;
+        --gold-dk: #a07c40;
+        --red: #cc2222;
+        --white: #ffffff;
+        --font-body: "Archivo", system-ui, sans-serif;
+        --font-display: "Cormorant Garamond", Georgia, serif;
+        --nav-h: 62px;
+        --ease-smooth: cubic-bezier(0.76, 0, 0.24, 1);
+        --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        font-family: var(--font-body);
+        font-size: 16px;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        min-height: 100vh;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+      button {
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      img,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+      input,
+      select,
+      textarea {
+        font-family: inherit;
+        font-size: inherit;
+      }
+      ::selection {
+        background: var(--gold);
+        color: var(--ink);
+      }
+
+      /* ─── NAVBAR ─── */
+      .navbar {
+        position: fixed;
+        inset: 0 0 auto 0;
+        z-index: 200;
+        height: var(--nav-h);
+        padding: 0 48px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(8, 8, 8, 0.88);
+        backdrop-filter: blur(48px) saturate(180%);
+        -webkit-backdrop-filter: blur(48px) saturate(180%);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .navbar__logo {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+      }
+      .navbar__right {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+      }
+      .navbar__nav {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        list-style: none;
+      }
+      .navbar__nav a {
+        font-family: var(--font-body);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.9);
+        position: relative;
+        transition: color 0.25s ease;
+      }
+      .navbar__nav a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--gold);
+        transition: width 0.38s var(--ease-smooth);
+      }
+      .navbar__nav a:hover::after,
+      .navbar__nav a.active::after {
+        width: 100%;
+      }
+      .navbar__nav a.active {
+        color: #fff;
+      }
+      .navbar__sep {
+        width: 1px;
+        height: 18px;
+        background: rgba(255, 255, 255, 0.15);
+        flex-shrink: 0;
+      }
+      /* ── btn-slide alias (matches property-details navbar) ── */
+      .btn-slide {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--font-body);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        padding: 9px 20px;
+        line-height: 1;
+        border-radius: 100px;
+        white-space: nowrap;
+        cursor: pointer;
+        border: none;
+        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .btn-slide:hover {
+        transform: translateY(-2px);
+      }
+      .btn-slide--fill {
+        background:
+          linear-gradient(
+            50.5deg,
+            color-mix(in oklab, #fff 42%, transparent) 0%,
+            color-mix(in oklab, #fff 8%, transparent) 45%,
+            transparent 70%
+          ),
+          color-mix(in oklab, var(--gold) 52%, transparent);
+        backdrop-filter: blur(80px) saturate(280%) brightness(1.18)
+          contrast(1.05);
+        -webkit-backdrop-filter: blur(80px) saturate(280%) brightness(1.18)
+          contrast(1.05);
+        color: #fff;
+      }
+      .btn-slide--fill:hover {
+      }
+
+      /* ── pill button system ── */
+      .btn-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.03em;
+        padding: 13px 26px;
+        line-height: 1;
+        border-radius: 100px;
+        white-space: nowrap;
+        cursor: pointer;
+        border: none;
+        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        text-decoration: none;
+      }
+      .btn-pill:hover {
+        transform: translateY(-2px);
+      }
+      .btn-pill svg {
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .btn-pill:hover svg {
+        transform: translateX(4px);
+      }
+
+      /* gold fill — for dark bg (navbar) */
+      .btn-pill--fill {
+        background:
+          linear-gradient(
+            50.5deg,
+            color-mix(in oklab, #fff 42%, transparent) 0%,
+            color-mix(in oklab, #fff 8%, transparent) 45%,
+            transparent 70%
+          ),
+          color-mix(in oklab, var(--gold) 52%, transparent);
+        backdrop-filter: blur(80px) saturate(280%) brightness(1.18)
+          contrast(1.05);
+        -webkit-backdrop-filter: blur(80px) saturate(280%) brightness(1.18)
+          contrast(1.05);
+        color: #fff;
+      }
+      .btn-pill--fill:hover {
+        background:
+          linear-gradient(
+            50.5deg,
+            color-mix(in oklab, #fff 52%, transparent) 0%,
+            color-mix(in oklab, #fff 12%, transparent) 45%,
+            transparent 70%
+          ),
+          color-mix(in oklab, var(--gold) 70%, transparent);
+      }
+
+      /* solid gold — for light bg primary actions */
+      .btn-pill--gold {
+        background: var(--gold);
+        color: var(--ink);
+      }
+      .btn-pill--gold:hover {
+        background: var(--gold-lt);
+      }
+
+      /* outline — for light bg secondary actions */
+      .btn-pill--outline {
+        background: rgba(201, 169, 110, 0.06);
+        border: 1.5px solid rgba(201, 169, 110, 0.42);
+        color: var(--gold-dk);
+      }
+      .btn-pill--outline:hover {
+        background: rgba(201, 169, 110, 0.13);
+        border-color: var(--gold);
+      }
+
+      /* size tweak for navbar */
+      .navbar__actions .btn-pill {
+        font-size: 11px;
+        padding: 9px 20px;
+      }
+
+      .btn-nav {
+        display: none;
+      } /* retired */
+      .btn-nav--gold {
+        display: none;
+      }
+
+      /* ─── PAGE HEADER ─── */
+      .page-hero {
+        padding-top: var(--nav-h);
+        background: #0d0d0d url("why-bg.jpeg") center top / cover no-repeat;
+        position: relative;
+        overflow: hidden;
+      }
+      /* Main dark overlay for readability */
+      .page-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.72) 0%,
+          rgba(0, 0, 0, 0.58) 50%,
+          rgba(0, 0, 0, 0.78) 100%
+        );
+        pointer-events: none;
+        z-index: 1;
+      }
+      /* Gold-tinted bottom fade to blend into the filter bar */
+      .page-hero::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(13, 13, 13, 0.55)
+        );
+        pointer-events: none;
+        z-index: 2;
+      }
+      .page-hero__inner {
+        position: relative;
+        z-index: 3;
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 72px 48px 64px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 40px;
+      }
+      .page-hero__bread {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 18px;
+        text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+      }
+      .page-hero__bread a {
+        color: rgba(255, 255, 255, 0.7);
+        transition: color 0.2s;
+      }
+      .page-hero__bread a:hover {
+        color: var(--gold);
+      }
+      .page-hero__bread span {
+        color: rgba(255, 255, 255, 0.35);
+      }
+      .page-hero__title {
+        font-family: var(--font-display);
+        font-size: clamp(38px, 5vw, 68px);
+        font-weight: 300;
+        letter-spacing: -0.02em;
+        color: #fff;
+        line-height: 1.05;
+        text-shadow: 0 2px 24px rgba(0, 0, 0, 0.55);
+      }
+      .page-hero__title em {
+        font-style: normal;
+        font-family: var(--font-display);
+        font-weight: 300;
+        color: var(--gold);
+        font-size: 1.02em;
+        letter-spacing: -0.01em;
+        text-shadow: 0 0 40px rgba(201, 169, 110, 0.45);
+      }
+      .page-hero__meta {
+        text-align: right;
+        flex-shrink: 0;
+        padding: 20px 28px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-radius: 16px;
+      }
+      .page-hero__count {
+        font-family: var(--font-display);
+        font-size: 56px;
+        font-weight: 300;
+        color: var(--gold);
+        line-height: 1;
+        text-shadow: 0 0 32px rgba(201, 169, 110, 0.5);
+      }
+      .page-hero__count-label {
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.65);
+        margin-top: 6px;
+      }
+
+      /* ─── FILTER BAR ─── */
+      .filter-wrap {
+        position: sticky;
+        top: var(--nav-h);
+        z-index: 100;
+        background: var(--bg);
+        border-bottom: 1px solid var(--ink-10);
+        box-shadow: 0 4px 24px rgba(13, 13, 13, 0.06);
+      }
+      .filter-bar {
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 0 48px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        height: 62px;
+      }
+      .filter-search {
+        position: relative;
+        flex: 1;
+        min-width: 180px;
+        max-width: 280px;
+      }
+      .filter-search svg {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--ink-30);
+        pointer-events: none;
+      }
+      .filter-search input {
+        width: 100%;
+        padding: 10px 12px 10px 38px;
+        border: 1px solid var(--ink-10);
+        border-radius: 6px;
+        background: #fff;
+        font-size: 13px;
+        color: var(--ink);
+        transition: border-color 0.2s;
+        outline: none;
+      }
+      .filter-search input::placeholder {
+        color: var(--ink-30);
+      }
+      .filter-search input:focus {
+        border-color: var(--gold);
+      }
+
+      .filter-sel {
+        position: relative;
+        flex-shrink: 0;
+      }
+      .filter-sel select {
+        appearance: none;
+        -webkit-appearance: none;
+        padding: 10px 36px 10px 14px;
+        border: 1px solid var(--ink-10);
+        border-radius: 6px;
+        background: #fff;
+        font-size: 13px;
+        color: var(--ink);
+        cursor: pointer;
+        outline: none;
+        transition: border-color 0.2s;
+        white-space: nowrap;
+      }
+      .filter-sel select:focus {
+        border-color: var(--gold);
+      }
+      .filter-sel::after {
+        content: "";
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 0;
+        height: 0;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-top: 5px solid var(--ink-60);
+        pointer-events: none;
+      }
+
+      .filter-sep {
+        width: 1px;
+        height: 28px;
+        background: var(--ink-10);
+        flex-shrink: 0;
+        margin: 0 4px;
+      }
+
+      .btn-adv {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        padding: 10px 18px;
+        border: 1.5px solid rgba(201, 169, 110, 0.35);
+        border-radius: 100px;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        color: var(--gold-dk);
+        background: rgba(201, 169, 110, 0.05);
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .btn-adv:hover,
+      .btn-adv.is-open {
+        border-color: var(--gold);
+        color: var(--gold-dk);
+        background: rgba(201, 169, 110, 0.1);
+      }
+      .btn-adv svg {
+        transition: transform 0.3s var(--ease-smooth);
+      }
+      .btn-adv.is-open svg {
+        transform: rotate(180deg);
+      }
+
+      .filter-right {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+      }
+      .btn-clear {
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink-30);
+        padding: 6px 16px;
+        border-radius: 100px;
+        transition:
+          color 0.2s,
+          background 0.2s;
+      }
+      .btn-clear:hover {
+        color: var(--red);
+      }
+      .btn-filter-apply {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 11px 22px;
+        border-radius: 100px;
+        background: var(--gold);
+        color: var(--ink);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        border: none;
+        cursor: pointer;
+      }
+      .btn-filter-apply:hover {
+        background: var(--gold-lt);
+        transform: translateY(-2px);
+      }
+
+      /* ─── ADVANCED FILTER PANEL ─── */
+      .adv-panel {
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 0 48px;
+        overflow: hidden;
+        max-height: 0;
+        transition:
+          max-height 0.5s var(--ease-smooth),
+          padding-bottom 0.5s var(--ease-smooth);
+      }
+      .adv-panel.is-open {
+        max-height: 400px;
+        padding-bottom: 24px;
+      }
+      .adv-panel__inner {
+        border-top: 1px solid var(--ink-10);
+        padding-top: 24px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px 32px;
+      }
+      .adv-group label {
+        display: block;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink-60);
+        margin-bottom: 10px;
+        font-weight: 500;
+      }
+      .adv-range {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .adv-range input {
+        flex: 1;
+        padding: 9px 12px;
+        border: 1px solid var(--ink-10);
+        border-radius: 6px;
+        font-size: 13px;
+        background: #fff;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .adv-range input:focus {
+        border-color: var(--gold);
+      }
+      .adv-range span {
+        color: var(--ink-30);
+        font-size: 13px;
+        flex-shrink: 0;
+      }
+      .adv-checks {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .adv-check {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 13px;
+        border: 1px solid var(--ink-10);
+        border-radius: 20px;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.18s;
+      }
+      .adv-check input {
+        display: none;
+      }
+      .adv-check:hover {
+        border-color: var(--gold-lt);
+        color: var(--gold-dk);
+      }
+      .adv-check.is-checked {
+        border-color: var(--gold);
+        background: var(--gold);
+        color: var(--ink);
+      }
+
+      /* ─── RESULTS BAR ─── */
+      .results-bar {
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 24px 48px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      .results-bar__label {
+        font-size: 13px;
+        color: var(--ink-60);
+      }
+      .results-bar__label strong {
+        color: var(--ink);
+        font-weight: 600;
+      }
+      .results-bar__right {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .sort-sel {
+        position: relative;
+      }
+      .sort-sel select {
+        appearance: none;
+        -webkit-appearance: none;
+        padding: 8px 32px 8px 14px;
+        border: 1px solid var(--ink-10);
+        border-radius: 6px;
+        background: #fff;
+        font-size: 12px;
+        color: var(--ink);
+        cursor: pointer;
+        outline: none;
+      }
+      .sort-sel::after {
+        content: "";
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 0;
+        height: 0;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-top: 5px solid var(--ink-60);
+        pointer-events: none;
+      }
+      .view-toggle {
+        display: flex;
+        border: 1px solid var(--ink-10);
+        border-radius: 6px;
+        overflow: hidden;
+      }
+      .view-btn {
+        padding: 8px 12px;
+        color: var(--ink-30);
+        transition: all 0.2s;
+        background: #fff;
+        border: none;
+        display: flex;
+        align-items: center;
+      }
+      .view-btn.active,
+      .view-btn:hover {
+        background: var(--ink);
+        color: #fff;
+      }
+
+      /* ─── GRID ─── */
+      .listings-wrap {
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 28px 48px 80px;
+      }
+      .listings-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+      }
+      .listings-grid.list-view {
+        grid-template-columns: 1fr;
+      }
+
+      /* ─── PROPERTY CARD ─── */
+      .prop-card {
+        background: #fff;
+        border-radius: 20px;
+        overflow: hidden;
+        transition:
+          box-shadow 0.35s var(--ease-out),
+          transform 0.35s var(--ease-out);
+        cursor: pointer;
+        position: relative;
+      }
+      .prop-card:hover {
+        transform: translateY(-4px);
+      }
+
+      /* image area */
+      .prop-card__img {
+        position: relative;
+        aspect-ratio: 4/3;
+        overflow: hidden;
+      }
+      .prop-card__img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.65s var(--ease-smooth);
+      }
+      .prop-card:hover .prop-card__img img {
+        transform: scale(1.05);
+      }
+
+      /* agent avatar */
+      .prop-card__agent {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        z-index: 4;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+      }
+      .prop-card__agent img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* status badges */
+      .prop-card__badges {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        z-index: 4;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        align-items: flex-end;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        line-height: 1;
+      }
+      .badge--gold {
+        background: var(--gold);
+        color: var(--ink);
+      }
+      .badge--red {
+        background: var(--red);
+        color: #fff;
+      }
+      .badge--ink {
+        background: rgba(13, 13, 13, 0.75);
+        backdrop-filter: blur(8px);
+        color: #fff;
+      }
+      .badge--green {
+        background: #1e7e52;
+        color: #fff;
+      }
+
+      /* price tag */
+      .prop-card__price-tag {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 3;
+        padding: 32px 16px 14px;
+        background: linear-gradient(
+          to top,
+          rgba(13, 13, 13, 0.82) 0%,
+          transparent 100%
+        );
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+      }
+      .prop-card__price {
+        font-family: var(--font-display);
+        font-size: 22px;
+        font-weight: 600;
+        color: #fff;
+        line-height: 1;
+      }
+      .prop-card__price-sub {
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.6);
+        margin-top: 3px;
+      }
+      .prop-card__status {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 5px 10px;
+        border-radius: 4px;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        color: #fff;
+        backdrop-filter: blur(6px);
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      /* body */
+      .prop-card__body {
+        padding: 18px 20px 14px;
+      }
+      .prop-card__meta {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      .prop-card__type {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--gold-dk);
+      }
+      .prop-card__dot {
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: var(--ink-30);
+        flex-shrink: 0;
+      }
+      .prop-card__date {
+        font-size: 10px;
+        color: var(--ink-30);
+      }
+      .prop-card__title {
+        font-family: var(--font-display);
+        font-size: 19px;
+        font-weight: 400;
+        color: var(--ink);
+        line-height: 1.25;
+        margin-bottom: 6px;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .prop-card__loc {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 12px;
+        color: var(--ink-60);
+        margin-bottom: 14px;
+      }
+      .prop-card__loc svg {
+        flex-shrink: 0;
+        color: var(--gold);
+      }
+
+      /* specs */
+      .prop-card__specs {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        border-top: 1px solid var(--ink-10);
+        border-bottom: 1px solid var(--ink-10);
+        padding: 10px 0;
+        margin-bottom: 12px;
+      }
+      .prop-spec {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        position: relative;
+      }
+      .prop-spec + .prop-spec::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 10%;
+        height: 80%;
+        width: 1px;
+        background: var(--ink-10);
+      }
+      .prop-spec__val {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--ink);
+        line-height: 1;
+      }
+      .prop-spec__key {
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink-30);
+      }
+
+      /* actions */
+      .prop-card__actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 2px 0;
+      }
+      .prop-card__actions .act-btn {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--ink-10);
+        background: #fff;
+        color: var(--ink-60);
+        transition: all 0.22s var(--ease-out);
+        position: relative;
+      }
+      .prop-card__actions .act-btn:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+        background: rgba(201, 169, 110, 0.08);
+      }
+      .prop-card__actions .act-btn.is-fav {
+        border-color: var(--red);
+        color: var(--red);
+        background: rgba(204, 34, 34, 0.06);
+      }
+      .prop-card__actions .act-btn.is-compare {
+        border-color: var(--gold);
+        color: var(--gold-dk);
+        background: rgba(201, 169, 110, 0.1);
+      }
+      .prop-card__actions .act-btn[data-tip] {
+        position: relative;
+      }
+      .prop-card__actions .act-btn[data-tip]::after {
+        content: attr(data-tip);
+        position: absolute;
+        bottom: calc(100% + 7px);
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--ink);
+        color: #fff;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        white-space: nowrap;
+        padding: 4px 8px;
+        border-radius: 4px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.18s;
+      }
+      .prop-card__actions .act-btn[data-tip]:hover::after {
+        opacity: 1;
+      }
+
+      .prop-card__actions .btn-detail {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        color: var(--gold-dk);
+        padding: 8px 18px;
+        border-radius: 100px;
+        border: 1.5px solid rgba(201, 169, 110, 0.42);
+        background: rgba(201, 169, 110, 0.06);
+        transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .prop-card__actions .btn-detail:hover {
+        background: rgba(201, 169, 110, 0.13);
+        border-color: var(--gold);
+        transform: translateY(-1px);
+      }
+      .prop-card__actions .btn-detail svg {
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .prop-card__actions .btn-detail:hover svg {
+        transform: translateX(3px);
+      }
+
+      /* ─── LIST VIEW CARD ─── */
+      .listings-grid.list-view .prop-card {
+        display: grid;
+        grid-template-columns: 340px 1fr;
+      }
+      .listings-grid.list-view .prop-card__img {
+        aspect-ratio: unset;
+        height: 100%;
+        min-height: 220px;
+      }
+      .listings-grid.list-view .prop-card__body {
+        padding: 22px 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      /* ─── LOAD MORE ─── */
+      .load-more-wrap {
+        display: flex;
+        justify-content: center;
+        padding: 0 0 80px;
+      }
+      .btn-load-more {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 36px;
+        border-radius: 100px;
+        border: 1.5px solid rgba(201, 169, 110, 0.38);
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        color: var(--gold-dk);
+        background: rgba(201, 169, 110, 0.05);
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        cursor: pointer;
+      }
+      .btn-load-more:hover {
+        border-color: var(--gold);
+        color: var(--gold-dk);
+        background: rgba(201, 169, 110, 0.12);
+        transform: translateY(-2px);
+      }
+      .btn-load-more .spinner {
+        width: 14px;
+        height: 14px;
+        border: 2px solid var(--ink-10);
+        border-top-color: var(--gold);
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+        display: none;
+      }
+      .btn-load-more.is-loading .spinner {
+        display: block;
+      }
+      .btn-load-more.is-loading span {
+        opacity: 0.5;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* ─── COMPARE SIDEBAR ─── */
+      .cmp-bar {
+        position: fixed;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 900;
+        display: flex;
+        flex-direction: row-reverse; /* toggle stays at the true right edge */
+        align-items: stretch;
+        transition:
+          opacity 0.25s,
+          visibility 0.25s;
+      }
+      .cmp-bar.is-empty {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      .cmp-bar__toggle {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 18px 10px;
+        background: var(--gold);
+        color: var(--ink);
+        border-radius: 8px 0 0 8px;
+        cursor: pointer;
+        box-shadow: -4px 0 20px rgba(201, 169, 110, 0.3);
+        transition: background 0.2s;
+      }
+      .cmp-bar__toggle:hover {
+        background: var(--gold-lt);
+      }
+      .cmp-bar__count {
+        font-size: 11px;
+        font-weight: 700;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--ink);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+      }
+      .cmp-bar__label {
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        writing-mode: vertical-rl;
+        color: var(--ink);
+      }
+      .cmp-bar__panel {
+        width: 280px;
+        background: var(--bg);
+        border-radius: 12px 0 0 12px;
+        border: 1px solid var(--ink-10);
+        border-right: none;
+        box-shadow: -8px 0 40px rgba(13, 13, 13, 0.12);
+        transform: translateX(100%);
+        transition: transform 0.38s cubic-bezier(0.32, 0, 0.15, 1);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      .cmp-bar__panel.is-open {
+        transform: translateX(0);
+      }
+      .cmp-panel__head {
+        padding: 18px 20px 14px;
+        border-bottom: 1px solid var(--ink-10);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .cmp-panel__head h4 {
+        font-family: var(--font-display);
+        font-size: 16px;
+        font-weight: 400;
+      }
+      .cmp-panel__close {
+        color: var(--ink-30);
+        transition: color 0.2s;
+      }
+      .cmp-panel__close:hover {
+        color: var(--ink);
+      }
+      .cmp-panel__list {
+        flex: 1;
+        overflow-y: auto;
+        padding: 12px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .cmp-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 10px;
+        border-radius: 8px;
+        border: 1px solid var(--ink-10);
+        background: #fff;
+        position: relative;
+      }
+      .cmp-item__thumb {
+        width: 44px;
+        height: 44px;
+        border-radius: 6px;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+      .cmp-item__title {
+        font-size: 12px;
+        font-weight: 500;
+        flex: 1;
+        min-width: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .cmp-item__rm {
+        color: var(--ink-30);
+        transition: color 0.2s;
+        flex-shrink: 0;
+      }
+      .cmp-item__rm:hover {
+        color: var(--red);
+      }
+      .cmp-panel__slot {
+        padding: 16px;
+        border: 1.5px dashed var(--ink-10);
+        border-radius: 8px;
+        font-size: 12px;
+        color: var(--ink-30);
+        text-align: center;
+      }
+      .cmp-panel__foot {
+        padding: 14px 16px;
+        border-top: 1px solid var(--ink-10);
+      }
+      .btn-cmp-go {
+        width: 100%;
+        padding: 13px;
+        border-radius: 100px;
+        background: var(--gold);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .btn-cmp-go:hover {
+        background: var(--gold-lt);
+        transform: translateY(-2px);
+      }
+      .btn-cmp-go:disabled {
+        opacity: 0.4;
+        pointer-events: none;
+        transform: none;
+      }
+
+      /* ─── LIGHTBOX ─── */
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 9000;
+        background: rgba(8, 8, 8, 0.95);
+        backdrop-filter: blur(12px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.35s;
+      }
+      .lightbox.is-open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .lightbox__close {
+        position: absolute;
+        top: 24px;
+        right: 28px;
+        color: rgba(255, 255, 255, 0.6);
+        transition: color 0.2s;
+        z-index: 2;
+      }
+      .lightbox__close:hover {
+        color: #fff;
+      }
+      .lightbox__stage {
+        position: relative;
+        max-width: 1000px;
+        width: 90%;
+        margin: 0 auto;
+      }
+      .lightbox__img {
+        width: 100%;
+        max-height: 72vh;
+        object-fit: contain;
+        border-radius: 8px;
+        box-shadow: 0 32px 80px rgba(0, 0, 0, 0.7);
+      }
+      .lightbox__counter {
+        font-size: 12px;
+        letter-spacing: 0.15em;
+        color: rgba(255, 255, 255, 0.4);
+        margin-top: 16px;
+        text-align: center;
+      }
+      .lightbox__nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+      .lightbox__nav:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      .lightbox__nav--prev {
+        left: -60px;
+      }
+      .lightbox__nav--next {
+        right: -60px;
+      }
+      .lightbox__thumbs {
+        display: flex;
+        gap: 8px;
+        margin-top: 18px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        max-width: 800px;
+        justify-content: center;
+      }
+      .lightbox__thumb {
+        width: 64px;
+        height: 48px;
+        border-radius: 5px;
+        object-fit: cover;
+        flex-shrink: 0;
+        cursor: pointer;
+        opacity: 0.45;
+        border: 2px solid transparent;
+        transition:
+          opacity 0.2s,
+          border-color 0.2s;
+      }
+      .lightbox__thumb.active {
+        opacity: 1;
+        border-color: var(--gold);
+      }
+
+      /* ─── FOOTER ─── */
+      .footer {
+        background: #0d0d0d;
+        color: rgba(255, 255, 255, 0.4);
+        text-align: center;
+        padding: 32px 48px;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+      }
+      .footer a {
+        color: var(--gold);
+        transition: opacity 0.2s;
+      }
+      .footer a:hover {
+        opacity: 0.7;
+      }
+
+      /* ─── SCROLL REVEAL ─── */
+      .sr {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.65s var(--ease-out),
+          transform 0.65s var(--ease-out);
+      }
+      .sr.in-view {
+        opacity: 1;
+        transform: none;
+      }
+
+      @media (max-width: 1100px) {
+        .listings-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .page-hero__inner,
+        .filter-bar,
+        .results-bar,
+        .listings-wrap,
+        .adv-panel {
+          padding-left: 28px;
+          padding-right: 28px;
+        }
+        .adv-panel__inner {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 700px) {
+        .listings-grid {
+          grid-template-columns: 1fr;
+        }
+        .navbar {
+          padding: 0 20px;
+        }
+        .page-hero__inner {
+          padding: 48px 20px 44px;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 20px;
+        }
+        .page-hero__meta {
+          text-align: left;
+          width: 100%;
+        }
+        .filter-bar {
+          flex-wrap: wrap;
+          height: auto;
+          padding: 12px 20px;
+          gap: 8px;
+        }
+        .filter-search {
+          max-width: 100%;
+          flex-basis: 100%;
+        }
+        .filter-sel select {
+          font-size: 12px;
+          padding: 8px 28px 8px 10px;
+        }
+        .results-bar,
+        .listings-wrap,
+        .adv-panel {
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+        .lightbox__nav--prev {
+          left: -6px;
+        }
+        .lightbox__nav--next {
+          right: -6px;
+        }
+        .listings-grid.list-view .prop-card {
+          grid-template-columns: 1fr;
+        }
+        .listings-grid.list-view .prop-card__img {
+          height: 220px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+      <a href="index.html" class="navbar__logo" aria-label="Akar Town — Home">
+        <svg
+          width="230"
+          viewBox="0 0 2185 380"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M90.97 258.84H160.93L236.12 169.2V379.42H296.66V5.21997L90.97 258.84Z"
+            fill="white"
+          />
+          <path
+            d="M64.78 291.12L0 371H66.84L133.85 291.12H64.78Z"
+            fill="#FF0000"
+          />
+          <path
+            d="M390.87 186.6L544.58 373.2H472.34L339.38 212.73L317.86 187.07L339.38 160.95L472.34 0.00999451H544.58L390.87 186.61V186.6Z"
+            fill="white"
+          />
+          <path
+            d="M772.951 153.462L752.741 160.698C739.129 146.227 720.111 138.991 695.632 138.991C677.085 138.991 661.976 143.759 650.277 153.268C638.606 162.805 632.756 174.92 632.756 189.613C632.756 204.306 638.55 217.086 650.111 226.429C661.671 235.772 677.279 240.429 696.935 240.429C720.665 240.429 739.351 233.082 752.935 218.362L772.036 228.924C762.388 240.179 751.465 248.302 739.295 253.32C727.125 258.338 712.57 260.833 695.632 260.833C671.901 260.833 652.162 254.9 636.471 243.035C618.534 229.423 609.58 211.625 609.58 189.613C609.58 167.601 618.673 150.302 636.831 136.579C652.661 124.575 672.261 118.587 695.632 118.587C729.259 118.587 755.042 130.203 772.978 153.462H772.951Z"
+            fill="white"
+          />
+          <path
+            d="M1015.47 189.71C1015.47 211.722 1006.43 229.52 988.385 243.132C972.555 254.997 952.899 260.93 929.418 260.93C905.937 260.93 885.893 254.942 870.064 242.938C852.016 229.326 842.978 211.611 842.978 189.71C842.978 167.809 852.127 150.51 870.424 136.676C886.503 124.561 906.159 118.49 929.391 118.49C952.622 118.49 972.361 124.561 988.191 136.676C1006.38 150.538 1015.44 168.197 1015.44 189.71H1015.47ZM992.294 189.71C992.294 174.019 985.612 161.266 972.278 151.508C960.773 143.108 946.495 138.894 929.446 138.894C910.761 138.894 895.569 143.69 883.814 153.255C872.06 162.847 866.21 174.989 866.21 189.71C866.21 204.431 871.949 217.183 883.454 226.526C894.959 235.869 910.289 240.526 929.446 240.526C948.602 240.526 963.711 235.841 975.161 226.443C986.583 217.045 992.321 204.791 992.321 189.71H992.294Z"
+            fill="white"
+          />
+          <path
+            d="M1269.99 256.841H1247.73V147.058H1247.18L1177.45 234.607L1108.29 147.058H1107.73V256.841H1085.47V122.579H1113.28L1177.62 203.724L1242.24 122.579H1269.97V256.841H1269.99Z"
+            fill="white"
+          />
+          <path
+            d="M1446.45 122.607C1460.17 122.607 1471.04 126.405 1479.11 134.001C1487.15 141.597 1491.17 151.771 1491.17 164.496C1491.17 177.858 1486.98 188.06 1478.64 195.102C1470.29 202.144 1458.15 205.664 1442.18 205.664H1362.25V256.841H1339.99V122.579H1446.45V122.607ZM1442.57 185.676C1459.76 185.676 1468.35 178.746 1468.35 164.912C1468.35 150.08 1459.26 142.65 1441.1 142.65H1362.28V185.676H1442.6H1442.57Z"
+            fill="white"
+          />
+          <path
+            d="M1731.22 256.841H1706.88L1691.41 226.789H1600.98L1585.51 256.841H1561.17L1632.19 122.579H1660.19L1731.22 256.841ZM1680.6 206.773L1646.39 141.708L1611.76 206.773H1680.6Z"
+            fill="white"
+          />
+          <path
+            d="M1953.67 256.841H1925.97L1823.48 146.726V256.841H1801.22V122.579H1828.86L1931.43 232.75V122.579H1953.69V256.841H1953.67Z"
+            fill="white"
+          />
+          <path
+            d="M2192.83 122.579L2119.39 203.807V256.841H2097.13V203.807L2023.69 122.579H2051.44L2108.39 185.288L2165.08 122.579H2192.83Z"
+            fill="white"
+          />
+        </svg>
+      </a>
+      <div class="navbar__right">
+        <ul class="navbar__nav" role="list">
+          <li><a href="listings.html" class="active">Properties</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="navbar__sep" aria-hidden="true"></div>
+        <div>
+          <button class="btn-slide btn-slide--fill">Get in Touch</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <div class="page-hero">
+      <div class="page-hero__inner">
+        <div>
+          <nav class="page-hero__bread" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <span aria-hidden="true">›</span>
+            <span>Properties</span>
+          </nav>
+          <h1 class="page-hero__title">
+            Discover <em>Exceptional</em><br />Properties
+          </h1>
+        </div>
+        <div class="page-hero__meta">
+          <div class="page-hero__count" id="heroCount">248</div>
+          <div class="page-hero__count-label">Available Properties</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FILTER BAR -->
+    <div class="filter-wrap" id="filterWrap">
+      <!-- Main filter row -->
+      <div class="filter-bar">
+        <div class="filter-search">
+          <svg
+            width="15"
+            height="15"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.35-4.35" />
+          </svg>
+          <input
+            type="text"
+            placeholder="Search location, project…"
+            id="searchInput"
+          />
+        </div>
+
+        <div class="filter-sel">
+          <select id="typeFilter">
+            <option value="">All Types</option>
+            <option>Apartment</option>
+            <option>Villa</option>
+            <option>Townhouse</option>
+            <option>Penthouse</option>
+            <option>Chalet</option>
+            <option>Studio</option>
+          </select>
+        </div>
+
+        <div class="filter-sel">
+          <select id="priceFilter">
+            <option value="">Any Price</option>
+            <option value="0-2">Under 2M EGP</option>
+            <option value="2-5">2M – 5M EGP</option>
+            <option value="5-10">5M – 10M EGP</option>
+            <option value="10-20">10M – 20M EGP</option>
+            <option value="20+">20M+ EGP</option>
+          </select>
+        </div>
+
+        <div class="filter-sel">
+          <select id="bedsFilter">
+            <option value="">Beds</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6+</option>
+          </select>
+        </div>
+
+        <div class="filter-sel">
+          <select id="bathsFilter">
+            <option value="">Baths</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5+</option>
+          </select>
+        </div>
+
+        <div class="filter-sep"></div>
+
+        <button class="btn-adv" id="advToggle">
+          <svg
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <line x1="4" y1="6" x2="20" y2="6" />
+            <line x1="8" y1="12" x2="16" y2="12" />
+            <line x1="11" y1="18" x2="13" y2="18" />
+          </svg>
+          Filters
+          <svg
+            width="12"
+            height="12"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            viewBox="0 0 24 24"
+          >
+            <polyline points="6,9 12,15 18,9" />
+          </svg>
+        </button>
+
+        <div class="filter-right">
+          <button class="btn-clear" id="clearBtn">Clear All</button>
+          <button class="btn-filter-apply" id="applyBtn">Apply</button>
+        </div>
+      </div>
+
+      <!-- Advanced filter panel -->
+      <div class="adv-panel" id="advPanel">
+        <div class="adv-panel__inner">
+          <div class="adv-group">
+            <label>Area (m²)</label>
+            <div class="adv-range">
+              <input type="number" placeholder="Min" id="areaMin" />
+              <span>—</span>
+              <input type="number" placeholder="Max" id="areaMax" />
+            </div>
+          </div>
+          <div class="adv-group">
+            <label>Floor</label>
+            <div class="adv-range">
+              <input type="number" placeholder="Min" id="floorMin" />
+              <span>—</span>
+              <input type="number" placeholder="Max" id="floorMax" />
+            </div>
+          </div>
+          <div class="adv-group">
+            <label>Status</label>
+            <div class="adv-checks" id="statusChecks">
+              <label class="adv-check"
+                ><input type="checkbox" value="for-sale" /> For Sale</label
+              >
+              <label class="adv-check"
+                ><input type="checkbox" value="for-rent" /> For Rent</label
+              >
+              <label class="adv-check"
+                ><input type="checkbox" value="off-plan" /> Off Plan</label
+              >
+            </div>
+          </div>
+          <div class="adv-group">
+            <label>Amenities</label>
+            <div class="adv-checks" id="amenityChecks">
+              <label class="adv-check"
+                ><input type="checkbox" value="pool" /> Pool</label
+              >
+              <label class="adv-check"
+                ><input type="checkbox" value="gym" /> Gym</label
+              >
+              <label class="adv-check"
+                ><input type="checkbox" value="parking" /> Parking</label
+              >
+              <label class="adv-check"
+                ><input type="checkbox" value="garden" /> Garden</label
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTS BAR -->
+    <div class="results-bar sr" id="resultsBar">
+      <p class="results-bar__label">
+        <strong id="resultCount">18</strong> properties found
+      </p>
+      <div class="results-bar__right">
+        <div class="sort-sel">
+          <select id="sortSel">
+            <option>Newest First</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+            <option>Most Popular</option>
+            <option>Area: Large to Small</option>
+          </select>
+        </div>
+        <div class="view-toggle">
+          <button class="view-btn active" id="gridViewBtn" title="Grid view">
+            <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
+              <rect x="3" y="3" width="7" height="7" rx="1" />
+              <rect x="14" y="3" width="7" height="7" rx="1" />
+              <rect x="3" y="14" width="7" height="7" rx="1" />
+              <rect x="14" y="14" width="7" height="7" rx="1" />
+            </svg>
+          </button>
+          <button class="view-btn" id="listViewBtn" title="List view">
+            <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
+              <rect x="3" y="4" width="18" height="3" rx="1" />
+              <rect x="3" y="10.5" width="18" height="3" rx="1" />
+              <rect x="3" y="17" width="18" height="3" rx="1" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROPERTY GRID -->
+    <div class="listings-wrap">
+      <div class="listings-grid" id="listingsGrid">
+        <!-- Cards injected by JS -->
+      </div>
+    </div>
+
+    <!-- LOAD MORE -->
+    <div class="load-more-wrap">
+      <button class="btn-load-more" id="loadMoreBtn">
+        <div class="spinner"></div>
+        <span>Load More Properties</span>
+        <svg
+          width="14"
+          height="14"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <polyline points="6,9 12,15 18,9" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- COMPARE SIDEBAR -->
+    <div class="cmp-bar is-empty" id="cmpBar">
+      <button
+        class="cmp-bar__toggle"
+        id="cmpToggle"
+        aria-label="Compare sidebar"
+      >
+        <div class="cmp-bar__count" id="cmpCount">0</div>
+        <div class="cmp-bar__label">Compare</div>
+      </button>
+      <div class="cmp-bar__panel" id="cmpPanel">
+        <div class="cmp-panel__head">
+          <h4>Compare Units</h4>
+          <button class="cmp-panel__close" id="cmpClose">
+            <svg
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+        <div class="cmp-panel__list" id="cmpList"></div>
+        <div class="cmp-panel__foot">
+          <button class="btn-cmp-go" id="cmpGoBtn" disabled>Compare Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div
+      class="lightbox"
+      id="lightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Image gallery"
+    >
+      <button class="lightbox__close" id="lbClose" aria-label="Close">
+        <svg
+          width="28"
+          height="28"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+      <div class="lightbox__stage">
+        <button class="lightbox__nav lightbox__nav--prev" id="lbPrev">
+          <svg
+            width="20"
+            height="20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <polyline points="15,18 9,12 15,6" />
+          </svg>
+        </button>
+        <img class="lightbox__img" id="lbImg" src="" alt="" />
+        <button class="lightbox__nav lightbox__nav--next" id="lbNext">
+          <svg
+            width="20"
+            height="20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <polyline points="9,18 15,12 9,6" />
+          </svg>
+        </button>
+      </div>
+      <div class="lightbox__counter" id="lbCounter"></div>
+      <div class="lightbox__thumbs" id="lbThumbs"></div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>
+        © 2026 <a href="index.html">Akar Town</a> — All rights reserved.
+        Exclusive Luxury Real Estate.
+      </p>
+    </footer>
+
+    <script>
+      /* ── DATA ── */
+      const PROPERTIES = [
+        {
+          id: "p1",
+          title: "Serenity Penthouse",
+          type: "Penthouse",
+          status: "For Sale",
+          price: "18,500,000",
+          priceN: 18500000,
+          beds: 4,
+          baths: 4,
+          area: 340,
+          floor: 24,
+          location: "New Cairo, Fifth Settlement",
+          date: "2 days ago",
+          featured: true,
+          agent: {
+            name: "Sara Hassan",
+            img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80",
+          },
+          img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=700&q=80",
+          images: [
+            "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=900&q=80",
+            "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=900&q=80",
+            "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=900&q=80",
+            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80",
+          ],
+          amenities: ["pool", "gym", "parking"],
+        },
+        {
+          id: "p2",
+          title: "Altos Garden Villa",
+          type: "Villa",
+          status: "For Sale",
+          price: "32,000,000",
+          priceN: 32000000,
+          beds: 6,
+          baths: 5,
+          area: 620,
+          floor: 1,
+          location: "Sheikh Zayed, 6th of October",
+          date: "1 week ago",
+          featured: true,
+          agent: {
+            name: "Khaled Nour",
+            img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80",
+          },
+          img: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=700&q=80",
+          images: [
+            "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=900&q=80",
+            "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&q=80",
+            "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=900&q=80",
+            "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&q=80",
+          ],
+          amenities: ["pool", "gym", "garden", "parking"],
+        },
+        {
+          id: "p3",
+          title: "Lumière Apartment",
+          type: "Apartment",
+          status: "For Sale",
+          price: "4,750,000",
+          priceN: 4750000,
+          beds: 3,
+          baths: 2,
+          area: 175,
+          floor: 8,
+          location: "Maadi, Cairo",
+          date: "3 days ago",
+          featured: false,
+          agent: {
+            name: "Nadia Samy",
+            img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80",
+          },
+          img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=80",
+          images: [
+            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80",
+            "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=80",
+            "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&q=80",
+          ],
+          amenities: ["gym", "parking"],
+        },
+        {
+          id: "p4",
+          title: "Azure Sky Chalet",
+          type: "Chalet",
+          status: "Off Plan",
+          price: "8,200,000",
+          priceN: 8200000,
+          beds: 3,
+          baths: 3,
+          area: 210,
+          floor: 2,
+          location: "Ain Sokhna, North Coast",
+          date: "5 days ago",
+          featured: true,
+          agent: {
+            name: "Omar Fathy",
+            img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80",
+          },
+          img: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=700&q=80",
+          images: [
+            "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=900&q=80",
+            "https://images.unsplash.com/photo-1501117716987-bb48875d5a3b?w=900&q=80",
+            "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=900&q=80",
+          ],
+          amenities: ["pool", "garden"],
+        },
+        {
+          id: "p5",
+          title: "The Rosemont",
+          type: "Townhouse",
+          status: "For Sale",
+          price: "11,400,000",
+          priceN: 11400000,
+          beds: 4,
+          baths: 3,
+          area: 290,
+          floor: 2,
+          location: "New Administrative Capital",
+          date: "1 day ago",
+          featured: false,
+          agent: {
+            name: "Sara Hassan",
+            img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80",
+          },
+          img: "https://images.unsplash.com/photo-1628744448840-55bdb2497bd4?w=700&q=80",
+          images: [
+            "https://images.unsplash.com/photo-1628744448840-55bdb2497bd4?w=900&q=80",
+            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80",
+            "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&q=80",
+          ],
+          amenities: ["pool", "gym", "parking", "garden"],
+        },
+        {
+          id: "p6",
+          title: "Ivory Studio",
+          type: "Studio",
+          status: "For Rent",
+          price: "25,000 /mo",
+          priceN: 25000,
+          beds: 0,
+          baths: 1,
+          area: 65,
+          floor: 4,
+          location: "Zamalek, Cairo",
+          date: "Just now",
+          featured: false,
+          agent: {
+            name: "Nadia Samy",
+            img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80",
+          },
+          img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=700&q=80",
+          images: [
+            "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&q=80",
+            "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=900&q=80",
+          ],
+          amenities: ["gym"],
+        },
+        {
+          id: "p7",
+          title: "Grand Cascade Villa",
+          type: "Villa",
+          status: "For Sale",
+          price: "54,000,000",
+          priceN: 54000000,
+          beds: 7,
+          baths: 6,
+          area: 900,
+          floor: 2,
+          location: "El Gouna, Red Sea",
+          date: "2 weeks ago",
+          featured: true,
+          agent: {
+            name: "Khaled Nour",
+            img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80",
+          },
+          img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80",
+          images: [
+            "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&q=80",
+            "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=900&q=80",
+            "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=900&q=80",
+            "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&q=80",
+          ],
+          amenities: ["pool", "gym", "parking", "garden"],
+        },
+        {
+          id: "p8",
+          title: "Verdant Heights",
+          type: "Apartment",
+          status: "Off Plan",
+          price: "6,900,000",
+          priceN: 6900000,
+          beds: 3,
+          baths: 2,
+          area: 195,
+          floor: 12,
+          location: "North Coast, Sidi Abdel Rahman",
+          date: "4 days ago",
+          featured: false,
+          agent: {
+            name: "Omar Fathy",
+            img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80",
+          },
+          img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&q=80",
+          images: [
+            "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=80",
+            "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=900&q=80",
+            "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=900&q=80",
+          ],
+          amenities: ["pool", "gym"],
+        },
+        {
+          id: "p9",
+          title: "Onyx Tower Suite",
+          type: "Penthouse",
+          status: "For Sale",
+          price: "22,000,000",
+          priceN: 22000000,
+          beds: 5,
+          baths: 4,
+          area: 420,
+          floor: 30,
+          location: "Zamalek, Cairo",
+          date: "3 weeks ago",
+          featured: true,
+          agent: {
+            name: "Sara Hassan",
+            img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80",
+          },
+          img: "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=700&q=80",
+          images: [
+            "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=900&q=80",
+            "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=900&q=80",
+            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80",
+          ],
+          amenities: ["gym", "parking"],
+        },
+        {
+          id: "p10",
+          title: "Palm Court",
+          type: "Townhouse",
+          status: "For Sale",
+          price: "14,800,000",
+          priceN: 14800000,
+          beds: 4,
+          baths: 3,
+          area: 310,
+          floor: 1,
+          location: "El Shorouk, Cairo",
+          date: "6 days ago",
+          featured: false,
+          agent: {
+            name: "Khaled Nour",
+            img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80",
+          },
+          img: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=700&q=80",
+          images: [
+            "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&q=80",
+            "https://images.unsplash.com/photo-1628744448840-55bdb2497bd4?w=900&q=80",
+            "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=900&q=80",
+          ],
+          amenities: ["pool", "garden", "parking"],
+        },
+        {
+          id: "p11",
+          title: "Sage Residence",
+          type: "Apartment",
+          status: "For Sale",
+          price: "3,200,000",
+          priceN: 3200000,
+          beds: 2,
+          baths: 2,
+          area: 130,
+          floor: 5,
+          location: "Heliopolis, Cairo",
+          date: "1 month ago",
+          featured: false,
+          agent: {
+            name: "Nadia Samy",
+            img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80",
+          },
+          img: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=700&q=80",
+          images: [
+            "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=900&q=80",
+            "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&q=80",
+          ],
+          amenities: ["parking"],
+        },
+        {
+          id: "p12",
+          title: "Mirage Retreat",
+          type: "Chalet",
+          status: "For Sale",
+          price: "9,600,000",
+          priceN: 9600000,
+          beds: 4,
+          baths: 3,
+          area: 260,
+          floor: 1,
+          location: "North Coast, Hacienda Bay",
+          date: "2 days ago",
+          featured: true,
+          agent: {
+            name: "Omar Fathy",
+            img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80",
+          },
+          img: "https://images.unsplash.com/photo-1501117716987-bb48875d5a3b?w=700&q=80",
+          images: [
+            "https://images.unsplash.com/photo-1501117716987-bb48875d5a3b?w=900&q=80",
+            "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=900&q=80",
+            "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=900&q=80",
+          ],
+          amenities: ["pool", "garden"],
+        },
+      ];
+
+      /* ── STATE ── */
+      let visibleCount = 9;
+      let filtered = [...PROPERTIES];
+      let compareItems = [];
+      const MAX_CMP = 4;
+      let favSet = new Set();
+      let lbImages = [],
+        lbIdx = 0;
+
+      /* ── RENDER CARD ── */
+      function statusBadge(s) {
+        if (s === "For Sale")
+          return `<span class="badge badge--green">${s}</span>`;
+        if (s === "For Rent")
+          return `<span class="badge badge--ink">${s}</span>`;
+        return `<span class="badge badge--red">${s}</span>`;
+      }
+
+      function makeCard(p) {
+        const isFav = favSet.has(p.id);
+        const isCmp = compareItems.some((c) => c.id === p.id);
+        const bedsLabel = p.beds === 0 ? "Studio" : `${p.beds}`;
+        return `
+<div class="prop-card sr" data-id="${p.id}">
+  <div class="prop-card__img">
+    <div class="prop-card__agent">
+      <img src="${p.agent.img}" alt="${p.agent.name}" loading="lazy"/>
+    </div>
+    <div class="prop-card__badges">
+      ${p.featured ? `<span class="badge badge--gold">Featured</span>` : ""}
+      <span class="badge badge--ink">${p.type}</span>
+    </div>
+    <div class="prop-card__price-tag">
+      <div>
+        <div class="prop-card__price">EGP ${p.price}</div>
+        <div class="prop-card__price-sub">Total Price</div>
+      </div>
+      ${statusBadge(p.status)}
+    </div>
+    <img src="${p.img}" alt="${p.title}" loading="lazy" />
+  </div>
+  <div class="prop-card__body">
+    <div class="prop-card__meta">
+      <span class="prop-card__type">${p.type}</span>
+      <span class="prop-card__dot"></span>
+      <span class="prop-card__date">${p.date}</span>
+    </div>
+    <h3 class="prop-card__title">
+      <a href="property-details.html?id=${p.id}">${p.title}</a>
+    </h3>
+    <div class="prop-card__loc">
+      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      ${p.location}
+    </div>
+    <div class="prop-card__specs">
+      ${
+        p.beds > 0
+          ? `<div class="prop-spec">
+        <span class="prop-spec__val">${bedsLabel}</span>
+        <span class="prop-spec__key">Beds</span>
+      </div>`
+          : ""
+      }
+      <div class="prop-spec">
+        <span class="prop-spec__val">${p.baths}</span>
+        <span class="prop-spec__key">Baths</span>
+      </div>
+      <div class="prop-spec">
+        <span class="prop-spec__val">${p.area}</span>
+        <span class="prop-spec__key">m²</span>
+      </div>
+      <div class="prop-spec">
+        <span class="prop-spec__val">${p.floor}</span>
+        <span class="prop-spec__key">Floor</span>
+      </div>
+    </div>
+    <div class="prop-card__actions">
+      <button class="act-btn act-fav ${isFav ? "is-fav" : ""}" data-id="${p.id}" data-tip="${isFav ? "Remove from" : "Save to"} favorites" aria-label="Favorite">
+        <svg width="15" height="15" fill="${isFav ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      </button>
+      <button class="act-btn act-gallery" data-id="${p.id}" data-images='${JSON.stringify(p.images)}' data-tip="View gallery" aria-label="Gallery">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+      </button>
+      <button class="act-btn act-cmp ${isCmp ? "is-compare" : ""}" data-id="${p.id}" data-title="${p.title}" data-thumb="${p.img}" data-tip="${isCmp ? "Remove from" : "Add to"} compare" aria-label="Compare">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      </button>
+      <a href="property-details.html?id=${p.id}" class="btn-detail">
+        Details
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9,18 15,12 9,6"/></svg>
+      </a>
+    </div>
+  </div>
+</div>`;
+      }
+
+      /* ── RENDER GRID ── */
+      const grid = document.getElementById("listingsGrid");
+      const resultCountEl = document.getElementById("resultCount");
+
+      function renderGrid(reset = false) {
+        if (reset) visibleCount = 9;
+        const slice = filtered.slice(0, visibleCount);
+        grid.innerHTML = slice.map(makeCard).join("");
+        resultCountEl.textContent = filtered.length;
+        document.getElementById("loadMoreBtn").style.display =
+          visibleCount >= filtered.length ? "none" : "flex";
+        bindCardEvents();
+        observeSR();
+      }
+
+      /* ── FILTER LOGIC ── */
+      function applyFilters() {
+        const q = document.getElementById("searchInput").value.toLowerCase();
+        const type = document.getElementById("typeFilter").value;
+        const price = document.getElementById("priceFilter").value;
+        const beds = document.getElementById("bedsFilter").value;
+        const baths = document.getElementById("bathsFilter").value;
+        const checkedStatuses = [
+          ...document.querySelectorAll("#statusChecks input:checked"),
+        ].map((i) => i.value);
+        const checkedAmenities = [
+          ...document.querySelectorAll("#amenityChecks input:checked"),
+        ].map((i) => i.value);
+        const areaMin = +document.getElementById("areaMin").value || 0;
+        const areaMax = +document.getElementById("areaMax").value || Infinity;
+
+        filtered = PROPERTIES.filter((p) => {
+          if (
+            q &&
+            !p.title.toLowerCase().includes(q) &&
+            !p.location.toLowerCase().includes(q)
+          )
+            return false;
+          if (type && p.type !== type) return false;
+          if (beds && beds !== "6+") {
+            if (p.beds !== +beds) return false;
+          }
+          if (beds === "6+") {
+            if (p.beds < 6) return false;
+          }
+          if (baths && baths !== "5+") {
+            if (p.baths !== +baths) return false;
+          }
+          if (baths === "5+") {
+            if (p.baths < 5) return false;
+          }
+          if (price) {
+            const [lo, hi] = price.includes("+")
+              ? [20, Infinity]
+              : price.split("-").map(Number);
+            const pm = p.priceN / 1000000;
+            if (pm < lo || pm > hi) return false;
+          }
+          if (checkedStatuses.length) {
+            const smap = {
+              "for-sale": "For Sale",
+              "for-rent": "For Rent",
+              "off-plan": "Off Plan",
+            };
+            if (!checkedStatuses.some((s) => smap[s] === p.status))
+              return false;
+          }
+          if (checkedAmenities.length) {
+            if (!checkedAmenities.every((a) => p.amenities.includes(a)))
+              return false;
+          }
+          if (p.area < areaMin || p.area > areaMax) return false;
+          return true;
+        });
+        const sort = document.getElementById("sortSel").value;
+        if (sort === "Price: Low to High")
+          filtered.sort((a, b) => a.priceN - b.priceN);
+        else if (sort === "Price: High to Low")
+          filtered.sort((a, b) => b.priceN - a.priceN);
+        else if (sort === "Area: Large to Small")
+          filtered.sort((a, b) => b.area - a.area);
+        renderGrid(true);
+      }
+
+      document
+        .getElementById("applyBtn")
+        .addEventListener("click", applyFilters);
+      document
+        .getElementById("sortSel")
+        .addEventListener("change", applyFilters);
+      document.getElementById("searchInput").addEventListener("input", () => {
+        clearTimeout(window._st);
+        window._st = setTimeout(applyFilters, 350);
+      });
+      document.getElementById("clearBtn").addEventListener("click", () => {
+        document
+          .querySelectorAll(".filter-bar select")
+          .forEach((s) => (s.value = ""));
+        document.getElementById("searchInput").value = "";
+        document
+          .querySelectorAll(".adv-panel input[type=checkbox]")
+          .forEach((c) => (c.checked = false));
+        document
+          .querySelectorAll(".adv-panel input[type=number]")
+          .forEach((i) => (i.value = ""));
+        document
+          .querySelectorAll(".adv-check")
+          .forEach((c) => c.classList.remove("is-checked"));
+        filtered = [...PROPERTIES];
+        renderGrid(true);
+      });
+
+      /* ── ADVANCED PANEL TOGGLE ── */
+      const advToggle = document.getElementById("advToggle");
+      const advPanel = document.getElementById("advPanel");
+      advToggle.addEventListener("click", () => {
+        const open = advPanel.classList.toggle("is-open");
+        advToggle.classList.toggle("is-open", open);
+      });
+
+      /* ── ADV CHECK STYLING ── */
+      document.querySelectorAll(".adv-check").forEach((label) => {
+        label.addEventListener("click", () => {
+          setTimeout(() => {
+            label.classList.toggle(
+              "is-checked",
+              label.querySelector("input").checked,
+            );
+          }, 0);
+        });
+      });
+
+      /* ── LOAD MORE ── */
+      document
+        .getElementById("loadMoreBtn")
+        .addEventListener("click", function () {
+          this.classList.add("is-loading");
+          setTimeout(() => {
+            visibleCount += 6;
+            renderGrid(false);
+            this.classList.remove("is-loading");
+          }, 600);
+        });
+
+      /* ── VIEW TOGGLE ── */
+      document
+        .getElementById("gridViewBtn")
+        .addEventListener("click", function () {
+          grid.classList.remove("list-view");
+          this.classList.add("active");
+          document.getElementById("listViewBtn").classList.remove("active");
+        });
+      document
+        .getElementById("listViewBtn")
+        .addEventListener("click", function () {
+          grid.classList.add("list-view");
+          this.classList.add("active");
+          document.getElementById("gridViewBtn").classList.remove("active");
+        });
+
+      /* ── COMPARE ── */
+      const cmpToggle = document.getElementById("cmpToggle");
+      const cmpPanel = document.getElementById("cmpPanel");
+      const cmpClose = document.getElementById("cmpClose");
+      const cmpList = document.getElementById("cmpList");
+      const cmpCount = document.getElementById("cmpCount");
+      const cmpGoBtn = document.getElementById("cmpGoBtn");
+
+      cmpToggle.addEventListener("click", () =>
+        cmpPanel.classList.toggle("is-open"),
+      );
+      cmpClose.addEventListener("click", () =>
+        cmpPanel.classList.remove("is-open"),
+      );
+
+      function renderCmpList() {
+        const bar = document.getElementById("cmpBar");
+        cmpCount.textContent = compareItems.length;
+        cmpGoBtn.disabled = compareItems.length < 2;
+        if (compareItems.length === 0) {
+          bar.classList.add("is-empty");
+          cmpPanel.classList.remove("is-open");
+        } else {
+          bar.classList.remove("is-empty");
+        }
+        let html = "";
+        for (const item of compareItems) {
+          html += `<div class="cmp-item" data-id="${item.id}">
+      <img class="cmp-item__thumb" src="${item.thumb}" alt="${item.title}"/>
+      <span class="cmp-item__title">${item.title}</span>
+      <button class="cmp-item__rm" data-rm="${item.id}" aria-label="Remove">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>`;
+        }
+        const slots = MAX_CMP - compareItems.length;
+        for (let i = 0; i < slots; i++)
+          html += `<div class="cmp-panel__slot">+ Add property</div>`;
+        cmpList.innerHTML = html;
+        cmpList.querySelectorAll("[data-rm]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            removeFromCompare(btn.dataset.rm);
+          });
+        });
+      }
+
+      function addToCompare(id, title, thumb) {
+        if (compareItems.find((i) => i.id === id)) {
+          removeFromCompare(id);
+          return;
+        }
+        if (compareItems.length >= MAX_CMP) {
+          const bar = document.getElementById("cmpBar");
+          bar.style.transform = "translateY(-50%) translateX(6px)";
+          setTimeout(() => {
+            bar.style.transform = "translateY(-50%) translateX(-6px)";
+          }, 80);
+          setTimeout(() => {
+            bar.style.transform = "translateY(-50%)";
+          }, 160);
+          return;
+        }
+        compareItems.push({ id, title, thumb });
+        renderCmpList();
+        cmpPanel.classList.add("is-open");
+      }
+
+      function removeFromCompare(id) {
+        compareItems = compareItems.filter((i) => i.id !== id);
+        renderCmpList();
+        const btn = grid.querySelector(`.act-cmp[data-id="${id}"]`);
+        if (btn) {
+          btn.classList.remove("is-compare");
+          btn.dataset.tip = "Add to compare";
+        }
+      }
+
+      cmpGoBtn.addEventListener("click", () => {
+        window.location.href =
+          "compare.html?ids=" + compareItems.map((i) => i.id).join(",");
+      });
+
+      /* ── LIGHTBOX ── */
+      const lb = document.getElementById("lightbox");
+      const lbImg = document.getElementById("lbImg");
+      const lbCounter = document.getElementById("lbCounter");
+      const lbThumbsEl = document.getElementById("lbThumbs");
+
+      function openLightbox(images, startIdx = 0) {
+        lbImages = images;
+        lbIdx = startIdx;
+        renderLb();
+        lb.classList.add("is-open");
+        document.body.style.overflow = "hidden";
+      }
+      function closeLightbox() {
+        lb.classList.remove("is-open");
+        document.body.style.overflow = "";
+      }
+      function renderLb() {
+        lbImg.src = lbImages[lbIdx];
+        lbCounter.textContent = `${lbIdx + 1} / ${lbImages.length}`;
+        lbThumbsEl.innerHTML = lbImages
+          .map(
+            (src, i) =>
+              `<img class="lightbox__thumb ${i === lbIdx ? "active" : ""}" src="${src}" data-i="${i}" loading="lazy"/>`,
+          )
+          .join("");
+        lbThumbsEl.querySelectorAll(".lightbox__thumb").forEach((t) => {
+          t.addEventListener("click", () => {
+            lbIdx = +t.dataset.i;
+            renderLb();
+          });
+        });
+      }
+      document
+        .getElementById("lbClose")
+        .addEventListener("click", closeLightbox);
+      document.getElementById("lbPrev").addEventListener("click", () => {
+        lbIdx = (lbIdx - 1 + lbImages.length) % lbImages.length;
+        renderLb();
+      });
+      document.getElementById("lbNext").addEventListener("click", () => {
+        lbIdx = (lbIdx + 1) % lbImages.length;
+        renderLb();
+      });
+      lb.addEventListener("click", (e) => {
+        if (e.target === lb) closeLightbox();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (!lb.classList.contains("is-open")) return;
+        if (e.key === "Escape") closeLightbox();
+        if (e.key === "ArrowLeft") {
+          lbIdx = (lbIdx - 1 + lbImages.length) % lbImages.length;
+          renderLb();
+        }
+        if (e.key === "ArrowRight") {
+          lbIdx = (lbIdx + 1) % lbImages.length;
+          renderLb();
+        }
+      });
+
+      /* ── BIND CARD EVENTS ── */
+      function bindCardEvents() {
+        grid.querySelectorAll(".prop-card").forEach((card) => {
+          card.addEventListener("click", (e) => {
+            if (!e.target.closest(".act-btn,.btn-detail,.prop-card__actions"))
+              window.location.href =
+                "property-details.html?id=" + card.dataset.id;
+          });
+        });
+        grid.querySelectorAll(".act-fav").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const id = btn.dataset.id;
+            if (favSet.has(id)) {
+              favSet.delete(id);
+              btn.classList.remove("is-fav");
+            } else {
+              favSet.add(id);
+              btn.classList.add("is-fav");
+            }
+            const svg = btn.querySelector("svg");
+            if (svg)
+              svg.setAttribute(
+                "fill",
+                favSet.has(id) ? "currentColor" : "none",
+              );
+          });
+        });
+        grid.querySelectorAll(".act-gallery").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const images = JSON.parse(btn.dataset.images);
+            openLightbox(images, 0);
+          });
+        });
+        grid.querySelectorAll(".act-cmp").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const { id, title, thumb } = btn.dataset;
+            addToCompare(id, title, thumb);
+            btn.classList.toggle(
+              "is-compare",
+              compareItems.some((c) => c.id === id),
+            );
+          });
+        });
+      }
+
+      /* ── SCROLL REVEAL ── */
+      let srObs;
+      function observeSR() {
+        const els = document.querySelectorAll(".sr:not(.in-view)");
+        if (!srObs) {
+          srObs = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((en, i) => {
+                if (en.isIntersecting) {
+                  setTimeout(() => en.target.classList.add("in-view"), i * 60);
+                  srObs.unobserve(en.target);
+                }
+              });
+            },
+            { threshold: 0.1 },
+          );
+        }
+        els.forEach((el) => srObs.observe(el));
+      }
+
+      /* ── INIT ── */
+      renderGrid(true);
+      renderCmpList();
+      observeSR();
+
+      /* Animate hero count */
+      (function () {
+        const el = document.getElementById("heroCount");
+        const target = 248;
+        let current = 0;
+        const step = () => {
+          current = Math.min(current + 5, target);
+          el.textContent = current;
+          if (current < target) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      })();
+    </script>
+  </body>
+</html>

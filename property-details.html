@@ -1473,7 +1473,7 @@
         font-family: var(--font-body);
         font-size: 42px;
         font-weight: 400;
-        color: var(--gold);
+        color: #fff;
         line-height: 1;
         margin-bottom: 4px;
         letter-spacing: -0.01em;
@@ -1481,7 +1481,7 @@
       .pd-price-card__price sup {
         font-size: 0.4em;
         vertical-align: super;
-        color: var(--gold-lt);
+        color: rgba(255, 255, 255, 0.6);
         font-family: var(--font-body);
         font-weight: 400;
         letter-spacing: 0.06em;
@@ -1502,14 +1502,25 @@
         justify-content: center;
         margin-bottom: 10px;
       }
+      .pd-price-card .btn-slide--fill {
+        background: rgba(255, 255, 255, 0.15);
+        color: #fff;
+        border: 1.5px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+      .pd-price-card .btn-slide--fill:hover {
+        background: rgba(255, 255, 255, 0.25);
+        border-color: rgba(255, 255, 255, 0.5);
+      }
       .pd-price-card .btn-slide--outline {
-        border-color: rgba(200, 16, 46, 0.45);
-        color: var(--gold-lt);
-        background: rgba(200, 16, 46, 0.06);
+        border-color: rgba(255, 255, 255, 0.25);
+        color: #fff;
+        background: rgba(255, 255, 255, 0.06);
       }
       .pd-price-card .btn-slide--outline:hover {
-        background: rgba(200, 16, 46, 0.14);
-        border-color: var(--gold);
+        background: rgba(255, 255, 255, 0.13);
+        border-color: rgba(255, 255, 255, 0.5);
       }
       .pd-price-card__contacts {
         display: grid;
@@ -1540,11 +1551,12 @@
         flex-shrink: 0;
       }
       .pd-price-card__contact-btn--call {
-        background: var(--gold);
+        background: rgba(255, 255, 255, 0.15);
         color: #ffffff;
+        border: 1.5px solid rgba(255, 255, 255, 0.3);
       }
       .pd-price-card__contact-btn--call:hover {
-        background: var(--gold-lt);
+        background: rgba(255, 255, 255, 0.25);
         transform: translateY(-1px);
       }
       .pd-price-card__contact-btn--wa {

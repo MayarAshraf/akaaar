@@ -6,14 +6,17 @@
     <title>Compare Properties — Akar Town</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Kufi+Arabic:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Kufi+Arabic:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <style>
       :root {
         --bg: #faf8f5;
         --ink: #0d0d0d;
-        --ink-60: rgba(13,13,13,.6);
-        --ink-30: rgba(13,13,13,.3);
-        --ink-10: rgba(13,13,13,.1);
+        --ink-60: rgba(13, 13, 13, 0.6);
+        --ink-30: rgba(13, 13, 13, 0.3);
+        --ink-10: rgba(13, 13, 13, 0.1);
         --gold: #c9a96e;
         --gold-lt: #e4c99a;
         --gold-dk: #a07c40;
@@ -23,580 +26,1462 @@
         --font-body: "Archivo", system-ui, sans-serif;
         --font-display: "Cormorant Garamond", Georgia, serif;
         --nav-h: 62px;
-        --ease-smooth: cubic-bezier(.76,0,.24,1);
-        --ease-out: cubic-bezier(.16,1,.3,1);
+        --ease-smooth: cubic-bezier(0.76, 0, 0.24, 1);
+        --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
         --lw: 196px;
       }
-      *,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
-      html { font-family:var(--font-body); font-size:16px; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
-      body { background:var(--bg); color:var(--ink); min-height:100vh; line-height:1.6; overflow-x:hidden; }
-      button { border:none; background:none; cursor:pointer; font-family:inherit; }
-      a { text-decoration:none; color:inherit; }
-      img,svg { display:block; max-width:100%; }
-      ::selection { background:var(--gold); color:var(--ink); }
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        font-family: var(--font-body);
+        font-size: 16px;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        min-height: 100vh;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+      button {
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      img,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+      ::selection {
+        background: var(--gold);
+        color: var(--ink);
+      }
 
       /* ── NAVBAR ── */
       .navbar {
-        position:fixed; inset:0 0 auto 0; z-index:200;
-        height:var(--nav-h); padding:0 48px;
-        display:flex; align-items:center; justify-content:space-between;
-        background:rgba(8,8,8,.9); backdrop-filter:blur(48px) saturate(180%);
-        -webkit-backdrop-filter:blur(48px) saturate(180%);
-        border-bottom:1px solid rgba(255,255,255,.06);
-        box-shadow:0 1px 0 rgba(255,255,255,.04),0 8px 40px rgba(0,0,0,.4);
+        position: fixed;
+        inset: 0 0 auto 0;
+        z-index: 200;
+        height: var(--nav-h);
+        padding: 0 48px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(8, 8, 8, 0.9);
+        backdrop-filter: blur(48px) saturate(180%);
+        -webkit-backdrop-filter: blur(48px) saturate(180%);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.04),
+          0 8px 40px rgba(0, 0, 0, 0.4);
       }
-      .navbar__logo { display:flex; align-items:center; flex-shrink:0; }
-      .navbar__right { display:flex; align-items:center; gap:32px; }
-      .navbar__nav { display:flex; align-items:center; gap:32px; list-style:none; }
+      .navbar__logo {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+      }
+      .navbar__right {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+      }
+      .navbar__nav {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        list-style: none;
+      }
       .navbar__nav a {
-        font-size:12px; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
-        color:rgba(255,255,255,.9); position:relative; transition:color .25s;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.9);
+        position: relative;
+        transition: color 0.25s;
       }
       .navbar__nav a::after {
-        content:""; position:absolute; bottom:-5px; left:0; width:0; height:1px;
-        background:var(--gold); transition:width .38s var(--ease-smooth);
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--gold);
+        transition: width 0.38s var(--ease-smooth);
       }
-      .navbar__nav a:hover::after { width:100%; }
-      .navbar__sep { width:1px; height:18px; background:rgba(255,255,255,.15); flex-shrink:0; }
+      .navbar__nav a:hover::after {
+        width: 100%;
+      }
+      .navbar__sep {
+        width: 1px;
+        height: 18px;
+        background: rgba(255, 255, 255, 0.15);
+        flex-shrink: 0;
+      }
       .btn-pill {
-        display:inline-flex; align-items:center; gap:8px;
-        font-size:11px; font-weight:500; letter-spacing:.03em;
-        padding:9px 20px; line-height:1; border-radius:100px;
-        white-space:nowrap; cursor:pointer; border:none;
-        transition:all .35s var(--ease-out);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.03em;
+        padding: 9px 20px;
+        line-height: 1;
+        border-radius: 100px;
+        white-space: nowrap;
+        cursor: pointer;
+        border: none;
+        transition: all 0.35s var(--ease-out);
       }
       .btn-pill--fill {
-        background:var(--gold);
-        color:var(--ink);
+        background: var(--gold);
+        color: var(--ink);
       }
       .btn-pill--fill:hover {
-        background:var(--gold-lt);
+        background: var(--gold-lt);
       }
 
       /* ── PAGE HERO ── */
       .page-hero {
-        padding-top:var(--nav-h); background:#0d0d0d;
-        position:relative; overflow:hidden;
+        padding-top: var(--nav-h);
+        background: #0d0d0d;
+        position: relative;
+        overflow: hidden;
       }
       .page-hero::before {
-        content:""; position:absolute; inset:0;
-        background:linear-gradient(135deg,rgba(201,169,110,.12) 0%,transparent 60%);
-        pointer-events:none;
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(201, 169, 110, 0.12) 0%,
+          transparent 60%
+        );
+        pointer-events: none;
       }
       .page-hero__inner {
-        max-width:1320px; margin:0 auto; padding:52px 48px 48px;
-        display:flex; align-items:flex-end; justify-content:space-between; gap:40px;
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 52px 48px 48px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 40px;
       }
       .page-hero__bread {
-        display:flex; align-items:center; gap:8px;
-        font-size:11px; letter-spacing:.16em; text-transform:uppercase;
-        color:rgba(255,255,255,.4); margin-bottom:14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.4);
+        margin-bottom: 14px;
       }
-      .page-hero__bread a { color:rgba(255,255,255,.4); transition:color .2s; }
-      .page-hero__bread a:hover { color:var(--gold); }
-      .page-hero__bread span { color:rgba(255,255,255,.2); }
+      .page-hero__bread a {
+        color: rgba(255, 255, 255, 0.4);
+        transition: color 0.2s;
+      }
+      .page-hero__bread a:hover {
+        color: var(--gold);
+      }
+      .page-hero__bread span {
+        color: rgba(255, 255, 255, 0.2);
+      }
       .page-hero__title {
-        font-family:var(--font-body); font-size:clamp(34px,5vw,60px);
-        font-weight:300; letter-spacing:-.01em; color:#fff; line-height:1.05;
+        font-family: var(--font-body);
+        font-size: clamp(34px, 5vw, 60px);
+        font-weight: 300;
+        letter-spacing: -0.01em;
+        color: #fff;
+        line-height: 1.05;
       }
       .page-hero__title em {
-        font-style:normal; color:var(--gold); font-size:1.02em;
+        font-style: normal;
+        color: var(--gold);
+        font-size: 1.02em;
       }
-      .page-hero__meta { text-align:right; flex-shrink:0; }
+      .page-hero__meta {
+        text-align: right;
+        flex-shrink: 0;
+      }
       .page-hero__count {
-        font-family:var(--font-body); font-size:52px;
-        font-weight:300; color:var(--gold); line-height:1;
+        font-family: var(--font-body);
+        font-size: 52px;
+        font-weight: 300;
+        color: var(--gold);
+        line-height: 1;
       }
       .page-hero__count-label {
-        font-size:11px; letter-spacing:.18em; text-transform:uppercase;
-        color:rgba(255,255,255,.4); margin-top:4px;
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.4);
+        margin-top: 4px;
       }
 
       /* ── PROPERTY IMAGE COLUMNS (accordion) ── */
       .prop-cols {
-        background:#111;
-        border-top:1px solid rgba(255,255,255,.06);
+        background: #111;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
       }
       .prop-cols__inner {
-        max-width:1320px; margin:0 auto; padding:0 48px;
-        display:flex; overflow:hidden;
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 0 48px;
+        display: flex;
+        overflow: hidden;
       }
       .prop-col-card {
-        flex:1; min-width:0;
-        position:relative; overflow:hidden;
-        height:260px; cursor:pointer;
-        transition:flex .5s var(--ease-out);
-        border-right:1px solid rgba(255,255,255,.04);
+        flex: 1;
+        min-width: 0;
+        position: relative;
+        overflow: hidden;
+        height: 260px;
+        cursor: pointer;
+        transition: flex 0.5s var(--ease-out);
+        border-right: 1px solid rgba(255, 255, 255, 0.04);
       }
-      .prop-col-card:last-child { border-right:none; }
-      .prop-col-card:hover { flex:1.55; }
+      .prop-col-card:last-child {
+        border-right: none;
+      }
+      .prop-col-card:hover {
+        flex: 1.55;
+      }
       .prop-col-card__img {
-        position:absolute; inset:0; width:100%; height:100%;
-        object-fit:cover; transition:transform .7s var(--ease-smooth),filter .5s;
-        filter:brightness(.7) saturate(.9);
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition:
+          transform 0.7s var(--ease-smooth),
+          filter 0.5s;
+        filter: brightness(0.7) saturate(0.9);
       }
       .prop-col-card:hover .prop-col-card__img {
-        transform:scale(1.06); filter:brightness(.8) saturate(1.1);
+        transform: scale(1.06);
+        filter: brightness(0.8) saturate(1.1);
       }
       .prop-col-card__grad {
-        position:absolute; inset:0;
-        background:linear-gradient(to top,rgba(0,0,0,.9) 0%,rgba(0,0,0,.35) 55%,rgba(0,0,0,.05) 100%);
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.9) 0%,
+          rgba(0, 0, 0, 0.35) 55%,
+          rgba(0, 0, 0, 0.05) 100%
+        );
       }
       .prop-col-card__num {
-        position:absolute; top:16px; left:16px; z-index:4;
-        width:24px; height:24px; border-radius:50%;
-        background:var(--gold); color:var(--ink);
-        font-size:10px; font-weight:700;
-        display:flex; align-items:center; justify-content:center;
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        z-index: 4;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: var(--gold);
+        color: var(--ink);
+        font-size: 10px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
       .prop-col-card__rm {
-        position:absolute; top:14px; right:14px; z-index:4;
-        width:26px; height:26px; border-radius:50%;
-        background:rgba(0,0,0,.45); backdrop-filter:blur(8px);
-        border:1px solid rgba(255,255,255,.12); color:rgba(255,255,255,.6);
-        display:flex; align-items:center; justify-content:center;
-        transition:all .2s;
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        z-index: 4;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: rgba(255, 255, 255, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
       }
-      .prop-col-card__rm:hover { background:rgba(204,34,34,.65); border-color:var(--red); color:#fff; }
+      .prop-col-card__rm:hover {
+        background: rgba(204, 34, 34, 0.65);
+        border-color: var(--red);
+        color: #fff;
+      }
       .prop-col-card__body {
-        position:absolute; bottom:0; left:0; right:0;
-        padding:16px 18px 20px; z-index:3;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 16px 18px 20px;
+        z-index: 3;
       }
       .prop-col-card__type {
-        font-size:9px; font-weight:700; letter-spacing:.2em;
-        text-transform:uppercase; color:var(--gold); margin-bottom:5px;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 5px;
       }
       .prop-col-card__name {
-        font-family:var(--font-body); font-size:clamp(14px,1.8vw,20px);
-        font-weight:300; color:#fff; line-height:1.2; margin-bottom:6px;
-        white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+        font-family: var(--font-body);
+        font-size: clamp(14px, 1.8vw, 20px);
+        font-weight: 300;
+        color: #fff;
+        line-height: 1.2;
+        margin-bottom: 6px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
-      .prop-col-card:hover .prop-col-card__name { white-space:normal; }
+      .prop-col-card:hover .prop-col-card__name {
+        white-space: normal;
+      }
       .prop-col-card__price {
-        font-family:var(--font-body); font-size:clamp(16px,2.2vw,24px);
-        font-weight:600; color:var(--gold); line-height:1;
+        font-family: var(--font-body);
+        font-size: clamp(16px, 2.2vw, 24px);
+        font-weight: 600;
+        color: var(--gold);
+        line-height: 1;
       }
       .prop-col-card__price-lbl {
-        font-size:8px; letter-spacing:.12em; text-transform:uppercase;
-        color:rgba(255,255,255,.45); margin-top:2px;
+        font-size: 8px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.45);
+        margin-top: 2px;
       }
 
       /* Add more card */
       .prop-col-add {
-        flex:0 0 110px;
-        display:flex; flex-direction:column; align-items:center;
-        justify-content:center; gap:10px;
-        background:rgba(255,255,255,.03);
-        border-left:1px solid rgba(255,255,255,.06);
-        padding:20px; cursor:pointer; color:rgba(255,255,255,.35);
-        transition:all .3s; text-decoration:none;
+        flex: 0 0 110px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background: rgba(255, 255, 255, 0.03);
+        border-left: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 20px;
+        cursor: pointer;
+        color: rgba(255, 255, 255, 0.35);
+        transition: all 0.3s;
+        text-decoration: none;
       }
-      .prop-col-add:hover { background:rgba(201,169,110,.07); color:var(--gold); }
+      .prop-col-add:hover {
+        background: rgba(201, 169, 110, 0.07);
+        color: var(--gold);
+      }
       .prop-col-add__ring {
-        width:38px; height:38px; border-radius:50%;
-        border:1.5px solid currentColor;
-        display:flex; align-items:center; justify-content:center;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1.5px solid currentColor;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
-      .prop-col-add__lbl { font-size:9px; letter-spacing:.14em; text-transform:uppercase; text-align:center; }
+      .prop-col-add__lbl {
+        font-size: 9px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        text-align: center;
+      }
 
       /* ── STICKY MINI HEADER ── */
       .sticky-strip {
-        position:fixed; top:var(--nav-h); left:0; right:0; z-index:150;
-        background:rgba(10,10,10,.95); backdrop-filter:blur(24px);
-        -webkit-backdrop-filter:blur(24px);
-        border-bottom:1px solid rgba(255,255,255,.06);
-        transform:translateY(-100%); transition:transform .4s var(--ease-out);
-        overflow:hidden;
+        position: fixed;
+        top: var(--nav-h);
+        left: 0;
+        right: 0;
+        z-index: 150;
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        transform: translateY(-100%);
+        transition: transform 0.4s var(--ease-out);
+        overflow: hidden;
       }
-      .sticky-strip.is-visible { transform:translateY(0); }
+      .sticky-strip.is-visible {
+        transform: translateY(0);
+      }
       .sticky-strip__inner {
-        max-width:1320px; margin:0 auto; padding:0 48px;
-        display:flex; align-items:stretch;
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 0 48px;
+        display: flex;
+        align-items: stretch;
       }
       .sticky-strip__lbl {
-        flex:0 0 var(--lw); display:flex; align-items:center;
-        font-size:9px; letter-spacing:.2em; text-transform:uppercase;
-        color:rgba(255,255,255,.25);
-        border-right:1px solid rgba(255,255,255,.06);
-        padding-right:16px;
+        flex: 0 0 var(--lw);
+        display: flex;
+        align-items: center;
+        font-size: 9px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.25);
+        border-right: 1px solid rgba(255, 255, 255, 0.06);
+        padding-right: 16px;
       }
       .sticky-prop {
-        flex:1; display:flex; align-items:center; gap:10px;
-        padding:8px 16px; border-right:1px solid rgba(255,255,255,.05);
-        min-width:0;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 16px;
+        border-right: 1px solid rgba(255, 255, 255, 0.05);
+        min-width: 0;
       }
-      .sticky-prop:last-child { border-right:none; }
+      .sticky-prop:last-child {
+        border-right: none;
+      }
       .sticky-prop__thumb {
-        width:34px; height:34px; border-radius:5px;
-        object-fit:cover; flex-shrink:0;
+        width: 34px;
+        height: 34px;
+        border-radius: 5px;
+        object-fit: cover;
+        flex-shrink: 0;
       }
       .sticky-prop__name {
-        font-size:11px; font-weight:500; color:#fff;
-        white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+        font-size: 11px;
+        font-weight: 500;
+        color: #fff;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
-      .sticky-prop__price { font-size:10px; color:var(--gold); }
+      .sticky-prop__price {
+        font-size: 10px;
+        color: var(--gold);
+      }
 
       /* ── COMPARE TABLE ── */
       .cmp-wrap {
-        max-width:1320px; margin:0 auto; padding:0 48px;
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 0 48px;
       }
       .cmp-scroll {
-        overflow-x:auto; -webkit-overflow-scrolling:touch;
-        padding-bottom:2px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 2px;
       }
-      .cmp-scroll::-webkit-scrollbar { height:3px; }
-      .cmp-scroll::-webkit-scrollbar-track { background:var(--ink-10); }
-      .cmp-scroll::-webkit-scrollbar-thumb { background:var(--gold); border-radius:2px; }
+      .cmp-scroll::-webkit-scrollbar {
+        height: 3px;
+      }
+      .cmp-scroll::-webkit-scrollbar-track {
+        background: var(--ink-10);
+      }
+      .cmp-scroll::-webkit-scrollbar-thumb {
+        background: var(--gold);
+        border-radius: 2px;
+      }
 
-      .cmp-grid { display:block; min-width:max-content; }
+      .cmp-grid {
+        display: block;
+        min-width: max-content;
+      }
 
       /* Section header row */
       .cmp-sec {
-        display:flex; align-items:stretch;
-        border-bottom:1px solid var(--ink-10);
-        margin-top:8px;
+        display: flex;
+        align-items: stretch;
+        border-bottom: 1px solid var(--ink-10);
+        margin-top: 8px;
       }
       .cmp-sec__lbl {
-        flex:0 0 var(--lw); position:sticky; left:0; z-index:10;
-        background:var(--bg);
-        padding:32px 20px 14px 0;
-        display:flex; align-items:flex-end;
+        flex: 0 0 var(--lw);
+        position: sticky;
+        left: 0;
+        z-index: 10;
+        background: var(--bg);
+        padding: 32px 20px 14px 0;
+        display: flex;
+        align-items: flex-end;
       }
       .cmp-sec__lbl-text {
-        font-family:var(--font-body); font-size:15px; letter-spacing:.02em;
-        color:var(--gold); font-weight:400; font-style:italic;
-        display:inline-flex; align-items:center; gap:10px;
+        font-family: var(--font-body);
+        font-size: 15px;
+        letter-spacing: 0.02em;
+        color: var(--gold);
+        font-weight: 400;
+        font-style: italic;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
       }
       .cmp-sec__lbl-text::after {
-        content:""; display:block; width:28px; height:1px;
-        background:linear-gradient(to right,var(--gold-lt),transparent);
+        content: "";
+        display: block;
+        width: 28px;
+        height: 1px;
+        background: linear-gradient(to right, var(--gold-lt), transparent);
       }
-      .cmp-sec__cells { flex:1; display:flex; }
+      .cmp-sec__cells {
+        flex: 1;
+        display: flex;
+      }
       .cmp-sec__cell {
-        flex:1; min-width:230px;
-        padding:32px 24px 14px;
-        border-left:1px solid var(--ink-10);
+        flex: 1;
+        min-width: 230px;
+        padding: 32px 24px 14px;
+        border-left: 1px solid var(--ink-10);
       }
 
       /* Data rows */
       .cmp-row {
-        display:flex; align-items:stretch;
-        border-bottom:1px solid rgba(13,13,13,.045);
-        transition:background .15s;
+        display: flex;
+        align-items: stretch;
+        border-bottom: 1px solid rgba(13, 13, 13, 0.045);
+        transition: background 0.15s;
       }
-      .cmp-row:hover { background:rgba(201,169,110,.018); }
+      .cmp-row:hover {
+        background: rgba(201, 169, 110, 0.018);
+      }
       .cmp-lbl {
-        flex:0 0 var(--lw); position:sticky; left:0; z-index:10;
-        background:var(--bg); padding:20px 20px 20px 0;
-        display:flex; align-items:center;
-        font-size:11px; letter-spacing:.12em; text-transform:uppercase;
-        color:var(--ink-60); font-weight:600;
-        transition:background .15s;
+        flex: 0 0 var(--lw);
+        position: sticky;
+        left: 0;
+        z-index: 10;
+        background: var(--bg);
+        padding: 20px 20px 20px 0;
+        display: flex;
+        align-items: center;
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ink-60);
+        font-weight: 600;
+        transition: background 0.15s;
       }
-      .cmp-row:hover .cmp-lbl { background:rgba(250,248,245,.99); }
-      .cmp-cells { flex:1; display:flex; }
+      .cmp-row:hover .cmp-lbl {
+        background: rgba(250, 248, 245, 0.99);
+      }
+      .cmp-cells {
+        flex: 1;
+        display: flex;
+      }
       .cmp-cell {
-        flex:1; min-width:230px; padding:20px 24px;
-        display:flex; flex-direction:column; justify-content:center;
-        border-left:1px solid rgba(13,13,13,.04);
-        position:relative; transition:background .15s;
+        flex: 1;
+        min-width: 230px;
+        padding: 20px 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-left: 1px solid rgba(13, 13, 13, 0.04);
+        position: relative;
+        transition: background 0.15s;
       }
-      .cmp-row:hover .cmp-cell { background:rgba(201,169,110,.015); }
+      .cmp-row:hover .cmp-cell {
+        background: rgba(201, 169, 110, 0.015);
+      }
 
       /* Best cell highlight */
-      .cmp-cell--best { background:rgba(201,169,110,.055); }
+      .cmp-cell--best {
+        background: rgba(201, 169, 110, 0.055);
+      }
       .cmp-cell--best::after {
-        content:""; position:absolute; top:0; left:0; right:0; height:2px;
-        background:linear-gradient(to right,var(--gold),var(--gold-lt));
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(to right, var(--gold), var(--gold-lt));
       }
 
       /* Cell content types */
       .cmp-val {
-        font-family:var(--font-body); font-size:30px;
-        font-weight:400; color:var(--ink); line-height:1;
-        display:flex; align-items:baseline; gap:5px; flex-wrap:wrap;
+        font-family: var(--font-body);
+        font-size: 30px;
+        font-weight: 400;
+        color: var(--ink);
+        line-height: 1;
+        display: flex;
+        align-items: baseline;
+        gap: 5px;
+        flex-wrap: wrap;
       }
-      .cmp-val__unit { font-size:13px; color:var(--ink-30); font-family:var(--font-body); font-weight:400; }
-      .cmp-text { font-size:15px; color:var(--ink); font-weight:400; }
-      .cmp-loc { font-size:14px; color:var(--ink-60); display:flex; align-items:flex-start; gap:6px; line-height:1.4; }
-      .cmp-loc svg { flex-shrink:0; margin-top:3px; color:var(--gold); }
+      .cmp-val__unit {
+        font-size: 13px;
+        color: var(--ink-30);
+        font-family: var(--font-body);
+        font-weight: 400;
+      }
+      .cmp-text {
+        font-size: 15px;
+        color: var(--ink);
+        font-weight: 400;
+      }
+      .cmp-loc {
+        font-size: 14px;
+        color: var(--ink-60);
+        display: flex;
+        align-items: flex-start;
+        gap: 6px;
+        line-height: 1.4;
+      }
+      .cmp-loc svg {
+        flex-shrink: 0;
+        margin-top: 3px;
+        color: var(--gold);
+      }
 
       .best-badge {
-        display:inline-flex; align-items:center; gap:4px;
-        font-size:9px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
-        color:var(--gold-dk); background:rgba(201,169,110,.12);
-        border:1.5px solid rgba(201,169,110,.35); border-radius:100px;
-        padding:3px 10px; margin-top:6px; align-self:flex-start;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--gold-dk);
+        background: rgba(201, 169, 110, 0.12);
+        border: 1.5px solid rgba(201, 169, 110, 0.35);
+        border-radius: 100px;
+        padding: 3px 10px;
+        margin-top: 6px;
+        align-self: flex-start;
       }
 
       /* Bar chart */
       .cmp-bar-track {
-        height:3px; background:var(--ink-10); border-radius:3px;
-        overflow:hidden; margin-top:8px; width:100%;
+        height: 3px;
+        background: var(--ink-10);
+        border-radius: 3px;
+        overflow: hidden;
+        margin-top: 8px;
+        width: 100%;
       }
       .cmp-bar-fill {
-        height:100%; border-radius:3px;
-        background:linear-gradient(to right,var(--gold-dk),var(--gold));
-        width:0; transition:width 1.1s var(--ease-out);
+        height: 100%;
+        border-radius: 3px;
+        background: linear-gradient(to right, var(--gold-dk), var(--gold));
+        width: 0;
+        transition: width 1.1s var(--ease-out);
       }
 
       /* Status pill — matches listings badge style */
       .cmp-status {
-        display:inline-flex; align-items:center; gap:5px;
-        font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
-        padding:6px 14px; border-radius:100px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 6px 14px;
+        border-radius: 100px;
       }
-      .cmp-status--sale {width:fit-content; background:rgba(30,126,82,.1); color:var(--green); border:1.5px solid rgba(30,126,82,.22); }
-      .cmp-status--rent { background:rgba(13,13,13,.06); color:var(--ink-60); border:1.5px solid var(--ink-10); }
-      .cmp-status--offplan { background:rgba(201,169,110,.1); color:var(--gold-dk); border:1.5px solid rgba(201,169,110,.28); }
+      .cmp-status--sale {
+        width: fit-content;
+        background: rgba(30, 126, 82, 0.1);
+        color: var(--green);
+        border: 1.5px solid rgba(30, 126, 82, 0.22);
+      }
+      .cmp-status--rent {
+        background: rgba(13, 13, 13, 0.06);
+        color: var(--ink-60);
+        border: 1.5px solid var(--ink-10);
+      }
+      .cmp-status--offplan {
+        background: rgba(201, 169, 110, 0.1);
+        color: var(--gold-dk);
+        border: 1.5px solid rgba(201, 169, 110, 0.28);
+      }
 
       /* Amenity chips — pill style, content-fitted */
-      .cmp-amenities { display:flex; flex-wrap:wrap; gap:7px; }
+      .cmp-amenities {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+      }
       .cmp-tag {
-        display:inline-flex; align-items:center; gap:5px;
-        font-size:11px; letter-spacing:.04em; font-weight:500;
-        padding:7px 14px; border-radius:100px; white-space:nowrap;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        font-weight: 500;
+        padding: 7px 14px;
+        border-radius: 100px;
+        white-space: nowrap;
       }
       .cmp-tag--yes {
-        background:rgba(201,169,110,.08);
-        border:1.5px solid rgba(201,169,110,.32);
-        color:var(--gold-dk);
+        background: rgba(201, 169, 110, 0.08);
+        border: 1.5px solid rgba(201, 169, 110, 0.32);
+        color: var(--gold-dk);
       }
       .cmp-tag--no {
-        background:rgba(13,13,13,.04);
-        border:1.5px solid var(--ink-10);
-        color:var(--ink-30);
-        text-decoration:line-through;
+        background: rgba(13, 13, 13, 0.04);
+        border: 1.5px solid var(--ink-10);
+        color: var(--ink-30);
+        text-decoration: line-through;
       }
 
       /* Agent */
-      .cmp-agent { display:flex; align-items:center; gap:12px; }
-      .cmp-agent__img { width:40px; height:40px; border-radius:50%; object-fit:cover; border:2px solid rgba(201,169,110,.4); flex-shrink:0; }
-      .cmp-agent__name { font-size:14px; font-weight:500; color:var(--ink); }
-      .cmp-agent__role { font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-30); margin-top:1px; }
+      .cmp-agent {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .cmp-agent__img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid rgba(201, 169, 110, 0.4);
+        flex-shrink: 0;
+      }
+      .cmp-agent__name {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--ink);
+      }
+      .cmp-agent__role {
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink-30);
+        margin-top: 1px;
+      }
 
       /* ── CTA SECTION ── */
       .cta-section {
-        background:#0d0d0d; padding:80px 0;
-        position:relative; overflow:hidden; margin-top:64px;
+        background: #0d0d0d;
+        padding: 80px 0;
+        position: relative;
+        overflow: hidden;
+        margin-top: 64px;
       }
       .cta-section::before {
-        content:""; position:absolute; inset:0;
-        background:linear-gradient(135deg,rgba(201,169,110,.09) 0%,transparent 55%);
-        pointer-events:none;
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(201, 169, 110, 0.09) 0%,
+          transparent 55%
+        );
+        pointer-events: none;
       }
       .cta-inner {
-        max-width:1320px; margin:0 auto; padding:0 48px;
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 0 48px;
       }
       .cta-heading {
-        font-family:var(--font-body); font-size:clamp(28px,3.5vw,48px);
-        font-weight:300; color:#fff; text-align:center; margin-bottom:8px;
+        font-family: var(--font-body);
+        font-size: clamp(28px, 3.5vw, 48px);
+        font-weight: 300;
+        color: #fff;
+        text-align: center;
+        margin-bottom: 8px;
       }
-      .cta-heading em { font-style:normal; color:var(--gold); }
+      .cta-heading em {
+        font-style: normal;
+        color: var(--gold);
+      }
       .cta-sub {
-        font-size:13px; color:rgba(255,255,255,.38); text-align:center; margin-bottom:48px;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.38);
+        text-align: center;
+        margin-bottom: 48px;
       }
-      .cta-cards { display:flex; gap:16px; flex-wrap:wrap; }
+      .cta-cards {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
       .cta-card {
-        flex:1; min-width:200px;
-        background:rgba(255,255,255,.04);
-        border:1px solid rgba(255,255,255,.07); border-radius:16px;
-        overflow:hidden; transition:all .35s var(--ease-out);
+        flex: 1;
+        min-width: 200px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 16px;
+        overflow: hidden;
+        transition: all 0.35s var(--ease-out);
       }
-      .cta-card:hover { background:rgba(255,255,255,.06); border-color:rgba(201,169,110,.28); transform:translateY(-4px); box-shadow:0 24px 60px rgba(0,0,0,.5); }
-      .cta-card__img { aspect-ratio:16/9; width:100%; object-fit:cover; opacity:.8; transition:opacity .4s; display:block; }
-      .cta-card:hover .cta-card__img { opacity:1; }
-      .cta-card__body { padding:18px; }
-      .cta-card__type { font-size:9px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
-      .cta-card__title { font-family:var(--font-body); font-size:22px; font-weight:300; color:#fff; margin-bottom:4px; line-height:1.15; }
-      .cta-card__price { font-size:14px; color:var(--gold); font-weight:500; margin-bottom:18px; letter-spacing:.01em; }
-      .cta-card__btns { display:flex; gap:8px; }
+      .cta-card:hover {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(201, 169, 110, 0.28);
+        transform: translateY(-4px);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+      }
+      .cta-card__img {
+        aspect-ratio: 16/9;
+        width: 100%;
+        object-fit: cover;
+        opacity: 0.8;
+        transition: opacity 0.4s;
+        display: block;
+      }
+      .cta-card:hover .cta-card__img {
+        opacity: 1;
+      }
+      .cta-card__body {
+        padding: 18px;
+      }
+      .cta-card__type {
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 8px;
+      }
+      .cta-card__title {
+        font-family: var(--font-body);
+        font-size: 22px;
+        font-weight: 300;
+        color: #fff;
+        margin-bottom: 4px;
+        line-height: 1.15;
+      }
+      .cta-card__price {
+        font-size: 14px;
+        color: var(--gold);
+        font-weight: 500;
+        margin-bottom: 18px;
+        letter-spacing: 0.01em;
+      }
+      .cta-card__btns {
+        display: flex;
+        gap: 8px;
+      }
 
       /* btn-pill adapted for dark CTA background */
       .btn-outline-dark {
-        flex:1; display:inline-flex; align-items:center; justify-content:center; gap:6px;
-        padding:11px 16px; border-radius:100px;
-        border:1.5px solid rgba(255,255,255,.18);
-        font-size:11px; font-weight:500; letter-spacing:.06em; text-transform:uppercase;
-        color:rgba(255,255,255,.75); white-space:nowrap;
-        transition:all .3s var(--ease-out);
+        flex: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 11px 16px;
+        border-radius: 100px;
+        border: 1.5px solid rgba(255, 255, 255, 0.18);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.75);
+        white-space: nowrap;
+        transition: all 0.3s var(--ease-out);
       }
-      .btn-outline-dark:hover { border-color:rgba(255,255,255,.38); color:#fff; transform:translateY(-1px); }
+      .btn-outline-dark:hover {
+        border-color: rgba(255, 255, 255, 0.38);
+        color: #fff;
+        transform: translateY(-1px);
+      }
 
       .btn-gold-pill {
-        flex:1; display:inline-flex; align-items:center; justify-content:center; gap:6px;
-        padding:11px 16px; border-radius:100px;
-        background:var(--gold); color:var(--ink);
-        font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
-        white-space:nowrap; border:none;
-        transition:all .3s var(--ease-out);
+        flex: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 11px 16px;
+        border-radius: 100px;
+        background: var(--gold);
+        color: var(--ink);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        border: none;
+        transition: all 0.3s var(--ease-out);
       }
-      .btn-gold-pill:hover { background:var(--gold-lt); transform:translateY(-2px); }
+      .btn-gold-pill:hover {
+        background: var(--gold-lt);
+        transform: translateY(-2px);
+      }
 
       /* ── EMPTY STATE ── */
       .empty {
-        display:flex; flex-direction:column; align-items:center;
-        justify-content:center; padding:140px 48px; text-align:center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 140px 48px;
+        text-align: center;
       }
-      .empty__icon { color:var(--ink-30); margin-bottom:24px; }
-      .empty__title { font-family:var(--font-body); font-size:40px; font-weight:300; color:var(--ink); margin-bottom:12px; }
-      .empty__sub { font-size:14px; color:var(--ink-60); margin-bottom:32px; max-width:380px; }
+      .empty__icon {
+        color: var(--ink-30);
+        margin-bottom: 24px;
+      }
+      .empty__title {
+        font-family: var(--font-body);
+        font-size: 40px;
+        font-weight: 300;
+        color: var(--ink);
+        margin-bottom: 12px;
+      }
+      .empty__sub {
+        font-size: 14px;
+        color: var(--ink-60);
+        margin-bottom: 32px;
+        max-width: 380px;
+      }
       .btn-back {
-        display:inline-flex; align-items:center; gap:8px;
-        padding:13px 28px; border-radius:100px;
-        background:var(--gold); color:var(--ink);
-        font-size:12px; font-weight:600; letter-spacing:.06em;
-        transition:all .3s var(--ease-out);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 13px 28px;
+        border-radius: 100px;
+        background: var(--gold);
+        color: var(--ink);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        transition: all 0.3s var(--ease-out);
       }
-      .btn-back:hover { background:var(--gold-lt); transform:translateY(-2px); }
+      .btn-back:hover {
+        background: var(--gold-lt);
+        transform: translateY(-2px);
+      }
 
       /* ── SITE FOOTER ── */
-      .site-footer { background:#080808; position:relative; overflow:hidden; }
+      .site-footer {
+        background: #080808;
+        position: relative;
+        overflow: hidden;
+      }
       .site-footer__wm {
-        position:absolute; bottom:-0.08em; right:-0.02em;
-        font-size:clamp(80px,16vw,240px); font-weight:300;
-        letter-spacing:-0.02em; color:rgba(255,255,255,.022);
-        line-height:1; pointer-events:none; user-select:none;
+        position: absolute;
+        bottom: -0.08em;
+        right: -0.02em;
+        font-size: clamp(80px, 16vw, 240px);
+        font-weight: 300;
+        letter-spacing: -0.02em;
+        color: rgba(255, 255, 255, 0.022);
+        line-height: 1;
+        pointer-events: none;
+        user-select: none;
       }
-      .site-footer__inner { max-width:1320px; margin:0 auto; padding:80px 48px 0; position:relative; }
-      .site-footer__top { display:grid; grid-template-columns:1.1fr 1fr 1.1fr; gap:60px; padding-bottom:30px; }
-      .site-footer__logo-link { display:inline-block; margin-bottom:22px; }
-      .site-footer__tagline { font-size:13px; line-height:1.72; color:rgba(255,255,255,.35); max-width:290px; margin-bottom:32px; }
-      .site-footer__stats { display:flex; gap:24px; margin-bottom:32px; }
-      .site-footer__stat { display:flex; flex-direction:column; }
-      .site-footer__stat-n { font-size:34px; font-weight:300; color:var(--gold); line-height:1; }
-      .site-footer__stat-l { font-size:9px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.26); margin-top:5px; }
-      .site-footer__socials { display:flex; gap:8px; }
+      .site-footer__inner {
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 80px 48px 0;
+        position: relative;
+      }
+      .site-footer__top {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr 1.1fr;
+        gap: 60px;
+        padding-bottom: 30px;
+      }
+      .site-footer__logo-link {
+        display: inline-block;
+        margin-bottom: 22px;
+      }
+      .site-footer__tagline {
+        font-size: 13px;
+        line-height: 1.72;
+        color: rgba(255, 255, 255, 0.35);
+        max-width: 290px;
+        margin-bottom: 32px;
+      }
+      .site-footer__stats {
+        display: flex;
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      .site-footer__stat {
+        display: flex;
+        flex-direction: column;
+      }
+      .site-footer__stat-n {
+        font-size: 34px;
+        font-weight: 300;
+        color: var(--gold);
+        line-height: 1;
+      }
+      .site-footer__stat-l {
+        font-size: 9px;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.26);
+        margin-top: 5px;
+      }
+      .site-footer__socials {
+        display: flex;
+        gap: 8px;
+      }
       .site-footer__social {
-        width:36px; height:36px; border-radius:50%; border:1px solid rgba(255,255,255,.1);
-        display:flex; align-items:center; justify-content:center;
-        color:rgba(255,255,255,.4); text-decoration:none; transition:all .25s; flex-shrink:0;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255, 255, 255, 0.4);
+        text-decoration: none;
+        transition: all 0.25s;
+        flex-shrink: 0;
       }
-      .site-footer__social:hover { border-color:var(--gold); color:var(--gold); background:rgba(201,169,110,.07); transform:translateY(-2px); }
-      .site-footer__nav { display:grid; grid-template-columns:1fr 1fr; gap:24px; padding-top:2px; }
-      .site-footer__nav-head { font-size:9px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); margin-bottom:20px; }
-      .site-footer__nav-col ul { list-style:none; display:flex; flex-direction:column; gap:12px; }
+      .site-footer__social:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+        background: rgba(201, 169, 110, 0.07);
+        transform: translateY(-2px);
+      }
+      .site-footer__nav {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        padding-top: 2px;
+      }
+      .site-footer__nav-head {
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 20px;
+      }
+      .site-footer__nav-col ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
       .site-footer__nav-col li a {
-        font-size:13px; color:rgba(255,255,255,.4); text-decoration:none;
-        display:inline-flex; align-items:center; transition:color .22s;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.4);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        transition: color 0.22s;
       }
       .site-footer__nav-col li a::before {
-        content:""; display:inline-block; width:0; height:1px; background:var(--gold); margin-right:0;
-        transition:width .28s cubic-bezier(.76,0,.24,1),margin-right .28s cubic-bezier(.76,0,.24,1); flex-shrink:0;
+        content: "";
+        display: inline-block;
+        width: 0;
+        height: 1px;
+        background: var(--gold);
+        margin-right: 0;
+        transition:
+          width 0.28s cubic-bezier(0.76, 0, 0.24, 1),
+          margin-right 0.28s cubic-bezier(0.76, 0, 0.24, 1);
+        flex-shrink: 0;
       }
-      .site-footer__nav-col li a:hover { color:rgba(255,255,255,.9); }
-      .site-footer__nav-col li a:hover::before { width:10px; margin-right:7px; }
+      .site-footer__nav-col li a:hover {
+        color: rgba(255, 255, 255, 0.9);
+      }
+      .site-footer__nav-col li a:hover::before {
+        width: 10px;
+        margin-right: 7px;
+      }
       .site-footer__match {
-        padding:28px 26px; background:rgba(255,255,255,.03);
-        border:1px solid rgba(201,169,110,.18); border-radius:16px; position:relative; overflow:hidden;
+        padding: 28px 26px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(201, 169, 110, 0.18);
+        border-radius: 16px;
+        position: relative;
+        overflow: hidden;
       }
       .site-footer__match::before {
-        content:""; position:absolute; top:0; left:0; right:0; height:2px;
-        background:linear-gradient(to right,var(--gold),rgba(201,169,110,.2),transparent); pointer-events:none;
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(
+          to right,
+          var(--gold),
+          rgba(201, 169, 110, 0.2),
+          transparent
+        );
+        pointer-events: none;
       }
-      .site-footer__match-eyebrow { font-size:9px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
-      .site-footer__match-title { font-size:26px; font-weight:300; color:#fff; line-height:1.15; margin-bottom:6px; }
-      .site-footer__match-title em { font-style:normal; color:var(--gold); }
-      .site-footer__match-sub { font-size:12px; color:rgba(255,255,255,.32); margin-bottom:18px; line-height:1.6; }
-      .site-footer__match-types { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+      .site-footer__match-eyebrow {
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 8px;
+      }
+      .site-footer__match-title {
+        font-size: 26px;
+        font-weight: 300;
+        color: #fff;
+        line-height: 1.15;
+        margin-bottom: 6px;
+      }
+      .site-footer__match-title em {
+        font-style: normal;
+        color: var(--gold);
+      }
+      .site-footer__match-sub {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.32);
+        margin-bottom: 18px;
+        line-height: 1.6;
+      }
+      .site-footer__match-types {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 16px;
+      }
       .fmatch-type {
-        font-size:11px; font-weight:500; letter-spacing:.04em; padding:6px 14px;
-        border-radius:100px; border:1.5px solid rgba(255,255,255,.1); color:rgba(255,255,255,.42);
-        background:none; cursor:pointer; transition:all .22s; font-family:inherit;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        padding: 6px 14px;
+        border-radius: 100px;
+        border: 1.5px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.42);
+        background: none;
+        cursor: pointer;
+        transition: all 0.22s;
+        font-family: inherit;
       }
-      .fmatch-type:hover,.fmatch-type.is-active { border-color:var(--gold); color:var(--gold); background:rgba(201,169,110,.08); }
-      .fmatch-lbl { display:block; font-size:9px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.25); margin-bottom:8px; }
-      .fmatch-budget-row { display:flex; align-items:center; gap:8px; margin-bottom:14px; }
-      .fmatch-sep { color:rgba(255,255,255,.2); font-size:12px; flex-shrink:0; }
+      .fmatch-type:hover,
+      .fmatch-type.is-active {
+        border-color: var(--gold);
+        color: var(--gold);
+        background: rgba(201, 169, 110, 0.08);
+      }
+      .fmatch-lbl {
+        display: block;
+        font-size: 9px;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.25);
+        margin-bottom: 8px;
+      }
+      .fmatch-budget-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+      .fmatch-sep {
+        color: rgba(255, 255, 255, 0.2);
+        font-size: 12px;
+        flex-shrink: 0;
+      }
       .fmatch-input {
-        flex:1; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09);
-        border-radius:8px; padding:9px 12px; font-size:12px; color:#fff;
-        font-family:inherit; transition:border-color .2s; min-width:0; -moz-appearance:textfield;
+        flex: 1;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 8px;
+        padding: 9px 12px;
+        font-size: 12px;
+        color: #fff;
+        font-family: inherit;
+        transition: border-color 0.2s;
+        min-width: 0;
+        -moz-appearance: textfield;
       }
-      .fmatch-input::-webkit-outer-spin-button,.fmatch-input::-webkit-inner-spin-button { -webkit-appearance:none; }
-      .fmatch-input::placeholder { color:rgba(255,255,255,.2); }
-      .fmatch-input:focus { outline:none; border-color:rgba(201,169,110,.45); }
-      .fmatch-email-row { display:flex; gap:8px; align-items:center; }
-      .fmatch-input--email { flex:1; }
+      .fmatch-input::-webkit-outer-spin-button,
+      .fmatch-input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+      .fmatch-input::placeholder {
+        color: rgba(255, 255, 255, 0.2);
+      }
+      .fmatch-input:focus {
+        outline: none;
+        border-color: rgba(201, 169, 110, 0.45);
+      }
+      .fmatch-email-row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .fmatch-input--email {
+        flex: 1;
+      }
       .fmatch-submit {
-        flex-shrink:0; width:40px; height:40px; border-radius:50%;
-        background:var(--gold); color:#0d0d0d; display:flex; align-items:center; justify-content:center;
-        cursor:pointer; transition:all .28s; border:none; font-family:inherit;
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--gold);
+        color: #0d0d0d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.28s;
+        border: none;
+        font-family: inherit;
       }
-      .fmatch-submit:hover { background:var(--gold-lt); transform:translateY(-2px); box-shadow:0 8px 24px rgba(201,169,110,.35); }
-      .fmatch-confirm { font-size:11px; letter-spacing:.03em; margin-top:10px; min-height:16px; line-height:1.5; }
-      .site-footer__rule { display:flex; align-items:center; gap:14px; }
-      .site-footer__rule-line { flex:1; height:1px; background:linear-gradient(to right,transparent,rgba(201,169,110,.25),transparent); }
+      .fmatch-submit:hover {
+        background: var(--gold-lt);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(201, 169, 110, 0.35);
+      }
+      .fmatch-confirm {
+        font-size: 11px;
+        letter-spacing: 0.03em;
+        margin-top: 10px;
+        min-height: 16px;
+        line-height: 1.5;
+      }
+      .site-footer__rule {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .site-footer__rule-line {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          rgba(201, 169, 110, 0.25),
+          transparent
+        );
+      }
       .site-footer__rule-diamond {
-        width:20px; height:20px; border:1px solid rgba(201,169,110,.3); transform:rotate(45deg);
-        background:rgba(201,169,110,.04); flex-shrink:0; display:flex; align-items:center; justify-content:center;
+        width: 20px;
+        height: 20px;
+        border: 1px solid rgba(201, 169, 110, 0.3);
+        transform: rotate(45deg);
+        background: rgba(201, 169, 110, 0.04);
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
-      .site-footer__rule-diamond::after { content:""; width:5px; height:5px; background:var(--gold); border-radius:50%; transform:rotate(-45deg); }
-      .site-footer__bottom { display:flex; align-items:center; justify-content:space-between; padding:24px 0 32px; gap:16px; flex-wrap:wrap; }
-      .site-footer__copy { font-size:11px; color:rgba(255,255,255,.2); letter-spacing:.08em; }
-      .site-footer__legal { display:flex; gap:20px; flex-wrap:wrap; }
-      .site-footer__legal a { font-size:11px; color:rgba(255,255,255,.2); letter-spacing:.06em; text-decoration:none; transition:color .2s; }
-      .site-footer__legal a:hover { color:var(--gold); }
+      .site-footer__rule-diamond::after {
+        content: "";
+        width: 5px;
+        height: 5px;
+        background: var(--gold);
+        border-radius: 50%;
+        transform: rotate(-45deg);
+      }
+      .site-footer__bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 24px 0 32px;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .site-footer__copy {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.2);
+        letter-spacing: 0.08em;
+      }
+      .site-footer__legal {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .site-footer__legal a {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.2);
+        letter-spacing: 0.06em;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .site-footer__legal a:hover {
+        color: var(--gold);
+      }
       .site-footer__top-btn {
-        width:36px; height:36px; border-radius:50%; border:1px solid rgba(255,255,255,.1);
-        background:none; display:flex; align-items:center; justify-content:center;
-        color:rgba(255,255,255,.35); cursor:pointer; transition:all .25s; flex-shrink:0; font-family:inherit;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255, 255, 255, 0.35);
+        cursor: pointer;
+        transition: all 0.25s;
+        flex-shrink: 0;
+        font-family: inherit;
       }
-      .site-footer__top-btn:hover { border-color:var(--gold); color:var(--gold); transform:translateY(-2px); }
-      @media(max-width:1100px) {
-        .site-footer__top { grid-template-columns:1fr 1fr; gap:48px; }
-        .site-footer__match { grid-column:1 / -1; }
+      .site-footer__top-btn:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+        transform: translateY(-2px);
       }
-      @media(max-width:680px) {
-        .site-footer__inner { padding:60px 24px 0; }
-        .site-footer__top { grid-template-columns:1fr; gap:40px; padding-bottom:48px; }
-        .site-footer__nav { grid-template-columns:1fr 1fr; }
-        .site-footer__stats { gap:20px; }
-        .site-footer__bottom { flex-direction:column; align-items:flex-start; gap:14px; }
+      @media (max-width: 1100px) {
+        .site-footer__top {
+          grid-template-columns: 1fr 1fr;
+          gap: 48px;
+        }
+        .site-footer__match {
+          grid-column: 1 / -1;
+        }
+      }
+      @media (max-width: 680px) {
+        .site-footer__inner {
+          padding: 60px 24px 0;
+        }
+        .site-footer__top {
+          grid-template-columns: 1fr;
+          gap: 40px;
+          padding-bottom: 48px;
+        }
+        .site-footer__nav {
+          grid-template-columns: 1fr 1fr;
+        }
+        .site-footer__stats {
+          gap: 20px;
+        }
+        .site-footer__bottom {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 14px;
+        }
       }
 
       /* ── SCROLL REVEAL ── */
-      .sr { opacity:0; transform:translateY(22px); transition:opacity .65s var(--ease-out),transform .65s var(--ease-out); }
-      .sr.in-view { opacity:1; transform:none; }
-
-      @media(max-width:900px) {
-        :root { --lw: 130px; }
-        .page-hero__inner,.cmp-wrap,.cta-inner { padding-left:24px; padding-right:24px; }
-        .prop-cols__inner { padding:0 24px; }
-        .sticky-strip__inner { padding:0 24px; }
-        .navbar { padding:0 24px; }
-        .page-hero__inner { flex-direction:column; gap:16px; padding-bottom:36px; }
-        .page-hero__meta { text-align:left; }
-        .prop-col-card { height:200px; }
+      .sr {
+        opacity: 0;
+        transform: translateY(22px);
+        transition:
+          opacity 0.65s var(--ease-out),
+          transform 0.65s var(--ease-out);
       }
-      @media(max-width:600px) {
-        :root { --lw: 100px; }
-        .cmp-cell { min-width:180px; padding:16px 14px; }
-        .cmp-val { font-size:22px; }
-        .cmp-text { font-size:14px; }
-        .cmp-loc { font-size:13px; }
-        .prop-col-add { flex:0 0 80px; }
-        .prop-col-card { height:170px; }
-        .empty { padding:80px 24px; }
+      .sr.in-view {
+        opacity: 1;
+        transform: none;
+      }
+
+      @media (max-width: 900px) {
+        :root {
+          --lw: 130px;
+        }
+        .page-hero__inner,
+        .cmp-wrap,
+        .cta-inner {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+        .prop-cols__inner {
+          padding: 0 24px;
+        }
+        .sticky-strip__inner {
+          padding: 0 24px;
+        }
+        .navbar {
+          padding: 0 24px;
+        }
+        .page-hero__inner {
+          flex-direction: column;
+          gap: 16px;
+          padding-bottom: 36px;
+        }
+        .page-hero__meta {
+          text-align: left;
+        }
+        .prop-col-card {
+          height: 200px;
+        }
+      }
+      @media (max-width: 600px) {
+        :root {
+          --lw: 100px;
+        }
+        .cmp-cell {
+          min-width: 180px;
+          padding: 16px 14px;
+        }
+        .cmp-val {
+          font-size: 22px;
+        }
+        .cmp-text {
+          font-size: 14px;
+        }
+        .cmp-loc {
+          font-size: 13px;
+        }
+        .prop-col-add {
+          flex: 0 0 80px;
+        }
+        .prop-col-card {
+          height: 170px;
+        }
+        .empty {
+          padding: 80px 24px;
+        }
       }
     </style>
   </head>
   <body>
-
     <!-- NAVBAR -->
     <nav class="navbar" role="navigation" aria-label="Main navigation">
       <a href="index.html" class="navbar__logo" aria-label="Akar Town — Home">
-        <svg width="160" viewBox="0 0 2185 380" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M90.97 258.84H160.93L236.12 169.2V379.42H296.66V5.21997L90.97 258.84Z" fill="white"/>
-          <path d="M64.78 291.12L0 371H66.84L133.85 291.12H64.78Z" fill="#FF0000"/>
-          <path d="M390.87 186.6L544.58 373.2H472.34L339.38 212.73L317.86 187.07L339.38 160.95L472.34 0.00999451H544.58L390.87 186.61V186.6Z" fill="white"/>
-          <path d="M772.951 153.462L752.741 160.698C739.129 146.227 720.111 138.991 695.632 138.991C677.085 138.991 661.976 143.759 650.277 153.268C638.606 162.805 632.756 174.92 632.756 189.613C632.756 204.306 638.55 217.086 650.111 226.429C661.671 235.772 677.279 240.429 696.935 240.429C720.665 240.429 739.351 233.082 752.935 218.362L772.036 228.924C762.388 240.179 751.465 248.302 739.295 253.32C727.125 258.338 712.57 260.833 695.632 260.833C671.901 260.833 652.162 254.9 636.471 243.035C618.534 229.423 609.58 211.625 609.58 189.613C609.58 167.601 618.673 150.302 636.831 136.579C652.661 124.575 672.261 118.587 695.632 118.587C729.259 118.587 755.042 130.203 772.978 153.462H772.951Z" fill="white"/>
-          <path d="M1015.47 189.71C1015.47 211.722 1006.43 229.52 988.385 243.132C972.555 254.997 952.899 260.93 929.418 260.93C905.937 260.93 885.893 254.942 870.064 242.938C852.016 229.326 842.978 211.611 842.978 189.71C842.978 167.809 852.127 150.51 870.424 136.676C886.503 124.561 906.159 118.49 929.391 118.49C952.622 118.49 972.361 124.561 988.191 136.676C1006.38 150.538 1015.44 168.197 1015.44 189.71H1015.47ZM992.294 189.71C992.294 174.019 985.612 161.266 972.278 151.508C960.773 143.108 946.495 138.894 929.446 138.894C910.761 138.894 895.569 143.69 883.814 153.255C872.06 162.847 866.21 174.989 866.21 189.71C866.21 204.431 871.949 217.183 883.454 226.526C894.959 235.869 910.289 240.526 929.446 240.526C948.602 240.526 963.711 235.841 975.161 226.443C986.583 217.045 992.321 204.791 992.321 189.71H992.294Z" fill="white"/>
-          <path d="M1269.99 256.841H1247.73V147.058H1247.18L1177.45 234.607L1108.29 147.058H1107.73V256.841H1085.47V122.579H1113.28L1177.62 203.724L1242.24 122.579H1269.97V256.841H1269.99Z" fill="white"/>
-          <path d="M1446.45 122.607C1460.17 122.607 1471.04 126.405 1479.11 134.001C1487.15 141.597 1491.17 151.771 1491.17 164.496C1491.17 177.858 1486.98 188.06 1478.64 195.102C1470.29 202.144 1458.15 205.664 1442.18 205.664H1362.25V256.841H1339.99V122.579H1446.45V122.607ZM1442.57 185.676C1459.76 185.676 1468.35 178.746 1468.35 164.912C1468.35 150.08 1459.26 142.65 1441.1 142.65H1362.28V185.676H1442.6H1442.57Z" fill="white"/>
-          <path d="M1731.22 256.841H1706.88L1691.41 226.789H1600.98L1585.51 256.841H1561.17L1632.19 122.579H1660.19L1731.22 256.841ZM1680.6 206.773L1646.39 141.708L1611.76 206.773H1680.6Z" fill="white"/>
-          <path d="M1953.67 256.841H1925.97L1823.48 146.726V256.841H1801.22V122.579H1828.86L1931.43 232.75V122.579H1953.69V256.841H1953.67Z" fill="white"/>
-          <path d="M2192.83 122.579L2119.39 203.807V256.841H2097.13V203.807L2023.69 122.579H2051.44L2108.39 185.288L2165.08 122.579H2192.83Z" fill="white"/>
+        <svg
+          width="160"
+          viewBox="0 0 2185 380"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M90.97 258.84H160.93L236.12 169.2V379.42H296.66V5.21997L90.97 258.84Z"
+            fill="white"
+          />
+          <path
+            d="M64.78 291.12L0 371H66.84L133.85 291.12H64.78Z"
+            fill="#FF0000"
+          />
+          <path
+            d="M390.87 186.6L544.58 373.2H472.34L339.38 212.73L317.86 187.07L339.38 160.95L472.34 0.00999451H544.58L390.87 186.61V186.6Z"
+            fill="white"
+          />
+          <path
+            d="M772.951 153.462L752.741 160.698C739.129 146.227 720.111 138.991 695.632 138.991C677.085 138.991 661.976 143.759 650.277 153.268C638.606 162.805 632.756 174.92 632.756 189.613C632.756 204.306 638.55 217.086 650.111 226.429C661.671 235.772 677.279 240.429 696.935 240.429C720.665 240.429 739.351 233.082 752.935 218.362L772.036 228.924C762.388 240.179 751.465 248.302 739.295 253.32C727.125 258.338 712.57 260.833 695.632 260.833C671.901 260.833 652.162 254.9 636.471 243.035C618.534 229.423 609.58 211.625 609.58 189.613C609.58 167.601 618.673 150.302 636.831 136.579C652.661 124.575 672.261 118.587 695.632 118.587C729.259 118.587 755.042 130.203 772.978 153.462H772.951Z"
+            fill="white"
+          />
+          <path
+            d="M1015.47 189.71C1015.47 211.722 1006.43 229.52 988.385 243.132C972.555 254.997 952.899 260.93 929.418 260.93C905.937 260.93 885.893 254.942 870.064 242.938C852.016 229.326 842.978 211.611 842.978 189.71C842.978 167.809 852.127 150.51 870.424 136.676C886.503 124.561 906.159 118.49 929.391 118.49C952.622 118.49 972.361 124.561 988.191 136.676C1006.38 150.538 1015.44 168.197 1015.44 189.71H1015.47ZM992.294 189.71C992.294 174.019 985.612 161.266 972.278 151.508C960.773 143.108 946.495 138.894 929.446 138.894C910.761 138.894 895.569 143.69 883.814 153.255C872.06 162.847 866.21 174.989 866.21 189.71C866.21 204.431 871.949 217.183 883.454 226.526C894.959 235.869 910.289 240.526 929.446 240.526C948.602 240.526 963.711 235.841 975.161 226.443C986.583 217.045 992.321 204.791 992.321 189.71H992.294Z"
+            fill="white"
+          />
+          <path
+            d="M1269.99 256.841H1247.73V147.058H1247.18L1177.45 234.607L1108.29 147.058H1107.73V256.841H1085.47V122.579H1113.28L1177.62 203.724L1242.24 122.579H1269.97V256.841H1269.99Z"
+            fill="white"
+          />
+          <path
+            d="M1446.45 122.607C1460.17 122.607 1471.04 126.405 1479.11 134.001C1487.15 141.597 1491.17 151.771 1491.17 164.496C1491.17 177.858 1486.98 188.06 1478.64 195.102C1470.29 202.144 1458.15 205.664 1442.18 205.664H1362.25V256.841H1339.99V122.579H1446.45V122.607ZM1442.57 185.676C1459.76 185.676 1468.35 178.746 1468.35 164.912C1468.35 150.08 1459.26 142.65 1441.1 142.65H1362.28V185.676H1442.6H1442.57Z"
+            fill="white"
+          />
+          <path
+            d="M1731.22 256.841H1706.88L1691.41 226.789H1600.98L1585.51 256.841H1561.17L1632.19 122.579H1660.19L1731.22 256.841ZM1680.6 206.773L1646.39 141.708L1611.76 206.773H1680.6Z"
+            fill="white"
+          />
+          <path
+            d="M1953.67 256.841H1925.97L1823.48 146.726V256.841H1801.22V122.579H1828.86L1931.43 232.75V122.579H1953.69V256.841H1953.67Z"
+            fill="white"
+          />
+          <path
+            d="M2192.83 122.579L2119.39 203.807V256.841H2097.13V203.807L2023.69 122.579H2051.44L2108.39 185.288L2165.08 122.579H2192.83Z"
+            fill="white"
+          />
         </svg>
       </a>
       <div class="navbar__right">
@@ -643,7 +1528,7 @@
     </div>
 
     <!-- COMPARE TABLE -->
-    <main id="cmpMain" style="padding:48px 0 0">
+    <main id="cmpMain" style="padding: 48px 0 0">
       <div class="cmp-wrap">
         <div class="cmp-scroll">
           <div class="cmp-grid" id="cmpGrid"></div>
@@ -655,7 +1540,10 @@
     <section class="cta-section sr" id="ctaSection">
       <div class="cta-inner">
         <h2 class="cta-heading">Ready to <em>Decide?</em></h2>
-        <p class="cta-sub">Schedule a viewing or request detailed information from our dedicated agents.</p>
+        <p class="cta-sub">
+          Schedule a viewing or request detailed information from our dedicated
+          agents.
+        </p>
         <div class="cta-cards" id="ctaCards"></div>
       </div>
     </section>
@@ -667,21 +1555,63 @@
         <div class="site-footer__top">
           <!-- Brand -->
           <div class="site-footer__brand">
-            <a href="index.html" class="site-footer__logo-link" aria-label="Akar Town — Home">
-              <svg width="230" viewBox="0 0 2185 380" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M90.97 258.84H160.93L236.12 169.2V379.42H296.66V5.21997L90.97 258.84Z" fill="white"/>
-                <path d="M64.78 291.12L0 371H66.84L133.85 291.12H64.78Z" fill="#FF0000"/>
-                <path d="M390.87 186.6L544.58 373.2H472.34L339.38 212.73L317.86 187.07L339.38 160.95L472.34 0.00999451H544.58L390.87 186.61V186.6Z" fill="white"/>
-                <path d="M772.951 153.462L752.741 160.698C739.129 146.227 720.111 138.991 695.632 138.991C677.085 138.991 661.976 143.759 650.277 153.268C638.606 162.805 632.756 174.92 632.756 189.613C632.756 204.306 638.55 217.086 650.111 226.429C661.671 235.772 677.279 240.429 696.935 240.429C720.665 240.429 739.351 233.082 752.935 218.362L772.036 228.924C762.388 240.179 751.465 248.302 739.295 253.32C727.125 258.338 712.57 260.833 695.632 260.833C671.901 260.833 652.162 254.9 636.471 243.035C618.534 229.423 609.58 211.625 609.58 189.613C609.58 167.601 618.673 150.302 636.831 136.579C652.661 124.575 672.261 118.587 695.632 118.587C729.259 118.587 755.042 130.203 772.978 153.462H772.951Z" fill="white"/>
-                <path d="M1015.47 189.71C1015.47 211.722 1006.43 229.52 988.385 243.132C972.555 254.997 952.899 260.93 929.418 260.93C905.937 260.93 885.893 254.942 870.064 242.938C852.016 229.326 842.978 211.611 842.978 189.71C842.978 167.809 852.127 150.51 870.424 136.676C886.503 124.561 906.159 118.49 929.391 118.49C952.622 118.49 972.361 124.561 988.191 136.676C1006.38 150.538 1015.44 168.197 1015.44 189.71H1015.47ZM992.294 189.71C992.294 174.019 985.612 161.266 972.278 151.508C960.773 143.108 946.495 138.894 929.446 138.894C910.761 138.894 895.569 143.69 883.814 153.255C872.06 162.847 866.21 174.989 866.21 189.71C866.21 204.431 871.949 217.183 883.454 226.526C894.959 235.869 910.289 240.526 929.446 240.526C948.602 240.526 963.711 235.841 975.161 226.443C986.583 217.045 992.321 204.791 992.321 189.71H992.294Z" fill="white"/>
-                <path d="M1269.99 256.841H1247.73V147.058H1247.18L1177.45 234.607L1108.29 147.058H1107.73V256.841H1085.47V122.579H1113.28L1177.62 203.724L1242.24 122.579H1269.97V256.841H1269.99Z" fill="white"/>
-                <path d="M1446.45 122.607C1460.17 122.607 1471.04 126.405 1479.11 134.001C1487.15 141.597 1491.17 151.771 1491.17 164.496C1491.17 177.858 1486.98 188.06 1478.64 195.102C1470.29 202.144 1458.15 205.664 1442.18 205.664H1362.25V256.841H1339.99V122.579H1446.45V122.607ZM1442.57 185.676C1459.76 185.676 1468.35 178.746 1468.35 164.912C1468.35 150.08 1459.26 142.65 1441.1 142.65H1362.28V185.676H1442.6H1442.57Z" fill="white"/>
-                <path d="M1731.22 256.841H1706.88L1691.41 226.789H1600.98L1585.51 256.841H1561.17L1632.19 122.579H1660.19L1731.22 256.841ZM1680.6 206.773L1646.39 141.708L1611.76 206.773H1680.6Z" fill="white"/>
-                <path d="M1953.67 256.841H1925.97L1823.48 146.726V256.841H1801.22V122.579H1828.86L1931.43 232.75V122.579H1953.69V256.841H1953.67Z" fill="white"/>
-                <path d="M2192.83 122.579L2119.39 203.807V256.841H2097.13V203.807L2023.69 122.579H2051.44L2108.39 185.288L2165.08 122.579H2192.83Z" fill="white"/>
+            <a
+              href="index.html"
+              class="site-footer__logo-link"
+              aria-label="Akar Town — Home"
+            >
+              <svg
+                width="230"
+                viewBox="0 0 2185 380"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M90.97 258.84H160.93L236.12 169.2V379.42H296.66V5.21997L90.97 258.84Z"
+                  fill="white"
+                />
+                <path
+                  d="M64.78 291.12L0 371H66.84L133.85 291.12H64.78Z"
+                  fill="#FF0000"
+                />
+                <path
+                  d="M390.87 186.6L544.58 373.2H472.34L339.38 212.73L317.86 187.07L339.38 160.95L472.34 0.00999451H544.58L390.87 186.61V186.6Z"
+                  fill="white"
+                />
+                <path
+                  d="M772.951 153.462L752.741 160.698C739.129 146.227 720.111 138.991 695.632 138.991C677.085 138.991 661.976 143.759 650.277 153.268C638.606 162.805 632.756 174.92 632.756 189.613C632.756 204.306 638.55 217.086 650.111 226.429C661.671 235.772 677.279 240.429 696.935 240.429C720.665 240.429 739.351 233.082 752.935 218.362L772.036 228.924C762.388 240.179 751.465 248.302 739.295 253.32C727.125 258.338 712.57 260.833 695.632 260.833C671.901 260.833 652.162 254.9 636.471 243.035C618.534 229.423 609.58 211.625 609.58 189.613C609.58 167.601 618.673 150.302 636.831 136.579C652.661 124.575 672.261 118.587 695.632 118.587C729.259 118.587 755.042 130.203 772.978 153.462H772.951Z"
+                  fill="white"
+                />
+                <path
+                  d="M1015.47 189.71C1015.47 211.722 1006.43 229.52 988.385 243.132C972.555 254.997 952.899 260.93 929.418 260.93C905.937 260.93 885.893 254.942 870.064 242.938C852.016 229.326 842.978 211.611 842.978 189.71C842.978 167.809 852.127 150.51 870.424 136.676C886.503 124.561 906.159 118.49 929.391 118.49C952.622 118.49 972.361 124.561 988.191 136.676C1006.38 150.538 1015.44 168.197 1015.44 189.71H1015.47ZM992.294 189.71C992.294 174.019 985.612 161.266 972.278 151.508C960.773 143.108 946.495 138.894 929.446 138.894C910.761 138.894 895.569 143.69 883.814 153.255C872.06 162.847 866.21 174.989 866.21 189.71C866.21 204.431 871.949 217.183 883.454 226.526C894.959 235.869 910.289 240.526 929.446 240.526C948.602 240.526 963.711 235.841 975.161 226.443C986.583 217.045 992.321 204.791 992.321 189.71H992.294Z"
+                  fill="white"
+                />
+                <path
+                  d="M1269.99 256.841H1247.73V147.058H1247.18L1177.45 234.607L1108.29 147.058H1107.73V256.841H1085.47V122.579H1113.28L1177.62 203.724L1242.24 122.579H1269.97V256.841H1269.99Z"
+                  fill="white"
+                />
+                <path
+                  d="M1446.45 122.607C1460.17 122.607 1471.04 126.405 1479.11 134.001C1487.15 141.597 1491.17 151.771 1491.17 164.496C1491.17 177.858 1486.98 188.06 1478.64 195.102C1470.29 202.144 1458.15 205.664 1442.18 205.664H1362.25V256.841H1339.99V122.579H1446.45V122.607ZM1442.57 185.676C1459.76 185.676 1468.35 178.746 1468.35 164.912C1468.35 150.08 1459.26 142.65 1441.1 142.65H1362.28V185.676H1442.6H1442.57Z"
+                  fill="white"
+                />
+                <path
+                  d="M1731.22 256.841H1706.88L1691.41 226.789H1600.98L1585.51 256.841H1561.17L1632.19 122.579H1660.19L1731.22 256.841ZM1680.6 206.773L1646.39 141.708L1611.76 206.773H1680.6Z"
+                  fill="white"
+                />
+                <path
+                  d="M1953.67 256.841H1925.97L1823.48 146.726V256.841H1801.22V122.579H1828.86L1931.43 232.75V122.579H1953.69V256.841H1953.67Z"
+                  fill="white"
+                />
+                <path
+                  d="M2192.83 122.579L2119.39 203.807V256.841H2097.13V203.807L2023.69 122.579H2051.44L2108.39 185.288L2165.08 122.579H2192.83Z"
+                  fill="white"
+                />
               </svg>
             </a>
-            <p class="site-footer__tagline">Egypt's most curated luxury real estate — from New Cairo's towers to the North Coast's shores.</p>
+            <p class="site-footer__tagline">
+              Egypt's most curated luxury real estate — from New Cairo's towers
+              to the North Coast's shores.
+            </p>
             <div class="site-footer__stats">
               <div class="site-footer__stat">
                 <span class="site-footer__stat-n">164</span>
@@ -698,16 +1628,73 @@
             </div>
             <div class="site-footer__socials">
               <a href="#" class="site-footer__social" aria-label="Instagram">
-                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                <svg
+                  width="15"
+                  height="15"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  viewBox="0 0 24 24"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle
+                    cx="17.5"
+                    cy="6.5"
+                    r="1"
+                    fill="currentColor"
+                    stroke="none"
+                  />
+                </svg>
               </a>
               <a href="#" class="site-footer__social" aria-label="Facebook">
-                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                <svg
+                  width="15"
+                  height="15"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                  />
+                </svg>
               </a>
               <a href="#" class="site-footer__social" aria-label="LinkedIn">
-                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                <svg
+                  width="15"
+                  height="15"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"
+                  />
+                  <rect x="2" y="9" width="4" height="12" />
+                  <circle cx="4" cy="4" r="2" />
+                </svg>
               </a>
               <a href="#" class="site-footer__social" aria-label="YouTube">
-                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75,15.02 15.5,12 9.75,8.98" fill="currentColor" stroke="none"/></svg>
+                <svg
+                  width="15"
+                  height="15"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"
+                  />
+                  <polygon
+                    points="9.75,15.02 15.5,12 9.75,8.98"
+                    fill="currentColor"
+                    stroke="none"
+                  />
+                </svg>
               </a>
             </div>
           </div>
@@ -739,26 +1726,70 @@
           <!-- Property Match Widget -->
           <div class="site-footer__match">
             <div class="site-footer__match-eyebrow">Property Matching</div>
-            <h2 class="site-footer__match-title">Find Your <em>Perfect</em> Unit</h2>
-            <p class="site-footer__match-sub">Tell us what you need — we'll alert you the moment it's listed.</p>
+            <h2 class="site-footer__match-title">
+              Find Your <em>Perfect</em> Unit
+            </h2>
+            <p class="site-footer__match-sub">
+              Tell us what you need — we'll alert you the moment it's listed.
+            </p>
             <div class="site-footer__match-types" id="fmatchTypes">
-              <button class="fmatch-type is-active" data-type="Apartment">Apartment</button>
+              <button class="fmatch-type is-active" data-type="Apartment">
+                Apartment
+              </button>
               <button class="fmatch-type" data-type="Villa">Villa</button>
-              <button class="fmatch-type" data-type="Penthouse">Penthouse</button>
+              <button class="fmatch-type" data-type="Penthouse">
+                Penthouse
+              </button>
               <button class="fmatch-type" data-type="Chalet">Chalet</button>
-              <button class="fmatch-type" data-type="Townhouse">Townhouse</button>
+              <button class="fmatch-type" data-type="Townhouse">
+                Townhouse
+              </button>
             </div>
-            <label class="fmatch-lbl" for="fmatchBudgetMin">Budget Range (EGP)</label>
+            <label class="fmatch-lbl" for="fmatchBudgetMin"
+              >Budget Range (EGP)</label
+            >
             <div class="fmatch-budget-row">
-              <input id="fmatchBudgetMin" type="number" class="fmatch-input" placeholder="Minimum" min="0" aria-label="Minimum budget">
+              <input
+                id="fmatchBudgetMin"
+                type="number"
+                class="fmatch-input"
+                placeholder="Minimum"
+                min="0"
+                aria-label="Minimum budget"
+              />
               <span class="fmatch-sep">—</span>
-              <input type="number" class="fmatch-input" placeholder="Maximum" min="0" aria-label="Maximum budget">
+              <input
+                type="number"
+                class="fmatch-input"
+                placeholder="Maximum"
+                min="0"
+                aria-label="Maximum budget"
+              />
             </div>
             <label class="fmatch-lbl" for="fmatchEmail">Your Email</label>
             <div class="fmatch-email-row">
-              <input id="fmatchEmail" type="email" class="fmatch-input fmatch-input--email" placeholder="you@example.com">
-              <button class="fmatch-submit" id="fmatchSubmit" aria-label="Get matched">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13,6 19,12 13,18"/></svg>
+              <input
+                id="fmatchEmail"
+                type="email"
+                class="fmatch-input fmatch-input--email"
+                placeholder="you@example.com"
+              />
+              <button
+                class="fmatch-submit"
+                id="fmatchSubmit"
+                aria-label="Get matched"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  viewBox="0 0 24 24"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="13,6 19,12 13,18" />
+                </svg>
               </button>
             </div>
             <p class="fmatch-confirm" id="fmatchConfirm" aria-live="polite"></p>
@@ -772,35 +1803,56 @@
         </div>
         <!-- Bottom bar -->
         <div class="site-footer__bottom">
-          <p class="site-footer__copy">© 2026 Akar Town Real Estate. All rights reserved.</p>
+          <p class="site-footer__copy">
+            © 2026 Akar Town Real Estate. All rights reserved.
+          </p>
           <div class="site-footer__legal">
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Use</a>
             <a href="#">Cookie Policy</a>
           </div>
-          <button class="site-footer__top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="18,15 12,9 6,15"/></svg>
+          <button
+            class="site-footer__top-btn"
+            onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+            aria-label="Back to top"
+          >
+            <svg
+              width="14"
+              height="14"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              viewBox="0 0 24 24"
+            >
+              <polyline points="18,15 12,9 6,15" />
+            </svg>
           </button>
         </div>
       </div>
     </footer>
     <script>
       (() => {
-        const types = document.querySelectorAll('#fmatchTypes .fmatch-type');
-        types.forEach(btn => btn.addEventListener('click', () => {
-          types.forEach(b => b.classList.remove('is-active'));
-          btn.classList.add('is-active');
-        }));
-        const submit = document.getElementById('fmatchSubmit');
-        const emailEl = document.getElementById('fmatchEmail');
-        const confirmEl = document.getElementById('fmatchConfirm');
+        const types = document.querySelectorAll("#fmatchTypes .fmatch-type");
+        types.forEach((btn) =>
+          btn.addEventListener("click", () => {
+            types.forEach((b) => b.classList.remove("is-active"));
+            btn.classList.add("is-active");
+          }),
+        );
+        const submit = document.getElementById("fmatchSubmit");
+        const emailEl = document.getElementById("fmatchEmail");
+        const confirmEl = document.getElementById("fmatchConfirm");
         if (submit) {
-          submit.addEventListener('click', () => {
-            const email = emailEl?.value.trim() || '';
-            if (!email || !email.includes('@')) { emailEl?.focus(); return; }
-            confirmEl.textContent = "✓ You're on the list! We'll notify you when a match is found.";
-            confirmEl.style.color = 'rgba(201,169,110,0.9)';
-            emailEl.value = '';
+          submit.addEventListener("click", () => {
+            const email = emailEl?.value.trim() || "";
+            if (!email || !email.includes("@")) {
+              emailEl?.focus();
+              return;
+            }
+            confirmEl.textContent =
+              "✓ You're on the list! We'll notify you when a match is found.";
+            confirmEl.style.color = "rgba(201,169,110,0.9)";
+            emailEl.value = "";
           });
         }
       })();
@@ -808,41 +1860,442 @@
 
     <script>
       (() => {
-      /* ── DATA ── */
-      const PROPERTIES = [
-        { id:"1",  title:"Lumière Penthouse", type:"Penthouse", status:"For Sale", price:"85,000,000", priceN:85000000, beds:4, baths:4, area:380, floor:28, location:"New Cairo, Egypt", date:"Q2 2026", agent:{name:"Sara Hassan",img:"https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80"}, img:"https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=700&q=80", amenities:["pool","gym","parking"] },
-        { id:"2",  title:"The Crown Tower", type:"Apartment", status:"For Sale", price:"62,000,000", priceN:62000000, beds:3, baths:3, area:290, floor:35, location:"Zamalek, Cairo", date:"Q1 2025", agent:{name:"Khaled Nour",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80"}, img:"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80", amenities:["gym","parking"] },
-        { id:"3",  title:"Meridian Residence", type:"Villa", status:"Off Plan", price:"28,000,000", priceN:28000000, beds:5, baths:4, area:520, floor:2, location:"6th of October, Egypt", date:"Q3 2027", agent:{name:"Nadia Samy",img:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80"}, img:"https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&q=80", amenities:["pool","garden","parking"] },
-        { id:"4",  title:"Aqua Terrace", type:"Chalet", status:"For Sale", price:"35,000,000", priceN:35000000, beds:3, baths:3, area:240, floor:4, location:"North Coast, Egypt", date:"Q4 2026", agent:{name:"Omar Fathy",img:"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80"}, img:"https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=700&q=80", amenities:["pool","garden"] },
-        { id:"p1", title:"Serenity Penthouse", type:"Penthouse", status:"For Sale", price:"18,500,000", priceN:18500000, beds:4, baths:4, area:340, floor:24, location:"New Cairo, Fifth Settlement", date:"2 days ago", agent:{name:"Sara Hassan",img:"https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80"}, img:"https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=700&q=80", amenities:["pool","gym","parking"] },
-        { id:"p2", title:"Altos Garden Villa", type:"Villa", status:"For Sale", price:"32,000,000", priceN:32000000, beds:6, baths:5, area:620, floor:1, location:"Sheikh Zayed, 6th of October", date:"1 week ago", agent:{name:"Khaled Nour",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80"}, img:"https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=700&q=80", amenities:["pool","gym","garden","parking"] },
-        { id:"p3", title:"Lumière Apartment", type:"Apartment", status:"For Sale", price:"4,750,000", priceN:4750000, beds:3, baths:2, area:175, floor:8, location:"Maadi, Cairo", date:"3 days ago", agent:{name:"Nadia Samy",img:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80"}, img:"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=80", amenities:["gym","parking"] },
-        { id:"p4", title:"Azure Sky Chalet", type:"Chalet", status:"Off Plan", price:"8,200,000", priceN:8200000, beds:3, baths:3, area:210, floor:2, location:"Ain Sokhna, North Coast", date:"5 days ago", agent:{name:"Omar Fathy",img:"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80"}, img:"https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=700&q=80", amenities:["pool","garden"] },
-        { id:"p5", title:"The Rosemont", type:"Townhouse", status:"For Sale", price:"11,400,000", priceN:11400000, beds:4, baths:3, area:290, floor:2, location:"New Administrative Capital", date:"1 day ago", agent:{name:"Sara Hassan",img:"https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80"}, img:"https://images.unsplash.com/photo-1628744448840-55bdb2497bd4?w=700&q=80", amenities:["pool","gym","parking","garden"] },
-        { id:"p6", title:"Ivory Studio", type:"Studio", status:"For Rent", price:"25,000 /mo", priceN:25000, beds:0, baths:1, area:65, floor:4, location:"Zamalek, Cairo", date:"Just now", agent:{name:"Nadia Samy",img:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80"}, img:"https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=700&q=80", amenities:["gym"] },
-        { id:"p7", title:"Grand Cascade Villa", type:"Villa", status:"For Sale", price:"54,000,000", priceN:54000000, beds:7, baths:6, area:900, floor:2, location:"El Gouna, Red Sea", date:"2 weeks ago", agent:{name:"Khaled Nour",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80"}, img:"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80", amenities:["pool","gym","parking","garden"] },
-        { id:"p8", title:"Verdant Heights", type:"Apartment", status:"Off Plan", price:"6,900,000", priceN:6900000, beds:3, baths:2, area:195, floor:12, location:"North Coast, Sidi Abdel Rahman", date:"4 days ago", agent:{name:"Omar Fathy",img:"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80"}, img:"https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&q=80", amenities:["pool","gym"] },
-        { id:"p9", title:"Onyx Tower Suite", type:"Penthouse", status:"For Sale", price:"22,000,000", priceN:22000000, beds:5, baths:4, area:420, floor:30, location:"Zamalek, Cairo", date:"3 weeks ago", agent:{name:"Sara Hassan",img:"https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80"}, img:"https://images.unsplash.com/photo-1600210492493-0946911123ea?w=700&q=80", amenities:["gym","parking"] },
-        { id:"p10", title:"Palm Court", type:"Townhouse", status:"For Sale", price:"14,800,000", priceN:14800000, beds:4, baths:3, area:310, floor:1, location:"El Shorouk, Cairo", date:"6 days ago", agent:{name:"Khaled Nour",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80"}, img:"https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=700&q=80", amenities:["pool","garden","parking"] },
-        { id:"p11", title:"Sage Residence", type:"Apartment", status:"For Sale", price:"3,200,000", priceN:3200000, beds:2, baths:2, area:130, floor:5, location:"Heliopolis, Cairo", date:"1 month ago", agent:{name:"Nadia Samy",img:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80"}, img:"https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=700&q=80", amenities:["parking"] },
-        { id:"p12", title:"Mirage Retreat", type:"Chalet", status:"For Sale", price:"9,600,000", priceN:9600000, beds:4, baths:3, area:260, floor:1, location:"North Coast, Hacienda Bay", date:"2 days ago", agent:{name:"Omar Fathy",img:"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80"}, img:"https://images.unsplash.com/photo-1501117716987-bb48875d5a3b?w=700&q=80", amenities:["pool","garden"] },
-        { id:"feat1", title:"The Pinnacle Penthouse", type:"Penthouse", status:"For Sale", price:"45,000,000", priceN:45000000, beds:4, baths:5, area:650, floor:42, location:"New Cairo, Egypt", date:"Available Now", agent:{name:"Sara Hassan",img:"https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80"}, img:"https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=700&q=80", amenities:["pool","gym","parking"] },
-        { id:"feat2", title:"Al Noor Garden Villas", type:"Villa", status:"Ready to Move", price:"62,500,000", priceN:62500000, beds:5, baths:6, area:820, floor:2, location:"Sheikh Zayed, Egypt", date:"Available Now", agent:{name:"Khaled Nour",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80"}, img:"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80", amenities:["pool","garden","parking"] },
-        { id:"feat3", title:"Maaya Heights Tower", type:"Apartment", status:"Off Plan", price:"28,000,000", priceN:28000000, beds:3, baths:4, area:420, floor:18, location:"6th of October, Egypt", date:"Q3 2026", agent:{name:"Nadia Samy",img:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80"}, img:"https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&q=80", amenities:["gym","parking"] },
-        { id:"feat4", title:"Azure Coast Estates", type:"Villa", status:"For Sale", price:"95,000,000", priceN:95000000, beds:6, baths:7, area:1200, floor:1, location:"Ain Sokhna, Egypt", date:"Available Now", agent:{name:"Omar Fathy",img:"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80"}, img:"https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=700&q=80", amenities:["pool","garden","parking"] },
-        { id:"feat5", title:"Sky Gardens Residences", type:"Apartment", status:"Off Plan", price:"22,500,000", priceN:22500000, beds:3, baths:3, area:380, floor:15, location:"North Coast, Egypt", date:"Q1 2027", agent:{name:"Sara Hassan",img:"https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80"}, img:"https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=700&q=80", amenities:["pool","gym"] },
-      ];
+        /* ── DATA ── */
+        const PROPERTIES = [
+          {
+            id: "1",
+            title: "Lumière Penthouse",
+            type: "Penthouse",
+            status: "For Sale",
+            price: "85,000,000",
+            priceN: 85000000,
+            beds: 4,
+            baths: 4,
+            area: 380,
+            floor: 28,
+            location: "New Cairo, Egypt",
+            date: "Q2 2026",
+            agent: {
+              name: "Sara Hassan",
+              img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80",
+            },
+            img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=700&q=80",
+            amenities: ["pool", "gym", "parking"],
+          },
+          {
+            id: "2",
+            title: "The Crown Tower",
+            type: "Apartment",
+            status: "For Sale",
+            price: "62,000,000",
+            priceN: 62000000,
+            beds: 3,
+            baths: 3,
+            area: 290,
+            floor: 35,
+            location: "Zamalek, Cairo",
+            date: "Q1 2025",
+            agent: {
+              name: "Khaled Nour",
+              img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80",
+            },
+            img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80",
+            amenities: ["gym", "parking"],
+          },
+          {
+            id: "3",
+            title: "Meridian Residence",
+            type: "Villa",
+            status: "Off Plan",
+            price: "28,000,000",
+            priceN: 28000000,
+            beds: 5,
+            baths: 4,
+            area: 520,
+            floor: 2,
+            location: "6th of October, Egypt",
+            date: "Q3 2027",
+            agent: {
+              name: "Nadia Samy",
+              img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80",
+            },
+            img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&q=80",
+            amenities: ["pool", "garden", "parking"],
+          },
+          {
+            id: "4",
+            title: "Aqua Terrace",
+            type: "Chalet",
+            status: "For Sale",
+            price: "35,000,000",
+            priceN: 35000000,
+            beds: 3,
+            baths: 3,
+            area: 240,
+            floor: 4,
+            location: "North Coast, Egypt",
+            date: "Q4 2026",
+            agent: {
+              name: "Omar Fathy",
+              img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80",
+            },
+            img: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=700&q=80",
+            amenities: ["pool", "garden"],
+          },
+          {
+            id: "p1",
+            title: "Serenity Penthouse",
+            type: "Penthouse",
+            status: "For Sale",
+            price: "18,500,000",
+            priceN: 18500000,
+            beds: 4,
+            baths: 4,
+            area: 340,
+            floor: 24,
+            location: "New Cairo, Fifth Settlement",
+            date: "2 days ago",
+            agent: {
+              name: "Sara Hassan",
+              img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80",
+            },
+            img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=700&q=80",
+            amenities: ["pool", "gym", "parking"],
+          },
+          {
+            id: "p2",
+            title: "Altos Garden Villa",
+            type: "Villa",
+            status: "For Sale",
+            price: "32,000,000",
+            priceN: 32000000,
+            beds: 6,
+            baths: 5,
+            area: 620,
+            floor: 1,
+            location: "Sheikh Zayed, 6th of October",
+            date: "1 week ago",
+            agent: {
+              name: "Khaled Nour",
+              img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80",
+            },
+            img: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=700&q=80",
+            amenities: ["pool", "gym", "garden", "parking"],
+          },
+          {
+            id: "p3",
+            title: "Lumière Apartment",
+            type: "Apartment",
+            status: "For Sale",
+            price: "4,750,000",
+            priceN: 4750000,
+            beds: 3,
+            baths: 2,
+            area: 175,
+            floor: 8,
+            location: "Maadi, Cairo",
+            date: "3 days ago",
+            agent: {
+              name: "Nadia Samy",
+              img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80",
+            },
+            img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=80",
+            amenities: ["gym", "parking"],
+          },
+          {
+            id: "p4",
+            title: "Azure Sky Chalet",
+            type: "Chalet",
+            status: "Off Plan",
+            price: "8,200,000",
+            priceN: 8200000,
+            beds: 3,
+            baths: 3,
+            area: 210,
+            floor: 2,
+            location: "Ain Sokhna, North Coast",
+            date: "5 days ago",
+            agent: {
+              name: "Omar Fathy",
+              img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80",
+            },
+            img: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=700&q=80",
+            amenities: ["pool", "garden"],
+          },
+          {
+            id: "p5",
+            title: "The Rosemont",
+            type: "Townhouse",
+            status: "For Sale",
+            price: "11,400,000",
+            priceN: 11400000,
+            beds: 4,
+            baths: 3,
+            area: 290,
+            floor: 2,
+            location: "New Administrative Capital",
+            date: "1 day ago",
+            agent: {
+              name: "Sara Hassan",
+              img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80",
+            },
+            img: "https://images.unsplash.com/photo-1628744448840-55bdb2497bd4?w=700&q=80",
+            amenities: ["pool", "gym", "parking", "garden"],
+          },
+          {
+            id: "p6",
+            title: "Ivory Studio",
+            type: "Studio",
+            status: "For Rent",
+            price: "25,000 /mo",
+            priceN: 25000,
+            beds: 0,
+            baths: 1,
+            area: 65,
+            floor: 4,
+            location: "Zamalek, Cairo",
+            date: "Just now",
+            agent: {
+              name: "Nadia Samy",
+              img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80",
+            },
+            img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=700&q=80",
+            amenities: ["gym"],
+          },
+          {
+            id: "p7",
+            title: "Grand Cascade Villa",
+            type: "Villa",
+            status: "For Sale",
+            price: "54,000,000",
+            priceN: 54000000,
+            beds: 7,
+            baths: 6,
+            area: 900,
+            floor: 2,
+            location: "El Gouna, Red Sea",
+            date: "2 weeks ago",
+            agent: {
+              name: "Khaled Nour",
+              img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80",
+            },
+            img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80",
+            amenities: ["pool", "gym", "parking", "garden"],
+          },
+          {
+            id: "p8",
+            title: "Verdant Heights",
+            type: "Apartment",
+            status: "Off Plan",
+            price: "6,900,000",
+            priceN: 6900000,
+            beds: 3,
+            baths: 2,
+            area: 195,
+            floor: 12,
+            location: "North Coast, Sidi Abdel Rahman",
+            date: "4 days ago",
+            agent: {
+              name: "Omar Fathy",
+              img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80",
+            },
+            img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&q=80",
+            amenities: ["pool", "gym"],
+          },
+          {
+            id: "p9",
+            title: "Onyx Tower Suite",
+            type: "Penthouse",
+            status: "For Sale",
+            price: "22,000,000",
+            priceN: 22000000,
+            beds: 5,
+            baths: 4,
+            area: 420,
+            floor: 30,
+            location: "Zamalek, Cairo",
+            date: "3 weeks ago",
+            agent: {
+              name: "Sara Hassan",
+              img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80",
+            },
+            img: "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=700&q=80",
+            amenities: ["gym", "parking"],
+          },
+          {
+            id: "p10",
+            title: "Palm Court",
+            type: "Townhouse",
+            status: "For Sale",
+            price: "14,800,000",
+            priceN: 14800000,
+            beds: 4,
+            baths: 3,
+            area: 310,
+            floor: 1,
+            location: "El Shorouk, Cairo",
+            date: "6 days ago",
+            agent: {
+              name: "Khaled Nour",
+              img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80",
+            },
+            img: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=700&q=80",
+            amenities: ["pool", "garden", "parking"],
+          },
+          {
+            id: "p11",
+            title: "Sage Residence",
+            type: "Apartment",
+            status: "For Sale",
+            price: "3,200,000",
+            priceN: 3200000,
+            beds: 2,
+            baths: 2,
+            area: 130,
+            floor: 5,
+            location: "Heliopolis, Cairo",
+            date: "1 month ago",
+            agent: {
+              name: "Nadia Samy",
+              img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80",
+            },
+            img: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=700&q=80",
+            amenities: ["parking"],
+          },
+          {
+            id: "p12",
+            title: "Mirage Retreat",
+            type: "Chalet",
+            status: "For Sale",
+            price: "9,600,000",
+            priceN: 9600000,
+            beds: 4,
+            baths: 3,
+            area: 260,
+            floor: 1,
+            location: "North Coast, Hacienda Bay",
+            date: "2 days ago",
+            agent: {
+              name: "Omar Fathy",
+              img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80",
+            },
+            img: "https://images.unsplash.com/photo-1501117716987-bb48875d5a3b?w=700&q=80",
+            amenities: ["pool", "garden"],
+          },
+          {
+            id: "feat1",
+            title: "The Pinnacle Penthouse",
+            type: "Penthouse",
+            status: "For Sale",
+            price: "45,000,000",
+            priceN: 45000000,
+            beds: 4,
+            baths: 5,
+            area: 650,
+            floor: 42,
+            location: "New Cairo, Egypt",
+            date: "Available Now",
+            agent: {
+              name: "Sara Hassan",
+              img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80",
+            },
+            img: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=700&q=80",
+            amenities: ["pool", "gym", "parking"],
+          },
+          {
+            id: "feat2",
+            title: "Al Noor Garden Villas",
+            type: "Villa",
+            status: "Ready to Move",
+            price: "62,500,000",
+            priceN: 62500000,
+            beds: 5,
+            baths: 6,
+            area: 820,
+            floor: 2,
+            location: "Sheikh Zayed, Egypt",
+            date: "Available Now",
+            agent: {
+              name: "Khaled Nour",
+              img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80",
+            },
+            img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80",
+            amenities: ["pool", "garden", "parking"],
+          },
+          {
+            id: "feat3",
+            title: "Maaya Heights Tower",
+            type: "Apartment",
+            status: "Off Plan",
+            price: "28,000,000",
+            priceN: 28000000,
+            beds: 3,
+            baths: 4,
+            area: 420,
+            floor: 18,
+            location: "6th of October, Egypt",
+            date: "Q3 2026",
+            agent: {
+              name: "Nadia Samy",
+              img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80",
+            },
+            img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&q=80",
+            amenities: ["gym", "parking"],
+          },
+          {
+            id: "feat4",
+            title: "Azure Coast Estates",
+            type: "Villa",
+            status: "For Sale",
+            price: "95,000,000",
+            priceN: 95000000,
+            beds: 6,
+            baths: 7,
+            area: 1200,
+            floor: 1,
+            location: "Ain Sokhna, Egypt",
+            date: "Available Now",
+            agent: {
+              name: "Omar Fathy",
+              img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80",
+            },
+            img: "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=700&q=80",
+            amenities: ["pool", "garden", "parking"],
+          },
+          {
+            id: "feat5",
+            title: "Sky Gardens Residences",
+            type: "Apartment",
+            status: "Off Plan",
+            price: "22,500,000",
+            priceN: 22500000,
+            beds: 3,
+            baths: 3,
+            area: 380,
+            floor: 15,
+            location: "North Coast, Egypt",
+            date: "Q1 2027",
+            agent: {
+              name: "Sara Hassan",
+              img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80",
+            },
+            img: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=700&q=80",
+            amenities: ["pool", "gym"],
+          },
+        ];
 
-      /* ── PARSE URL ── */
-      const params = new URLSearchParams(window.location.search);
-      const rawIds = (params.get('ids') || '').split(',').filter(Boolean);
-      let props = rawIds.map(id => PROPERTIES.find(p => p.id === id)).filter(Boolean);
+        /* ── PARSE URL ── */
+        const params = new URLSearchParams(window.location.search);
+        const rawIds = (params.get("ids") || "").split(",").filter(Boolean);
+        let props = rawIds
+          .map((id) => PROPERTIES.find((p) => p.id === id))
+          .filter(Boolean);
 
-      /* ── EMPTY STATE ── */
-      if (!props.length) {
-        document.getElementById('propCols').style.display = 'none';
-        document.getElementById('stickyStrip').style.display = 'none';
-        document.getElementById('cmpMain').innerHTML = `
+        /* ── EMPTY STATE ── */
+        if (!props.length) {
+          document.getElementById("propCols").style.display = "none";
+          document.getElementById("stickyStrip").style.display = "none";
+          document.getElementById("cmpMain").innerHTML = `
           <div class="empty">
             <svg class="empty__icon" width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.3" viewBox="0 0 24 24">
               <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
@@ -854,44 +2307,51 @@
               Browse Properties
             </a>
           </div>`;
-        document.getElementById('ctaSection').style.display = 'none';
-        document.getElementById('heroCount').textContent = '0';
-        return;
-      }
-
-      document.getElementById('heroCount').textContent = props.length;
-
-      /* ── WINNER DETECTION ── */
-      function winner(key, mode) {
-        const vals = props.map(p => p[key]);
-        const target = mode === 'max' ? Math.max(...vals) : Math.min(...vals);
-        return props.map(p => p[key] === target && vals.filter(v => v === target).length < vals.length);
-      }
-
-      const winBeds   = winner('beds', 'max');
-      const winBaths  = winner('baths', 'max');
-      const winArea   = winner('area', 'max');
-      const winFloor  = winner('floor', 'max');
-      const winPrice  = winner('priceN', 'min');
-
-      const maxArea  = Math.max(...props.map(p => p.area));
-      const maxFloor = Math.max(...props.map(p => p.floor));
-
-      /* ── REMOVE PROPERTY ── */
-      window.removeProp = function removeProp(id) {
-        props = props.filter(p => p.id !== id);
-        if (!props.length) {
-          window.location.href = 'listings.html';
+          document.getElementById("ctaSection").style.display = "none";
+          document.getElementById("heroCount").textContent = "0";
           return;
         }
-        const newIds = props.map(p => p.id).join(',');
-        window.location.href = `compare.html?ids=${newIds}`;
-      }
 
-      /* ── RENDER PROP IMAGE ACCORDION ── */
-      function renderAccordion() {
-        const inner = document.getElementById('propColsInner');
-        inner.innerHTML = props.map((p, i) => `
+        document.getElementById("heroCount").textContent = props.length;
+
+        /* ── WINNER DETECTION ── */
+        function winner(key, mode) {
+          const vals = props.map((p) => p[key]);
+          const target = mode === "max" ? Math.max(...vals) : Math.min(...vals);
+          return props.map(
+            (p) =>
+              p[key] === target &&
+              vals.filter((v) => v === target).length < vals.length,
+          );
+        }
+
+        const winBeds = winner("beds", "max");
+        const winBaths = winner("baths", "max");
+        const winArea = winner("area", "max");
+        const winFloor = winner("floor", "max");
+        const winPrice = winner("priceN", "min");
+
+        const maxArea = Math.max(...props.map((p) => p.area));
+        const maxFloor = Math.max(...props.map((p) => p.floor));
+
+        /* ── REMOVE PROPERTY ── */
+        window.removeProp = function removeProp(id) {
+          props = props.filter((p) => p.id !== id);
+          if (!props.length) {
+            window.location.href = "listings.html";
+            return;
+          }
+          const newIds = props.map((p) => p.id).join(",");
+          window.location.href = `compare.html?ids=${newIds}`;
+        };
+
+        /* ── RENDER PROP IMAGE ACCORDION ── */
+        function renderAccordion() {
+          const inner = document.getElementById("propColsInner");
+          inner.innerHTML =
+            props
+              .map(
+                (p, i) => `
           <div class="prop-col-card" data-id="${p.id}">
             <img class="prop-col-card__img" src="${p.img}" alt="${p.title}" loading="lazy"/>
             <div class="prop-col-card__grad"></div>
@@ -906,128 +2366,173 @@
               <div class="prop-col-card__price-lbl">Total Price</div>
             </div>
           </div>
-        `).join('') + `
+        `,
+              )
+              .join("") +
+            `
           <a href="listings.html" class="prop-col-add" title="Add more properties">
             <div class="prop-col-add__ring">
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             </div>
             <span class="prop-col-add__lbl">Add More</span>
           </a>`;
-      }
+        }
 
-      /* ── RENDER STICKY STRIP ── */
-      function renderStickyStrip() {
-        const inner = document.getElementById('stickyStripInner');
-        const existing = inner.querySelector('.sticky-strip__lbl');
-        inner.innerHTML = '';
-        inner.appendChild(existing);
-        props.forEach(p => {
-          const div = document.createElement('div');
-          div.className = 'sticky-prop';
-          div.innerHTML = `
+        /* ── RENDER STICKY STRIP ── */
+        function renderStickyStrip() {
+          const inner = document.getElementById("stickyStripInner");
+          const existing = inner.querySelector(".sticky-strip__lbl");
+          inner.innerHTML = "";
+          inner.appendChild(existing);
+          props.forEach((p) => {
+            const div = document.createElement("div");
+            div.className = "sticky-prop";
+            div.innerHTML = `
             <img class="sticky-prop__thumb" src="${p.img}" alt="${p.title}" loading="lazy"/>
             <div>
               <div class="sticky-prop__name">${p.title}</div>
               <div class="sticky-prop__price">EGP ${p.price}</div>
             </div>`;
-          inner.appendChild(div);
-        });
-      }
-
-      /* ── STATUS BADGE ── */
-      function statusPill(s) {
-        if (s === 'For Sale') return `<span class="cmp-status cmp-status--sale">For Sale</span>`;
-        if (s === 'For Rent') return `<span class="cmp-status cmp-status--rent">For Rent</span>`;
-        return `<span class="cmp-status cmp-status--offplan">Off Plan</span>`;
-      }
-
-      /* ── AMENITY TAG ── */
-      function amenTag(label, has) {
-        return has
-          ? `<span class="cmp-tag cmp-tag--yes"><svg width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>${label}</span>`
-          : `<span class="cmp-tag cmp-tag--no">${label}</span>`;
-      }
-
-      /* ── BUILD TABLE ── */
-      const SCHEMA = [
-        {
-          section: 'Overview',
-          rows: [
-            { label: 'Price',    render: (p, i) => `<div class="cmp-val" style="flex-direction:column;align-items:flex-start;gap:2px"><span style="font-size:13px;font-family:var(--font-body);color:var(--ink-30);letter-spacing:.08em;text-transform:uppercase">EGP</span><span>${p.price}</span>${winPrice[i] ? '<span class="best-badge">Best Value</span>' : ''}</div>` },
-            { label: 'Status',   render: (p) => statusPill(p.status) },
-            { label: 'Type',     render: (p) => `<span class="cmp-text">${p.type}</span>` },
-            { label: 'Location', render: (p) => `<span class="cmp-loc"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>${p.location}</span>` },
-            { label: 'Listed',   render: (p) => `<span class="cmp-text">${p.date}</span>` },
-            { label: 'Agent',    render: (p) => `<div class="cmp-agent"><img class="cmp-agent__img" src="${p.agent.img}" alt="${p.agent.name}" loading="lazy"/><div><div class="cmp-agent__name">${p.agent.name}</div><div class="cmp-agent__role">Agent</div></div></div>` },
-          ]
-        },
-        {
-          section: 'Specifications',
-          rows: [
-            {
-              label: 'Bedrooms',
-              render: (p, i) => `<div class="cmp-val">${p.beds || '—'}<span class="cmp-val__unit">${p.beds ? 'bd' : ''}</span>${winBeds[i] ? '<span class="best-badge">Most</span>' : ''}</div>`,
-              best: winBeds,
-            },
-            {
-              label: 'Bathrooms',
-              render: (p, i) => `<div class="cmp-val">${p.baths}<span class="cmp-val__unit">ba</span>${winBaths[i] ? '<span class="best-badge">Most</span>' : ''}</div>`,
-              best: winBaths,
-            },
-            {
-              label: 'Area',
-              render: (p, i) => `
-                <div class="cmp-val">${p.area}<span class="cmp-val__unit">m²</span>${winArea[i] ? '<span class="best-badge">Largest</span>' : ''}</div>
-                <div class="cmp-bar-track"><div class="cmp-bar-fill" data-pct="${Math.round(p.area/maxArea*100)}"></div></div>`,
-              best: winArea,
-            },
-            {
-              label: 'Floor',
-              render: (p, i) => `
-                <div class="cmp-val">${p.floor}<span class="cmp-val__unit">fl</span>${winFloor[i] ? '<span class="best-badge">Highest</span>' : ''}</div>
-                <div class="cmp-bar-track"><div class="cmp-bar-fill" data-pct="${maxFloor > 0 ? Math.round(p.floor/maxFloor*100) : 0}"></div></div>`,
-              best: winFloor,
-            },
-          ]
-        },
-        {
-          section: 'Amenities',
-          rows: [
-            { label: 'Pool',     render: (p) => amenTag('Swimming Pool', p.amenities.includes('pool')) },
-            { label: 'Gym',      render: (p) => amenTag('Gymnasium', p.amenities.includes('gym')) },
-            { label: 'Parking',  render: (p) => amenTag('Parking', p.amenities.includes('parking')) },
-            { label: 'Garden',   render: (p) => amenTag('Garden / Terrace', p.amenities.includes('garden')) },
-          ]
-        },
-      ];
-
-      function renderTable() {
-        const grid = document.getElementById('cmpGrid');
-        let html = '';
-        SCHEMA.forEach(({ section, rows }) => {
-          /* Section header */
-          html += `<div class="cmp-sec">
-            <div class="cmp-sec__lbl"><span class="cmp-sec__lbl-text">${section}</span></div>
-            <div class="cmp-sec__cells">${props.map(() => `<div class="cmp-sec__cell"></div>`).join('')}</div>
-          </div>`;
-          /* Data rows */
-          rows.forEach(({ label, render, best }) => {
-            html += `<div class="cmp-row">
-              <div class="cmp-lbl">${label}</div>
-              <div class="cmp-cells">${props.map((p, i) => {
-                const isBest = best ? best[i] : false;
-                return `<div class="cmp-cell${isBest ? ' cmp-cell--best' : ''}">${render(p, i)}</div>`;
-              }).join('')}</div>
-            </div>`;
+            inner.appendChild(div);
           });
-        });
-        grid.innerHTML = html;
-      }
+        }
 
-      /* ── RENDER CTA CARDS ── */
-      function renderCTA() {
-        const cta = document.getElementById('ctaCards');
-        cta.innerHTML = props.map(p => `
+        /* ── STATUS BADGE ── */
+        function statusPill(s) {
+          if (s === "For Sale")
+            return `<span class="cmp-status cmp-status--sale">For Sale</span>`;
+          if (s === "For Rent")
+            return `<span class="cmp-status cmp-status--rent">For Rent</span>`;
+          return `<span class="cmp-status cmp-status--offplan">Off Plan</span>`;
+        }
+
+        /* ── AMENITY TAG ── */
+        function amenTag(label, has) {
+          return has
+            ? `<span class="cmp-tag cmp-tag--yes"><svg width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>${label}</span>`
+            : `<span class="cmp-tag cmp-tag--no">${label}</span>`;
+        }
+
+        /* ── BUILD TABLE ── */
+        const SCHEMA = [
+          {
+            section: "Overview",
+            rows: [
+              {
+                label: "Price",
+                render: (p, i) =>
+                  `<div class="cmp-val" style="flex-direction:column;align-items:flex-start;gap:2px"><span style="font-size:13px;font-family:var(--font-body);color:var(--ink-30);letter-spacing:.08em;text-transform:uppercase">EGP</span><span>${p.price}</span>${winPrice[i] ? '<span class="best-badge">Best Value</span>' : ""}</div>`,
+              },
+              { label: "Status", render: (p) => statusPill(p.status) },
+              {
+                label: "Type",
+                render: (p) => `<span class="cmp-text">${p.type}</span>`,
+              },
+              {
+                label: "Location",
+                render: (p) =>
+                  `<span class="cmp-loc"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>${p.location}</span>`,
+              },
+              {
+                label: "Listed",
+                render: (p) => `<span class="cmp-text">${p.date}</span>`,
+              },
+              {
+                label: "Agent",
+                render: (p) =>
+                  `<div class="cmp-agent"><img class="cmp-agent__img" src="${p.agent.img}" alt="${p.agent.name}" loading="lazy"/><div><div class="cmp-agent__name">${p.agent.name}</div><div class="cmp-agent__role">Agent</div></div></div>`,
+              },
+            ],
+          },
+          {
+            section: "Specifications",
+            rows: [
+              {
+                label: "Bedrooms",
+                render: (p, i) =>
+                  `<div class="cmp-val">${p.beds || "—"}<span class="cmp-val__unit">${p.beds ? "bd" : ""}</span>${winBeds[i] ? '<span class="best-badge">Most</span>' : ""}</div>`,
+                best: winBeds,
+              },
+              {
+                label: "Bathrooms",
+                render: (p, i) =>
+                  `<div class="cmp-val">${p.baths}<span class="cmp-val__unit">ba</span>${winBaths[i] ? '<span class="best-badge">Most</span>' : ""}</div>`,
+                best: winBaths,
+              },
+              {
+                label: "Area",
+                render: (p, i) => `
+                <div class="cmp-val">${p.area}<span class="cmp-val__unit">m²</span>${winArea[i] ? '<span class="best-badge">Largest</span>' : ""}</div>
+                <div class="cmp-bar-track"><div class="cmp-bar-fill" data-pct="${Math.round((p.area / maxArea) * 100)}"></div></div>`,
+                best: winArea,
+              },
+              {
+                label: "Floor",
+                render: (p, i) => `
+                <div class="cmp-val">${p.floor}<span class="cmp-val__unit">fl</span>${winFloor[i] ? '<span class="best-badge">Highest</span>' : ""}</div>
+                <div class="cmp-bar-track"><div class="cmp-bar-fill" data-pct="${maxFloor > 0 ? Math.round((p.floor / maxFloor) * 100) : 0}"></div></div>`,
+                best: winFloor,
+              },
+            ],
+          },
+          {
+            section: "Amenities",
+            rows: [
+              {
+                label: "Pool",
+                render: (p) =>
+                  amenTag("Swimming Pool", p.amenities.includes("pool")),
+              },
+              {
+                label: "Gym",
+                render: (p) =>
+                  amenTag("Gymnasium", p.amenities.includes("gym")),
+              },
+              {
+                label: "Parking",
+                render: (p) =>
+                  amenTag("Parking", p.amenities.includes("parking")),
+              },
+              {
+                label: "Garden",
+                render: (p) =>
+                  amenTag("Garden / Terrace", p.amenities.includes("garden")),
+              },
+            ],
+          },
+        ];
+
+        function renderTable() {
+          const grid = document.getElementById("cmpGrid");
+          let html = "";
+          SCHEMA.forEach(({ section, rows }) => {
+            /* Section header */
+            html += `<div class="cmp-sec">
+            <div class="cmp-sec__lbl"><span class="cmp-sec__lbl-text">${section}</span></div>
+            <div class="cmp-sec__cells">${props.map(() => `<div class="cmp-sec__cell"></div>`).join("")}</div>
+          </div>`;
+            /* Data rows */
+            rows.forEach(({ label, render, best }) => {
+              html += `<div class="cmp-row">
+              <div class="cmp-lbl">${label}</div>
+              <div class="cmp-cells">${props
+                .map((p, i) => {
+                  const isBest = best ? best[i] : false;
+                  return `<div class="cmp-cell${isBest ? " cmp-cell--best" : ""}">${render(p, i)}</div>`;
+                })
+                .join("")}</div>
+            </div>`;
+            });
+          });
+          grid.innerHTML = html;
+        }
+
+        /* ── RENDER CTA CARDS ── */
+        function renderCTA() {
+          const cta = document.getElementById("ctaCards");
+          cta.innerHTML = props
+            .map(
+              (p) => `
           <div class="cta-card sr">
             <img class="cta-card__img" src="${p.img}" alt="${p.title}" loading="lazy"/>
             <div class="cta-card__body">
@@ -1039,56 +2544,66 @@
                 <button class="btn-gold-pill" onclick="alert('Booking request for ${p.title} sent.')">Request Tour</button>
               </div>
             </div>
-          </div>`).join('');
-      }
+          </div>`,
+            )
+            .join("");
+        }
 
-      /* ── STICKY BAR ON SCROLL ── */
-      function initStickyBar() {
-        const strip   = document.getElementById('stickyStrip');
-        const trigger = document.getElementById('propCols');
-        const io = new IntersectionObserver(
-          ([e]) => strip.classList.toggle('is-visible', !e.isIntersecting),
-          { rootMargin: `-${parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'))}px 0px 0px 0px` }
-        );
-        io.observe(trigger);
-      }
+        /* ── STICKY BAR ON SCROLL ── */
+        function initStickyBar() {
+          const strip = document.getElementById("stickyStrip");
+          const trigger = document.getElementById("propCols");
+          const io = new IntersectionObserver(
+            ([e]) => strip.classList.toggle("is-visible", !e.isIntersecting),
+            {
+              rootMargin: `-${parseInt(getComputedStyle(document.documentElement).getPropertyValue("--nav-h"))}px 0px 0px 0px`,
+            },
+          );
+          io.observe(trigger);
+        }
 
-      /* ── ANIMATE BARS ON SCROLL ── */
-      function initBars() {
-        const bars = document.querySelectorAll('.cmp-bar-fill');
-        if (!bars.length) return;
-        const io = new IntersectionObserver(entries => {
-          entries.forEach(en => {
-            if (en.isIntersecting) {
-              en.target.style.width = en.target.dataset.pct + '%';
-              io.unobserve(en.target);
-            }
-          });
-        }, { threshold: 0.3 });
-        bars.forEach(b => io.observe(b));
-      }
+        /* ── ANIMATE BARS ON SCROLL ── */
+        function initBars() {
+          const bars = document.querySelectorAll(".cmp-bar-fill");
+          if (!bars.length) return;
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((en) => {
+                if (en.isIntersecting) {
+                  en.target.style.width = en.target.dataset.pct + "%";
+                  io.unobserve(en.target);
+                }
+              });
+            },
+            { threshold: 0.3 },
+          );
+          bars.forEach((b) => io.observe(b));
+        }
 
-      /* ── SCROLL REVEAL ── */
-      function initSR() {
-        const srObs = new IntersectionObserver(entries => {
-          entries.forEach((en, i) => {
-            if (en.isIntersecting) {
-              setTimeout(() => en.target.classList.add('in-view'), i * 80);
-              srObs.unobserve(en.target);
-            }
-          });
-        }, { threshold: 0.08 });
-        document.querySelectorAll('.sr').forEach(el => srObs.observe(el));
-      }
+        /* ── SCROLL REVEAL ── */
+        function initSR() {
+          const srObs = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((en, i) => {
+                if (en.isIntersecting) {
+                  setTimeout(() => en.target.classList.add("in-view"), i * 80);
+                  srObs.unobserve(en.target);
+                }
+              });
+            },
+            { threshold: 0.08 },
+          );
+          document.querySelectorAll(".sr").forEach((el) => srObs.observe(el));
+        }
 
-      /* ── INIT ── */
-      renderAccordion();
-      renderStickyStrip();
-      renderTable();
-      renderCTA();
-      initStickyBar();
-      initBars();
-      initSR();
+        /* ── INIT ── */
+        renderAccordion();
+        renderStickyStrip();
+        renderTable();
+        renderCTA();
+        initStickyBar();
+        initBars();
+        initSR();
       })();
     </script>
   </body>

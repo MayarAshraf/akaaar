@@ -289,7 +289,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        padding: calc(var(--nav-h) + 16px) 12px 20px 48px;
+        padding: calc(var(--nav-h) + 5px) 12px 20px 48px;
         gap: 8px;
 
         /* ── More transparent glass so hero image bleeds through ── */
@@ -4068,7 +4068,7 @@
         });
       });
 
-      var speeds = [5.0, 3.8, 5.8, 4.2, 4.8];
+      var speeds = [9.0, 7.2, 10.5, 7.8, 9.6];
       var offsets = [0, 0, 0, 0, 0];
       var cardH = 234;
       var totalH = cardH * COLS[0].length;
@@ -4085,7 +4085,7 @@
 
       var readyTimer = setTimeout(function () {
         splash.classList.add("sp-ready");
-      }, 600);
+      }, 1500);
 
       function exitSplash() {
         clearTimeout(readyTimer);

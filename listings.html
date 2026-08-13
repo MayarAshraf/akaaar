@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Properties — Akar Town</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="shortcut icon" href="favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,9 +20,9 @@
         --ink-60: rgba(13, 13, 13, 0.6);
         --ink-30: rgba(13, 13, 13, 0.3);
         --ink-10: rgba(13, 13, 13, 0.1);
-        --gold: #c9a96e;
-        --gold-lt: #e4c99a;
-        --gold-dk: #a07c40;
+        --gold: #C8102E;
+        --gold-lt: #C8102E;
+        --gold-dk: #C8102E;
         --red: #cc2222;
         --white: #ffffff;
         --font-body: "Archivo", system-ui, sans-serif;
@@ -72,7 +74,7 @@
       }
       ::selection {
         background: var(--gold);
-        color: var(--ink);
+        color: #ffffff;
       }
 
       /* ─── NAVBAR ─── */
@@ -171,7 +173,7 @@
       /* gold fill — matches home btn-slide--fill */
       .btn-pill--fill {
         background: var(--gold);
-        color: var(--ink);
+        color: #ffffff;
       }
       .btn-pill--fill:hover {
         background: var(--gold-lt);
@@ -180,7 +182,7 @@
       /* solid gold — for light bg primary actions */
       .btn-pill--gold {
         background: var(--gold);
-        color: var(--ink);
+        color: #ffffff;
       }
       .btn-pill--gold:hover {
         background: var(--gold-lt);
@@ -188,12 +190,12 @@
 
       /* outline — for light bg secondary actions */
       .btn-pill--outline {
-        background: rgba(201, 169, 110, 0.06);
-        border: 1.5px solid rgba(201, 169, 110, 0.42);
+        background: rgba(200, 16, 46, 0.06);
+        border: 1.5px solid rgba(200, 16, 46, 0.42);
         color: var(--gold-dk);
       }
       .btn-pill--outline:hover {
-        background: rgba(201, 169, 110, 0.13);
+        background: rgba(200, 16, 46, 0.13);
         border-color: var(--gold);
       }
 
@@ -230,7 +232,7 @@
         background:
           linear-gradient(
             135deg,
-            rgba(201, 169, 110, 0.22) 0%,
+            rgba(200, 16, 46, 0.22) 0%,
             transparent 50%
           ),
           linear-gradient(
@@ -385,12 +387,12 @@
         font-family: inherit;
       }
       .csel__trigger:hover {
-        border-color: rgba(201, 169, 110, 0.45);
-        background: rgba(201, 169, 110, 0.025);
+        border-color: rgba(200, 16, 46, 0.45);
+        background: rgba(200, 16, 46, 0.025);
       }
       .csel.is-open .csel__trigger {
         border-color: var(--gold-lt);
-        box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.1);
+        box-shadow: 0 0 0 3px rgba(200, 16, 46, 0.1);
       }
       .csel__val {
         flex: 1;
@@ -454,13 +456,13 @@
         position: relative;
       }
       .csel__opt:hover {
-        background: rgba(201, 169, 110, 0.06);
+        background: rgba(200, 16, 46, 0.06);
         color: var(--ink);
       }
       .csel__opt.is-selected {
         color: var(--gold-dk);
         font-weight: 500;
-        background: rgba(201, 169, 110, 0.08);
+        background: rgba(200, 16, 46, 0.08);
       }
       .csel__opt.is-selected::after {
         content: "";
@@ -487,13 +489,13 @@
         align-items: center;
         gap: 7px;
         padding: 10px 18px;
-        border: 1.5px solid rgba(201, 169, 110, 0.35);
+        border: 1.5px solid rgba(200, 16, 46, 0.35);
         border-radius: 100px;
         font-size: 12px;
         font-weight: 500;
         letter-spacing: 0.04em;
         color: var(--gold-dk);
-        background: rgba(201, 169, 110, 0.05);
+        background: rgba(200, 16, 46, 0.05);
         transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         white-space: nowrap;
         flex-shrink: 0;
@@ -502,7 +504,7 @@
       .btn-adv.is-open {
         border-color: var(--gold);
         color: var(--gold-dk);
-        background: rgba(201, 169, 110, 0.1);
+        background: rgba(200, 16, 46, 0.1);
       }
       .btn-adv svg {
         transition: transform 0.3s var(--ease-smooth);
@@ -539,7 +541,7 @@
         padding: 11px 22px;
         border-radius: 100px;
         background: var(--gold);
-        color: var(--ink);
+        color: #ffffff;
         font-size: 12px;
         font-weight: 600;
         letter-spacing: 0.04em;
@@ -604,7 +606,7 @@
       }
       .adv-range:focus-within {
         border-color: var(--gold-lt);
-        box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.08);
+        box-shadow: 0 0 0 3px rgba(200, 16, 46, 0.08);
       }
       .adv-range input {
         flex: 1;
@@ -667,16 +669,16 @@
           transform 0.18s;
       }
       .adv-check:hover {
-        border-color: rgba(201, 169, 110, 0.5);
+        border-color: rgba(200, 16, 46, 0.5);
         color: var(--gold-dk);
-        background: rgba(201, 169, 110, 0.04);
+        background: rgba(200, 16, 46, 0.04);
       }
       .adv-check:hover .adv-check__dot {
         border-color: var(--gold-lt);
       }
       .adv-check.is-checked {
         border-color: var(--gold);
-        background: rgba(201, 169, 110, 0.1);
+        background: rgba(200, 16, 46, 0.1);
         color: var(--gold-dk);
         font-weight: 500;
       }
@@ -831,7 +833,7 @@
       }
       .badge--gold {
         background: var(--gold);
-        color: var(--ink);
+        color: #ffffff;
       }
       .badge--red {
         background: var(--red);
@@ -1007,7 +1009,7 @@
       .prop-card__actions .act-btn:hover {
         border-color: var(--gold);
         color: var(--gold);
-        background: rgba(201, 169, 110, 0.08);
+        background: rgba(200, 16, 46, 0.08);
       }
       .prop-card__actions .act-btn.is-fav {
         border-color: var(--red);
@@ -1017,7 +1019,7 @@
       .prop-card__actions .act-btn.is-compare {
         border-color: var(--gold);
         color: var(--gold-dk);
-        background: rgba(201, 169, 110, 0.1);
+        background: rgba(200, 16, 46, 0.1);
       }
       .prop-card__actions .act-btn[data-tip] {
         position: relative;
@@ -1054,12 +1056,12 @@
         color: var(--gold-dk);
         padding: 8px 18px;
         border-radius: 100px;
-        border: 1.5px solid rgba(201, 169, 110, 0.42);
-        background: rgba(201, 169, 110, 0.06);
+        border: 1.5px solid rgba(200, 16, 46, 0.42);
+        background: rgba(200, 16, 46, 0.06);
         transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
       }
       .prop-card__actions .btn-detail:hover {
-        background: rgba(201, 169, 110, 0.13);
+        background: rgba(200, 16, 46, 0.13);
         border-color: var(--gold);
         transform: translateY(-1px);
       }
@@ -1099,19 +1101,19 @@
         gap: 10px;
         padding: 14px 36px;
         border-radius: 100px;
-        border: 1.5px solid rgba(201, 169, 110, 0.38);
+        border: 1.5px solid rgba(200, 16, 46, 0.38);
         font-size: 12px;
         font-weight: 500;
         letter-spacing: 0.04em;
         color: var(--gold-dk);
-        background: rgba(201, 169, 110, 0.05);
+        background: rgba(200, 16, 46, 0.05);
         transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         cursor: pointer;
       }
       .btn-load-more:hover {
         border-color: var(--gold);
         color: var(--gold-dk);
-        background: rgba(201, 169, 110, 0.12);
+        background: rgba(200, 16, 46, 0.12);
         transform: translateY(-2px);
       }
       .btn-load-more .spinner {
@@ -1161,11 +1163,13 @@
         gap: 8px;
         padding: 18px 10px;
         background: var(--gold);
-        color: var(--ink);
+        color: #ffffff;
         border-radius: 8px 0 0 8px;
         cursor: pointer;
-        box-shadow: -4px 0 20px rgba(201, 169, 110, 0.3);
+        box-shadow: -4px 0 20px rgba(200, 16, 46, 0.3);
         transition: background 0.2s;
+        position: relative;
+        z-index: 1;
       }
       .cmp-bar__toggle:hover {
         background: var(--gold-lt);
@@ -1192,19 +1196,24 @@
         color: var(--ink);
       }
       .cmp-bar__panel {
+        position: absolute;
+        right: 100%;
+        top: 50%;
+        z-index: 0;
         width: 280px;
+        height: 360px;
         background: var(--bg);
         border: 1px solid var(--ink-10);
         border-right: none;
         box-shadow: -8px 0 40px rgba(13, 13, 13, 0.12);
-        transform: translateX(100%);
+        transform: translateY(-50%) translateX(100%);
         transition: transform 0.38s cubic-bezier(0.32, 0, 0.15, 1);
         display: flex;
         flex-direction: column;
         overflow: hidden;
       }
       .cmp-bar__panel.is-open {
-        transform: translateX(0);
+        transform: translateY(-50%) translateX(0);
       }
       .cmp-panel__head {
         padding: 18px 20px 14px;
@@ -1284,7 +1293,7 @@
         padding: 13px;
         border-radius: 100px;
         background: var(--gold);
-        color: var(--ink);
+        color: #ffffff;
         font-size: 12px;
         font-weight: 700;
         letter-spacing: 0.06em;
@@ -1491,7 +1500,7 @@
       .site-footer__social:hover {
         border-color: var(--gold);
         color: var(--gold);
-        background: rgba(201, 169, 110, 0.07);
+        background: rgba(200, 16, 46, 0.07);
         transform: translateY(-2px);
       }
       .site-footer__nav {
@@ -1544,7 +1553,7 @@
       .site-footer__match {
         padding: 28px 26px;
         background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(201, 169, 110, 0.18);
+        border: 1px solid rgba(200, 16, 46, 0.18);
         border-radius: 16px;
         position: relative;
         overflow: hidden;
@@ -1559,7 +1568,7 @@
         background: linear-gradient(
           to right,
           var(--gold),
-          rgba(201, 169, 110, 0.2),
+          rgba(200, 16, 46, 0.2),
           transparent
         );
         pointer-events: none;
@@ -1612,7 +1621,7 @@
       .fmatch-type.is-active {
         border-color: var(--gold);
         color: var(--gold);
-        background: rgba(201, 169, 110, 0.08);
+        background: rgba(200, 16, 46, 0.08);
       }
       .fmatch-lbl {
         display: block;
@@ -1656,7 +1665,7 @@
       }
       .fmatch-input:focus {
         outline: none;
-        border-color: rgba(201, 169, 110, 0.45);
+        border-color: rgba(200, 16, 46, 0.45);
       }
       .fmatch-email-row {
         display: flex;
@@ -1672,7 +1681,7 @@
         height: 40px;
         border-radius: 50%;
         background: var(--gold);
-        color: #0d0d0d;
+        color: #ffffff;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1684,7 +1693,7 @@
       .fmatch-submit:hover {
         background: var(--gold-lt);
         transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(201, 169, 110, 0.35);
+        box-shadow: 0 8px 24px rgba(200, 16, 46, 0.35);
       }
       .fmatch-confirm {
         font-size: 11px;
@@ -1704,16 +1713,16 @@
         background: linear-gradient(
           to right,
           transparent,
-          rgba(201, 169, 110, 0.25),
+          rgba(200, 16, 46, 0.25),
           transparent
         );
       }
       .site-footer__rule-diamond {
         width: 20px;
         height: 20px;
-        border: 1px solid rgba(201, 169, 110, 0.3);
+        border: 1px solid rgba(200, 16, 46, 0.3);
         transform: rotate(45deg);
-        background: rgba(201, 169, 110, 0.04);
+        background: rgba(200, 16, 46, 0.04);
         flex-shrink: 0;
         display: flex;
         align-items: center;
@@ -1902,7 +1911,7 @@
           />
           <path
             d="M64.78 291.12L0 371H66.84L133.85 291.12H64.78Z"
-            fill="#FF0000"
+            fill="#C8102E"
           />
           <path
             d="M390.87 186.6L544.58 373.2H472.34L339.38 212.73L317.86 187.07L339.38 160.95L472.34 0.00999451H544.58L390.87 186.61V186.6Z"
@@ -2403,7 +2412,7 @@
                 />
                 <path
                   d="M64.78 291.12L0 371H66.84L133.85 291.12H64.78Z"
-                  fill="#FF0000"
+                  fill="#C8102E"
                 />
                 <path
                   d="M390.87 186.6L544.58 373.2H472.34L339.38 212.73L317.86 187.07L339.38 160.95L472.34 0.00999451H544.58L390.87 186.61V186.6Z"
@@ -2682,7 +2691,7 @@
             }
             confirmEl.textContent =
               "✓ You're on the list! We'll notify you when a match is found.";
-            confirmEl.style.color = "rgba(201,169,110,0.9)";
+            confirmEl.style.color = "rgba(200,16,46,0.9)";
             emailEl.value = "";
           });
         }

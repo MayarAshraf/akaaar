@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Compare Properties — Akar Town</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="shortcut icon" href="favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,9 +19,9 @@
         --ink-60: rgba(13, 13, 13, 0.6);
         --ink-30: rgba(13, 13, 13, 0.3);
         --ink-10: rgba(13, 13, 13, 0.1);
-        --gold: #c9a96e;
-        --gold-lt: #e4c99a;
-        --gold-dk: #a07c40;
+        --gold: #C8102E;
+        --gold-lt: #C8102E;
+        --gold-dk: #C8102E;
         --red: #cc2222;
         --green: #1e7e52;
         --white: #fff;
@@ -67,7 +69,7 @@
       }
       ::selection {
         background: var(--gold);
-        color: var(--ink);
+        color: #ffffff;
       }
 
       /* ── NAVBAR ── */
@@ -149,7 +151,7 @@
       }
       .btn-pill--fill {
         background: var(--gold);
-        color: var(--ink);
+        color: #ffffff;
       }
       .btn-pill--fill:hover {
         background: var(--gold-lt);
@@ -168,7 +170,7 @@
         inset: 0;
         background: linear-gradient(
           135deg,
-          rgba(201, 169, 110, 0.12) 0%,
+          rgba(200, 16, 46, 0.12) 0%,
           transparent 60%
         );
         pointer-events: none;
@@ -296,7 +298,7 @@
         height: 24px;
         border-radius: 50%;
         background: var(--gold);
-        color: var(--ink);
+        color: #ffffff;
         font-size: 10px;
         font-weight: 700;
         display: flex;
@@ -387,7 +389,7 @@
         text-decoration: none;
       }
       .prop-col-add:hover {
-        background: rgba(201, 169, 110, 0.07);
+        background: rgba(200, 16, 46, 0.07);
         color: var(--gold);
       }
       .prop-col-add__ring {
@@ -555,7 +557,7 @@
         transition: background 0.15s;
       }
       .cmp-row:hover {
-        background: rgba(201, 169, 110, 0.018);
+        background: rgba(200, 16, 46, 0.018);
       }
       .cmp-lbl {
         flex: 0 0 var(--lw);
@@ -592,12 +594,12 @@
         transition: background 0.15s;
       }
       .cmp-row:hover .cmp-cell {
-        background: rgba(201, 169, 110, 0.015);
+        background: rgba(200, 16, 46, 0.015);
       }
 
       /* Best cell highlight */
       .cmp-cell--best {
-        background: rgba(201, 169, 110, 0.055);
+        background: rgba(200, 16, 46, 0.055);
       }
       .cmp-cell--best::after {
         content: "";
@@ -655,8 +657,8 @@
         letter-spacing: 0.12em;
         text-transform: uppercase;
         color: var(--gold-dk);
-        background: rgba(201, 169, 110, 0.12);
-        border: 1.5px solid rgba(201, 169, 110, 0.35);
+        background: rgba(200, 16, 46, 0.12);
+        border: 1.5px solid rgba(200, 16, 46, 0.35);
         border-radius: 100px;
         padding: 3px 10px;
         margin-top: 6px;
@@ -704,9 +706,9 @@
         border: 1.5px solid var(--ink-10);
       }
       .cmp-status--offplan {
-        background: rgba(201, 169, 110, 0.1);
+        background: rgba(200, 16, 46, 0.1);
         color: var(--gold-dk);
-        border: 1.5px solid rgba(201, 169, 110, 0.28);
+        border: 1.5px solid rgba(200, 16, 46, 0.28);
       }
 
       /* Amenity chips — pill style, content-fitted */
@@ -727,8 +729,8 @@
         white-space: nowrap;
       }
       .cmp-tag--yes {
-        background: rgba(201, 169, 110, 0.08);
-        border: 1.5px solid rgba(201, 169, 110, 0.32);
+        background: rgba(200, 16, 46, 0.08);
+        border: 1.5px solid rgba(200, 16, 46, 0.32);
         color: var(--gold-dk);
       }
       .cmp-tag--no {
@@ -749,7 +751,7 @@
         height: 40px;
         border-radius: 50%;
         object-fit: cover;
-        border: 2px solid rgba(201, 169, 110, 0.4);
+        border: 2px solid rgba(200, 16, 46, 0.4);
         flex-shrink: 0;
       }
       .cmp-agent__name {
@@ -779,7 +781,7 @@
         inset: 0;
         background: linear-gradient(
           135deg,
-          rgba(201, 169, 110, 0.09) 0%,
+          rgba(200, 16, 46, 0.09) 0%,
           transparent 55%
         );
         pointer-events: none;
@@ -823,7 +825,7 @@
       }
       .cta-card:hover {
         background: rgba(255, 255, 255, 0.06);
-        border-color: rgba(201, 169, 110, 0.28);
+        border-color: rgba(200, 16, 46, 0.28);
         transform: translateY(-4px);
         box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
       }
@@ -902,7 +904,7 @@
         padding: 11px 16px;
         border-radius: 100px;
         background: var(--gold);
-        color: var(--ink);
+        color: #ffffff;
         font-size: 11px;
         font-weight: 700;
         letter-spacing: 0.06em;
@@ -949,7 +951,7 @@
         padding: 13px 28px;
         border-radius: 100px;
         background: var(--gold);
-        color: var(--ink);
+        color: #ffffff;
         font-size: 12px;
         font-weight: 600;
         letter-spacing: 0.06em;
@@ -1044,7 +1046,7 @@
       .site-footer__social:hover {
         border-color: var(--gold);
         color: var(--gold);
-        background: rgba(201, 169, 110, 0.07);
+        background: rgba(200, 16, 46, 0.07);
         transform: translateY(-2px);
       }
       .site-footer__nav {
@@ -1097,7 +1099,7 @@
       .site-footer__match {
         padding: 28px 26px;
         background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(201, 169, 110, 0.18);
+        border: 1px solid rgba(200, 16, 46, 0.18);
         border-radius: 16px;
         position: relative;
         overflow: hidden;
@@ -1112,7 +1114,7 @@
         background: linear-gradient(
           to right,
           var(--gold),
-          rgba(201, 169, 110, 0.2),
+          rgba(200, 16, 46, 0.2),
           transparent
         );
         pointer-events: none;
@@ -1165,7 +1167,7 @@
       .fmatch-type.is-active {
         border-color: var(--gold);
         color: var(--gold);
-        background: rgba(201, 169, 110, 0.08);
+        background: rgba(200, 16, 46, 0.08);
       }
       .fmatch-lbl {
         display: block;
@@ -1209,7 +1211,7 @@
       }
       .fmatch-input:focus {
         outline: none;
-        border-color: rgba(201, 169, 110, 0.45);
+        border-color: rgba(200, 16, 46, 0.45);
       }
       .fmatch-email-row {
         display: flex;
@@ -1225,7 +1227,7 @@
         height: 40px;
         border-radius: 50%;
         background: var(--gold);
-        color: #0d0d0d;
+        color: #ffffff;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1237,7 +1239,7 @@
       .fmatch-submit:hover {
         background: var(--gold-lt);
         transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(201, 169, 110, 0.35);
+        box-shadow: 0 8px 24px rgba(200, 16, 46, 0.35);
       }
       .fmatch-confirm {
         font-size: 11px;
@@ -1257,16 +1259,16 @@
         background: linear-gradient(
           to right,
           transparent,
-          rgba(201, 169, 110, 0.25),
+          rgba(200, 16, 46, 0.25),
           transparent
         );
       }
       .site-footer__rule-diamond {
         width: 20px;
         height: 20px;
-        border: 1px solid rgba(201, 169, 110, 0.3);
+        border: 1px solid rgba(200, 16, 46, 0.3);
         transform: rotate(45deg);
-        background: rgba(201, 169, 110, 0.04);
+        background: rgba(200, 16, 46, 0.04);
         flex-shrink: 0;
         display: flex;
         align-items: center;
@@ -1448,7 +1450,7 @@
           />
           <path
             d="M64.78 291.12L0 371H66.84L133.85 291.12H64.78Z"
-            fill="#FF0000"
+            fill="#C8102E"
           />
           <path
             d="M390.87 186.6L544.58 373.2H472.34L339.38 212.73L317.86 187.07L339.38 160.95L472.34 0.00999451H544.58L390.87 186.61V186.6Z"
@@ -1572,7 +1574,7 @@
                 />
                 <path
                   d="M64.78 291.12L0 371H66.84L133.85 291.12H64.78Z"
-                  fill="#FF0000"
+                  fill="#C8102E"
                 />
                 <path
                   d="M390.87 186.6L544.58 373.2H472.34L339.38 212.73L317.86 187.07L339.38 160.95L472.34 0.00999451H544.58L390.87 186.61V186.6Z"
@@ -1851,7 +1853,7 @@
             }
             confirmEl.textContent =
               "✓ You're on the list! We'll notify you when a match is found.";
-            confirmEl.style.color = "rgba(201,169,110,0.9)";
+            confirmEl.style.color = "rgba(200,16,46,0.9)";
             emailEl.value = "";
           });
         }

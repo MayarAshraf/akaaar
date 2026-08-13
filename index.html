@@ -1,9 +1,11 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Akar Town — Exclusive Real Estate</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="shortcut icon" href="favicon.svg" />
     <meta
       name="description"
       content="Akar Town — Discover exceptional luxury properties across Egypt's finest locations."
@@ -33,9 +35,9 @@
         --ink-60: rgba(13, 13, 13, 0.6);
         --ink-30: rgba(13, 13, 13, 0.3);
         --ink-10: rgba(13, 13, 13, 0.1);
-        --gold: #c9a96e;
-        --gold-lt: #e4c99a;
-        --gold-dk: #a07c40;
+        --gold: #C8102E;
+        --gold-lt: #C8102E;
+        --gold-dk: #C8102E;
         --red: #cc2222;
         --white: #ffffff;
 
@@ -129,11 +131,11 @@
       /* Brand text selection */
       ::selection {
         background: var(--gold);
-        color: var(--ink);
+        color: #ffffff;
       }
       ::-moz-selection {
         background: var(--gold);
-        color: var(--ink);
+        color: #ffffff;
       }
 
       /* ─────────────────────────────────────────────
@@ -730,7 +732,7 @@
       /* PRIMARY — solid gold */
       .btn-slide--fill {
         background: var(--gold);
-        color: var(--ink);
+        color: #ffffff;
       }
 
       .btn-slide--fill:hover {
@@ -1085,39 +1087,126 @@
         font-family: var(--font-body-ltr);
       }
 
-      /* ─────────────────────────────────────────────
-   LOADING SCREEN
-───────────────────────────────────────────── */
-      .loader {
+      /* ── SPLASH SCREEN ──────────────────────────────────────── */
+      #splash {
         position: fixed;
         inset: 0;
         z-index: 9999;
-        background: var(--bg);
+        background: #f7f7f7;
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-direction: column;
-        gap: 24px;
-        pointer-events: none;
-        font-family: var(--font-body-ltr);
-      }
-
-      .loader__logo {
-        opacity: 0;
-      }
-
-      .loader__bar-track {
-        width: 120px;
-        height: 1px;
-        background: var(--ink-10);
         overflow: hidden;
+        cursor: pointer;
       }
-
-      .loader__bar {
-        width: 0%;
-        height: 100%;
-        background: var(--gold);
-        transition: width 0.6s var(--ease-out-ex);
+      #splash.sp-exit {
+        pointer-events: none;
+        background: transparent;
+      }
+      .sp-field {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 0 16px;
+        opacity: 0.3;
+      }
+      .sp-col {
+        flex: 0 0 176px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        will-change: transform;
+      }
+      #splash.sp-exit .sp-col {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .sp-card {
+        flex-shrink: 0;
+        overflow: hidden;
+        line-height: 0;
+      }
+      .sp-card svg {
+        display: block;
+        width: 176px;
+        height: auto;
+      }
+      .sp-stage {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+      }
+      .sp-logo-frame {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        opacity: 0;
+        transform: translateY(16px) scale(0.97);
+        transition:
+          opacity 0.55s 0.1s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.65s 0.1s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      #splash.sp-ready .sp-logo-frame {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      #splash.sp-exit .sp-logo-frame {
+        opacity: 0;
+        transform: scale(1.03) translateY(-6px);
+        transition:
+          opacity 0.4s ease,
+          transform 0.5s cubic-bezier(0.4, 0, 1, 1);
+      }
+      .sp-panel {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 50%;
+        background: #fff;
+        z-index: 1;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 1s ease;
+      }
+      .sp-panel-l { left: 0; }
+      .sp-panel-r { right: 0; }
+      #splash.sp-ready .sp-panel {
+        opacity: 1;
+      }
+      #splash.sp-exit .sp-panel {
+        opacity: 1;
+        transition: transform 0.7s cubic-bezier(0.76, 0, 0.24, 1);
+      }
+      #splash.sp-exit .sp-panel-l {
+        transform: translateX(-100%);
+      }
+      #splash.sp-exit .sp-panel-r {
+        transform: translateX(100%);
+      }
+      .sp-logo-svg {
+        width: clamp(280px, 50vw, 560px);
+        display: block;
+      }
+      @media (max-width: 1100px) {
+        .sp-col:nth-child(1),
+        .sp-col:nth-child(5) { display: none; }
+      }
+      @media (max-width: 700px) {
+        .sp-col:nth-child(2),
+        .sp-col:nth-child(4) { display: none; }
+        .sp-col { flex-basis: 148px; }
+        .sp-card svg { width: 148px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .sp-col { animation: none !important; transform: translateY(-50%); }
+        .sp-logo-frame { transition-duration: 0.2s !important; }
       }
 
       /* ─────────────────────────────────────────────
@@ -1291,9 +1380,9 @@
         color: var(--gold-dk);
         margin-bottom: 22px;
         padding: 6px 16px;
-        border: 1px solid rgba(201, 169, 110, 0.38);
+        border: 1px solid rgba(200, 16, 46, 0.38);
         border-radius: 20px;
-        background: rgba(201, 169, 110, 0.07);
+        background: rgba(200, 16, 46, 0.07);
       }
 
       .props__eyebrow::before {
@@ -1524,7 +1613,7 @@
 
       .prop-badge--gold {
         background: var(--gold);
-        color: var(--ink);
+        color: #ffffff;
       }
 
       .prop-badge--red {
@@ -1712,7 +1801,7 @@
         transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         flex-shrink: 0;
         background: var(--gold);
-        color: var(--ink);
+        color: #ffffff;
       }
 
       .btn-explore svg {
@@ -1804,7 +1893,7 @@
       .prop-action-btn--compare.is-active {
         border-color: var(--gold);
         color: var(--gold);
-        background: rgba(201, 169, 110, 0.08);
+        background: rgba(200, 16, 46, 0.08);
       }
 
       /* ── Compare tray ── */
@@ -1842,7 +1931,7 @@
       .compare-tray__go {
         padding: 10px 24px;
         background: var(--gold);
-        color: var(--ink);
+        color: #ffffff;
         border-radius: 100px;
         font-size: 12px;
         font-weight: 700;
@@ -1854,7 +1943,7 @@
         font-family: inherit;
       }
       .compare-tray__go:hover {
-        background: #e4c99a;
+        background: #C8102E;
       }
       .compare-tray__clear {
         font-size: 11px;
@@ -2061,8 +2150,8 @@
 
       /* ── btn-slide--outline — pill outline for light-bg secondary actions ── */
       .btn-slide--outline {
-        background: rgba(201, 169, 110, 0.12);
-        border: 2px solid rgba(201, 169, 110, 0.9);
+        background: rgba(200, 16, 46, 0.12);
+        border: 2px solid rgba(200, 16, 46, 0.9);
         color: var(--gold-dk);
       }
       .btn-slide--outline:hover {
@@ -2093,8 +2182,8 @@
         cursor: pointer;
         text-decoration: none;
         transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        background: rgba(201, 169, 110, 0.12);
-        border: 2px solid rgba(201, 169, 110, 0.9);
+        background: rgba(200, 16, 46, 0.12);
+        border: 2px solid rgba(200, 16, 46, 0.9);
         color: var(--gold-dk);
       }
 
@@ -2176,9 +2265,9 @@
         color: var(--gold-dk);
         margin-bottom: 22px;
         padding: 6px 18px;
-        border: 1px solid rgba(201, 169, 110, 0.38);
+        border: 1px solid rgba(200, 16, 46, 0.38);
         border-radius: 20px;
-        background: rgba(201, 169, 110, 0.07);
+        background: rgba(200, 16, 46, 0.07);
       }
 
       .why__eyebrow::before,
@@ -2431,9 +2520,9 @@
         color: var(--gold-dk);
         margin-bottom: 22px;
         padding: 6px 16px;
-        border: 1px solid rgba(201, 169, 110, 0.38);
+        border: 1px solid rgba(200, 16, 46, 0.38);
         border-radius: 20px;
-        background: rgba(201, 169, 110, 0.07);
+        background: rgba(200, 16, 46, 0.07);
       }
 
       .pgal__eyebrow::before {
@@ -2572,7 +2661,7 @@
         letter-spacing: 0.22em;
         text-transform: uppercase;
         color: var(--gold);
-        border: 1px solid rgba(201, 169, 110, 0.5);
+        border: 1px solid rgba(200, 16, 46, 0.5);
         padding: 4px 10px;
         border-radius: 2px;
         margin-bottom: 10px;
@@ -2665,7 +2754,7 @@
 
       .pgal-card__cta:hover {
         border-color: var(--gold);
-        color: var(--gold-dk, #a07c40);
+        color: var(--gold-dk, #C8102E);
       }
 
       .pgal-card__cta svg {
@@ -2701,7 +2790,7 @@
         align-items: center;
         gap: 7px;
         background: var(--gold);
-        color: var(--ink);
+        color: #ffffff;
         border: none;
         padding: 10px 14px;
         cursor: pointer;
@@ -2725,7 +2814,7 @@
         stroke-linecap: round;
       }
       .cmp-bar__toggle:hover {
-        background: var(--gold-dk, #a07c40);
+        background: var(--gold-dk, #C8102E);
       }
       .cmp-bar__toggle[hidden] {
         display: none;
@@ -2863,7 +2952,7 @@
       }
       .cmp-bar__go:hover {
         background: var(--gold);
-        color: var(--ink);
+        color: #ffffff;
       }
 
       /* ── Lightbox ── */
@@ -3102,8 +3191,8 @@
 
       /* Compare — active (added) state */
       .pgal-compare-btn.is-compared {
-        background: rgba(201, 169, 110, 0.9) !important;
-        border-color: rgba(201, 169, 110, 0) !important;
+        background: rgba(200, 16, 46, 0.9) !important;
+        border-color: rgba(200, 16, 46, 0) !important;
         color: var(--ink) !important;
       }
 
@@ -3191,7 +3280,7 @@
       .site-footer__social:hover {
         border-color: var(--gold);
         color: var(--gold);
-        background: rgba(201, 169, 110, 0.07);
+        background: rgba(200, 16, 46, 0.07);
         transform: translateY(-2px);
       }
       .site-footer__nav {
@@ -3244,7 +3333,7 @@
       .site-footer__match {
         padding: 28px 26px;
         background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(201, 169, 110, 0.18);
+        border: 1px solid rgba(200, 16, 46, 0.18);
         border-radius: 16px;
         position: relative;
         overflow: hidden;
@@ -3259,7 +3348,7 @@
         background: linear-gradient(
           to right,
           var(--gold),
-          rgba(201, 169, 110, 0.2),
+          rgba(200, 16, 46, 0.2),
           transparent
         );
         pointer-events: none;
@@ -3312,7 +3401,7 @@
       .fmatch-type.is-active {
         border-color: var(--gold);
         color: var(--gold);
-        background: rgba(201, 169, 110, 0.08);
+        background: rgba(200, 16, 46, 0.08);
       }
       .fmatch-lbl {
         display: block;
@@ -3356,7 +3445,7 @@
       }
       .fmatch-input:focus {
         outline: none;
-        border-color: rgba(201, 169, 110, 0.45);
+        border-color: rgba(200, 16, 46, 0.45);
       }
       .fmatch-email-row {
         display: flex;
@@ -3372,7 +3461,7 @@
         height: 40px;
         border-radius: 50%;
         background: var(--gold);
-        color: #0d0d0d;
+        color: #ffffff;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -3384,7 +3473,7 @@
       .fmatch-submit:hover {
         background: var(--gold-lt);
         transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(201, 169, 110, 0.35);
+        box-shadow: 0 8px 24px rgba(200, 16, 46, 0.35);
       }
       .fmatch-confirm {
         font-size: 11px;
@@ -3404,16 +3493,16 @@
         background: linear-gradient(
           to right,
           transparent,
-          rgba(201, 169, 110, 0.25),
+          rgba(200, 16, 46, 0.25),
           transparent
         );
       }
       .site-footer__rule-diamond {
         width: 20px;
         height: 20px;
-        border: 1px solid rgba(201, 169, 110, 0.3);
+        border: 1px solid rgba(200, 16, 46, 0.3);
         transform: rotate(45deg);
-        background: rgba(201, 169, 110, 0.04);
+        background: rgba(200, 16, 46, 0.04);
         flex-shrink: 0;
         display: flex;
         align-items: center;
@@ -3537,9 +3626,9 @@
         color: var(--gold-dk);
         margin-bottom: 22px;
         padding: 6px 16px;
-        border: 1px solid rgba(201, 169, 110, 0.38);
+        border: 1px solid rgba(200, 16, 46, 0.38);
         border-radius: 20px;
-        background: rgba(201, 169, 110, 0.07);
+        background: rgba(200, 16, 46, 0.07);
       }
 
       .loc__title {
@@ -3971,7 +4060,7 @@
           />
           <path
             d="M64.78 291.12L0 371H66.84L133.85 291.12H64.78Z"
-            fill="#FF0000"
+            fill="#C8102E"
           />
           <path
             d="M390.87 186.6L544.58 373.2H472.34L339.38 212.73L317.86 187.07L339.38 160.95L472.34 0.00999451H544.58L390.87 186.61V186.6Z"
@@ -4406,7 +4495,7 @@
             <path
               d="M 125,200 C 200,200 200,60 375,60 C 500,60 500,200 625,200 C 750,200 750,60 875,60"
               fill="none"
-              stroke="rgba(201,169,110,0.6)"
+              stroke="rgba(200,16,46,0.6)"
               stroke-width="1.5"
               stroke-dasharray="6 8"
               stroke-linecap="round"
@@ -4475,14 +4564,14 @@
                   width="90"
                   height="40"
                   rx="2"
-                  fill="rgba(201,169,110,0.22)"
-                  stroke="rgba(201,169,110,0.6)"
+                  fill="rgba(200,16,46,0.22)"
+                  stroke="rgba(200,16,46,0.6)"
                   stroke-width="1.2"
                 />
                 <polygon
                   points="15,52 60,18 105,52"
-                  fill="rgba(201,169,110,0.16)"
-                  stroke="rgba(201,169,110,0.6)"
+                  fill="rgba(200,16,46,0.16)"
+                  stroke="rgba(200,16,46,0.6)"
                   stroke-width="1.2"
                   stroke-linejoin="round"
                 />
@@ -4492,8 +4581,8 @@
                   width="24"
                   height="26"
                   rx="1"
-                  fill="rgba(201,169,110,0.28)"
-                  stroke="rgba(201,169,110,0.8)"
+                  fill="rgba(200,16,46,0.28)"
+                  stroke="rgba(200,16,46,0.8)"
                   stroke-width="1"
                 />
                 <rect
@@ -4502,8 +4591,8 @@
                   width="16"
                   height="14"
                   rx="1"
-                  fill="rgba(201,169,110,0.18)"
-                  stroke="rgba(201,169,110,0.7)"
+                  fill="rgba(200,16,46,0.18)"
+                  stroke="rgba(200,16,46,0.7)"
                   stroke-width="0.8"
                 />
                 <rect
@@ -4512,8 +4601,8 @@
                   width="16"
                   height="14"
                   rx="1"
-                  fill="rgba(201,169,110,0.18)"
-                  stroke="rgba(201,169,110,0.7)"
+                  fill="rgba(200,16,46,0.18)"
+                  stroke="rgba(200,16,46,0.7)"
                   stroke-width="0.8"
                 />
                 <line
@@ -4521,17 +4610,17 @@
                   y1="18"
                   x2="60"
                   y2="10"
-                  stroke="rgba(201,169,110,0.7)"
+                  stroke="rgba(200,16,46,0.7)"
                   stroke-width="1"
                 />
-                <circle cx="60" cy="9" r="2" fill="rgba(201,169,110,0.6)" />
+                <circle cx="60" cy="9" r="2" fill="rgba(200,16,46,0.6)" />
                 <rect
                   x="8"
                   y="90"
                   width="104"
                   height="1.5"
                   rx="0.75"
-                  fill="rgba(201,169,110,0.3)"
+                  fill="rgba(200,16,46,0.3)"
                 />
                 <rect
                   x="0"
@@ -4539,7 +4628,7 @@
                   width="120"
                   height="0.5"
                   rx="0.25"
-                  fill="rgba(201,169,110,0.22)"
+                  fill="rgba(200,16,46,0.22)"
                 />
               </svg>
               <span class="why__stage-num">01</span>
@@ -4568,8 +4657,8 @@
                   width="50"
                   height="72"
                   rx="2"
-                  fill="rgba(201,169,110,0.18)"
-                  stroke="rgba(201,169,110,0.6)"
+                  fill="rgba(200,16,46,0.18)"
+                  stroke="rgba(200,16,46,0.6)"
                   stroke-width="1.2"
                 />
                 <rect
@@ -4578,8 +4667,8 @@
                   width="50"
                   height="10"
                   rx="2"
-                  fill="rgba(201,169,110,0.32)"
-                  stroke="rgba(201,169,110,0.6)"
+                  fill="rgba(200,16,46,0.32)"
+                  stroke="rgba(200,16,46,0.6)"
                   stroke-width="1.2"
                 />
                 <rect
@@ -4588,8 +4677,8 @@
                   width="10"
                   height="8"
                   rx="1"
-                  fill="rgba(201,169,110,0.32)"
-                  stroke="rgba(201,169,110,0.7)"
+                  fill="rgba(200,16,46,0.32)"
+                  stroke="rgba(200,16,46,0.7)"
                   stroke-width="0.8"
                 />
                 <rect
@@ -4598,8 +4687,8 @@
                   width="10"
                   height="8"
                   rx="1"
-                  fill="rgba(201,169,110,0.32)"
-                  stroke="rgba(201,169,110,0.7)"
+                  fill="rgba(200,16,46,0.32)"
+                  stroke="rgba(200,16,46,0.7)"
                   stroke-width="0.8"
                 />
                 <rect
@@ -4608,8 +4697,8 @@
                   width="10"
                   height="8"
                   rx="1"
-                  fill="rgba(201,169,110,0.32)"
-                  stroke="rgba(201,169,110,0.7)"
+                  fill="rgba(200,16,46,0.32)"
+                  stroke="rgba(200,16,46,0.7)"
                   stroke-width="0.8"
                 />
                 <rect
@@ -4618,8 +4707,8 @@
                   width="10"
                   height="8"
                   rx="1"
-                  fill="rgba(201,169,110,0.32)"
-                  stroke="rgba(201,169,110,0.7)"
+                  fill="rgba(200,16,46,0.32)"
+                  stroke="rgba(200,16,46,0.7)"
                   stroke-width="0.8"
                 />
                 <rect
@@ -4628,8 +4717,8 @@
                   width="10"
                   height="8"
                   rx="1"
-                  fill="rgba(201,169,110,0.32)"
-                  stroke="rgba(201,169,110,0.7)"
+                  fill="rgba(200,16,46,0.32)"
+                  stroke="rgba(200,16,46,0.7)"
                   stroke-width="0.8"
                 />
                 <rect
@@ -4638,8 +4727,8 @@
                   width="10"
                   height="8"
                   rx="1"
-                  fill="rgba(201,169,110,0.32)"
-                  stroke="rgba(201,169,110,0.7)"
+                  fill="rgba(200,16,46,0.32)"
+                  stroke="rgba(200,16,46,0.7)"
                   stroke-width="0.8"
                 />
                 <rect
@@ -4648,8 +4737,8 @@
                   width="20"
                   height="14"
                   rx="1"
-                  fill="rgba(201,169,110,0.22)"
-                  stroke="rgba(201,169,110,0.7)"
+                  fill="rgba(200,16,46,0.22)"
+                  stroke="rgba(200,16,46,0.7)"
                   stroke-width="0.8"
                 />
                 <line
@@ -4657,17 +4746,17 @@
                   y1="20"
                   x2="60"
                   y2="10"
-                  stroke="rgba(201,169,110,0.8)"
+                  stroke="rgba(200,16,46,0.8)"
                   stroke-width="1"
                 />
-                <circle cx="60" cy="8" r="2.5" fill="rgba(201,169,110,0.7)" />
+                <circle cx="60" cy="8" r="2.5" fill="rgba(200,16,46,0.7)" />
                 <rect
                   x="8"
                   y="91"
                   width="104"
                   height="1.5"
                   rx="0.75"
-                  fill="rgba(201,169,110,0.3)"
+                  fill="rgba(200,16,46,0.3)"
                 />
                 <rect
                   x="15"
@@ -4675,8 +4764,8 @@
                   width="20"
                   height="10"
                   rx="1"
-                  fill="rgba(201,169,110,0.16)"
-                  stroke="rgba(201,169,110,0.55)"
+                  fill="rgba(200,16,46,0.16)"
+                  stroke="rgba(200,16,46,0.55)"
                   stroke-width="0.8"
                 />
                 <rect
@@ -4685,8 +4774,8 @@
                   width="20"
                   height="10"
                   rx="1"
-                  fill="rgba(201,169,110,0.16)"
-                  stroke="rgba(201,169,110,0.55)"
+                  fill="rgba(200,16,46,0.16)"
+                  stroke="rgba(200,16,46,0.55)"
                   stroke-width="0.8"
                 />
               </svg>
@@ -4716,8 +4805,8 @@
                   width="40"
                   height="42"
                   rx="2"
-                  fill="rgba(201,169,110,0.18)"
-                  stroke="rgba(201,169,110,0.8)"
+                  fill="rgba(200,16,46,0.18)"
+                  stroke="rgba(200,16,46,0.8)"
                   stroke-width="1.2"
                 />
                 <rect
@@ -4726,21 +4815,21 @@
                   width="40"
                   height="48"
                   rx="2"
-                  fill="rgba(201,169,110,0.22)"
-                  stroke="rgba(201,169,110,0.6)"
+                  fill="rgba(200,16,46,0.22)"
+                  stroke="rgba(200,16,46,0.6)"
                   stroke-width="1.2"
                 />
                 <polygon
                   points="10,50 30,28 50,50"
-                  fill="rgba(201,169,110,0.14)"
-                  stroke="rgba(201,169,110,0.8)"
+                  fill="rgba(200,16,46,0.14)"
+                  stroke="rgba(200,16,46,0.8)"
                   stroke-width="1.2"
                   stroke-linejoin="round"
                 />
                 <polygon
                   points="70,44 90,20 110,44"
-                  fill="rgba(201,169,110,0.18)"
-                  stroke="rgba(201,169,110,0.6)"
+                  fill="rgba(200,16,46,0.18)"
+                  stroke="rgba(200,16,46,0.6)"
                   stroke-width="1.2"
                   stroke-linejoin="round"
                 />
@@ -4750,8 +4839,8 @@
                   width="12"
                   height="28"
                   rx="1"
-                  fill="rgba(201,169,110,0.28)"
-                  stroke="rgba(201,169,110,0.7)"
+                  fill="rgba(200,16,46,0.28)"
+                  stroke="rgba(200,16,46,0.7)"
                   stroke-width="0.8"
                 />
                 <rect
@@ -4760,8 +4849,8 @@
                   width="12"
                   height="34"
                   rx="1"
-                  fill="rgba(201,169,110,0.28)"
-                  stroke="rgba(201,169,110,0.7)"
+                  fill="rgba(200,16,46,0.28)"
+                  stroke="rgba(200,16,46,0.7)"
                   stroke-width="0.8"
                 />
                 <rect
@@ -4770,8 +4859,8 @@
                   width="10"
                   height="8"
                   rx="1"
-                  fill="rgba(201,169,110,0.28)"
-                  stroke="rgba(201,169,110,0.7)"
+                  fill="rgba(200,16,46,0.28)"
+                  stroke="rgba(200,16,46,0.7)"
                   stroke-width="0.8"
                 />
                 <rect
@@ -4780,8 +4869,8 @@
                   width="10"
                   height="8"
                   rx="1"
-                  fill="rgba(201,169,110,0.28)"
-                  stroke="rgba(201,169,110,0.7)"
+                  fill="rgba(200,16,46,0.28)"
+                  stroke="rgba(200,16,46,0.7)"
                   stroke-width="0.8"
                 />
                 <rect
@@ -4790,8 +4879,8 @@
                   width="10"
                   height="8"
                   rx="1"
-                  fill="rgba(201,169,110,0.28)"
-                  stroke="rgba(201,169,110,0.7)"
+                  fill="rgba(200,16,46,0.28)"
+                  stroke="rgba(200,16,46,0.7)"
                   stroke-width="0.8"
                 />
                 <rect
@@ -4800,8 +4889,8 @@
                   width="20"
                   height="27"
                   rx="0"
-                  fill="rgba(201,169,110,0.06)"
-                  stroke="rgba(201,169,110,0.55)"
+                  fill="rgba(200,16,46,0.06)"
+                  stroke="rgba(200,16,46,0.55)"
                   stroke-width="0.8"
                 />
                 <rect
@@ -4810,7 +4899,7 @@
                   width="120"
                   height="1.5"
                   rx="0.75"
-                  fill="rgba(201,169,110,0.3)"
+                  fill="rgba(200,16,46,0.3)"
                 />
               </svg>
               <span class="why__stage-num">03</span>
@@ -4838,14 +4927,14 @@
                   width="110"
                   height="37"
                   rx="2"
-                  fill="rgba(201,169,110,0.18)"
-                  stroke="rgba(201,169,110,0.55)"
+                  fill="rgba(200,16,46,0.18)"
+                  stroke="rgba(200,16,46,0.55)"
                   stroke-width="1.2"
                 />
                 <polygon
                   points="5,55 60,22 115,55"
-                  fill="rgba(201,169,110,0.14)"
-                  stroke="rgba(201,169,110,0.55)"
+                  fill="rgba(200,16,46,0.14)"
+                  stroke="rgba(200,16,46,0.55)"
                   stroke-width="1.2"
                   stroke-linejoin="round"
                 />
@@ -4855,8 +4944,8 @@
                   width="28"
                   height="24"
                   rx="1"
-                  fill="rgba(201,169,110,0.28)"
-                  stroke="rgba(201,169,110,0.8)"
+                  fill="rgba(200,16,46,0.28)"
+                  stroke="rgba(200,16,46,0.8)"
                   stroke-width="1"
                 />
                 <rect
@@ -4865,8 +4954,8 @@
                   width="14"
                   height="12"
                   rx="1"
-                  fill="rgba(201,169,110,0.22)"
-                  stroke="rgba(201,169,110,0.7)"
+                  fill="rgba(200,16,46,0.22)"
+                  stroke="rgba(200,16,46,0.7)"
                   stroke-width="0.8"
                 />
                 <rect
@@ -4875,8 +4964,8 @@
                   width="14"
                   height="12"
                   rx="1"
-                  fill="rgba(201,169,110,0.22)"
-                  stroke="rgba(201,169,110,0.7)"
+                  fill="rgba(200,16,46,0.22)"
+                  stroke="rgba(200,16,46,0.7)"
                   stroke-width="0.8"
                 />
                 <rect
@@ -4885,8 +4974,8 @@
                   width="14"
                   height="12"
                   rx="1"
-                  fill="rgba(201,169,110,0.22)"
-                  stroke="rgba(201,169,110,0.7)"
+                  fill="rgba(200,16,46,0.22)"
+                  stroke="rgba(200,16,46,0.7)"
                   stroke-width="0.8"
                 />
                 <rect
@@ -4895,8 +4984,8 @@
                   width="14"
                   height="12"
                   rx="1"
-                  fill="rgba(201,169,110,0.22)"
-                  stroke="rgba(201,169,110,0.7)"
+                  fill="rgba(200,16,46,0.22)"
+                  stroke="rgba(200,16,46,0.7)"
                   stroke-width="0.8"
                 />
                 <line
@@ -4904,7 +4993,7 @@
                   y1="55"
                   x2="30"
                   y2="45"
-                  stroke="rgba(201,169,110,0.65)"
+                  stroke="rgba(200,16,46,0.65)"
                   stroke-width="0.8"
                 />
                 <line
@@ -4912,7 +5001,7 @@
                   y1="22"
                   x2="60"
                   y2="12"
-                  stroke="rgba(201,169,110,0.8)"
+                  stroke="rgba(200,16,46,0.8)"
                   stroke-width="1"
                 />
                 <line
@@ -4920,17 +5009,17 @@
                   y1="55"
                   x2="90"
                   y2="45"
-                  stroke="rgba(201,169,110,0.65)"
+                  stroke="rgba(200,16,46,0.65)"
                   stroke-width="0.8"
                 />
-                <circle cx="60" cy="10" r="3" fill="rgba(201,169,110,0.7)" />
+                <circle cx="60" cy="10" r="3" fill="rgba(200,16,46,0.7)" />
                 <rect
                   x="0"
                   y="91"
                   width="120"
                   height="1.5"
                   rx="0.75"
-                  fill="rgba(201,169,110,0.3)"
+                  fill="rgba(200,16,46,0.3)"
                 />
                 <!-- trees -->
                 <line
@@ -4938,7 +5027,7 @@
                   y1="92"
                   x2="8"
                   y2="80"
-                  stroke="rgba(201,169,110,0.55)"
+                  stroke="rgba(200,16,46,0.55)"
                   stroke-width="0.8"
                 />
                 <ellipse
@@ -4946,8 +5035,8 @@
                   cy="77"
                   rx="5"
                   ry="6"
-                  fill="rgba(201,169,110,0.16)"
-                  stroke="rgba(201,169,110,0.55)"
+                  fill="rgba(200,16,46,0.16)"
+                  stroke="rgba(200,16,46,0.55)"
                   stroke-width="0.8"
                 />
                 <line
@@ -4955,7 +5044,7 @@
                   y1="92"
                   x2="112"
                   y2="80"
-                  stroke="rgba(201,169,110,0.55)"
+                  stroke="rgba(200,16,46,0.55)"
                   stroke-width="0.8"
                 />
                 <ellipse
@@ -4963,8 +5052,8 @@
                   cy="77"
                   rx="5"
                   ry="6"
-                  fill="rgba(201,169,110,0.16)"
-                  stroke="rgba(201,169,110,0.55)"
+                  fill="rgba(200,16,46,0.16)"
+                  stroke="rgba(200,16,46,0.55)"
                   stroke-width="0.8"
                 />
               </svg>
@@ -7788,7 +7877,7 @@
                 />
                 <path
                   d="M64.78 291.12L0 371H66.84L133.85 291.12H64.78Z"
-                  fill="#FF0000"
+                  fill="#C8102E"
                 />
                 <path
                   d="M390.87 186.6L544.58 373.2H472.34L339.38 212.73L317.86 187.07L339.38 160.95L472.34 0.00999451H544.58L390.87 186.61V186.6Z"
@@ -8067,7 +8156,7 @@
             }
             confirmEl.textContent =
               "✓ You're on the list! We'll notify you when a match is found.";
-            confirmEl.style.color = "rgba(201,169,110,0.9)";
+            confirmEl.style.color = "rgba(200,16,46,0.9)";
             emailEl.value = "";
           });
         }

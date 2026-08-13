@@ -168,53 +168,22 @@
         transform: translateX(4px);
       }
 
-      /* gold fill — for dark bg (navbar) */
+      /* gold fill — matches home btn-slide--fill */
       .btn-pill--fill {
-        background:
-          linear-gradient(
-            50.5deg,
-            color-mix(in oklab, #fff 42%, transparent) 0%,
-            color-mix(in oklab, #fff 8%, transparent) 45%,
-            transparent 70%
-          ),
-          color-mix(in oklab, var(--gold) 52%, transparent);
-        backdrop-filter: blur(80px) saturate(280%) brightness(1.18)
-          contrast(1.05);
-        -webkit-backdrop-filter: blur(80px) saturate(280%) brightness(1.18)
-          contrast(1.05);
-        box-shadow:
-          inset 0 1.5px 0 color-mix(in oklab, #fff 70%, transparent),
-          inset 0 -1px 0 color-mix(in oklab, var(--gold) 30%, transparent),
-          inset 0 0 0 1px color-mix(in oklab, #fff 18%, transparent),
-          0 0 0 1px rgba(0, 0, 0, 0.08);
-        color: #fff;
+        background: var(--gold);
+        color: var(--ink);
       }
       .btn-pill--fill:hover {
-        background:
-          linear-gradient(
-            50.5deg,
-            color-mix(in oklab, #fff 52%, transparent) 0%,
-            color-mix(in oklab, #fff 12%, transparent) 45%,
-            transparent 70%
-          ),
-          color-mix(in oklab, var(--gold) 70%, transparent);
-        box-shadow:
-          inset 0 1.5px 0 color-mix(in oklab, #fff 80%, transparent),
-          inset 0 -1px 0 color-mix(in oklab, var(--gold) 40%, transparent),
-          inset 0 0 0 1px color-mix(in oklab, #fff 25%, transparent),
-          0 0 0 1px rgba(0, 0, 0, 0.06),
-          0 10px 36px rgba(201, 169, 110, 0.42);
+        background: var(--gold-lt);
       }
 
       /* solid gold — for light bg primary actions */
       .btn-pill--gold {
         background: var(--gold);
         color: var(--ink);
-        box-shadow: 0 2px 12px rgba(201, 169, 110, 0.22);
       }
       .btn-pill--gold:hover {
         background: var(--gold-lt);
-        box-shadow: 0 8px 28px rgba(201, 169, 110, 0.45);
       }
 
       /* outline — for light bg secondary actions */
@@ -226,7 +195,6 @@
       .btn-pill--outline:hover {
         background: rgba(201, 169, 110, 0.13);
         border-color: var(--gold);
-        box-shadow: 0 8px 28px rgba(201, 169, 110, 0.22);
       }
 
       /* size tweak for navbar */
@@ -245,25 +213,40 @@
       /* ─── PAGE HEADER ─── */
       .page-hero {
         padding-top: var(--nav-h);
-        background: #0d0d0d;
+        background: #0d0d0d url("why-bg.jpeg") center 40% / cover no-repeat;
         position: relative;
         overflow: hidden;
+        min-height: 420px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
       }
+      /* layer 1: image tint, layer 2: dark vignette stronger at bottom */
       .page-hero::before {
         content: "";
         position: absolute;
         inset: 0;
-        background: linear-gradient(
-          135deg,
-          rgba(201, 169, 110, 0.12) 0%,
-          transparent 60%
-        );
+        z-index: 0;
+        background:
+          linear-gradient(
+            135deg,
+            rgba(201, 169, 110, 0.22) 0%,
+            transparent 50%
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(5, 5, 5, 0.45) 0%,
+            rgba(5, 5, 5, 0.78) 100%
+          );
         pointer-events: none;
       }
       .page-hero__inner {
+        position: relative;
+        z-index: 1;
         max-width: 1320px;
+        width: 100%;
         margin: 0 auto;
-        padding: 56px 48px 52px;
+        padding: 72px 48px 60px;
         display: flex;
         align-items: flex-end;
         justify-content: space-between;
@@ -276,32 +259,33 @@
         font-size: 11px;
         letter-spacing: 0.16em;
         text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.45);
-        margin-bottom: 16px;
+        color: rgba(255, 255, 255, 0.6);
+        margin-bottom: 18px;
       }
       .page-hero__bread a {
-        color: rgba(255, 255, 255, 0.45);
+        color: rgba(255, 255, 255, 0.6);
         transition: color 0.2s;
       }
       .page-hero__bread a:hover {
         color: var(--gold);
       }
       .page-hero__bread span {
-        color: rgba(255, 255, 255, 0.25);
+        color: rgba(255, 255, 255, 0.35);
       }
       .page-hero__title {
-        font-family: var(--font-display);
-        font-size: clamp(36px, 5vw, 64px);
+        font-family: var(--font-body);
+        font-size: clamp(40px, 5.5vw, 72px);
         font-weight: 300;
         letter-spacing: -0.01em;
         color: #fff;
         line-height: 1.05;
+        text-shadow: 0 2px 24px rgba(0, 0, 0, 0.55);
       }
       .page-hero__title em {
         font-style: normal;
-        font-family: var(--font-display);
+        font-family: var(--font-body);
         font-weight: 300;
-        color: var(--gold);
+        color: var(--gold-lt);
         font-size: 1.02em;
         letter-spacing: -0.01em;
       }
@@ -310,17 +294,18 @@
         flex-shrink: 0;
       }
       .page-hero__count {
-        font-family: var(--font-display);
-        font-size: 52px;
+        font-family: var(--font-body);
+        font-size: 64px;
         font-weight: 300;
-        color: var(--gold);
+        color: var(--gold-lt);
         line-height: 1;
+        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
       }
       .page-hero__count-label {
         font-size: 11px;
         letter-spacing: 0.18em;
         text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.4);
+        color: rgba(255, 255, 255, 0.55);
         margin-top: 4px;
       }
 
@@ -374,39 +359,112 @@
         border-color: var(--gold);
       }
 
-      .filter-sel {
+      /* ─── CUSTOM SELECT ─── */
+      .csel {
         position: relative;
         flex-shrink: 0;
       }
-      .filter-sel select {
-        appearance: none;
-        -webkit-appearance: none;
-        padding: 10px 36px 10px 14px;
+      .csel__trigger {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        padding: 9px 11px 9px 14px;
         border: 1px solid var(--ink-10);
-        border-radius: 6px;
+        border-radius: 8px;
         background: #fff;
         font-size: 13px;
         color: var(--ink);
         cursor: pointer;
         outline: none;
-        transition: border-color 0.2s;
+        transition: border-color 0.22s, box-shadow 0.22s, background 0.22s;
         white-space: nowrap;
+        min-width: 112px;
+        font-family: inherit;
       }
-      .filter-sel select:focus {
-        border-color: var(--gold);
+      .csel__trigger:hover {
+        border-color: rgba(201, 169, 110, 0.45);
+        background: rgba(201, 169, 110, 0.025);
       }
-      .filter-sel::after {
+      .csel.is-open .csel__trigger {
+        border-color: var(--gold-lt);
+        box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.1);
+      }
+      .csel__val {
+        flex: 1;
+        text-align: left;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: color 0.2s;
+      }
+      .csel.has-value .csel__val {
+        color: var(--gold-dk);
+        font-weight: 500;
+      }
+      .csel__arrow {
+        flex-shrink: 0;
+        color: var(--ink-30);
+        transition: transform 0.28s var(--ease-smooth), color 0.2s;
+      }
+      .csel.is-open .csel__arrow {
+        transform: rotate(180deg);
+        color: var(--gold);
+      }
+      .csel__menu {
+        position: absolute;
+        top: calc(100% + 5px);
+        left: 0;
+        min-width: 100%;
+        background: #fff;
+        border: 1px solid rgba(13, 13, 13, 0.08);
+        border-radius: 10px;
+        box-shadow:
+          0 4px 6px -1px rgba(13, 13, 13, 0.06),
+          0 16px 40px -4px rgba(13, 13, 13, 0.14);
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-6px) scaleY(0.96);
+        transform-origin: top center;
+        pointer-events: none;
+        transition:
+          opacity 0.18s var(--ease-out),
+          transform 0.18s var(--ease-out);
+        z-index: 150;
+      }
+      .csel.is-open .csel__menu {
+        opacity: 1;
+        transform: translateY(0) scaleY(1);
+        pointer-events: auto;
+      }
+      .csel__opt {
+        padding: 9px 14px;
+        font-size: 13px;
+        color: var(--ink-60);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: background 0.12s, color 0.12s;
+        position: relative;
+      }
+      .csel__opt:hover {
+        background: rgba(201, 169, 110, 0.06);
+        color: var(--ink);
+      }
+      .csel__opt.is-selected {
+        color: var(--gold-dk);
+        font-weight: 500;
+        background: rgba(201, 169, 110, 0.08);
+      }
+      .csel__opt.is-selected::after {
         content: "";
         position: absolute;
-        right: 12px;
+        right: 14px;
         top: 50%;
         transform: translateY(-50%);
-        width: 0;
-        height: 0;
-        border-left: 4px solid transparent;
-        border-right: 4px solid transparent;
-        border-top: 5px solid var(--ink-60);
-        pointer-events: none;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--gold);
       }
 
       .filter-sep {
@@ -438,7 +496,6 @@
         border-color: var(--gold);
         color: var(--gold-dk);
         background: rgba(201, 169, 110, 0.1);
-        box-shadow: 0 4px 16px rgba(201, 169, 110, 0.18);
       }
       .btn-adv svg {
         transition: transform 0.3s var(--ease-smooth);
@@ -482,11 +539,9 @@
         transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         border: none;
         cursor: pointer;
-        box-shadow: 0 2px 12px rgba(201, 169, 110, 0.22);
       }
       .btn-filter-apply:hover {
         background: var(--gold-lt);
-        box-shadow: 0 8px 28px rgba(201, 169, 110, 0.45);
         transform: translateY(-2px);
       }
 
@@ -502,75 +557,121 @@
           padding-bottom 0.5s var(--ease-smooth);
       }
       .adv-panel.is-open {
-        max-height: 400px;
-        padding-bottom: 24px;
+        max-height: 480px;
+        padding-bottom: 28px;
       }
       .adv-panel__inner {
         border-top: 1px solid var(--ink-10);
         padding-top: 24px;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 24px 32px;
+        gap: 22px 36px;
       }
-      .adv-group label {
-        display: block;
-        font-size: 11px;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--ink-60);
-        margin-bottom: 10px;
-        font-weight: 500;
-      }
-      .adv-range {
+      .adv-group__label {
         display: flex;
         align-items: center;
         gap: 8px;
+        font-size: 10px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--ink-30);
+        margin-bottom: 12px;
+        font-weight: 600;
+      }
+      .adv-group__label::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--ink-10);
+      }
+      .adv-range {
+        display: flex;
+        align-items: stretch;
+        border: 1px solid var(--ink-10);
+        border-radius: 8px;
+        overflow: hidden;
+        background: #fff;
+        transition: border-color 0.22s, box-shadow 0.22s;
+      }
+      .adv-range:focus-within {
+        border-color: var(--gold-lt);
+        box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.08);
       }
       .adv-range input {
         flex: 1;
-        padding: 9px 12px;
-        border: 1px solid var(--ink-10);
-        border-radius: 6px;
+        padding: 9px 8px;
+        border: none;
         font-size: 13px;
-        background: #fff;
+        background: transparent;
         outline: none;
-        transition: border-color 0.2s;
+        color: var(--ink);
+        min-width: 0;
+        text-align: center;
+        font-family: inherit;
       }
-      .adv-range input:focus {
-        border-color: var(--gold);
-      }
-      .adv-range span {
+      .adv-range input::placeholder {
         color: var(--ink-30);
-        font-size: 13px;
+        font-size: 11.5px;
+      }
+      .adv-range__sep {
+        display: flex;
+        align-items: center;
+        padding: 0 6px;
+        color: var(--ink-30);
+        font-size: 10px;
         flex-shrink: 0;
+        background: rgba(13, 13, 13, 0.02);
+        border-left: 1px solid var(--ink-10);
+        border-right: 1px solid var(--ink-10);
       }
       .adv-checks {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 7px;
       }
       .adv-check {
         display: flex;
         align-items: center;
         gap: 6px;
-        padding: 7px 13px;
+        padding: 6px 12px 6px 9px;
         border: 1px solid var(--ink-10);
         border-radius: 20px;
         font-size: 12px;
         cursor: pointer;
-        transition: all 0.18s;
+        transition: all 0.2s var(--ease-out);
+        background: #fff;
+        color: var(--ink-60);
+        user-select: none;
       }
       .adv-check input {
         display: none;
       }
+      .adv-check__dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        border: 1.5px solid var(--ink-30);
+        flex-shrink: 0;
+        transition: background 0.18s, border-color 0.18s, transform 0.18s;
+      }
       .adv-check:hover {
-        border-color: var(--gold-lt);
+        border-color: rgba(201, 169, 110, 0.5);
         color: var(--gold-dk);
+        background: rgba(201, 169, 110, 0.04);
+      }
+      .adv-check:hover .adv-check__dot {
+        border-color: var(--gold-lt);
       }
       .adv-check.is-checked {
         border-color: var(--gold);
+        background: rgba(201, 169, 110, 0.1);
+        color: var(--gold-dk);
+        font-weight: 500;
+      }
+      .adv-check.is-checked .adv-check__dot {
         background: var(--gold);
-        color: var(--ink);
+        border-color: var(--gold);
+        transform: scale(1.15);
       }
 
       /* ─── RESULTS BAR ─── */
@@ -599,30 +700,10 @@
       .sort-sel {
         position: relative;
       }
-      .sort-sel select {
-        appearance: none;
-        -webkit-appearance: none;
-        padding: 8px 32px 8px 14px;
-        border: 1px solid var(--ink-10);
-        border-radius: 6px;
-        background: #fff;
+      .sort-sel .csel__trigger {
         font-size: 12px;
-        color: var(--ink);
-        cursor: pointer;
-        outline: none;
-      }
-      .sort-sel::after {
-        content: "";
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 0;
-        height: 0;
-        border-left: 4px solid transparent;
-        border-right: 4px solid transparent;
-        border-top: 5px solid var(--ink-60);
-        pointer-events: none;
+        padding: 7px 10px 7px 13px;
+        min-width: 150px;
       }
       .view-toggle {
         display: flex;
@@ -665,14 +746,17 @@
         background: #fff;
         border-radius: 20px;
         overflow: hidden;
+        border: 1px solid var(--ink-10);
         transition:
           box-shadow 0.35s var(--ease-out),
-          transform 0.35s var(--ease-out);
+          transform 0.35s var(--ease-out),
+          border-color 0.35s var(--ease-out);
         cursor: pointer;
         position: relative;
       }
       .prop-card:hover {
         transform: translateY(-4px);
+        border-color: var(--gold-lt);
       }
 
       /* image area */
@@ -769,7 +853,7 @@
         justify-content: space-between;
       }
       .prop-card__price {
-        font-family: var(--font-display);
+        font-family: var(--font-body);
         font-size: 22px;
         font-weight: 600;
         color: #fff;
@@ -824,7 +908,7 @@
         color: var(--ink-30);
       }
       .prop-card__title {
-        font-family: var(--font-display);
+        font-family: var(--font-body);
         font-size: 19px;
         font-weight: 400;
         color: var(--ink);
@@ -965,7 +1049,6 @@
       .prop-card__actions .btn-detail:hover {
         background: rgba(201, 169, 110, 0.13);
         border-color: var(--gold);
-        box-shadow: 0 6px 20px rgba(201, 169, 110, 0.22);
         transform: translateY(-1px);
       }
       .prop-card__actions .btn-detail svg {
@@ -1017,7 +1100,6 @@
         border-color: var(--gold);
         color: var(--gold-dk);
         background: rgba(201, 169, 110, 0.12);
-        box-shadow: 0 8px 28px rgba(201, 169, 110, 0.2);
         transform: translateY(-2px);
       }
       .btn-load-more .spinner {
@@ -1050,6 +1132,12 @@
         z-index: 900;
         display: flex;
         align-items: stretch;
+        transition: opacity 0.25s, transform 0.25s;
+      }
+      .cmp-bar.cmp-bar--hidden {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-50%) translateX(100%);
       }
       .cmp-bar__toggle {
         display: flex;
@@ -1092,7 +1180,6 @@
       .cmp-bar__panel {
         width: 280px;
         background: var(--bg);
-        border-radius: 12px 0 0 12px;
         border: 1px solid var(--ink-10);
         border-right: none;
         box-shadow: -8px 0 40px rgba(13, 13, 13, 0.12);
@@ -1113,9 +1200,9 @@
         justify-content: space-between;
       }
       .cmp-panel__head h4 {
-        font-family: var(--font-display);
+        font-family: var(--font-body);
         font-size: 16px;
-        font-weight: 400;
+        font-weight: 500;
       }
       .cmp-panel__close {
         color: var(--ink-30);
@@ -1190,14 +1277,12 @@
         transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         border: none;
         cursor: pointer;
-        box-shadow: 0 2px 12px rgba(201, 169, 110, 0.22);
         display: flex;
         align-items: center;
         justify-content: center;
       }
       .btn-cmp-go:hover {
         background: var(--gold-lt);
-        box-shadow: 0 8px 28px rgba(201, 169, 110, 0.45);
         transform: translateY(-2px);
       }
       .btn-cmp-go:disabled {
@@ -1308,21 +1393,109 @@
         border-color: var(--gold);
       }
 
-      /* ─── FOOTER ─── */
-      .footer {
-        background: #0d0d0d;
-        color: rgba(255, 255, 255, 0.4);
-        text-align: center;
-        padding: 32px 48px;
-        font-size: 12px;
-        letter-spacing: 0.1em;
+      /* ─── SITE FOOTER ─── */
+      .site-footer { background: #080808; position: relative; overflow: hidden; }
+      .site-footer__wm {
+        position: absolute; bottom: -0.08em; right: -0.02em;
+        font-size: clamp(80px, 16vw, 240px); font-weight: 300;
+        letter-spacing: -0.02em; color: rgba(255, 255, 255, 0.022);
+        line-height: 1; pointer-events: none; user-select: none;
       }
-      .footer a {
-        color: var(--gold);
-        transition: opacity 0.2s;
+      .site-footer__inner { max-width: 1320px; margin: 0 auto; padding: 80px 48px 0; position: relative; }
+      .site-footer__top { display: grid; grid-template-columns: 1.1fr 1fr 1.1fr; gap: 60px; padding-bottom: 30px; }
+      .site-footer__logo-link { display: inline-block; margin-bottom: 22px; }
+      .site-footer__tagline { font-size: 13px; line-height: 1.72; color: rgba(255, 255, 255, 0.35); max-width: 290px; margin-bottom: 32px; }
+      .site-footer__stats { display: flex; gap: 24px; margin-bottom: 32px; }
+      .site-footer__stat { display: flex; flex-direction: column; }
+      .site-footer__stat-n { font-size: 34px; font-weight: 300; color: var(--gold); line-height: 1; }
+      .site-footer__stat-l { font-size: 9px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255, 255, 255, 0.26); margin-top: 5px; }
+      .site-footer__socials { display: flex; gap: 8px; }
+      .site-footer__social {
+        width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex; align-items: center; justify-content: center;
+        color: rgba(255, 255, 255, 0.4); text-decoration: none; transition: all 0.25s; flex-shrink: 0;
       }
-      .footer a:hover {
-        opacity: 0.7;
+      .site-footer__social:hover { border-color: var(--gold); color: var(--gold); background: rgba(201, 169, 110, 0.07); transform: translateY(-2px); }
+      .site-footer__nav { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding-top: 2px; }
+      .site-footer__nav-head { font-size: 9px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+      .site-footer__nav-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+      .site-footer__nav-col li a {
+        font-size: 13px; color: rgba(255, 255, 255, 0.4); text-decoration: none;
+        display: inline-flex; align-items: center; transition: color 0.22s;
+      }
+      .site-footer__nav-col li a::before {
+        content: ""; display: inline-block; width: 0; height: 1px; background: var(--gold); margin-right: 0;
+        transition: width 0.28s cubic-bezier(0.76, 0, 0.24, 1), margin-right 0.28s cubic-bezier(0.76, 0, 0.24, 1); flex-shrink: 0;
+      }
+      .site-footer__nav-col li a:hover { color: rgba(255, 255, 255, 0.9); }
+      .site-footer__nav-col li a:hover::before { width: 10px; margin-right: 7px; }
+      .site-footer__match {
+        padding: 28px 26px; background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(201, 169, 110, 0.18); border-radius: 16px; position: relative; overflow: hidden;
+      }
+      .site-footer__match::before {
+        content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+        background: linear-gradient(to right, var(--gold), rgba(201, 169, 110, 0.2), transparent); pointer-events: none;
+      }
+      .site-footer__match-eyebrow { font-size: 9px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+      .site-footer__match-title { font-size: 26px; font-weight: 300; color: #fff; line-height: 1.15; margin-bottom: 6px; }
+      .site-footer__match-title em { font-style: normal; color: var(--gold); }
+      .site-footer__match-sub { font-size: 12px; color: rgba(255, 255, 255, 0.32); margin-bottom: 18px; line-height: 1.6; }
+      .site-footer__match-types { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+      .fmatch-type {
+        font-size: 11px; font-weight: 500; letter-spacing: 0.04em; padding: 6px 14px;
+        border-radius: 100px; border: 1.5px solid rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.42);
+        background: none; cursor: pointer; transition: all 0.22s; font-family: inherit;
+      }
+      .fmatch-type:hover, .fmatch-type.is-active { border-color: var(--gold); color: var(--gold); background: rgba(201, 169, 110, 0.08); }
+      .fmatch-lbl { display: block; font-size: 9px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255, 255, 255, 0.25); margin-bottom: 8px; }
+      .fmatch-budget-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+      .fmatch-sep { color: rgba(255, 255, 255, 0.2); font-size: 12px; flex-shrink: 0; }
+      .fmatch-input {
+        flex: 1; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 8px; padding: 9px 12px; font-size: 12px; color: #fff;
+        font-family: inherit; transition: border-color 0.2s; min-width: 0; -moz-appearance: textfield;
+      }
+      .fmatch-input::-webkit-outer-spin-button, .fmatch-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+      .fmatch-input::placeholder { color: rgba(255, 255, 255, 0.2); }
+      .fmatch-input:focus { outline: none; border-color: rgba(201, 169, 110, 0.45); }
+      .fmatch-email-row { display: flex; gap: 8px; align-items: center; }
+      .fmatch-input--email { flex: 1; }
+      .fmatch-submit {
+        flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%;
+        background: var(--gold); color: #0d0d0d; display: flex; align-items: center; justify-content: center;
+        cursor: pointer; transition: all 0.28s; border: none; font-family: inherit;
+      }
+      .fmatch-submit:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201, 169, 110, 0.35); }
+      .fmatch-confirm { font-size: 11px; letter-spacing: 0.03em; margin-top: 10px; min-height: 16px; line-height: 1.5; }
+      .site-footer__rule { display: flex; align-items: center; gap: 14px; }
+      .site-footer__rule-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(201, 169, 110, 0.25), transparent); }
+      .site-footer__rule-diamond {
+        width: 20px; height: 20px; border: 1px solid rgba(201, 169, 110, 0.3); transform: rotate(45deg);
+        background: rgba(201, 169, 110, 0.04); flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      }
+      .site-footer__rule-diamond::after { content: ""; width: 5px; height: 5px; background: var(--gold); border-radius: 50%; transform: rotate(-45deg); }
+      .site-footer__bottom { display: flex; align-items: center; justify-content: space-between; padding: 24px 0 32px; gap: 16px; flex-wrap: wrap; }
+      .site-footer__copy { font-size: 11px; color: rgba(255, 255, 255, 0.2); letter-spacing: 0.08em; }
+      .site-footer__legal { display: flex; gap: 20px; flex-wrap: wrap; }
+      .site-footer__legal a { font-size: 11px; color: rgba(255, 255, 255, 0.2); letter-spacing: 0.06em; text-decoration: none; transition: color 0.2s; }
+      .site-footer__legal a:hover { color: var(--gold); }
+      .site-footer__top-btn {
+        width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.1);
+        background: none; display: flex; align-items: center; justify-content: center;
+        color: rgba(255, 255, 255, 0.35); cursor: pointer; transition: all 0.25s; flex-shrink: 0; font-family: inherit;
+      }
+      .site-footer__top-btn:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+      @media (max-width: 1100px) {
+        .site-footer__top { grid-template-columns: 1fr 1fr; gap: 48px; }
+        .site-footer__match { grid-column: 1 / -1; }
+      }
+      @media (max-width: 680px) {
+        .site-footer__inner { padding: 60px 24px 0; }
+        .site-footer__top { grid-template-columns: 1fr; gap: 40px; padding-bottom: 48px; }
+        .site-footer__nav { grid-template-columns: 1fr 1fr; }
+        .site-footer__stats { gap: 20px; }
+        .site-footer__bottom { flex-direction: column; align-items: flex-start; gap: 14px; }
       }
 
       /* ─── SCROLL REVEAL ─── */
@@ -1379,9 +1552,10 @@
           max-width: 100%;
           flex-basis: 100%;
         }
-        .filter-sel select {
+        .csel__trigger {
           font-size: 12px;
-          padding: 8px 28px 8px 10px;
+          padding: 8px 10px 8px 11px;
+          min-width: 90px;
         }
         .results-bar,
         .listings-wrap,
@@ -1458,6 +1632,7 @@
       </a>
       <div class="navbar__right">
         <ul class="navbar__nav" role="list">
+          <li><a href="index.html">Home</a></li>
           <li><a href="listings.html" class="active">Properties</a></li>
           <li><a href="#">Projects</a></li>
           <li><a href="#">About</a></li>
@@ -1513,50 +1688,70 @@
           />
         </div>
 
-        <div class="filter-sel">
-          <select id="typeFilter">
-            <option value="">All Types</option>
-            <option>Apartment</option>
-            <option>Villa</option>
-            <option>Townhouse</option>
-            <option>Penthouse</option>
-            <option>Chalet</option>
-            <option>Studio</option>
-          </select>
+        <!-- Type -->
+        <div class="csel" id="typeFilter" data-value="">
+          <button class="csel__trigger" type="button" aria-haspopup="listbox">
+            <span class="csel__val">All Types</span>
+            <svg class="csel__arrow" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg>
+          </button>
+          <div class="csel__menu" role="listbox">
+            <div class="csel__opt is-selected" data-val="">All Types</div>
+            <div class="csel__opt" data-val="Apartment">Apartment</div>
+            <div class="csel__opt" data-val="Villa">Villa</div>
+            <div class="csel__opt" data-val="Townhouse">Townhouse</div>
+            <div class="csel__opt" data-val="Penthouse">Penthouse</div>
+            <div class="csel__opt" data-val="Chalet">Chalet</div>
+            <div class="csel__opt" data-val="Studio">Studio</div>
+          </div>
         </div>
 
-        <div class="filter-sel">
-          <select id="priceFilter">
-            <option value="">Any Price</option>
-            <option value="0-2">Under 2M EGP</option>
-            <option value="2-5">2M – 5M EGP</option>
-            <option value="5-10">5M – 10M EGP</option>
-            <option value="10-20">10M – 20M EGP</option>
-            <option value="20+">20M+ EGP</option>
-          </select>
+        <!-- Price -->
+        <div class="csel" id="priceFilter" data-value="">
+          <button class="csel__trigger" type="button" aria-haspopup="listbox">
+            <span class="csel__val">Any Price</span>
+            <svg class="csel__arrow" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg>
+          </button>
+          <div class="csel__menu" role="listbox">
+            <div class="csel__opt is-selected" data-val="">Any Price</div>
+            <div class="csel__opt" data-val="0-2">Under 2M EGP</div>
+            <div class="csel__opt" data-val="2-5">2M – 5M EGP</div>
+            <div class="csel__opt" data-val="5-10">5M – 10M EGP</div>
+            <div class="csel__opt" data-val="10-20">10M – 20M EGP</div>
+            <div class="csel__opt" data-val="20+">20M+ EGP</div>
+          </div>
         </div>
 
-        <div class="filter-sel">
-          <select id="bedsFilter">
-            <option value="">Beds</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6+</option>
-          </select>
+        <!-- Beds -->
+        <div class="csel" id="bedsFilter" data-value="">
+          <button class="csel__trigger" type="button" aria-haspopup="listbox">
+            <span class="csel__val">Beds</span>
+            <svg class="csel__arrow" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg>
+          </button>
+          <div class="csel__menu" role="listbox">
+            <div class="csel__opt is-selected" data-val="">Any Beds</div>
+            <div class="csel__opt" data-val="1">1 Bed</div>
+            <div class="csel__opt" data-val="2">2 Beds</div>
+            <div class="csel__opt" data-val="3">3 Beds</div>
+            <div class="csel__opt" data-val="4">4 Beds</div>
+            <div class="csel__opt" data-val="5">5 Beds</div>
+            <div class="csel__opt" data-val="6+">6+ Beds</div>
+          </div>
         </div>
 
-        <div class="filter-sel">
-          <select id="bathsFilter">
-            <option value="">Baths</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5+</option>
-          </select>
+        <!-- Baths -->
+        <div class="csel" id="bathsFilter" data-value="">
+          <button class="csel__trigger" type="button" aria-haspopup="listbox">
+            <span class="csel__val">Baths</span>
+            <svg class="csel__arrow" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg>
+          </button>
+          <div class="csel__menu" role="listbox">
+            <div class="csel__opt is-selected" data-val="">Any Baths</div>
+            <div class="csel__opt" data-val="1">1 Bath</div>
+            <div class="csel__opt" data-val="2">2 Baths</div>
+            <div class="csel__opt" data-val="3">3 Baths</div>
+            <div class="csel__opt" data-val="4">4 Baths</div>
+            <div class="csel__opt" data-val="5+">5+ Baths</div>
+          </div>
         </div>
 
         <div class="filter-sep"></div>
@@ -1597,50 +1792,36 @@
       <div class="adv-panel" id="advPanel">
         <div class="adv-panel__inner">
           <div class="adv-group">
-            <label>Area (m²)</label>
+            <div class="adv-group__label">Area (m²)</div>
             <div class="adv-range">
               <input type="number" placeholder="Min" id="areaMin" />
-              <span>—</span>
+              <span class="adv-range__sep">—</span>
               <input type="number" placeholder="Max" id="areaMax" />
             </div>
           </div>
           <div class="adv-group">
-            <label>Floor</label>
+            <div class="adv-group__label">Floor</div>
             <div class="adv-range">
               <input type="number" placeholder="Min" id="floorMin" />
-              <span>—</span>
+              <span class="adv-range__sep">—</span>
               <input type="number" placeholder="Max" id="floorMax" />
             </div>
           </div>
           <div class="adv-group">
-            <label>Status</label>
+            <div class="adv-group__label">Status</div>
             <div class="adv-checks" id="statusChecks">
-              <label class="adv-check"
-                ><input type="checkbox" value="for-sale" /> For Sale</label
-              >
-              <label class="adv-check"
-                ><input type="checkbox" value="for-rent" /> For Rent</label
-              >
-              <label class="adv-check"
-                ><input type="checkbox" value="off-plan" /> Off Plan</label
-              >
+              <label class="adv-check"><input type="checkbox" value="for-sale" /><span class="adv-check__dot"></span>For Sale</label>
+              <label class="adv-check"><input type="checkbox" value="for-rent" /><span class="adv-check__dot"></span>For Rent</label>
+              <label class="adv-check"><input type="checkbox" value="off-plan" /><span class="adv-check__dot"></span>Off Plan</label>
             </div>
           </div>
           <div class="adv-group">
-            <label>Amenities</label>
+            <div class="adv-group__label">Amenities</div>
             <div class="adv-checks" id="amenityChecks">
-              <label class="adv-check"
-                ><input type="checkbox" value="pool" /> Pool</label
-              >
-              <label class="adv-check"
-                ><input type="checkbox" value="gym" /> Gym</label
-              >
-              <label class="adv-check"
-                ><input type="checkbox" value="parking" /> Parking</label
-              >
-              <label class="adv-check"
-                ><input type="checkbox" value="garden" /> Garden</label
-              >
+              <label class="adv-check"><input type="checkbox" value="pool" /><span class="adv-check__dot"></span>Pool</label>
+              <label class="adv-check"><input type="checkbox" value="gym" /><span class="adv-check__dot"></span>Gym</label>
+              <label class="adv-check"><input type="checkbox" value="parking" /><span class="adv-check__dot"></span>Parking</label>
+              <label class="adv-check"><input type="checkbox" value="garden" /><span class="adv-check__dot"></span>Garden</label>
             </div>
           </div>
         </div>
@@ -1654,13 +1835,19 @@
       </p>
       <div class="results-bar__right">
         <div class="sort-sel">
-          <select id="sortSel">
-            <option>Newest First</option>
-            <option>Price: Low to High</option>
-            <option>Price: High to Low</option>
-            <option>Most Popular</option>
-            <option>Area: Large to Small</option>
-          </select>
+          <div class="csel" id="sortSel" data-value="">
+            <button class="csel__trigger" type="button" aria-haspopup="listbox">
+              <span class="csel__val">Newest First</span>
+              <svg class="csel__arrow" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg>
+            </button>
+            <div class="csel__menu" role="listbox">
+              <div class="csel__opt is-selected" data-val="">Newest First</div>
+              <div class="csel__opt" data-val="price-asc">Price: Low to High</div>
+              <div class="csel__opt" data-val="price-desc">Price: High to Low</div>
+              <div class="csel__opt" data-val="popular">Most Popular</div>
+              <div class="csel__opt" data-val="area-desc">Area: Large to Small</div>
+            </div>
+          </div>
         </div>
         <div class="view-toggle">
           <button class="view-btn active" id="gridViewBtn" title="Grid view">
@@ -1708,7 +1895,7 @@
     </div>
 
     <!-- COMPARE SIDEBAR -->
-    <div class="cmp-bar" id="cmpBar">
+    <div class="cmp-bar cmp-bar--hidden" id="cmpBar">
       <button
         class="cmp-bar__toggle"
         id="cmpToggle"
@@ -1793,13 +1980,151 @@
       <div class="lightbox__thumbs" id="lbThumbs"></div>
     </div>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-      <p>
-        © 2026 <a href="index.html">Akar Town</a> — All rights reserved.
-        Exclusive Luxury Real Estate.
-      </p>
+    <!-- SITE FOOTER -->
+    <footer class="site-footer">
+      <span class="site-footer__wm" aria-hidden="true">AKAR</span>
+      <div class="site-footer__inner">
+        <div class="site-footer__top">
+          <!-- Brand -->
+          <div class="site-footer__brand">
+            <a href="index.html" class="site-footer__logo-link" aria-label="Akar Town — Home">
+              <svg width="230" viewBox="0 0 2185 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M90.97 258.84H160.93L236.12 169.2V379.42H296.66V5.21997L90.97 258.84Z" fill="white"/>
+                <path d="M64.78 291.12L0 371H66.84L133.85 291.12H64.78Z" fill="#FF0000"/>
+                <path d="M390.87 186.6L544.58 373.2H472.34L339.38 212.73L317.86 187.07L339.38 160.95L472.34 0.00999451H544.58L390.87 186.61V186.6Z" fill="white"/>
+                <path d="M772.951 153.462L752.741 160.698C739.129 146.227 720.111 138.991 695.632 138.991C677.085 138.991 661.976 143.759 650.277 153.268C638.606 162.805 632.756 174.92 632.756 189.613C632.756 204.306 638.55 217.086 650.111 226.429C661.671 235.772 677.279 240.429 696.935 240.429C720.665 240.429 739.351 233.082 752.935 218.362L772.036 228.924C762.388 240.179 751.465 248.302 739.295 253.32C727.125 258.338 712.57 260.833 695.632 260.833C671.901 260.833 652.162 254.9 636.471 243.035C618.534 229.423 609.58 211.625 609.58 189.613C609.58 167.601 618.673 150.302 636.831 136.579C652.661 124.575 672.261 118.587 695.632 118.587C729.259 118.587 755.042 130.203 772.978 153.462H772.951Z" fill="white"/>
+                <path d="M1015.47 189.71C1015.47 211.722 1006.43 229.52 988.385 243.132C972.555 254.997 952.899 260.93 929.418 260.93C905.937 260.93 885.893 254.942 870.064 242.938C852.016 229.326 842.978 211.611 842.978 189.71C842.978 167.809 852.127 150.51 870.424 136.676C886.503 124.561 906.159 118.49 929.391 118.49C952.622 118.49 972.361 124.561 988.191 136.676C1006.38 150.538 1015.44 168.197 1015.44 189.71H1015.47ZM992.294 189.71C992.294 174.019 985.612 161.266 972.278 151.508C960.773 143.108 946.495 138.894 929.446 138.894C910.761 138.894 895.569 143.69 883.814 153.255C872.06 162.847 866.21 174.989 866.21 189.71C866.21 204.431 871.949 217.183 883.454 226.526C894.959 235.869 910.289 240.526 929.446 240.526C948.602 240.526 963.711 235.841 975.161 226.443C986.583 217.045 992.321 204.791 992.321 189.71H992.294Z" fill="white"/>
+                <path d="M1269.99 256.841H1247.73V147.058H1247.18L1177.45 234.607L1108.29 147.058H1107.73V256.841H1085.47V122.579H1113.28L1177.62 203.724L1242.24 122.579H1269.97V256.841H1269.99Z" fill="white"/>
+                <path d="M1446.45 122.607C1460.17 122.607 1471.04 126.405 1479.11 134.001C1487.15 141.597 1491.17 151.771 1491.17 164.496C1491.17 177.858 1486.98 188.06 1478.64 195.102C1470.29 202.144 1458.15 205.664 1442.18 205.664H1362.25V256.841H1339.99V122.579H1446.45V122.607ZM1442.57 185.676C1459.76 185.676 1468.35 178.746 1468.35 164.912C1468.35 150.08 1459.26 142.65 1441.1 142.65H1362.28V185.676H1442.6H1442.57Z" fill="white"/>
+                <path d="M1731.22 256.841H1706.88L1691.41 226.789H1600.98L1585.51 256.841H1561.17L1632.19 122.579H1660.19L1731.22 256.841ZM1680.6 206.773L1646.39 141.708L1611.76 206.773H1680.6Z" fill="white"/>
+                <path d="M1953.67 256.841H1925.97L1823.48 146.726V256.841H1801.22V122.579H1828.86L1931.43 232.75V122.579H1953.69V256.841H1953.67Z" fill="white"/>
+                <path d="M2192.83 122.579L2119.39 203.807V256.841H2097.13V203.807L2023.69 122.579H2051.44L2108.39 185.288L2165.08 122.579H2192.83Z" fill="white"/>
+              </svg>
+            </a>
+            <p class="site-footer__tagline">Egypt's most curated luxury real estate — from New Cairo's towers to the North Coast's shores.</p>
+            <div class="site-footer__stats">
+              <div class="site-footer__stat">
+                <span class="site-footer__stat-n">164</span>
+                <span class="site-footer__stat-l">Active Listings</span>
+              </div>
+              <div class="site-footer__stat">
+                <span class="site-footer__stat-n">6</span>
+                <span class="site-footer__stat-l">Locations</span>
+              </div>
+              <div class="site-footer__stat">
+                <span class="site-footer__stat-n">12+</span>
+                <span class="site-footer__stat-l">Years</span>
+              </div>
+            </div>
+            <div class="site-footer__socials">
+              <a href="#" class="site-footer__social" aria-label="Instagram">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </a>
+              <a href="#" class="site-footer__social" aria-label="Facebook">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </a>
+              <a href="#" class="site-footer__social" aria-label="LinkedIn">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+              <a href="#" class="site-footer__social" aria-label="YouTube">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75,15.02 15.5,12 9.75,8.98" fill="currentColor" stroke="none"/></svg>
+              </a>
+            </div>
+          </div>
+          <!-- Navigation -->
+          <nav class="site-footer__nav" aria-label="Footer navigation">
+            <div class="site-footer__nav-col">
+              <h3 class="site-footer__nav-head">Explore</h3>
+              <ul>
+                <li><a href="listings.html">All Properties</a></li>
+                <li><a href="listings.html">Villas &amp; Compounds</a></li>
+                <li><a href="listings.html">Penthouse Collection</a></li>
+                <li><a href="listings.html">Off-Plan Projects</a></li>
+                <li><a href="listings.html">North Coast</a></li>
+                <li><a href="compare.html">Compare Units</a></li>
+              </ul>
+            </div>
+            <div class="site-footer__nav-col">
+              <h3 class="site-footer__nav-head">Company</h3>
+              <ul>
+                <li><a href="#">About Akar Town</a></li>
+                <li><a href="#">Our Agents</a></li>
+                <li><a href="#">Success Stories</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Press &amp; Media</a></li>
+                <li><a href="#">Contact Us</a></li>
+              </ul>
+            </div>
+          </nav>
+          <!-- Property Match Widget -->
+          <div class="site-footer__match">
+            <div class="site-footer__match-eyebrow">Property Matching</div>
+            <h2 class="site-footer__match-title">Find Your <em>Perfect</em> Unit</h2>
+            <p class="site-footer__match-sub">Tell us what you need — we'll alert you the moment it's listed.</p>
+            <div class="site-footer__match-types" id="fmatchTypes">
+              <button class="fmatch-type is-active" data-type="Apartment">Apartment</button>
+              <button class="fmatch-type" data-type="Villa">Villa</button>
+              <button class="fmatch-type" data-type="Penthouse">Penthouse</button>
+              <button class="fmatch-type" data-type="Chalet">Chalet</button>
+              <button class="fmatch-type" data-type="Townhouse">Townhouse</button>
+            </div>
+            <label class="fmatch-lbl" for="fmatchBudgetMin">Budget Range (EGP)</label>
+            <div class="fmatch-budget-row">
+              <input id="fmatchBudgetMin" type="number" class="fmatch-input" placeholder="Minimum" min="0" aria-label="Minimum budget">
+              <span class="fmatch-sep">—</span>
+              <input type="number" class="fmatch-input" placeholder="Maximum" min="0" aria-label="Maximum budget">
+            </div>
+            <label class="fmatch-lbl" for="fmatchEmail">Your Email</label>
+            <div class="fmatch-email-row">
+              <input id="fmatchEmail" type="email" class="fmatch-input fmatch-input--email" placeholder="you@example.com">
+              <button class="fmatch-submit" id="fmatchSubmit" aria-label="Get matched">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13,6 19,12 13,18"/></svg>
+              </button>
+            </div>
+            <p class="fmatch-confirm" id="fmatchConfirm" aria-live="polite"></p>
+          </div>
+        </div>
+        <!-- Divider -->
+        <div class="site-footer__rule" aria-hidden="true">
+          <div class="site-footer__rule-line"></div>
+          <div class="site-footer__rule-diamond"></div>
+          <div class="site-footer__rule-line"></div>
+        </div>
+        <!-- Bottom bar -->
+        <div class="site-footer__bottom">
+          <p class="site-footer__copy">© 2026 Akar Town Real Estate. All rights reserved.</p>
+          <div class="site-footer__legal">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+            <a href="#">Cookie Policy</a>
+          </div>
+          <button class="site-footer__top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="18,15 12,9 6,15"/></svg>
+          </button>
+        </div>
+      </div>
     </footer>
+    <script>
+      (() => {
+        const types = document.querySelectorAll('#fmatchTypes .fmatch-type');
+        types.forEach(btn => btn.addEventListener('click', () => {
+          types.forEach(b => b.classList.remove('is-active'));
+          btn.classList.add('is-active');
+        }));
+        const submit = document.getElementById('fmatchSubmit');
+        const emailEl = document.getElementById('fmatchEmail');
+        const confirmEl = document.getElementById('fmatchConfirm');
+        if (submit) {
+          submit.addEventListener('click', () => {
+            const email = emailEl?.value.trim() || '';
+            if (!email || !email.includes('@')) { emailEl?.focus(); return; }
+            confirmEl.textContent = "✓ You're on the list! We'll notify you when a match is found.";
+            confirmEl.style.color = 'rgba(201,169,110,0.9)';
+            emailEl.value = '';
+          });
+        }
+      })();
+    </script>
 
     <script>
       /* ── DATA ── */
@@ -2167,7 +2492,7 @@
       <span class="prop-card__date">${p.date}</span>
     </div>
     <h3 class="prop-card__title">
-      <a href="property-detail.html?id=${p.id}">${p.title}</a>
+      <a href="property-details.html?id=${p.id}">${p.title}</a>
     </h3>
     <div class="prop-card__loc">
       <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -2205,7 +2530,7 @@
       <button class="act-btn act-cmp ${isCmp ? "is-compare" : ""}" data-id="${p.id}" data-title="${p.title}" data-thumb="${p.img}" data-tip="${isCmp ? "Remove from" : "Add to"} compare" aria-label="Compare">
         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
       </button>
-      <a href="property-detail.html?id=${p.id}" class="btn-detail">
+      <a href="property-details.html?id=${p.id}" class="btn-detail">
         Details
         <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9,18 15,12 9,6"/></svg>
       </a>
@@ -2232,10 +2557,10 @@
       /* ── FILTER LOGIC ── */
       function applyFilters() {
         const q = document.getElementById("searchInput").value.toLowerCase();
-        const type = document.getElementById("typeFilter").value;
-        const price = document.getElementById("priceFilter").value;
-        const beds = document.getElementById("bedsFilter").value;
-        const baths = document.getElementById("bathsFilter").value;
+        const type = document.getElementById("typeFilter").dataset.value || "";
+        const price = document.getElementById("priceFilter").dataset.value || "";
+        const beds = document.getElementById("bedsFilter").dataset.value || "";
+        const baths = document.getElementById("bathsFilter").dataset.value || "";
         const checkedStatuses = [
           ...document.querySelectorAll("#statusChecks input:checked"),
         ].map((i) => i.value);
@@ -2288,40 +2613,73 @@
           if (p.area < areaMin || p.area > areaMax) return false;
           return true;
         });
-        const sort = document.getElementById("sortSel").value;
-        if (sort === "Price: Low to High")
-          filtered.sort((a, b) => a.priceN - b.priceN);
-        else if (sort === "Price: High to Low")
-          filtered.sort((a, b) => b.priceN - a.priceN);
-        else if (sort === "Area: Large to Small")
-          filtered.sort((a, b) => b.area - a.area);
+        const sort = document.getElementById("sortSel").dataset.value || "";
+        if (sort === "price-asc") filtered.sort((a, b) => a.priceN - b.priceN);
+        else if (sort === "price-desc") filtered.sort((a, b) => b.priceN - a.priceN);
+        else if (sort === "area-desc") filtered.sort((a, b) => b.area - a.area);
         renderGrid(true);
       }
 
-      document
-        .getElementById("applyBtn")
-        .addEventListener("click", applyFilters);
-      document
-        .getElementById("sortSel")
-        .addEventListener("change", applyFilters);
+      /* ── CUSTOM SELECT INIT ── */
+      function initCsel(el, onSelect) {
+        const trigger = el.querySelector(".csel__trigger");
+        const valEl = el.querySelector(".csel__val");
+        const menu = el.querySelector(".csel__menu");
+        const opts = el.querySelectorAll(".csel__opt");
+        trigger.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const willOpen = !el.classList.contains("is-open");
+          document.querySelectorAll(".csel.is-open").forEach((c) => c.classList.remove("is-open"));
+          if (willOpen) el.classList.add("is-open");
+        });
+        opts.forEach((opt) => {
+          opt.addEventListener("click", () => {
+            const val = opt.dataset.val;
+            el.dataset.value = val;
+            valEl.textContent = opt.textContent.trim();
+            el.classList.toggle("has-value", !!val);
+            opts.forEach((o) => o.classList.remove("is-selected"));
+            opt.classList.add("is-selected");
+            el.classList.remove("is-open");
+            if (onSelect) onSelect(val);
+          });
+        });
+        menu.addEventListener("click", (e) => e.stopPropagation());
+      }
+      document.addEventListener("click", () => {
+        document.querySelectorAll(".csel.is-open").forEach((c) => c.classList.remove("is-open"));
+      });
+      initCsel(document.getElementById("typeFilter"));
+      initCsel(document.getElementById("priceFilter"));
+      initCsel(document.getElementById("bedsFilter"));
+      initCsel(document.getElementById("bathsFilter"));
+      initCsel(document.getElementById("sortSel"), () => applyFilters());
+
+      document.getElementById("applyBtn").addEventListener("click", applyFilters);
       document.getElementById("searchInput").addEventListener("input", () => {
         clearTimeout(window._st);
         window._st = setTimeout(applyFilters, 350);
       });
       document.getElementById("clearBtn").addEventListener("click", () => {
-        document
-          .querySelectorAll(".filter-bar select")
-          .forEach((s) => (s.value = ""));
+        const resetCfg = [
+          { id: "typeFilter", label: "All Types" },
+          { id: "priceFilter", label: "Any Price" },
+          { id: "bedsFilter", label: "Beds" },
+          { id: "bathsFilter", label: "Baths" },
+          { id: "sortSel", label: "Newest First" },
+        ];
+        resetCfg.forEach(({ id, label }) => {
+          const el = document.getElementById(id);
+          el.dataset.value = "";
+          el.classList.remove("has-value");
+          const valEl = el.querySelector(".csel__val");
+          if (valEl) valEl.textContent = label;
+          el.querySelectorAll(".csel__opt").forEach((o, j) => o.classList.toggle("is-selected", j === 0));
+        });
         document.getElementById("searchInput").value = "";
-        document
-          .querySelectorAll(".adv-panel input[type=checkbox]")
-          .forEach((c) => (c.checked = false));
-        document
-          .querySelectorAll(".adv-panel input[type=number]")
-          .forEach((i) => (i.value = ""));
-        document
-          .querySelectorAll(".adv-check")
-          .forEach((c) => c.classList.remove("is-checked"));
+        document.querySelectorAll(".adv-panel input[type=checkbox]").forEach((c) => (c.checked = false));
+        document.querySelectorAll(".adv-panel input[type=number]").forEach((i) => (i.value = ""));
+        document.querySelectorAll(".adv-check").forEach((c) => c.classList.remove("is-checked"));
         filtered = [...PROPERTIES];
         renderGrid(true);
       });
@@ -2338,10 +2696,7 @@
       document.querySelectorAll(".adv-check").forEach((label) => {
         label.addEventListener("click", () => {
           setTimeout(() => {
-            label.classList.toggle(
-              "is-checked",
-              label.querySelector("input").checked,
-            );
+            label.classList.toggle("is-checked", label.querySelector("input").checked);
           }, 0);
         });
       });
@@ -2390,6 +2745,13 @@
       );
 
       function renderCmpList() {
+        const bar = document.getElementById("cmpBar");
+        if (compareItems.length === 0) {
+          bar.classList.add("cmp-bar--hidden");
+          cmpPanel.classList.remove("is-open");
+        } else {
+          bar.classList.remove("cmp-bar--hidden");
+        }
         cmpCount.textContent = compareItems.length;
         cmpGoBtn.disabled = compareItems.length < 2;
         let html = "";
@@ -2515,7 +2877,7 @@
           card.addEventListener("click", (e) => {
             if (!e.target.closest(".act-btn,.btn-detail,.prop-card__actions"))
               window.location.href =
-                "property-detail.html?id=" + card.dataset.id;
+                "property-details.html?id=" + card.dataset.id;
           });
         });
         grid.querySelectorAll(".act-fav").forEach((btn) => {

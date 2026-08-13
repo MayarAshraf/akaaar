@@ -7074,11 +7074,31 @@
           openGallery(PROPS[propIdx].images, 0),
         );
 
+        /* ── Autoplay ── */
+        const PROP_AUTO_MS = 4000;
+        let propAutoTimer = null;
+
+        function startPropAutoplay() {
+          clearInterval(propAutoTimer);
+          propAutoTimer = setInterval(() => {
+            switchPropByThumb((propIdx + 1) % PROPS.length);
+          }, PROP_AUTO_MS);
+        }
+
+        function stopPropAutoplay() {
+          clearInterval(propAutoTimer);
+        }
+
+        const propSection = document.getElementById("properties");
+        propSection.addEventListener("mouseenter", stopPropAutoplay);
+        propSection.addEventListener("mouseleave", startPropAutoplay);
+
         /* Init */
         buildThumbs();
         populateCard(PROPS[0]);
         syncActionBtns();
         syncCompareTray();
+        startPropAutoplay();
 
         /* Scroll reveal */
         const revealEls = document.querySelectorAll(".props-reveal");

@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Noto+Kufi+Arabic:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Kufi+Arabic:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
 
@@ -1225,6 +1225,1373 @@
         background: currentColor;
         flex-shrink: 0;
       }
+
+      /* ═══════════════════════════════════════════════════
+   FEATURED PROPERTIES
+═══════════════════════════════════════════════════ */
+      .props {
+        padding: 72px 0 90px;
+        background: var(--bg);
+        position: relative;
+      }
+
+      .props::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 60px;
+        right: 60px;
+        height: 1px;
+        background: var(--ink-10);
+      }
+
+      .props__wrap {
+        max-width: 1340px;
+        margin: 0 auto;
+        padding: 0 60px;
+      }
+
+      .props__header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 40px;
+        margin-bottom: 48px;
+      }
+
+      .props__header-left {
+        flex: 1;
+      }
+
+      .props__header-right {
+        flex-shrink: 0;
+        padding-bottom: 4px;
+      }
+
+      .props__count {
+        font-family: var(--font-body-ltr);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--ink-40);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .props__count::before {
+        content: "";
+        display: block;
+        width: 40px;
+        height: 1px;
+        background: var(--ink-20);
+      }
+
+      .props__eyebrow {
+        display: inline-flex;
+        align-items: center;
+        font-family: var(--font-body-ltr);
+        font-size: 9.5px;
+        font-weight: 700;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--gold-dk);
+        margin-bottom: 22px;
+        padding: 6px 16px;
+        border: 1px solid rgba(201,169,110,.38);
+        border-radius: 20px;
+        background: rgba(201,169,110,.07);
+      }
+
+      .props__eyebrow::before { display: none; }
+
+      .props__title {
+        font-family: var(--font-body-ltr);
+        font-size: clamp(34px, 3.8vw, 52px);
+        font-weight: 300;
+        line-height: 1.08;
+        letter-spacing: -0.025em;
+        color: var(--ink);
+        margin-top: 0;
+        margin-bottom: 12px;
+      }
+
+      .props__title em {
+        font-style: normal;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-weight: 400;
+        color: var(--gold);
+        font-size: 1.04em;
+        letter-spacing: -0.01em;
+      }
+
+      .props__sub {
+        font-size: 15px;
+        color: var(--ink-60);
+        line-height: 1.65;
+        max-width: 420px;
+      }
+
+      /* ── Split card ── */
+      .prop-card {
+        display: grid;
+        grid-template-columns: 48fr 52fr;
+        gap: 48px;
+        align-items: start;
+        overflow: visible;
+      }
+
+      /* ── Gallery ── */
+      .prop-card__gallery {
+        position: relative;
+        /* thumb height ≈ 90px; 56px below image → 34px inside image */
+        padding-bottom: 56px;
+      }
+
+      .prop-card__img-wrap {
+        position: relative;
+        width: 100%;
+        height: 515px;
+        border-radius: 20px;
+        overflow: hidden;
+        background: var(--ink-10);
+      }
+
+      .prop-card__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        will-change: transform, opacity;
+        transition: transform 0.7s var(--ease-smooth);
+      }
+
+      .prop-card__img-wrap:hover .prop-card__img {
+        transform: scale(1.03);
+      }
+
+      /*
+       * Thumbnail strip — spans from 26% inside the image to 230px
+       * past the gallery right edge, into the (otherwise empty)
+       * lower portion of the details column. Details content is
+       * compressed above this zone so nothing gets covered.
+       */
+      .prop-card__thumbs-row {
+        position: absolute;
+        bottom: 75px;
+        left: 26%;
+        width: calc(100% + 280px);
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .prop-card__thumbs {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 8px;
+        flex: 1;
+        min-width: 0;
+      }
+
+      .prop-card__thumbs .prop-thumb {
+        flex: 1 1 0;
+        min-width: 0;
+      }
+
+      .prop-thumb {
+        position: relative;
+        aspect-ratio: 4 / 3;
+        border-radius: 7px;
+        overflow: hidden;
+        cursor: pointer;
+        border: 3px solid white;
+        padding: 0;
+        background: none;
+        transition: border-color 0.3s ease;
+      }
+
+      .prop-thumb::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(13, 13, 13, 0.32);
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+      }
+
+      .prop-thumb.is-active::after,
+      .prop-thumb:hover::after {
+        opacity: 0;
+      }
+
+      .prop-thumb.is-active {
+        border-color: var(--gold);
+      }
+
+      .prop-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
+      }
+
+      .prop-thumb:hover img {
+        transform: scale(1.07);
+      }
+
+      /* Prev/next arrows — horizontal pair to the right of thumbs */
+      .prop-thumb-arrows {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-shrink: 0;
+      }
+
+      .prop-thumb-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid var(--ink-30);
+        background: var(--bg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: all 0.28s ease;
+        color: var(--ink);
+        padding: 0;
+        box-shadow: 0 2px 10px rgba(13, 13, 13, 0.12);
+      }
+
+      .prop-thumb-btn svg {
+        width: 14px;
+        height: 14px;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .prop-thumb-btn:hover {
+        background: var(--ink);
+        border-color: var(--ink);
+        color: var(--white);
+      }
+
+      /* ── Info panel ── */
+      .prop-card__info {
+        display: flex;
+        flex-direction: column;
+        padding-top: 6px;
+      }
+
+      .prop-card__top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+
+      .prop-badges {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .prop-badge {
+        display: inline-flex;
+        align-items: center;
+        font-family: var(--font-body-ltr);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        padding: 6px 14px;
+        border-radius: 3px;
+      }
+
+      .prop-badge--gold {
+        background: var(--gold);
+        color: var(--ink);
+      }
+
+      .prop-badge--red {
+        background: var(--red);
+        color: #fff;
+      }
+
+      .prop-badge--dark {
+        background: var(--ink);
+        color: var(--white);
+      }
+
+      .prop-badge--outline {
+        border: 1px solid var(--ink-30);
+        color: var(--ink-60);
+      }
+
+      .prop-nav {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+      }
+
+      .prop-counter {
+        font-family: var(--font-body-ltr);
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        color: var(--ink-60);
+        font-variant-numeric: tabular-nums;
+        margin-right: 6px;
+      }
+
+      .prop-arrow {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1px solid var(--ink-10);
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s var(--ease-smooth);
+        color: var(--ink);
+        padding: 0;
+      }
+
+      .prop-arrow svg {
+        width: 15px;
+        height: 15px;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .prop-arrow:hover {
+        background: var(--ink);
+        border-color: var(--ink);
+        color: var(--white);
+        transform: scale(1.06);
+      }
+
+      .prop-arrow:disabled {
+        opacity: 0.25;
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+
+      .prop-title {
+        font-family: var(--font-body-ltr);
+        font-size: clamp(26px, 2.8vw, 40px);
+        font-weight: 300;
+        line-height: 1.12;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+        margin-bottom: 12px;
+      }
+
+      .prop-desc {
+        font-size: 14.5px;
+        line-height: 1.65;
+        color: var(--ink-60);
+        margin-bottom: 14px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .prop-divider {
+        height: 1px;
+        background: var(--ink-10);
+        margin-bottom: 14px;
+      }
+
+      .prop-specs {
+        display: flex;
+        gap: 28px;
+        margin-bottom: 14px;
+      }
+
+      .prop-spec {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .prop-spec__icon {
+        width: 20px;
+        height: 20px;
+        color: var(--gold);
+        flex-shrink: 0;
+      }
+
+      .prop-spec__icon svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      .prop-spec__body {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .prop-spec__val {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--ink);
+        font-variant-numeric: tabular-nums;
+        line-height: 1;
+      }
+
+      .prop-spec__lbl {
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink-60);
+      }
+
+      .prop-price-row {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .prop-price__lbl {
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 6px;
+      }
+
+      .prop-price {
+        font-size: clamp(24px, 2.5vw, 34px);
+        font-weight: 600;
+        color: var(--gold-dk);
+        font-variant-numeric: tabular-nums;
+        line-height: 1;
+      }
+
+      .btn-explore {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--font-body-ltr);
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.03em;
+        padding: 13px 26px;
+        line-height: 1;
+        border-radius: 100px;
+        white-space: nowrap;
+        cursor: pointer;
+        border: none;
+        text-decoration: none;
+        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        flex-shrink: 0;
+        background:
+          linear-gradient(50.5deg, color-mix(in oklab, #fff 42%, transparent) 0%, color-mix(in oklab, #fff 8%, transparent) 45%, transparent 70%),
+          color-mix(in oklab, var(--gold) 52%, transparent);
+        backdrop-filter: blur(80px) saturate(280%) brightness(1.18) contrast(1.05);
+        -webkit-backdrop-filter: blur(80px) saturate(280%) brightness(1.18) contrast(1.05);
+        box-shadow:
+          inset 0 1.5px 0 color-mix(in oklab, #fff 70%, transparent),
+          inset 0 -1px 0 color-mix(in oklab, var(--gold) 30%, transparent),
+          inset 0 0 0 1px color-mix(in oklab, #fff 18%, transparent),
+          0 0 0 1px rgba(0,0,0,.08);
+        color: var(--white);
+      }
+
+      .btn-explore svg {
+        width: 14px; height: 14px;
+        stroke: currentColor; stroke-width: 2; fill: none;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .btn-explore:hover {
+        background:
+          linear-gradient(50.5deg, color-mix(in oklab, #fff 52%, transparent) 0%, color-mix(in oklab, #fff 12%, transparent) 45%, transparent 70%),
+          color-mix(in oklab, var(--gold) 70%, transparent);
+        box-shadow:
+          inset 0 1.5px 0 color-mix(in oklab, #fff 80%, transparent),
+          inset 0 -1px 0 color-mix(in oklab, var(--gold) 40%, transparent),
+          inset 0 0 0 1px color-mix(in oklab, #fff 25%, transparent),
+          0 0 0 1px rgba(0,0,0,.06),
+          0 10px 36px rgba(201, 169, 110, 0.42);
+        transform: translateY(-2px);
+        color: var(--white);
+      }
+
+      .btn-explore:hover svg { transform: translateX(4px); }
+
+      .prop-location {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 13px;
+        color: var(--ink-60);
+        margin-top: 4px;
+        margin-bottom: 14px;
+      }
+
+      .prop-location svg {
+        width: 14px;
+        height: 14px;
+        stroke: var(--gold);
+        fill: none;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        flex-shrink: 0;
+      }
+
+      .props__footer {
+        display: flex;
+        justify-content: center;
+        margin-top: 80px;
+        padding-top: 60px;
+        border-top: 1px solid var(--ink-10);
+      }
+
+      /* ── btn-slide--outline — pill outline for light-bg secondary actions ── */
+      .btn-slide--outline {
+        background: rgba(201,169,110,.06);
+        border: 1.5px solid rgba(201,169,110,.45);
+        color: var(--gold-dk);
+      }
+      .btn-slide--outline:hover {
+        background: rgba(201,169,110,.13);
+        border-color: var(--gold);
+        box-shadow: 0 8px 28px rgba(201,169,110,.25);
+      }
+      .btn-slide--outline svg {
+        transition: transform 0.3s cubic-bezier(0.16,1,.3,1);
+      }
+      .btn-slide--outline:hover svg { transform: translateX(4px); }
+
+      /* btn-view-all → pill outline alias */
+      .btn-view-all {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--font-body-ltr);
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.03em;
+        padding: 13px 32px;
+        line-height: 1;
+        border-radius: 100px;
+        white-space: nowrap;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        background: rgba(201,169,110,.06);
+        border: 1.5px solid rgba(201,169,110,.45);
+        color: var(--gold-dk);
+      }
+
+      .btn-view-all svg {
+        width: 14px; height: 14px;
+        stroke: currentColor; fill: none; stroke-width: 1.5;
+        transition: transform 0.3s cubic-bezier(0.16,1,.3,1);
+      }
+
+      .btn-view-all:hover {
+        background: rgba(201,169,110,.13);
+        border-color: var(--gold);
+        box-shadow: 0 8px 28px rgba(201,169,110,.25);
+        transform: translateY(-2px);
+        color: var(--gold-dk);
+      }
+
+      .btn-view-all:hover svg { transform: translateX(4px); }
+
+      .props-reveal {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      /* ═══════════════════════════════════════════════════
+   WHY CHOOSE US
+═══════════════════════════════════════════════════ */
+      .why {
+        padding: 80px 0 100px;
+        background-color: var(--bg);
+        background-image: url("why-bg.jpeg");
+        background-size: cover;
+        background-position: center top;
+        background-repeat: no-repeat;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .why::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(250,248,245,0.82);
+        pointer-events: none;
+      }
+
+      .why__wrap {
+        max-width: 1340px;
+        margin: 0 auto;
+        padding: 0 60px;
+      }
+
+      /* Header */
+      .why__header {
+        text-align: center;
+        margin-bottom: 64px;
+      }
+
+      .why__eyebrow {
+        display: inline-flex;
+        align-items: center;
+        font-family: var(--font-body-ltr);
+        font-size: 9.5px;
+        font-weight: 700;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--gold-dk);
+        margin-bottom: 22px;
+        padding: 6px 18px;
+        border: 1px solid rgba(201,169,110,.38);
+        border-radius: 20px;
+        background: rgba(201,169,110,.07);
+      }
+
+      .why__eyebrow::before,
+      .why__eyebrow::after { display: none; }
+
+      .why__title {
+        font-family: var(--font-body-ltr);
+        font-size: clamp(34px, 3.8vw, 54px);
+        font-weight: 300;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+        color: var(--ink);
+        margin: 0 0 14px;
+      }
+
+      .why__title em {
+        font-style: normal;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-weight: 400;
+        color: var(--gold);
+        font-size: 1.04em;
+        letter-spacing: -0.01em;
+      }
+
+      .why__sub {
+        font-size: 15px;
+        color: var(--ink-60);
+        line-height: 1.65;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      /* Stats bar */
+      .why__stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: rgba(13,13,13,0.08);
+        border-radius: 12px;
+        overflow: hidden;
+        margin-bottom: 80px;
+      }
+
+      .why__stat {
+        background: rgba(250,248,245,0.7);
+        backdrop-filter: blur(8px);
+        padding: 32px 28px;
+        text-align: center;
+        position: relative;
+      }
+
+      .why__stat::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 32px;
+        height: 2px;
+        background: var(--gold);
+        border-radius: 2px;
+        opacity: 0;
+        transition: opacity 0.6s ease;
+      }
+
+      .why__stat.is-counted::after { opacity: 1; }
+
+      .why__stat-num {
+        display: block;
+        font-family: var(--font-body-ltr);
+        font-size: clamp(36px, 4vw, 52px);
+        font-weight: 300;
+        letter-spacing: -0.03em;
+        color: var(--gold);
+        line-height: 1;
+        margin-bottom: 8px;
+      }
+
+      .why__stat-lbl {
+        display: block;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--ink-40);
+      }
+
+      /* Timeline */
+      .why__timeline {
+        position: relative;
+      }
+
+      /* SVG wavy dotted path */
+      .why__path-svg {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 260px;
+        transform: translateY(-50%);
+        pointer-events: none;
+        overflow: visible;
+      }
+
+      /* Stage grid: 4 columns, 2 rows (top / bottom alternating) */
+      .why__stages {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 1fr auto 1fr;
+        row-gap: 0;
+        column-gap: 0;
+        min-height: 500px;
+      }
+
+      .why__stage {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 0 20px;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+
+      .why__stage.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Top stages: sit in row 1, bottom stages in row 3 */
+      .why__stage--top {
+        grid-row: 1;
+        justify-content: flex-end;
+        padding-bottom: 48px;
+      }
+
+      .why__stage--bottom {
+        grid-row: 3;
+        justify-content: flex-start;
+        padding-top: 48px;
+      }
+
+      /* Column positions */
+      .why__stage:nth-child(1) { grid-column: 1; }
+      .why__stage:nth-child(2) { grid-column: 2; }
+      .why__stage:nth-child(3) { grid-column: 3; }
+      .why__stage:nth-child(4) { grid-column: 4; }
+
+      /* Dot on timeline connector */
+      .why__dot {
+        grid-row: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 0;
+      }
+
+      .why__stage-illus {
+        width: 120px;
+        height: 100px;
+        margin-bottom: 20px;
+        flex-shrink: 0;
+      }
+
+      .why__stage-num {
+        font-family: var(--font-body-ltr);
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 8px;
+      }
+
+      .why__stage-title {
+        font-family: var(--font-body-ltr);
+        font-size: 18px;
+        font-weight: 400;
+        color: var(--ink);
+        margin-bottom: 10px;
+        letter-spacing: -0.01em;
+      }
+
+      .why__stage-desc {
+        font-size: 13.5px;
+        line-height: 1.65;
+        color: var(--ink-60);
+        max-width: 200px;
+      }
+
+      .why-reveal {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      /* ═══════════════════════════════════════════════════
+   PROPERTY GALLERY
+═══════════════════════════════════════════════════ */
+      .pgal {
+        padding: 80px 0 100px;
+        background: var(--bg);
+        border-top: 1px solid var(--ink-10);
+      }
+
+      .pgal__wrap {
+        max-width: 1340px;
+        margin: 0 auto;
+        padding: 0 60px;
+      }
+
+      .pgal__header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 40px;
+        margin-bottom: 52px;
+      }
+
+      .pgal__header-left { flex: 1; }
+      .pgal__header-right { flex-shrink: 0; padding-bottom: 4px; }
+
+      .pgal__eyebrow {
+        display: inline-flex;
+        align-items: center;
+        font-family: var(--font-body-ltr);
+        font-size: 9.5px;
+        font-weight: 700;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--gold-dk);
+        margin-bottom: 22px;
+        padding: 6px 16px;
+        border: 1px solid rgba(201,169,110,.38);
+        border-radius: 20px;
+        background: rgba(201,169,110,.07);
+      }
+
+      .pgal__eyebrow::before { display: none; }
+
+      .pgal__title {
+        font-family: var(--font-body-ltr);
+        font-size: clamp(34px, 3.8vw, 52px);
+        font-weight: 300;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+        color: var(--ink);
+        margin: 0 0 12px;
+      }
+
+      .pgal__title em {
+        font-style: normal;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-weight: 400;
+        color: var(--gold);
+        font-size: 1.04em;
+        letter-spacing: -0.01em;
+      }
+
+      .pgal__sub {
+        font-size: 15px;
+        color: var(--ink-60);
+        line-height: 1.65;
+        max-width: 380px;
+      }
+
+      /* Masonry grid */
+      .pgal__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: clamp(240px, 21vw, 360px);
+        gap: 14px;
+      }
+
+      /* Grid positions */
+      .pgal-card:nth-child(1) { grid-column: 1 / 3; grid-row: 1; }
+      .pgal-card:nth-child(2) { grid-column: 3;     grid-row: 1 / 3; }
+      .pgal-card:nth-child(3) { grid-column: 1;     grid-row: 2; }
+      .pgal-card:nth-child(4) { grid-column: 2;     grid-row: 2; }
+      .pgal-card:nth-child(5) { grid-column: 1;     grid-row: 3 / 5; }
+      .pgal-card:nth-child(6) { grid-column: 2 / 4; grid-row: 3; }
+      .pgal-card:nth-child(7) { grid-column: 2;     grid-row: 4; }
+      .pgal-card:nth-child(8) { grid-column: 3;     grid-row: 4; }
+
+      /* Card base */
+      .pgal-card {
+        position: relative;
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: pointer;
+        background: var(--ink-10);
+        box-shadow: 0 2px 16px rgba(13,13,13,0.08);
+        transition: box-shadow 0.45s ease;
+        transform: translateZ(0);
+        isolation: isolate;
+      }
+
+      .pgal-card__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transform-origin: center center;
+      }
+
+      /* Dim overlay */
+      .pgal-card__dim {
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.18);
+        z-index: 1;
+        opacity: 0;
+        pointer-events: none;
+        will-change: opacity;
+      }
+
+      /* Info panel — light frosted glass */
+      .pgal-card__panel {
+        position: absolute;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        padding: 22px 20px;
+        will-change: clip-path, opacity;
+        background: #fff;
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+      }
+
+      /* Landscape: left panel, ~44% width, full height */
+      .pgal-card[data-type="landscape"] .pgal-card__panel {
+        top: 0; bottom: 0; left: 0;
+        width: 44%;
+        justify-content: center;
+        border-radius: 0 12px 12px 0;
+      }
+
+      /* Portrait: bottom panel, auto height */
+      .pgal-card[data-type="portrait"] .pgal-card__panel {
+        bottom: 0; 
+        width: 100%;
+        top: auto;
+        justify-content: flex-end;
+        border-radius: 12px 12px 0 0;
+      }
+
+      /* Square: inset card, full overlay */
+      .pgal-card[data-type="square"] .pgal-card__panel {
+        inset: 10px;
+        justify-content: flex-end;
+        border-radius: 10px;
+      }
+
+      /* Badge */
+      .pgal-card__badge {
+        display: inline-block;
+        font-family: var(--font-body-ltr);
+        font-size: 9px;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        border: 1px solid rgba(201,169,110,0.5);
+        padding: 4px 10px;
+        border-radius: 2px;
+        margin-bottom: 10px;
+        width: fit-content;
+      }
+
+      .pgal-card__title {
+        font-family: var(--font-body-ltr);
+        font-size: clamp(14px, 1.3vw, 19px);
+        font-weight: 400;
+        color: var(--ink);
+        letter-spacing: -0.01em;
+        line-height: 1.2;
+        margin-bottom: 5px;
+      }
+
+      .pgal-card__location {
+        font-size: 11.5px;
+        color: var(--ink-60);
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 10px;
+      }
+
+      .pgal-card__location svg {
+        width: 11px; height: 11px;
+        stroke: var(--gold); fill: none;
+        stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+        flex-shrink: 0;
+      }
+
+      .pgal-card__specs {
+        display: flex;
+        gap: 14px;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+      }
+
+      .pgal-card__spec {
+        font-size: 11.5px;
+        color: var(--ink-60);
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .pgal-card__spec svg {
+        width: 12px; height: 12px;
+        stroke: var(--ink-40); fill: none;
+        stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+      }
+
+      .pgal-card__price {
+        font-family: var(--font-body-ltr);
+        font-size: clamp(14px, 1.2vw, 18px);
+        font-weight: 400;
+        color: var(--gold);
+        letter-spacing: -0.01em;
+        margin-bottom: 14px;
+      }
+
+      .pgal-card__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-family: var(--font-body-ltr);
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--ink);
+        text-decoration: none;
+        border-bottom: 1px solid var(--ink-20);
+        padding-bottom: 3px;
+        width: fit-content;
+        transition: border-color 0.2s ease, color 0.2s ease;
+        margin-bottom: 14px;
+      }
+
+      .pgal-card__cta:hover { border-color: var(--gold); color: var(--gold-dk, #a07c40); }
+
+      .pgal-card__cta svg {
+        width: 12px; height: 12px;
+        stroke: currentColor; fill: none;
+        stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+        transition: transform 0.25s ease;
+      }
+
+      .pgal-card__cta:hover svg { transform: translateX(3px); }
+
+      /* 3 action icon buttons */
+      .pgal-card__actions {
+        display: flex;
+        gap: 6px;
+        border-top: 1px solid rgba(13,13,13,0.08);
+        padding-top: 10px;
+        margin-top: 2px;
+      }
+
+      .pgal-action {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        height: 32px;
+        border: 1px solid rgba(13,13,13,0.1);
+        border-radius: 6px;
+        background: transparent;
+        cursor: pointer;
+        font-family: var(--font-body-ltr);
+        font-size: 9.5px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        color: var(--ink-60);
+        transition: all 0.22s ease;
+      }
+
+      .pgal-action svg {
+        width: 13px; height: 13px;
+        stroke: currentColor; fill: none;
+        stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+        flex-shrink: 0;
+        transition: stroke 0.22s ease;
+      }
+
+      .pgal-action:hover { border-color: var(--gold); color: var(--gold-dk, #a07c40); }
+      .pgal-action:hover svg { stroke: var(--gold); }
+
+      /* Fav active */
+      .pgal-action.pgal-fav.is-fav { border-color: #e63b3b; color: #e63b3b; }
+      .pgal-action.pgal-fav.is-fav svg { stroke: #e63b3b; fill: #e63b3b; }
+
+      /* Compare active */
+      .pgal-action.pgal-compare-btn.is-compared { border-color: var(--gold); background: var(--gold); color: #fff; }
+      .pgal-action.pgal-compare-btn.is-compared svg { stroke: #fff; }
+
+      /* ── Compare sidebar ── */
+      .cmp-bar {
+        position: fixed;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 900;
+        display: flex;
+        align-items: flex-end;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .cmp-bar__toggle {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        background: var(--gold);
+        color: var(--ink);
+        border: none;
+        padding: 10px 14px;
+        cursor: pointer;
+        font-family: var(--font-body-ltr);
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        border-radius: 8px 0 0 8px;
+        box-shadow: -3px 0 16px rgba(13,13,13,0.15);
+        white-space: nowrap;
+        transition: background 0.2s ease;
+        writing-mode: initial;
+      }
+
+      .cmp-bar__toggle svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; }
+      .cmp-bar__toggle:hover { background: var(--gold-dk, #a07c40); }
+      .cmp-bar__toggle[hidden] { display: none; }
+
+      .cmp-bar__panel {
+        background: var(--bg);
+        border: 1px solid var(--ink-10);
+        border-right: none;
+        border-radius: 12px 0 0 12px;
+        box-shadow: -4px 0 32px rgba(13,13,13,0.14);
+        width: 280px;
+        overflow: hidden;
+        transform: translateX(100%);
+        transition: transform 0.38s cubic-bezier(0.32,0,0.15,1);
+      }
+
+      .cmp-bar__panel.is-open { transform: translateX(0); }
+
+      .cmp-bar__head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 18px 12px;
+        border-bottom: 1px solid var(--ink-10);
+      }
+
+      .cmp-bar__heading {
+        font-family: var(--font-body-ltr);
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--ink);
+        letter-spacing: -0.01em;
+      }
+
+      .cmp-bar__close-all {
+        background: none; border: none; cursor: pointer;
+        font-size: 10px; font-family: var(--font-body-ltr);
+        color: var(--ink-40); letter-spacing: 0.06em;
+        transition: color 0.2s ease;
+      }
+      .cmp-bar__close-all:hover { color: var(--ink); }
+
+      .cmp-bar__list {
+        list-style: none;
+        padding: 10px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-height: 320px;
+        overflow-y: auto;
+      }
+
+      .cmp-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 8px;
+        border: 1px solid var(--ink-10);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .cmp-item__thumb {
+        width: 46px; height: 36px;
+        border-radius: 5px;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+
+      .cmp-item__name {
+        font-size: 12px;
+        font-weight: 400;
+        color: var(--ink);
+        line-height: 1.3;
+        flex: 1;
+        min-width: 0;
+      }
+
+      .cmp-item__rm {
+        background: none; border: none; cursor: pointer;
+        width: 20px; height: 20px;
+        border-radius: 50%;
+        background: var(--ink-10);
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+        transition: background 0.2s ease;
+      }
+      .cmp-item__rm:hover { background: #e63b3b; }
+      .cmp-item__rm svg { width: 10px; height: 10px; stroke: var(--ink-60); stroke-width: 2; }
+      .cmp-item__rm:hover svg { stroke: #fff; }
+
+      .cmp-bar__footer { padding: 12px 14px; }
+
+      .cmp-bar__go {
+        display: block; width: 100%;
+        background: var(--ink); color: var(--white);
+        border: none; cursor: pointer;
+        padding: 12px;
+        border-radius: 8px;
+        font-family: var(--font-body-ltr);
+        font-size: 11px; font-weight: 600;
+        letter-spacing: 0.14em; text-transform: uppercase;
+        transition: background 0.2s ease;
+      }
+      .cmp-bar__go:hover { background: var(--gold); color: var(--ink); }
+
+      /* ── Lightbox ── */
+      .pgal-lb {
+        position: fixed; inset: 0;
+        background: rgba(10,10,10,0.96);
+        z-index: 9999;
+        display: flex; align-items: center; justify-content: center;
+        opacity: 0; pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .pgal-lb.is-open { opacity: 1; pointer-events: all; }
+
+      .pgal-lb__inner {
+        position: relative;
+        width: min(90vw, 1100px);
+        height: min(80vh, 700px);
+        display: flex; align-items: center; justify-content: center;
+      }
+
+      .pgal-lb__img {
+        max-width: 100%; max-height: 100%;
+        object-fit: contain;
+        border-radius: 8px;
+        box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+        transition: opacity 0.2s ease;
+      }
+
+      .pgal-lb__close {
+        position: absolute; top: -44px; right: 0;
+        background: none; border: none; cursor: pointer;
+        color: rgba(255,255,255,0.7); font-size: 28px; line-height: 1;
+        transition: color 0.2s ease;
+      }
+      .pgal-lb__close:hover { color: #fff; }
+
+      .pgal-lb__prev, .pgal-lb__next {
+        position: fixed;
+        top: 50%; transform: translateY(-50%);
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.15);
+        color: #fff; cursor: pointer;
+        width: 48px; height: 48px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        backdrop-filter: blur(8px);
+        transition: background 0.2s ease;
+      }
+      .pgal-lb__prev { left: 24px; }
+      .pgal-lb__next { right: 24px; }
+      .pgal-lb__prev:hover, .pgal-lb__next:hover { background: rgba(255,255,255,0.2); }
+      .pgal-lb__prev svg, .pgal-lb__next svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+      .pgal-lb__info {
+        position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+        text-align: center;
+      }
+      .pgal-lb__title { font-family: var(--font-body-ltr); font-size: 15px; font-weight: 300; color: #fff; margin-bottom: 6px; letter-spacing: -0.01em; }
+      .pgal-lb__counter { font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: 0.1em; }
+
+      .pgal-lb__thumbs {
+        position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+        display: flex; gap: 8px;
+      }
+
+      .pgal-lb__thumb {
+        width: 52px; height: 38px;
+        object-fit: cover; border-radius: 4px;
+        cursor: pointer; opacity: 0.45;
+        border: 2px solid transparent;
+        transition: opacity 0.2s ease, border-color 0.2s ease;
+      }
+      .pgal-lb__thumb.is-active { opacity: 1; border-color: var(--gold); }
+      .pgal-lb__thumb:hover { opacity: 0.8; }
+
+      .pgal-reveal {
+        opacity: 0;
+        transform: translateY(24px);
+      }
     </style>
   </head>
   <body>
@@ -1338,7 +2705,7 @@
 
       <div class="navbar__right">
         <ul class="navbar__nav" role="list">
-          <li><a href="#">Properties</a></li>
+          <li><a href="listings.html">Properties</a></li>
           <li><a href="#">Projects</a></li>
           <li><a href="#">About</a></li>
           <li><a href="#">Contact</a></li>
@@ -1449,6 +2816,521 @@
       </div>
       <!-- /stage -->
     </section>
+
+    <!-- ─── FEATURED PROPERTIES ─── -->
+    <section class="props" id="properties">
+      <div class="props__wrap">
+
+        <!-- Header -->
+        <header class="props__header">
+          <div class="props__header-left">
+            <p class="props__eyebrow props-reveal">Properties</p>
+            <h2 class="props__title props-reveal">Featured <em>Properties</em></h2>
+            <p class="props__sub props-reveal">Exceptional homes curated exclusively for the discerning few.</p>
+          </div>
+          <div class="props__header-right props-reveal">
+            <span class="props__count">05 Properties</span>
+          </div>
+        </header>
+
+        <!-- Split card -->
+        <div class="prop-card props-reveal" id="propCard">
+
+          <!-- Left: Gallery -->
+          <div class="prop-card__gallery">
+            <div class="prop-card__img-wrap">
+              <img class="prop-card__img" id="propMainImg" src="" alt="" loading="eager" />
+            </div>
+            <div class="prop-card__thumbs-row">
+              <div class="prop-card__thumbs" id="propThumbs"></div>
+              <div class="prop-thumb-arrows">
+                <button class="prop-thumb-btn" id="thumbPrev" aria-label="Previous image">
+                  <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"/></svg>
+                </button>
+                <button class="prop-thumb-btn" id="thumbNext" aria-label="Next image">
+                  <svg viewBox="0 0 24 24"><polyline points="9,18 15,12 9,6"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Info -->
+          <div class="prop-card__info">
+
+            <!-- Top: badges + property nav -->
+            <div class="prop-card__top">
+              <div class="prop-badges" id="propBadges"></div>
+              <div class="prop-nav">
+                <span class="prop-counter" id="propCounter">01 / 05</span>
+                <button class="prop-arrow" id="propPrev" aria-label="Previous property">
+                  <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"/></svg>
+                </button>
+                <button class="prop-arrow" id="propNext" aria-label="Next property">
+                  <svg viewBox="0 0 24 24"><polyline points="9,18 15,12 9,6"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <h3 class="prop-title" id="propTitle"></h3>
+
+            <!-- Location -->
+            <div class="prop-location">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 21s-8-7.5-8-12a8 8 0 0116 0c0 4.5-8 12-8 12z"/>
+                <circle cx="12" cy="9" r="2.5"/>
+              </svg>
+              <span id="propLocationText"></span>
+            </div>
+
+            <p class="prop-desc" id="propDesc"></p>
+
+            <div class="prop-divider"></div>
+
+            <!-- Specs -->
+            <div class="prop-specs">
+              <div class="prop-spec">
+                <span class="prop-spec__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 9V19M22 9V19M2 14H22M6 14V10a1 1 0 011-1h4a1 1 0 011 1v4"/>
+                  </svg>
+                </span>
+                <div class="prop-spec__body">
+                  <span class="prop-spec__val" id="propBeds">—</span>
+                  <span class="prop-spec__lbl">Beds</span>
+                </div>
+              </div>
+              <div class="prop-spec">
+                <span class="prop-spec__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 12h16v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4z"/>
+                    <path d="M4 12V7a2 2 0 012-2h2v7"/>
+                    <path d="M8 21v1M16 21v1"/>
+                  </svg>
+                </span>
+                <div class="prop-spec__body">
+                  <span class="prop-spec__val" id="propBaths">—</span>
+                  <span class="prop-spec__lbl">Baths</span>
+                </div>
+              </div>
+              <div class="prop-spec">
+                <span class="prop-spec__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="1.5"/>
+                    <path d="M3 9h18M9 3v18"/>
+                  </svg>
+                </span>
+                <div class="prop-spec__body">
+                  <span class="prop-spec__val" id="propArea">—</span>
+                  <span class="prop-spec__lbl">Area m²</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="prop-divider"></div>
+
+            <!-- Price + CTA -->
+            <div class="prop-price-row">
+              <div>
+                <div class="prop-price__lbl">Starting Price</div>
+                <div class="prop-price" id="propPrice">—</div>
+              </div>
+              <a href="#contact" class="btn-explore">
+                Explore
+                <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+
+          </div>
+          <!-- /info -->
+        </div>
+        <!-- /prop-card -->
+
+        <!-- View All -->
+        <div class="props__footer props-reveal">
+          <a href="#" class="btn-view-all">
+            View All Properties
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── WHY CHOOSE US ─── -->
+    <section class="why" id="why-us">
+      <div class="why__wrap">
+
+        <!-- Header -->
+        <header class="why__header">
+          <p class="why__eyebrow why-reveal">Our Distinction</p>
+          <h2 class="why__title why-reveal">Why Choose <em>Akar Town</em></h2>
+          <p class="why__sub why-reveal">Decades of expertise paired with an unwavering commitment to luxury living.</p>
+        </header>
+
+        <!-- Stats -->
+        <div class="why__stats">
+          <div class="why__stat why-reveal">
+            <span class="why__stat-num" data-target="500" data-suffix="+">0</span>
+            <span class="why__stat-lbl">Premium Properties</span>
+          </div>
+          <div class="why__stat why-reveal">
+            <span class="why__stat-num" data-target="15" data-suffix="+">0</span>
+            <span class="why__stat-lbl">Years of Expertise</span>
+          </div>
+          <div class="why__stat why-reveal">
+            <span class="why__stat-num" data-target="98" data-suffix="%">0</span>
+            <span class="why__stat-lbl">Client Satisfaction</span>
+          </div>
+          <div class="why__stat why-reveal">
+            <span class="why__stat-num" data-target="2000" data-suffix="+">0</span>
+            <span class="why__stat-lbl">Happy Clients</span>
+          </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="why__timeline">
+
+          <!-- Dotted wavy SVG path -->
+          <svg class="why__path-svg" viewBox="0 0 1000 260" preserveAspectRatio="none" aria-hidden="true">
+            <path
+              d="M 125,200 C 200,200 200,60 375,60 C 500,60 500,200 625,200 C 750,200 750,60 875,60"
+              fill="none"
+              stroke="rgba(201,169,110,0.6)"
+              stroke-width="1.5"
+              stroke-dasharray="6 8"
+              stroke-linecap="round"
+            />
+            <!-- Stage dots on path -->
+            <circle cx="125" cy="200" r="5" fill="var(--gold)" opacity="0.9"/>
+            <circle cx="375" cy="60"  r="5" fill="var(--gold)" opacity="0.9"/>
+            <circle cx="625" cy="200" r="5" fill="var(--gold)" opacity="0.9"/>
+            <circle cx="875" cy="60"  r="5" fill="var(--gold)" opacity="0.9"/>
+            <!-- Outer pulse rings -->
+            <circle cx="125" cy="200" r="10" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.3"/>
+            <circle cx="375" cy="60"  r="10" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.3"/>
+            <circle cx="625" cy="200" r="10" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.3"/>
+            <circle cx="875" cy="60"  r="10" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.3"/>
+          </svg>
+
+          <!-- 4 stages -->
+          <div class="why__stages">
+
+            <!-- Stage 1 — bottom-left -->
+            <div class="why__stage why__stage--bottom" style="transition-delay:0s">
+              <!-- Villa illustration -->
+              <svg class="why__stage-illus" viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="15" y="52" width="90" height="40" rx="2" fill="rgba(201,169,110,0.22)" stroke="rgba(201,169,110,0.6)" stroke-width="1.2"/>
+                <polygon points="15,52 60,18 105,52" fill="rgba(201,169,110,0.16)" stroke="rgba(201,169,110,0.6)" stroke-width="1.2" stroke-linejoin="round"/>
+                <rect x="48" y="66" width="24" height="26" rx="1" fill="rgba(201,169,110,0.28)" stroke="rgba(201,169,110,0.8)" stroke-width="1"/>
+                <rect x="22" y="60" width="16" height="14" rx="1" fill="rgba(201,169,110,0.18)" stroke="rgba(201,169,110,0.7)" stroke-width="0.8"/>
+                <rect x="82" y="60" width="16" height="14" rx="1" fill="rgba(201,169,110,0.18)" stroke="rgba(201,169,110,0.7)" stroke-width="0.8"/>
+                <line x1="60" y1="18" x2="60" y2="10" stroke="rgba(201,169,110,0.7)" stroke-width="1"/>
+                <circle cx="60" cy="9" r="2" fill="rgba(201,169,110,0.6)"/>
+                <rect x="8" y="90" width="104" height="1.5" rx="0.75" fill="rgba(201,169,110,0.3)"/>
+                <rect x="0" y="91.5" width="120" height="0.5" rx="0.25" fill="rgba(201,169,110,0.22)"/>
+              </svg>
+              <span class="why__stage-num">01</span>
+              <h3 class="why__stage-title">Expert Guidance</h3>
+              <p class="why__stage-desc">Dedicated advisors who understand your vision and navigate every decision.</p>
+            </div>
+
+            <!-- Stage 2 — top -->
+            <div class="why__stage why__stage--top" style="transition-delay:0.15s">
+              <!-- Tower illustration -->
+              <svg class="why__stage-illus" viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="35" y="20" width="50" height="72" rx="2" fill="rgba(201,169,110,0.18)" stroke="rgba(201,169,110,0.6)" stroke-width="1.2"/>
+                <rect x="35" y="20" width="50" height="10" rx="2" fill="rgba(201,169,110,0.32)" stroke="rgba(201,169,110,0.6)" stroke-width="1.2"/>
+                <rect x="42" y="35" width="10" height="8" rx="1" fill="rgba(201,169,110,0.32)" stroke="rgba(201,169,110,0.7)" stroke-width="0.8"/>
+                <rect x="58" y="35" width="10" height="8" rx="1" fill="rgba(201,169,110,0.32)" stroke="rgba(201,169,110,0.7)" stroke-width="0.8"/>
+                <rect x="42" y="50" width="10" height="8" rx="1" fill="rgba(201,169,110,0.32)" stroke="rgba(201,169,110,0.7)" stroke-width="0.8"/>
+                <rect x="58" y="50" width="10" height="8" rx="1" fill="rgba(201,169,110,0.32)" stroke="rgba(201,169,110,0.7)" stroke-width="0.8"/>
+                <rect x="42" y="65" width="10" height="8" rx="1" fill="rgba(201,169,110,0.32)" stroke="rgba(201,169,110,0.7)" stroke-width="0.8"/>
+                <rect x="58" y="65" width="10" height="8" rx="1" fill="rgba(201,169,110,0.32)" stroke="rgba(201,169,110,0.7)" stroke-width="0.8"/>
+                <rect x="50" y="78" width="20" height="14" rx="1" fill="rgba(201,169,110,0.22)" stroke="rgba(201,169,110,0.7)" stroke-width="0.8"/>
+                <line x1="60" y1="20" x2="60" y2="10" stroke="rgba(201,169,110,0.8)" stroke-width="1"/>
+                <circle cx="60" cy="8" r="2.5" fill="rgba(201,169,110,0.7)"/>
+                <rect x="8" y="91" width="104" height="1.5" rx="0.75" fill="rgba(201,169,110,0.3)"/>
+                <rect x="15" y="82" width="20" height="10" rx="1" fill="rgba(201,169,110,0.16)" stroke="rgba(201,169,110,0.55)" stroke-width="0.8"/>
+                <rect x="85" y="82" width="20" height="10" rx="1" fill="rgba(201,169,110,0.16)" stroke="rgba(201,169,110,0.55)" stroke-width="0.8"/>
+              </svg>
+              <span class="why__stage-num">02</span>
+              <h3 class="why__stage-title">Curated Portfolio</h3>
+              <p class="why__stage-desc">Hand-selected luxury developments in Egypt's most coveted locations.</p>
+            </div>
+
+            <!-- Stage 3 — bottom -->
+            <div class="why__stage why__stage--bottom" style="transition-delay:0.3s">
+              <!-- Townhouse illustration -->
+              <svg class="why__stage-illus" viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="50" width="40" height="42" rx="2" fill="rgba(201,169,110,0.18)" stroke="rgba(201,169,110,0.8)" stroke-width="1.2"/>
+                <rect x="70" y="44" width="40" height="48" rx="2" fill="rgba(201,169,110,0.22)" stroke="rgba(201,169,110,0.6)" stroke-width="1.2"/>
+                <polygon points="10,50 30,28 50,50" fill="rgba(201,169,110,0.14)" stroke="rgba(201,169,110,0.8)" stroke-width="1.2" stroke-linejoin="round"/>
+                <polygon points="70,44 90,20 110,44" fill="rgba(201,169,110,0.18)" stroke="rgba(201,169,110,0.6)" stroke-width="1.2" stroke-linejoin="round"/>
+                <rect x="24" y="64" width="12" height="28" rx="1" fill="rgba(201,169,110,0.28)" stroke="rgba(201,169,110,0.7)" stroke-width="0.8"/>
+                <rect x="84" y="58" width="12" height="34" rx="1" fill="rgba(201,169,110,0.28)" stroke="rgba(201,169,110,0.7)" stroke-width="0.8"/>
+                <rect x="14" y="56" width="10" height="8" rx="1" fill="rgba(201,169,110,0.28)" stroke="rgba(201,169,110,0.7)" stroke-width="0.8"/>
+                <rect x="76" y="50" width="10" height="8" rx="1" fill="rgba(201,169,110,0.28)" stroke="rgba(201,169,110,0.7)" stroke-width="0.8"/>
+                <rect x="100" y="50" width="10" height="8" rx="1" fill="rgba(201,169,110,0.28)" stroke="rgba(201,169,110,0.7)" stroke-width="0.8"/>
+                <rect x="50" y="65" width="20" height="27" rx="0" fill="rgba(201,169,110,0.06)" stroke="rgba(201,169,110,0.55)" stroke-width="0.8"/>
+                <rect x="0" y="91" width="120" height="1.5" rx="0.75" fill="rgba(201,169,110,0.3)"/>
+              </svg>
+              <span class="why__stage-num">03</span>
+              <h3 class="why__stage-title">Seamless Process</h3>
+              <p class="why__stage-desc">End-to-end support from first viewing through final handover.</p>
+            </div>
+
+            <!-- Stage 4 — top -->
+            <div class="why__stage why__stage--top" style="transition-delay:0.45s">
+              <!-- Estate/mansion illustration -->
+              <svg class="why__stage-illus" viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="5" y="55" width="110" height="37" rx="2" fill="rgba(201,169,110,0.18)" stroke="rgba(201,169,110,0.55)" stroke-width="1.2"/>
+                <polygon points="5,55 60,22 115,55" fill="rgba(201,169,110,0.14)" stroke="rgba(201,169,110,0.55)" stroke-width="1.2" stroke-linejoin="round"/>
+                <rect x="46" y="68" width="28" height="24" rx="1" fill="rgba(201,169,110,0.28)" stroke="rgba(201,169,110,0.8)" stroke-width="1"/>
+                <rect x="12" y="63" width="14" height="12" rx="1" fill="rgba(201,169,110,0.22)" stroke="rgba(201,169,110,0.7)" stroke-width="0.8"/>
+                <rect x="30" y="63" width="14" height="12" rx="1" fill="rgba(201,169,110,0.22)" stroke="rgba(201,169,110,0.7)" stroke-width="0.8"/>
+                <rect x="76" y="63" width="14" height="12" rx="1" fill="rgba(201,169,110,0.22)" stroke="rgba(201,169,110,0.7)" stroke-width="0.8"/>
+                <rect x="94" y="63" width="14" height="12" rx="1" fill="rgba(201,169,110,0.22)" stroke="rgba(201,169,110,0.7)" stroke-width="0.8"/>
+                <line x1="30" y1="55" x2="30" y2="45" stroke="rgba(201,169,110,0.65)" stroke-width="0.8"/>
+                <line x1="60" y1="22" x2="60" y2="12" stroke="rgba(201,169,110,0.8)" stroke-width="1"/>
+                <line x1="90" y1="55" x2="90" y2="45" stroke="rgba(201,169,110,0.65)" stroke-width="0.8"/>
+                <circle cx="60" cy="10" r="3" fill="rgba(201,169,110,0.7)"/>
+                <rect x="0" y="91" width="120" height="1.5" rx="0.75" fill="rgba(201,169,110,0.3)"/>
+                <!-- trees -->
+                <line x1="8" y1="92" x2="8" y2="80" stroke="rgba(201,169,110,0.55)" stroke-width="0.8"/>
+                <ellipse cx="8" cy="77" rx="5" ry="6" fill="rgba(201,169,110,0.16)" stroke="rgba(201,169,110,0.55)" stroke-width="0.8"/>
+                <line x1="112" y1="92" x2="112" y2="80" stroke="rgba(201,169,110,0.55)" stroke-width="0.8"/>
+                <ellipse cx="112" cy="77" rx="5" ry="6" fill="rgba(201,169,110,0.16)" stroke="rgba(201,169,110,0.55)" stroke-width="0.8"/>
+              </svg>
+              <span class="why__stage-num">04</span>
+              <h3 class="why__stage-title">Lifetime Value</h3>
+              <p class="why__stage-desc">Investment-grade properties that appreciate and enrich for generations.</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── PROPERTY GALLERY ─── -->
+    <section class="pgal" id="gallery">
+      <div class="pgal__wrap">
+
+        <header class="pgal__header">
+          <div class="pgal__header-left">
+            <p class="pgal__eyebrow pgal-reveal">Property Gallery</p>
+            <h2 class="pgal__title pgal-reveal">Our <em>Projects</em></h2>
+            <p class="pgal__sub pgal-reveal">A curated collection of Egypt's most distinguished addresses.</p>
+          </div>
+          <div class="pgal__header-right pgal-reveal">
+            <a href="#" class="btn-view-all">
+              View All
+              <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </header>
+
+        <div class="pgal__grid">
+
+          <!-- 1: landscape -->
+          <article class="pgal-card pgal-reveal" data-id="1" data-title="Lumière Penthouse" data-thumb="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=200&auto=format&fit=crop&q=80" data-images="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1400&auto=format&fit=crop&q=90,https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1400&auto=format&fit=crop&q=90,https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1400&auto=format&fit=crop&q=90,https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1400&auto=format&fit=crop&q=90">
+            <img class="pgal-card__img" src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1400&auto=format&fit=crop&q=90" alt="Lumière Penthouse" loading="lazy"/>
+            <div class="pgal-card__dim"></div>
+            <div class="pgal-card__panel">
+              <span class="pgal-card__badge pgal-text">Exclusive</span>
+              <h3 class="pgal-card__title pgal-text">Lumière Penthouse</h3>
+              <p class="pgal-card__location pgal-text"><svg viewBox="0 0 24 24"><path d="M12 21s-8-7.5-8-12a8 8 0 0116 0c0 4.5-8 12-8 12z"/><circle cx="12" cy="9" r="2.5"/></svg>New Cairo, Egypt</p>
+              <div class="pgal-card__specs pgal-text">
+                <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><path d="M2 9V19M22 9V19M2 14H22M6 14V10a1 1 0 011-1h4a1 1 0 011 1v4"/></svg>4 Beds</span>
+                <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><path d="M4 12h16v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4z"/><path d="M4 12V7a2 2 0 012-2h2v7"/></svg>4 Baths</span>
+                <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1.5"/><path d="M3 9h18M9 3v18"/></svg>680 m²</span>
+              </div>
+              <p class="pgal-card__price pgal-text">EGP 85,000,000</p>
+              <a href="property-detail.html" class="pgal-card__cta pgal-cta">View Property <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <div class="pgal-card__actions pgal-text">
+                <button class="pgal-action pgal-fav" aria-label="Favourite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+                <button class="pgal-action pgal-gallery-btn" aria-label="Gallery"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></button>
+                <button class="pgal-action pgal-compare-btn" aria-label="Compare"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2: portrait (rowspan 2) -->
+          <article class="pgal-card pgal-reveal" data-id="2" data-title="The Crown Tower" data-thumb="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=200&auto=format&fit=crop&q=80" data-images="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1400&auto=format&fit=crop&q=90,https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1400&auto=format&fit=crop&q=90,https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1400&auto=format&fit=crop&q=90">
+            <img class="pgal-card__img" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&auto=format&fit=crop&q=90" alt="The Crown Tower" loading="lazy"/>
+            <div class="pgal-card__dim"></div>
+            <div class="pgal-card__panel">
+              <span class="pgal-card__badge pgal-text">Featured</span>
+              <h3 class="pgal-card__title pgal-text">The Crown Tower</h3>
+              <p class="pgal-card__location pgal-text"><svg viewBox="0 0 24 24"><path d="M12 21s-8-7.5-8-12a8 8 0 0116 0c0 4.5-8 12-8 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Zamalek, Cairo</p>
+              <div class="pgal-card__specs pgal-text">
+                <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><path d="M2 9V19M22 9V19M2 14H22M6 14V10a1 1 0 011-1h4a1 1 0 011 1v4"/></svg>3 Beds</span>
+                <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><path d="M4 12h16v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4z"/><path d="M4 12V7a2 2 0 012-2h2v7"/></svg>3 Baths</span>
+                <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1.5"/><path d="M3 9h18M9 3v18"/></svg>520 m²</span>
+              </div>
+              <p class="pgal-card__price pgal-text">EGP 62,000,000</p>
+              <a href="property-detail.html" class="pgal-card__cta pgal-cta">View Property <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <div class="pgal-card__actions pgal-text">
+                <button class="pgal-action pgal-fav" aria-label="Favourite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+                <button class="pgal-action pgal-gallery-btn" aria-label="Gallery"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></button>
+                <button class="pgal-action pgal-compare-btn" aria-label="Compare"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3: square -->
+          <article class="pgal-card pgal-reveal" data-id="3" data-title="Meridian Residence" data-thumb="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=200&auto=format&fit=crop&q=80" data-images="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1400&auto=format&fit=crop&q=90,https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1400&auto=format&fit=crop&q=90,https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=1400&auto=format&fit=crop&q=90">
+            <img class="pgal-card__img" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&auto=format&fit=crop&q=90" alt="Meridian Residence" loading="lazy"/>
+            <div class="pgal-card__dim"></div>
+            <div class="pgal-card__panel">
+              <span class="pgal-card__badge pgal-text">New Launch</span>
+              <h3 class="pgal-card__title pgal-text">Meridian Residence</h3>
+              <p class="pgal-card__location pgal-text"><svg viewBox="0 0 24 24"><path d="M12 21s-8-7.5-8-12a8 8 0 0116 0c0 4.5-8 12-8 12z"/><circle cx="12" cy="9" r="2.5"/></svg>6th of October, Egypt</p>
+              <p class="pgal-card__price pgal-text">EGP 28,000,000</p>
+              <a href="property-detail.html" class="pgal-card__cta pgal-cta">View Property <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <div class="pgal-card__actions pgal-text">
+                <button class="pgal-action pgal-fav" aria-label="Favourite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+                <button class="pgal-action pgal-gallery-btn" aria-label="Gallery"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></button>
+                <button class="pgal-action pgal-compare-btn" aria-label="Compare"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 4: square -->
+          <article class="pgal-card pgal-reveal" data-id="4" data-title="Aqua Terrace" data-thumb="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=200&auto=format&fit=crop&q=80" data-images="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1400&auto=format&fit=crop&q=90,https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1400&auto=format&fit=crop&q=90,https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1400&auto=format&fit=crop&q=90">
+            <img class="pgal-card__img" src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=900&auto=format&fit=crop&q=90" alt="Aqua Terrace" loading="lazy"/>
+            <div class="pgal-card__dim"></div>
+            <div class="pgal-card__panel">
+              <span class="pgal-card__badge pgal-text">For Sale</span>
+              <h3 class="pgal-card__title pgal-text">Aqua Terrace</h3>
+              <p class="pgal-card__location pgal-text"><svg viewBox="0 0 24 24"><path d="M12 21s-8-7.5-8-12a8 8 0 0116 0c0 4.5-8 12-8 12z"/><circle cx="12" cy="9" r="2.5"/></svg>North Coast, Egypt</p>
+              <p class="pgal-card__price pgal-text">EGP 35,000,000</p>
+              <a href="property-detail.html" class="pgal-card__cta pgal-cta">View Property <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <div class="pgal-card__actions pgal-text">
+                <button class="pgal-action pgal-fav" aria-label="Favourite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+                <button class="pgal-action pgal-gallery-btn" aria-label="Gallery"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></button>
+                <button class="pgal-action pgal-compare-btn" aria-label="Compare"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 5: portrait (rowspan 2) -->
+          <article class="pgal-card pgal-reveal" data-id="5" data-title="Ivory Mansions" data-thumb="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=200&auto=format&fit=crop&q=80" data-images="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1400&auto=format&fit=crop&q=90,https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1400&auto=format&fit=crop&q=90,https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1400&auto=format&fit=crop&q=90">
+            <img class="pgal-card__img" src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&auto=format&fit=crop&q=90" alt="Ivory Mansions" loading="lazy"/>
+            <div class="pgal-card__dim"></div>
+            <div class="pgal-card__panel">
+              <span class="pgal-card__badge pgal-text">Luxury Villa</span>
+              <h3 class="pgal-card__title pgal-text">Ivory Mansions</h3>
+              <p class="pgal-card__location pgal-text"><svg viewBox="0 0 24 24"><path d="M12 21s-8-7.5-8-12a8 8 0 0116 0c0 4.5-8 12-8 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Sheikh Zayed, Egypt</p>
+              <div class="pgal-card__specs pgal-text">
+                <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><path d="M2 9V19M22 9V19M2 14H22M6 14V10a1 1 0 011-1h4a1 1 0 011 1v4"/></svg>5 Beds</span>
+                <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1.5"/><path d="M3 9h18M9 3v18"/></svg>920 m²</span>
+              </div>
+              <p class="pgal-card__price pgal-text">EGP 110,000,000</p>
+              <a href="property-detail.html" class="pgal-card__cta pgal-cta">View Property <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <div class="pgal-card__actions pgal-text">
+                <button class="pgal-action pgal-fav" aria-label="Favourite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+                <button class="pgal-action pgal-gallery-btn" aria-label="Gallery"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></button>
+                <button class="pgal-action pgal-compare-btn" aria-label="Compare"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 6: landscape -->
+          <article class="pgal-card pgal-reveal" data-id="6" data-title="Azure Shore Estate" data-thumb="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=200&auto=format&fit=crop&q=80" data-images="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=1400&auto=format&fit=crop&q=90,https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1400&auto=format&fit=crop&q=90,https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1400&auto=format&fit=crop&q=90">
+            <img class="pgal-card__img" src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=1400&auto=format&fit=crop&q=90" alt="Azure Shore Estate" loading="lazy"/>
+            <div class="pgal-card__dim"></div>
+            <div class="pgal-card__panel">
+              <span class="pgal-card__badge pgal-text">Beachfront</span>
+              <h3 class="pgal-card__title pgal-text">Azure Shore Estate</h3>
+              <p class="pgal-card__location pgal-text"><svg viewBox="0 0 24 24"><path d="M12 21s-8-7.5-8-12a8 8 0 0116 0c0 4.5-8 12-8 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Ain Sokhna, Egypt</p>
+              <div class="pgal-card__specs pgal-text">
+                <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><path d="M2 9V19M22 9V19M2 14H22M6 14V10a1 1 0 011-1h4a1 1 0 011 1v4"/></svg>6 Beds</span>
+                <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><path d="M4 12h16v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4z"/><path d="M4 12V7a2 2 0 012-2h2v7"/></svg>7 Baths</span>
+                <span class="pgal-card__spec"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1.5"/><path d="M3 9h18M9 3v18"/></svg>1,200 m²</span>
+              </div>
+              <p class="pgal-card__price pgal-text">EGP 95,000,000</p>
+              <a href="property-detail.html" class="pgal-card__cta pgal-cta">View Property <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <div class="pgal-card__actions pgal-text">
+                <button class="pgal-action pgal-fav" aria-label="Favourite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+                <button class="pgal-action pgal-gallery-btn" aria-label="Gallery"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></button>
+                <button class="pgal-action pgal-compare-btn" aria-label="Compare"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 7: square -->
+          <article class="pgal-card pgal-reveal" data-id="7" data-title="Solaris Heights" data-thumb="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=200&auto=format&fit=crop&q=80" data-images="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1400&auto=format&fit=crop&q=90,https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1400&auto=format&fit=crop&q=90,https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1400&auto=format&fit=crop&q=90">
+            <img class="pgal-card__img" src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=900&auto=format&fit=crop&q=90" alt="Solaris Heights" loading="lazy"/>
+            <div class="pgal-card__dim"></div>
+            <div class="pgal-card__panel">
+              <span class="pgal-card__badge pgal-text">Off-Plan</span>
+              <h3 class="pgal-card__title pgal-text">Solaris Heights</h3>
+              <p class="pgal-card__location pgal-text"><svg viewBox="0 0 24 24"><path d="M12 21s-8-7.5-8-12a8 8 0 0116 0c0 4.5-8 12-8 12z"/><circle cx="12" cy="9" r="2.5"/></svg>New Capital, Egypt</p>
+              <p class="pgal-card__price pgal-text">EGP 18,500,000</p>
+              <a href="property-detail.html" class="pgal-card__cta pgal-cta">View Property <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <div class="pgal-card__actions pgal-text">
+                <button class="pgal-action pgal-fav" aria-label="Favourite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+                <button class="pgal-action pgal-gallery-btn" aria-label="Gallery"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></button>
+                <button class="pgal-action pgal-compare-btn" aria-label="Compare"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 8: square -->
+          <article class="pgal-card pgal-reveal" data-id="8" data-title="Crest Villa" data-thumb="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=200&auto=format&fit=crop&q=80" data-images="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1400&auto=format&fit=crop&q=90,https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1400&auto=format&fit=crop&q=90,https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=1400&auto=format&fit=crop&q=90">
+            <img class="pgal-card__img" src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=900&auto=format&fit=crop&q=90" alt="Crest Villa" loading="lazy"/>
+            <div class="pgal-card__dim"></div>
+            <div class="pgal-card__panel">
+              <span class="pgal-card__badge pgal-text">Ready</span>
+              <h3 class="pgal-card__title pgal-text">Crest Villa</h3>
+              <p class="pgal-card__location pgal-text"><svg viewBox="0 0 24 24"><path d="M12 21s-8-7.5-8-12a8 8 0 0116 0c0 4.5-8 12-8 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Maadi, Cairo</p>
+              <p class="pgal-card__price pgal-text">EGP 42,000,000</p>
+              <a href="property-detail.html" class="pgal-card__cta pgal-cta">View Property <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <div class="pgal-card__actions pgal-text">
+                <button class="pgal-action pgal-fav" aria-label="Favourite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+                <button class="pgal-action pgal-gallery-btn" aria-label="Gallery"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></button>
+                <button class="pgal-action pgal-compare-btn" aria-label="Compare"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── COMPARE SIDEBAR ─── -->
+    <aside class="cmp-bar" id="cmpBar" aria-label="Property comparison">
+      <button class="cmp-bar__toggle" id="cmpToggle" hidden>
+        <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+        <span id="cmpCount">0</span>/4
+      </button>
+      <div class="cmp-bar__panel" id="cmpPanel">
+        <div class="cmp-bar__head">
+          <span class="cmp-bar__heading">Compare Properties</span>
+          <button class="cmp-bar__close-all" id="cmpCloseAll">Clear all</button>
+        </div>
+        <ul class="cmp-bar__list" id="cmpList"></ul>
+        <div class="cmp-bar__footer">
+          <button class="cmp-bar__go" id="cmpGoBtn">Compare Now</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ─── LIGHTBOX ─── -->
+    <div class="pgal-lb" id="pgalLb" role="dialog" aria-modal="true" aria-label="Property gallery">
+      <div class="pgal-lb__inner">
+        <button class="pgal-lb__close" id="pgalLbClose" aria-label="Close">&#x2715;</button>
+        <img class="pgal-lb__img" id="pgalLbImg" src="" alt=""/>
+      </div>
+      <button class="pgal-lb__prev" id="pgalLbPrev" aria-label="Previous"><svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"/></svg></button>
+      <button class="pgal-lb__next" id="pgalLbNext" aria-label="Next"><svg viewBox="0 0 24 24"><polyline points="9,18 15,12 9,6"/></svg></button>
+      <div class="pgal-lb__info">
+        <p class="pgal-lb__title" id="pgalLbTitle"></p>
+        <p class="pgal-lb__counter" id="pgalLbCounter"></p>
+      </div>
+      <div class="pgal-lb__thumbs" id="pgalLbThumbs"></div>
+    </div>
 
     <!-- ─── SCRIPTS ─── -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -1588,7 +3470,7 @@
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
           </a>
-          <a href="#" class="btn-slide btn-slide--ghost" aria-label="View details of ${data.title}">View Details</a>
+          <a href="property-detail.html" class="btn-slide btn-slide--ghost" aria-label="View details of ${data.title}">View Details</a>
         </div>
       </div>`;
           swiperWrap.appendChild(slide);
@@ -2009,11 +3891,16 @@
           toThumb.classList.add("is-active");
           toThumb.setAttribute("aria-selected", "true");
           toThumb.setAttribute("tabindex", "0");
-          toThumb.scrollIntoView({
-            behavior: "smooth",
-            block: "nearest",
-            inline: "center",
-          });
+          const thumbContainer = thumbsWrap;
+          if (thumbContainer) {
+            const thumbTop = toThumb.offsetTop;
+            const thumbH = toThumb.offsetHeight;
+            const contH = thumbContainer.clientHeight;
+            thumbContainer.scrollTo({
+              top: thumbTop - contH / 2 + thumbH / 2,
+              behavior: "smooth",
+            });
+          }
         }
 
         setProgress(toIdx);
@@ -2248,6 +4135,726 @@
           nav.classList.toggle("is-scrolled", window.scrollY > 40);
         window.addEventListener("scroll", onScroll, { passive: true });
         onScroll();
+      })();
+    </script>
+
+    <script>
+      /* ══════════════════════════════════════════════
+   AKAR TOWN — FEATURED PROPERTIES SLIDER
+══════════════════════════════════════════════ */
+      (function () {
+        "use strict";
+
+        const PROPS = [
+          {
+            title: "The Pinnacle Penthouse",
+            description:
+              "Soaring above New Cairo's skyline, this ultra-luxury penthouse redefines elevated living with panoramic city views, a private rooftop pool terrace, and bespoke handcrafted finishes throughout.",
+            badges: [
+              { label: "Exclusive", cls: "prop-badge--gold" },
+              { label: "For Sale", cls: "prop-badge--red" },
+            ],
+            location: "New Cairo, Egypt",
+            beds: 4,
+            baths: 5,
+            area: "650",
+            price: "EGP 45,000,000",
+            images: [
+              "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&auto=format&fit=crop&q=90",
+              "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&auto=format&fit=crop&q=90",
+              "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1200&auto=format&fit=crop&q=90",
+              "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&auto=format&fit=crop&q=90",
+              "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&auto=format&fit=crop&q=90",
+            ],
+          },
+          {
+            title: "Al Noor Garden Villas",
+            description:
+              "Timeless architecture meets lush private landscaping in this exclusive gated community. Each villa offers a private pool, garden atrium, and fully bespoke interior by award-winning designers.",
+            badges: [
+              { label: "Featured", cls: "prop-badge--gold" },
+              { label: "Ready to Move", cls: "prop-badge--dark" },
+            ],
+            location: "Sheikh Zayed, Egypt",
+            beds: 5,
+            baths: 6,
+            area: "820",
+            price: "EGP 62,500,000",
+            images: [
+              "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&auto=format&fit=crop&q=90",
+              "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&auto=format&fit=crop&q=90",
+              "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1200&auto=format&fit=crop&q=90",
+              "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&auto=format&fit=crop&q=90",
+              "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1200&auto=format&fit=crop&q=90",
+            ],
+          },
+          {
+            title: "Maaya Heights Tower",
+            description:
+              "An architectural statement rising from the heart of 6th October City. Elevated beyond expectation with resort-style amenities, private concierge, and investment-grade returns.",
+            badges: [
+              { label: "Exclusive", cls: "prop-badge--gold" },
+              { label: "Off-Plan", cls: "prop-badge--outline" },
+            ],
+            location: "6th of October, Egypt",
+            beds: 3,
+            baths: 4,
+            area: "420",
+            price: "EGP 28,000,000",
+            images: [
+              "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&auto=format&fit=crop&q=90",
+              "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&auto=format&fit=crop&q=90",
+              "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=1200&auto=format&fit=crop&q=90",
+              "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1200&auto=format&fit=crop&q=90",
+              "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&auto=format&fit=crop&q=90",
+            ],
+          },
+          {
+            title: "Azure Coast Estates",
+            description:
+              "Where the Mediterranean breeze meets private beach access. Luxury seafront living on Egypt's most coveted coastline, complete with private dock, beach club, and panoramic sea views.",
+            badges: [
+              { label: "Featured", cls: "prop-badge--gold" },
+              { label: "For Sale", cls: "prop-badge--red" },
+            ],
+            location: "Ain Sokhna, Egypt",
+            beds: 6,
+            baths: 7,
+            area: "1,200",
+            price: "EGP 95,000,000",
+            images: [
+              "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=1200&auto=format&fit=crop&q=90",
+              "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&auto=format&fit=crop&q=90",
+              "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&auto=format&fit=crop&q=90",
+              "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&auto=format&fit=crop&q=90",
+              "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&auto=format&fit=crop&q=90",
+            ],
+          },
+          {
+            title: "Sky Gardens Residences",
+            description:
+              "Suspended greenery and sky-high living converge at Egypt's first vertical garden tower. Each residence features floor-to-ceiling glazing and a private planted sky terrace.",
+            badges: [
+              { label: "New Launch", cls: "prop-badge--red" },
+              { label: "Off-Plan", cls: "prop-badge--outline" },
+            ],
+            location: "North Coast, Egypt",
+            beds: 3,
+            baths: 3,
+            area: "380",
+            price: "EGP 22,500,000",
+            images: [
+              "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1200&auto=format&fit=crop&q=90",
+              "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&auto=format&fit=crop&q=90",
+              "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&auto=format&fit=crop&q=90",
+              "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=1200&auto=format&fit=crop&q=90",
+              "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1200&auto=format&fit=crop&q=90",
+            ],
+          },
+        ];
+
+        let propIdx = 0;
+        let imgIdx = 0;
+        let isPropAnim = false;
+        let isImgAnim = false;
+        let imgAutoTimer = null;
+        const IMG_AUTO_MS = 3800;
+
+        function startImgAutoplay() {
+          clearImgAutoplay();
+          imgAutoTimer = setTimeout(() => {
+            const prop = PROPS[propIdx];
+            switchImg((imgIdx + 1) % prop.images.length);
+          }, IMG_AUTO_MS);
+        }
+
+        function clearImgAutoplay() {
+          if (imgAutoTimer) { clearTimeout(imgAutoTimer); imgAutoTimer = null; }
+        }
+
+        const mainImg = document.getElementById("propMainImg");
+        const thumbsEl = document.getElementById("propThumbs");
+        const badgesEl = document.getElementById("propBadges");
+        const titleEl = document.getElementById("propTitle");
+        const descEl = document.getElementById("propDesc");
+        const bedsEl = document.getElementById("propBeds");
+        const bathsEl = document.getElementById("propBaths");
+        const areaEl = document.getElementById("propArea");
+        const priceEl = document.getElementById("propPrice");
+        const locationEl = document.getElementById("propLocationText");
+        const counterEl = document.getElementById("propCounter");
+        const propPrevBtn = document.getElementById("propPrev");
+        const propNextBtn = document.getElementById("propNext");
+        const thumbPrevBtn = document.getElementById("thumbPrev");
+        const thumbNextBtn = document.getElementById("thumbNext");
+
+        const specsEl = document.querySelector(".prop-specs");
+        const priceRowEl = document.querySelector(".prop-price-row");
+        const locationRowEl = document.querySelector(".prop-location");
+        const INFO_ELS = [badgesEl, titleEl, locationRowEl, descEl, specsEl, priceRowEl];
+
+        function fmtCounter(i, total) {
+          return String(i + 1).padStart(2, "0") + " / " + String(total).padStart(2, "0");
+        }
+
+        function buildThumbs(prop) {
+          thumbsEl.innerHTML = "";
+          prop.images.forEach((src, i) => {
+            const btn = document.createElement("button");
+            btn.className = "prop-thumb" + (i === imgIdx ? " is-active" : "");
+            btn.setAttribute("aria-label", "View image " + (i + 1));
+            const img = document.createElement("img");
+            img.src = src;
+            img.alt = "";
+            img.loading = "lazy";
+            btn.appendChild(img);
+            btn.addEventListener("click", () => switchImg(i));
+            thumbsEl.appendChild(btn);
+          });
+        }
+
+        function switchImg(newIdx) {
+          const prop = PROPS[propIdx];
+          if (isImgAnim || newIdx === imgIdx || newIdx < 0 || newIdx >= prop.images.length) return;
+          isImgAnim = true;
+          clearImgAutoplay();
+
+          const thumbBtns = thumbsEl.querySelectorAll(".prop-thumb");
+          const srcThumb = thumbBtns[newIdx];
+          const mainWrap = mainImg.closest(".prop-card__img-wrap");
+
+          if (srcThumb && mainWrap) {
+            const tr = srcThumb.getBoundingClientRect();
+            const mr = mainWrap.getBoundingClientRect();
+
+            /* flying clone */
+            const clone = document.createElement("img");
+            clone.src = prop.images[newIdx];
+            clone.style.cssText = [
+              "position:fixed",
+              `top:${tr.top}px`,
+              `left:${tr.left}px`,
+              `width:${tr.width}px`,
+              `height:${tr.height}px`,
+              "object-fit:cover",
+              "border-radius:8px",
+              "z-index:9999",
+              "pointer-events:none",
+              "will-change:transform",
+            ].join(";");
+            document.body.appendChild(clone);
+
+            /* dim current main image */
+            gsap.to(mainImg, { opacity: 0, duration: 0.25, ease: "power2.in" });
+
+            /* fly clone thumb → main */
+            gsap.to(clone, {
+              top: mr.top,
+              left: mr.left,
+              width: mr.width,
+              height: mr.height,
+              borderRadius: "14px",
+              duration: 0.72,
+              ease: "power3.inOut",
+              onComplete() {
+                clone.remove();
+                mainImg.src = prop.images[newIdx];
+                imgIdx = newIdx;
+                thumbBtns.forEach((t, ti) => t.classList.toggle("is-active", ti === imgIdx));
+                gsap.fromTo(mainImg, { opacity: 0 }, { opacity: 1, duration: 0.22, ease: "power2.out" });
+                isImgAnim = false;
+                startImgAutoplay();
+              },
+            });
+          } else {
+            /* fallback crossfade */
+            gsap.to(mainImg, {
+              opacity: 0, scale: 1.04, duration: 0.28, ease: "power2.in",
+              onComplete() {
+                mainImg.src = prop.images[newIdx];
+                imgIdx = newIdx;
+                thumbBtns.forEach((t, ti) => t.classList.toggle("is-active", ti === imgIdx));
+                gsap.fromTo(mainImg, { opacity: 0, scale: 1.04 }, { opacity: 1, scale: 1, duration: 0.45, ease: "power2.out" });
+                isImgAnim = false;
+                startImgAutoplay();
+              },
+            });
+          }
+        }
+
+        function populateCard(prop) {
+          badgesEl.innerHTML = prop.badges
+            .map((b) => `<span class="prop-badge ${b.cls}">${b.label}</span>`)
+            .join("");
+          titleEl.textContent = prop.title;
+          descEl.textContent = prop.description;
+          bedsEl.textContent = prop.beds;
+          bathsEl.textContent = prop.baths;
+          areaEl.textContent = prop.area;
+          priceEl.textContent = prop.price;
+          locationEl.textContent = prop.location;
+          counterEl.textContent = fmtCounter(propIdx, PROPS.length);
+          propPrevBtn.disabled = propIdx === 0;
+          propNextBtn.disabled = propIdx === PROPS.length - 1;
+          imgIdx = 0;
+          mainImg.src = prop.images[0];
+          mainImg.alt = prop.title;
+          buildThumbs(prop);
+        }
+
+        function navProp(newIdx) {
+          if (isPropAnim || newIdx === propIdx || newIdx < 0 || newIdx >= PROPS.length) return;
+          isPropAnim = true;
+          const dir = newIdx > propIdx ? 1 : -1;
+
+          const tl = gsap.timeline({
+            onComplete() {
+              isPropAnim = false;
+            },
+          });
+
+          tl.to(INFO_ELS, {
+            y: dir * -22,
+            opacity: 0,
+            duration: 0.3,
+            stagger: 0.04,
+            ease: "power2.in",
+          }, 0);
+
+          tl.to(mainImg, { opacity: 0, scale: 1.05, duration: 0.34, ease: "power2.in" }, 0.05);
+          tl.to(thumbsEl, { opacity: 0, y: 8, duration: 0.22, ease: "power2.in" }, 0);
+
+          tl.call(() => {
+            propIdx = newIdx;
+            populateCard(PROPS[propIdx]);
+          });
+
+          tl.fromTo(
+            mainImg,
+            { opacity: 0, scale: 1.05 },
+            { opacity: 1, scale: 1, duration: 0.55, ease: "power2.out" },
+          );
+          tl.fromTo(
+            thumbsEl,
+            { opacity: 0, y: 8 },
+            { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+            "<",
+          );
+          tl.fromTo(
+            INFO_ELS,
+            { y: dir * 22, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.48, stagger: 0.06, ease: "power3.out" },
+            "<0.08",
+          );
+
+          tl.call(() => { isImgAnim = false; startImgAutoplay(); });
+        }
+
+        propPrevBtn.addEventListener("click", () => { clearImgAutoplay(); navProp(propIdx - 1); });
+        propNextBtn.addEventListener("click", () => { clearImgAutoplay(); navProp(propIdx + 1); });
+        thumbPrevBtn.addEventListener("click", () => switchImg(imgIdx - 1));
+        thumbNextBtn.addEventListener("click", () => switchImg(imgIdx + 1));
+
+        /* Pause on hover */
+        const propsSection = document.getElementById("properties");
+        if (propsSection) {
+          propsSection.addEventListener("mouseenter", clearImgAutoplay);
+          propsSection.addEventListener("mouseleave", startImgAutoplay);
+        }
+
+        /* Init */
+        populateCard(PROPS[0]);
+        startImgAutoplay();
+
+        /* Scroll reveal */
+        const revealEls = document.querySelectorAll(".props-reveal");
+        const revealObs = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              const el = entry.target;
+              gsap.to(el, {
+                y: 0,
+                opacity: 1,
+                duration: 0.78,
+                delay: parseFloat(el.dataset.revealDelay || 0),
+                ease: "power3.out",
+              });
+              revealObs.unobserve(el);
+            });
+          },
+          { threshold: 0.12 },
+        );
+
+        revealEls.forEach((el, i) => {
+          el.dataset.revealDelay = i * 0.1;
+          revealObs.observe(el);
+        });
+      })();
+    </script>
+
+    <!-- Why Choose Us: counter + reveal -->
+    <script>
+      (() => {
+        /* ── Counter animation ── */
+        function animateCounter(el) {
+          const target = parseInt(el.dataset.target, 10);
+          const suffix = el.dataset.suffix || "";
+          const duration = 1800;
+          const start = performance.now();
+          el.closest(".why__stat").classList.add("is-counted");
+
+          function tick(now) {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            const ease = 1 - Math.pow(1 - progress, 3);
+            const value = Math.round(ease * target);
+            el.textContent = (value >= 1000 ? (value / 1000).toFixed(1).replace(/\.0$/, "") + "K" : value) + suffix;
+            if (progress < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        }
+
+        /* ── Scroll reveal for stats ── */
+        const statsObs = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const numEl = entry.target.querySelector(".why__stat-num");
+            if (numEl) animateCounter(numEl);
+            statsObs.unobserve(entry.target);
+          });
+        }, { threshold: 0.4 });
+
+        document.querySelectorAll(".why__stat").forEach((el) => statsObs.observe(el));
+
+        /* ── Scroll reveal for header + stages ── */
+        const whyRevealObs = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            gsap.to(el, {
+              y: 0, opacity: 1, duration: 0.72,
+              delay: parseFloat(el.dataset.whyDelay || 0),
+              ease: "power3.out",
+            });
+            whyRevealObs.unobserve(el);
+          });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll(".why-reveal").forEach((el, i) => {
+          el.dataset.whyDelay = i * 0.08;
+          whyRevealObs.observe(el);
+        });
+
+        /* ── Stage cards stagger on scroll ── */
+        const stageObs = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-visible");
+            stageObs.unobserve(entry.target);
+          });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll(".why__stage").forEach((el) => stageObs.observe(el));
+      })();
+    </script>
+
+    <!-- Property Gallery: hover + fav + gallery + compare -->
+    <script>
+      (() => {
+        /* ── Type detection ── */
+        function detectType(card) {
+          const { width, height } = card.getBoundingClientRect();
+          const r = width / height;
+          if (r >= 1.35) return 'landscape';
+          if (r <= 0.78) return 'portrait';
+          return 'square';
+        }
+
+        function resetPanel(card) {
+          const type = detectType(card);
+          card.dataset.type = type;
+          const panel = card.querySelector('.pgal-card__panel');
+          const texts = panel.querySelectorAll('.pgal-text');
+          const cta = panel.querySelector('.pgal-cta');
+          gsap.killTweensOf([panel, texts, cta]);
+          gsap.set(texts, { opacity: 0, y: 14 });
+          gsap.set(cta,   { opacity: 0, y: 10 });
+          if (type === 'landscape') {
+            gsap.set(panel, { x: 0, y: 0, opacity: 1, scale: 1, clipPath: 'inset(0% 100% 0% 0%)' });
+          } else if (type === 'portrait') {
+            gsap.set(panel, { y: 0, x: 0, opacity: 1, scale: 1, clipPath: 'inset(100% 0% 0% 0%)' });
+          } else {
+            gsap.set(panel, { opacity: 0, scale: 0.91, y: 18, x: 0, clipPath: 'none' });
+          }
+        }
+
+        /* ── Hover animation ── */
+        function initCard(card) {
+          const img   = card.querySelector('.pgal-card__img');
+          const dim   = card.querySelector('.pgal-card__dim');
+          const panel = card.querySelector('.pgal-card__panel');
+          let tl = null;
+
+          resetPanel(card);
+
+          card.addEventListener('mouseenter', () => {
+            if (tl) tl.kill();
+            const type = detectType(card);
+            card.dataset.type = type;
+            const texts = panel.querySelectorAll('.pgal-text');
+            const cta   = panel.querySelector('.pgal-cta');
+            tl = gsap.timeline();
+
+            tl.to(img, { scale: 1.06, duration: 0.35, ease: 'power2.out' }, 0);
+            tl.to(dim, { opacity: 1, duration: 0.25, ease: 'power2.out' }, 0.04);
+
+            if (type === 'landscape') {
+              tl.to(panel, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.32, ease: 'power3.out' }, 0.04);
+            } else if (type === 'portrait') {
+              tl.to(panel, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.32, ease: 'power3.out' }, 0.04);
+            } else {
+              tl.to(panel, { opacity: 1, scale: 1, y: 0, duration: 0.28, ease: 'power3.out' }, 0.04);
+            }
+
+            tl.to(texts, { opacity: 1, y: 0, stagger: 0.04, duration: 0.22, ease: 'power2.out' }, 0.12);
+            tl.to(cta, { opacity: 1, y: 0, duration: 0.18, ease: 'power2.out' }, '+=0.02');
+          });
+
+          card.addEventListener('mouseleave', () => {
+            if (tl) tl.kill();
+            const type = detectType(card);
+            const texts = panel.querySelectorAll('.pgal-text');
+            const cta   = panel.querySelector('.pgal-cta');
+            tl = gsap.timeline();
+
+            tl.to([...texts, cta], { opacity: 0, y: 8, duration: 0.12, ease: 'power2.in' }, 0);
+            tl.to(img, { scale: 1, duration: 0.3, ease: 'power2.out' }, 0);
+            tl.to(dim, { opacity: 0, duration: 0.2, ease: 'power2.in' }, 0);
+
+            if (type === 'landscape') tl.to(panel, { clipPath: 'inset(0% 100% 0% 0%)', duration: 0.26, ease: 'power2.in' }, 0.03);
+            else if (type === 'portrait') tl.to(panel, { clipPath: 'inset(100% 0% 0% 0%)', duration: 0.26, ease: 'power2.in' }, 0.03);
+            else tl.to(panel, { opacity: 0, scale: 0.93, y: 12, duration: 0.22, ease: 'power2.in' }, 0.03);
+          });
+
+          /* clicking card body navigates to detail — actions/cta stop propagation */
+          card.addEventListener('click', e => {
+            if (!e.target.closest('.pgal-action, .pgal-card__cta, .pgal-card__actions')) {
+              window.location.href = 'property-detail.html';
+            }
+          });
+          card.querySelectorAll('.pgal-action').forEach(btn => {
+            btn.addEventListener('click', e => e.stopPropagation());
+          });
+        }
+
+        /* ── Favourite ── */
+        function initFav(card) {
+          const btn = card.querySelector('.pgal-fav');
+          if (!btn) return;
+          btn.addEventListener('click', () => {
+            btn.classList.toggle('is-fav');
+            gsap.fromTo(btn, { scale: 0.7 }, { scale: 1, duration: 0.4, ease: 'elastic.out(1,0.5)' });
+          });
+        }
+
+        /* ── Lightbox ── */
+        const lb        = document.getElementById('pgalLb');
+        const lbImg     = document.getElementById('pgalLbImg');
+        const lbTitle   = document.getElementById('pgalLbTitle');
+        const lbCounter = document.getElementById('pgalLbCounter');
+        const lbThumbs  = document.getElementById('pgalLbThumbs');
+        const lbPrev    = document.getElementById('pgalLbPrev');
+        const lbNext    = document.getElementById('pgalLbNext');
+        const lbClose   = document.getElementById('pgalLbClose');
+
+        let lbImages = [], lbIdx = 0, lbCardTitle = '';
+
+        function lbOpen(images, idx, title) {
+          lbImages = images; lbIdx = idx; lbCardTitle = title;
+          lbRender();
+          lb.classList.add('is-open');
+          document.body.style.overflow = 'hidden';
+        }
+
+        function lbClose2() {
+          lb.classList.remove('is-open');
+          document.body.style.overflow = '';
+        }
+
+        function lbRender() {
+          lbImg.style.opacity = '0';
+          lbImg.src = lbImages[lbIdx];
+          lbImg.onload = () => { lbImg.style.opacity = '1'; };
+          lbTitle.textContent = lbCardTitle;
+          lbCounter.textContent = (lbIdx + 1) + ' / ' + lbImages.length;
+          lbThumbs.innerHTML = '';
+          lbImages.forEach((src, i) => {
+            const t = document.createElement('img');
+            t.className = 'pgal-lb__thumb' + (i === lbIdx ? ' is-active' : '');
+            t.src = src.replace('w=1400', 'w=120');
+            t.addEventListener('click', () => { lbIdx = i; lbRender(); });
+            lbThumbs.appendChild(t);
+          });
+          lbPrev.disabled = lbIdx === 0;
+          lbNext.disabled = lbIdx === lbImages.length - 1;
+        }
+
+        lbClose.addEventListener('click', lbClose2);
+        lb.addEventListener('click', e => { if (e.target === lb) lbClose2(); });
+        lbPrev.addEventListener('click', () => { if (lbIdx > 0) { lbIdx--; lbRender(); } });
+        lbNext.addEventListener('click', () => { if (lbIdx < lbImages.length - 1) { lbIdx++; lbRender(); } });
+        document.addEventListener('keydown', e => {
+          if (!lb.classList.contains('is-open')) return;
+          if (e.key === 'Escape') lbClose2();
+          if (e.key === 'ArrowLeft' && lbIdx > 0) { lbIdx--; lbRender(); }
+          if (e.key === 'ArrowRight' && lbIdx < lbImages.length - 1) { lbIdx++; lbRender(); }
+        });
+
+        function initGallery(card) {
+          const btn = card.querySelector('.pgal-gallery-btn');
+          if (!btn) return;
+          btn.addEventListener('click', () => {
+            const images = (card.dataset.images || '').split(',').filter(Boolean);
+            const title  = card.dataset.title || '';
+            if (images.length) lbOpen(images, 0, title);
+          });
+        }
+
+        /* ── Compare sidebar ── */
+        const MAX_COMPARE = 4;
+        let compareItems = [];
+
+        const cmpToggle  = document.getElementById('cmpToggle');
+        const cmpPanel   = document.getElementById('cmpPanel');
+        const cmpList    = document.getElementById('cmpList');
+        const cmpCount   = document.getElementById('cmpCount');
+        const cmpCloseAll = document.getElementById('cmpCloseAll');
+        const cmpGoBtn   = document.getElementById('cmpGoBtn');
+
+        let cmpOpen = false;
+
+        cmpToggle.addEventListener('click', () => {
+          cmpOpen = !cmpOpen;
+          cmpPanel.classList.toggle('is-open', cmpOpen);
+        });
+
+        function renderCmpList() {
+          cmpList.innerHTML = '';
+          compareItems.forEach(item => {
+            const li = document.createElement('li');
+            li.className = 'cmp-item';
+            li.innerHTML = `
+              <img class="cmp-item__thumb" src="${item.thumb}" alt="${item.title}"/>
+              <span class="cmp-item__name">${item.title}</span>
+              <button class="cmp-item__rm" data-id="${item.id}" aria-label="Remove">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>`;
+            cmpList.appendChild(li);
+          });
+
+          cmpList.querySelectorAll('.cmp-item__rm').forEach(btn => {
+            btn.addEventListener('click', () => removeFromCompare(btn.dataset.id));
+          });
+
+          cmpCount.textContent = compareItems.length;
+          cmpToggle.hidden = compareItems.length === 0;
+          if (compareItems.length === 0) {
+            cmpOpen = false;
+            cmpPanel.classList.remove('is-open');
+          }
+        }
+
+        function addToCompare(card) {
+          const id    = card.dataset.id;
+          const title = card.dataset.title;
+          const thumb = card.dataset.thumb;
+          if (compareItems.find(i => i.id === id)) { removeFromCompare(id); return; }
+          if (compareItems.length >= MAX_COMPARE) {
+            gsap.fromTo(cmpPanel, { x: 8 }, { x: 0, duration: 0.4, ease: 'elastic.out(1,0.4)' });
+            return;
+          }
+          compareItems.push({ id, title, thumb });
+          renderCmpList();
+          if (!cmpOpen) {
+            cmpOpen = true;
+            cmpPanel.classList.add('is-open');
+          }
+          gsap.fromTo(cmpPanel, { x: 16 }, { x: 0, duration: 0.45, ease: 'back.out(1.7)' });
+        }
+
+        function removeFromCompare(id) {
+          compareItems = compareItems.filter(i => i.id !== id);
+          /* un-mark the button on the card */
+          const card = document.querySelector(`.pgal-card[data-id="${id}"]`);
+          if (card) card.querySelector('.pgal-compare-btn')?.classList.remove('is-compared');
+          renderCmpList();
+        }
+
+        cmpCloseAll.addEventListener('click', () => {
+          compareItems.forEach(i => {
+            const card = document.querySelector(`.pgal-card[data-id="${i.id}"]`);
+            if (card) card.querySelector('.pgal-compare-btn')?.classList.remove('is-compared');
+          });
+          compareItems = [];
+          renderCmpList();
+        });
+
+        cmpGoBtn.addEventListener('click', () => {
+          const ids = compareItems.map(i => i.id).join(',');
+          window.location.href = 'compare.html?ids=' + ids;
+        });
+
+        function initCompare(card) {
+          const btn = card.querySelector('.pgal-compare-btn');
+          if (!btn) return;
+          btn.addEventListener('click', () => {
+            const id = card.dataset.id;
+            const alreadyIn = compareItems.find(i => i.id === id);
+            if (alreadyIn) {
+              removeFromCompare(id);
+              btn.classList.remove('is-compared');
+            } else {
+              if (compareItems.length >= MAX_COMPARE) return;
+              addToCompare(card);
+              btn.classList.add('is-compared');
+            }
+          });
+        }
+
+        /* ── Init on load ── */
+        function initAll() {
+          document.querySelectorAll('.pgal-card').forEach(card => {
+            initCard(card);
+            initFav(card);
+            initGallery(card);
+            initCompare(card);
+          });
+        }
+
+        if (document.readyState === 'complete') initAll();
+        else window.addEventListener('load', initAll);
+
+        let rsz;
+        window.addEventListener('resize', () => {
+          clearTimeout(rsz);
+          rsz = setTimeout(() => document.querySelectorAll('.pgal-card').forEach(resetPanel), 220);
+        });
+
+        /* ── Scroll reveal ── */
+        const pgalObs = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            const el = e.target;
+            gsap.to(el, { y: 0, opacity: 1, duration: 0.72, delay: parseFloat(el.dataset.pgalDelay || 0), ease: 'power3.out' });
+            pgalObs.unobserve(el);
+          });
+        }, { threshold: 0.08 });
+
+        document.querySelectorAll('.pgal-reveal').forEach((el, i) => {
+          el.dataset.pgalDelay = i * 0.06;
+          pgalObs.observe(el);
+        });
       })();
     </script>
   </body>

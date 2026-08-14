@@ -2467,6 +2467,7 @@
         transform: translateY(0);
       }
 
+
       /* Top stages: sit in row 1, bottom stages in row 3 */
       .why__stage--top {
         grid-row: 1;
@@ -4498,56 +4499,32 @@
             preserveAspectRatio="none"
             aria-hidden="true"
           >
+            <defs>
+              <clipPath id="whyPathClip">
+                <!-- width starts at 0; JS animates it to 790 to reveal path left→right -->
+                <rect id="whyClipRect" x="115" y="0" width="0" height="260" />
+              </clipPath>
+            </defs>
             <path
+              class="why__path-line"
               d="M 125,200 C 200,200 200,60 375,60 C 500,60 500,200 625,200 C 750,200 750,60 875,60"
               fill="none"
               stroke="rgba(200,16,46,0.6)"
               stroke-width="1.5"
               stroke-dasharray="6 8"
               stroke-linecap="round"
+              clip-path="url(#whyPathClip)"
             />
             <!-- Stage dots on path -->
-            <circle cx="125" cy="200" r="5" fill="var(--gold)" opacity="0.9" />
-            <circle cx="375" cy="60" r="5" fill="var(--gold)" opacity="0.9" />
-            <circle cx="625" cy="200" r="5" fill="var(--gold)" opacity="0.9" />
-            <circle cx="875" cy="60" r="5" fill="var(--gold)" opacity="0.9" />
+            <circle class="why__dot-main" cx="125" cy="200" r="5" fill="var(--gold)" />
+            <circle class="why__dot-main" cx="375" cy="60"  r="5" fill="var(--gold)" />
+            <circle class="why__dot-main" cx="625" cy="200" r="5" fill="var(--gold)" />
+            <circle class="why__dot-main" cx="875" cy="60"  r="5" fill="var(--gold)" />
             <!-- Outer pulse rings -->
-            <circle
-              cx="125"
-              cy="200"
-              r="10"
-              fill="none"
-              stroke="var(--gold)"
-              stroke-width="1"
-              opacity="0.3"
-            />
-            <circle
-              cx="375"
-              cy="60"
-              r="10"
-              fill="none"
-              stroke="var(--gold)"
-              stroke-width="1"
-              opacity="0.3"
-            />
-            <circle
-              cx="625"
-              cy="200"
-              r="10"
-              fill="none"
-              stroke="var(--gold)"
-              stroke-width="1"
-              opacity="0.3"
-            />
-            <circle
-              cx="875"
-              cy="60"
-              r="10"
-              fill="none"
-              stroke="var(--gold)"
-              stroke-width="1"
-              opacity="0.3"
-            />
+            <circle class="why__pulse-ring" cx="125" cy="200" r="10" fill="none" stroke="var(--gold)" stroke-width="1.5" />
+            <circle class="why__pulse-ring" cx="375" cy="60"  r="10" fill="none" stroke="var(--gold)" stroke-width="1.5" />
+            <circle class="why__pulse-ring" cx="625" cy="200" r="10" fill="none" stroke="var(--gold)" stroke-width="1.5" />
+            <circle class="why__pulse-ring" cx="875" cy="60"  r="10" fill="none" stroke="var(--gold)" stroke-width="1.5" />
           </svg>
 
           <!-- 4 stages -->
@@ -7110,21 +7087,38 @@
           whyRevealObs.observe(el);
         });
 
-        /* ── Stage cards stagger on scroll ── */
+        /* ── Timeline: path draw ── */
+        (() => {
+          const whyTimeline = document.querySelector('.why__timeline');
+          if (!whyTimeline) return;
+
+          const clipRect = document.getElementById('whyClipRect');
+          const PATH_DUR = 1.5;
+          const CLIP_W   = 790;
+
+          let fired = false;
+          const obs = new IntersectionObserver((entries) => {
+            if (!entries[0].isIntersecting || fired) return;
+            fired = true;
+            obs.disconnect();
+            gsap.to(clipRect, { attr: { width: CLIP_W }, duration: PATH_DUR, ease: 'none', delay: 0.2 });
+          }, { threshold: 0.2 });
+
+          obs.observe(whyTimeline);
+        })();
+
+        /* ── Stage cards: original CSS-transition approach ── */
         const stageObs = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
               if (!entry.isIntersecting) return;
-              entry.target.classList.add("is-visible");
+              entry.target.classList.add('is-visible');
               stageObs.unobserve(entry.target);
             });
           },
           { threshold: 0.2 },
         );
-
-        document
-          .querySelectorAll(".why__stage")
-          .forEach((el) => stageObs.observe(el));
+        document.querySelectorAll('.why__stage').forEach((el) => stageObs.observe(el));
       })();
     </script>
 

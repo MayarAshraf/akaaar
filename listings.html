@@ -20,12 +20,13 @@
         --ink-60: rgba(13, 13, 13, 0.6);
         --ink-30: rgba(13, 13, 13, 0.3);
         --ink-10: rgba(13, 13, 13, 0.1);
-        --gold: #C8102E;
-        --gold-lt: #C8102E;
-        --gold-dk: #C8102E;
+        --gold: #c8102e;
+        --gold-lt: #c8102e;
+        --gold-dk: #c8102e;
         --red: #cc2222;
         --white: #ffffff;
         --font-body: "Archivo", system-ui, sans-serif;
+        --font-body-rtl: "Noto Kufi Arabic", system-ui, sans-serif;
         --font-display: "Cormorant Garamond", Georgia, serif;
         --nav-h: 62px;
         --ease-smooth: cubic-bezier(0.76, 0, 0.24, 1);
@@ -103,7 +104,7 @@
       .navbar__right {
         display: flex;
         align-items: center;
-        gap: 32px;
+        gap: 20px;
       }
       .navbar__nav {
         display: flex;
@@ -205,6 +206,134 @@
         padding: 9px 20px;
       }
 
+      /* ── RTL / Arabic base ── */
+      [dir="rtl"],
+      [lang="ar"],
+      :lang(ar) {
+        font-family: var(--font-body-rtl);
+        direction: rtl;
+        text-align: right;
+        letter-spacing: 0;
+        text-transform: none;
+      }
+
+      /* ── Language Toggle ── */
+      /* ── Lang slide toggle ── */
+      .lang-toggle {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 80px;
+        height: 31px;
+        border-radius: 100px;
+        background: rgba(160, 50, 72, 0.18);
+        border: 1px solid rgba(160, 50, 72, 0.45);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 0 12px rgba(160, 50, 72, 0.2);
+        padding: 3px;
+        cursor: pointer;
+        flex-shrink: 0;
+        outline: none;
+        transition:
+          box-shadow 0.3s ease,
+          border-color 0.3s ease;
+      }
+      .lang-toggle:hover {
+        border-color: rgba(160, 50, 72, 0.7);
+        box-shadow: 0 0 18px rgba(160, 50, 72, 0.35);
+      }
+      [dir="rtl"] .lang-toggle {
+        margin-left: 0;
+        margin-right: 12px;
+      }
+      .lang-toggle:focus-visible {
+        box-shadow: 0 0 0 2px rgba(160, 50, 72, 0.6);
+      }
+      .lang-toggle__en,
+      .lang-toggle__ar {
+        flex: 1;
+        text-align: center;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        position: relative;
+        z-index: 1;
+        transition: color 0.3s ease;
+        user-select: none;
+        line-height: 1;
+      }
+      .lang-toggle__en {
+        font-family: "Archivo", system-ui, sans-serif;
+        color: #fff;
+      }
+      .lang-toggle__ar {
+        font-family: "Noto Kufi Arabic", system-ui, sans-serif;
+        color: rgba(255, 255, 255, 0.5);
+      }
+      html[lang="ar"] .lang-toggle__en {
+        color: rgba(255, 255, 255, 0.5);
+      }
+      html[lang="ar"] .lang-toggle__ar {
+        color: #fff;
+      }
+      .lang-toggle__knob {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: calc(50% - 3px);
+        height: calc(100% - 6px);
+        background: var(--gold);
+        border-radius: 100px;
+        transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        z-index: 0;
+      }
+      html[lang="ar"] .lang-toggle__knob {
+        transform: translateX(100%);
+      }
+
+      /* ── RTL overrides ── */
+      [dir="rtl"] .navbar__nav a { font-family: var(--font-body-rtl); letter-spacing: 0.02em; text-transform: none; }
+      [dir="rtl"] .btn-slide svg,
+      [dir="rtl"] .btn-pill svg {
+        transform: scaleX(-1);
+      }
+      [dir="rtl"] .btn-slide svg:hover,
+      [dir="rtl"] .btn-pill svg:hover {
+        transform: scaleX(-1) translateX(-4px);
+      }
+      /* ── RTL property card ── */
+      [dir="rtl"] .prop-card__agent { left: auto; right: 14px; }
+      [dir="rtl"] .prop-card__badges { right: auto; left: 14px; align-items: flex-start; }
+      [dir="rtl"] .prop-card__price-tag { flex-direction: row-reverse; }
+      [dir="rtl"] .prop-card__body { text-align: right; }
+      [dir="rtl"] .prop-card__meta { flex-direction: row-reverse; }
+      [dir="rtl"] .prop-card__loc { flex-direction: row-reverse; justify-content: flex-end; }
+      [dir="rtl"] .prop-card__specs { flex-direction: row-reverse; }
+      [dir="rtl"] .prop-spec + .prop-spec::before { display: none; }
+      [dir="rtl"] .prop-spec { border-right: 1px solid var(--ink-10); border-left: none; }
+      [dir="rtl"] .prop-spec:last-child { border-right: none; }
+      [dir="rtl"] .prop-card__actions { flex-direction: row-reverse; }
+      [dir="rtl"] .btn-detail svg { transform: scaleX(-1); }
+      /* ── RTL lightbox navigation ── */
+      [dir="rtl"] .lightbox__nav--prev { left: auto; right: -60px; }
+      [dir="rtl"] .lightbox__nav--next { right: auto; left: -60px; }
+      [dir="rtl"] .lightbox__nav svg { transform: scaleX(-1); }
+      /* ── RTL filter bar ── */
+      [dir="rtl"] .filter-search svg { left: auto; right: 12px; }
+      [dir="rtl"] .filter-search input { padding: 10px 38px 10px 12px; }
+      [dir="rtl"] .csel__val { text-align: right; }
+      [dir="rtl"] .csel__menu { left: auto; right: 0; }
+      [dir="rtl"] .filter-right { margin-left: 0; margin-right: auto; }
+      /* ── RTL footer ── */
+      [dir="rtl"] .site-footer__nav-head { letter-spacing: 0.04em; text-transform: none; }
+      [dir="rtl"] .site-footer__stat-l { letter-spacing: 0.04em; text-transform: none; }
+      [dir="rtl"] .site-footer__nav-col li a::before {
+        margin-right: 0;
+        transition: width 0.28s cubic-bezier(0.76, 0, 0.24, 1), margin-left 0.28s cubic-bezier(0.76, 0, 0.24, 1);
+      }
+      [dir="rtl"] .site-footer__nav-col li a:hover::before { margin-right: 0; margin-left: 7px; }
+
       .btn-nav {
         display: none;
       } /* retired */
@@ -230,11 +359,7 @@
         inset: 0;
         z-index: 0;
         background:
-          linear-gradient(
-            135deg,
-            rgba(200, 16, 46, 0.22) 0%,
-            transparent 50%
-          ),
+          linear-gradient(135deg, rgba(200, 16, 46, 0.22) 0%, transparent 50%),
           linear-gradient(
             to bottom,
             rgba(5, 5, 5, 0.45) 0%,
@@ -1141,179 +1266,163 @@
       /* ─── COMPARE SIDEBAR ─── */
       .cmp-bar {
         position: fixed;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
+        bottom: 32px;
+        right: 32px;
         z-index: 900;
         display: flex;
-        align-items: stretch;
-        transition:
-          opacity 0.25s,
-          transform 0.25s;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+        transition: opacity 0.25s, transform 0.25s;
+        pointer-events: none;
       }
       .cmp-bar.cmp-bar--hidden {
         opacity: 0;
         pointer-events: none;
-        transform: translateY(-50%) translateX(100%);
-      }
-      .cmp-bar__toggle {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 18px 10px;
-        background: var(--gold);
-        color: #ffffff;
-        border-radius: 8px 0 0 8px;
-        cursor: pointer;
-        box-shadow: -4px 0 20px rgba(200, 16, 46, 0.3);
-        transition: background 0.2s;
-        position: relative;
-        z-index: 1;
-      }
-      .cmp-bar__toggle:hover {
-        background: var(--gold-lt);
-      }
-      .cmp-bar__count {
-        font-size: 11px;
-        font-weight: 700;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: var(--ink);
-        color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        line-height: 1;
-      }
-      .cmp-bar__label {
-        font-size: 9px;
-        font-weight: 700;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        writing-mode: vertical-rl;
-        color: var(--ink);
+        transform: translateY(16px);
       }
       .cmp-bar__panel {
-        position: absolute;
-        right: 100%;
-        top: 50%;
-        z-index: 0;
-        width: 280px;
-        height: 360px;
-        background: var(--bg);
-        border: 1px solid var(--ink-10);
-        border-right: none;
-        box-shadow: -8px 0 40px rgba(13, 13, 13, 0.12);
-        transform: translateY(-50%) translateX(100%);
-        transition: transform 0.38s cubic-bezier(0.32, 0, 0.15, 1);
+        width: 300px;
+        background: #fff;
+        border-radius: 14px;
+        border: 1px solid rgba(0,0,0,0.09);
+        box-shadow: 0 12px 48px rgba(13,13,13,0.16);
         display: flex;
         flex-direction: column;
         overflow: hidden;
+        transform-origin: bottom right;
+        transform: scale(0.94) translateY(10px);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.32s cubic-bezier(0.32,0,0.15,1), opacity 0.28s;
+        max-height: 420px;
       }
       .cmp-bar__panel.is-open {
-        transform: translateY(-50%) translateX(0);
+        transform: scale(1) translateY(0);
+        opacity: 1;
+        pointer-events: auto;
       }
       .cmp-panel__head {
-        padding: 18px 20px 14px;
-        border-bottom: 1px solid var(--ink-10);
+        padding: 12px 14px;
+        border-bottom: 1px solid rgba(0,0,0,0.07);
         display: flex;
         align-items: center;
         justify-content: space-between;
+        flex-shrink: 0;
+        gap: 8px;
       }
-      .cmp-panel__head h4 {
-        font-family: var(--font-body);
-        font-size: 16px;
-        font-weight: 500;
-      }
+      .cmp-panel__head h4 { font-size: 14px; font-weight: 600; text-align: center; flex: 1; }
       .cmp-panel__close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(0,0,0,0.05);
         color: var(--ink-30);
-        transition: color 0.2s;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: background 0.2s, color 0.2s;
       }
-      .cmp-panel__close:hover {
-        color: var(--ink);
-      }
+      .cmp-panel__close:hover { background: rgba(0,0,0,0.1); color: var(--ink); }
       .cmp-panel__list {
         flex: 1;
         overflow-y: auto;
-        padding: 12px 16px;
         display: flex;
         flex-direction: column;
-        gap: 10px;
       }
       .cmp-item {
         display: flex;
         align-items: center;
         gap: 10px;
-        padding: 8px 10px;
-        border-radius: 8px;
-        border: 1px solid var(--ink-10);
-        background: #fff;
-        position: relative;
+        padding: 12px 16px;
+        border-bottom: 1px solid rgba(0,0,0,0.06);
+        background: transparent;
       }
-      .cmp-item__thumb {
-        width: 44px;
-        height: 44px;
-        border-radius: 6px;
-        object-fit: cover;
-        flex-shrink: 0;
-      }
-      .cmp-item__title {
-        font-size: 12px;
-        font-weight: 500;
-        flex: 1;
-        min-width: 0;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      .cmp-item__rm {
-        color: var(--ink-30);
-        transition: color 0.2s;
-        flex-shrink: 0;
-      }
-      .cmp-item__rm:hover {
-        color: var(--red);
-      }
+      .cmp-item:last-child { border-bottom: none; }
+      .cmp-item__thumb { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+      .cmp-item__title { font-size: 13px; font-weight: 400; flex: 1; min-width: 0; line-height: 1.45; white-space: normal; color: var(--ink); }
+      .cmp-item__rm { color: #bbb; transition: color 0.2s; flex-shrink: 0; border: none; background: none; cursor: pointer; padding: 4px; line-height: 0; border-radius: 50%; }
+      .cmp-item__rm:hover { color: var(--red, #cc2222); background: rgba(204,34,34,0.08); }
       .cmp-panel__slot {
-        padding: 16px;
-        border: 1.5px dashed var(--ink-10);
-        border-radius: 8px;
+        padding: 14px 16px;
         font-size: 12px;
         color: var(--ink-30);
         text-align: center;
+        border-bottom: 1px solid rgba(0,0,0,0.06);
       }
+      .cmp-panel__slot:last-child { border-bottom: none; }
+      .cmp-bar__right {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        z-index: 1;
+        pointer-events: auto;
+      }
+      .cmp-bar__toggle {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        padding: 13px 20px;
+        background: var(--ink);
+        color: #fff;
+        border-radius: 100px;
+        cursor: pointer;
+        box-shadow: 0 6px 28px rgba(13,13,13,0.28);
+        transition: background 0.2s;
+        border: none;
+        white-space: nowrap;
+      }
+      .cmp-bar__toggle:hover { background: #333; }
+      .cmp-bar__count {
+        font-size: 12px;
+        font-weight: 700;
+        background: var(--gold);
+        color: #fff;
+        border-radius: 20px;
+        padding: 3px 9px;
+        line-height: 1.4;
+      }
+      .cmp-bar__label {
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        color: rgba(255,255,255,0.9);
+      }
+      .cmp-bar__chevron {
+        transition: transform 0.3s cubic-bezier(0.32,0,0.15,1);
+        opacity: 0.7;
+      }
+      .cmp-bar__panel.is-open ~ .cmp-bar__right .cmp-bar__chevron { transform: rotate(180deg); }
       .cmp-panel__foot {
-        padding: 14px 16px;
-        border-top: 1px solid var(--ink-10);
+        padding: 14px 16px 16px;
+        border-top: 1px solid rgba(0,0,0,0.07);
+        flex-shrink: 0;
       }
       .btn-cmp-go {
         width: 100%;
         padding: 13px;
         border-radius: 100px;
-        background: var(--gold);
-        color: #ffffff;
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 0.06em;
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        background: var(--ink);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
         border: none;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
+        gap: 8px;
+        transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
       }
-      .btn-cmp-go:hover {
-        background: var(--gold-lt);
-        transform: translateY(-2px);
-      }
-      .btn-cmp-go:disabled {
-        opacity: 0.4;
-        pointer-events: none;
-        transform: none;
-      }
+      .btn-cmp-go:hover { opacity: 0.82; transform: translateY(-1px); }
+      .btn-cmp-go:disabled { opacity: 0.35; pointer-events: none; transform: none; }
+      [dir="rtl"] .cmp-bar { right: auto; left: 32px; }
+      [dir="rtl"] .cmp-bar__panel { transform-origin: bottom left; }
 
       /* ─── LIGHTBOX ─── */
       .lightbox {
@@ -1887,6 +1996,8 @@
         .lightbox__nav--next {
           right: -6px;
         }
+        [dir="rtl"] .lightbox__nav--prev { left: auto; right: -6px; }
+        [dir="rtl"] .lightbox__nav--next { right: auto; left: -6px; }
         .listings-grid.list-view .prop-card {
           grid-template-columns: 1fr;
         }
@@ -1950,15 +2061,33 @@
       </a>
       <div class="navbar__right">
         <ul class="navbar__nav" role="list">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="listings.html" class="active">Properties</a></li>
-          <li><a href="#">Projects</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+          <li>
+            <a href="listings.html" class="active" data-i18n="nav.properties"
+              >Properties</a
+            >
+          </li>
+          <li><a href="#" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="#" data-i18n="nav.about">About</a></li>
+          <li><a href="#" data-i18n="nav.contact">Contact</a></li>
         </ul>
         <div class="navbar__sep" aria-hidden="true"></div>
         <div>
-          <button class="btn-pill btn-pill--fill">Get in Touch</button>
+          <button class="btn-pill btn-pill--fill" data-i18n="nav.cta">
+            Get in Touch
+          </button>
+        </div>
+        <div
+          id="langToggle"
+          class="lang-toggle"
+          role="switch"
+          aria-checked="false"
+          tabindex="0"
+          aria-label="Switch language"
+        >
+          <span class="lang-toggle__en">EN</span>
+          <span class="lang-toggle__knob"></span>
+          <span class="lang-toggle__ar">عر</span>
         </div>
       </div>
     </nav>
@@ -1970,15 +2099,21 @@
           <nav class="page-hero__bread" aria-label="Breadcrumb">
             <a href="index.html">Home</a>
             <span aria-hidden="true">›</span>
-            <span>Properties</span>
+            <span data-i18n="listings.eyebrow">Properties</span>
           </nav>
-          <h1 class="page-hero__title">
+          <h1
+            class="page-hero__title"
+            data-i18n="listings.title"
+            data-i18n-html
+          >
             Discover <em>Exceptional</em><br />Properties
           </h1>
         </div>
         <div class="page-hero__meta">
           <div class="page-hero__count" id="heroCount">248</div>
-          <div class="page-hero__count-label">Available Properties</div>
+          <div class="page-hero__count-label" data-i18n="listings.count">
+            Available Properties
+          </div>
         </div>
       </div>
     </div>
@@ -2141,8 +2276,20 @@
         </button>
 
         <div class="filter-right">
-          <button class="btn-clear" id="clearBtn">Clear All</button>
-          <button class="btn-filter-apply" id="applyBtn">Apply</button>
+          <button
+            class="btn-clear"
+            id="clearBtn"
+            data-i18n="listings.filter.reset"
+          >
+            Clear All
+          </button>
+          <button
+            class="btn-filter-apply"
+            id="applyBtn"
+            data-i18n="listings.filter.apply"
+          >
+            Apply
+          </button>
         </div>
       </div>
 
@@ -2166,7 +2313,9 @@
             </div>
           </div>
           <div class="adv-group">
-            <div class="adv-group__label">Status</div>
+            <div class="adv-group__label" data-i18n="listings.filter.status">
+              Status
+            </div>
             <div class="adv-checks" id="statusChecks">
               <label class="adv-check"
                 ><input type="checkbox" value="for-sale" /><span
@@ -2289,7 +2438,7 @@
     <div class="load-more-wrap">
       <button class="btn-load-more" id="loadMoreBtn">
         <div class="spinner"></div>
-        <span>Load More Properties</span>
+        <span data-i18n="btn.load-more">Load More Properties</span>
         <svg
           width="14"
           height="14"
@@ -2305,35 +2454,25 @@
 
     <!-- COMPARE SIDEBAR -->
     <div class="cmp-bar cmp-bar--hidden" id="cmpBar">
-      <button
-        class="cmp-bar__toggle"
-        id="cmpToggle"
-        aria-label="Compare sidebar"
-      >
-        <div class="cmp-bar__count" id="cmpCount">0</div>
-        <div class="cmp-bar__label">Compare</div>
-      </button>
       <div class="cmp-bar__panel" id="cmpPanel">
         <div class="cmp-panel__head">
-          <h4>Compare Units</h4>
-          <button class="cmp-panel__close" id="cmpClose">
-            <svg
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-            >
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
+          <h4 data-i18n="cmp.panel.title">Property Comparison</h4>
+          <button class="cmp-panel__close" id="cmpClose" aria-label="Close panel">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           </button>
         </div>
         <div class="cmp-panel__list" id="cmpList"></div>
         <div class="cmp-panel__foot">
-          <button class="btn-cmp-go" id="cmpGoBtn" disabled>Compare Now</button>
+          <button class="btn-cmp-go" id="cmpGoBtn" disabled data-i18n="cmp.go">Compare Now</button>
         </div>
+      </div>
+      <div class="cmp-bar__right">
+        <button class="cmp-bar__toggle" id="cmpToggle" aria-label="Toggle compare panel">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="M16 21l4-4-4-4"/><path d="M20 17H4"/></svg>
+          <span class="cmp-bar__label" data-i18n="cmp.toggle">Compare</span>
+          <span id="cmpCount" class="cmp-bar__count">0/4</span>
+          <svg class="cmp-bar__chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+        </button>
       </div>
     </div>
 
@@ -2449,22 +2588,22 @@
                 />
               </svg>
             </a>
-            <p class="site-footer__tagline">
+            <p class="site-footer__tagline" data-i18n="footer.desc">
               Egypt's most curated luxury real estate — from New Cairo's towers
               to the North Coast's shores.
             </p>
             <div class="site-footer__stats">
               <div class="site-footer__stat">
                 <span class="site-footer__stat-n">164</span>
-                <span class="site-footer__stat-l">Active Listings</span>
+                <span class="site-footer__stat-l" data-i18n="footer.stat.listings">Active Listings</span>
               </div>
               <div class="site-footer__stat">
                 <span class="site-footer__stat-n">6</span>
-                <span class="site-footer__stat-l">Locations</span>
+                <span class="site-footer__stat-l" data-i18n="footer.stat.locations">Locations</span>
               </div>
               <div class="site-footer__stat">
                 <span class="site-footer__stat-n">12+</span>
-                <span class="site-footer__stat-l">Years</span>
+                <span class="site-footer__stat-l" data-i18n="footer.stat.years">Years</span>
               </div>
             </div>
             <div class="site-footer__socials">
@@ -2542,35 +2681,56 @@
           <!-- Navigation -->
           <nav class="site-footer__nav" aria-label="Footer navigation">
             <div class="site-footer__nav-col">
-              <h3 class="site-footer__nav-head">Explore</h3>
+              <h3
+                class="site-footer__nav-head"
+                data-i18n="footer.col.properties"
+              >
+                Explore
+              </h3>
               <ul>
-                <li><a href="listings.html">All Properties</a></li>
-                <li><a href="listings.html">Villas &amp; Compounds</a></li>
-                <li><a href="listings.html">Penthouse Collection</a></li>
-                <li><a href="listings.html">Off-Plan Projects</a></li>
-                <li><a href="listings.html">North Coast</a></li>
-                <li><a href="compare.html">Compare Units</a></li>
+                <li>
+                  <a href="listings.html" data-i18n="footer.link.all"
+                    >All Properties</a
+                  >
+                </li>
+                <li><a href="listings.html" data-i18n="footer.link.villas">Villas &amp; Compounds</a></li>
+                <li><a href="listings.html" data-i18n="footer.link.penthouse">Penthouse Collection</a></li>
+                <li>
+                  <a href="listings.html" data-i18n="footer.link.offplan"
+                    >Off-Plan Projects</a
+                  >
+                </li>
+                <li><a href="listings.html" data-i18n="footer.link.north-coast">North Coast</a></li>
+                <li><a href="compare.html" data-i18n="footer.link.compare-units">Compare Units</a></li>
               </ul>
             </div>
             <div class="site-footer__nav-col">
-              <h3 class="site-footer__nav-head">Company</h3>
+              <h3 class="site-footer__nav-head" data-i18n="footer.col.company">
+                Company
+              </h3>
               <ul>
-                <li><a href="#">About Akar Town</a></li>
-                <li><a href="#">Our Agents</a></li>
-                <li><a href="#">Success Stories</a></li>
-                <li><a href="#">Careers</a></li>
-                <li><a href="#">Press &amp; Media</a></li>
-                <li><a href="#">Contact Us</a></li>
+                <li>
+                  <a href="#" data-i18n="footer.link.about">About Akar Town</a>
+                </li>
+                <li><a href="#" data-i18n="footer.link.team">Our Agents</a></li>
+                <li><a href="#" data-i18n="footer.link.success">Success Stories</a></li>
+                <li><a href="#" data-i18n="footer.link.careers">Careers</a></li>
+                <li>
+                  <a href="#" data-i18n="footer.link.press"
+                    >Press &amp; Media</a
+                  >
+                </li>
+                <li><a href="#" data-i18n="footer.link.contact-us">Contact Us</a></li>
               </ul>
             </div>
           </nav>
           <!-- Property Match Widget -->
           <div class="site-footer__match">
-            <div class="site-footer__match-eyebrow">Property Matching</div>
-            <h2 class="site-footer__match-title">
+            <div class="site-footer__match-eyebrow" data-i18n="footer.match.eyebrow">Property Matching</div>
+            <h2 class="site-footer__match-title" data-i18n="footer.match.title" data-i18n-html>
               Find Your <em>Perfect</em> Unit
             </h2>
-            <p class="site-footer__match-sub">
+            <p class="site-footer__match-sub" data-i18n="footer.match.sub">
               Tell us what you need — we'll alert you the moment it's listed.
             </p>
             <div class="site-footer__match-types" id="fmatchTypes">
@@ -2644,13 +2804,13 @@
         </div>
         <!-- Bottom bar -->
         <div class="site-footer__bottom">
-          <p class="site-footer__copy">
+          <p class="site-footer__copy" data-i18n="footer.copy">
             © 2026 Akar Town Real Estate. All rights reserved.
           </p>
           <div class="site-footer__legal">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Use</a>
-            <a href="#">Cookie Policy</a>
+            <a href="#" data-i18n="footer.privacy">Privacy Policy</a>
+            <a href="#" data-i18n="footer.terms">Terms of Use</a>
+            <a href="#" data-i18n="footer.cookie">Cookie Policy</a>
           </div>
           <button
             class="site-footer__top-btn"
@@ -3052,7 +3212,7 @@
     <div class="prop-card__price-tag">
       <div>
         <div class="prop-card__price">EGP ${p.price}</div>
-        <div class="prop-card__price-sub">Total Price</div>
+        <div class="prop-card__price-sub" data-i18n="card.price.total">Total Price</div>
       </div>
       ${statusBadge(p.status)}
     </div>
@@ -3076,13 +3236,13 @@
         p.beds > 0
           ? `<div class="prop-spec">
         <span class="prop-spec__val">${bedsLabel}</span>
-        <span class="prop-spec__key">Beds</span>
+        <span class="prop-spec__key" data-i18n="spec.beds">Beds</span>
       </div>`
           : ""
       }
       <div class="prop-spec">
         <span class="prop-spec__val">${p.baths}</span>
-        <span class="prop-spec__key">Baths</span>
+        <span class="prop-spec__key" data-i18n="spec.baths">Baths</span>
       </div>
       <div class="prop-spec">
         <span class="prop-spec__val">${p.area}</span>
@@ -3090,7 +3250,7 @@
       </div>
       <div class="prop-spec">
         <span class="prop-spec__val">${p.floor}</span>
-        <span class="prop-spec__key">Floor</span>
+        <span class="prop-spec__key" data-i18n="spec.floor">Floor</span>
       </div>
     </div>
     <div class="prop-card__actions">
@@ -3104,7 +3264,7 @@
         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
       </button>
       <a href="property-details.html?id=${p.id}" class="btn-detail">
-        Details
+        <span data-i18n="card.details">Details</span>
         <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9,18 15,12 9,6"/></svg>
       </a>
     </div>
@@ -3326,16 +3486,13 @@
       const cmpToggle = document.getElementById("cmpToggle");
       const cmpPanel = document.getElementById("cmpPanel");
       const cmpClose = document.getElementById("cmpClose");
+
       const cmpList = document.getElementById("cmpList");
       const cmpCount = document.getElementById("cmpCount");
       const cmpGoBtn = document.getElementById("cmpGoBtn");
 
-      cmpToggle.addEventListener("click", () =>
-        cmpPanel.classList.toggle("is-open"),
-      );
-      cmpClose.addEventListener("click", () =>
-        cmpPanel.classList.remove("is-open"),
-      );
+      cmpToggle.addEventListener("click", () => cmpPanel.classList.toggle("is-open"));
+      cmpClose.addEventListener("click", () => cmpPanel.classList.remove("is-open"));
 
       function renderCmpList() {
         const bar = document.getElementById("cmpBar");
@@ -3345,15 +3502,15 @@
         } else {
           bar.classList.remove("cmp-bar--hidden");
         }
-        cmpCount.textContent = compareItems.length;
-        cmpGoBtn.disabled = compareItems.length < 2;
+        cmpCount.textContent = compareItems.length + "/" + MAX_CMP;
+        cmpGoBtn.disabled = compareItems.length < 1;
         let html = "";
         for (const item of compareItems) {
           html += `<div class="cmp-item" data-id="${item.id}">
       <img class="cmp-item__thumb" src="${item.thumb}" alt="${item.title}"/>
       <span class="cmp-item__title">${item.title}</span>
       <button class="cmp-item__rm" data-rm="${item.id}" aria-label="Remove">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>`;
         }
@@ -3375,12 +3532,12 @@
         }
         if (compareItems.length >= MAX_CMP) {
           const bar = document.getElementById("cmpBar");
-          bar.style.transform = "translateY(-50%) translateX(6px)";
+          bar.style.transform = "translateX(6px)";
           setTimeout(() => {
-            bar.style.transform = "translateY(-50%) translateX(-6px)";
+            bar.style.transform = "translateX(-6px)";
           }, 80);
           setTimeout(() => {
-            bar.style.transform = "translateY(-50%)";
+            bar.style.transform = "";
           }, 160);
           return;
         }
@@ -3551,6 +3708,374 @@
           if (current < target) requestAnimationFrame(step);
         };
         requestAnimationFrame(step);
+      })();
+    </script>
+
+    <script>
+      /* ── i18n / Language Switcher ── */
+      (function () {
+        var STORAGE_KEY = "akar_lang";
+
+        var T = {
+          en: {
+            /* Navbar */
+            "nav.home": "Home",
+            "nav.properties": "Properties",
+            "nav.projects": "Projects",
+            "nav.about": "About",
+            "nav.contact": "Contact",
+            "nav.cta": "Get in Touch",
+            /* Buttons */
+            "btn.view-all": "View All Properties",
+            "btn.schedule": "Schedule Viewing",
+            "btn.enquire": "Send Enquiry",
+            "btn.load-more": "Load More Properties",
+            "btn.compare": "Compare",
+            "btn.details": "View Details",
+            "btn.call": "Call Now",
+            "btn.wa": "WhatsApp",
+            /* Hero */
+            "hero.scroll": "Scroll to Explore",
+            /* Featured Properties */
+            "feat.eyebrow": "Properties",
+            "feat.title": "Featured <em>Properties</em>",
+            "feat.sub":
+              "Exceptional homes curated exclusively for the discerning few.",
+            "feat.label.price": "Starting Price",
+            "feat.label.beds": "Beds",
+            "feat.label.baths": "Baths",
+            "feat.label.area": "Area m²",
+            "feat.label.location": "Location",
+            /* Why Choose Us */
+            "why.eyebrow": "Why Akar Town",
+            "why.title": "Excellence in <em>Every Detail</em>",
+            "why.sub":
+              "Two decades of curating Egypt's finest properties with uncompromising standards.",
+            "why.item1.title": "Expert Guidance",
+            "why.item1.desc":
+              "Dedicated advisors who understand your vision and guide you to the perfect property.",
+            "why.item2.title": "Curated Portfolio",
+            "why.item2.desc":
+              "Hand-selected luxury developments in Egypt's most coveted locations.",
+            "why.item3.title": "Seamless Process",
+            "why.item3.desc":
+              "End-to-end support from first viewing through final handover.",
+            "why.item4.title": "Lifetime Value",
+            "why.item4.desc":
+              "Investment-grade properties that appreciate and enrich for generations.",
+            "why.stat1.label": "Luxury Properties",
+            "why.stat2.label": "Satisfied Clients",
+            "why.stat3.label": "Years Experience",
+            "why.stat4.label": "Partner Developers",
+            /* Locations */
+            "loc.eyebrow": "Locations",
+            "loc.title": "Prime <em>Destinations</em>",
+            "loc.sub":
+              "Handpicked neighbourhoods where luxury meets lifestyle.",
+            /* Gallery */
+            "gal.eyebrow": "Portfolio",
+            "gal.title": "Property <em>Gallery</em>",
+            "gal.sub": "A curated collection of Egypt's most distinguished addresses.",
+            "gal.filter.all": "All",
+            "gal.filter.residential": "Residential",
+            "gal.filter.commercial": "Commercial",
+            "gal.filter.offplan": "Off-Plan",
+            /* Listings page */
+            "listings.eyebrow": "Properties",
+            "listings.title": "Discover <em>Exceptional</em> Properties",
+            "listings.count": "Available Properties",
+            "listings.sort.label": "Sort by",
+            "listings.sort.newest": "Newest",
+            "listings.sort.price-asc": "Price: Low to High",
+            "listings.sort.price-desc": "Price: High to Low",
+            "listings.sort.area": "Largest Area",
+            "listings.filter.title": "Filter Properties",
+            "listings.filter.type": "Property Type",
+            "listings.filter.location": "Location",
+            "listings.filter.price": "Price Range",
+            "listings.filter.beds": "Bedrooms",
+            "listings.filter.status": "Status",
+            "listings.filter.apply": "Apply Filters",
+            "listings.filter.reset": "Reset",
+            "listings.no-results": "No properties match your filters.",
+            /* Property card */
+            "card.price.total": "Total Price",
+            "spec.beds": "Beds",
+            "spec.baths": "Baths",
+            "spec.floor": "Floor",
+            "card.details": "Details",
+            /* Compare page */
+            "cmp.eyebrow": "Analysis",
+            "cmp.title": "Compare <em>Properties</em>",
+            "cmp.sub": "Side-by-side luxury comparison",
+            "cmp.units-selected": "Units Selected",
+            "cmp.cta.heading": "Ready to <em>Decide?</em>",
+            "cmp.cta.sub": "Schedule a viewing or request detailed information from our dedicated agents.",
+            "cmp.add": "Add Property",
+            "cmp.remove": "Remove",
+            "cmp.clear": "Clear All",
+            "cmp.beds": "Bedrooms",
+            "cmp.baths": "Bathrooms",
+            "cmp.area": "Area",
+            "cmp.price": "Price",
+            "cmp.location": "Location",
+            "cmp.status": "Status",
+            "cmp.type": "Type",
+            "cmp.panel.title": "Property Comparison",
+            "cmp.toggle": "Compare",
+            "cmp.go": "Compare Now",
+            /* Property Details page */
+            "pd.eyebrow": "Property Details",
+            "pd.price.label": "Starting Price",
+            "pd.ref": "Reference",
+            "pd.beds": "Bedrooms",
+            "pd.baths": "Bathrooms",
+            "pd.area": "Area",
+            "pd.floor": "Floor",
+            "pd.year": "Year Built",
+            "pd.type": "Property Type",
+            "pd.status": "Status",
+            "pd.overview": "Overview",
+            "pd.amenities": "Amenities",
+            "pd.location": "Location",
+            "pd.gallery": "Gallery",
+            "pd.similar": "Similar Properties",
+            "pd.agent": "Your Agent",
+            "pd.agent.call": "Call Agent",
+            "pd.agent.msg": "Send Message",
+            /* Footer */
+            "footer.tagline": "Luxury Real Estate",
+            "footer.desc":
+              "Egypt's premier luxury real estate destination. Curating exceptional properties for discerning clients since 2004.",
+            "footer.col.properties": "Properties",
+            "footer.col.company": "Company",
+            "footer.col.contact": "Contact",
+            "footer.link.all": "All Properties",
+            "footer.link.villas": "Villas & Compounds",
+            "footer.link.penthouse": "Penthouse Collection",
+            "footer.link.residential": "Residential",
+            "footer.link.commercial": "Commercial",
+            "footer.link.offplan": "Off-Plan Projects",
+            "footer.link.north-coast": "North Coast",
+            "footer.link.compare-units": "Compare Units",
+            "footer.link.about": "About Us",
+            "footer.link.team": "Our Team",
+            "footer.link.success": "Success Stories",
+            "footer.link.careers": "Careers",
+            "footer.link.press": "Press & Media",
+            "footer.link.contact-us": "Contact Us",
+            "footer.stat.listings": "Active Listings",
+            "footer.stat.locations": "Locations",
+            "footer.stat.years": "Years",
+            "footer.match.eyebrow": "Property Matching",
+            "footer.match.title": "Find Your <em>Perfect</em> Unit",
+            "footer.match.sub": "Tell us what you need — we'll alert you the moment it's listed.",
+            "footer.copy": "© 2025 Akar Town. All rights reserved.",
+            "footer.privacy": "Privacy Policy",
+            "footer.terms": "Terms of Use",
+            "footer.cookie": "Cookie Policy",
+          },
+          ar: {
+            /* Navbar */
+            "nav.home": "الرئيسية",
+            "nav.properties": "العقارات",
+            "nav.projects": "المشاريع",
+            "nav.about": "من نحن",
+            "nav.contact": "تواصل",
+            "nav.cta": "تواصل معنا",
+            /* Buttons */
+            "btn.view-all": "عرض جميع العقارات",
+            "btn.schedule": "حجز معاينة",
+            "btn.enquire": "إرسال استفسار",
+            "btn.load-more": "تحميل المزيد",
+            "btn.compare": "مقارنة",
+            "btn.details": "عرض التفاصيل",
+            "btn.call": "اتصل الآن",
+            "btn.wa": "واتساب",
+            /* Hero */
+            "hero.scroll": "اسحب للاستكشاف",
+            /* Featured Properties */
+            "feat.eyebrow": "العقارات",
+            "feat.title": "العقارات <em>المميزة</em>",
+            "feat.sub": "منازل استثنائية مختارة بعناية للنخبة.",
+            "feat.label.price": "السعر الابتدائي",
+            "feat.label.beds": "غرف النوم",
+            "feat.label.baths": "الحمامات",
+            "feat.label.area": "المساحة م²",
+            "feat.label.location": "الموقع",
+            /* Why Choose Us */
+            "why.eyebrow": "لماذا أكار تاون",
+            "why.title": "التميز في <em>كل التفاصيل</em>",
+            "why.sub":
+              "عقدان من تنظيم أفضل العقارات في مصر بمعايير لا تقبل المساومة.",
+            "why.item1.title": "إرشاد الخبراء",
+            "why.item1.desc":
+              "مستشارون متخصصون يفهمون رؤيتك ويوجهونك نحو العقار المثالي.",
+            "why.item2.title": "محفظة مختارة",
+            "why.item2.desc":
+              "مشاريع فاخرة مختارة بعناية في أرقى المواقع في مصر.",
+            "why.item3.title": "عملية سلسة",
+            "why.item3.desc": "دعم شامل من أول معاينة حتى التسليم النهائي.",
+            "why.item4.title": "قيمة دائمة",
+            "why.item4.desc":
+              "عقارات ذات جودة استثمارية تزداد قيمتها وتثري الأجيال القادمة.",
+            "why.stat1.label": "عقار فاخر",
+            "why.stat2.label": "عميل راضٍ",
+            "why.stat3.label": "سنوات خبرة",
+            "why.stat4.label": "مطور شريك",
+            /* Locations */
+            "loc.eyebrow": "المواقع",
+            "loc.title": "الوجهات <em>المتميزة</em>",
+            "loc.sub": "أحياء مختارة بعناية حيث يلتقي الفخامة بأسلوب الحياة.",
+            /* Gallery */
+            "gal.eyebrow": "أعمالنا",
+            "gal.title": "معرض <em>العقارات</em>",
+            "gal.sub": "مجموعة مختارة من أرقى العناوين في مصر.",
+            "gal.filter.all": "الكل",
+            "gal.filter.residential": "سكني",
+            "gal.filter.commercial": "تجاري",
+            "gal.filter.offplan": "على الخارطة",
+            /* Listings page */
+            "listings.eyebrow": "العقارات",
+            "listings.title": "اكتشف <em>عقارات استثنائية</em>",
+            "listings.count": "عقار متاح",
+            "listings.sort.label": "ترتيب حسب",
+            "listings.sort.newest": "الأحدث",
+            "listings.sort.price-asc": "السعر: من الأقل",
+            "listings.sort.price-desc": "السعر: من الأعلى",
+            "listings.sort.area": "أكبر مساحة",
+            "listings.filter.title": "تصفية العقارات",
+            "listings.filter.type": "نوع العقار",
+            "listings.filter.location": "الموقع",
+            "listings.filter.price": "نطاق السعر",
+            "listings.filter.beds": "غرف النوم",
+            "listings.filter.status": "الحالة",
+            "listings.filter.apply": "تطبيق التصفية",
+            "listings.filter.reset": "إعادة ضبط",
+            "listings.no-results": "لا توجد عقارات تطابق معايير البحث.",
+            /* Property card */
+            "card.price.total": "السعر الإجمالي",
+            "spec.beds": "غرف",
+            "spec.baths": "حمامات",
+            "spec.floor": "طابق",
+            "card.details": "التفاصيل",
+            /* Compare page */
+            "cmp.eyebrow": "تحليل",
+            "cmp.title": "مقارنة <em>العقارات</em>",
+            "cmp.sub": "مقارنة جانبية للعقارات الفاخرة",
+            "cmp.units-selected": "وحدات مختارة",
+            "cmp.cta.heading": "مستعد لاتخاذ <em>قرارك؟</em>",
+            "cmp.cta.sub": "احجز معاينة أو اطلب معلومات تفصيلية من وكلائنا المتخصصين.",
+            "cmp.add": "إضافة عقار",
+            "cmp.remove": "إزالة",
+            "cmp.clear": "مسح الكل",
+            "cmp.beds": "غرف النوم",
+            "cmp.baths": "الحمامات",
+            "cmp.area": "المساحة",
+            "cmp.price": "السعر",
+            "cmp.location": "الموقع",
+            "cmp.status": "الحالة",
+            "cmp.type": "النوع",
+            "cmp.panel.title": "مقارنة العقارات",
+            "cmp.toggle": "مقارنة",
+            "cmp.go": "قارن الآن",
+            /* Property Details page */
+            "pd.eyebrow": "تفاصيل العقار",
+            "pd.price.label": "السعر الابتدائي",
+            "pd.ref": "المرجع",
+            "pd.beds": "غرف النوم",
+            "pd.baths": "الحمامات",
+            "pd.area": "المساحة",
+            "pd.floor": "الطابق",
+            "pd.year": "سنة البناء",
+            "pd.type": "نوع العقار",
+            "pd.status": "الحالة",
+            "pd.overview": "نظرة عامة",
+            "pd.amenities": "المرافق",
+            "pd.location": "الموقع",
+            "pd.gallery": "معرض الصور",
+            "pd.similar": "عقارات مشابهة",
+            "pd.agent": "وكيلك العقاري",
+            "pd.agent.call": "اتصل بالوكيل",
+            "pd.agent.msg": "إرسال رسالة",
+            /* Footer */
+            "footer.tagline": "العقارات الفاخرة",
+            "footer.desc":
+              "الوجهة الأولى للعقارات الفاخرة في مصر. نختار لعملائنا المميزين أفضل العقارات منذ عام 2004.",
+            "footer.col.properties": "العقارات",
+            "footer.col.company": "الشركة",
+            "footer.col.contact": "تواصل معنا",
+            "footer.link.all": "جميع العقارات",
+            "footer.link.villas": "الفيلات والكمبوندات",
+            "footer.link.penthouse": "مجموعة البنتهاوس",
+            "footer.link.residential": "سكني",
+            "footer.link.commercial": "تجاري",
+            "footer.link.offplan": "مشاريع على الخارطة",
+            "footer.link.north-coast": "الساحل الشمالي",
+            "footer.link.compare-units": "مقارنة الوحدات",
+            "footer.link.about": "من نحن",
+            "footer.link.team": "فريقنا",
+            "footer.link.success": "قصص النجاح",
+            "footer.link.careers": "الوظائف",
+            "footer.link.press": "الصحافة والإعلام",
+            "footer.link.contact-us": "تواصل معنا",
+            "footer.stat.listings": "إعلان نشط",
+            "footer.stat.locations": "موقع",
+            "footer.stat.years": "سنة",
+            "footer.match.eyebrow": "مطابقة العقارات",
+            "footer.match.title": "اعثر على <em>وحدتك المثالية</em>",
+            "footer.match.sub": "أخبرنا بما تحتاجه — سنُنبهك فور إدراجه.",
+            "footer.copy": "© 2025 أكار تاون. جميع الحقوق محفوظة.",
+            "footer.privacy": "سياسة الخصوصية",
+            "footer.terms": "شروط الاستخدام",
+            "footer.cookie": "سياسة ملفات الارتباط",
+          },
+        };
+
+        function applyLang(lang) {
+          var html = document.documentElement;
+          html.setAttribute("lang", lang);
+          html.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+
+          var t = T[lang] || T.en;
+
+          /* Translate all data-i18n elements */
+          document.querySelectorAll("[data-i18n]").forEach(function (el) {
+            var key = el.getAttribute("data-i18n");
+            var val = t[key] !== undefined ? t[key] : T.en[key] || "";
+            if (el.hasAttribute("data-i18n-html")) {
+              el.innerHTML = val;
+            } else {
+              el.textContent = val;
+            }
+          });
+
+          /* Update toggle button label */
+          var btn = document.getElementById("langToggle");
+          if (btn)
+            btn.setAttribute("aria-checked", lang === "ar" ? "true" : "false");
+
+          localStorage.setItem(STORAGE_KEY, lang);
+        }
+
+        /* Init */
+        var saved = localStorage.getItem(STORAGE_KEY) || "en";
+        applyLang(saved);
+
+        var toggleBtn = document.getElementById("langToggle");
+        if (toggleBtn) {
+          function doToggle() {
+            var current = document.documentElement.getAttribute("lang") || "en";
+            applyLang(current === "ar" ? "en" : "ar");
+          }
+          toggleBtn.addEventListener("click", doToggle);
+          toggleBtn.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              doToggle();
+            }
+          });
+        }
       })();
     </script>
   </body>

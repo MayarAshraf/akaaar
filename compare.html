@@ -19,13 +19,14 @@
         --ink-60: rgba(13, 13, 13, 0.6);
         --ink-30: rgba(13, 13, 13, 0.3);
         --ink-10: rgba(13, 13, 13, 0.1);
-        --gold: #C8102E;
-        --gold-lt: #C8102E;
-        --gold-dk: #C8102E;
+        --gold: #c8102e;
+        --gold-lt: #c8102e;
+        --gold-dk: #c8102e;
         --red: #cc2222;
         --green: #1e7e52;
         --white: #fff;
         --font-body: "Archivo", system-ui, sans-serif;
+        --font-body-rtl: "Noto Kufi Arabic", system-ui, sans-serif;
         --font-display: "Cormorant Garamond", Georgia, serif;
         --nav-h: 62px;
         --ease-smooth: cubic-bezier(0.76, 0, 0.24, 1);
@@ -98,7 +99,7 @@
       .navbar__right {
         display: flex;
         align-items: center;
-        gap: 32px;
+        gap: 20px;
       }
       .navbar__nav {
         display: flex;
@@ -156,6 +157,139 @@
       .btn-pill--fill:hover {
         background: var(--gold-lt);
       }
+
+      /* ── RTL / Arabic base ── */
+      [dir="rtl"],
+      [lang="ar"],
+      :lang(ar) {
+        font-family: var(--font-body-rtl);
+        direction: rtl;
+        text-align: right;
+        letter-spacing: 0;
+        text-transform: none;
+      }
+
+      /* ── Language Toggle ── */
+      /* ── Lang slide toggle ── */
+      .lang-toggle {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 80px;
+        height: 31px;
+        border-radius: 100px;
+        background: rgba(160, 50, 72, 0.18);
+        border: 1px solid rgba(160, 50, 72, 0.45);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 0 12px rgba(160, 50, 72, 0.2);
+        padding: 3px;
+        cursor: pointer;
+        flex-shrink: 0;
+        outline: none;
+        transition:
+          box-shadow 0.3s ease,
+          border-color 0.3s ease;
+      }
+      .lang-toggle:hover {
+        border-color: rgba(160, 50, 72, 0.7);
+        box-shadow: 0 0 18px rgba(160, 50, 72, 0.35);
+      }
+      [dir="rtl"] .lang-toggle {
+        margin-left: 0;
+        margin-right: 12px;
+      }
+      .lang-toggle:focus-visible {
+        box-shadow: 0 0 0 2px rgba(160, 50, 72, 0.6);
+      }
+      .lang-toggle__en,
+      .lang-toggle__ar {
+        flex: 1;
+        text-align: center;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        position: relative;
+        z-index: 1;
+        transition: color 0.3s ease;
+        user-select: none;
+        line-height: 1;
+      }
+      .lang-toggle__en {
+        font-family: "Archivo", system-ui, sans-serif;
+        color: #fff;
+      }
+      .lang-toggle__ar {
+        font-family: "Noto Kufi Arabic", system-ui, sans-serif;
+        color: rgba(255, 255, 255, 0.5);
+      }
+      html[lang="ar"] .lang-toggle__en {
+        color: rgba(255, 255, 255, 0.5);
+      }
+      html[lang="ar"] .lang-toggle__ar {
+        color: #fff;
+      }
+      .lang-toggle__knob {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: calc(50% - 3px);
+        height: calc(100% - 6px);
+        background: var(--gold);
+        border-radius: 100px;
+        transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        z-index: 0;
+      }
+      html[lang="ar"] .lang-toggle__knob {
+        transform: translateX(100%);
+      }
+
+      /* ── RTL overrides ── */
+      [dir="rtl"] .navbar__nav a { font-family: var(--font-body-rtl); letter-spacing: 0.02em; text-transform: none; }
+      [dir="rtl"] .btn-slide svg,
+      [dir="rtl"] .btn-pill svg {
+        transform: scaleX(-1);
+      }
+      [dir="rtl"] .btn-slide svg:hover,
+      [dir="rtl"] .btn-pill svg:hover {
+        transform: scaleX(-1) translateX(-4px);
+      }
+      /* ── RTL page hero ── */
+      [dir="rtl"] .page-hero__title { font-family: var(--font-body-rtl); }
+      [dir="rtl"] .page-hero__meta { text-align: left; }
+      [dir="rtl"] .page-hero__bread { flex-direction: row-reverse; text-transform: none; letter-spacing: 0.02em; }
+      [dir="rtl"] .page-hero__bread .bread-sep { display: inline-block; transform: scaleX(-1); }
+      /* ── RTL prop-col accordion ── */
+      [dir="rtl"] .prop-col-card__num { left: auto; right: 16px; }
+      [dir="rtl"] .prop-col-card__rm { right: auto; left: 14px; }
+      [dir="rtl"] .prop-col-card { border-right: none; border-left: 1px solid rgba(255, 255, 255, 0.04); }
+      [dir="rtl"] .prop-col-card:last-child { border-left: none; }
+      [dir="rtl"] .prop-col-card__body { left: auto; right: 0; }
+      [dir="rtl"] .prop-col-add { border-left: none; border-right: 1px solid rgba(255, 255, 255, 0.06); }
+      /* ── RTL sticky strip ── */
+      [dir="rtl"] .sticky-strip__lbl { border-right: none; border-left: 1px solid rgba(255, 255, 255, 0.06); padding-right: 0; padding-left: 16px; }
+      [dir="rtl"] .sticky-prop { border-right: none; border-left: 1px solid rgba(255, 255, 255, 0.05); }
+      [dir="rtl"] .sticky-prop:last-child { border-left: none; }
+      /* ── RTL compare table ── */
+      [dir="rtl"] .cmp-lbl { left: auto; right: 0; padding: 20px 0 20px 20px; }
+      [dir="rtl"] .cmp-sec__lbl { left: auto; right: 0; padding: 32px 0 14px 20px; }
+      [dir="rtl"] .cmp-sec__lbl-text::after { background: linear-gradient(to left, var(--gold-lt), transparent); }
+      [dir="rtl"] .cmp-bar-fill { background: linear-gradient(to left, var(--gold-dk), var(--gold)); }
+      [dir="rtl"] .cmp-cell--best::after { background: linear-gradient(to left, var(--gold), var(--gold-lt)); left: auto; right: 0; }
+      [dir="rtl"] .cmp-sec__cell { border-left: none; border-right: 1px solid var(--ink-10); }
+      [dir="rtl"] .cmp-cell { border-left: none; border-right: 1px solid rgba(13, 13, 13, 0.04); }
+      /* ── RTL CTA section ── */
+      [dir="rtl"] .cta-heading { font-family: var(--font-body-rtl); }
+      [dir="rtl"] .btn-outline-dark,
+      [dir="rtl"] .btn-gold-pill { letter-spacing: 0.02em; text-transform: none; font-family: var(--font-body-rtl); }
+      /* ── RTL footer ── */
+      [dir="rtl"] .site-footer__nav-head { letter-spacing: 0.04em; text-transform: none; }
+      [dir="rtl"] .site-footer__stat-l { letter-spacing: 0.04em; text-transform: none; }
+      [dir="rtl"] .site-footer__nav-col li a::before {
+        margin-right: 0;
+        transition: width 0.28s cubic-bezier(0.76, 0, 0.24, 1), margin-left 0.28s cubic-bezier(0.76, 0, 0.24, 1);
+      }
+      [dir="rtl"] .site-footer__nav-col li a:hover::before { margin-right: 0; margin-left: 7px; }
 
       /* ── PAGE HERO ── */
       .page-hero {
@@ -437,10 +571,11 @@
         flex: 0 0 var(--lw);
         display: flex;
         align-items: center;
-        font-size: 9px;
-        letter-spacing: 0.2em;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.25);
+        color: rgba(255, 255, 255, 0.55);
         border-right: 1px solid rgba(255, 255, 255, 0.06);
         padding-right: 16px;
       }
@@ -689,6 +824,7 @@
         display: inline-flex;
         align-items: center;
         gap: 5px;
+        width: fit-content;
         font-size: 11px;
         font-weight: 600;
         letter-spacing: 0.1em;
@@ -697,7 +833,6 @@
         border-radius: 100px;
       }
       .cmp-status--sale {
-        width: fit-content;
         background: rgba(30, 126, 82, 0.1);
         color: var(--green);
         border: 1.5px solid rgba(30, 126, 82, 0.22);
@@ -723,6 +858,7 @@
         display: inline-flex;
         align-items: center;
         gap: 5px;
+        width: fit-content;
         font-size: 11px;
         letter-spacing: 0.04em;
         font-weight: 500;
@@ -1490,14 +1626,34 @@
       </a>
       <div class="navbar__right">
         <ul class="navbar__nav" role="list">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="listings.html" class="active">Properties</a></li>
-          <li><a href="#">Projects</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+          <li>
+            <a href="listings.html" class="active" data-i18n="nav.properties"
+              >Properties</a
+            >
+          </li>
+          <li><a href="#" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="#" data-i18n="nav.about">About</a></li>
+          <li><a href="#" data-i18n="nav.contact">Contact</a></li>
         </ul>
         <div class="navbar__sep" aria-hidden="true"></div>
-        <div><button class="btn-pill btn-pill--fill">Get in Touch</button></div>
+        <div>
+          <button class="btn-pill btn-pill--fill" data-i18n="nav.cta">
+            Get in Touch
+          </button>
+        </div>
+        <div
+          id="langToggle"
+          class="lang-toggle"
+          role="switch"
+          aria-checked="false"
+          tabindex="0"
+          aria-label="Switch language"
+        >
+          <span class="lang-toggle__en">EN</span>
+          <span class="lang-toggle__knob"></span>
+          <span class="lang-toggle__ar">عر</span>
+        </div>
       </div>
     </nav>
 
@@ -1506,15 +1662,17 @@
       <div class="page-hero__inner">
         <div>
           <nav class="page-hero__bread" aria-label="Breadcrumb">
-            <a href="index.html">Home</a><span>›</span>
-            <a href="listings.html">Properties</a><span>›</span>
-            <span>Compare</span>
+            <a href="index.html" data-i18n="nav.home">Home</a><span class="bread-sep">›</span>
+            <a href="listings.html" data-i18n="nav.properties">Properties</a><span class="bread-sep">›</span>
+            <span data-i18n="cmp.bread">Compare</span>
           </nav>
-          <h1 class="page-hero__title">Side-by-Side <em>Comparison</em></h1>
+          <h1 class="page-hero__title" data-i18n="cmp.title" data-i18n-html>
+            Side-by-Side <em>Comparison</em>
+          </h1>
         </div>
         <div class="page-hero__meta">
           <div class="page-hero__count" id="heroCount">0</div>
-          <div class="page-hero__count-label">Units Selected</div>
+          <div class="page-hero__count-label" data-i18n="cmp.units-selected">Units Selected</div>
         </div>
       </div>
     </div>
@@ -1527,7 +1685,7 @@
     <!-- STICKY MINI STRIP -->
     <div class="sticky-strip" id="stickyStrip">
       <div class="sticky-strip__inner" id="stickyStripInner">
-        <div class="sticky-strip__lbl">Comparing</div>
+        <div class="sticky-strip__lbl" data-cmp-lbl="cmp.comparing">Comparing</div>
       </div>
     </div>
 
@@ -1543,8 +1701,8 @@
     <!-- CTA SECTION -->
     <section class="cta-section sr" id="ctaSection">
       <div class="cta-inner">
-        <h2 class="cta-heading">Ready to <em>Decide?</em></h2>
-        <p class="cta-sub">
+        <h2 class="cta-heading" data-i18n="cmp.cta.heading" data-i18n-html>Ready to <em>Decide?</em></h2>
+        <p class="cta-sub" data-i18n="cmp.cta.sub">
           Schedule a viewing or request detailed information from our dedicated
           agents.
         </p>
@@ -1612,22 +1770,22 @@
                 />
               </svg>
             </a>
-            <p class="site-footer__tagline">
+            <p class="site-footer__tagline" data-i18n="footer.desc">
               Egypt's most curated luxury real estate — from New Cairo's towers
               to the North Coast's shores.
             </p>
             <div class="site-footer__stats">
               <div class="site-footer__stat">
                 <span class="site-footer__stat-n">164</span>
-                <span class="site-footer__stat-l">Active Listings</span>
+                <span class="site-footer__stat-l" data-i18n="footer.stat.listings">Active Listings</span>
               </div>
               <div class="site-footer__stat">
                 <span class="site-footer__stat-n">6</span>
-                <span class="site-footer__stat-l">Locations</span>
+                <span class="site-footer__stat-l" data-i18n="footer.stat.locations">Locations</span>
               </div>
               <div class="site-footer__stat">
                 <span class="site-footer__stat-n">12+</span>
-                <span class="site-footer__stat-l">Years</span>
+                <span class="site-footer__stat-l" data-i18n="footer.stat.years">Years</span>
               </div>
             </div>
             <div class="site-footer__socials">
@@ -1705,35 +1863,56 @@
           <!-- Navigation -->
           <nav class="site-footer__nav" aria-label="Footer navigation">
             <div class="site-footer__nav-col">
-              <h3 class="site-footer__nav-head">Explore</h3>
+              <h3
+                class="site-footer__nav-head"
+                data-i18n="footer.col.properties"
+              >
+                Explore
+              </h3>
               <ul>
-                <li><a href="listings.html">All Properties</a></li>
-                <li><a href="listings.html">Villas &amp; Compounds</a></li>
-                <li><a href="listings.html">Penthouse Collection</a></li>
-                <li><a href="listings.html">Off-Plan Projects</a></li>
-                <li><a href="listings.html">North Coast</a></li>
-                <li><a href="compare.html">Compare Units</a></li>
+                <li>
+                  <a href="listings.html" data-i18n="footer.link.all"
+                    >All Properties</a
+                  >
+                </li>
+                <li><a href="listings.html" data-i18n="footer.link.villas">Villas &amp; Compounds</a></li>
+                <li><a href="listings.html" data-i18n="footer.link.penthouse">Penthouse Collection</a></li>
+                <li>
+                  <a href="listings.html" data-i18n="footer.link.offplan"
+                    >Off-Plan Projects</a
+                  >
+                </li>
+                <li><a href="listings.html" data-i18n="footer.link.north-coast">North Coast</a></li>
+                <li><a href="compare.html" data-i18n="footer.link.compare-units">Compare Units</a></li>
               </ul>
             </div>
             <div class="site-footer__nav-col">
-              <h3 class="site-footer__nav-head">Company</h3>
+              <h3 class="site-footer__nav-head" data-i18n="footer.col.company">
+                Company
+              </h3>
               <ul>
-                <li><a href="#">About Akar Town</a></li>
-                <li><a href="#">Our Agents</a></li>
-                <li><a href="#">Success Stories</a></li>
-                <li><a href="#">Careers</a></li>
-                <li><a href="#">Press &amp; Media</a></li>
-                <li><a href="#">Contact Us</a></li>
+                <li>
+                  <a href="#" data-i18n="footer.link.about">About Akar Town</a>
+                </li>
+                <li><a href="#" data-i18n="footer.link.team">Our Agents</a></li>
+                <li><a href="#" data-i18n="footer.link.success">Success Stories</a></li>
+                <li><a href="#" data-i18n="footer.link.careers">Careers</a></li>
+                <li>
+                  <a href="#" data-i18n="footer.link.press"
+                    >Press &amp; Media</a
+                  >
+                </li>
+                <li><a href="#" data-i18n="footer.link.contact-us">Contact Us</a></li>
               </ul>
             </div>
           </nav>
           <!-- Property Match Widget -->
           <div class="site-footer__match">
-            <div class="site-footer__match-eyebrow">Property Matching</div>
-            <h2 class="site-footer__match-title">
+            <div class="site-footer__match-eyebrow" data-i18n="footer.match.eyebrow">Property Matching</div>
+            <h2 class="site-footer__match-title" data-i18n="footer.match.title" data-i18n-html>
               Find Your <em>Perfect</em> Unit
             </h2>
-            <p class="site-footer__match-sub">
+            <p class="site-footer__match-sub" data-i18n="footer.match.sub">
               Tell us what you need — we'll alert you the moment it's listed.
             </p>
             <div class="site-footer__match-types" id="fmatchTypes">
@@ -1807,13 +1986,13 @@
         </div>
         <!-- Bottom bar -->
         <div class="site-footer__bottom">
-          <p class="site-footer__copy">
+          <p class="site-footer__copy" data-i18n="footer.copy">
             © 2026 Akar Town Real Estate. All rights reserved.
           </p>
           <div class="site-footer__legal">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Use</a>
-            <a href="#">Cookie Policy</a>
+            <a href="#" data-i18n="footer.privacy">Privacy Policy</a>
+            <a href="#" data-i18n="footer.terms">Terms of Use</a>
+            <a href="#" data-i18n="footer.cookie">Cookie Policy</a>
           </div>
           <button
             class="site-footer__top-btn"
@@ -2367,7 +2546,7 @@
               <div class="prop-col-card__type">${p.type}</div>
               <div class="prop-col-card__name">${p.title}</div>
               <div class="prop-col-card__price">EGP ${p.price}</div>
-              <div class="prop-col-card__price-lbl">Total Price</div>
+              <div class="prop-col-card__price-lbl" data-cmp-lbl="cmp.price.total">Total Price</div>
             </div>
           </div>
         `,
@@ -2378,7 +2557,7 @@
             <div class="prop-col-add__ring">
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             </div>
-            <span class="prop-col-add__lbl">Add More</span>
+            <span class="prop-col-add__lbl" data-cmp-lbl="cmp.add.more">Add More</span>
           </a>`;
         }
 
@@ -2420,58 +2599,58 @@
         /* ── BUILD TABLE ── */
         const SCHEMA = [
           {
-            section: "Overview",
+            section: "Overview", sectionKey: "cmp.sec.overview",
             rows: [
               {
-                label: "Price",
+                label: "Price", key: "cmp.row.price",
                 render: (p, i) =>
                   `<div class="cmp-val" style="flex-direction:column;align-items:flex-start;gap:2px"><span style="font-size:13px;font-family:var(--font-body);color:var(--ink-30);letter-spacing:.08em;text-transform:uppercase">EGP</span><span>${p.price}</span>${winPrice[i] ? '<span class="best-badge">Best Value</span>' : ""}</div>`,
               },
-              { label: "Status", render: (p) => statusPill(p.status) },
+              { label: "Status", key: "cmp.row.status", render: (p) => statusPill(p.status) },
               {
-                label: "Type",
+                label: "Type", key: "cmp.row.type",
                 render: (p) => `<span class="cmp-text">${p.type}</span>`,
               },
               {
-                label: "Location",
+                label: "Location", key: "cmp.row.location",
                 render: (p) =>
                   `<span class="cmp-loc"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>${p.location}</span>`,
               },
               {
-                label: "Listed",
+                label: "Listed", key: "cmp.row.listed",
                 render: (p) => `<span class="cmp-text">${p.date}</span>`,
               },
               {
-                label: "Agent",
+                label: "Agent", key: "cmp.row.agent",
                 render: (p) =>
                   `<div class="cmp-agent"><img class="cmp-agent__img" src="${p.agent.img}" alt="${p.agent.name}" loading="lazy"/><div><div class="cmp-agent__name">${p.agent.name}</div><div class="cmp-agent__role">Agent</div></div></div>`,
               },
             ],
           },
           {
-            section: "Specifications",
+            section: "Specifications", sectionKey: "cmp.sec.specs",
             rows: [
               {
-                label: "Bedrooms",
+                label: "Bedrooms", key: "cmp.row.beds",
                 render: (p, i) =>
                   `<div class="cmp-val">${p.beds || "—"}<span class="cmp-val__unit">${p.beds ? "bd" : ""}</span>${winBeds[i] ? '<span class="best-badge">Most</span>' : ""}</div>`,
                 best: winBeds,
               },
               {
-                label: "Bathrooms",
+                label: "Bathrooms", key: "cmp.row.baths",
                 render: (p, i) =>
                   `<div class="cmp-val">${p.baths}<span class="cmp-val__unit">ba</span>${winBaths[i] ? '<span class="best-badge">Most</span>' : ""}</div>`,
                 best: winBaths,
               },
               {
-                label: "Area",
+                label: "Area", key: "cmp.row.area",
                 render: (p, i) => `
                 <div class="cmp-val">${p.area}<span class="cmp-val__unit">m²</span>${winArea[i] ? '<span class="best-badge">Largest</span>' : ""}</div>
                 <div class="cmp-bar-track"><div class="cmp-bar-fill" data-pct="${Math.round((p.area / maxArea) * 100)}"></div></div>`,
                 best: winArea,
               },
               {
-                label: "Floor",
+                label: "Floor", key: "cmp.row.floor",
                 render: (p, i) => `
                 <div class="cmp-val">${p.floor}<span class="cmp-val__unit">fl</span>${winFloor[i] ? '<span class="best-badge">Highest</span>' : ""}</div>
                 <div class="cmp-bar-track"><div class="cmp-bar-fill" data-pct="${maxFloor > 0 ? Math.round((p.floor / maxFloor) * 100) : 0}"></div></div>`,
@@ -2480,25 +2659,25 @@
             ],
           },
           {
-            section: "Amenities",
+            section: "Amenities", sectionKey: "cmp.sec.amenities",
             rows: [
               {
-                label: "Pool",
+                label: "Pool", key: "cmp.row.pool",
                 render: (p) =>
                   amenTag("Swimming Pool", p.amenities.includes("pool")),
               },
               {
-                label: "Gym",
+                label: "Gym", key: "cmp.row.gym",
                 render: (p) =>
                   amenTag("Gymnasium", p.amenities.includes("gym")),
               },
               {
-                label: "Parking",
+                label: "Parking", key: "cmp.row.parking",
                 render: (p) =>
                   amenTag("Parking", p.amenities.includes("parking")),
               },
               {
-                label: "Garden",
+                label: "Garden", key: "cmp.row.garden",
                 render: (p) =>
                   amenTag("Garden / Terrace", p.amenities.includes("garden")),
               },
@@ -2509,16 +2688,16 @@
         function renderTable() {
           const grid = document.getElementById("cmpGrid");
           let html = "";
-          SCHEMA.forEach(({ section, rows }) => {
+          SCHEMA.forEach(({ section, sectionKey, rows }) => {
             /* Section header */
             html += `<div class="cmp-sec">
-            <div class="cmp-sec__lbl"><span class="cmp-sec__lbl-text">${section}</span></div>
+            <div class="cmp-sec__lbl"><span class="cmp-sec__lbl-text" data-cmp-lbl="${sectionKey}">${section}</span></div>
             <div class="cmp-sec__cells">${props.map(() => `<div class="cmp-sec__cell"></div>`).join("")}</div>
           </div>`;
             /* Data rows */
-            rows.forEach(({ label, render, best }) => {
+            rows.forEach(({ label, key, render, best }) => {
               html += `<div class="cmp-row">
-              <div class="cmp-lbl">${label}</div>
+              <div class="cmp-lbl" data-cmp-lbl="${key}">${label}</div>
               <div class="cmp-cells">${props
                 .map((p, i) => {
                   const isBest = best ? best[i] : false;
@@ -2608,6 +2787,407 @@
         initStickyBar();
         initBars();
         initSR();
+      })();
+    </script>
+
+    <script>
+      /* ── i18n / Language Switcher ── */
+      (function () {
+        var STORAGE_KEY = "akar_lang";
+
+        var T = {
+          en: {
+            /* Navbar */
+            "nav.home": "Home",
+            "nav.properties": "Properties",
+            "nav.projects": "Projects",
+            "nav.about": "About",
+            "nav.contact": "Contact",
+            "nav.cta": "Get in Touch",
+            /* Buttons */
+            "btn.view-all": "View All Properties",
+            "btn.schedule": "Schedule Viewing",
+            "btn.enquire": "Send Enquiry",
+            "btn.load-more": "Load More Properties",
+            "btn.compare": "Compare",
+            "btn.details": "View Details",
+            "btn.call": "Call Now",
+            "btn.wa": "WhatsApp",
+            /* Hero */
+            "hero.scroll": "Scroll to Explore",
+            /* Featured Properties */
+            "feat.eyebrow": "Properties",
+            "feat.title": "Featured <em>Properties</em>",
+            "feat.sub":
+              "Exceptional homes curated exclusively for the discerning few.",
+            "feat.label.price": "Starting Price",
+            "feat.label.beds": "Beds",
+            "feat.label.baths": "Baths",
+            "feat.label.area": "Area m²",
+            "feat.label.location": "Location",
+            /* Why Choose Us */
+            "why.eyebrow": "Why Akar Town",
+            "why.title": "Excellence in <em>Every Detail</em>",
+            "why.sub":
+              "Two decades of curating Egypt's finest properties with uncompromising standards.",
+            "why.item1.title": "Expert Guidance",
+            "why.item1.desc":
+              "Dedicated advisors who understand your vision and guide you to the perfect property.",
+            "why.item2.title": "Curated Portfolio",
+            "why.item2.desc":
+              "Hand-selected luxury developments in Egypt's most coveted locations.",
+            "why.item3.title": "Seamless Process",
+            "why.item3.desc":
+              "End-to-end support from first viewing through final handover.",
+            "why.item4.title": "Lifetime Value",
+            "why.item4.desc":
+              "Investment-grade properties that appreciate and enrich for generations.",
+            "why.stat1.label": "Luxury Properties",
+            "why.stat2.label": "Satisfied Clients",
+            "why.stat3.label": "Years Experience",
+            "why.stat4.label": "Partner Developers",
+            /* Locations */
+            "loc.eyebrow": "Locations",
+            "loc.title": "Prime <em>Destinations</em>",
+            "loc.sub":
+              "Handpicked neighbourhoods where luxury meets lifestyle.",
+            /* Gallery */
+            "gal.eyebrow": "Portfolio",
+            "gal.title": "Property <em>Gallery</em>",
+            "gal.sub": "A curated collection of Egypt's most distinguished addresses.",
+            "gal.filter.all": "All",
+            "gal.filter.residential": "Residential",
+            "gal.filter.commercial": "Commercial",
+            "gal.filter.offplan": "Off-Plan",
+            /* Listings page */
+            "listings.eyebrow": "Properties",
+            "listings.title": "Discover <em>Exceptional</em> Properties",
+            "listings.count": "Available Properties",
+            "listings.sort.label": "Sort by",
+            "listings.sort.newest": "Newest",
+            "listings.sort.price-asc": "Price: Low to High",
+            "listings.sort.price-desc": "Price: High to Low",
+            "listings.sort.area": "Largest Area",
+            "listings.filter.title": "Filter Properties",
+            "listings.filter.type": "Property Type",
+            "listings.filter.location": "Location",
+            "listings.filter.price": "Price Range",
+            "listings.filter.beds": "Bedrooms",
+            "listings.filter.status": "Status",
+            "listings.filter.apply": "Apply Filters",
+            "listings.filter.reset": "Reset",
+            "listings.no-results": "No properties match your filters.",
+            /* Compare page */
+            "cmp.eyebrow": "Analysis",
+            "cmp.bread": "Compare",
+            "cmp.title": "Compare <em>Properties</em>",
+            "cmp.sub": "Side-by-side luxury comparison",
+            "cmp.units-selected": "Units Selected",
+            "cmp.cta.heading": "Ready to <em>Decide?</em>",
+            "cmp.cta.sub": "Schedule a viewing or request detailed information from our dedicated agents.",
+            "cmp.add": "Add Property",
+            "cmp.remove": "Remove",
+            "cmp.clear": "Clear All",
+            "cmp.beds": "Bedrooms",
+            "cmp.baths": "Bathrooms",
+            "cmp.area": "Area",
+            "cmp.price": "Price",
+            "cmp.location": "Location",
+            "cmp.status": "Status",
+            "cmp.type": "Type",
+            /* Compare table rows & sections */
+            "cmp.sec.overview": "Overview",
+            "cmp.sec.specs": "Specifications",
+            "cmp.sec.amenities": "Amenities",
+            "cmp.row.price": "Price",
+            "cmp.row.status": "Status",
+            "cmp.row.type": "Type",
+            "cmp.row.location": "Location",
+            "cmp.row.listed": "Listed",
+            "cmp.row.agent": "Agent",
+            "cmp.row.beds": "Bedrooms",
+            "cmp.row.baths": "Bathrooms",
+            "cmp.row.area": "Area",
+            "cmp.row.floor": "Floor",
+            "cmp.row.pool": "Pool",
+            "cmp.row.gym": "Gym",
+            "cmp.row.parking": "Parking",
+            "cmp.row.garden": "Garden",
+            "cmp.comparing": "Comparing",
+            "cmp.price.total": "Total Price",
+            "cmp.add.more": "Add More",
+            /* Property Details page */
+            "pd.eyebrow": "Property Details",
+            "pd.price.label": "Starting Price",
+            "pd.ref": "Reference",
+            "pd.beds": "Bedrooms",
+            "pd.baths": "Bathrooms",
+            "pd.area": "Area",
+            "pd.floor": "Floor",
+            "pd.year": "Year Built",
+            "pd.type": "Property Type",
+            "pd.status": "Status",
+            "pd.overview": "Overview",
+            "pd.amenities": "Amenities",
+            "pd.location": "Location",
+            "pd.gallery": "Gallery",
+            "pd.similar": "Similar Properties",
+            "pd.agent": "Your Agent",
+            "pd.agent.call": "Call Agent",
+            "pd.agent.msg": "Send Message",
+            /* Footer */
+            "footer.tagline": "Luxury Real Estate",
+            "footer.desc":
+              "Egypt's premier luxury real estate destination. Curating exceptional properties for discerning clients since 2004.",
+            "footer.col.properties": "Properties",
+            "footer.col.company": "Company",
+            "footer.col.contact": "Contact",
+            "footer.link.all": "All Properties",
+            "footer.link.villas": "Villas & Compounds",
+            "footer.link.penthouse": "Penthouse Collection",
+            "footer.link.residential": "Residential",
+            "footer.link.commercial": "Commercial",
+            "footer.link.offplan": "Off-Plan Projects",
+            "footer.link.north-coast": "North Coast",
+            "footer.link.compare-units": "Compare Units",
+            "footer.link.about": "About Us",
+            "footer.link.team": "Our Team",
+            "footer.link.success": "Success Stories",
+            "footer.link.careers": "Careers",
+            "footer.link.press": "Press & Media",
+            "footer.link.contact-us": "Contact Us",
+            "footer.stat.listings": "Active Listings",
+            "footer.stat.locations": "Locations",
+            "footer.stat.years": "Years",
+            "footer.match.eyebrow": "Property Matching",
+            "footer.match.title": "Find Your <em>Perfect</em> Unit",
+            "footer.match.sub": "Tell us what you need — we'll alert you the moment it's listed.",
+            "footer.copy": "© 2025 Akar Town. All rights reserved.",
+            "footer.privacy": "Privacy Policy",
+            "footer.terms": "Terms of Use",
+            "footer.cookie": "Cookie Policy",
+          },
+          ar: {
+            /* Navbar */
+            "nav.home": "الرئيسية",
+            "nav.properties": "العقارات",
+            "nav.projects": "المشاريع",
+            "nav.about": "من نحن",
+            "nav.contact": "تواصل",
+            "nav.cta": "تواصل معنا",
+            /* Buttons */
+            "btn.view-all": "عرض جميع العقارات",
+            "btn.schedule": "حجز معاينة",
+            "btn.enquire": "إرسال استفسار",
+            "btn.load-more": "تحميل المزيد",
+            "btn.compare": "مقارنة",
+            "btn.details": "عرض التفاصيل",
+            "btn.call": "اتصل الآن",
+            "btn.wa": "واتساب",
+            /* Hero */
+            "hero.scroll": "اسحب للاستكشاف",
+            /* Featured Properties */
+            "feat.eyebrow": "العقارات",
+            "feat.title": "العقارات <em>المميزة</em>",
+            "feat.sub": "منازل استثنائية مختارة بعناية للنخبة.",
+            "feat.label.price": "السعر الابتدائي",
+            "feat.label.beds": "غرف النوم",
+            "feat.label.baths": "الحمامات",
+            "feat.label.area": "المساحة م²",
+            "feat.label.location": "الموقع",
+            /* Why Choose Us */
+            "why.eyebrow": "لماذا أكار تاون",
+            "why.title": "التميز في <em>كل التفاصيل</em>",
+            "why.sub":
+              "عقدان من تنظيم أفضل العقارات في مصر بمعايير لا تقبل المساومة.",
+            "why.item1.title": "إرشاد الخبراء",
+            "why.item1.desc":
+              "مستشارون متخصصون يفهمون رؤيتك ويوجهونك نحو العقار المثالي.",
+            "why.item2.title": "محفظة مختارة",
+            "why.item2.desc":
+              "مشاريع فاخرة مختارة بعناية في أرقى المواقع في مصر.",
+            "why.item3.title": "عملية سلسة",
+            "why.item3.desc": "دعم شامل من أول معاينة حتى التسليم النهائي.",
+            "why.item4.title": "قيمة دائمة",
+            "why.item4.desc":
+              "عقارات ذات جودة استثمارية تزداد قيمتها وتثري الأجيال القادمة.",
+            "why.stat1.label": "عقار فاخر",
+            "why.stat2.label": "عميل راضٍ",
+            "why.stat3.label": "سنوات خبرة",
+            "why.stat4.label": "مطور شريك",
+            /* Locations */
+            "loc.eyebrow": "المواقع",
+            "loc.title": "الوجهات <em>المتميزة</em>",
+            "loc.sub": "أحياء مختارة بعناية حيث يلتقي الفخامة بأسلوب الحياة.",
+            /* Gallery */
+            "gal.eyebrow": "أعمالنا",
+            "gal.title": "معرض <em>العقارات</em>",
+            "gal.sub": "مجموعة مختارة من أرقى العناوين في مصر.",
+            "gal.filter.all": "الكل",
+            "gal.filter.residential": "سكني",
+            "gal.filter.commercial": "تجاري",
+            "gal.filter.offplan": "على الخارطة",
+            /* Listings page */
+            "listings.eyebrow": "العقارات",
+            "listings.title": "اكتشف <em>عقارات استثنائية</em>",
+            "listings.count": "عقار متاح",
+            "listings.sort.label": "ترتيب حسب",
+            "listings.sort.newest": "الأحدث",
+            "listings.sort.price-asc": "السعر: من الأقل",
+            "listings.sort.price-desc": "السعر: من الأعلى",
+            "listings.sort.area": "أكبر مساحة",
+            "listings.filter.title": "تصفية العقارات",
+            "listings.filter.type": "نوع العقار",
+            "listings.filter.location": "الموقع",
+            "listings.filter.price": "نطاق السعر",
+            "listings.filter.beds": "غرف النوم",
+            "listings.filter.status": "الحالة",
+            "listings.filter.apply": "تطبيق التصفية",
+            "listings.filter.reset": "إعادة ضبط",
+            "listings.no-results": "لا توجد عقارات تطابق معايير البحث.",
+            /* Compare page */
+            "cmp.eyebrow": "تحليل",
+            "cmp.bread": "مقارنة",
+            "cmp.title": "مقارنة <em>العقارات</em>",
+            "cmp.sub": "مقارنة جانبية للعقارات الفاخرة",
+            "cmp.units-selected": "وحدات مختارة",
+            "cmp.cta.heading": "مستعد لاتخاذ <em>قرارك؟</em>",
+            "cmp.cta.sub": "احجز معاينة أو اطلب معلومات تفصيلية من وكلائنا المتخصصين.",
+            "cmp.add": "إضافة عقار",
+            "cmp.remove": "إزالة",
+            "cmp.clear": "مسح الكل",
+            "cmp.beds": "غرف النوم",
+            "cmp.baths": "الحمامات",
+            "cmp.area": "المساحة",
+            "cmp.price": "السعر",
+            "cmp.location": "الموقع",
+            "cmp.status": "الحالة",
+            "cmp.type": "النوع",
+            /* Compare table rows & sections */
+            "cmp.sec.overview": "نظرة عامة",
+            "cmp.sec.specs": "المواصفات",
+            "cmp.sec.amenities": "المرافق",
+            "cmp.row.price": "السعر",
+            "cmp.row.status": "الحالة",
+            "cmp.row.type": "النوع",
+            "cmp.row.location": "الموقع",
+            "cmp.row.listed": "تاريخ الإدراج",
+            "cmp.row.agent": "الوكيل",
+            "cmp.row.beds": "غرف النوم",
+            "cmp.row.baths": "الحمامات",
+            "cmp.row.area": "المساحة",
+            "cmp.row.floor": "الطابق",
+            "cmp.row.pool": "حمام السباحة",
+            "cmp.row.gym": "الجيم",
+            "cmp.row.parking": "مواقف السيارات",
+            "cmp.row.garden": "الحديقة / التراس",
+            "cmp.comparing": "مقارنة",
+            "cmp.price.total": "السعر الإجمالي",
+            "cmp.add.more": "إضافة المزيد",
+            /* Property Details page */
+            "pd.eyebrow": "تفاصيل العقار",
+            "pd.price.label": "السعر الابتدائي",
+            "pd.ref": "المرجع",
+            "pd.beds": "غرف النوم",
+            "pd.baths": "الحمامات",
+            "pd.area": "المساحة",
+            "pd.floor": "الطابق",
+            "pd.year": "سنة البناء",
+            "pd.type": "نوع العقار",
+            "pd.status": "الحالة",
+            "pd.overview": "نظرة عامة",
+            "pd.amenities": "المرافق",
+            "pd.location": "الموقع",
+            "pd.gallery": "معرض الصور",
+            "pd.similar": "عقارات مشابهة",
+            "pd.agent": "وكيلك العقاري",
+            "pd.agent.call": "اتصل بالوكيل",
+            "pd.agent.msg": "إرسال رسالة",
+            /* Footer */
+            "footer.tagline": "العقارات الفاخرة",
+            "footer.desc":
+              "الوجهة الأولى للعقارات الفاخرة في مصر. نختار لعملائنا المميزين أفضل العقارات منذ عام 2004.",
+            "footer.col.properties": "العقارات",
+            "footer.col.company": "الشركة",
+            "footer.col.contact": "تواصل معنا",
+            "footer.link.all": "جميع العقارات",
+            "footer.link.villas": "الفيلات والكمبوندات",
+            "footer.link.penthouse": "مجموعة البنتهاوس",
+            "footer.link.residential": "سكني",
+            "footer.link.commercial": "تجاري",
+            "footer.link.offplan": "مشاريع على الخارطة",
+            "footer.link.north-coast": "الساحل الشمالي",
+            "footer.link.compare-units": "مقارنة الوحدات",
+            "footer.link.about": "من نحن",
+            "footer.link.team": "فريقنا",
+            "footer.link.success": "قصص النجاح",
+            "footer.link.careers": "الوظائف",
+            "footer.link.press": "الصحافة والإعلام",
+            "footer.link.contact-us": "تواصل معنا",
+            "footer.stat.listings": "إعلان نشط",
+            "footer.stat.locations": "موقع",
+            "footer.stat.years": "سنة",
+            "footer.match.eyebrow": "مطابقة العقارات",
+            "footer.match.title": "اعثر على <em>وحدتك المثالية</em>",
+            "footer.match.sub": "أخبرنا بما تحتاجه — سنُنبهك فور إدراجه.",
+            "footer.copy": "© 2025 أكار تاون. جميع الحقوق محفوظة.",
+            "footer.privacy": "سياسة الخصوصية",
+            "footer.terms": "شروط الاستخدام",
+            "footer.cookie": "سياسة ملفات الارتباط",
+          },
+        };
+
+        function applyLang(lang) {
+          var html = document.documentElement;
+          html.setAttribute("lang", lang);
+          html.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+
+          var t = T[lang] || T.en;
+
+          /* Translate all data-i18n elements */
+          document.querySelectorAll("[data-i18n]").forEach(function (el) {
+            var key = el.getAttribute("data-i18n");
+            var val = t[key] !== undefined ? t[key] : T.en[key] || "";
+            if (el.hasAttribute("data-i18n-html")) {
+              el.innerHTML = val;
+            } else {
+              el.textContent = val;
+            }
+          });
+
+          /* Translate compare table labels (data-cmp-lbl) */
+          document.querySelectorAll("[data-cmp-lbl]").forEach(function (el) {
+            var key = el.getAttribute("data-cmp-lbl");
+            var val = t[key] !== undefined ? t[key] : T.en[key] || "";
+            if (val) el.textContent = val;
+          });
+
+          /* Update toggle button label */
+          var btn = document.getElementById("langToggle");
+          if (btn)
+            btn.setAttribute("aria-checked", lang === "ar" ? "true" : "false");
+
+          localStorage.setItem(STORAGE_KEY, lang);
+        }
+
+        /* Init */
+        var saved = localStorage.getItem(STORAGE_KEY) || "en";
+        applyLang(saved);
+
+        var toggleBtn = document.getElementById("langToggle");
+        if (toggleBtn) {
+          function doToggle() {
+            var current = document.documentElement.getAttribute("lang") || "en";
+            applyLang(current === "ar" ? "en" : "ar");
+          }
+          toggleBtn.addEventListener("click", doToggle);
+          toggleBtn.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              doToggle();
+            }
+          });
+        }
       })();
     </script>
   </body>

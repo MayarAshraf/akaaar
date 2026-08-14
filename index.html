@@ -126,6 +126,8 @@
         font-family: var(--font-body-rtl);
         direction: rtl;
         text-align: right;
+        letter-spacing: 0;
+        text-transform: none;
       }
 
       /* Brand text selection */
@@ -176,7 +178,7 @@
       .navbar__right {
         display: flex;
         align-items: center;
-        gap: 32px;
+        gap: 20px;
       }
 
       .navbar__nav {
@@ -227,6 +229,173 @@
         display: flex;
         align-items: center;
       }
+
+      /* ── Language Toggle ── */
+      /* ── Lang slide toggle ── */
+      .lang-toggle {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 80px;
+        height: 31px;
+        border-radius: 100px;
+        background: rgba(160, 50, 72, 0.18);
+        border: 1px solid rgba(160, 50, 72, 0.45);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: 3px;
+        cursor: pointer;
+        flex-shrink: 0;
+        outline: none;
+        transition: box-shadow 0.3s ease, border-color 0.3s ease;
+      }
+      .lang-toggle:hover {
+        border-color: rgba(160, 50, 72, 0.7);
+        box-shadow: 0 0 18px rgba(160, 50, 72, 0.35);
+      }
+      [dir="rtl"] .lang-toggle { margin-left: 0; margin-right: 12px; }
+      .lang-toggle:focus-visible {
+        box-shadow: 0 0 0 2px rgba(160, 50, 72, 0.6);
+      }
+      .lang-toggle__en,
+      .lang-toggle__ar {
+        flex: 1;
+        text-align: center;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        position: relative;
+        z-index: 1;
+        transition: color 0.3s ease;
+        user-select: none;
+        line-height: 1;
+      }
+      .lang-toggle__en { font-family: "Archivo", system-ui, sans-serif; color: #fff; }
+      .lang-toggle__ar { font-family: "Noto Kufi Arabic", system-ui, sans-serif; color: rgba(255, 255, 255, 0.5); }
+      html[lang="ar"] .lang-toggle__en { color: rgba(255, 255, 255, 0.5); }
+      html[lang="ar"] .lang-toggle__ar { color: #fff; }
+      .lang-toggle__knob {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: calc(50% - 3px);
+        height: calc(100% - 6px);
+        background: var(--gold);
+        border-radius: 100px;
+        transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        z-index: 0;
+      }
+      html[lang="ar"] .lang-toggle__knob { transform: translateX(100%); }
+
+      /* ── RTL overrides ── */
+      [dir="rtl"] .navbar__nav a { font-family: var(--font-body-rtl); letter-spacing: 0.02em; text-transform: none; }
+      [dir="rtl"] .btn-slide svg,
+      [dir="rtl"] .btn-pill svg { transform: scaleX(-1); }
+      [dir="rtl"] .btn-slide svg:hover,
+      [dir="rtl"] .btn-pill svg:hover { transform: scaleX(-1) translateX(-4px); }
+      /* ── RTL Why Choose Us ── */
+      [dir="rtl"] .why__eyebrow {
+        font-family: var(--font-body-rtl);
+        letter-spacing: 0.08em;
+      }
+      [dir="rtl"] .why__title,
+      [dir="rtl"] .why__title em {
+        font-family: var(--font-body-rtl);
+      }
+      [dir="rtl"] .why__sub { text-align: center; }
+      [dir="rtl"] .why__stage-title { font-family: var(--font-body-rtl); }
+      [dir="rtl"] .why__stage-desc { text-align: center; }
+      [dir="rtl"] .why__stat {
+        text-align: center;
+      }
+      [dir="rtl"] .why__stat-num {
+        text-align: center;
+        display: block;
+      }
+      [dir="rtl"] .why__stat-lbl {
+        text-align: center;
+        letter-spacing: 0.05em;
+        text-transform: none;
+      }
+      [dir="rtl"] .why__stat::after {
+        left: 50%;
+        right: auto;
+      }
+      /* ── RTL Locations slider ── */
+      [dir="rtl"] .loc__nav-btn svg { transform: scaleX(-1); }
+      /* ── RTL Gallery lightbox (inside gallery section) ── */
+      [dir="rtl"] .gallery-lb__nav--prev { left: auto; right: -60px; }
+      [dir="rtl"] .gallery-lb__nav--next { right: auto; left: -60px; }
+      [dir="rtl"] .gallery-lb__nav svg { transform: scaleX(-1); }
+      /* ── RTL Property photo gallery lightbox ── */
+      [dir="rtl"] .pgal-lb__prev { left: auto; right: 24px; }
+      [dir="rtl"] .pgal-lb__next { right: auto; left: 24px; }
+      [dir="rtl"] .pgal-lb__prev svg,
+      [dir="rtl"] .pgal-lb__next svg { transform: scaleX(-1); }
+      /* ── RTL Featured Properties ── */
+      [dir="rtl"] .prop-card__thumbs-row {
+        left: auto;
+        right: 26%;
+      }
+      [dir="rtl"] #thumbPrev svg,
+      [dir="rtl"] #thumbNext svg,
+      [dir="rtl"] .prop-thumb-btn svg {
+        transform: scaleX(-1);
+      }
+      /* ── RTL hero layout ── */
+      [dir="rtl"] .slide-overlay {
+        background:
+          linear-gradient(
+            255deg,
+            rgba(5, 5, 5, 0.72) 0%,
+            rgba(5, 5, 5, 0.38) 44%,
+            rgba(5, 5, 5, 0.08) 75%,
+            rgba(5, 5, 5, 0) 100%
+          ),
+          linear-gradient(180deg, rgba(5, 5, 5, 0.45) 0%, rgba(5, 5, 5, 0) 22%),
+          linear-gradient(0deg, rgba(5, 5, 5, 0.55) 0%, rgba(5, 5, 5, 0) 40%);
+      }
+      [dir="rtl"] .hero__thumbs {
+        left: auto;
+        right: 0;
+        padding: calc(var(--nav-h) + 5px) 48px 20px 12px;
+        box-shadow:
+          inset 1px 0 0 color-mix(in oklab, #fff 10%, transparent),
+          -4px 0 24px rgba(0, 0, 0, 0.1);
+      }
+      [dir="rtl"] .slide-content {
+        left: auto;
+        right: calc(var(--thumb-w) + 48px);
+      }
+      [dir="rtl"] .hero__controls {
+        right: auto;
+        left: 44px;
+      }
+      [dir="rtl"] .hero__glass-tag {
+        right: auto;
+        left: 44px;
+      }
+      [dir="rtl"] .nav-btn svg {
+        transform: scaleX(-1);
+      }
+      [dir="rtl"] .nav-btn--prev:hover svg {
+        transform: scaleX(-1) translateX(2px);
+      }
+      [dir="rtl"] .nav-btn--next:hover svg {
+        transform: scaleX(-1) translateX(-2px);
+      }
+      /* ── RTL footer ── */
+      [dir="rtl"] .site-footer__nav-head { letter-spacing: 0.04em; text-transform: none; }
+      [dir="rtl"] .site-footer__stat-l { letter-spacing: 0.04em; text-transform: none; }
+      [dir="rtl"] .site-footer__nav-col li a::before {
+        margin-right: 0;
+        transition: width 0.28s cubic-bezier(0.76, 0, 0.24, 1), margin-left 0.28s cubic-bezier(0.76, 0, 0.24, 1);
+      }
+      [dir="rtl"] .site-footer__nav-col li a:hover::before { margin-right: 0; margin-left: 7px; }
+      /* ── Bilingual slide text ── */
+      .txt-ar { display: none; }
+      html[lang="ar"] .txt-en { display: none; }
+      html[lang="ar"] .txt-ar { display: inline; }
 
       /* Scale down btn-slide when used inside the navbar */
       .navbar__actions .btn-slide {
@@ -1890,74 +2059,10 @@
         fill: #e74c3c;
         stroke: #e74c3c;
       }
-      .prop-action-btn--compare.is-active {
+.prop-action-btn--compare.is-active {
         border-color: var(--gold);
         color: var(--gold);
         background: rgba(200, 16, 46, 0.08);
-      }
-
-      /* ── Compare tray ── */
-      .compare-tray {
-        position: fixed;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%) translateY(110%);
-        z-index: 600;
-        background: var(--ink);
-        border-radius: 14px 14px 0 0;
-        padding: 16px 28px;
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        box-shadow: 0 -8px 48px rgba(0, 0, 0, 0.4);
-        transition: transform 0.45s var(--ease-out);
-        min-width: 360px;
-      }
-      .compare-tray.is-visible {
-        transform: translateX(-50%) translateY(0);
-      }
-      .compare-tray__info {
-        flex: 1;
-        font-size: 13px;
-        color: rgba(255, 255, 255, 0.6);
-      }
-      .compare-tray__count {
-        font-size: 22px;
-        font-weight: 600;
-        color: var(--gold);
-        display: block;
-        line-height: 1.1;
-      }
-      .compare-tray__go {
-        padding: 10px 24px;
-        background: var(--gold);
-        color: #ffffff;
-        border-radius: 100px;
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        cursor: pointer;
-        border: none;
-        transition: background 0.2s;
-        white-space: nowrap;
-        font-family: inherit;
-      }
-      .compare-tray__go:hover {
-        background: #C8102E;
-      }
-      .compare-tray__clear {
-        font-size: 11px;
-        color: rgba(255, 255, 255, 0.35);
-        cursor: pointer;
-        transition: color 0.2s;
-        text-decoration: underline;
-        background: none;
-        border: none;
-        white-space: nowrap;
-        font-family: inherit;
-      }
-      .compare-tray__clear:hover {
-        color: rgba(255, 255, 255, 0.6);
       }
 
       /* ── Gallery lightbox ── */
@@ -2101,51 +2206,6 @@
       }
 
       /* ── Unified slider navigation ── */
-      .props__slider-nav {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 28px;
-      }
-
-      .props__slider-track {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-      }
-
-      .props__slider-current,
-      .props__slider-total {
-        font-family: var(--font-body-ltr);
-        font-size: 12px;
-        font-weight: 500;
-        letter-spacing: 0.1em;
-        color: var(--ink-60);
-        font-variant-numeric: tabular-nums;
-        min-width: 22px;
-        text-align: center;
-      }
-
-      .props__slider-current {
-        color: var(--ink);
-      }
-
-      .props__slider-bar-wrap {
-        width: 120px;
-        height: 2px;
-        background: var(--ink-10);
-        border-radius: 2px;
-        overflow: hidden;
-      }
-
-      .props__slider-fill {
-        height: 100%;
-        background: var(--gold);
-        border-radius: 2px;
-        transform-origin: left;
-        transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-        width: 20%;
-      }
 
       /* ── btn-slide--outline — pill outline for light-bg secondary actions ── */
       .btn-slide--outline {
@@ -2411,7 +2471,7 @@
       .why__stage--top {
         grid-row: 1;
         justify-content: flex-end;
-        padding-bottom: 48px;
+        padding-bottom: 80px;
       }
 
       .why__stage--bottom {
@@ -2775,188 +2835,96 @@
         transform: translateX(3px);
       }
 
+
       /* ── Compare sidebar ── */
       .cmp-bar {
         position: fixed;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
+        bottom: 32px;
+        right: 32px;
         z-index: 900;
         display: flex;
-        align-items: flex-end;
         flex-direction: column;
-        gap: 0;
+        align-items: flex-end;
+        gap: 10px;
+        transition: opacity 0.25s, transform 0.25s;
+        pointer-events: none;
       }
-
-      .cmp-bar__toggle {
-        display: flex;
-        align-items: center;
-        gap: 7px;
-        background: var(--gold);
-        color: #ffffff;
-        border: none;
-        padding: 10px 14px;
-        cursor: pointer;
-        font-family: var(--font-body-ltr);
-        font-size: 11px;
-        font-weight: 600;
-        letter-spacing: 0.1em;
-        border-radius: 8px 0 0 8px;
-        box-shadow: -3px 0 16px rgba(13, 13, 13, 0.15);
-        white-space: nowrap;
-        transition: background 0.2s ease;
-        writing-mode: initial;
+      .cmp-bar.cmp-bar--hidden {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(16px);
       }
-
-      .cmp-bar__toggle svg {
-        width: 15px;
-        height: 15px;
-        stroke: currentColor;
-        fill: none;
-        stroke-width: 1.5;
-        stroke-linecap: round;
-      }
-      .cmp-bar__toggle:hover {
-        background: var(--gold-dk, #C8102E);
-      }
-      .cmp-bar__toggle[hidden] {
-        display: none;
-      }
-
       .cmp-bar__panel {
-        background: var(--bg);
-        border: 1px solid var(--ink-10);
-        border-right: none;
-        border-radius: 12px 0 0 12px;
-        box-shadow: -4px 0 32px rgba(13, 13, 13, 0.14);
-        width: 280px;
+        width: 300px;
+        background: #fff;
+        border-radius: 14px;
+        border: 1px solid rgba(0,0,0,0.09);
+        box-shadow: 0 12px 48px rgba(13,13,13,0.16);
+        display: flex;
+        flex-direction: column;
         overflow: hidden;
-        transform: translateX(100%);
-        transition: transform 0.38s cubic-bezier(0.32, 0, 0.15, 1);
+        transform-origin: bottom right;
+        transform: scale(0.94) translateY(10px);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.32s cubic-bezier(0.32,0,0.15,1), opacity 0.28s;
+        max-height: 420px;
       }
-
-      .cmp-bar__panel.is-open {
-        transform: translateX(0);
-      }
-
-      .cmp-bar__head {
+      .cmp-bar__panel.is-open { transform: scale(1) translateY(0); opacity: 1; pointer-events: auto; }
+      .cmp-panel__head {
+        padding: 12px 14px;
+        border-bottom: 1px solid rgba(0,0,0,0.07);
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 16px 18px 12px;
-        border-bottom: 1px solid var(--ink-10);
-      }
-
-      .cmp-bar__heading {
-        font-family: var(--font-body-ltr);
-        font-size: 13px;
-        font-weight: 500;
-        color: var(--ink);
-        letter-spacing: -0.01em;
-      }
-
-      .cmp-bar__close-all {
-        background: none;
-        border: none;
-        cursor: pointer;
-        font-size: 10px;
-        font-family: var(--font-body-ltr);
-        color: var(--ink-40);
-        letter-spacing: 0.06em;
-        transition: color 0.2s ease;
-      }
-      .cmp-bar__close-all:hover {
-        color: var(--ink);
-      }
-
-      .cmp-bar__list {
-        list-style: none;
-        padding: 10px 14px;
-        display: flex;
-        flex-direction: column;
+        flex-shrink: 0;
         gap: 8px;
-        max-height: 320px;
-        overflow-y: auto;
       }
-
+      .cmp-panel__head h4 { font-size: 14px; font-weight: 600; text-align: center; flex: 1; }
+      .cmp-panel__close {
+        display: flex; align-items: center; justify-content: center;
+        width: 28px; height: 28px; border-radius: 50%; border: none;
+        background: rgba(0,0,0,0.05); color: var(--ink-30); cursor: pointer;
+        flex-shrink: 0; transition: background 0.2s, color 0.2s;
+      }
+      .cmp-panel__close:hover { background: rgba(0,0,0,0.1); color: var(--ink); }
+      .cmp-panel__list { flex: 1; overflow-y: auto; display: flex; flex-direction: column; }
       .cmp-item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 6px 8px;
-        border: 1px solid var(--ink-10);
-        border-radius: 8px;
-        background: #fff;
+        display: flex; align-items: center; gap: 10px;
+        padding: 12px 16px; border-bottom: 1px solid rgba(0,0,0,0.06); background: transparent;
       }
-
-      .cmp-item__thumb {
-        width: 46px;
-        height: 36px;
-        border-radius: 5px;
-        object-fit: cover;
-        flex-shrink: 0;
+      .cmp-item:last-child { border-bottom: none; }
+      .cmp-item__thumb { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+      .cmp-item__title { font-size: 13px; font-weight: 400; flex: 1; min-width: 0; line-height: 1.45; white-space: normal; color: var(--ink); }
+      .cmp-item__rm { color: #bbb; transition: color 0.2s; flex-shrink: 0; border: none; background: none; cursor: pointer; padding: 4px; line-height: 0; border-radius: 50%; }
+      .cmp-item__rm:hover { color: var(--red, #cc2222); background: rgba(204,34,34,0.08); }
+      .cmp-panel__slot { padding: 14px 16px; font-size: 12px; color: var(--ink-30); text-align: center; border-bottom: 1px solid rgba(0,0,0,0.06); }
+      .cmp-panel__slot:last-child { border-bottom: none; }
+      .cmp-bar__right { display: flex; flex-direction: column; position: relative; z-index: 1; pointer-events: auto; }
+      .cmp-bar__toggle {
+        display: flex; flex-direction: row; align-items: center; gap: 10px;
+        padding: 13px 20px; background: var(--ink); color: #fff;
+        border-radius: 100px; cursor: pointer;
+        box-shadow: 0 6px 28px rgba(13,13,13,0.28);
+        transition: background 0.2s; border: none; white-space: nowrap;
       }
-
-      .cmp-item__name {
-        font-size: 12px;
-        font-weight: 400;
-        color: var(--ink);
-        line-height: 1.3;
-        flex: 1;
-        min-width: 0;
+      .cmp-bar__toggle:hover { background: #333; }
+      .cmp-bar__count { font-size: 12px; font-weight: 700; background: var(--gold); color: #fff; border-radius: 20px; padding: 3px 9px; line-height: 1.4; }
+      .cmp-bar__label { font-size: 13px; font-weight: 500; letter-spacing: 0.01em; color: rgba(255,255,255,0.9); }
+      .cmp-bar__chevron { transition: transform 0.3s cubic-bezier(0.32,0,0.15,1); opacity: 0.7; }
+      .cmp-bar__panel.is-open ~ .cmp-bar__right .cmp-bar__chevron { transform: rotate(180deg); }
+      .cmp-panel__foot { padding: 14px 16px 16px; border-top: 1px solid rgba(0,0,0,0.07); flex-shrink: 0; }
+      .btn-cmp-go {
+        width: 100%; padding: 13px; border-radius: 100px; background: var(--ink); color: #fff;
+        font-size: 13px; font-weight: 600; letter-spacing: 0.04em; border: none; cursor: pointer;
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
       }
-
-      .cmp-item__rm {
-        background: none;
-        border: none;
-        cursor: pointer;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: var(--ink-10);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        transition: background 0.2s ease;
-      }
-      .cmp-item__rm:hover {
-        background: #e63b3b;
-      }
-      .cmp-item__rm svg {
-        width: 10px;
-        height: 10px;
-        stroke: var(--ink-60);
-        stroke-width: 2;
-      }
-      .cmp-item__rm:hover svg {
-        stroke: #fff;
-      }
-
-      .cmp-bar__footer {
-        padding: 12px 14px;
-      }
-
-      .cmp-bar__go {
-        display: block;
-        width: 100%;
-        background: var(--ink);
-        color: var(--white);
-        border: none;
-        cursor: pointer;
-        padding: 12px;
-        border-radius: 8px;
-        font-family: var(--font-body-ltr);
-        font-size: 11px;
-        font-weight: 600;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        transition: background 0.2s ease;
-      }
-      .cmp-bar__go:hover {
-        background: var(--gold);
-        color: #ffffff;
-      }
+      .btn-cmp-go:hover { opacity: 0.82; transform: translateY(-1px); }
+      .btn-cmp-go:disabled { opacity: 0.35; pointer-events: none; transform: none; }
+      .pgal-compare-btn.is-compared { background: rgba(200,16,46,0.9) !important; border-color: transparent !important; color: #fff !important; }
+      [dir="rtl"] .cmp-bar { right: auto; left: 32px; }
+      [dir="rtl"] .cmp-bar__panel { transform-origin: bottom left; }
 
       /* ── Lightbox ── */
       .pgal-lb {
@@ -3192,12 +3160,6 @@
         fill: currentColor;
       }
 
-      /* Compare — active (added) state */
-      .pgal-compare-btn.is-compared {
-        background: rgba(200, 16, 46, 0.9) !important;
-        border-color: rgba(200, 16, 46, 0) !important;
-        color: var(--ink) !important;
-      }
 
       /* ─── SITE FOOTER ─── */
       .site-footer {
@@ -3752,7 +3714,6 @@
 
       .loc-card:hover {
         transform: translateY(-10px);
-        box-shadow: 0 24px 64px rgba(13, 13, 13, 0.24);
       }
 
       .loc-card__img {
@@ -4161,15 +4122,20 @@
 
       <div class="navbar__right">
         <ul class="navbar__nav" role="list">
-          <li><a href="index.html" class="active">Home</a></li>
-          <li><a href="listings.html">Properties</a></li>
-          <li><a href="#">Projects</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="index.html" class="active" data-i18n="nav.home">Home</a></li>
+          <li><a href="listings.html" data-i18n="nav.properties">Properties</a></li>
+          <li><a href="#" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="#" data-i18n="nav.about">About</a></li>
+          <li><a href="#" data-i18n="nav.contact">Contact</a></li>
         </ul>
         <div class="navbar__sep" aria-hidden="true"></div>
         <div class="navbar__actions">
-          <button class="btn-slide btn-slide--fill">Get in Touch</button>
+          <button class="btn-slide btn-slide--fill" data-i18n="nav.cta">Get in Touch</button>
+        </div>
+        <div id="langToggle" class="lang-toggle" role="switch" aria-checked="false" tabindex="0" aria-label="Switch language">
+          <span class="lang-toggle__en">EN</span>
+          <span class="lang-toggle__knob"></span>
+          <span class="lang-toggle__ar">عر</span>
         </div>
       </div>
     </nav>
@@ -4280,15 +4246,15 @@
         <!-- Header -->
         <header class="props__header">
           <div class="props__header-left">
-            <p class="props__eyebrow props-reveal">Properties</p>
-            <h2 class="props__title props-reveal">
+            <p class="props__eyebrow props-reveal" data-i18n="feat.eyebrow">Properties</p>
+            <h2 class="props__title props-reveal" data-i18n="feat.title" data-i18n-html>
               Featured <em>Properties</em>
             </h2>
-            <p class="props__sub props-reveal">
+            <p class="props__sub props-reveal" data-i18n="feat.sub">
               Exceptional homes curated exclusively for the discerning few.
             </p>
           </div>
-          <a href="#" class="btn-view-all props-reveal">
+          <a href="#" class="btn-view-all props-reveal" data-i18n="btn.view-all">
             View All Properties
             <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
           </a>
@@ -4358,9 +4324,7 @@
                     aria-label="Add to Compare"
                     title="Add to Compare"
                   >
-                    <svg viewBox="0 0 24 24">
-                      <path d="M18 20V10M12 20V4M6 20v-6" />
-                    </svg>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="M16 21l4-4-4-4"/><path d="M20 17H4"/></svg>
                   </button>
                   <button
                     class="prop-action-btn prop-action-btn--gallery"
@@ -4461,7 +4425,7 @@
               <!-- Price + CTA -->
               <div class="prop-price-row">
                 <div>
-                  <div class="prop-price__lbl">Starting Price</div>
+                  <div class="prop-price__lbl" data-i18n="feat.label.price">Starting Price</div>
                   <div class="prop-price" id="propPrice">—</div>
                 </div>
                 <a href="property-details.html" class="btn-explore">
@@ -4478,26 +4442,6 @@
         </div>
         <!-- /props__vp -->
 
-        <!-- Unified slider nav -->
-        <div class="props__slider-nav">
-          <button
-            class="prop-arrow"
-            id="propPrev"
-            aria-label="Previous property"
-          >
-            <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6" /></svg>
-          </button>
-          <div class="props__slider-track">
-            <span class="props__slider-current" id="propCounter">01</span>
-            <div class="props__slider-bar-wrap">
-              <div class="props__slider-fill" id="propFill"></div>
-            </div>
-            <span class="props__slider-total" id="propTotal">05</span>
-          </div>
-          <button class="prop-arrow" id="propNext" aria-label="Next property">
-            <svg viewBox="0 0 24 24"><polyline points="9,18 15,12 9,6" /></svg>
-          </button>
-        </div>
       </div>
     </section>
 
@@ -4509,9 +4453,9 @@
       <div class="why__wrap">
         <!-- Header -->
         <header class="why__header">
-          <p class="why__eyebrow why-reveal">Our Distinction</p>
-          <h2 class="why__title why-reveal">Why Choose <em>Akar Town</em></h2>
-          <p class="why__sub why-reveal">
+          <p class="why__eyebrow why-reveal" data-i18n="why.eyebrow">Our Distinction</p>
+          <h2 class="why__title why-reveal" data-i18n="why.title" data-i18n-html>Why Choose <em>Akar Town</em></h2>
+          <p class="why__sub why-reveal" data-i18n="why.sub">
             Decades of expertise paired with an unwavering commitment to luxury
             living.
           </p>
@@ -4523,25 +4467,25 @@
             <span class="why__stat-num" data-target="500" data-suffix="+"
               >0</span
             >
-            <span class="why__stat-lbl">Premium Properties</span>
+            <span class="why__stat-lbl" data-i18n="why.stat1.label">Premium Properties</span>
           </div>
           <div class="why__stat why-reveal">
             <span class="why__stat-num" data-target="15" data-suffix="+"
               >0</span
             >
-            <span class="why__stat-lbl">Years of Expertise</span>
+            <span class="why__stat-lbl" data-i18n="why.stat2.label">Years of Expertise</span>
           </div>
           <div class="why__stat why-reveal">
             <span class="why__stat-num" data-target="98" data-suffix="%"
               >0</span
             >
-            <span class="why__stat-lbl">Client Satisfaction</span>
+            <span class="why__stat-lbl" data-i18n="why.stat3.label">Client Satisfaction</span>
           </div>
           <div class="why__stat why-reveal">
             <span class="why__stat-num" data-target="2000" data-suffix="+"
               >0</span
             >
-            <span class="why__stat-lbl">Happy Clients</span>
+            <span class="why__stat-lbl" data-i18n="why.stat4.label">Happy Clients</span>
           </div>
         </div>
 
@@ -4694,8 +4638,8 @@
                 />
               </svg>
               <span class="why__stage-num">01</span>
-              <h3 class="why__stage-title">Expert Guidance</h3>
-              <p class="why__stage-desc">
+              <h3 class="why__stage-title" data-i18n="why.item1.title">Expert Guidance</h3>
+              <p class="why__stage-desc" data-i18n="why.item1.desc">
                 Dedicated advisors who understand your vision and navigate every
                 decision.
               </p>
@@ -4842,8 +4786,8 @@
                 />
               </svg>
               <span class="why__stage-num">02</span>
-              <h3 class="why__stage-title">Curated Portfolio</h3>
-              <p class="why__stage-desc">
+              <h3 class="why__stage-title" data-i18n="why.item2.title">Curated Portfolio</h3>
+              <p class="why__stage-desc" data-i18n="why.item2.desc">
                 Hand-selected luxury developments in Egypt's most coveted
                 locations.
               </p>
@@ -4965,8 +4909,8 @@
                 />
               </svg>
               <span class="why__stage-num">03</span>
-              <h3 class="why__stage-title">Seamless Process</h3>
-              <p class="why__stage-desc">
+              <h3 class="why__stage-title" data-i18n="why.item3.title">Seamless Process</h3>
+              <p class="why__stage-desc" data-i18n="why.item3.desc">
                 End-to-end support from first viewing through final handover.
               </p>
             </div>
@@ -5120,8 +5064,8 @@
                 />
               </svg>
               <span class="why__stage-num">04</span>
-              <h3 class="why__stage-title">Lifetime Value</h3>
-              <p class="why__stage-desc">
+              <h3 class="why__stage-title" data-i18n="why.item4.title">Lifetime Value</h3>
+              <p class="why__stage-desc" data-i18n="why.item4.desc">
                 Investment-grade properties that appreciate and enrich for
                 generations.
               </p>
@@ -5136,9 +5080,9 @@
       <div class="pgal__wrap">
         <header class="pgal__header">
           <div class="pgal__header-left">
-            <p class="pgal__eyebrow pgal-reveal">Property Gallery</p>
-            <h2 class="pgal__title pgal-reveal">Our <em>Projects</em></h2>
-            <p class="pgal__sub pgal-reveal">
+            <p class="pgal__eyebrow pgal-reveal" data-i18n="gal.eyebrow">Property Gallery</p>
+            <h2 class="pgal__title pgal-reveal" data-i18n="gal.title" data-i18n-html>Our <em>Projects</em></h2>
+            <p class="pgal__sub pgal-reveal" data-i18n="gal.sub">
               A curated collection of Egypt's most distinguished addresses.
             </p>
           </div>
@@ -5207,15 +5151,6 @@
                   <rect x="3" y="14" width="7" height="7" rx="1" />
                 </svg>
               </button>
-              <button
-                class="pgal-action pgal-compare-btn"
-                aria-label="Add to compare"
-                title="Compare"
-              >
-                <svg viewBox="0 0 24 24">
-                  <path d="M18 20V10M12 20V4M6 20v-6" />
-                </svg>
-              </button>
             </div>
           </article>
 
@@ -5273,15 +5208,6 @@
                   <rect x="14" y="3" width="7" height="7" rx="1" />
                   <rect x="14" y="14" width="7" height="7" rx="1" />
                   <rect x="3" y="14" width="7" height="7" rx="1" />
-                </svg>
-              </button>
-              <button
-                class="pgal-action pgal-compare-btn"
-                aria-label="Add to compare"
-                title="Compare"
-              >
-                <svg viewBox="0 0 24 24">
-                  <path d="M18 20V10M12 20V4M6 20v-6" />
                 </svg>
               </button>
             </div>
@@ -5343,15 +5269,6 @@
                   <rect x="3" y="14" width="7" height="7" rx="1" />
                 </svg>
               </button>
-              <button
-                class="pgal-action pgal-compare-btn"
-                aria-label="Add to compare"
-                title="Compare"
-              >
-                <svg viewBox="0 0 24 24">
-                  <path d="M18 20V10M12 20V4M6 20v-6" />
-                </svg>
-              </button>
             </div>
           </article>
 
@@ -5411,15 +5328,6 @@
                   <rect x="3" y="14" width="7" height="7" rx="1" />
                 </svg>
               </button>
-              <button
-                class="pgal-action pgal-compare-btn"
-                aria-label="Add to compare"
-                title="Compare"
-              >
-                <svg viewBox="0 0 24 24">
-                  <path d="M18 20V10M12 20V4M6 20v-6" />
-                </svg>
-              </button>
             </div>
           </article>
         </div>
@@ -5430,11 +5338,11 @@
     <section class="loc" id="locations">
       <div class="loc__wrap">
         <header class="loc__header">
-          <p class="loc__eyebrow loc-reveal">Our Locations</p>
-          <h2 class="loc__title loc-reveal">
+          <p class="loc__eyebrow loc-reveal" data-i18n="loc.eyebrow">Our Locations</p>
+          <h2 class="loc__title loc-reveal" data-i18n="loc.title" data-i18n-html>
             Explore <em>Prime</em> Destinations
           </h2>
-          <p class="loc__sub loc-reveal">
+          <p class="loc__sub loc-reveal" data-i18n="loc.sub">
             Exceptional properties across Egypt's most coveted addresses — from
             Cairo's skyline to the Mediterranean coast.
           </p>
@@ -5691,23 +5599,30 @@
       </div>
     </section>
 
+
     <!-- ─── COMPARE SIDEBAR ─── -->
-    <aside class="cmp-bar" id="cmpBar" aria-label="Property comparison">
-      <button class="cmp-bar__toggle" id="cmpToggle" hidden>
-        <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6" /></svg>
-        <span id="cmpCount">0</span>/4
-      </button>
+    <div class="cmp-bar cmp-bar--hidden" id="cmpBar">
       <div class="cmp-bar__panel" id="cmpPanel">
-        <div class="cmp-bar__head">
-          <span class="cmp-bar__heading">Compare Properties</span>
-          <button class="cmp-bar__close-all" id="cmpCloseAll">Clear all</button>
+        <div class="cmp-panel__head">
+          <h4 data-i18n="cmp.panel.title">Property Comparison</h4>
+          <button class="cmp-panel__close" id="cmpClose" aria-label="Close panel">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
         </div>
-        <ul class="cmp-bar__list" id="cmpList"></ul>
-        <div class="cmp-bar__footer">
-          <button class="cmp-bar__go" id="cmpGoBtn">Compare Now</button>
+        <div class="cmp-panel__list" id="cmpList"></div>
+        <div class="cmp-panel__foot">
+          <button class="btn-cmp-go" id="cmpGoBtn" disabled data-i18n="cmp.go">Compare Now</button>
         </div>
       </div>
-    </aside>
+      <div class="cmp-bar__right">
+        <button class="cmp-bar__toggle" id="cmpToggle" aria-label="Toggle compare panel">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="M16 21l4-4-4-4"/><path d="M20 17H4"/></svg>
+          <span class="cmp-bar__label" data-i18n="cmp.toggle">Compare</span>
+          <span id="cmpCount" class="cmp-bar__count">0/4</span>
+          <svg class="cmp-bar__chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+        </button>
+      </div>
+    </div>
 
     <!-- ─── LIGHTBOX ─── -->
     <div
@@ -5753,8 +5668,11 @@
       const SLIDES = [
         {
           title: "The Pinnacle Residences",
+          title_ar: "مساكن القمة",
           tagline: "Where Sky Meets Luxury",
+          tagline_ar: "حيث تلتقي السماء بالفخامة",
           location: "Cairo, Egypt",
+          location_ar: "القاهرة، مصر",
           image:
             "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1920&auto=format&fit=crop&q=90",
           thumb:
@@ -5762,8 +5680,11 @@
         },
         {
           title: "Al Noor Villas",
+          title_ar: "فلل النور",
           tagline: "Timeless Living, Reimagined",
+          tagline_ar: "معيشة خالدة بصياغة جديدة",
           location: "New Cairo, Egypt",
+          location_ar: "القاهرة الجديدة، مصر",
           image:
             "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1920&auto=format&fit=crop&q=90",
           thumb:
@@ -5771,8 +5692,11 @@
         },
         {
           title: "Maaya Heights",
+          title_ar: "مرتفعات مايا",
           tagline: "Elevated Beyond Expectation",
+          tagline_ar: "أعلى من كل توقع",
           location: "6th of October, Egypt",
+          location_ar: "السادس من أكتوبر، مصر",
           image:
             "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&auto=format&fit=crop&q=90",
           thumb:
@@ -5780,8 +5704,11 @@
         },
         {
           title: "Sky Gardens",
+          title_ar: "حدائق السماء",
           tagline: "Nature Meets Architecture",
+          tagline_ar: "حيث تلتقي الطبيعة بالعمارة",
           location: "North Coast, Egypt",
+          location_ar: "الساحل الشمالي، مصر",
           image:
             "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1920&auto=format&fit=crop&q=90",
           thumb:
@@ -5789,8 +5716,11 @@
         },
         {
           title: "The Boulevard",
+          title_ar: "البوليفار",
           tagline: "Live at the Center of Everything",
+          tagline_ar: "عِش في قلب كل شيء",
           location: "Sheikh Zayed, Egypt",
+          location_ar: "الشيخ زايد، مصر",
           image:
             "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1920&auto=format&fit=crop&q=90",
           thumb:
@@ -5798,8 +5728,11 @@
         },
         {
           title: "Azure Coast Estates",
+          title_ar: "عقارات الساحل الأزرق",
           tagline: "Where the Sea Becomes Home",
+          tagline_ar: "حيث يصبح البحر وطناً",
           location: "Ain Sokhna, Egypt",
+          location_ar: "العين السخنة، مصر",
           image:
             "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=1920&auto=format&fit=crop&q=90",
           thumb:
@@ -5807,8 +5740,11 @@
         },
         {
           title: "Azure Coast Estates",
+          title_ar: "عقارات الساحل الأزرق",
           tagline: "Where the Sea Becomes Home",
+          tagline_ar: "حيث يصبح البحر وطناً",
           location: "Ain Sokhna, Egypt",
+          location_ar: "العين السخنة، مصر",
           image:
             "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=1920&auto=format&fit=crop&q=90",
           thumb:
@@ -5855,24 +5791,24 @@
       <div class="slide-content">
         <div class="slide-eyebrow">
           <span class="slide-eyebrow__rule"></span>
-          <span class="slide-eyebrow__label">Exclusive Property</span>
+          <span class="slide-eyebrow__label" data-i18n="slide.eyebrow">Exclusive Property</span>
         </div>
-        <h2 class="slide-title">${data.title}</h2>
-        <p class="slide-tagline">${data.tagline}</p>
+        <h2 class="slide-title"><span class="txt-en">${data.title}</span><span class="txt-ar">${data.title_ar}</span></h2>
+        <p class="slide-tagline"><span class="txt-en">${data.tagline}</span><span class="txt-ar">${data.tagline_ar}</span></p>
         <div class="slide-location">
           <svg class="slide-location__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
           </svg>
-          <span class="slide-location__text">${data.location}</span>
+          <span class="slide-location__text"><span class="txt-en">${data.location}</span><span class="txt-ar">${data.location_ar}</span></span>
         </div>
         <div class="slide-ctas">
           <a href="#" class="btn-slide btn-slide--fill" aria-label="Explore ${data.title}">
-            Explore Project
+            <span data-i18n="slide.cta.explore">Explore Project</span>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
           </a>
-          <a href="property-detail.html" class="btn-slide btn-slide--ghost" aria-label="View details of ${data.title}">View Details</a>
+          <a href="property-detail.html" class="btn-slide btn-slide--ghost" aria-label="View details of ${data.title}" data-i18n="slide.cta.details">View Details</a>
         </div>
       </div>`;
           swiperWrap.appendChild(slide);
@@ -5896,7 +5832,7 @@
       </div>
       <div class="thumb-item__meta">
         <div class="thumb-item__num">0${i + 1}</div>
-        <div class="thumb-item__name">${data.title}</div>
+        <div class="thumb-item__name"><span class="txt-en">${data.title}</span><span class="txt-ar">${data.title_ar}</span></div>
       </div>
       <div class="thumb-item__bar"></div>`;
           btn.addEventListener("click", () => navigate(i, false, null));
@@ -6511,18 +6447,6 @@
       })();
     </script>
 
-    <!-- ── Compare Tray ── -->
-    <div class="compare-tray" id="compareTray" role="status" aria-live="polite">
-      <div class="compare-tray__info">
-        <span class="compare-tray__count" id="compareTrayCount">0</span>
-        <span class="compare-tray__label-text"> properties selected</span>
-      </div>
-      <button class="compare-tray__go" id="compareTrayGo">Compare Now</button>
-      <button class="compare-tray__clear" id="compareTrayClear">
-        Clear all
-      </button>
-    </div>
-
     <!-- ── Gallery Lightbox ── -->
     <div
       class="gallery-lb"
@@ -6561,6 +6485,12 @@
         <p class="gallery-lb__counter" id="galleryLbCounter">1 / 5</p>
       </div>
     </div>
+
+    <!-- Shared compare state — accessible by all IIFEs on this page -->
+    <script>
+      window.MAX_CMP = 4;
+      window.cmpItems = [];
+    </script>
 
     <script>
       /* ══════════════════════════════════════════════
@@ -6695,12 +6625,9 @@
         const areaEl = document.getElementById("propArea");
         const priceEl = document.getElementById("propPrice");
         const locationEl = document.getElementById("propLocationText");
-        const counterEl = document.getElementById("propCounter");
-        const totalEl = document.getElementById("propTotal");
-        const fillEl = document.getElementById("propFill");
         const propCard = document.getElementById("propCard");
-        const propPrevBtn = document.getElementById("propPrev");
-        const propNextBtn = document.getElementById("propNext");
+        const propPrevBtn = document.getElementById("thumbPrev");
+        const propNextBtn = document.getElementById("thumbNext");
 
         /* ── Build property thumbs once ── */
         function buildThumbs() {
@@ -6781,12 +6708,6 @@
               areaEl.textContent = newProp.area;
               priceEl.textContent = newProp.price;
               locationEl.textContent = newProp.location;
-              if (counterEl)
-                counterEl.textContent = String(propIdx + 1).padStart(2, "0");
-              if (totalEl)
-                totalEl.textContent = String(PROPS.length).padStart(2, "0");
-              if (fillEl)
-                fillEl.style.width = ((propIdx + 1) / PROPS.length) * 100 + "%";
               propPrevBtn.disabled = propIdx === 0;
               propNextBtn.disabled = propIdx === PROPS.length - 1;
               thumbBtns.forEach((t, ti) =>
@@ -6832,12 +6753,6 @@
           areaEl.textContent = prop.area;
           priceEl.textContent = prop.price;
           locationEl.textContent = prop.location;
-          if (counterEl)
-            counterEl.textContent = String(propIdx + 1).padStart(2, "0");
-          if (totalEl)
-            totalEl.textContent = String(PROPS.length).padStart(2, "0");
-          if (fillEl)
-            fillEl.style.width = ((propIdx + 1) / PROPS.length) * 100 + "%";
           propPrevBtn.disabled = propIdx === 0;
           propNextBtn.disabled = propIdx === PROPS.length - 1;
           mainImg.src = prop.images[0];
@@ -6888,8 +6803,8 @@
           });
         }
 
-        propPrevBtn.addEventListener("click", () => navProp(propIdx - 1));
-        propNextBtn.addEventListener("click", () => navProp(propIdx + 1));
+        propPrevBtn.addEventListener("click", () => { if (propIdx > 0) switchPropByThumb(propIdx - 1); });
+        propNextBtn.addEventListener("click", () => { if (propIdx < PROPS.length - 1) switchPropByThumb(propIdx + 1); });
 
         /* ── Favourites (localStorage) ── */
         const FAV_KEY = "akar_favs";
@@ -7049,12 +6964,13 @@
         function syncActionBtns() {
           const id = PROPS[propIdx].id;
           const faved = isFav(id);
-          const cmpd = isInCompare(id);
           favBtn.classList.toggle("is-active", faved);
           favBtn.title = faved ? "Remove from Favourites" : "Add to Favourites";
-          compareBtn.classList.toggle("is-active", cmpd);
-          compareBtn.title = cmpd ? "Remove from Compare" : "Add to Compare";
+          const inCmp = window.cmpItems.some((i) => i.id === id);
+          compareBtn.classList.toggle("is-active", inCmp);
+          compareBtn.title = inCmp ? "Remove from Compare" : "Add to Compare";
         }
+        window.syncPropCmpBtn = syncActionBtns;
 
         favBtn.addEventListener("click", () => {
           const id = PROPS[propIdx].id;
@@ -7065,9 +6981,11 @@
             favBtn.style.transform = "";
           }, 200);
         });
-        compareBtn.addEventListener("click", () =>
-          toggleCompare(PROPS[propIdx].id),
-        );
+        compareBtn.addEventListener("click", () => {
+          const p = PROPS[propIdx];
+          window.addToCompare && window.addToCompare(p.id, p.title, p.images[0]);
+          syncActionBtns();
+        });
         galleryBtn.addEventListener("click", () =>
           openGallery(PROPS[propIdx].images, 0),
         );
@@ -7504,118 +7422,76 @@
         }
 
         /* ── Compare sidebar ── */
-        const MAX_COMPARE = 4;
-        let compareItems = [];
-
-        const cmpToggle = document.getElementById("cmpToggle");
+        const compareItems = window.cmpItems;
+        const MAX_COMPARE = window.MAX_CMP;
         const cmpPanel = document.getElementById("cmpPanel");
+        const cmpToggle = document.getElementById("cmpToggle");
+        const cmpClose = document.getElementById("cmpClose");
         const cmpList = document.getElementById("cmpList");
         const cmpCount = document.getElementById("cmpCount");
-        const cmpCloseAll = document.getElementById("cmpCloseAll");
         const cmpGoBtn = document.getElementById("cmpGoBtn");
 
-        let cmpOpen = false;
-
-        cmpToggle.addEventListener("click", () => {
-          cmpOpen = !cmpOpen;
-          cmpPanel.classList.toggle("is-open", cmpOpen);
-        });
+        cmpToggle.addEventListener("click", () => { cmpPanel.classList.toggle("is-open"); window.syncPropCmpBtn && window.syncPropCmpBtn(); });
+        cmpClose.addEventListener("click", () => { cmpPanel.classList.remove("is-open"); window.syncPropCmpBtn && window.syncPropCmpBtn(); });
 
         function renderCmpList() {
-          cmpList.innerHTML = "";
-          compareItems.forEach((item) => {
-            const li = document.createElement("li");
-            li.className = "cmp-item";
-            li.innerHTML = `
-              <img class="cmp-item__thumb" src="${item.thumb}" alt="${item.title}"/>
-              <span class="cmp-item__name">${item.title}</span>
-              <button class="cmp-item__rm" data-id="${item.id}" aria-label="Remove">
-                <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-              </button>`;
-            cmpList.appendChild(li);
-          });
-
-          cmpList.querySelectorAll(".cmp-item__rm").forEach((btn) => {
-            btn.addEventListener("click", () =>
-              removeFromCompare(btn.dataset.id),
-            );
-          });
-
-          cmpCount.textContent = compareItems.length;
-          cmpToggle.hidden = compareItems.length === 0;
+          const bar = document.getElementById("cmpBar");
           if (compareItems.length === 0) {
-            cmpOpen = false;
+            bar.classList.add("cmp-bar--hidden");
             cmpPanel.classList.remove("is-open");
+          } else {
+            bar.classList.remove("cmp-bar--hidden");
           }
+          cmpCount.textContent = compareItems.length + "/" + MAX_COMPARE;
+          cmpGoBtn.disabled = compareItems.length < 1;
+          let html = "";
+          for (const item of compareItems) {
+            html += `<div class="cmp-item" data-id="${item.id}">
+              <img class="cmp-item__thumb" src="${item.thumb}" alt="${item.title}"/>
+              <span class="cmp-item__title">${item.title}</span>
+              <button class="cmp-item__rm" data-rm="${item.id}" aria-label="Remove">
+                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>`;
+          }
+          const slots = MAX_COMPARE - compareItems.length;
+          for (let i = 0; i < slots; i++)
+            html += `<div class="cmp-panel__slot">+ Add property</div>`;
+          cmpList.innerHTML = html;
+          cmpList.querySelectorAll("[data-rm]").forEach((btn) => {
+            btn.addEventListener("click", () => removeFromCompare(btn.dataset.rm));
+          });
+          window.syncPropCmpBtn && window.syncPropCmpBtn();
         }
 
-        function addToCompare(card) {
-          const id = card.dataset.id;
-          const title = card.dataset.title;
-          const thumb = card.dataset.thumb;
-          if (compareItems.find((i) => i.id === id)) {
-            removeFromCompare(id);
-            return;
-          }
+        function addToCompare(id, title, thumb) {
+          if (compareItems.find((i) => i.id === id)) { removeFromCompare(id); return; }
           if (compareItems.length >= MAX_COMPARE) {
-            gsap.fromTo(
-              cmpPanel,
-              { x: 8 },
-              {
-                x: 0,
-                duration: 0.4,
-                ease: "elastic.out(1,0.4)",
-                clearProps: "transform",
-              },
-            );
+            const bar = document.getElementById("cmpBar");
+            bar.style.transform = "translateX(6px)";
+            setTimeout(() => { bar.style.transform = "translateX(-6px)"; }, 80);
+            setTimeout(() => { bar.style.transform = ""; }, 160);
             return;
           }
           compareItems.push({ id, title, thumb });
           renderCmpList();
-          if (!cmpOpen) {
-            cmpOpen = true;
-            cmpPanel.classList.add("is-open");
-          }
-          gsap.fromTo(
-            cmpPanel,
-            { x: 16 },
-            {
-              x: 0,
-              duration: 0.45,
-              ease: "back.out(1.7)",
-              clearProps: "transform",
-            },
-          );
+          cmpPanel.classList.add("is-open");
+          window.syncPropCmpBtn && window.syncPropCmpBtn();
         }
 
         function removeFromCompare(id) {
-          compareItems = compareItems.filter((i) => i.id !== id);
-          /* un-mark the button on the card */
+          const idx = compareItems.findIndex((i) => i.id === id);
+          if (idx !== -1) compareItems.splice(idx, 1);
           const card = document.querySelector(`.pgal-card[data-id="${id}"]`);
-          if (card)
-            card
-              .querySelector(".pgal-compare-btn")
-              ?.classList.remove("is-compared");
+          if (card) card.querySelector(".pgal-compare-btn")?.classList.remove("is-compared");
           renderCmpList();
         }
 
-        cmpCloseAll.addEventListener("click", () => {
-          compareItems.forEach((i) => {
-            const card = document.querySelector(
-              `.pgal-card[data-id="${i.id}"]`,
-            );
-            if (card)
-              card
-                .querySelector(".pgal-compare-btn")
-                ?.classList.remove("is-compared");
-          });
-          compareItems = [];
-          renderCmpList();
-        });
+        window.addToCompare = addToCompare;
 
         cmpGoBtn.addEventListener("click", () => {
-          const ids = compareItems.map((i) => i.id).join(",");
-          window.location.href = "compare.html?ids=" + ids;
+          if (compareItems.length < 1) return;
+          window.location.href = "compare.html?ids=" + compareItems.map((i) => i.id).join(",");
         });
 
         function initCompare(card) {
@@ -7623,13 +7499,13 @@
           if (!btn) return;
           btn.addEventListener("click", () => {
             const id = card.dataset.id;
-            const alreadyIn = compareItems.find((i) => i.id === id);
-            if (alreadyIn) {
+            const title = card.dataset.title;
+            const thumb = card.dataset.thumb;
+            if (compareItems.find((i) => i.id === id)) {
               removeFromCompare(id);
               btn.classList.remove("is-compared");
             } else {
-              if (compareItems.length >= MAX_COMPARE) return;
-              addToCompare(card);
+              addToCompare(id, title, thumb);
               btn.classList.add("is-compared");
             }
           });
@@ -7736,10 +7612,12 @@
         trackWrap.addEventListener("scroll", updateProgress);
 
         /* ── Button nav ── */
+        const isRTL = () => document.documentElement.dir === "rtl";
+
         if (prevBtn)
           prevBtn.addEventListener("click", () => {
             stopAutoplay();
-            trackWrap.scrollBy({ left: -STEP, behavior: "smooth" });
+            trackWrap.scrollBy({ left: isRTL() ? STEP : -STEP, behavior: "smooth" });
             startAutoplay();
           });
         if (nextBtn)
@@ -7750,11 +7628,15 @@
           });
 
         function scrollNext() {
+          const rtl = isRTL();
           const max = trackWrap.scrollWidth - trackWrap.clientWidth;
-          if (trackWrap.scrollLeft >= max - 2) {
-            trackWrap.scrollTo({ left: 0, behavior: "smooth" });
+          const atEnd = rtl
+            ? trackWrap.scrollLeft <= -(max - 2)
+            : trackWrap.scrollLeft >= max - 2;
+          if (atEnd) {
+            trackWrap.scrollTo({ left: rtl ? 0 : 0, behavior: "smooth" });
           } else {
-            trackWrap.scrollBy({ left: STEP, behavior: "smooth" });
+            trackWrap.scrollBy({ left: rtl ? -STEP : STEP, behavior: "smooth" });
           }
         }
 
@@ -7865,22 +7747,22 @@
                 />
               </svg>
             </a>
-            <p class="site-footer__tagline">
+            <p class="site-footer__tagline" data-i18n="footer.desc">
               Egypt's most curated luxury real estate — from New Cairo's towers
               to the North Coast's shores.
             </p>
             <div class="site-footer__stats">
               <div class="site-footer__stat">
                 <span class="site-footer__stat-n">164</span>
-                <span class="site-footer__stat-l">Active Listings</span>
+                <span class="site-footer__stat-l" data-i18n="footer.stat.listings">Active Listings</span>
               </div>
               <div class="site-footer__stat">
                 <span class="site-footer__stat-n">6</span>
-                <span class="site-footer__stat-l">Locations</span>
+                <span class="site-footer__stat-l" data-i18n="footer.stat.locations">Locations</span>
               </div>
               <div class="site-footer__stat">
                 <span class="site-footer__stat-n">12+</span>
-                <span class="site-footer__stat-l">Years</span>
+                <span class="site-footer__stat-l" data-i18n="footer.stat.years">Years</span>
               </div>
             </div>
             <div class="site-footer__socials">
@@ -7958,35 +7840,35 @@
           <!-- Navigation -->
           <nav class="site-footer__nav" aria-label="Footer navigation">
             <div class="site-footer__nav-col">
-              <h3 class="site-footer__nav-head">Explore</h3>
+              <h3 class="site-footer__nav-head" data-i18n="footer.col.properties">Explore</h3>
               <ul>
-                <li><a href="listings.html">All Properties</a></li>
-                <li><a href="listings.html">Villas &amp; Compounds</a></li>
-                <li><a href="listings.html">Penthouse Collection</a></li>
-                <li><a href="listings.html">Off-Plan Projects</a></li>
-                <li><a href="listings.html">North Coast</a></li>
-                <li><a href="compare.html">Compare Units</a></li>
+                <li><a href="listings.html" data-i18n="footer.link.all">All Properties</a></li>
+                <li><a href="listings.html" data-i18n="footer.link.villas">Villas &amp; Compounds</a></li>
+                <li><a href="listings.html" data-i18n="footer.link.penthouse">Penthouse Collection</a></li>
+                <li><a href="listings.html" data-i18n="footer.link.offplan">Off-Plan Projects</a></li>
+                <li><a href="listings.html" data-i18n="footer.link.north-coast">North Coast</a></li>
+                <li><a href="compare.html" data-i18n="footer.link.compare-units">Compare Units</a></li>
               </ul>
             </div>
             <div class="site-footer__nav-col">
-              <h3 class="site-footer__nav-head">Company</h3>
+              <h3 class="site-footer__nav-head" data-i18n="footer.col.company">Company</h3>
               <ul>
-                <li><a href="#">About Akar Town</a></li>
-                <li><a href="#">Our Agents</a></li>
-                <li><a href="#">Success Stories</a></li>
-                <li><a href="#">Careers</a></li>
-                <li><a href="#">Press &amp; Media</a></li>
-                <li><a href="#">Contact Us</a></li>
+                <li><a href="#" data-i18n="footer.link.about">About Akar Town</a></li>
+                <li><a href="#" data-i18n="footer.link.team">Our Agents</a></li>
+                <li><a href="#" data-i18n="footer.link.success">Success Stories</a></li>
+                <li><a href="#" data-i18n="footer.link.careers">Careers</a></li>
+                <li><a href="#" data-i18n="footer.link.press">Press &amp; Media</a></li>
+                <li><a href="#" data-i18n="footer.link.contact-us">Contact Us</a></li>
               </ul>
             </div>
           </nav>
           <!-- Property Match Widget -->
           <div class="site-footer__match">
-            <div class="site-footer__match-eyebrow">Property Matching</div>
-            <h2 class="site-footer__match-title">
+            <div class="site-footer__match-eyebrow" data-i18n="footer.match.eyebrow">Property Matching</div>
+            <h2 class="site-footer__match-title" data-i18n="footer.match.title" data-i18n-html>
               Find Your <em>Perfect</em> Unit
             </h2>
-            <p class="site-footer__match-sub">
+            <p class="site-footer__match-sub" data-i18n="footer.match.sub">
               Tell us what you need — we'll alert you the moment it's listed.
             </p>
             <div class="site-footer__match-types" id="fmatchTypes">
@@ -8060,13 +7942,13 @@
         </div>
         <!-- Bottom bar -->
         <div class="site-footer__bottom">
-          <p class="site-footer__copy">
+          <p class="site-footer__copy" data-i18n="footer.copy">
             © 2026 Akar Town Real Estate. All rights reserved.
           </p>
           <div class="site-footer__legal">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Use</a>
-            <a href="#">Cookie Policy</a>
+            <a href="#" data-i18n="footer.privacy">Privacy Policy</a>
+            <a href="#" data-i18n="footer.terms">Terms of Use</a>
+            <a href="#" data-i18n="footer.cookie">Cookie Policy</a>
           </div>
           <button
             class="site-footer__top-btn"
@@ -8113,6 +7995,351 @@
           });
         }
       })();
+    </script>
+
+    <script>
+/* ── i18n / Language Switcher ── */
+(function () {
+  var STORAGE_KEY = "akar_lang";
+
+  var T = {
+    en: {
+      /* Navbar */
+      "nav.home": "Home",
+      "nav.properties": "Properties",
+      "nav.projects": "Projects",
+      "nav.about": "About",
+      "nav.contact": "Contact",
+      "nav.cta": "Get in Touch",
+      /* Buttons */
+      "btn.view-all": "View All Properties",
+      "btn.schedule": "Schedule Viewing",
+      "btn.enquire": "Send Enquiry",
+      "btn.load-more": "Load More Properties",
+      "btn.compare": "Compare",
+      "btn.details": "View Details",
+      "btn.call": "Call Now",
+      "btn.wa": "WhatsApp",
+      /* Hero */
+      "hero.scroll": "Scroll to Explore",
+      "slide.eyebrow": "Exclusive Property",
+      "slide.cta.explore": "Explore Project",
+      "slide.cta.details": "View Details",
+      /* Featured Properties */
+      "feat.eyebrow": "Properties",
+      "feat.title": "Featured <em>Properties</em>",
+      "feat.sub": "Exceptional homes curated exclusively for the discerning few.",
+      "feat.label.price": "Starting Price",
+      "feat.label.beds": "Beds",
+      "feat.label.baths": "Baths",
+      "feat.label.area": "Area m²",
+      "feat.label.location": "Location",
+      /* Why Choose Us */
+      "why.eyebrow": "Why Akar Town",
+      "why.title": "Excellence in <em>Every Detail</em>",
+      "why.sub": "Two decades of curating Egypt's finest properties with uncompromising standards.",
+      "why.item1.title": "Expert Guidance",
+      "why.item1.desc": "Dedicated advisors who understand your vision and guide you to the perfect property.",
+      "why.item2.title": "Curated Portfolio",
+      "why.item2.desc": "Hand-selected luxury developments in Egypt's most coveted locations.",
+      "why.item3.title": "Seamless Process",
+      "why.item3.desc": "End-to-end support from first viewing through final handover.",
+      "why.item4.title": "Lifetime Value",
+      "why.item4.desc": "Investment-grade properties that appreciate and enrich for generations.",
+      "why.stat1.label": "Luxury Properties",
+      "why.stat2.label": "Years of Experience",
+      "why.stat3.label": "Client Satisfaction",
+      "why.stat4.label": "Happy Clients",
+      /* Locations */
+      "loc.eyebrow": "Locations",
+      "loc.title": "Prime <em>Destinations</em>",
+      "loc.sub": "Handpicked neighbourhoods where luxury meets lifestyle.",
+      /* Gallery */
+      "gal.eyebrow": "Portfolio",
+      "gal.title": "Property <em>Gallery</em>",
+      "gal.sub": "A curated collection of Egypt's most distinguished addresses.",
+      "gal.filter.all": "All",
+      "gal.filter.residential": "Residential",
+      "gal.filter.commercial": "Commercial",
+      "gal.filter.offplan": "Off-Plan",
+      /* Listings page */
+      "listings.eyebrow": "Properties",
+      "listings.title": "Discover <em>Exceptional</em> Properties",
+      "listings.count": "Available Properties",
+      "listings.sort.label": "Sort by",
+      "listings.sort.newest": "Newest",
+      "listings.sort.price-asc": "Price: Low to High",
+      "listings.sort.price-desc": "Price: High to Low",
+      "listings.sort.area": "Largest Area",
+      "listings.filter.title": "Filter Properties",
+      "listings.filter.type": "Property Type",
+      "listings.filter.location": "Location",
+      "listings.filter.price": "Price Range",
+      "listings.filter.beds": "Bedrooms",
+      "listings.filter.status": "Status",
+      "listings.filter.apply": "Apply Filters",
+      "listings.filter.reset": "Reset",
+      "listings.no-results": "No properties match your filters.",
+      /* Compare page */
+      "cmp.eyebrow": "Analysis",
+      "cmp.title": "Compare <em>Properties</em>",
+      "cmp.sub": "Side-by-side luxury comparison",
+      "cmp.units-selected": "Units Selected",
+      "cmp.cta.heading": "Ready to <em>Decide?</em>",
+      "cmp.cta.sub": "Schedule a viewing or request detailed information from our dedicated agents.",
+      "cmp.add": "Add Property",
+      "cmp.remove": "Remove",
+      "cmp.clear": "Clear All",
+      "cmp.beds": "Bedrooms",
+      "cmp.baths": "Bathrooms",
+      "cmp.area": "Area",
+      "cmp.price": "Price",
+      "cmp.location": "Location",
+      "cmp.status": "Status",
+      "cmp.type": "Type",
+      "cmp.panel.title": "Property Comparison",
+      "cmp.toggle": "Compare",
+      "cmp.go": "Compare Now",
+      /* Property Details page */
+      "pd.eyebrow": "Property Details",
+      "pd.price.label": "Starting Price",
+      "pd.ref": "Reference",
+      "pd.beds": "Bedrooms",
+      "pd.baths": "Bathrooms",
+      "pd.area": "Area",
+      "pd.floor": "Floor",
+      "pd.year": "Year Built",
+      "pd.type": "Property Type",
+      "pd.status": "Status",
+      "pd.overview": "Overview",
+      "pd.amenities": "Amenities",
+      "pd.location": "Location",
+      "pd.gallery": "Gallery",
+      "pd.similar": "Similar Properties",
+      "pd.agent": "Your Agent",
+      "pd.agent.call": "Call Agent",
+      "pd.agent.msg": "Send Message",
+      /* Footer */
+      "footer.tagline": "Luxury Real Estate",
+      "footer.desc": "Egypt's premier luxury real estate destination. Curating exceptional properties for discerning clients since 2004.",
+      "footer.col.properties": "Properties",
+      "footer.col.company": "Company",
+      "footer.col.contact": "Contact",
+      "footer.link.all": "All Properties",
+      "footer.link.villas": "Villas & Compounds",
+      "footer.link.penthouse": "Penthouse Collection",
+      "footer.link.residential": "Residential",
+      "footer.link.commercial": "Commercial",
+      "footer.link.offplan": "Off-Plan Projects",
+      "footer.link.north-coast": "North Coast",
+      "footer.link.compare-units": "Compare Units",
+      "footer.link.about": "About Us",
+      "footer.link.team": "Our Team",
+      "footer.link.success": "Success Stories",
+      "footer.link.careers": "Careers",
+      "footer.link.press": "Press & Media",
+      "footer.link.contact-us": "Contact Us",
+      "footer.stat.listings": "Active Listings",
+      "footer.stat.locations": "Locations",
+      "footer.stat.years": "Years",
+      "footer.match.eyebrow": "Property Matching",
+      "footer.match.title": "Find Your <em>Perfect</em> Unit",
+      "footer.match.sub": "Tell us what you need — we'll alert you the moment it's listed.",
+      "footer.copy": "© 2025 Akar Town. All rights reserved.",
+      "footer.privacy": "Privacy Policy",
+      "footer.terms": "Terms of Use",
+      "footer.cookie": "Cookie Policy",
+    },
+    ar: {
+      /* Navbar */
+      "nav.home": "الرئيسية",
+      "nav.properties": "العقارات",
+      "nav.projects": "المشاريع",
+      "nav.about": "من نحن",
+      "nav.contact": "تواصل",
+      "nav.cta": "تواصل معنا",
+      /* Buttons */
+      "btn.view-all": "عرض جميع العقارات",
+      "btn.schedule": "حجز معاينة",
+      "btn.enquire": "إرسال استفسار",
+      "btn.load-more": "تحميل المزيد",
+      "btn.compare": "مقارنة",
+      "btn.details": "عرض التفاصيل",
+      "btn.call": "اتصل الآن",
+      "btn.wa": "واتساب",
+      /* Hero */
+      "hero.scroll": "اسحب للاستكشاف",
+      "slide.eyebrow": "عقار حصري",
+      "slide.cta.explore": "استكشف المشروع",
+      "slide.cta.details": "عرض التفاصيل",
+      /* Featured Properties */
+      "feat.eyebrow": "العقارات",
+      "feat.title": "العقارات <em>المميزة</em>",
+      "feat.sub": "منازل استثنائية مختارة بعناية للنخبة.",
+      "feat.label.price": "السعر الابتدائي",
+      "feat.label.beds": "غرف النوم",
+      "feat.label.baths": "الحمامات",
+      "feat.label.area": "المساحة م²",
+      "feat.label.location": "الموقع",
+      /* Why Choose Us */
+      "why.eyebrow": "لماذا أكار تاون",
+      "why.title": "التميز في <em>كل التفاصيل</em>",
+      "why.sub": "عقدان من تنظيم أفضل العقارات في مصر بمعايير لا تقبل المساومة.",
+      "why.item1.title": "إرشاد الخبراء",
+      "why.item1.desc": "مستشارون متخصصون يفهمون رؤيتك ويوجهونك نحو العقار المثالي.",
+      "why.item2.title": "محفظة مختارة",
+      "why.item2.desc": "مشاريع فاخرة مختارة بعناية في أرقى المواقع في مصر.",
+      "why.item3.title": "عملية سلسة",
+      "why.item3.desc": "دعم شامل من أول معاينة حتى التسليم النهائي.",
+      "why.item4.title": "قيمة دائمة",
+      "why.item4.desc": "عقارات ذات جودة استثمارية تزداد قيمتها وتثري الأجيال القادمة.",
+      "why.stat1.label": "عقار فاخر",
+      "why.stat2.label": "سنوات خبرة",
+      "why.stat3.label": "رضا العملاء",
+      "why.stat4.label": "عميل سعيد",
+      /* Locations */
+      "loc.eyebrow": "المواقع",
+      "loc.title": "الوجهات <em>المتميزة</em>",
+      "loc.sub": "أحياء مختارة بعناية حيث يلتقي الفخامة بأسلوب الحياة.",
+      /* Gallery */
+      "gal.eyebrow": "أعمالنا",
+      "gal.title": "معرض <em>العقارات</em>",
+      "gal.sub": "مجموعة مختارة من أرقى العناوين في مصر.",
+      "gal.filter.all": "الكل",
+      "gal.filter.residential": "سكني",
+      "gal.filter.commercial": "تجاري",
+      "gal.filter.offplan": "على الخارطة",
+      /* Listings page */
+      "listings.eyebrow": "العقارات",
+      "listings.title": "اكتشف <em>عقارات استثنائية</em>",
+      "listings.count": "عقار متاح",
+      "listings.sort.label": "ترتيب حسب",
+      "listings.sort.newest": "الأحدث",
+      "listings.sort.price-asc": "السعر: من الأقل",
+      "listings.sort.price-desc": "السعر: من الأعلى",
+      "listings.sort.area": "أكبر مساحة",
+      "listings.filter.title": "تصفية العقارات",
+      "listings.filter.type": "نوع العقار",
+      "listings.filter.location": "الموقع",
+      "listings.filter.price": "نطاق السعر",
+      "listings.filter.beds": "غرف النوم",
+      "listings.filter.status": "الحالة",
+      "listings.filter.apply": "تطبيق التصفية",
+      "listings.filter.reset": "إعادة ضبط",
+      "listings.no-results": "لا توجد عقارات تطابق معايير البحث.",
+      /* Compare page */
+      "cmp.eyebrow": "تحليل",
+      "cmp.title": "مقارنة <em>العقارات</em>",
+      "cmp.sub": "مقارنة جانبية للعقارات الفاخرة",
+      "cmp.units-selected": "وحدات مختارة",
+      "cmp.cta.heading": "مستعد لاتخاذ <em>قرارك؟</em>",
+      "cmp.cta.sub": "احجز معاينة أو اطلب معلومات تفصيلية من وكلائنا المتخصصين.",
+      "cmp.add": "إضافة عقار",
+      "cmp.remove": "إزالة",
+      "cmp.clear": "مسح الكل",
+      "cmp.beds": "غرف النوم",
+      "cmp.baths": "الحمامات",
+      "cmp.area": "المساحة",
+      "cmp.price": "السعر",
+      "cmp.location": "الموقع",
+      "cmp.status": "الحالة",
+      "cmp.type": "النوع",
+      "cmp.panel.title": "مقارنة العقارات",
+      "cmp.toggle": "مقارنة",
+      "cmp.go": "قارن الآن",
+      /* Property Details page */
+      "pd.eyebrow": "تفاصيل العقار",
+      "pd.price.label": "السعر الابتدائي",
+      "pd.ref": "المرجع",
+      "pd.beds": "غرف النوم",
+      "pd.baths": "الحمامات",
+      "pd.area": "المساحة",
+      "pd.floor": "الطابق",
+      "pd.year": "سنة البناء",
+      "pd.type": "نوع العقار",
+      "pd.status": "الحالة",
+      "pd.overview": "نظرة عامة",
+      "pd.amenities": "المرافق",
+      "pd.location": "الموقع",
+      "pd.gallery": "معرض الصور",
+      "pd.similar": "عقارات مشابهة",
+      "pd.agent": "وكيلك العقاري",
+      "pd.agent.call": "اتصل بالوكيل",
+      "pd.agent.msg": "إرسال رسالة",
+      /* Footer */
+      "footer.tagline": "العقارات الفاخرة",
+      "footer.desc": "الوجهة الأولى للعقارات الفاخرة في مصر. نختار لعملائنا المميزين أفضل العقارات منذ عام 2004.",
+      "footer.col.properties": "العقارات",
+      "footer.col.company": "الشركة",
+      "footer.col.contact": "تواصل معنا",
+      "footer.link.all": "جميع العقارات",
+      "footer.link.villas": "الفيلات والكمبوندات",
+      "footer.link.penthouse": "مجموعة البنتهاوس",
+      "footer.link.residential": "سكني",
+      "footer.link.commercial": "تجاري",
+      "footer.link.offplan": "مشاريع على الخارطة",
+      "footer.link.north-coast": "الساحل الشمالي",
+      "footer.link.compare-units": "مقارنة الوحدات",
+      "footer.link.about": "من نحن",
+      "footer.link.team": "فريقنا",
+      "footer.link.success": "قصص النجاح",
+      "footer.link.careers": "الوظائف",
+      "footer.link.press": "الصحافة والإعلام",
+      "footer.link.contact-us": "تواصل معنا",
+      "footer.stat.listings": "إعلان نشط",
+      "footer.stat.locations": "موقع",
+      "footer.stat.years": "سنة",
+      "footer.match.eyebrow": "مطابقة العقارات",
+      "footer.match.title": "اعثر على <em>وحدتك المثالية</em>",
+      "footer.match.sub": "أخبرنا بما تحتاجه — سنُنبهك فور إدراجه.",
+      "footer.copy": "© 2025 أكار تاون. جميع الحقوق محفوظة.",
+      "footer.privacy": "سياسة الخصوصية",
+      "footer.terms": "شروط الاستخدام",
+      "footer.cookie": "سياسة ملفات الارتباط",
+    },
+  };
+
+  function applyLang(lang) {
+    var html = document.documentElement;
+    html.setAttribute("lang", lang);
+    html.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+
+    var t = T[lang] || T.en;
+
+    /* Translate all data-i18n elements */
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n");
+      var val = t[key] !== undefined ? t[key] : (T.en[key] || "");
+      if (el.hasAttribute("data-i18n-html")) {
+        el.innerHTML = val;
+      } else {
+        el.textContent = val;
+      }
+    });
+
+    /* Update toggle button label */
+    var btn = document.getElementById("langToggle");
+    if (btn) btn.setAttribute("aria-checked", lang === "ar" ? "true" : "false");
+
+    localStorage.setItem(STORAGE_KEY, lang);
+  }
+
+  /* Init */
+  var saved = localStorage.getItem(STORAGE_KEY) || "en";
+  applyLang(saved);
+
+  var toggleBtn = document.getElementById("langToggle");
+  if (toggleBtn) {
+    function doToggle() {
+      var current = document.documentElement.getAttribute("lang") || "en";
+      applyLang(current === "ar" ? "en" : "ar");
+    }
+    toggleBtn.addEventListener("click", doToggle);
+    toggleBtn.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); doToggle(); }
+    });
+  }
+})();
     </script>
   </body>
 </html>

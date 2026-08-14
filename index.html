@@ -6489,7 +6489,8 @@
     <!-- Shared compare state — accessible by all IIFEs on this page -->
     <script>
       window.MAX_CMP = 4;
-      window.cmpItems = [];
+      try { window.cmpItems = JSON.parse(localStorage.getItem("akar_cmp")) || []; }
+      catch(e) { window.cmpItems = []; }
     </script>
 
     <script>
@@ -7435,6 +7436,7 @@
         cmpClose.addEventListener("click", () => { cmpPanel.classList.remove("is-open"); window.syncPropCmpBtn && window.syncPropCmpBtn(); });
 
         function renderCmpList() {
+          try { localStorage.setItem("akar_cmp", JSON.stringify([...compareItems])); } catch(e) {}
           const bar = document.getElementById("cmpBar");
           if (compareItems.length === 0) {
             bar.classList.add("cmp-bar--hidden");
@@ -7519,6 +7521,7 @@
             initGallery(card);
             initCompare(card);
           });
+          renderCmpList();
         }
 
         if (document.readyState === "complete") initAll();

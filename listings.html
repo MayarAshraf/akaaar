@@ -3180,7 +3180,7 @@
       /* ── STATE ── */
       let visibleCount = 9;
       let filtered = [...PROPERTIES];
-      let compareItems = [];
+      let compareItems = (() => { try { return JSON.parse(localStorage.getItem("akar_cmp")) || []; } catch(e) { return []; } })();
       const MAX_CMP = 4;
       let favSet = new Set();
       let lbImages = [],
@@ -3261,7 +3261,7 @@
         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
       </button>
       <button class="act-btn act-cmp ${isCmp ? "is-compare" : ""}" data-id="${p.id}" data-title="${p.title}" data-thumb="${p.img}" data-tip="${isCmp ? "Remove from" : "Add to"} compare" aria-label="Compare">
-        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="M16 21l4-4-4-4"/><path d="M20 17H4"/></svg>
       </button>
       <a href="property-details.html?id=${p.id}" class="btn-detail">
         <span data-i18n="card.details">Details</span>
@@ -3495,6 +3495,7 @@
       cmpClose.addEventListener("click", () => cmpPanel.classList.remove("is-open"));
 
       function renderCmpList() {
+        try { localStorage.setItem("akar_cmp", JSON.stringify(compareItems)); } catch(e) {}
         const bar = document.getElementById("cmpBar");
         if (compareItems.length === 0) {
           bar.classList.add("cmp-bar--hidden");

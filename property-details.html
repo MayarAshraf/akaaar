@@ -2820,19 +2820,7 @@
               title="Compare"
               aria-label="Compare"
             >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <polyline points="16 3 21 3 21 8" />
-                <line x1="4" y1="20" x2="21" y2="3" />
-                <polyline points="21 16 21 21 16 21" />
-                <line x1="15" y1="15" x2="21" y2="21" />
-              </svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="M16 21l4-4-4-4"/><path d="M20 17H4"/></svg>
             </button>
             <button
               class="gallery-action-btn"
@@ -3009,19 +2997,7 @@
           aria-label="Compare property"
           title="Compare"
         >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <polyline points="16 3 21 3 21 8" />
-            <line x1="4" y1="20" x2="21" y2="3" />
-            <polyline points="21 16 21 21 16 21" />
-            <line x1="15" y1="15" x2="21" y2="21" />
-          </svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="M16 21l4-4-4-4"/><path d="M20 17H4"/></svg>
         </button>
         <button
           class="pd-sticky__save"
@@ -4752,7 +4728,7 @@
 
       // ── COMPARE SIDEBAR ──
       const MAX_CMP = 4;
-      let compareItems = [];
+      let compareItems = (() => { try { return JSON.parse(localStorage.getItem("akar_cmp")) || []; } catch(e) { return []; } })();
       const CMP_ID = "pd1";
       const CMP_TITLE = "Serenity Villa";
       const CMP_THUMB = "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=400&q=80";
@@ -4767,8 +4743,10 @@
 
       cmpToggle.addEventListener("click", () => cmpPanel.classList.toggle("is-open"));
       cmpClose.addEventListener("click", () => cmpPanel.classList.remove("is-open"));
+      renderCmpList();
 
       function renderCmpList() {
+        try { localStorage.setItem("akar_cmp", JSON.stringify(compareItems)); } catch(e) {}
         const bar = document.getElementById("cmpBar");
         if (compareItems.length === 0) {
           bar.classList.add("cmp-bar--hidden");

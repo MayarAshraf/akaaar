@@ -3292,6 +3292,13 @@
         transform: translateY(24px);
       }
 
+      /* Cards start fully clipped; GSAP wipes them in — opacity managed by clip-path only */
+      .pgal-card.pgal-reveal {
+        opacity: 1;
+        transform: none;
+        clip-path: inset(0 100% 0 0 round 12px);
+      }
+
       /* ── Gallery card action buttons (fav / gallery / compare) ── */
       .pgal-card__actions {
         position: absolute;
@@ -8019,10 +8026,52 @@
           { threshold: 0.08 },
         );
 
-        document.querySelectorAll(".pgal-reveal").forEach((el, i) => {
+        document.querySelectorAll(".pgal-reveal:not(.pgal-card)").forEach((el, i) => {
           el.dataset.pgalDelay = i * 0.06;
           pgalObs.observe(el);
         });
+
+        /* ── Cinematic wipe: each card reveals from its natural edge ── */
+        (() => {
+          const grid = document.querySelector(".pgal__grid");
+          if (!grid) return;
+          const cards = grid.querySelectorAll(".pgal-card");
+          /* clip-path inset wipe direction per card position */
+          const wipes = [
+            { from: "inset(0 100% 0 0 round 12px)",   to: "inset(0 0% 0 0 round 12px)",   delay: 0    }, /* card 1: left→right  */
+            { from: "inset(0 0 100% 0 round 12px)",   to: "inset(0 0 0% 0 round 12px)",   delay: 0.18 }, /* card 2: top→bottom  */
+            { from: "inset(100% 0 0 0 round 12px)",   to: "inset(0% 0 0 0 round 12px)",   delay: 0.36 }, /* card 3: btm→top     */
+            { from: "inset(100% 0 0 0 round 12px)",   to: "inset(0% 0 0 0 round 12px)",   delay: 0.46 }, /* card 4: btm→top     */
+          ];
+          let fired = false;
+          const wipeObs = new IntersectionObserver(
+            (entries) => {
+              if (!entries[0].isIntersecting || fired) return;
+              fired = true;
+              wipeObs.disconnect();
+              cards.forEach((card, i) => {
+                const w = wipes[i] || wipes[wipes.length - 1];
+                const img = card.querySelector(".pgal-card__img");
+                /* reveal the card frame */
+                gsap.fromTo(
+                  card,
+                  { clipPath: w.from, opacity: 1 },
+                  { clipPath: w.to, duration: 1.05, delay: w.delay, ease: "power2.inOut" }
+                );
+                /* cinematic zoom-out on inner image */
+                if (img) {
+                  gsap.fromTo(
+                    img,
+                    { scale: 1.15 },
+                    { scale: 1, duration: 1.3, delay: w.delay, ease: "power2.out" }
+                  );
+                }
+              });
+            },
+            { threshold: 0.12 }
+          );
+          wipeObs.observe(grid);
+        })();
       })();
     </script>
 

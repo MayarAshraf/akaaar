@@ -87,7 +87,6 @@
         backdrop-filter: blur(48px) saturate(180%);
         -webkit-backdrop-filter: blur(48px) saturate(180%);
         border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        box-shadow:
           0 1px 0 rgba(255, 255, 255, 0.04),
           0 8px 40px rgba(0, 0, 0, 0.4);
       }
@@ -151,11 +150,14 @@
         transition: all 0.35s var(--ease-out);
       }
       .btn-pill--fill {
-        background: var(--gold);
+        background: linear-gradient(135deg, rgba(215, 20, 52, 0.96) 0%, rgba(185, 10, 36, 1) 100%);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         color: #ffffff;
       }
       .btn-pill--fill:hover {
-        background: var(--gold-lt);
+        background: linear-gradient(135deg, rgba(225, 25, 58, 0.98) 0%, rgba(200, 16, 46, 1) 100%);
       }
 
       /* ── RTL / Arabic base ── */
@@ -182,7 +184,6 @@
         border: 1px solid rgba(160, 50, 72, 0.45);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        box-shadow: 0 0 12px rgba(160, 50, 72, 0.2);
         padding: 3px;
         cursor: pointer;
         flex-shrink: 0;
@@ -193,14 +194,12 @@
       }
       .lang-toggle:hover {
         border-color: rgba(160, 50, 72, 0.7);
-        box-shadow: 0 0 18px rgba(160, 50, 72, 0.35);
       }
       [dir="rtl"] .lang-toggle {
         margin-left: 0;
         margin-right: 12px;
       }
       .lang-toggle:focus-visible {
-        box-shadow: 0 0 0 2px rgba(160, 50, 72, 0.6);
       }
       .lang-toggle__en,
       .lang-toggle__ar {
@@ -1046,7 +1045,6 @@
         background: rgba(255, 255, 255, 0.06);
         border-color: rgba(200, 16, 46, 0.28);
         transform: translateY(-4px);
-        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
       }
       .cta-card__img {
         aspect-ratio: 16/9;
@@ -1099,17 +1097,21 @@
         gap: 6px;
         padding: 11px 16px;
         border-radius: 100px;
-        border: 1.5px solid rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.22);
         font-size: 11px;
         font-weight: 500;
         letter-spacing: 0.06em;
         text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.75);
+        color: rgba(255, 255, 255, 0.8);
         white-space: nowrap;
         transition: all 0.3s var(--ease-out);
       }
       .btn-outline-dark:hover {
-        border-color: rgba(255, 255, 255, 0.38);
+        background: rgba(255, 255, 255, 0.14);
+        border-color: rgba(255, 255, 255, 0.4);
         color: #fff;
         transform: translateY(-1px);
       }
@@ -1122,18 +1124,20 @@
         gap: 6px;
         padding: 11px 16px;
         border-radius: 100px;
-        background: var(--gold);
+        background: linear-gradient(135deg, rgba(215, 20, 52, 0.96) 0%, rgba(185, 10, 36, 1) 100%);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         color: #ffffff;
         font-size: 11px;
         font-weight: 700;
         letter-spacing: 0.06em;
         text-transform: uppercase;
         white-space: nowrap;
-        border: none;
         transition: all 0.3s var(--ease-out);
       }
       .btn-gold-pill:hover {
-        background: var(--gold-lt);
+        background: linear-gradient(135deg, rgba(225, 25, 58, 0.98) 0%, rgba(200, 16, 46, 1) 100%);
         transform: translateY(-2px);
       }
 
@@ -1169,7 +1173,10 @@
         gap: 8px;
         padding: 13px 28px;
         border-radius: 100px;
-        background: var(--gold);
+        background: linear-gradient(135deg, rgba(215, 20, 52, 0.96) 0%, rgba(185, 10, 36, 1) 100%);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         color: #ffffff;
         font-size: 12px;
         font-weight: 600;
@@ -1177,7 +1184,7 @@
         transition: all 0.3s var(--ease-out);
       }
       .btn-back:hover {
-        background: var(--gold-lt);
+        background: linear-gradient(135deg, rgba(225, 25, 58, 0.98) 0%, rgba(200, 16, 46, 1) 100%);
         transform: translateY(-2px);
       }
 
@@ -1458,7 +1465,6 @@
       .fmatch-submit:hover {
         background: var(--gold-lt);
         transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(200, 16, 46, 0.35);
       }
       .fmatch-confirm {
         font-size: 11px;

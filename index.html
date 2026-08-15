@@ -3399,7 +3399,7 @@
         font-size: clamp(80px, 16vw, 240px);
         font-weight: 300;
         letter-spacing: -0.02em;
-        color: rgba(255, 255, 255, 0.022);
+        color: rgba(255, 255, 255, 0.07);
         line-height: 1;
         pointer-events: none;
         user-select: none;
@@ -3423,7 +3423,7 @@
       .site-footer__tagline {
         font-size: 13px;
         line-height: 1.72;
-        color: rgba(255, 255, 255, 0.35);
+        color: rgba(255, 255, 255, 0.58);
         max-width: 290px;
         margin-bottom: 32px;
       }
@@ -3447,7 +3447,7 @@
         font-weight: 600;
         letter-spacing: 0.16em;
         text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.26);
+        color: rgba(255, 255, 255, 0.48);
         margin-top: 5px;
       }
       .site-footer__socials {
@@ -3495,7 +3495,7 @@
       }
       .site-footer__nav-col li a {
         font-size: 13px;
-        color: rgba(255, 255, 255, 0.4);
+        color: rgba(255, 255, 255, 0.62);
         text-decoration: none;
         display: inline-flex;
         align-items: center;
@@ -3564,7 +3564,7 @@
       }
       .site-footer__match-sub {
         font-size: 12px;
-        color: rgba(255, 255, 255, 0.32);
+        color: rgba(255, 255, 255, 0.55);
         margin-bottom: 18px;
         line-height: 1.6;
       }
@@ -3580,8 +3580,8 @@
         letter-spacing: 0.04em;
         padding: 6px 14px;
         border-radius: 100px;
-        border: 1.5px solid rgba(255, 255, 255, 0.1);
-        color: rgba(255, 255, 255, 0.42);
+        border: 1.5px solid rgba(255, 255, 255, 0.18);
+        color: rgba(255, 255, 255, 0.62);
         background: none;
         cursor: pointer;
         transition: all 0.22s;
@@ -3599,7 +3599,7 @@
         font-weight: 600;
         letter-spacing: 0.18em;
         text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.25);
+        color: rgba(255, 255, 255, 0.48);
         margin-bottom: 8px;
       }
       .fmatch-budget-row {
@@ -3716,7 +3716,7 @@
       }
       .site-footer__copy {
         font-size: 11px;
-        color: rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.42);
         letter-spacing: 0.08em;
       }
       .site-footer__legal {
@@ -3726,7 +3726,7 @@
       }
       .site-footer__legal a {
         font-size: 11px;
-        color: rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.42);
         letter-spacing: 0.06em;
         text-decoration: none;
         transition: color 0.2s;
@@ -3793,12 +3793,15 @@
         background: var(--bg);
         border-top: 1px solid var(--ink-10);
         overflow: hidden;
+        position: relative;
       }
 
       .loc__wrap {
         max-width: 1340px;
         margin: 0 auto;
         padding: 0 60px;
+        position: relative;
+        z-index: 1;
       }
 
       .loc__header {
@@ -3929,16 +3932,53 @@
         color: inherit;
         background: var(--ink-10);
         transition:
+          width 0.58s cubic-bezier(0.16, 1, 0.3, 1),
           transform 0.48s cubic-bezier(0.16, 1, 0.3, 1),
           box-shadow 0.48s ease;
       }
 
-      .loc-card:first-child {
-        width: 420px;
+      .loc-card:hover {
+        width: 490px;
+        transform: translateY(-8px);
       }
 
-      .loc-card:hover {
-        transform: translateY(-10px);
+      /* Hidden tagline that slides up on card expand */
+      .loc-card__desc {
+        font-size: 12.5px;
+        color: rgba(255, 255, 255, 0.58);
+        line-height: 1.6;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        margin-bottom: 0;
+        transition:
+          max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+          opacity 0.4s ease 0.08s,
+          margin-bottom 0.4s ease;
+      }
+
+      .loc-card:hover .loc-card__desc {
+        max-height: 52px;
+        opacity: 1;
+        margin-bottom: 14px;
+      }
+
+      /* Ambient section background */
+      .loc__ambient {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        filter: blur(55px) saturate(130%);
+        transform: scale(1.2);
+        opacity: 0;
+        pointer-events: none;
+        z-index: 0;
+        transition: opacity 0.9s ease;
+      }
+
+      .loc__ambient.is-active {
+        opacity: 0.16;
       }
 
       .loc-card__img {
@@ -4163,9 +4203,6 @@
         .loc-card {
           width: 280px;
           height: 400px;
-        }
-        .loc-card:first-child {
-          width: 300px;
         }
         .loc {
           padding: 60px 0 80px;
@@ -5700,6 +5737,7 @@
 
     <!-- ─── LOCATIONS ─── -->
     <section class="loc" id="locations">
+      <div class="loc__ambient" id="locAmbient" aria-hidden="true"></div>
       <div class="loc__wrap">
         <header class="loc__header">
           <p class="loc__eyebrow loc-reveal" data-i18n="loc.eyebrow">
@@ -5744,6 +5782,10 @@
                   <span class="loc-card__pin-lbl">Egypt</span>
                 </div>
                 <h3 class="loc-card__name">New Cairo</h3>
+                <p class="loc-card__desc">
+                  Egypt's fastest-growing urban hub — world-class amenities,
+                  gated communities.
+                </p>
                 <div class="loc-card__meta">
                   <span class="loc-card__count">
                     <span class="loc-card__count-dot"></span>
@@ -5782,6 +5824,10 @@
                   <span class="loc-card__pin-lbl">Egypt</span>
                 </div>
                 <h3 class="loc-card__name">North Coast</h3>
+                <p class="loc-card__desc">
+                  Sun-kissed shores along Egypt's Mediterranean edge, steps from
+                  the sea.
+                </p>
                 <div class="loc-card__meta">
                   <span class="loc-card__count">
                     <span class="loc-card__count-dot"></span>
@@ -5820,6 +5866,10 @@
                   <span class="loc-card__pin-lbl">Egypt</span>
                 </div>
                 <h3 class="loc-card__name">Sheikh Zayed</h3>
+                <p class="loc-card__desc">
+                  An elegant enclave of spacious living and luxury west of
+                  Cairo.
+                </p>
                 <div class="loc-card__meta">
                   <span class="loc-card__count">
                     <span class="loc-card__count-dot"></span>
@@ -5858,6 +5908,9 @@
                   <span class="loc-card__pin-lbl">Egypt</span>
                 </div>
                 <h3 class="loc-card__name">Ain Sokhna</h3>
+                <p class="loc-card__desc">
+                  Private Red Sea escapes just 90 minutes from the capital.
+                </p>
                 <div class="loc-card__meta">
                   <span class="loc-card__count">
                     <span class="loc-card__count-dot"></span>
@@ -5896,6 +5949,9 @@
                   <span class="loc-card__pin-lbl">Egypt</span>
                 </div>
                 <h3 class="loc-card__name">6th of October</h3>
+                <p class="loc-card__desc">
+                  Modern infrastructure with room to breathe, grow, and invest.
+                </p>
                 <div class="loc-card__meta">
                   <span class="loc-card__count">
                     <span class="loc-card__count-dot"></span>
@@ -5934,6 +5990,9 @@
                   <span class="loc-card__pin-lbl">Egypt</span>
                 </div>
                 <h3 class="loc-card__name">Cairo</h3>
+                <p class="loc-card__desc">
+                  The heart of Egypt — iconic, historic, and always in demand.
+                </p>
                 <div class="loc-card__meta">
                   <span class="loc-card__count">
                     <span class="loc-card__count-dot"></span>
@@ -8026,10 +8085,12 @@
           { threshold: 0.08 },
         );
 
-        document.querySelectorAll(".pgal-reveal:not(.pgal-card)").forEach((el, i) => {
-          el.dataset.pgalDelay = i * 0.06;
-          pgalObs.observe(el);
-        });
+        document
+          .querySelectorAll(".pgal-reveal:not(.pgal-card)")
+          .forEach((el, i) => {
+            el.dataset.pgalDelay = i * 0.06;
+            pgalObs.observe(el);
+          });
 
         /* ── Cinematic wipe: each card reveals from its natural edge ── */
         (() => {
@@ -8038,10 +8099,26 @@
           const cards = grid.querySelectorAll(".pgal-card");
           /* clip-path inset wipe direction per card position */
           const wipes = [
-            { from: "inset(0 100% 0 0 round 12px)",   to: "inset(0 0% 0 0 round 12px)",   delay: 0    }, /* card 1: left→right  */
-            { from: "inset(0 0 100% 0 round 12px)",   to: "inset(0 0 0% 0 round 12px)",   delay: 0.18 }, /* card 2: top→bottom  */
-            { from: "inset(100% 0 0 0 round 12px)",   to: "inset(0% 0 0 0 round 12px)",   delay: 0.36 }, /* card 3: btm→top     */
-            { from: "inset(100% 0 0 0 round 12px)",   to: "inset(0% 0 0 0 round 12px)",   delay: 0.46 }, /* card 4: btm→top     */
+            {
+              from: "inset(0 100% 0 0 round 12px)",
+              to: "inset(0 0% 0 0 round 12px)",
+              delay: 0,
+            } /* card 1: left→right  */,
+            {
+              from: "inset(0 0 100% 0 round 12px)",
+              to: "inset(0 0 0% 0 round 12px)",
+              delay: 0.18,
+            } /* card 2: top→bottom  */,
+            {
+              from: "inset(100% 0 0 0 round 12px)",
+              to: "inset(0% 0 0 0 round 12px)",
+              delay: 0.36,
+            } /* card 3: btm→top     */,
+            {
+              from: "inset(100% 0 0 0 round 12px)",
+              to: "inset(0% 0 0 0 round 12px)",
+              delay: 0.46,
+            } /* card 4: btm→top     */,
           ];
           let fired = false;
           const wipeObs = new IntersectionObserver(
@@ -8056,19 +8133,29 @@
                 gsap.fromTo(
                   card,
                   { clipPath: w.from, opacity: 1 },
-                  { clipPath: w.to, duration: 1.05, delay: w.delay, ease: "power2.inOut" }
+                  {
+                    clipPath: w.to,
+                    duration: 1.05,
+                    delay: w.delay,
+                    ease: "power2.inOut",
+                  },
                 );
                 /* cinematic zoom-out on inner image */
                 if (img) {
                   gsap.fromTo(
                     img,
                     { scale: 1.15 },
-                    { scale: 1, duration: 1.3, delay: w.delay, ease: "power2.out" }
+                    {
+                      scale: 1,
+                      duration: 1.3,
+                      delay: w.delay,
+                      ease: "power2.out",
+                    },
                   );
                 }
               });
             },
-            { threshold: 0.12 }
+            { threshold: 0.12 },
           );
           wipeObs.observe(grid);
         })();
@@ -8202,6 +8289,26 @@
           el.dataset.locDelay = i * 0.07;
           locObs.observe(el);
         });
+
+        /* ── Ambient background swap on card hover ── */
+        const ambientEl = document.getElementById("locAmbient");
+        if (ambientEl) {
+          let fadeTimer = null;
+          document.querySelectorAll(".loc-card").forEach((card) => {
+            const img = card.querySelector(".loc-card__img");
+            if (!img) return;
+            card.addEventListener("mouseenter", () => {
+              clearTimeout(fadeTimer);
+              ambientEl.style.backgroundImage = `url(${img.src})`;
+              ambientEl.classList.add("is-active");
+            });
+            card.addEventListener("mouseleave", () => {
+              fadeTimer = setTimeout(() => {
+                ambientEl.classList.remove("is-active");
+              }, 200);
+            });
+          });
+        }
 
         /* Init */
         updateProgress();

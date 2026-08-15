@@ -112,6 +112,7 @@
         list-style: none;
       }
       .navbar__nav a {
+        font-family: var(--font-body-ltr);
         font-size: 12px;
         font-weight: 600;
         letter-spacing: 0.18em;
@@ -203,21 +204,18 @@
         box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.05);
         color: var(--gold-dk);
       }
-        color: var(--gold-dk);
-      }
       .btn-pill--outline:hover {
         background: rgba(255, 255, 255, 0.65);
         box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.07);
         border-color: rgba(255, 255, 255, 0.8);
       }
 
-      /* size tweak for navbar */        border-color: rgba(255, 255, 255, 0.8);
-      }
-
       /* size tweak for navbar */
       .navbar__actions .btn-pill {
         font-size: 11px;
-        padding: 9px 20px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        padding: 8px 20px;
       }
 
       /* ── RTL / Arabic base ── */
@@ -2105,7 +2103,7 @@
           grid-template-columns: repeat(2, 1fr);
         }
       }
-      @media (max-width: 700px) {
+      @media (max-width: 768px) {
         .listings-grid {
           grid-template-columns: 1fr;
         }
@@ -2162,6 +2160,106 @@
           height: 220px;
         }
       }
+
+      /* ─── HAMBURGER + MOBILE NAV ─── */
+      .nav-hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 36px;
+        height: 36px;
+        padding: 6px;
+        cursor: pointer;
+        flex-shrink: 0;
+        border: none;
+        background: none;
+      }
+      .nav-hamburger__bar {
+        display: block;
+        width: 22px;
+        height: 1.5px;
+        background: #fff;
+        border-radius: 2px;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        pointer-events: none;
+      }
+      .nav-hamburger.is-open .nav-hamburger__bar:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+      .nav-hamburger.is-open .nav-hamburger__bar:nth-child(2) { opacity: 0; }
+      .nav-hamburger.is-open .nav-hamburger__bar:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+      .mobile-nav {
+        position: fixed;
+        inset: 0;
+        z-index: 199;
+        display: flex;
+        flex-direction: column;
+        background: rgba(8, 8, 8, 0.97);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: calc(var(--nav-h) + 24px) 32px 48px;
+        transform: translateX(100%);
+        transition: transform 0.38s cubic-bezier(0.32,0,0.15,1);
+        overflow-y: auto;
+        pointer-events: none;
+      }
+      [dir="rtl"] .mobile-nav { transform: translateX(-100%); }
+      .mobile-nav.is-open { transform: translateX(0); pointer-events: auto; }
+      [dir="rtl"] .mobile-nav.is-open { transform: translateX(0); }
+      .mobile-nav__list { list-style: none; display: flex; flex-direction: column; gap: 0; margin-bottom: 32px; }
+      .mobile-nav__list li a {
+        display: block;
+        font-size: 28px;
+        font-weight: 300;
+        color: rgba(255,255,255,0.85);
+        letter-spacing: -0.01em;
+        padding: 16px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+        transition: color 0.2s;
+        font-family: var(--font-body, "Archivo", sans-serif);
+        text-decoration: none;
+      }
+      [dir="rtl"] .mobile-nav__list li a { font-family: var(--font-body-rtl, "Noto Kufi Arabic", sans-serif); }
+      .mobile-nav__list li a:hover, .mobile-nav__list li a.active { color: var(--gold); }
+      .mobile-nav__cta { margin-top: auto; }
+      .mobile-nav__cta button {
+        width: 100%;
+        padding: 15px 24px;
+        border-radius: 100px;
+        background: var(--gold);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        transition: opacity 0.2s;
+      }
+      .mobile-nav__cta button:hover { opacity: 0.85; }
+
+      @media (max-width: 700px) {
+        .nav-hamburger { display: flex; }
+        .navbar__nav, .navbar__sep, .navbar__actions { display: none; }
+        /* Hero count */
+        .page-hero__count { font-size: 40px; }
+        /* Footer stats */
+        .site-footer__stat-n { font-size: 24px; }
+        /* Compare bar */
+        .cmp-bar { right: 16px; bottom: 16px; left: 16px; }
+        .cmp-bar__toggle { justify-content: center; }
+        .cmp-bar__panel { width: 100%; }
+        /* Sort select */
+        .sort-sel .csel__trigger { min-width: 100px; }
+        /* Advanced filter inner */
+        .adv-panel__inner { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 480px) {
+        .page-hero__title { font-size: clamp(28px, 8vw, 48px); }
+        .page-hero__count { font-size: 32px; }
+        .site-footer__stat-n { font-size: 20px; }
+        .prop-card__price { font-size: 18px; }
+      }
     </style>
   </head>
   <body>
@@ -2169,7 +2267,7 @@
     <nav class="navbar" role="navigation" aria-label="Main navigation">
       <a href="index.html" class="navbar__logo" aria-label="Akar Town — Home">
         <svg
-          width="180"
+          width="230"
           viewBox="0 0 2185 380"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -2247,7 +2345,35 @@
           <span class="lang-toggle__ar">عر</span>
         </div>
       </div>
+      <button
+        class="nav-hamburger"
+        id="navHamburger"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+      >
+        <span class="nav-hamburger__bar"></span>
+        <span class="nav-hamburger__bar"></span>
+        <span class="nav-hamburger__bar"></span>
+      </button>
     </nav>
+
+    <!-- Mobile nav drawer -->
+    <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+      <ul class="mobile-nav__list">
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li>
+          <a href="listings.html" class="active" data-i18n="nav.properties"
+            >Properties</a
+          >
+        </li>
+        <li><a href="#" data-i18n="nav.projects">Projects</a></li>
+        <li><a href="#" data-i18n="nav.about">About</a></li>
+        <li><a href="#" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <div class="mobile-nav__cta">
+        <button data-i18n="nav.cta">Get in Touch</button>
+      </div>
+    </div>
 
     <!-- PAGE HEADER -->
     <div class="page-hero">
@@ -4337,6 +4463,29 @@
             }
           });
         }
+      })();
+
+      // Mobile nav
+      (() => {
+        const ham = document.getElementById("navHamburger");
+        const mob = document.getElementById("mobileNav");
+        if (!ham || !mob) return;
+        ham.addEventListener("click", () => {
+          const open = ham.classList.toggle("is-open");
+          mob.classList.toggle("is-open", open);
+          ham.setAttribute("aria-expanded", open);
+          mob.setAttribute("aria-hidden", !open);
+          document.body.style.overflow = open ? "hidden" : "";
+        });
+        mob.querySelectorAll("a").forEach((a) =>
+          a.addEventListener("click", () => {
+            ham.classList.remove("is-open");
+            mob.classList.remove("is-open");
+            ham.setAttribute("aria-expanded", "false");
+            mob.setAttribute("aria-hidden", "true");
+            document.body.style.overflow = "";
+          }),
+        );
       })();
     </script>
   </body>

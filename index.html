@@ -1284,7 +1284,7 @@
           bottom: calc(90px + 24px);
         }
         .hero__glass-tag {
-          top: 14px;
+          top: calc(var(--nav-h) + 12px);
           right: 16px;
         }
       }
@@ -4218,6 +4218,196 @@
           margin-bottom: 36px;
         }
       }
+      /* ─── HAMBURGER + MOBILE NAV ─── */
+      .nav-hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 36px;
+        height: 36px;
+        padding: 6px;
+        cursor: pointer;
+        flex-shrink: 0;
+        z-index: 10;
+        border: none;
+        background: none;
+      }
+      .nav-hamburger__bar {
+        display: block;
+        width: 22px;
+        height: 1.5px;
+        background: #fff;
+        border-radius: 2px;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        pointer-events: none;
+      }
+      .nav-hamburger.is-open .nav-hamburger__bar:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+      .nav-hamburger.is-open .nav-hamburger__bar:nth-child(2) { opacity: 0; }
+      .nav-hamburger.is-open .nav-hamburger__bar:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+      .mobile-nav {
+        position: fixed;
+        inset: 0;
+        z-index: 199;
+        display: flex;
+        flex-direction: column;
+        background: rgba(8, 8, 8, 0.97);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: calc(var(--nav-h) + 24px) 32px 48px;
+        transform: translateX(100%);
+        transition: transform 0.38s cubic-bezier(0.32,0,0.15,1);
+        overflow-y: auto;
+        pointer-events: none;
+      }
+      [dir="rtl"] .mobile-nav { transform: translateX(-100%); }
+      .mobile-nav.is-open { transform: translateX(0); pointer-events: auto; }
+      [dir="rtl"] .mobile-nav.is-open { transform: translateX(0); }
+      .mobile-nav__list { list-style: none; display: flex; flex-direction: column; gap: 0; margin-bottom: 32px; }
+      .mobile-nav__list li a {
+        display: block;
+        font-size: 28px;
+        font-weight: 300;
+        color: rgba(255,255,255,0.85);
+        letter-spacing: -0.01em;
+        padding: 16px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+        transition: color 0.2s;
+        font-family: var(--font-body-ltr, "Archivo", sans-serif);
+        text-decoration: none;
+      }
+      [dir="rtl"] .mobile-nav__list li a { font-family: var(--font-body-rtl, "Noto Kufi Arabic", sans-serif); }
+      .mobile-nav__list li a:hover, .mobile-nav__list li a.active { color: var(--gold); }
+      .mobile-nav__cta { margin-top: auto; }
+      .mobile-nav__cta button {
+        width: 100%;
+        padding: 15px 24px;
+        border-radius: 100px;
+        background: var(--gold);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        transition: opacity 0.2s;
+      }
+      .mobile-nav__cta button:hover { opacity: 0.85; }
+
+      /* ─── RESPONSIVE BREAKPOINTS ─── */
+      @media (max-width: 1024px) {
+        /* Featured Properties: collapse to single column on tablets too */
+        .prop-card { grid-template-columns: 1fr !important; gap: 0 !important; }
+        .prop-card__img-wrap { height: 380px !important; }
+        .props__vp { padding-bottom: 0 !important; margin-bottom: 0 !important; }
+        .prop-card__gallery { padding-bottom: 0 !important; }
+        .prop-card__thumbs-row {
+          position: relative !important;
+          bottom: auto !important;
+          left: auto !important;
+          width: 100% !important;
+          margin-top: 10px !important;
+          padding: 0 !important;
+        }
+        .prop-card__info { padding-top: 24px !important; }
+      }
+      @media (max-width: 900px) {
+        .props__wrap { padding-left: 24px; padding-right: 24px; }
+        .pgal__wrap { padding-left: 24px; padding-right: 24px; }
+        .why__wrap { padding-left: 24px; padding-right: 24px; }
+        /* Why stats 4→2 */
+        .why__stats { grid-template-columns: repeat(2, 1fr); }
+        /* Why stages: hide SVG path, reset ALL explicit grid placements */
+        .why__path-svg { display: none; }
+        .why__stages {
+          grid-template-columns: repeat(2, 1fr) !important;
+          grid-template-rows: auto !important;
+          min-height: auto !important;
+          gap: 40px 24px !important;
+        }
+        /* Reset explicit column/row on every stage so grid auto-places them */
+        .why__stage,
+        .why__stage:nth-child(1),
+        .why__stage:nth-child(2),
+        .why__stage:nth-child(3),
+        .why__stage:nth-child(4) {
+          grid-column: auto !important;
+          grid-row: auto !important;
+          padding: 0 16px !important;
+          justify-content: flex-start !important;
+        }
+        .why__stage--top { padding-bottom: 0 !important; }
+        .why__stage--bottom { padding-top: 0 !important; }
+        /* Gallery 3→2 */
+        .pgal__grid { grid-template-columns: repeat(2, 1fr) !important; }
+        .pgal__grid > * { grid-column: auto !important; grid-row: auto !important; }
+        .pgal__item:nth-child(n) { aspect-ratio: 4/3; }
+      }
+      @media (max-width: 768px) {
+        .nav-hamburger { display: flex; }
+        .navbar__nav, .navbar__sep, .navbar__actions { display: none; }
+
+        /* ── Featured Properties ── */
+        /* Stack to single column */
+        .prop-card { grid-template-columns: 1fr !important; gap: 0 !important; }
+        /* Shrink image */
+        .prop-card__img-wrap { height: 280px !important; }
+        /* Remove the extra room made for the floating thumb strip */
+        .props__vp { padding-bottom: 0 !important; margin-bottom: 0 !important; }
+        .prop-card__gallery { padding-bottom: 0 !important; }
+        /* Reset thumb strip from absolute to in-flow below the image */
+        .prop-card__thumbs-row {
+          position: relative !important;
+          bottom: auto !important;
+          left: auto !important;
+          width: 100% !important;
+          margin-top: 10px !important;
+          padding: 0 !important;
+        }
+        /* Info panel padding */
+        .prop-card__info { padding-top: 24px !important; }
+        /* Price row: stack on very small screens */
+        .prop-price-row { flex-wrap: wrap; gap: 12px; }
+        /* Header */
+        .props__wrap { padding-left: 20px; padding-right: 20px; }
+        .props__header { flex-direction: column; gap: 16px; }
+        .props__count { display: none; }
+        /* Props separator line */
+        .props::before { left: 20px; right: 20px; }
+
+        .pgal__wrap { padding-left: 20px; padding-right: 20px; }
+        .why__wrap { padding-left: 20px; padding-right: 20px; }
+
+        /* Footer stats reduce */
+        .site-footer__stat-n { font-size: 24px; }
+        /* Compare bar: full width bottom bar on mobile */
+        .cmp-bar { right: 16px; bottom: 16px; left: 16px; }
+        .cmp-bar__toggle { justify-content: center; }
+        .cmp-bar__panel { width: 100%; }
+      }
+      @media (max-width: 480px) {
+        /* Why stats → 2 col (keep), stages → 1 col */
+        .why__stages { grid-template-columns: 1fr !important; gap: 36px !important; }
+        .why__stage,
+        .why__stage:nth-child(1),
+        .why__stage:nth-child(2),
+        .why__stage:nth-child(3),
+        .why__stage:nth-child(4) {
+          grid-column: auto !important;
+          grid-row: auto !important;
+          padding: 0 24px !important;
+          align-items: center !important;
+          text-align: center !important;
+        }
+        .why__stage-illus { width: 80px; height: 66px; margin-bottom: 14px; }
+        /* Gallery → 1 col */
+        .pgal__grid { grid-template-columns: 1fr !important; }
+        .site-footer__stat-n { font-size: 20px; }
+        .why__title { font-size: 32px; }
+        .props__title { font-size: clamp(28px, 8vw, 48px); }
+      }
     </style>
   </head>
   <body>
@@ -4457,7 +4647,26 @@
           <span class="lang-toggle__ar">عر</span>
         </div>
       </div>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="nav-hamburger__bar"></span>
+        <span class="nav-hamburger__bar"></span>
+        <span class="nav-hamburger__bar"></span>
+      </button>
     </nav>
+
+    <!-- Mobile nav drawer -->
+    <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+      <ul class="mobile-nav__list">
+        <li><a href="index.html" class="active" data-i18n="nav.home">Home</a></li>
+        <li><a href="listings.html" data-i18n="nav.properties">Properties</a></li>
+        <li><a href="#" data-i18n="nav.projects">Projects</a></li>
+        <li><a href="#" data-i18n="nav.about">About</a></li>
+        <li><a href="#" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <div class="mobile-nav__cta">
+        <button data-i18n="nav.cta">Get in Touch</button>
+      </div>
+    </div>
 
     <!-- ─── HERO ─── -->
     <section
@@ -6925,6 +7134,27 @@
           nav.classList.toggle("is-scrolled", window.scrollY > 40);
         window.addEventListener("scroll", onScroll, { passive: true });
         onScroll();
+      })();
+
+      // Mobile nav
+      (() => {
+        const ham = document.getElementById("navHamburger");
+        const mob = document.getElementById("mobileNav");
+        if (!ham || !mob) return;
+        ham.addEventListener("click", () => {
+          const open = ham.classList.toggle("is-open");
+          mob.classList.toggle("is-open", open);
+          ham.setAttribute("aria-expanded", open);
+          mob.setAttribute("aria-hidden", !open);
+          document.body.style.overflow = open ? "hidden" : "";
+        });
+        mob.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+          ham.classList.remove("is-open");
+          mob.classList.remove("is-open");
+          ham.setAttribute("aria-expanded", "false");
+          mob.setAttribute("aria-hidden", "true");
+          document.body.style.overflow = "";
+        }));
       })();
     </script>
 

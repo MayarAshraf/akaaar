@@ -4408,64 +4408,6 @@
         .why__title { font-size: 32px; }
         .props__title { font-size: clamp(28px, 8vw, 48px); }
       }
-
-
-      /* ── WebGL canvas ──────────────────────────────────────── */
-      #slider {
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-        pointer-events: none;
-      }
-      .hero.has-webgl .slide-bg { display: none !important; }
-      .hero.has-webgl .hero__stage { isolation: isolate; }
-      .hero.has-webgl .hero__stage::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        z-index: 2;
-        background:
-          linear-gradient(105deg, rgba(5,5,5,0.72) 0%, rgba(5,5,5,0.38) 44%, rgba(5,5,5,0.08) 75%, rgba(5,5,5,0) 100%),
-          linear-gradient(180deg, rgba(5,5,5,0.45) 0%, rgba(5,5,5,0) 22%),
-          linear-gradient(0deg, rgba(5,5,5,0.55) 0%, rgba(5,5,5,0) 40%);
-      }
-      .hero.has-webgl .slide-overlay { display: none !important; }
-
-      /* ── Preview deck ──────────────────────────────────────── */
-      .hero__previews {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        z-index: 10;
-        overflow: hidden;
-      }
-      .hero-preview {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 108px;
-        aspect-ratio: 3/2;
-        border-radius: 4px;
-        overflow: hidden;
-        pointer-events: none;
-        will-change: transform, opacity;
-        transform-origin: 50% 50%;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.35);
-      }
-      .hero-preview img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
-      .hero-preview.is-active {
-        box-shadow: 0 4px 24px rgba(0,0,0,0.5);
-      }
-      .hero-preview.is-focused {
-        outline: 2px solid #fff;
-        outline-offset: 2px;
-      }
     </style>
   </head>
   <body>
@@ -4732,8 +4674,6 @@
       aria-label="Featured luxury properties"
       aria-roledescription="carousel"
     >
-      <!-- Floating preview deck -->
-      <div class="hero__previews" id="hero-previews" aria-hidden="true"></div>
       <!-- Thumbnails -->
       <aside
         class="hero__thumbs"
@@ -4746,8 +4686,6 @@
 
       <!-- Stage -->
       <div class="hero__stage" id="heroStage">
-        <!-- WebGL background canvas -->
-        <div id="slider" data-displacement="disp1.jpg" aria-hidden="true"></div>
         <!-- Swiper -->
         <div class="swiper" id="heroSwiper" aria-live="off">
           <div class="swiper-wrapper" id="swiperWrapper">
@@ -6404,20 +6342,15 @@
     </div>
 
     <!-- ─── SCRIPTS ─── -->
-    <script type="importmap">
-      { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.162.0/+esm" } }
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/CustomEase.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-    <script type="module">
-      import * as THREE from "three";
-      const gsap = window.gsap;
-
-      /* ════════════════════════════════════
-   HERO SLIDES DATA
-═════════════════════════════════════ */
+    <script>
+      /* ══════════════════════════════════════════════
+   AKAR TOWN — HERO SLIDER
+   Swiper.js + GSAP | Magazine Page Curl
+══════════════════════════════════════════════ */
 
       CustomEase.create("text.in", "0.16, 1, 0.3, 1");
       CustomEase.create("smooth", "0.76, 0, 0.24, 1");
@@ -6510,18 +6443,16 @@
       ];
 
       const AUTOPLAY_MS = 4500;
+      const CURL_MS = 1080;
       const REDUCED = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       ).matches;
 
       let activeIdx = 0;
-      let prevIdx = 0;
       let isAnimating = false;
       let autoTimer = null;
       let progTween = null;
       let swiper = null;
-      let sketch = null;
-      let previews = null;
 
       const thumbsWrap = document.getElementById("heroThumbs");
       const swiperWrap = document.getElementById("swiperWrapper");
@@ -6729,15 +6660,251 @@
       }
 
       /* ════════════════════════════════════
+   MAGAZINE PAGE CURL TRANSITION
+
+   Four visual layers (back to front):
+   z=1  toSlide   — incoming slide, full width, revealed underneath
+   z=2  fromSlide — clipped CSS polygon to the "flat" area not yet peeled
+   z=3  curlBack  — papery back-of-page visible as the leaf curls over
+   z=4  canvas    — frame-accurate soft shadow + specular crease highlight
+
+   The fold line is intentionally diagonal: bottom-right corner leads on a
+   forward turn, top-right corner leads on reverse, matching the physics of
+   a thick glossy magazine page being turned from a corner outward.
+═════════════════════════════════════ */
+      function doPageCurl(fromIdx, toIdx, forward) {
+        const fromSlide = getSlide(fromIdx);
+        const toSlide = getSlide(toIdx);
+        if (!fromSlide || !toSlide) return;
+
+        const heroStage = document.getElementById("heroStage");
+        let W = heroStage.offsetWidth;
+        let H = heroStage.offsetHeight;
+
+        /* Layer order */
+        gsap.set(toSlide, {
+          zIndex: 1,
+          display: "block",
+          visibility: "visible",
+        });
+        gsap.set(fromSlide, { zIndex: 2 });
+
+        /* Back-of-page element — warm paper tone, bright specular near the crease */
+        const curlBack = document.createElement("div");
+        curlBack.setAttribute("aria-hidden", "true");
+        curlBack.style.cssText =
+          "position:absolute;inset:0;z-index:3;pointer-events:none;will-change:clip-path,background;";
+        heroStage.appendChild(curlBack);
+
+        /* Canvas for shadow cast on toSlide + specular crease line */
+        const cnv = document.createElement("canvas");
+        cnv.setAttribute("aria-hidden", "true");
+        cnv.width = W;
+        cnv.height = H;
+        cnv.style.cssText =
+          "position:absolute;inset:0;z-index:4;pointer-events:none;";
+        heroStage.appendChild(cnv);
+        const ctx = cnv.getContext("2d");
+
+        /* Preload next image while animating */
+        new Image().src = SLIDES[(toIdx + 1) % SLIDES.length].image;
+
+        const state = { p: 0 };
+
+        const tl = gsap.timeline({
+          onComplete() {
+            cnv.remove();
+            curlBack.remove();
+            fromSlide.style.clipPath = "";
+            fromSlide.style.transform = "";
+            gsap.set(fromSlide, {
+              display: "none",
+              visibility: "hidden",
+              zIndex: 0,
+            });
+            gsap.set(toSlide, { zIndex: 2 });
+            isAnimating = false;
+            textIn(toSlide);
+            startAutoplay();
+          },
+        });
+
+        if (REDUCED) {
+          gsap.set(toSlide, { opacity: 0 });
+          tl.to(fromSlide, { opacity: 0, duration: 0.4 })
+            .to(toSlide, { opacity: 1, duration: 0.4 }, 0)
+            .add(() => gsap.set(fromSlide, { opacity: 1 }));
+          return;
+        }
+
+        tl.to(state, {
+          p: 1,
+          duration: CURL_MS / 1000,
+          /* slow corner-peel → fast sweep → gentle settle */
+          ease: "power3.inOut",
+          onUpdate() {
+            renderFrame(state.p);
+          },
+        });
+
+        /* ── Fold geometry ──────────────────────────────────────────────────────
+     Larger bow (0.20×W) gives a pronounced diagonal — the corner visibly
+     leads the rest of the leaf, matching the physics of a stiff magazine page.
+  ──────────────────────────────────────────────────────────────────────── */
+        function getFold(p) {
+          const center = forward ? W * (1 - p) : W * p;
+          const bow = Math.sin(p * Math.PI) * W * 0.2;
+          const topX = forward
+            ? Math.max(0, center + bow * 0.62)
+            : Math.min(W, center - bow * 0.62);
+          const bottomX = forward
+            ? Math.max(0, center - bow * 0.55)
+            : Math.min(W, center + bow * 0.55);
+          return { topX, bottomX };
+        }
+
+        /* ── Master render ──────────────────────────────────────────────────── */
+        function renderFrame(p) {
+          W = heroStage.offsetWidth;
+          H = heroStage.offsetHeight;
+          if (cnv.width !== W || cnv.height !== H) {
+            cnv.width = W;
+            cnv.height = H;
+          } else {
+            ctx.clearRect(0, 0, W, H);
+          }
+
+          const pk = Math.sin(p * Math.PI);
+          const { topX, bottomX } = getFold(p);
+
+          /* fromSlide: clip to the flat region + subtle bow warp */
+          if (forward) {
+            fromSlide.style.clipPath = `polygon(0 0,${topX}px 0,${bottomX}px 100%,0 100%)`;
+            fromSlide.style.transform = `perspective(2800px) rotateY(${pk * 3.2}deg)`;
+            fromSlide.style.transformOrigin = "left center";
+          } else {
+            fromSlide.style.clipPath = `polygon(${topX}px 0,100% 0,100% 100%,${bottomX}px 100%)`;
+            fromSlide.style.transform = `perspective(2800px) rotateY(${-pk * 3.2}deg)`;
+            fromSlide.style.transformOrigin = "right center";
+          }
+
+          /* curlBack: warm dark shadow — peaks at 0.52 alpha so the hero image
+             bleeds through and gives weight instead of a blinding white flash   */
+          const sa = (0.1 + pk * 0.42).toFixed(3);
+          if (forward) {
+            curlBack.style.clipPath = `polygon(${topX}px 0,100% 0,100% 100%,${bottomX}px 100%)`;
+            curlBack.style.background = `linear-gradient(to right,
+        rgba(210,195,178,${sa})  0%,
+        rgba(175,162,145,0.32)  24%,
+        rgba(140,130,116,0.18)  55%,
+        rgba(100,92,80,0.07)    80%,
+        rgba(60,55,48,0.02)    100%)`;
+          } else {
+            curlBack.style.clipPath = `polygon(0 0,${topX}px 0,${bottomX}px 100%,0 100%)`;
+            curlBack.style.background = `linear-gradient(to left,
+        rgba(210,195,178,${sa})  0%,
+        rgba(175,162,145,0.32)  24%,
+        rgba(140,130,116,0.18)  55%,
+        rgba(100,92,80,0.07)    80%,
+        rgba(60,55,48,0.02)    100%)`;
+          }
+
+          drawShadow(p, pk, topX, bottomX);
+          drawSpecular(p, pk, topX, bottomX);
+          drawPageEdge(pk, topX, bottomX);
+        }
+
+        /* Deep shadow on the revealed slide — wider band, steeper gradient */
+        function drawShadow(p, pk, topX, bottomX) {
+          const sw = Math.round(W * 0.13);
+          const leadX = forward
+            ? Math.min(topX, bottomX)
+            : Math.max(topX, bottomX);
+          const x0 = forward ? leadX : leadX - sw;
+          const x1 = forward ? leadX + sw : leadX;
+          const g = ctx.createLinearGradient(x0, 0, x1, 0);
+          g.addColorStop(0, `rgba(0,0,0,${(pk * 0.75).toFixed(3)})`);
+          g.addColorStop(0.15, `rgba(0,0,0,${(pk * 0.44).toFixed(3)})`);
+          g.addColorStop(0.5, `rgba(0,0,0,${(pk * 0.15).toFixed(3)})`);
+          g.addColorStop(1, "rgba(0,0,0,0)");
+          ctx.fillStyle = g;
+          ctx.fillRect(Math.min(x0, x1), 0, sw, H);
+        }
+
+        /* Specular strip on the flat page just before the crease */
+        function drawSpecular(p, pk, topX, bottomX) {
+          const sw = 16;
+          ctx.save();
+          ctx.beginPath();
+          if (forward) {
+            ctx.moveTo(topX, 0);
+            ctx.lineTo(topX - sw, 0);
+            ctx.lineTo(bottomX - sw, H);
+            ctx.lineTo(bottomX, H);
+          } else {
+            ctx.moveTo(topX, 0);
+            ctx.lineTo(topX + sw, 0);
+            ctx.lineTo(bottomX + sw, H);
+            ctx.lineTo(bottomX, H);
+          }
+          ctx.closePath();
+          ctx.clip();
+          const x0 = forward ? topX : topX + sw;
+          const x1 = forward ? topX - sw : topX;
+          const g = ctx.createLinearGradient(x0, 0, x1, 0);
+          g.addColorStop(0, `rgba(255,255,255,${(pk * 0.48).toFixed(3)})`);
+          g.addColorStop(0.45, `rgba(255,255,255,${(pk * 0.14).toFixed(3)})`);
+          g.addColorStop(1, "rgba(255,255,255,0)");
+          ctx.fillStyle = g;
+          ctx.fillRect(0, 0, W, H);
+          ctx.restore();
+
+          /* hairline crease */
+          ctx.save();
+          ctx.beginPath();
+          ctx.moveTo(topX, 0);
+          ctx.lineTo(bottomX, H);
+          ctx.strokeStyle = `rgba(255,255,255,${(pk * 0.38).toFixed(3)})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+          ctx.restore();
+        }
+
+        /* Dark stripe at the fold line — simulates physical page thickness/edge */
+        function drawPageEdge(pk, topX, bottomX) {
+          const ew = 2 + pk * 4;
+          ctx.save();
+          ctx.beginPath();
+          if (forward) {
+            ctx.moveTo(topX, 0);
+            ctx.lineTo(topX + ew, 0);
+            ctx.lineTo(bottomX + ew, H);
+            ctx.lineTo(bottomX, H);
+          } else {
+            ctx.moveTo(topX, 0);
+            ctx.lineTo(topX - ew, 0);
+            ctx.lineTo(bottomX - ew, H);
+            ctx.lineTo(bottomX, H);
+          }
+          ctx.closePath();
+          ctx.fillStyle = `rgba(20,14,8,${(pk * 0.6).toFixed(3)})`;
+          ctx.fill();
+          ctx.restore();
+        }
+      }
+
+      /* ════════════════════════════════════
    NAVIGATE
-   direction: +1.0 = forward (right→left), -1.0 = backward (left→right)
+   forward: true  = next (curl right→left)
+            false = prev  (curl left→right)
+            null  = infer from index delta
 ═════════════════════════════════════ */
       function navigate(toIdx, fromExternal = false, forward = null) {
-        if (sketch.isRunning || toIdx === activeIdx) return;
+        if (isAnimating || toIdx === activeIdx) return;
+        isAnimating = true;
 
         const fromIdx = activeIdx;
         activeIdx = toIdx;
-        prevIdx = fromIdx;
         const goForward = forward !== null ? forward : toIdx > fromIdx;
 
         const fromThumb = getThumb(fromIdx);
@@ -6764,20 +6931,12 @@
         }
 
         setProgress(toIdx);
-        announce(`Showing ${SLIDES[toIdx].title}, property ${toIdx + 1} of ${SLIDES.length}`);
-
+        announce(
+          `Showing ${SLIDES[toIdx].title}, property ${toIdx + 1} of ${SLIDES.length}`,
+        );
         if (swiper && !fromExternal) swiper.slideTo(toIdx, 0, false);
         clearAutoplay();
-
-        // make the incoming slide's content node visible (content is hidden until textIn)
-        const fromSlide = getSlide(fromIdx);
-        const toSlide = getSlide(toIdx);
-        if (toSlide) gsap.set(toSlide, { display: "block", visibility: "visible", zIndex: 3 });
-
-        // fade the current content out before the wipe arrives
-        if (fromSlide) textOut(fromSlide);
-
-        sketch.moveTo(toIdx, goForward ? 1.0 : -1.0);
+        doPageCurl(fromIdx, toIdx, goForward);
       }
 
       /* ════════════════════════════════════
@@ -6796,7 +6955,7 @@
               sw.slides.forEach((sl, i) => {
                 if (i === 0)
                   gsap.set(sl, {
-                    zIndex: 4,
+                    zIndex: 2,
                     display: "block",
                     visibility: "visible",
                   });
@@ -6809,10 +6968,10 @@
               });
             },
             slideChangeTransitionStart(sw) {
-              if (!sketch?.isRunning) navigate(sw.activeIndex, true, null);
+              if (!isAnimating) navigate(sw.activeIndex, true, null);
             },
             setTranslate(sw, translate) {
-              if (sketch?.isRunning) return;
+              if (isAnimating) return;
               const sl = sw.slides[activeIdx];
               if (sl) {
                 const bg = sl.querySelector(".slide-bg");
@@ -6911,10 +7070,8 @@
 
         if (firstSlide) {
           const bg = firstSlide.querySelector(".slide-bg");
-          if (bg) {
-            gsap.set(bg, { scale: 1.08 });
-            tl.to(bg, { scale: 1, duration: 1.6, ease: "smooth" }, 0.3);
-          }
+          gsap.set(bg, { scale: 1.08 });
+          tl.to(bg, { scale: 1, duration: 1.6, ease: "smooth" }, 0.3);
         }
 
         gsap.set(thumbItems, { x: -20, opacity: 0 });
@@ -6926,7 +7083,11 @@
 
         if (glassTag) {
           gsap.set(glassTag, { y: -10, opacity: 0 });
-          tl.to(glassTag, { y: 0, opacity: 1, duration: 0.6, ease: "smooth" }, 0.8);
+          tl.to(
+            glassTag,
+            { y: 0, opacity: 1, duration: 0.6, ease: "smooth" },
+            0.8,
+          );
         }
 
         const progEls = [progCurrent, progFill.parentElement, progTotal];
@@ -6937,11 +7098,15 @@
         gsap.set(navBtns, { scale: 0.8, opacity: 0 });
         tl.to(
           navBtns,
-          { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.4)", stagger: 0.1 },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 0.5,
+            ease: "back.out(1.4)",
+            stagger: 0.1,
+          },
           1.0,
         );
-
-        // preview deck starts hidden — appears only on mousemove over the hero
       }
 
       /* ════════════════════════════════════
@@ -6952,638 +7117,8 @@
         progTotal.textContent = String(SLIDES.length).padStart(2, "0");
         setProgress(0);
         initSwiper();
-
-        const heroEl = document.querySelector(".hero");
-        const sliderEl = document.getElementById("slider");
-        if (sliderEl) {
-          sketch = new HeroSketch({
-            container: sliderEl,
-            images: SLIDES.map((s) => s.image),
-            displacement: sliderEl.dataset.displacement || "disp1.jpg",
-            onNavigate: () => {},
-            onReveal: (index) => {
-              const fromSlide = getSlide(prevIdx);
-              const toSlide = getSlide(index);
-              if (fromSlide && fromSlide !== toSlide) {
-                gsap.set(fromSlide, { display: "none", visibility: "hidden", zIndex: 0 });
-              }
-              if (toSlide) {
-                gsap.set(toSlide, { zIndex: 4 });
-                textIn(toSlide);
-              }
-              startAutoplay();
-              previews?.setActive(index);
-            },
-          });
-          await sketch.load();
-          if (!sketch.noWebGL) {
-            heroEl?.classList.add("has-webgl");
-            sketch.play();
-          }
-        }
-
-        // Cursor-following preview deck
-        const heroLayer = document.getElementById("hero-previews");
-        const thumbItems = [...document.querySelectorAll(".thumb-item")];
-        const heroControls = document.querySelector(".hero__controls");
-        if (heroEl && heroLayer && thumbItems.length) {
-          previews = new HeroPreviews({
-            root: heroEl,
-            layer: heroLayer,
-            slots: thumbItems,
-            restZones: [thumbsWrap, heroControls],
-            focusZone: thumbsWrap,
-            slides: SLIDES,
-            onCover: null,
-          });
-          previews.init();
-        }
-
         await runLoader();
         entryAnimation();
-      }
-
-      /* ═══════════════════════════════════════════════════════════
-         HeroSketch — WebGL liquid-wipe transition engine
-         ═══════════════════════════════════════════════════════════ */
-
-      const fragmentShader = `
-        uniform float time;
-        uniform float progress;
-        uniform float intensity;
-        uniform float skew;
-        uniform float frequency;
-        uniform float direction;
-        uniform sampler2D texture1;
-        uniform sampler2D texture2;
-        uniform sampler2D displacement;
-        uniform vec4 resolution;
-        varying vec2 vUv;
-        const float PI = 3.1415926535;
-        void main() {
-          vec2 uv = (vUv - vec2(0.5)) * resolution.zw + vec2(0.5);
-          float waveAmp = sin(progress * PI);
-          vec2 noiseUv = uv * vec2(1.0, 1.4) + vec2(time * 0.1, 0.0);
-          float noise = texture2D(displacement, noiseUv).r - 0.5;
-          float ux = 0.5 + (uv.x - 0.5) * direction;
-          float diag = (uv.y - 0.5) * skew;
-          float wobble = sin(uv.y * frequency + time * 0.6 + progress * PI * 2.0) * 0.04 * waveAmp;
-          float seam = mix(1.15, -0.15, progress) + diag + wobble;
-          float dist = ux - seam;
-          float band = 0.07 + 0.03 * intensity;
-          float pull = exp(-pow(dist / band, 2.0)) * waveAmp * intensity;
-          vec2 uv1 = uv;
-          uv1.x += pull * 0.16 * direction;
-          uv1.y += noise * pull * 0.5;
-          vec2 uv2 = uv;
-          uv2.x -= pull * 0.08 * direction;
-          uv2.y += noise * pull * 0.5;
-          vec4 col1 = texture2D(texture1, uv1);
-          vec4 col2 = texture2D(texture2, uv2);
-          float mixFactor = smoothstep(-band, band, dist);
-          vec4 color = mix(col1, col2, mixFactor);
-          color.rgb += pull * 0.12;
-          gl_FragColor = color;
-        }
-      `;
-
-      const vertexShader = `
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-      `;
-
-      const REVEAL_AT = 0.62;
-      const TRANSITION = {
-        duration: 1.3,
-        easing: "power2.inOut",
-        intensity: 1,
-        skew: 0.18,
-        frequency: 6,
-      };
-
-      class HeroSketch {
-        constructor({ container, images, displacement, onNavigate, onReveal }) {
-          this.container = container;
-          this.images = images;
-          this.displacement = displacement;
-          this.onNavigate = onNavigate || (() => {});
-          this.onReveal = onReveal || (() => {});
-          this.scene = new THREE.Scene();
-          this.noWebGL = false;
-
-          const _tc = document.createElement("canvas");
-          const _tctx = _tc.getContext("webgl2") || _tc.getContext("webgl") || _tc.getContext("experimental-webgl");
-          if (!_tctx) {
-            this.noWebGL = true;
-          } else {
-            _tctx.getExtension?.("WEBGL_lose_context")?.loseContext();
-            try {
-              this.renderer = new THREE.WebGLRenderer({ antialias: false });
-              if (!this.renderer.getContext()) throw new Error("no context");
-              this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-              this.renderer.setClearColor(0x000000, 1);
-            } catch (_) {
-              this.renderer = null;
-              this.noWebGL = true;
-            }
-          }
-
-          this.width = this.container.offsetWidth;
-          this.height = this.container.offsetHeight;
-          if (!this.noWebGL) {
-            this.renderer.setSize(this.width, this.height);
-            this.container.appendChild(this.renderer.domElement);
-          }
-          this.camera = new THREE.PerspectiveCamera(70, this.width / this.height, 0.001, 1000);
-          this.camera.position.set(0, 0, 2);
-          this.time = 0;
-          this.current = 0;
-          this.textures = [];
-          this.paused = true;
-          this.isRunning = false;
-          this._onResize = this.resize.bind(this);
-          this._renderFrame = this.render.bind(this);
-        }
-
-        async load() {
-          if (this.noWebGL) {
-            this.onReveal(0);
-            return;
-          }
-
-          // crossOrigin required for external image URLs (Unsplash, etc.)
-          const loader = new THREE.TextureLoader();
-          loader.crossOrigin = "anonymous";
-
-          await Promise.all(
-            this.images.map(
-              (url, i) =>
-                new Promise((resolve) => {
-                  this.textures[i] = loader.load(url, resolve, undefined, resolve);
-                }),
-            ),
-          );
-
-          window.addEventListener("resize", this._onResize);
-          this.addObjects();
-          this.resize();
-        }
-
-        addObjects() {
-          // displacement map is local — separate loader without crossOrigin
-          const dispLoader = new THREE.TextureLoader();
-          this.material = new THREE.ShaderMaterial({
-            extensions: { derivatives: "#extension GL_OES_standard_derivatives : enable" },
-            side: THREE.DoubleSide,
-            uniforms: {
-              time:         { value: 0 },
-              progress:     { value: 0 },
-              intensity:    { value: TRANSITION.intensity },
-              skew:         { value: TRANSITION.skew },
-              frequency:    { value: TRANSITION.frequency },
-              direction:    { value: 1.0 },
-              texture1:     { value: this.textures[0] },
-              texture2:     { value: this.textures[1 % this.textures.length] },
-              displacement: { value: dispLoader.load(this.displacement) },
-              resolution:   { value: new THREE.Vector4() },
-            },
-            vertexShader,
-            fragmentShader,
-          });
-          this.geometry = new THREE.PlaneGeometry(1, 1, 2, 2);
-          this.plane = new THREE.Mesh(this.geometry, this.material);
-          this.scene.add(this.plane);
-        }
-
-        resize() {
-          if (this.noWebGL) return;
-          this.width = this.container.offsetWidth;
-          this.height = this.container.offsetHeight;
-          this.renderer.setSize(this.width, this.height);
-          this.camera.aspect = this.width / this.height;
-          const cover = this.textures[0]?.image;
-          this.imageAspect = cover?.width ? cover.height / cover.width : 9 / 16;
-          let a1, a2;
-          if (this.height / this.width > this.imageAspect) {
-            a1 = (this.width / this.height) * this.imageAspect;
-            a2 = 1;
-          } else {
-            a1 = 1;
-            a2 = this.height / this.width / this.imageAspect;
-          }
-          this.material.uniforms.resolution.value.set(this.width, this.height, a1, a2);
-          const dist = this.camera.position.z;
-          this.camera.fov = 2 * (180 / Math.PI) * Math.atan(1 / (2 * dist));
-          this.plane.scale.x = this.camera.aspect;
-          this.plane.scale.y = 1;
-          this.camera.updateProjectionMatrix();
-        }
-
-        play() {
-          if (this.noWebGL) return;
-          this.paused = false;
-          this.render();
-        }
-
-        stop() { this.paused = true; }
-
-        moveTo(index, direction) {
-          if (this.noWebGL) return;
-          if (this.isRunning || index === this.current) return;
-          this._transitionTo(index, direction);
-        }
-
-        _transitionTo(targetIndex, direction) {
-          if (this.isRunning) return;
-          this.isRunning = true;
-          this.onNavigate(targetIndex);
-
-          const targetTexture = this.textures[targetIndex];
-          this.material.uniforms.texture2.value = targetTexture;
-          this.material.uniforms.direction.value = direction;
-
-          let revealed = false;
-          const reveal = () => {
-            if (revealed) return;
-            revealed = true;
-            this.onReveal(targetIndex);
-          };
-
-          gsap.to(this.material.uniforms.progress, {
-            value: 1,
-            duration: TRANSITION.duration,
-            ease: TRANSITION.easing,
-            onUpdate: () => {
-              if (this.material.uniforms.progress.value >= REVEAL_AT) reveal();
-            },
-            onComplete: () => {
-              reveal();
-              this.current = targetIndex;
-              this.material.uniforms.texture1.value = targetTexture;
-              this.material.uniforms.progress.value = 0;
-              this.isRunning = false;
-            },
-          });
-        }
-
-        render() {
-          if (this.paused) return;
-          this.time += 0.05;
-          this.material.uniforms.time.value = this.time;
-          requestAnimationFrame(this._renderFrame);
-          this.renderer.render(this.scene, this.camera);
-        }
-
-        dispose() {
-          this.stop();
-          window.removeEventListener("resize", this._onResize);
-          if (this.noWebGL) return;
-          if (this.material?.uniforms?.progress) gsap.killTweensOf(this.material.uniforms.progress);
-          this.geometry?.dispose();
-          this.material?.uniforms?.displacement?.value?.dispose();
-          this.material?.dispose();
-          this.textures.forEach((t) => t?.dispose());
-          this.textures = [];
-          this.renderer?.dispose();
-          if (this.renderer?.domElement?.parentNode === this.container) {
-            this.container.removeChild(this.renderer.domElement);
-          }
-        }
-      }
-
-
-      /* ═══════════════════════════════════════════════════════════
-         HeroPreviews — cursor-following preview deck
-         ═══════════════════════════════════════════════════════════ */
-
-      const PREVIEW_MAX = 5;
-      const FOLLOW_LEAD = 0.17;
-      const FOLLOW_FALLOFF = 0.19;
-      const EASE_FLOOR = 0.28;
-      const DOCK_LEAD = 0.19;
-      const DOCK_FALLOFF = 0.06;
-      const OPACITY_GAIN = 1.8;
-      const FAN_X = 19;
-      const FAN_Y = 16;
-      const FAN_ROT = -1.7;
-      const FLOAT_SCALE = 0.94;
-      const FLOAT_OPACITY = 0.86;
-      const DOCK_OPACITY = 0.52;
-      const COVER_RANGE = 130;
-      const COVER_HIDE = 20;
-      const SETTLED = 0.25;
-      const ENTER = {
-        GATHER: 0.66, LIFT: 26, DEEPEN: 3, TILT: -3.2,
-        SCALE: 0.82, SHRINK: 0.03, DURATION: 0.9,
-        EASE: "expo.out", STAGGER: 0.1, FADE: 0.55,
-      };
-
-      class HeroPreviews {
-        constructor({ root, layer, slots, restZones, focusZone, slides, onCover }) {
-          this.root = root;
-          this.layer = layer;
-          this.slotEls = slots || [];
-          this.restZones = (restZones || []).filter(Boolean);
-          this.focusZone = focusZone || this.restZones[0] || null;
-          this.slides = slides || [];
-          this.onCover = onCover || null;
-          this.count = Math.min(this.slides.length, PREVIEW_MAX);
-          this.windowStart = 0;
-          this.active = 0;
-          this.mode = "dock";
-          this.client = { x: 0, y: 0 };
-          this.pointer = { x: 0, y: 0 };
-          this.base = { left: 0, top: 0 };
-          this.slotPoints = [];
-          this.cards = [];
-          this._raf = 0;
-          this._last = 0;
-          this._zonesIn = new Set();
-          this.follows = window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
-            !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-          this._onPointerMove = (e) => {
-            this.client.x = e.clientX;
-            this.client.y = e.clientY;
-            if (!this._raf) this._readBase();
-            this._readPointer();
-            if (!this._zonesIn.size) this._setMode("float");
-            this._start();
-          };
-          this._onPointerLeave = () => this._setMode("dock");
-          this._onZoneEnter = (e) => { this._zonesIn.add(e.currentTarget); this._setMode("dock"); };
-          this._onZoneLeave = (e) => { this._zonesIn.delete(e.currentTarget); };
-          this._onZoneFocus = (e) => {
-            this._setMode("dock");
-            const focused = e.target?.matches?.(":focus-visible")
-              ? this.slotEls.indexOf(e.target) : -1;
-            this._setFocus(focused);
-          };
-          this._onZoneBlur = () => this._setFocus(-1);
-          this._boundZones = [];
-          this._onResize = () => {
-            cancelAnimationFrame(this._resizeRaf);
-            this._resizeRaf = requestAnimationFrame(() => this.measure());
-          };
-        }
-
-        init() {
-          if (!this.layer || !this.slotEls.length || !this.count) return;
-          this.renderCards();
-          this._syncWindow(true);
-          this.setActive(0);
-          this._seat();
-          window.addEventListener("resize", this._onResize);
-          if (!this.follows) return;
-          this.root.addEventListener("pointermove", this._onPointerMove);
-          this.root.addEventListener("pointerleave", this._onPointerLeave);
-          this._boundZones = this.restZones;
-          this._boundZones.forEach((zone) => {
-            zone.addEventListener("pointerenter", this._onZoneEnter);
-            zone.addEventListener("pointerleave", this._onZoneLeave);
-          });
-          this.focusZone?.addEventListener("focusin", this._onZoneFocus);
-          this.focusZone?.addEventListener("focusout", this._onZoneBlur);
-        }
-
-        _setFocus(slideIndex) {
-          this.cards.forEach((card, i) => {
-            card.el.classList.toggle("is-focused",
-              slideIndex >= 0 && this.windowStart + i === slideIndex);
-          });
-        }
-
-        renderCards() {
-          this.layer.innerHTML = "";
-          this.cards = Array.from({ length: this.count }, (_, i) => {
-            const el = document.createElement("div");
-            el.className = "hero-preview";
-            el.style.zIndex = String(this.count - i);
-            el.innerHTML = `<img alt="" loading="lazy" />`;
-            this.layer.appendChild(el);
-            return {
-              el, img: el.querySelector("img"),
-              x: 0, y: 0, scale: 1, rot: 0, op: 0,
-              in: { x: 0, y: 0, rot: 0, scale: 1, op: 1 },
-            };
-          });
-        }
-
-        _windowStart() {
-          const spare = this.slides.length - this.count;
-          if (spare <= 0) return 0;
-          const centred = this.active - Math.floor((this.count - 1) / 2);
-          return Math.min(Math.max(centred, 0), spare);
-        }
-
-        _syncWindow(force = false) {
-          const start = this._windowStart();
-          if (!force && start === this.windowStart) return;
-          this.windowStart = start;
-          this.cards.forEach((card, i) => {
-            const slide = this.slides[start + i];
-            if (!slide) return;
-            if (card.img.getAttribute("src") !== slide.image)
-              card.img.setAttribute("src", slide.image);
-          });
-          if (!force) this._measureSlots();
-        }
-
-        setActive(index) {
-          this.active = index;
-          this._syncWindow();
-          this.cards.forEach((card, i) => {
-            card.el.classList.toggle("is-active", this.windowStart + i === index);
-          });
-          if (!this.follows) this._seat();
-          else this._start();
-        }
-
-        park() { this._setMode("dock"); }
-
-        _gather() {
-          this._measureSlots();
-          this._entering = true;
-          const points = this.slotPoints;
-          const centre = points.reduce((sum, p) => sum + p.x, 0) / (points.length || 1);
-          const middle = (this.cards.length - 1) / 2;
-          this.cards.forEach((card, i) => {
-            const p = points[i] || { x: centre };
-            card.in.x = (centre - p.x) * ENTER.GATHER;
-            card.in.y = ENTER.LIFT + i * ENTER.DEEPEN;
-            card.in.rot = (i - middle) * ENTER.TILT;
-            card.in.scale = ENTER.SCALE - i * ENTER.SHRINK;
-            card.in.op = 0;
-            this._paint(card);
-          });
-        }
-
-        intro() {
-          if (!this.follows || !this.cards.length) return null;
-          this._gather();
-          const offsets = this.cards.map((card) => card.in);
-          this._introTl = gsap.timeline({
-            onUpdate: () => this.cards.forEach((card) => this._paint(card)),
-            onComplete: () => { this._entering = false; this.measure(); },
-          })
-          .to(offsets, { x: 0, y: 0, rot: 0, scale: 1, duration: ENTER.DURATION, ease: ENTER.EASE, stagger: ENTER.STAGGER }, 0)
-          .to(offsets, { op: 1, duration: ENTER.FADE, ease: "power2.out", stagger: ENTER.STAGGER }, 0);
-          return this._introTl;
-        }
-
-        measure() {
-          this._measureSlots();
-          if (!this.follows) this._seat();
-          else this._start();
-        }
-
-        _readBase() {
-          const r = this.layer.getBoundingClientRect();
-          this.base.left = r.left;
-          this.base.top = r.top;
-        }
-
-        _readPointer() {
-          this.pointer.x = this.client.x - this.base.left;
-          this.pointer.y = this.client.y - this.base.top;
-        }
-
-        _measureSlots() {
-          if (!this.slotEls.length || !this.cards.length) return;
-          this._readBase();
-          const cardH = this.cards[0].el.offsetHeight;
-          this.slotPoints = this.cards.map((_, i) => {
-            const el = this.slotEls[this.windowStart + i];
-            if (!el) return { x: 0, y: 0 };
-            const r = el.getBoundingClientRect();
-            return {
-              x: r.left - this.base.left + r.width / 2,
-              y: r.top - this.base.top + cardH / 2,
-            };
-          });
-        }
-
-        _setMode(next) {
-          if (this.mode === next) return;
-          if (next === "dock") this._measureSlots();
-          this.mode = next;
-          this._start();
-        }
-
-        _targetFor(i, mode = this.mode) {
-          const isActive = this.windowStart + i === this.active;
-          if (mode === "dock") {
-            const p = this.slotPoints[i] || { x: 0, y: 0 };
-            return { x: p.x, y: p.y, scale: 1, rot: 0, op: 0 };
-          }
-          return {
-            x: this.pointer.x + i * FAN_X, y: this.pointer.y + i * FAN_Y,
-            scale: FLOAT_SCALE, rot: i * FAN_ROT, op: isActive ? 1 : FLOAT_OPACITY,
-          };
-        }
-
-        _ease(i) {
-          const docked = this.mode === "dock";
-          return (docked ? DOCK_LEAD : FOLLOW_LEAD) * Math.max(1 - i * (docked ? DOCK_FALLOFF : FOLLOW_FALLOFF), EASE_FLOOR);
-        }
-
-        _paint(card) {
-          const enter = card.in;
-          const x = card.x + enter.x;
-          const y = card.y + enter.y;
-          const scale = card.scale * enter.scale;
-          const rot = card.rot + enter.rot;
-          card.el.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0) scale(${scale.toFixed(3)}) rotate(${rot.toFixed(2)}deg)`;
-          card.el.style.opacity = (card.op * enter.op).toFixed(3);
-        }
-
-        _reportCover() {
-          if (!this.onCover || !this.follows || this._entering) return;
-          let total = 0, counted = 0;
-          this.cards.forEach((card, i) => {
-            const p = this.slotPoints[i];
-            if (!p) return;
-            total += Math.hypot(card.x - p.x, card.y - p.y);
-            counted++;
-          });
-          if (!counted) return;
-          const t = (COVER_RANGE - total / counted) / (COVER_RANGE - COVER_HIDE);
-          this.onCover(Math.min(Math.max(t, 0), 1));
-        }
-
-        _start() {
-          if (this._raf || !this.follows) return;
-          this._last = 0;
-          this._raf = requestAnimationFrame(this._tick);
-        }
-
-        _stop() {
-          cancelAnimationFrame(this._raf);
-          this._raf = 0;
-          this._last = 0;
-        }
-
-        _tick = (now) => {
-          const frames = this._last ? Math.min((now - this._last) / 16.667, 4) : 1;
-          this._last = now;
-          this._readBase();
-          this._readPointer();
-          let moving = false;
-          this.cards.forEach((card, i) => {
-            const t = this._targetFor(i);
-            const ease = this._ease(i);
-            const k = 1 - Math.pow(1 - ease, frames);
-            const ko = 1 - Math.pow(1 - Math.min(ease * OPACITY_GAIN, 0.75), frames);
-            card.x += (t.x - card.x) * k;
-            card.y += (t.y - card.y) * k;
-            card.scale += (t.scale - card.scale) * k;
-            card.rot += (t.rot - card.rot) * k;
-            card.op += (t.op - card.op) * ko;
-            if (Math.abs(t.x - card.x) > SETTLED || Math.abs(t.y - card.y) > SETTLED ||
-                Math.abs(t.op - card.op) > 0.004 || Math.abs(t.rot - card.rot) > 0.05 ||
-                Math.abs(t.scale - card.scale) > 0.002) {
-              moving = true;
-            } else {
-              card.x = t.x; card.y = t.y; card.scale = t.scale; card.rot = t.rot; card.op = t.op;
-            }
-            this._paint(card);
-          });
-          this._reportCover();
-          if (!moving) { this._stop(); return; }
-          this._raf = requestAnimationFrame(this._tick);
-        };
-
-        _seat() {
-          this._measureSlots();
-          this.mode = "dock";
-          this.cards.forEach((card, i) => {
-            const t = this._targetFor(i, "dock");
-            card.x = t.x; card.y = t.y; card.scale = t.scale; card.rot = t.rot; card.op = t.op;
-            this._paint(card);
-          });
-          this._reportCover();
-        }
-
-        destroy() {
-          this._stop();
-          this._introTl?.kill();
-          cancelAnimationFrame(this._resizeRaf);
-          window.removeEventListener("resize", this._onResize);
-          this.root?.removeEventListener("pointermove", this._onPointerMove);
-          this.root?.removeEventListener("pointerleave", this._onPointerLeave);
-          this._boundZones.forEach((zone) => {
-            zone.removeEventListener("pointerenter", this._onZoneEnter);
-            zone.removeEventListener("pointerleave", this._onZoneLeave);
-          });
-          this._boundZones = [];
-          this._zonesIn.clear();
-          this.focusZone?.removeEventListener("focusin", this._onZoneFocus);
-          this.focusZone?.removeEventListener("focusout", this._onZoneBlur);
-          this.cards = [];
-          if (this.layer) this.layer.innerHTML = "";
-        }
       }
 
       if (document.readyState === "loading") {

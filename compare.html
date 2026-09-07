@@ -1741,11 +1741,38 @@
         transition: opacity 0.2s;
       }
       .mobile-nav__cta button:hover { opacity: 0.85; }
+      .navbar__phone {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        color: rgba(255, 255, 255, 0.9);
+        white-space: nowrap;
+        flex-shrink: 0;
+        transition: color 0.25s ease;
+      }
+      .navbar__phone:hover { color: #ffffff; }
+      .navbar__phone svg { flex-shrink: 0; opacity: 0.75; }
+      .mobile-nav__phone {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 16px;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        color: rgba(255, 255, 255, 0.75);
+        transition: color 0.2s ease;
+      }
+      .mobile-nav__phone:hover { color: #fff; }
+      .mobile-nav__phone svg { opacity: 0.7; }
 
       /* ─── ADDITIONAL RESPONSIVE ─── */
       @media (max-width: 900px) {
         .nav-hamburger { display: flex; }
-        .navbar__nav, .navbar__sep, .navbar__actions { display: none; }
+        .navbar__nav, .navbar__sep, .navbar__actions, .navbar__phone { display: none; }
         /* Page hero count */
         .page-hero__count { font-size: 38px; }
         /* Footer stats */
@@ -1877,10 +1904,16 @@
           <li><a href="#" data-i18n="nav.about">About</a></li>
           <li><a href="#" data-i18n="nav.contact">Contact</a></li>
         </ul>
+        <a href="tel:01150000727" class="navbar__phone" aria-label="Call 01150000727">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.27-.73a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 15.5v1.42z"/>
+          </svg>
+          <span>01150000727</span>
+        </a>
         <div class="navbar__sep" aria-hidden="true"></div>
         <div class="navbar__actions">
           <button class="btn-pill btn-pill--fill" data-i18n="nav.cta">
-            Get in Touch
+            Submit Property
           </button>
         </div>
         <div
@@ -1913,7 +1946,13 @@
         <li><a href="#" data-i18n="nav.contact">Contact</a></li>
       </ul>
       <div class="mobile-nav__cta">
-        <button data-i18n="nav.cta">Get in Touch</button>
+        <button data-i18n="nav.cta">Submit Property</button>
+        <a href="tel:01150000727" class="mobile-nav__phone" aria-label="Call 01150000727">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.27-.73a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 15.5v1.42z"/>
+          </svg>
+          01150000727
+        </a>
       </div>
     </div>
 
@@ -3153,7 +3192,7 @@
             "nav.projects": "Projects",
             "nav.about": "About",
             "nav.contact": "Contact",
-            "nav.cta": "Get in Touch",
+            "nav.cta": "Submit Property",
             /* Buttons */
             "btn.view-all": "View All Properties",
             "btn.schedule": "Schedule Viewing",
@@ -3327,7 +3366,7 @@
             "nav.projects": "المشاريع",
             "nav.about": "من نحن",
             "nav.contact": "تواصل",
-            "nav.cta": "تواصل معنا",
+            "nav.cta": "تقديم عقار",
             /* Buttons */
             "btn.view-all": "عرض جميع العقارات",
             "btn.schedule": "حجز معاينة",

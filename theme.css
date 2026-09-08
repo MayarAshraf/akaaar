@@ -150,12 +150,16 @@ html[data-theme="dark"] .why__dot {
   box-shadow: 0 0 12px rgba(212, 20, 44, 0.2);
 }
 
-/* Path SVG circles */
-html[data-theme="dark"] .why__path-svg circle {
-  fill: rgba(237, 232, 223, 0.18);
+/* Path SVG — match illus crimson */
+html[data-theme="dark"] .why__dot-main {
+  fill: rgba(200, 16, 46, 0.9);
+}
+html[data-theme="dark"] .why__pulse-ring {
+  fill: none;
+  stroke: rgba(200, 16, 46, 0.5);
 }
 html[data-theme="dark"] .why__path-svg path {
-  stroke: rgba(237, 232, 223, 0.1);
+  stroke: rgba(200, 16, 46, 0.6);
 }
 
 /* Stage text */

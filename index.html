@@ -4562,7 +4562,7 @@
           });
         });
 
-        var speeds = [9.0, 7.2, 10.5, 7.8, 9.6];
+        var speeds = [27.0, 21.6, 31.5, 23.4, 28.8];
         var offsets = [0, 0, 0, 0, 0];
         var cardH = 234;
         var totalH = cardH * COLS[0].length;
@@ -4579,7 +4579,7 @@
 
         var readyTimer = setTimeout(function () {
           splash.classList.add("sp-ready");
-        }, 1500);
+        }, 3000);
 
         function exitSplash() {
           clearTimeout(readyTimer);
@@ -4591,7 +4591,7 @@
           }, 800);
         }
 
-        var exitTimer = setTimeout(exitSplash, 3000);
+        var exitTimer = setTimeout(exitSplash, 4500);
 
         splash.addEventListener("click", exitSplash);
         document.addEventListener("keydown", function onKey(e) {

@@ -1,0 +1,629 @@
+/* ══════════════════════════════════════════════════════════════
+   DARK THEME — Luxury Edition
+   Akar Town  ·  activated by html[data-theme="dark"]
+
+   Palette DNA:
+   · Base:    Deep warm charcoal — #0d0b08 (not cold grey)
+   · Surface: Tiered warm darks — #131008 / #1c1912 / #252119
+   · Text:    Warm cream — #ede8df  (never pure white)
+   · Accent:  Crimson — #d4142c (brightened for dark contrast)
+   · Luxury:  Gold shimmer — #c9a84c (details only)
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Smooth cross-fade on toggle ── */
+html {
+  transition: background-color 0.45s ease, color 0.45s ease;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   TOKEN OVERRIDES
+   ══════════════════════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --bg:        #0d0b08;
+  --ink:       #ede8df;
+  --ink-60:    rgba(237, 232, 223, 0.62);
+  --ink-30:    rgba(237, 232, 223, 0.34);
+  --ink-10:    rgba(237, 232, 223, 0.08);
+
+  /* Crimson — slightly brightened for dark backgrounds */
+  --gold:      #d4142c;
+  --gold-lt:   #e8162f;
+  --gold-dk:   #b30f24;
+  --red:       #d42222;
+
+  /* --white is used for text on dark surfaces — keep warm cream */
+  --white:     #ede8df;
+
+  /* Glass surfaces */
+  --glass-bg:     rgba(16, 13, 10, 0.92);
+  --glass-border: rgba(237, 232, 223, 0.07);
+  --glass-dark:   rgba(237, 232, 223, 0.05);
+
+  /* ── Dark surface scale ── */
+  --_s0:      #0d0b08;   /* page base         */
+  --_s1:      #131008;   /* subtle lift       */
+  --_s2:      #1c1912;   /* card level        */
+  --_s3:      #252119;   /* hover / focus     */
+
+  /* ── Border scale ── */
+  --_border:        rgba(237, 232, 223, 0.07);
+  --_border-md:     rgba(237, 232, 223, 0.13);
+  --_border-strong: rgba(237, 232, 223, 0.22);
+
+  /* ── Luxury accents ── */
+  --_gold-shimmer:  #c9a84c;
+  --_crimson-glow:  rgba(212, 20, 44, 0.18);
+  --_crimson-edge:  rgba(212, 20, 44, 0.28);
+
+  color-scheme: dark;
+}
+
+/* ── Soft element transition on toggle ── */
+html[data-theme="dark"] *,
+html[data-theme="dark"] *::before,
+html[data-theme="dark"] *::after {
+  transition-property: background-color, border-color, color, box-shadow, opacity;
+  transition-duration: 0.35s;
+  transition-timing-function: ease;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   GLOBAL STRUCTURE
+   ══════════════════════════════════════════════════════════════ */
+html[data-theme="dark"] body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+html[data-theme="dark"] ::selection {
+  background: var(--gold);
+  color: #fff;
+}
+
+/* Splash screen */
+html[data-theme="dark"] #splash:not(.sp-exit) {
+  background: var(--bg);
+}
+html[data-theme="dark"] .sp-panel {
+  background: var(--_s2);
+}
+html[data-theme="dark"] .sp-logo-svg path[fill="#231F20"] {
+  fill: #ffffff;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   NAVBAR — scrolled state on dark bg needs a touch more depth
+   ══════════════════════════════════════════════════════════════ */
+html[data-theme="dark"] .navbar.is-scrolled {
+  background: rgba(13, 11, 8, 0.92);
+  border-bottom-color: rgba(237, 232, 223, 0.06);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   WHY SECTION (index.html)
+   The biggest issue: background-image + light ::before overlay
+   → strip the image, replace with dramatic dark + crimson glow
+   ══════════════════════════════════════════════════════════════ */
+html[data-theme="dark"] .why {
+  background-color: #0c0a07;
+  background-image: none;
+}
+
+/* Replace the cream veil with a subtle vignette */
+html[data-theme="dark"] .why::before {
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 40%,
+    rgba(212, 20, 44, 0.06) 0%,
+    transparent 70%
+  );
+}
+
+/* Eyebrow pill → dark frosted glass */
+html[data-theme="dark"] .why__eyebrow {
+  background: rgba(14, 12, 9, 0.82);
+  border-color: rgba(237, 232, 223, 0.12);
+  box-shadow:
+    0 2px 24px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(237, 232, 223, 0.06);
+}
+
+/* Stats grid gap */
+html[data-theme="dark"] .why__stats {
+  background: rgba(237, 232, 223, 0.04);
+}
+
+/* Each stat cell */
+html[data-theme="dark"] .why__stat {
+  background: rgba(20, 17, 10, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+html[data-theme="dark"] .why__stat-lbl {
+  color: var(--ink-60);
+}
+
+/* Timeline dot */
+html[data-theme="dark"] .why__dot {
+  background: var(--_s2);
+  border-color: rgba(237, 232, 223, 0.18);
+  box-shadow: 0 0 12px rgba(212, 20, 44, 0.2);
+}
+
+/* Path SVG circles */
+html[data-theme="dark"] .why__path-svg circle {
+  fill: rgba(237, 232, 223, 0.18);
+}
+html[data-theme="dark"] .why__path-svg path {
+  stroke: rgba(237, 232, 223, 0.1);
+}
+
+/* Stage text */
+html[data-theme="dark"] .why__stage-num {
+  color: var(--ink-60);
+}
+html[data-theme="dark"] .why__stage-title {
+  color: var(--ink);
+}
+html[data-theme="dark"] .why__stage-desc {
+  color: var(--ink-60);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROPERTY GALLERY CARD PANEL (index.html)
+   ══════════════════════════════════════════════════════════════ */
+html[data-theme="dark"] .pgal-card__panel {
+  background: rgba(16, 13, 9, 0.9);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid var(--_border);
+  color: var(--ink);
+}
+html[data-theme="dark"] .pgal-card__title {
+  color: var(--ink);
+}
+html[data-theme="dark"] .pgal-card__sub,
+html[data-theme="dark"] .pgal-card__loc {
+  color: var(--ink-60);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   COMPARE PANEL (index.html)
+   ══════════════════════════════════════════════════════════════ */
+html[data-theme="dark"] .cmp-bar__panel {
+  background: var(--_s2);
+  border-color: var(--_border-md);
+  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.7);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   LISTINGS PAGE
+   ══════════════════════════════════════════════════════════════ */
+
+/* Filter bar inputs + dropdowns */
+html[data-theme="dark"] .filter-search input,
+html[data-theme="dark"] .csel__trigger,
+html[data-theme="dark"] .adv-range {
+  background: var(--_s2);
+  border-color: var(--_border-md);
+  color: var(--ink);
+}
+
+html[data-theme="dark"] .filter-search input::placeholder {
+  color: var(--ink-30);
+}
+
+html[data-theme="dark"] .csel__menu {
+  background: var(--_s2);
+  border-color: var(--_border-md);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.4),
+    0 20px 48px -4px rgba(0, 0, 0, 0.7);
+}
+
+html[data-theme="dark"] .csel__menu li,
+html[data-theme="dark"] .csel__option {
+  color: var(--ink-60);
+}
+
+html[data-theme="dark"] .csel__option:hover,
+html[data-theme="dark"] .csel__option.is-selected {
+  background: var(--_s3);
+  color: var(--ink);
+}
+
+/* View toggle buttons */
+html[data-theme="dark"] .view-btn {
+  background: var(--_s1);
+  color: var(--ink-60);
+}
+html[data-theme="dark"] .view-btn.active,
+html[data-theme="dark"] .view-btn:hover {
+  background: var(--_s3);
+  color: var(--ink);
+}
+
+/* Property card — the core card surface */
+html[data-theme="dark"] .prop-card {
+  background: var(--_s2);
+  border-color: var(--_border);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+}
+html[data-theme="dark"] .prop-card:hover {
+  border-color: var(--_border-md);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.55),
+    0 0 0 1px var(--_crimson-glow);
+}
+
+/* Card info text */
+html[data-theme="dark"] .prop-card__name,
+html[data-theme="dark"] .prop-card__title {
+  color: var(--ink);
+}
+html[data-theme="dark"] .prop-card__location,
+html[data-theme="dark"] .prop-card__meta,
+html[data-theme="dark"] .prop-card__type {
+  color: var(--ink-60);
+}
+html[data-theme="dark"] .prop-card__stat-label {
+  color: var(--ink-60);
+}
+html[data-theme="dark"] .prop-divider {
+  background: var(--_border);
+}
+
+/* Card action buttons (heart, compare) */
+html[data-theme="dark"] .prop-card__actions .act-btn {
+  background: var(--_s1);
+  border-color: var(--_border);
+  color: var(--ink-60);
+}
+html[data-theme="dark"] .prop-card__actions .act-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(212, 20, 44, 0.08);
+}
+
+/* Glassmorphic detail button on dark card */
+html[data-theme="dark"] .prop-card__actions .btn-detail {
+  background: rgba(237, 232, 223, 0.06);
+  border-color: rgba(237, 232, 223, 0.14);
+  color: var(--ink);
+}
+html[data-theme="dark"] .prop-card__actions .btn-detail:hover {
+  background: rgba(212, 20, 44, 0.12);
+  border-color: var(--_crimson-edge);
+}
+
+/* Price */
+html[data-theme="dark"] .prop-card__price {
+  color: var(--ink);
+}
+
+/* Advanced filter range inputs */
+html[data-theme="dark"] .adv-range input {
+  background: transparent;
+  color: var(--ink);
+}
+html[data-theme="dark"] .adv-range input::placeholder {
+  color: var(--ink-30);
+}
+
+/* Advanced filter group label underline */
+html[data-theme="dark"] .adv-group__label::after {
+  background: var(--_border);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROPERTY DETAILS PAGE
+   ══════════════════════════════════════════════════════════════ */
+
+/* Breadcrumb bar */
+html[data-theme="dark"] .pd-crumb {
+  background: var(--_s1);
+  border-bottom-color: var(--_border);
+}
+html[data-theme="dark"] .pd-crumb a,
+html[data-theme="dark"] .pd-crumb span {
+  color: var(--ink-60);
+}
+html[data-theme="dark"] .pd-crumb a:hover {
+  color: var(--ink);
+}
+
+/* Sticky bar (title/price at top on scroll) */
+html[data-theme="dark"] .pd-sticky-bar {
+  background: rgba(13, 11, 8, 0.95);
+  border-bottom-color: var(--_border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Stats boxes (bed / bath / area etc.) */
+html[data-theme="dark"] .stat-box,
+html[data-theme="dark"] .pd-stats {
+  background: var(--_s2);
+  border-color: var(--_border);
+}
+
+/* Thumbnail count card */
+html[data-theme="dark"] .thumb-count-card {
+  background: var(--_s2);
+  border-color: var(--_border);
+}
+html[data-theme="dark"] .thumb-count-card:hover {
+  border-color: var(--_border-md);
+}
+
+/* Property details table rows — subtle zebra on dark */
+html[data-theme="dark"] .pd-details-grid__row:nth-child(odd) .pd-details-grid__cell {
+  background: rgba(237, 232, 223, 0.03);
+}
+html[data-theme="dark"] .pd-details-grid__cell {
+  border-color: var(--_border);
+}
+html[data-theme="dark"] .pd-details-grid__label {
+  color: var(--ink-60);
+}
+html[data-theme="dark"] .pd-details-grid__value {
+  color: var(--ink);
+}
+
+/* Amenity & facility cards */
+html[data-theme="dark"] .pd-amenity,
+html[data-theme="dark"] .pd-facility {
+  background: var(--_s2);
+  border-color: var(--_border);
+}
+html[data-theme="dark"] .pd-amenity:hover,
+html[data-theme="dark"] .pd-facility:hover {
+  border-color: rgba(212, 20, 44, 0.35);
+  background: var(--_s3);
+}
+html[data-theme="dark"] .pd-amenity__icon {
+  background: rgba(212, 20, 44, 0.1);
+}
+html[data-theme="dark"] .pd-amenity__text,
+html[data-theme="dark"] .pd-facility__text,
+html[data-theme="dark"] .pd-facility__label {
+  color: var(--ink-60);
+}
+
+/* ── Price card (uses var(--ink) as background → cream in dark mode) ── */
+html[data-theme="dark"] .pd-price-card {
+  background: linear-gradient(
+    145deg,
+    #1a1007 0%,
+    #120c06 100%
+  );
+  border: 1px solid var(--_crimson-edge);
+  box-shadow:
+    0 0 0 1px rgba(212, 20, 44, 0.08),
+    0 12px 48px rgba(0, 0, 0, 0.6),
+    0 0 80px rgba(212, 20, 44, 0.06) inset;
+}
+html[data-theme="dark"] .pd-price-card__label {
+  color: rgba(237, 232, 223, 0.45);
+}
+html[data-theme="dark"] .pd-price-card__price {
+  color: var(--ink);
+}
+html[data-theme="dark"] .pd-price-card__sub {
+  color: var(--ink-60);
+}
+html[data-theme="dark"] .pd-price-card__divider {
+  background: rgba(237, 232, 223, 0.08);
+}
+html[data-theme="dark"] .pd-price-card .btn-slide--fill {
+  background: rgba(212, 20, 44, 0.2);
+  border-color: rgba(212, 20, 44, 0.35);
+}
+html[data-theme="dark"] .pd-price-card .btn-slide--fill:hover {
+  background: rgba(212, 20, 44, 0.32);
+}
+html[data-theme="dark"] .pd-price-card .btn-slide--outline {
+  background: rgba(237, 232, 223, 0.06);
+  border-color: rgba(237, 232, 223, 0.14);
+}
+html[data-theme="dark"] .pd-price-card .btn-slide--outline:hover {
+  background: rgba(237, 232, 223, 0.1);
+}
+html[data-theme="dark"] .pd-price-card__contact-btn--call {
+  background: rgba(237, 232, 223, 0.1);
+}
+html[data-theme="dark"] .pd-price-card__contact-btn--call:hover {
+  background: rgba(237, 232, 223, 0.18);
+}
+html[data-theme="dark"] .pd-price-card__ref {
+  color: rgba(237, 232, 223, 0.4);
+}
+
+/* ── Agent card ── */
+html[data-theme="dark"] .pd-agent-card {
+  background: var(--_s2);
+  border-color: var(--_border);
+}
+html[data-theme="dark"] .pd-agent-card__name {
+  color: var(--ink);
+}
+html[data-theme="dark"] .pd-agent-card__title,
+html[data-theme="dark"] .pd-agent-card__meta {
+  color: var(--ink-60);
+}
+
+/* ── Payment / mortgage card ── */
+html[data-theme="dark"] .pd-payment-card {
+  background: var(--_s2);
+  border-color: rgba(212, 20, 44, 0.2);
+}
+html[data-theme="dark"] .pd-payment-card__label,
+html[data-theme="dark"] .pd-payment-card__title {
+  color: var(--ink);
+}
+html[data-theme="dark"] .pd-payment-card__sub {
+  color: var(--ink-60);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SHARED ACROSS PAGES
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── *--dark badges: --ink becomes cream in dark mode → explicitly dark surface ── */
+html[data-theme="dark"] .prop-badge--dark,
+html[data-theme="dark"] .badge--dark {
+  background: var(--white);
+  color: black;
+  border: 1px solid rgba(237, 232, 223, 0.18);
+}
+
+/* ── Call button: var(--ink) bg becomes cream in dark mode → force dark surface ── */
+html[data-theme="dark"] .pd-agent-card__btn--call {
+  background: rgba(20, 17, 10, 0.92);
+  color: var(--ink);
+  border: 1px solid rgba(237, 232, 223, 0.18);
+}
+html[data-theme="dark"] .pd-agent-card__btn--call:hover {
+  background: var(--_s3);
+}
+
+/* ── Secondary / outline buttons → transparent + white in dark mode ── */
+html[data-theme="dark"] .btn-slide--outline,
+html[data-theme="dark"] .btn-view-all,
+html[data-theme="dark"] .btn-load-more,
+html[data-theme="dark"] .btn-pill--outline,
+html[data-theme="dark"] .btn-outline-dark {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #fff;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+html[data-theme="dark"] .btn-slide--outline:hover,
+html[data-theme="dark"] .btn-view-all:hover,
+html[data-theme="dark"] .btn-load-more:hover,
+html[data-theme="dark"] .btn-pill--outline:hover,
+html[data-theme="dark"] .btn-outline-dark:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.48);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Section eyebrows */
+html[data-theme="dark"] [class*="__eyebrow"]:not(.why__eyebrow) {
+  color: var(--ink-60);
+}
+
+/* Subtle dividers */
+html[data-theme="dark"] [class*="__divider"],
+html[data-theme="dark"] [class*="-divider"] {
+  background: var(--_border);
+}
+
+/* Generic form inputs */
+html[data-theme="dark"] input:not([type="radio"]):not([type="checkbox"]):not([type="range"]):not([type="submit"]),
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea {
+  background: var(--_s2);
+  border-color: var(--_border-md);
+  color: var(--ink);
+}
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder {
+  color: var(--ink-30);
+}
+html[data-theme="dark"] select option {
+  background: var(--_s2);
+  color: var(--ink);
+}
+
+/* Mobile nav links */
+html[data-theme="dark"] .mobile-nav__list li a {
+  color: var(--ink-60);
+}
+html[data-theme="dark"] .mobile-nav__list li a:hover,
+html[data-theme="dark"] .mobile-nav__list li a.active {
+  color: var(--ink);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   LUXURY SCROLLBAR
+   ══════════════════════════════════════════════════════════════ */
+html[data-theme="dark"] ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+html[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+html[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: rgba(237, 232, 223, 0.14);
+  border-radius: 999px;
+}
+html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(237, 232, 223, 0.26);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   THEME TOGGLE BUTTON
+   ══════════════════════════════════════════════════════════════ */
+.theme-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 31px;
+  height: 31px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.88);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.38);
+}
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--gold, #c8102e);
+  outline-offset: 3px;
+}
+
+/* Icon swap animation */
+.theme-toggle__sun,
+.theme-toggle__moon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    opacity 0.3s ease,
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Light mode: moon visible, sun hidden */
+.theme-toggle__sun  { opacity: 0; transform: rotate(90deg)  scale(0.6); }
+.theme-toggle__moon { opacity: 1; transform: rotate(0deg)   scale(1);   }
+
+/* Dark mode: sun visible, moon hidden + gold ring */
+html[data-theme="dark"] .theme-toggle__sun  { opacity: 1; transform: rotate(0deg)   scale(1);   }
+html[data-theme="dark"] .theme-toggle__moon { opacity: 0; transform: rotate(-90deg) scale(0.6); }
+
+html[data-theme="dark"] .theme-toggle {
+  border-color: rgba(201, 168, 76, 0.32);
+  color: rgba(237, 232, 223, 0.88);
+  box-shadow: 0 0 12px rgba(201, 168, 76, 0.08);
+}
+html[data-theme="dark"] .theme-toggle:hover {
+  background: rgba(201, 168, 76, 0.1);
+  border-color: rgba(201, 168, 76, 0.55);
+  box-shadow: 0 0 20px rgba(201, 168, 76, 0.15);
+}

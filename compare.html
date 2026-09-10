@@ -369,25 +369,38 @@
       /* ── PAGE HERO ── */
       .page-hero {
         padding-top: var(--nav-h);
-        background: #0d0d0d;
+        background: #06060a url("why-bg.jpeg") center 38% / cover no-repeat;
         position: relative;
         overflow: hidden;
+        min-height: 360px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
       }
       .page-hero::before {
         content: "";
         position: absolute;
         inset: 0;
-        background: linear-gradient(
-          135deg,
-          rgba(200, 16, 46, 0.12) 0%,
-          transparent 60%
-        );
+        z-index: 0;
+        background:
+          linear-gradient(108deg,
+            rgba(6, 6, 10, 0.96) 0%,
+            rgba(6, 6, 10, 0.75) 32%,
+            rgba(6, 6, 10, 0.28) 58%,
+            transparent 100%
+          ),
+          linear-gradient(to top,
+            rgba(6, 6, 10, 0.88) 0%,
+            rgba(6, 6, 10, 0.2) 45%,
+            transparent 70%
+          );
         pointer-events: none;
       }
       .page-hero__inner {
+        position: relative;
+        z-index: 1;
         max-width: 1320px;
-        margin: 0 auto;
-        padding: 52px 48px 48px;
+        padding: 56px 48px 52px;
         display: flex;
         align-items: flex-end;
         justify-content: space-between;

@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
@@ -362,23 +362,8 @@
         font-family: var(--font-body-rtl);
       }
       /* ── RTL footer ── */
-      [dir="rtl"] .site-footer__nav-head {
+      [dir="rtl"] .footer__label {
         letter-spacing: 0.04em;
-        text-transform: none;
-      }
-      [dir="rtl"] .site-footer__stat-l {
-        letter-spacing: 0.04em;
-        text-transform: none;
-      }
-      [dir="rtl"] .site-footer__nav-col li a::before {
-        margin-right: 0;
-        transition:
-          width 0.28s cubic-bezier(0.76, 0, 0.24, 1),
-          margin-left 0.28s cubic-bezier(0.76, 0, 0.24, 1);
-      }
-      [dir="rtl"] .site-footer__nav-col li a:hover::before {
-        margin-right: 0;
-        margin-left: 7px;
       }
 
       /* ── PAGE HERO ── */
@@ -1198,404 +1183,381 @@
         transform: translateY(-2px);
       }
 
-      /* ── SITE FOOTER ── */
-      .site-footer {
-        background: #080808;
-        position: relative;
-        overflow: hidden;
-      }
-      .site-footer__wm {
-        position: absolute;
-        bottom: -0.08em;
-        right: -0.02em;
-        font-size: clamp(80px, 16vw, 240px);
-        font-weight: 300;
-        letter-spacing: -0.02em;
-        color: rgba(255, 255, 255, 0.07);
-        line-height: 1;
-        pointer-events: none;
-        user-select: none;
-      }
-      .site-footer__inner {
-        max-width: 1320px;
-        margin: 0 auto;
-        padding: 80px 48px 0;
-        position: relative;
-      }
-      .site-footer__top {
-        display: grid;
-        grid-template-columns: 1.1fr 1fr 1.1fr;
-        gap: 60px;
-        padding-bottom: 30px;
-      }
-      .site-footer__logo-link {
-        display: inline-block;
-        margin-bottom: 22px;
-      }
-      .site-footer__tagline {
-        font-size: 13px;
-        line-height: 1.72;
-        color: rgba(255, 255, 255, 0.58);
-        max-width: 290px;
-        margin-bottom: 32px;
-      }
-      .site-footer__stats {
-        display: flex;
-        gap: 24px;
-        margin-bottom: 32px;
-      }
-      .site-footer__stat {
-        display: flex;
-        flex-direction: column;
-      }
-      .site-footer__stat-n {
-        font-size: 34px;
-        font-weight: 300;
-        color: var(--gold);
-        line-height: 1;
-      }
-      .site-footer__stat-l {
-        font-size: 9px;
-        font-weight: 600;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.48);
-        margin-top: 5px;
-      }
-      .site-footer__socials {
-        display: flex;
-        gap: 8px;
-      }
-      .site-footer__social {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: rgba(255, 255, 255, 0.4);
-        text-decoration: none;
-        transition: all 0.25s;
-        flex-shrink: 0;
-      }
-      .site-footer__social:hover {
-        border-color: var(--gold);
-        color: var(--gold);
-        background: rgba(200, 16, 46, 0.07);
-        transform: translateY(-2px);
-      }
-      .site-footer__nav {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
-        padding-top: 2px;
-      }
-      .site-footer__nav-head {
-        font-size: 9px;
-        font-weight: 700;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        color: var(--gold);
-        margin-bottom: 20px;
-      }
-      .site-footer__nav-col ul {
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-      }
-      .site-footer__nav-col li a {
-        font-size: 13px;
-        color: rgba(255, 255, 255, 0.62);
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        transition: color 0.22s;
-      }
-      .site-footer__nav-col li a::before {
-        content: "";
-        display: inline-block;
-        width: 0;
-        height: 1px;
-        background: var(--gold);
-        margin-right: 0;
-        transition:
-          width 0.28s cubic-bezier(0.76, 0, 0.24, 1),
-          margin-right 0.28s cubic-bezier(0.76, 0, 0.24, 1);
-        flex-shrink: 0;
-      }
-      .site-footer__nav-col li a:hover {
-        color: rgba(255, 255, 255, 0.9);
-      }
-      .site-footer__nav-col li a:hover::before {
-        width: 10px;
-        margin-right: 7px;
-      }
-      .site-footer__match {
-        padding: 28px 26px;
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(200, 16, 46, 0.18);
-        border-radius: 16px;
-        position: relative;
-        overflow: hidden;
-      }
-      .site-footer__match::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: linear-gradient(
-          to right,
-          var(--gold),
-          rgba(200, 16, 46, 0.2),
-          transparent
-        );
-        pointer-events: none;
-      }
-      .site-footer__match-eyebrow {
-        font-size: 9px;
-        font-weight: 700;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        color: var(--gold);
-        margin-bottom: 8px;
-      }
-      .site-footer__match-title {
-        font-size: 26px;
-        font-weight: 300;
-        color: #fff;
-        line-height: 1.15;
-        margin-bottom: 6px;
-      }
-      .site-footer__match-title em {
-        font-style: normal;
-        color: var(--gold);
-      }
-      .site-footer__match-sub {
-        font-size: 12px;
-        color: rgba(255, 255, 255, 0.55);
-        margin-bottom: 18px;
-        line-height: 1.6;
-      }
-      .site-footer__match-types {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        margin-bottom: 16px;
-      }
-      .fmatch-type {
-        font-size: 11px;
-        font-weight: 500;
-        letter-spacing: 0.04em;
-        padding: 6px 14px;
-        border-radius: 100px;
-        border: 1.5px solid rgba(255, 255, 255, 0.18);
-        color: rgba(255, 255, 255, 0.62);
-        background: none;
-        cursor: pointer;
-        transition: all 0.22s;
-        font-family: inherit;
-      }
-      .fmatch-type:hover,
-      .fmatch-type.is-active {
-        border-color: var(--gold);
-        color: var(--gold);
-        background: rgba(200, 16, 46, 0.08);
-      }
-      .fmatch-lbl {
-        display: block;
-        font-size: 9px;
-        font-weight: 600;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.48);
-        margin-bottom: 8px;
-      }
-      .fmatch-budget-row {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 14px;
-      }
-      .fmatch-sep {
-        color: rgba(255, 255, 255, 0.2);
-        font-size: 12px;
-        flex-shrink: 0;
-      }
-      .fmatch-input {
-        flex: 1;
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255, 255, 255, 0.09);
-        border-radius: 8px;
-        padding: 9px 12px;
-        font-size: 12px;
-        color: #fff;
-        font-family: inherit;
-        transition: border-color 0.2s;
-        min-width: 0;
-        -moz-appearance: textfield;
-      }
-      .fmatch-input::-webkit-outer-spin-button,
-      .fmatch-input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-      }
-      .fmatch-input::placeholder {
-        color: rgba(255, 255, 255, 0.2);
-      }
-      .fmatch-input:focus {
-        outline: none;
-        border-color: rgba(200, 16, 46, 0.45);
-      }
-      .fmatch-email-row {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-      }
-      .fmatch-input--email {
-        flex: 1;
-      }
-      .fmatch-submit {
-        flex-shrink: 0;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: var(--gold);
-        color: #ffffff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.28s;
-        border: none;
-        font-family: inherit;
-      }
-      .fmatch-submit:hover {
-        background: var(--gold-lt);
-        transform: translateY(-2px);
-      }
-      .fmatch-confirm {
-        font-size: 11px;
-        letter-spacing: 0.03em;
-        margin-top: 10px;
-        min-height: 16px;
-        line-height: 1.5;
-      }
-      .site-footer__rule {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-      }
-      .site-footer__rule-line {
-        flex: 1;
-        height: 1px;
-        background: linear-gradient(
-          to right,
-          transparent,
-          rgba(200, 16, 46, 0.25),
-          transparent
-        );
-      }
-      .site-footer__rule-diamond {
-        width: 20px;
-        height: 20px;
-        border: 1px solid rgba(200, 16, 46, 0.3);
-        transform: rotate(45deg);
-        background: rgba(200, 16, 46, 0.04);
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .site-footer__rule-diamond::after {
-        content: "";
-        width: 5px;
-        height: 5px;
-        background: var(--gold);
-        border-radius: 50%;
-        transform: rotate(-45deg);
-      }
-      .site-footer__bottom {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 24px 0 32px;
-        gap: 16px;
-        flex-wrap: wrap;
-      }
-      .site-footer__copy {
-        font-size: 11px;
-        color: rgba(255, 255, 255, 0.42);
-        letter-spacing: 0.08em;
-      }
-      .site-footer__legal {
-        display: flex;
-        gap: 20px;
-        flex-wrap: wrap;
-      }
-      .site-footer__legal a {
-        font-size: 11px;
-        color: rgba(255, 255, 255, 0.42);
-        letter-spacing: 0.06em;
-        text-decoration: none;
-        transition: color 0.2s;
-      }
-      .site-footer__legal a:hover {
-        color: var(--gold);
-      }
-      .site-footer__top-btn {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        background: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: rgba(255, 255, 255, 0.35);
-        cursor: pointer;
-        transition: all 0.25s;
-        flex-shrink: 0;
-        font-family: inherit;
-      }
-      .site-footer__top-btn:hover {
-        border-color: var(--gold);
-        color: var(--gold);
-        transform: translateY(-2px);
-      }
-      @media (max-width: 1100px) {
-        .site-footer__top {
-          grid-template-columns: 1fr 1fr;
-          gap: 48px;
-        }
-        .site-footer__match {
-          grid-column: 1 / -1;
-        }
-      }
-      @media (max-width: 680px) {
-        .site-footer__inner {
-          padding: 60px 24px 0;
-        }
-        .site-footer__top {
-          grid-template-columns: 1fr;
-          gap: 40px;
-          padding-bottom: 48px;
-        }
-        .site-footer__nav {
-          grid-template-columns: 1fr 1fr;
-        }
-        .site-footer__stats {
-          gap: 20px;
-        }
-        .site-footer__bottom {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 14px;
-        }
-      }
+            /* ── site-wrap ── */
+            .site-wrap {
+              position: relative;
+              background: var(--bg);
+              display: flow-root;
+            }
 
+            /* ── Footer: static in normal flow ── */
+            .site-footer {
+              position: relative;
+              width: 100%;
+              min-height: 100dvh;
+              overflow: hidden;
+              background: #080808;
+              color: #fff;
+            }
+            .footer__bg {
+              position: absolute;
+              inset: 0;
+              background-size: cover;
+              background-position: center;
+              filter: grayscale(0.35) brightness(0.42) contrast(1.1);
+              transform: scale(1);
+            }
+            .footer__scrim {
+              position: absolute;
+              inset: 0;
+              background: linear-gradient(0deg, #080808 12%, rgba(8, 8, 8, 0.05) 72%);
+              pointer-events: none;
+            }
+            .site-footer__inner {
+              position: relative;
+              z-index: 1;
+              padding: clamp(1.5rem, 3.5vh, 2.5rem) 0 clamp(1rem, 2vh, 1.5rem);
+              min-height: 100dvh;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+            }
+            .site-footer__inner > * {
+              flex-shrink: 0;
+            }
+            /* Constrain grid and bottom bar to readable width; let mark bleed full */
+            .footer__grid,
+            .footer__bottom {
+              max-width: 1320px;
+              width: 100%;
+              margin-left: auto;
+              margin-right: auto;
+              padding-left: 48px;
+              padding-right: 48px;
+              box-sizing: border-box;
+            }
+            /* Full-width wordmark — JS fits it to exact available width */
+            .footer__mark {
+              position: relative;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 100%;
+              margin: clamp(1.5rem, 4vh, 3rem) 0;
+              overflow: hidden;
+              pointer-events: none;
+            }
+            .footer__mark-text {
+              display: inline-block;
+              font-weight: 800;
+              letter-spacing: -0.03em;
+              line-height: 0.86;
+              white-space: nowrap;
+              font-size: clamp(4.5rem, 16vw, 13rem);
+              filter: grayscale(0.4) brightness(0.6) contrast(1.05);
+              color: transparent;
+              background-image: linear-gradient(
+                180deg,
+                rgba(246, 245, 242, 0.5) 0%,
+                rgba(246, 245, 242, 0.4) 45%,
+                rgba(246, 245, 242, 0.1) 72%,
+                rgba(246, 245, 242, 0) 88%
+              );
+              -webkit-background-clip: text;
+              background-clip: text;
+              -webkit-text-fill-color: transparent;
+              user-select: none;
+            }
+
+            /* ── Footer content CSS ── */
+            .footer__grid {
+              display: grid;
+              grid-template-columns: 1.4fr 1fr 1fr 1.6fr;
+              gap: clamp(1.5rem, 3vw, 2.5rem);
+            }
+            .footer__label {
+              display: block;
+              font-size: 0.68rem;
+              font-weight: 600;
+              letter-spacing: 0.16em;
+              text-transform: uppercase;
+              color: rgba(246, 245, 242, 0.55);
+              margin-bottom: 0.9rem;
+            }
+            /* Brand column */
+            .footer__brand-logo {
+              display: block;
+              margin-bottom: 1rem;
+              text-decoration: none;
+            }
+            .footer__brand-logo svg {
+              height: 26px;
+              width: auto;
+              display: block;
+            }
+            .footer__tagline {
+              font-size: 0.85rem;
+              line-height: 1.65;
+              color: rgba(246, 245, 242, 0.78);
+              max-width: 30ch;
+              margin: 0 0 1.4rem;
+            }
+            .footer__stats {
+              display: flex;
+              gap: clamp(1rem, 2.5vw, 1.75rem);
+              margin-bottom: 1.4rem;
+            }
+            .footer__stat-value {
+              display: block;
+              font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+              font-weight: 700;
+              color: #C8102E;
+              line-height: 1;
+              margin-bottom: 0.28rem;
+            }
+            .footer__stat-label {
+              display: block;
+              font-size: 0.6rem;
+              font-weight: 700;
+              letter-spacing: 0.1em;
+              text-transform: uppercase;
+              color: rgba(246, 245, 242, 0.6);
+            }
+            .footer__socials {
+              display: flex;
+              gap: 0.5rem;
+            }
+            .footer__social-btn {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 36px;
+              height: 36px;
+              border-radius: 50%;
+              border: 1px solid rgba(246, 245, 242, 0.35);
+              color: rgba(246, 245, 242, 0.8);
+              text-decoration: none;
+              transition: border-color 0.3s, color 0.3s;
+            }
+            .footer__social-btn:hover,
+            .footer__social-btn:focus-visible {
+              border-color: #f6f5f2;
+              color: #f6f5f2;
+            }
+            /* Nav link columns */
+            .footer__links {
+              list-style: none;
+              margin: 0;
+              padding: 0;
+              display: flex;
+              flex-direction: column;
+              gap: 0.55rem;
+            }
+            .footer__links a {
+              font-size: 0.92rem;
+              font-weight: 500;
+              color: rgba(246, 245, 242, 0.85);
+              text-decoration: none;
+              transition: color 0.3s ease;
+            }
+            .footer__links a:hover,
+            .footer__links a:focus-visible {
+              color: #f6f5f2;
+            }
+            /* Property matching column */
+            .footer__match-title {
+              font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+              font-weight: 700;
+              line-height: 1.2;
+              color: #f6f5f2;
+              margin: 0 0 0.5rem;
+            }
+            .footer__match-title em {
+              font-style: normal;
+              color: #C8102E;
+            }
+            .footer__match-desc {
+              font-size: 0.82rem;
+              line-height: 1.55;
+              color: rgba(246, 245, 242, 0.75);
+              margin: 0 0 1rem;
+            }
+            .footer__type-pills {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 0.4rem;
+              margin-bottom: 1rem;
+            }
+            .footer__type-pill {
+              padding: 0.38rem 0.9rem;
+              border-radius: 99px;
+              border: 1px solid rgba(246, 245, 242, 0.38);
+              font-size: 0.78rem;
+              font-weight: 500;
+              color: rgba(246, 245, 242, 0.88);
+              background: transparent;
+              cursor: pointer;
+              transition: background 0.2s, border-color 0.2s, color 0.2s;
+              font-family: inherit;
+              line-height: 1;
+            }
+            .footer__type-pill.is-active,
+            .footer__type-pill:hover {
+              background: #C8102E;
+              border-color: #C8102E;
+              color: #fff;
+            }
+            .footer__field-label {
+              display: block;
+              font-size: 0.6rem;
+              font-weight: 700;
+              letter-spacing: 0.1em;
+              text-transform: uppercase;
+              color: rgba(246, 245, 242, 0.6);
+              margin-bottom: 0.45rem;
+            }
+            .footer__budget-row {
+              display: flex;
+              align-items: center;
+              gap: 0.4rem;
+              margin-bottom: 0.85rem;
+            }
+            .footer__budget-input {
+              flex: 1;
+              min-width: 0;
+              padding: 0.6rem 0.7rem;
+              border-radius: 3px;
+              border: 1px solid rgba(246, 245, 242, 0.12);
+              background: rgba(246, 245, 242, 0.05);
+              color: #f6f5f2;
+              font-size: 0.8rem;
+              font-family: inherit;
+            }
+            .footer__budget-input::placeholder {
+              color: rgba(246, 245, 242, 0.42);
+            }
+            .footer__budget-sep {
+              color: rgba(246, 245, 242, 0.55);
+              font-size: 1rem;
+              flex-shrink: 0;
+            }
+            .footer__email-row {
+              display: flex;
+              gap: 0.45rem;
+              align-items: stretch;
+            }
+            .footer__email-input {
+              flex: 1;
+              min-width: 0;
+              padding: 0.6rem 0.7rem;
+              border-radius: 3px;
+              border: 1px solid rgba(246, 245, 242, 0.12);
+              background: rgba(246, 245, 242, 0.05);
+              color: #f6f5f2;
+              font-size: 0.8rem;
+              font-family: inherit;
+            }
+            .footer__email-input::placeholder {
+              color: rgba(246, 245, 242, 0.42);
+            }
+            .footer__email-input:focus-visible,
+            .footer__budget-input:focus-visible {
+              outline: 1px solid rgba(246, 245, 242, 0.5);
+              outline-offset: 2px;
+            }
+            .footer__match-submit {
+              flex-shrink: 0;
+              width: 38px;
+              height: 38px;
+              border-radius: 50%;
+              background: #C8102E;
+              color: #fff;
+              border: none;
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              transition: background 0.25s;
+            }
+            .footer__match-submit:hover {
+              background: #a60d24;
+            }
+            /* Bottom bar */
+            .footer__bottom {
+              display: flex;
+              flex-wrap: wrap;
+              align-items: center;
+              justify-content: space-between;
+              gap: 0.75rem;
+              padding-top: clamp(1rem, 2.5vh, 1.5rem);
+              border-top: 1px solid rgba(246, 245, 242, 0.12);
+              font-size: 0.75rem;
+              color: rgba(246, 245, 242, 0.6);
+            }
+            .footer__credit-link {
+              color: #f6f5f2;
+              font-weight: 600;
+              background-image: linear-gradient(currentColor, currentColor);
+              background-repeat: no-repeat;
+              background-position: 0 100%;
+              background-size: 100% 1px;
+              transition: background-size 0.35s ease;
+              text-decoration: none;
+            }
+            .footer__credit-link:hover,
+            .footer__credit-link:focus-visible {
+              background-size: 0 1px;
+              background-position: 100% 100%;
+            }
+            .footer__legal {
+              display: flex;
+              gap: 1.25rem;
+            }
+            .footer__legal a {
+              color: rgba(246, 245, 242, 0.6);
+              text-decoration: none;
+              transition: color 0.3s ease;
+            }
+            .footer__legal a:hover,
+            .footer__legal a:focus-visible {
+              color: #f6f5f2;
+            }
+            /* Responsive */
+            @media (max-width: 1024px) {
+              .footer__grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                row-gap: clamp(1.75rem, 5vh, 2.5rem);
+              }
+              .footer__col--match {
+                grid-column: 1 / -1;
+              }
+            }
+            @media (max-width: 620px) {
+              .footer__grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                column-gap: 1.25rem;
+                row-gap: 1.75rem;
+              }
+              .footer__col--brand {
+                grid-column: 1 / -1;
+                order: 1;
+              }
+              .footer__col--match {
+                grid-column: 1 / -1;
+                order: 4;
+              }
+              .footer__links {
+                gap: 0.45rem;
+              }
+              .footer__bottom {
+                justify-content: flex-start;
+              }
+            }
+            @media (max-width: 380px) {
+              .footer__budget-row {
+                flex-wrap: wrap;
+              }
+            }
       /* ── SCROLL REVEAL ── */
       .sr {
         opacity: 0;
@@ -1843,6 +1805,7 @@
     <script src="theme.js"></script>
   </head>
   <body>
+    <div id="site-wrap" class="site-wrap">
     <!-- NAVBAR -->
     <nav class="navbar" role="navigation" aria-label="Main navigation">
       <a href="index.html" class="navbar__logo" aria-label="Akar Town — Home">
@@ -2027,20 +1990,29 @@
       </div>
     </section>
 
+    </div>
+    <!-- /site-wrap -->
+
     <!-- SITE FOOTER -->
-    <footer class="site-footer">
-      <span class="site-footer__wm" aria-hidden="true">AKAR</span>
+    <footer class="site-footer" id="footer">
+      <div
+        class="footer__bg"
+        style="
+          background-image: url(&quot;https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1920&auto=format&fit=crop&q=90&quot;);
+        "
+        aria-hidden="true"
+      ></div>
+      <div class="footer__scrim" aria-hidden="true"></div>
       <div class="site-footer__inner">
-        <div class="site-footer__top">
+        <div class="footer__grid">
           <!-- Brand -->
-          <div class="site-footer__brand">
+          <div class="footer__col footer__col--brand" data-reveal>
             <a
-              href="index.html"
-              class="site-footer__logo-link"
+              href="/"
+              class="footer__brand-logo"
               aria-label="Akar Town — Home"
             >
               <svg
-                width="230"
                 viewBox="0 0 2185 380"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -2087,46 +2059,43 @@
                 />
               </svg>
             </a>
-            <p class="site-footer__tagline" data-i18n="footer.desc">
-              Egypt's most curated luxury real estate — from New Cairo's towers
-              to the North Coast's shores.
+            <p class="footer__tagline">
+              Egypt's premier luxury real estate destination. Curating
+              exceptional properties for discerning clients since 2004.
             </p>
-            <div class="site-footer__stats">
-              <div class="site-footer__stat">
-                <span class="site-footer__stat-n">164</span>
-                <span
-                  class="site-footer__stat-l"
-                  data-i18n="footer.stat.listings"
-                  >Active Listings</span
-                >
+            <div class="footer__stats">
+              <div class="footer__stat">
+                <span class="footer__stat-value">164</span>
+                <span class="footer__stat-label">Active Listings</span>
               </div>
-              <div class="site-footer__stat">
-                <span class="site-footer__stat-n">6</span>
-                <span
-                  class="site-footer__stat-l"
-                  data-i18n="footer.stat.locations"
-                  >Locations</span
-                >
+              <div class="footer__stat">
+                <span class="footer__stat-value">6</span>
+                <span class="footer__stat-label">Locations</span>
               </div>
-              <div class="site-footer__stat">
-                <span class="site-footer__stat-n">12+</span>
-                <span class="site-footer__stat-l" data-i18n="footer.stat.years"
-                  >Years</span
-                >
+              <div class="footer__stat">
+                <span class="footer__stat-value">12+</span>
+                <span class="footer__stat-label">Years</span>
               </div>
             </div>
-            <div class="site-footer__socials">
-              <a href="#" class="site-footer__social" aria-label="Instagram">
+            <div class="footer__socials">
+              <a
+                href="https://www.instagram.com/akar.town.real.estate/"
+                class="footer__social-btn"
+                aria-label="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <svg
-                  width="15"
-                  height="15"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
                   stroke-width="1.6"
-                  viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
                   <rect x="2" y="2" width="20" height="20" rx="5" />
-                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="12" cy="12" r="4.5" />
                   <circle
                     cx="17.5"
                     cy="6.5"
@@ -2136,265 +2105,214 @@
                   />
                 </svg>
               </a>
-              <a href="#" class="site-footer__social" aria-label="Facebook">
+              <a
+                href="https://www.facebook.com/AkarTownEG"
+                class="footer__social-btn"
+                aria-label="Facebook"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <svg
-                  width="15"
-                  height="15"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.6"
+                  width="16"
+                  height="16"
                   viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
                 >
                   <path
                     d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
                   />
                 </svg>
               </a>
-              <a href="#" class="site-footer__social" aria-label="LinkedIn">
+              <a
+                href="https://www.linkedin.com/company/akar-town/"
+                class="footer__social-btn"
+                aria-label="LinkedIn"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <svg
-                  width="15"
-                  height="15"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.6"
+                  width="16"
+                  height="16"
                   viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
                 >
                   <path
-                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"
+                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
                   />
                   <rect x="2" y="9" width="4" height="12" />
                   <circle cx="4" cy="4" r="2" />
                 </svg>
               </a>
-              <a href="#" class="site-footer__social" aria-label="YouTube">
+              <a
+                href="https://youtube.com/@mohamedelhemaly.akrealestate"
+                class="footer__social-btn"
+                aria-label="YouTube"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <svg
-                  width="15"
-                  height="15"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.6"
-                  viewBox="0 0 24 24"
+                  width="17"
+                  height="12"
+                  viewBox="0 0 24 17"
+                  fill="currentColor"
+                  aria-hidden="true"
                 >
                   <path
-                    d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"
+                    d="M22.54 2.42A2.78 2.78 0 0 0 20.59.46C18.88 0 12 0 12 0S5.12 0 3.41.46A2.78 2.78 0 0 0 1.46 2.42 29 29 0 0 0 1 8.5a29 29 0 0 0 .46 6.08 2.78 2.78 0 0 0 1.95 1.96C5.12 17 12 17 12 17s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 8.5a29 29 0 0 0-.46-6.08z"
                   />
                   <polygon
-                    points="9.75,15.02 15.5,12 9.75,8.98"
-                    fill="currentColor"
-                    stroke="none"
+                    points="9.75 12.02 15.5 8.5 9.75 4.98 9.75 12.02"
+                    fill="white"
                   />
                 </svg>
               </a>
             </div>
           </div>
-          <!-- Navigation -->
-          <nav class="site-footer__nav" aria-label="Footer navigation">
-            <div class="site-footer__nav-col">
-              <h3
-                class="site-footer__nav-head"
-                data-i18n="footer.col.properties"
-              >
-                Explore
-              </h3>
-              <ul>
-                <li>
-                  <a href="listings.html" data-i18n="footer.link.all"
-                    >All Properties</a
-                  >
-                </li>
-                <li>
-                  <a href="listings.html" data-i18n="footer.link.villas"
-                    >Villas &amp; Compounds</a
-                  >
-                </li>
-                <li>
-                  <a href="listings.html" data-i18n="footer.link.penthouse"
-                    >Penthouse Collection</a
-                  >
-                </li>
-                <li>
-                  <a href="listings.html" data-i18n="footer.link.offplan"
-                    >Off-Plan Projects</a
-                  >
-                </li>
-                <li>
-                  <a href="listings.html" data-i18n="footer.link.north-coast"
-                    >North Coast</a
-                  >
-                </li>
-                <li>
-                  <a href="compare.html" data-i18n="footer.link.compare-units"
-                    >Compare Units</a
-                  >
-                </li>
-              </ul>
-            </div>
-            <div class="site-footer__nav-col">
-              <h3 class="site-footer__nav-head" data-i18n="footer.col.company">
-                Company
-              </h3>
-              <ul>
-                <li>
-                  <a href="#" data-i18n="footer.link.about">About Akar Town</a>
-                </li>
-                <li><a href="#" data-i18n="footer.link.team">Our Agents</a></li>
-                <li>
-                  <a href="#" data-i18n="footer.link.success"
-                    >Success Stories</a
-                  >
-                </li>
-                <li><a href="#" data-i18n="footer.link.careers">Careers</a></li>
-                <li>
-                  <a href="#" data-i18n="footer.link.press"
-                    >Press &amp; Media</a
-                  >
-                </li>
-                <li>
-                  <a href="#" data-i18n="footer.link.contact-us">Contact Us</a>
-                </li>
-              </ul>
-            </div>
-          </nav>
-          <!-- Property Match Widget -->
-          <div class="site-footer__match">
-            <div
-              class="site-footer__match-eyebrow"
-              data-i18n="footer.match.eyebrow"
-            >
-              Property Matching
-            </div>
-            <h2
-              class="site-footer__match-title"
-              data-i18n="footer.match.title"
-              data-i18n-html
-            >
-              Find Your <em>Perfect</em> Unit
-            </h2>
-            <p class="site-footer__match-sub" data-i18n="footer.match.sub">
+
+          <!-- Properties -->
+          <div class="footer__col" data-reveal>
+            <span class="footer__label">Properties</span>
+            <ul class="footer__links">
+              <li><a href="#">All Properties</a></li>
+              <li><a href="#">Villas &amp; Compounds</a></li>
+              <li><a href="#">Penthouse Collection</a></li>
+              <li><a href="#">Off-Plan Projects</a></li>
+              <li><a href="#">North Coast</a></li>
+              <li><a href="listings.html">Compare Units</a></li>
+            </ul>
+          </div>
+
+          <!-- Company -->
+          <div class="footer__col" data-reveal>
+            <span class="footer__label">Company</span>
+            <ul class="footer__links">
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Our Team</a></li>
+              <li><a href="#">Success Stories</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Press &amp; Media</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+
+          <!-- Property Matching -->
+          <div class="footer__col footer__col--match" data-reveal>
+            <span class="footer__label">Property Matching</span>
+            <h3 class="footer__match-title">Find Your <em>Perfect</em> Unit</h3>
+            <p class="footer__match-desc">
               Tell us what you need — we'll alert you the moment it's listed.
             </p>
-            <div class="site-footer__match-types" id="fmatchTypes">
-              <button class="fmatch-type is-active" data-type="Apartment">
+            <div
+              class="footer__type-pills"
+              role="group"
+              aria-label="Property type"
+            >
+              <button
+                type="button"
+                class="footer__type-pill is-active"
+                data-pill
+              >
                 Apartment
               </button>
-              <button class="fmatch-type" data-type="Villa">Villa</button>
-              <button class="fmatch-type" data-type="Penthouse">
+              <button type="button" class="footer__type-pill" data-pill>
+                Villa
+              </button>
+              <button type="button" class="footer__type-pill" data-pill>
                 Penthouse
               </button>
-              <button class="fmatch-type" data-type="Chalet">Chalet</button>
-              <button class="fmatch-type" data-type="Townhouse">
-                Townhouse
+              <button type="button" class="footer__type-pill" data-pill>
+                Chalet
               </button>
             </div>
-            <label class="fmatch-lbl" for="fmatchBudgetMin"
-              >Budget Range (EGP)</label
-            >
-            <div class="fmatch-budget-row">
-              <input
-                id="fmatchBudgetMin"
-                type="number"
-                class="fmatch-input"
-                placeholder="Minimum"
-                min="0"
-                aria-label="Minimum budget"
-              />
-              <span class="fmatch-sep">—</span>
-              <input
-                type="number"
-                class="fmatch-input"
-                placeholder="Maximum"
-                min="0"
-                aria-label="Maximum budget"
-              />
-            </div>
-            <label class="fmatch-lbl" for="fmatchEmail">Your Email</label>
-            <div class="fmatch-email-row">
-              <input
-                id="fmatchEmail"
-                type="email"
-                class="fmatch-input fmatch-input--email"
-                placeholder="you@example.com"
-              />
-              <button
-                class="fmatch-submit"
-                id="fmatchSubmit"
-                aria-label="Get matched"
-              >
-                <svg
-                  width="16"
-                  height="16"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                  viewBox="0 0 24 24"
+            <form class="footer__match-form" id="footerMatchForm" novalidate>
+              <span class="footer__field-label">Budget Range (EGP)</span>
+              <div class="footer__budget-row">
+                <input
+                  type="number"
+                  class="footer__budget-input"
+                  placeholder="Minimum"
+                  aria-label="Minimum budget"
+                  min="0"
+                />
+                <span class="footer__budget-sep" aria-hidden="true">—</span>
+                <input
+                  type="number"
+                  class="footer__budget-input"
+                  placeholder="Maximum"
+                  aria-label="Maximum budget"
+                  min="0"
+                />
+              </div>
+              <span class="footer__field-label">Your Email</span>
+              <div class="footer__email-row">
+                <input
+                  type="email"
+                  class="footer__email-input"
+                  placeholder="you@example.com"
+                  required
+                  aria-label="Your email"
+                />
+                <button
+                  type="submit"
+                  class="footer__match-submit"
+                  aria-label="Submit"
                 >
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="13,6 19,12 13,18" />
-                </svg>
-              </button>
-            </div>
-            <p class="fmatch-confirm" id="fmatchConfirm" aria-live="polite"></p>
+                  <svg
+                    width="16"
+                    height="14"
+                    viewBox="0 0 16 14"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M7.99997 0.414307C7.99997 1.11051 8.68991 2.15231 9.38737 3.02724C10.2855 4.15371 11.3574 5.13777 12.5873 5.88911C13.5087 6.45171 14.6276 6.99177 15.5264 6.99177M7.99997 13.5855C7.99997 12.8893 8.68991 11.8475 9.38737 10.9726C10.2855 9.84617 11.3574 8.86204 12.5873 8.11071C13.5087 7.54811 14.6276 7.00804 15.5264 7.00804M15.5264 6.99991H0.473572"
+                      stroke="currentColor"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-        <!-- Divider -->
-        <div class="site-footer__rule" aria-hidden="true">
-          <div class="site-footer__rule-line"></div>
-          <div class="site-footer__rule-diamond"></div>
-          <div class="site-footer__rule-line"></div>
+
+        <!-- Full-width wordmark -->
+        <div class="footer__mark" data-reveal aria-hidden="true">
+          <span class="footer__mark-text">AKAR TOWN</span>
         </div>
+
         <!-- Bottom bar -->
-        <div class="site-footer__bottom">
-          <p class="site-footer__copy" data-i18n="footer.copy">
-            © 2026 Akar Town Real Estate. All rights reserved.
-          </p>
-          <div class="site-footer__legal">
-            <a href="#" data-i18n="footer.privacy">Privacy Policy</a>
-            <a href="#" data-i18n="footer.terms">Terms of Use</a>
-            <a href="#" data-i18n="footer.cookie">Cookie Policy</a>
-          </div>
-          <button
-            class="site-footer__top-btn"
-            onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
-            aria-label="Back to top"
+        <div class="footer__bottom" data-reveal>
+          <span class="footer__credit"
+            >&copy; Copyright 2026. All Rights Reserved To
+            <a
+              class="footer__credit-link"
+              href="https://www.8worx.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >8WORX</a
+            ></span
           >
-            <svg
-              width="14"
-              height="14"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-              viewBox="0 0 24 24"
-            >
-              <polyline points="18,15 12,9 6,15" />
-            </svg>
-          </button>
+          <div class="footer__legal">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms</a>
+          </div>
         </div>
       </div>
     </footer>
     <script>
-      (() => {
-        const types = document.querySelectorAll("#fmatchTypes .fmatch-type");
-        types.forEach((btn) =>
-          btn.addEventListener("click", () => {
-            types.forEach((b) => b.classList.remove("is-active"));
-            btn.classList.add("is-active");
-          }),
-        );
-        const submit = document.getElementById("fmatchSubmit");
-        const emailEl = document.getElementById("fmatchEmail");
-        const confirmEl = document.getElementById("fmatchConfirm");
-        if (submit) {
-          submit.addEventListener("click", () => {
-            const email = emailEl?.value.trim() || "";
-            if (!email || !email.includes("@")) {
-              emailEl?.focus();
-              return;
-            }
-            confirmEl.textContent =
-              "✓ You're on the list! We'll notify you when a match is found.";
-            confirmEl.style.color = "rgba(200,16,46,0.9)";
-            emailEl.value = "";
+      (function () {
+        var pills = document.querySelectorAll("[data-pill]");
+        pills.forEach(function (pill) {
+          pill.addEventListener("click", function () {
+            pills.forEach(function (p) { p.classList.remove("is-active"); });
+            pill.classList.add("is-active");
           });
+        });
+        var matchForm = document.getElementById("footerMatchForm");
+        if (matchForm) {
+          matchForm.addEventListener("submit", function (e) { e.preventDefault(); });
         }
       })();
     </script>
@@ -3591,6 +3509,32 @@
             }
           });
         }
+      })();
+    </script>
+
+    <script>
+      /* ── Footer wordmark fit ── */
+      (function () {
+        var mark = document.querySelector(".footer__mark");
+        var markText = document.querySelector(".footer__mark-text");
+        function fitMark() {
+          if (!mark || !markText) return;
+          var PROBE = 200;
+          markText.style.fontSize = PROBE + "px";
+          var probeW = markText.getBoundingClientRect().width;
+          if (!probeW) return;
+          var availW = mark.getBoundingClientRect().width;
+          var widthFit = (availW / probeW) * PROBE;
+          var heightCap = window.innerHeight * 0.34;
+          markText.style.fontSize = Math.min(widthFit, heightCap) + "px";
+        }
+        fitMark();
+        document.fonts && document.fonts.ready && document.fonts.ready.then(fitMark);
+        var raf;
+        window.addEventListener("resize", function () {
+          cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(fitMark);
+        });
       })();
     </script>
   </body>

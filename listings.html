@@ -521,6 +521,7 @@
       }
 
       /* ─── FILTER BAR ─── */
+      /* ─── FILTER ─── */
       .filter-wrap {
         position: sticky;
         top: var(--nav-h);
@@ -531,17 +532,19 @@
       .filter-bar {
         max-width: 1320px;
         margin: 0 auto;
-        padding: 0 48px;
+        padding: 10px 48px;
         display: flex;
         align-items: center;
         gap: 8px;
-        height: 62px;
+        flex-wrap: wrap;
       }
+
+      /* Search pill */
       .filter-search {
         position: relative;
         flex: 1;
-        min-width: 180px;
-        max-width: 280px;
+        min-width: 160px;
+        max-width: 240px;
       }
       .filter-search svg {
         position: absolute;
@@ -553,134 +556,109 @@
       }
       .filter-search input {
         width: 100%;
-        padding: 10px 12px 10px 38px;
+        padding: 9px 14px 9px 36px;
         border: 1px solid var(--ink-10);
-        border-radius: 6px;
-        background: #fff;
+        border-radius: 100px;
+        background: transparent;
         font-size: 13px;
         color: var(--ink);
         transition: border-color 0.2s;
         outline: none;
+        font-family: inherit;
       }
-      .filter-search input::placeholder {
-        color: var(--ink-30);
-      }
-      .filter-search input:focus {
-        border-color: var(--gold);
-      }
+      .filter-search input::placeholder { color: var(--ink-30); }
+      .filter-search input:focus { border-color: var(--gold); }
 
-      /* ─── CUSTOM SELECT ─── */
-      .csel {
-        position: relative;
-        flex-shrink: 0;
-      }
+      /* ─── CUSTOM SELECT (pill) ─── */
+      .csel { position: relative; flex-shrink: 0; }
       .csel__trigger {
         display: flex;
         align-items: center;
-        gap: 7px;
-        padding: 9px 11px 9px 14px;
+        gap: 8px;
+        padding: 6px 10px 6px 7px;
         border: 1px solid var(--ink-10);
-        border-radius: 8px;
-        background: #fff;
-        font-size: 13px;
-        color: var(--ink);
+        border-radius: 100px;
+        background: transparent;
         cursor: pointer;
-        outline: none;
-        transition:
-          border-color 0.22s,
-          box-shadow 0.22s,
-          background 0.22s;
         white-space: nowrap;
-        min-width: 112px;
+        outline: none;
         font-family: inherit;
+        transition: border-color 0.22s, background 0.22s;
       }
       .csel__trigger:hover {
-        border-color: rgba(200, 16, 46, 0.45);
-        background: rgba(200, 16, 46, 0.025);
+        border-color: rgba(200, 16, 46, 0.4);
+        background: rgba(200, 16, 46, 0.04);
       }
       .csel.is-open .csel__trigger {
-        border-color: var(--gold-lt);
+        border-color: var(--gold);
+        background: rgba(200, 16, 46, 0.06);
+      }
+      .csel__icon {
+        display: grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: rgba(200, 16, 46, 0.08);
+        color: var(--gold);
+        flex-shrink: 0;
+      }
+      .csel__text {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        line-height: 1.2;
+        min-width: 0;
+      }
+      .csel__label {
+        font-size: 9px;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink-30);
       }
       .csel__val {
-        flex: 1;
-        text-align: left;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--ink);
         transition: color 0.2s;
       }
-      .csel.has-value .csel__val {
-        color: var(--gold-dk);
-        font-weight: 500;
-      }
+      .csel.has-value .csel__val { color: var(--gold-dk); }
       .csel__arrow {
         flex-shrink: 0;
         color: var(--ink-30);
-        transition:
-          transform 0.28s var(--ease-smooth),
-          color 0.2s;
+        transition: transform 0.28s var(--ease-smooth), color 0.2s;
       }
-      .csel.is-open .csel__arrow {
-        transform: rotate(180deg);
-        color: var(--gold);
-      }
+      .csel.is-open .csel__arrow { transform: rotate(180deg); color: var(--gold); }
       .csel__menu {
         position: absolute;
-        top: calc(100% + 5px);
+        top: calc(100% + 6px);
         left: 0;
         min-width: 100%;
-        background: #fff;
-        border: 1px solid rgba(13, 13, 13, 0.08);
-        border-radius: 10px;
+        background: var(--bg);
+        border: 1px solid var(--ink-10);
+        border-radius: 12px;
+        box-shadow:
           0 4px 6px -1px rgba(13, 13, 13, 0.06),
-          0 16px 40px -4px rgba(13, 13, 13, 0.14);
+          0 16px 40px -4px rgba(13, 13, 13, 0.12);
         overflow: hidden;
         opacity: 0;
         transform: translateY(-6px) scaleY(0.96);
         transform-origin: top center;
         pointer-events: none;
-        transition:
-          opacity 0.18s var(--ease-out),
-          transform 0.18s var(--ease-out);
+        transition: opacity 0.18s var(--ease-out), transform 0.18s var(--ease-out);
         z-index: 150;
       }
-      .csel.is-open .csel__menu {
-        opacity: 1;
-        transform: translateY(0) scaleY(1);
-        pointer-events: auto;
-      }
+      .csel.is-open .csel__menu { opacity: 1; transform: translateY(0) scaleY(1); pointer-events: auto; }
       .csel__opt {
         padding: 9px 14px;
         font-size: 13px;
         color: var(--ink-60);
         cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        transition:
-          background 0.12s,
-          color 0.12s;
-        position: relative;
+        transition: background 0.12s, color 0.12s;
       }
-      .csel__opt:hover {
-        background: rgba(200, 16, 46, 0.06);
-        color: var(--ink);
-      }
-      .csel__opt.is-selected {
-        color: var(--gold-dk);
-        font-weight: 500;
-        background: rgba(200, 16, 46, 0.08);
-      }
-      .csel__opt.is-selected::after {
-        content: "";
-        position: absolute;
-        right: 14px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--gold);
-      }
+      .csel__opt:hover { background: rgba(200, 16, 46, 0.06); color: var(--ink); }
+      .csel__opt.is-selected { color: var(--gold-dk); font-weight: 500; background: rgba(200, 16, 46, 0.08); }
 
       .filter-sep {
         width: 1px;
@@ -690,42 +668,69 @@
         margin: 0 4px;
       }
 
+      /* Advanced filter button (pill) */
       .btn-adv {
         display: flex;
         align-items: center;
-        gap: 7px;
-        padding: 10px 18px;
-        border: 1.5px solid rgba(255, 255, 255, 0.65);
+        gap: 8px;
+        padding: 6px 12px 6px 7px;
+        border: 1px solid var(--ink-10);
         border-radius: 100px;
-        font-size: 12px;
-        font-weight: 500;
-        letter-spacing: 0.04em;
-        color: var(--gold-dk);
-        background: rgba(255, 255, 255, 0.48);
-        backdrop-filter: blur(16px) saturate(180%);
-        -webkit-backdrop-filter: blur(16px) saturate(180%);
-        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        background: transparent;
+        cursor: pointer;
+        font-family: inherit;
         white-space: nowrap;
-        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.05);
         flex-shrink: 0;
+        transition: border-color 0.22s, background 0.22s;
       }
-      .btn-adv:hover,        flex-shrink: 0;
+      .btn-adv__icon {
+        display: grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: rgba(200, 16, 46, 0.08);
+        color: var(--gold);
+        flex-shrink: 0;
+        transition: background 0.22s;
       }
+      .btn-adv__text {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        line-height: 1.2;
+      }
+      .btn-adv__sublabel {
+        font-size: 9px;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink-30);
+      }
+      .btn-adv__main {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--ink);
+      }
+      .btn-adv__badge {
+        display: grid;
+        place-items: center;
+        min-width: 18px;
+        height: 18px;
+        padding: 0 5px;
+        border-radius: 100px;
+        background: var(--gold);
+        color: #fff;
+        font-size: 10px;
+        font-weight: 700;
+      }
+      .btn-adv__badge[hidden] { display: none; }
       .btn-adv:hover,
       .btn-adv.is-open {
-        border-color: rgba(200, 16, 46, 0.35);
-        color: var(--gold-dk);
-        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.07);
-        background: rgba(200, 16, 46, 0.08);
+        border-color: rgba(200, 16, 46, 0.4);
+        background: rgba(200, 16, 46, 0.06);
       }
-        background: rgba(200, 16, 46, 0.08);
-      }
-      .btn-adv svg {
-        transition: transform 0.3s var(--ease-smooth);
-      }
-      .btn-adv.is-open svg {
-        transform: rotate(180deg);
-      }
+      .btn-adv.is-open .btn-adv__icon { background: rgba(200, 16, 46, 0.15); }
 
       .filter-right {
         margin-left: auto;
@@ -739,24 +744,20 @@
         letter-spacing: 0.1em;
         text-transform: uppercase;
         color: var(--ink-30);
-        padding: 6px 16px;
+        padding: 7px 14px;
         border-radius: 100px;
-        transition:
-          color 0.2s,
-          background 0.2s;
+        border: 1px solid transparent;
+        font-family: inherit;
+        transition: color 0.2s, border-color 0.2s;
       }
-      .btn-clear:hover {
-        color: var(--red);
-      }
+      .btn-clear:hover { color: var(--red); border-color: rgba(200, 16, 46, 0.2); }
       .btn-filter-apply {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        padding: 11px 22px;
+        padding: 9px 20px;
         border-radius: 100px;
         background: linear-gradient(135deg, rgba(215, 20, 52, 0.96) 0%, rgba(185, 10, 36, 1) 100%);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
         border: 1px solid rgba(255, 255, 255, 0.2);
         color: #ffffff;
         font-size: 12px;
@@ -764,34 +765,114 @@
         letter-spacing: 0.04em;
         transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         cursor: pointer;
+        font-family: inherit;
       }
       .btn-filter-apply:hover {
         background: linear-gradient(135deg, rgba(225, 25, 58, 0.98) 0%, rgba(200, 16, 46, 1) 100%);
         transform: translateY(-2px);
       }
 
-      /* ─── ADVANCED FILTER PANEL ─── */
-      .adv-panel {
-        max-width: 1320px;
-        margin: 0 auto;
-        padding: 0 48px;
+      /* ─── ADVANCED FILTER DRAWER ─── */
+      .adv-drawer {
+        position: fixed;
+        inset: 0;
+        z-index: 300;
+        pointer-events: none;
+      }
+      .adv-drawer.is-open { pointer-events: auto; }
+      .adv-drawer__scrim {
+        position: absolute;
+        inset: 0;
+        background: rgba(6, 6, 10, 0.42);
+        opacity: 0;
+        transition: opacity 0.35s;
+        cursor: pointer;
+      }
+      .adv-drawer.is-open .adv-drawer__scrim { opacity: 1; }
+      .adv-drawer__panel {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        width: min(420px, calc(100vw - 2.5rem));
+        background: #111;
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: -24px 0 60px rgba(0, 0, 0, 0.4);
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         overflow: hidden;
-        max-height: 0;
-        transition:
-          max-height 0.5s var(--ease-smooth),
-          padding-bottom 0.5s var(--ease-smooth);
       }
-      .adv-panel.is-open {
-        max-height: 480px;
-        padding-bottom: 28px;
+      .adv-drawer.is-open .adv-drawer__panel { transform: translateX(0); }
+      .adv-drawer__edge {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--gold);
+        pointer-events: none;
       }
-      .adv-panel__inner {
-        border-top: 1px solid var(--ink-10);
-        padding-top: 24px;
+      .adv-drawer__head {
+        flex: none;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 28px 28px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .adv-drawer__eyebrow {
+        display: block;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 6px;
+      }
+      .adv-drawer__title {
+        margin: 0;
+        font-family: var(--font-body);
+        font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+        font-weight: 300;
+        letter-spacing: -0.02em;
+        color: #fff;
+        line-height: 1.1;
+      }
+      .adv-drawer__close {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 22px 36px;
+        place-items: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: transparent;
+        color: rgba(255, 255, 255, 0.45);
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: background 0.22s, color 0.22s, border-color 0.22s, transform 0.35s;
       }
+      .adv-drawer__close:hover {
+        background: rgba(200, 16, 46, 0.12);
+        color: #fff;
+        border-color: rgba(200, 16, 46, 0.4);
+        transform: rotate(90deg);
+      }
+      .adv-drawer__body {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        padding: 24px 28px;
+        overscroll-behavior: contain;
+      }
+      .adv-group {
+        padding-bottom: 22px;
+        margin-bottom: 22px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .adv-group:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
       .adv-group__label {
         display: flex;
         align-items: center;
@@ -799,108 +880,92 @@
         font-size: 10px;
         letter-spacing: 0.16em;
         text-transform: uppercase;
-        color: var(--ink-30);
-        margin-bottom: 12px;
+        color: rgba(255, 255, 255, 0.45);
+        margin-bottom: 14px;
         font-weight: 600;
       }
-      .adv-group__label::after {
-        content: "";
-        flex: 1;
-        height: 1px;
-        background: var(--ink-10);
-      }
+      .adv-group__label::after { content: ""; flex: 1; height: 1px; background: rgba(255, 255, 255, 0.08); }
+
       .adv-range {
         display: flex;
         align-items: stretch;
-        border: 1px solid var(--ink-10);
-        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
         overflow: hidden;
-        background: #fff;
-        transition:
-          border-color 0.22s,
-          box-shadow 0.22s;
+        background: rgba(255, 255, 255, 0.05);
+        transition: border-color 0.22s;
       }
-      .adv-range:focus-within {
-        border-color: var(--gold-lt);
-      }
+      .adv-range:focus-within { border-color: var(--gold); }
       .adv-range input {
         flex: 1;
-        padding: 9px 8px;
+        padding: 10px;
         border: none;
         font-size: 13px;
         background: transparent;
         outline: none;
-        color: var(--ink);
+        color: #fff;
         min-width: 0;
         text-align: center;
         font-family: inherit;
       }
-      .adv-range input::placeholder {
-        color: var(--ink-30);
-        font-size: 11.5px;
-      }
+      .adv-range input::placeholder { color: rgba(255, 255, 255, 0.28); font-size: 12px; }
       .adv-range__sep {
         display: flex;
         align-items: center;
-        padding: 0 6px;
-        color: var(--ink-30);
+        padding: 0 8px;
+        color: rgba(255, 255, 255, 0.25);
         font-size: 10px;
         flex-shrink: 0;
-        background: rgba(13, 13, 13, 0.02);
-        border-left: 1px solid var(--ink-10);
-        border-right: 1px solid var(--ink-10);
+        background: rgba(255, 255, 255, 0.03);
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
       }
-      .adv-checks {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 7px;
-      }
+      .adv-checks { display: flex; flex-wrap: wrap; gap: 8px; }
       .adv-check {
         display: flex;
         align-items: center;
         gap: 6px;
-        padding: 6px 12px 6px 9px;
-        border: 1px solid var(--ink-10);
-        border-radius: 20px;
+        padding: 7px 14px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 100px;
         font-size: 12px;
+        font-weight: 500;
         cursor: pointer;
         transition: all 0.2s var(--ease-out);
-        background: #fff;
-        color: var(--ink-60);
+        background: transparent;
+        color: rgba(255, 255, 255, 0.6);
         user-select: none;
       }
-      .adv-check input {
-        display: none;
-      }
+      .adv-check input { display: none; }
       .adv-check__dot {
         width: 7px;
         height: 7px;
         border-radius: 50%;
-        border: 1.5px solid var(--ink-30);
+        border: 1.5px solid rgba(255, 255, 255, 0.28);
         flex-shrink: 0;
-        transition:
-          background 0.18s,
-          border-color 0.18s,
-          transform 0.18s;
+        transition: background 0.18s, border-color 0.18s;
       }
-      .adv-check:hover {
-        border-color: rgba(200, 16, 46, 0.5);
-        color: var(--gold-dk);
-        background: rgba(200, 16, 46, 0.04);
+      .adv-check:hover { border-color: rgba(200, 16, 46, 0.5); color: #fff; background: rgba(200, 16, 46, 0.1); }
+      .adv-check:hover .adv-check__dot { border-color: var(--gold); }
+      .adv-check.is-checked { border-color: var(--gold); background: rgba(200, 16, 46, 0.18); color: #fff; font-weight: 600; }
+      .adv-check.is-checked .adv-check__dot { background: var(--gold); border-color: var(--gold); }
+      .adv-drawer__foot {
+        flex: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 16px 28px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(0, 0, 0, 0.2);
       }
-      .adv-check:hover .adv-check__dot {
-        border-color: var(--gold-lt);
+      .adv-drawer__foot .btn-clear {
+        color: rgba(255, 255, 255, 0.4);
+        border-color: rgba(255, 255, 255, 0.1);
       }
-      .adv-check.is-checked {
-        border-color: var(--gold);
-        background: rgba(200, 16, 46, 0.1);
-        color: var(--gold-dk);
-        font-weight: 500;
-      }
-      .adv-check.is-checked .adv-check__dot {
-        background: var(--gold);
-        border-color: var(--gold);
-        transform: scale(1.15);
+      .adv-drawer__foot .btn-clear:hover {
+        color: #fff;
+        border-color: rgba(200, 16, 46, 0.4);
       }
 
       /* ─── RESULTS BAR ─── */
@@ -2083,13 +2148,9 @@
         .page-hero__inner,
         .filter-bar,
         .results-bar,
-        .listings-wrap,
-        .adv-panel {
+        .listings-wrap {
           padding-left: 28px;
           padding-right: 28px;
-        }
-        .adv-panel__inner {
-          grid-template-columns: repeat(2, 1fr);
         }
       }
       @media (max-width: 768px) {
@@ -2117,17 +2178,16 @@
           max-width: 100%;
           flex-basis: 100%;
         }
-        .csel__trigger {
-          font-size: 12px;
-          padding: 8px 10px 8px 11px;
-          min-width: 90px;
-        }
         .results-bar,
-        .listings-wrap,
-        .adv-panel {
+        .listings-wrap {
           padding-left: 20px;
           padding-right: 20px;
         }
+        .filter-bar { padding-left: 16px; padding-right: 16px; }
+        .adv-drawer__panel { width: 100vw; }
+        .adv-drawer__head,
+        .adv-drawer__body,
+        .adv-drawer__foot { padding-left: 20px; padding-right: 20px; }
         .lightbox__nav--prev {
           left: -6px;
         }
@@ -2240,8 +2300,7 @@
         .cmp-bar__panel { width: 100%; }
         /* Sort select */
         .sort-sel .csel__trigger { min-width: 100px; }
-        /* Advanced filter inner */
-        .adv-panel__inner { grid-template-columns: 1fr; }
+        .adv-drawer__panel { width: 100vw; }
       }
       @media (max-width: 480px) {
         .page-hero__title { font-size: clamp(28px, 8vw, 48px); }
@@ -2255,59 +2314,169 @@
   </head>
   <body>
     <div id="site-wrap" class="site-wrap">
-    <!-- NAVBAR -->
-    <nav class="navbar" role="navigation" aria-label="Main navigation">
-      <a href="index.html" class="navbar__logo" aria-label="Akar Town — Home">
-        <svg
-          width="230"
-          viewBox="0 0 2185 380"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+      <!-- NAVBAR -->
+      <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <a href="index.html" class="navbar__logo" aria-label="Akar Town — Home">
+          <svg
+            width="230"
+            viewBox="0 0 2185 380"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M90.97 258.84H160.93L236.12 169.2V379.42H296.66V5.21997L90.97 258.84Z"
+              fill="white"
+            />
+            <path
+              d="M64.78 291.12L0 371H66.84L133.85 291.12H64.78Z"
+              fill="#C8102E"
+            />
+            <path
+              d="M390.87 186.6L544.58 373.2H472.34L339.38 212.73L317.86 187.07L339.38 160.95L472.34 0.00999451H544.58L390.87 186.61V186.6Z"
+              fill="white"
+            />
+            <path
+              d="M772.951 153.462L752.741 160.698C739.129 146.227 720.111 138.991 695.632 138.991C677.085 138.991 661.976 143.759 650.277 153.268C638.606 162.805 632.756 174.92 632.756 189.613C632.756 204.306 638.55 217.086 650.111 226.429C661.671 235.772 677.279 240.429 696.935 240.429C720.665 240.429 739.351 233.082 752.935 218.362L772.036 228.924C762.388 240.179 751.465 248.302 739.295 253.32C727.125 258.338 712.57 260.833 695.632 260.833C671.901 260.833 652.162 254.9 636.471 243.035C618.534 229.423 609.58 211.625 609.58 189.613C609.58 167.601 618.673 150.302 636.831 136.579C652.661 124.575 672.261 118.587 695.632 118.587C729.259 118.587 755.042 130.203 772.978 153.462H772.951Z"
+              fill="white"
+            />
+            <path
+              d="M1015.47 189.71C1015.47 211.722 1006.43 229.52 988.385 243.132C972.555 254.997 952.899 260.93 929.418 260.93C905.937 260.93 885.893 254.942 870.064 242.938C852.016 229.326 842.978 211.611 842.978 189.71C842.978 167.809 852.127 150.51 870.424 136.676C886.503 124.561 906.159 118.49 929.391 118.49C952.622 118.49 972.361 124.561 988.191 136.676C1006.38 150.538 1015.44 168.197 1015.44 189.71H1015.47ZM992.294 189.71C992.294 174.019 985.612 161.266 972.278 151.508C960.773 143.108 946.495 138.894 929.446 138.894C910.761 138.894 895.569 143.69 883.814 153.255C872.06 162.847 866.21 174.989 866.21 189.71C866.21 204.431 871.949 217.183 883.454 226.526C894.959 235.869 910.289 240.526 929.446 240.526C948.602 240.526 963.711 235.841 975.161 226.443C986.583 217.045 992.321 204.791 992.321 189.71H992.294Z"
+              fill="white"
+            />
+            <path
+              d="M1269.99 256.841H1247.73V147.058H1247.18L1177.45 234.607L1108.29 147.058H1107.73V256.841H1085.47V122.579H1113.28L1177.62 203.724L1242.24 122.579H1269.97V256.841H1269.99Z"
+              fill="white"
+            />
+            <path
+              d="M1446.45 122.607C1460.17 122.607 1471.04 126.405 1479.11 134.001C1487.15 141.597 1491.17 151.771 1491.17 164.496C1491.17 177.858 1486.98 188.06 1478.64 195.102C1470.29 202.144 1458.15 205.664 1442.18 205.664H1362.25V256.841H1339.99V122.579H1446.45V122.607ZM1442.57 185.676C1459.76 185.676 1468.35 178.746 1468.35 164.912C1468.35 150.08 1459.26 142.65 1441.1 142.65H1362.28V185.676H1442.6H1442.57Z"
+              fill="white"
+            />
+            <path
+              d="M1731.22 256.841H1706.88L1691.41 226.789H1600.98L1585.51 256.841H1561.17L1632.19 122.579H1660.19L1731.22 256.841ZM1680.6 206.773L1646.39 141.708L1611.76 206.773H1680.6Z"
+              fill="white"
+            />
+            <path
+              d="M1953.67 256.841H1925.97L1823.48 146.726V256.841H1801.22V122.579H1828.86L1931.43 232.75V122.579H1953.69V256.841H1953.67Z"
+              fill="white"
+            />
+            <path
+              d="M2192.83 122.579L2119.39 203.807V256.841H2097.13V203.807L2023.69 122.579H2051.44L2108.39 185.288L2165.08 122.579H2192.83Z"
+              fill="white"
+            />
+          </svg>
+        </a>
+        <div class="navbar__right">
+          <ul class="navbar__nav" role="list">
+            <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+            <li>
+              <a href="listings.html" class="active" data-i18n="nav.properties"
+                >Properties</a
+              >
+            </li>
+            <li><a href="#" data-i18n="nav.projects">Projects</a></li>
+            <li><a href="#" data-i18n="nav.about">About</a></li>
+            <li><a href="#" data-i18n="nav.contact">Contact</a></li>
+          </ul>
+          <a
+            href="tel:01150000727"
+            class="navbar__phone"
+            aria-label="Call 01150000727"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.27-.73a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 15.5v1.42z"
+              />
+            </svg>
+            <span>01150000727</span>
+          </a>
+          <div class="navbar__sep" aria-hidden="true"></div>
+          <div class="navbar__actions">
+            <button class="btn-pill btn-pill--fill" data-i18n="nav.cta">
+              Submit Property
+            </button>
+          </div>
+          <div
+            id="langToggle"
+            class="lang-toggle"
+            role="switch"
+            aria-checked="false"
+            tabindex="0"
+            aria-label="Switch language"
+          >
+            <span class="lang-toggle__en">EN</span>
+            <span class="lang-toggle__knob"></span>
+            <span class="lang-toggle__ar">عر</span>
+          </div>
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            type="button"
+            aria-label="Switch to dark mode"
+            aria-pressed="false"
+          >
+            <span class="theme-toggle__sun" aria-hidden="true">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="5" />
+                <line x1="12" y1="1" x2="12" y2="3" />
+                <line x1="12" y1="21" x2="12" y2="23" />
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                <line x1="1" y1="12" x2="3" y2="12" />
+                <line x1="21" y1="12" x2="23" y2="12" />
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+              </svg>
+            </span>
+            <span class="theme-toggle__moon" aria-hidden="true">
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+              </svg>
+            </span>
+          </button>
+        </div>
+        <button
+          class="nav-hamburger"
+          id="navHamburger"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
         >
-          <path
-            d="M90.97 258.84H160.93L236.12 169.2V379.42H296.66V5.21997L90.97 258.84Z"
-            fill="white"
-          />
-          <path
-            d="M64.78 291.12L0 371H66.84L133.85 291.12H64.78Z"
-            fill="#C8102E"
-          />
-          <path
-            d="M390.87 186.6L544.58 373.2H472.34L339.38 212.73L317.86 187.07L339.38 160.95L472.34 0.00999451H544.58L390.87 186.61V186.6Z"
-            fill="white"
-          />
-          <path
-            d="M772.951 153.462L752.741 160.698C739.129 146.227 720.111 138.991 695.632 138.991C677.085 138.991 661.976 143.759 650.277 153.268C638.606 162.805 632.756 174.92 632.756 189.613C632.756 204.306 638.55 217.086 650.111 226.429C661.671 235.772 677.279 240.429 696.935 240.429C720.665 240.429 739.351 233.082 752.935 218.362L772.036 228.924C762.388 240.179 751.465 248.302 739.295 253.32C727.125 258.338 712.57 260.833 695.632 260.833C671.901 260.833 652.162 254.9 636.471 243.035C618.534 229.423 609.58 211.625 609.58 189.613C609.58 167.601 618.673 150.302 636.831 136.579C652.661 124.575 672.261 118.587 695.632 118.587C729.259 118.587 755.042 130.203 772.978 153.462H772.951Z"
-            fill="white"
-          />
-          <path
-            d="M1015.47 189.71C1015.47 211.722 1006.43 229.52 988.385 243.132C972.555 254.997 952.899 260.93 929.418 260.93C905.937 260.93 885.893 254.942 870.064 242.938C852.016 229.326 842.978 211.611 842.978 189.71C842.978 167.809 852.127 150.51 870.424 136.676C886.503 124.561 906.159 118.49 929.391 118.49C952.622 118.49 972.361 124.561 988.191 136.676C1006.38 150.538 1015.44 168.197 1015.44 189.71H1015.47ZM992.294 189.71C992.294 174.019 985.612 161.266 972.278 151.508C960.773 143.108 946.495 138.894 929.446 138.894C910.761 138.894 895.569 143.69 883.814 153.255C872.06 162.847 866.21 174.989 866.21 189.71C866.21 204.431 871.949 217.183 883.454 226.526C894.959 235.869 910.289 240.526 929.446 240.526C948.602 240.526 963.711 235.841 975.161 226.443C986.583 217.045 992.321 204.791 992.321 189.71H992.294Z"
-            fill="white"
-          />
-          <path
-            d="M1269.99 256.841H1247.73V147.058H1247.18L1177.45 234.607L1108.29 147.058H1107.73V256.841H1085.47V122.579H1113.28L1177.62 203.724L1242.24 122.579H1269.97V256.841H1269.99Z"
-            fill="white"
-          />
-          <path
-            d="M1446.45 122.607C1460.17 122.607 1471.04 126.405 1479.11 134.001C1487.15 141.597 1491.17 151.771 1491.17 164.496C1491.17 177.858 1486.98 188.06 1478.64 195.102C1470.29 202.144 1458.15 205.664 1442.18 205.664H1362.25V256.841H1339.99V122.579H1446.45V122.607ZM1442.57 185.676C1459.76 185.676 1468.35 178.746 1468.35 164.912C1468.35 150.08 1459.26 142.65 1441.1 142.65H1362.28V185.676H1442.6H1442.57Z"
-            fill="white"
-          />
-          <path
-            d="M1731.22 256.841H1706.88L1691.41 226.789H1600.98L1585.51 256.841H1561.17L1632.19 122.579H1660.19L1731.22 256.841ZM1680.6 206.773L1646.39 141.708L1611.76 206.773H1680.6Z"
-            fill="white"
-          />
-          <path
-            d="M1953.67 256.841H1925.97L1823.48 146.726V256.841H1801.22V122.579H1828.86L1931.43 232.75V122.579H1953.69V256.841H1953.67Z"
-            fill="white"
-          />
-          <path
-            d="M2192.83 122.579L2119.39 203.807V256.841H2097.13V203.807L2023.69 122.579H2051.44L2108.39 185.288L2165.08 122.579H2192.83Z"
-            fill="white"
-          />
-        </svg>
-      </a>
-      <div class="navbar__right">
-        <ul class="navbar__nav" role="list">
+          <span class="nav-hamburger__bar"></span>
+          <span class="nav-hamburger__bar"></span>
+          <span class="nav-hamburger__bar"></span>
+        </button>
+      </nav>
+
+      <!-- Mobile nav drawer -->
+      <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+        <ul class="mobile-nav__list">
           <li><a href="index.html" data-i18n="nav.home">Home</a></li>
           <li>
             <a href="listings.html" class="active" data-i18n="nav.properties"
@@ -2318,363 +2487,102 @@
           <li><a href="#" data-i18n="nav.about">About</a></li>
           <li><a href="#" data-i18n="nav.contact">Contact</a></li>
         </ul>
-        <a href="tel:01150000727" class="navbar__phone" aria-label="Call 01150000727">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.27-.73a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 15.5v1.42z"/>
-          </svg>
-          <span>01150000727</span>
-        </a>
-        <div class="navbar__sep" aria-hidden="true"></div>
-        <div class="navbar__actions">
-          <button class="btn-pill btn-pill--fill" data-i18n="nav.cta">
-            Submit Property
-          </button>
-        </div>
-        <div
-          id="langToggle"
-          class="lang-toggle"
-          role="switch"
-          aria-checked="false"
-          tabindex="0"
-          aria-label="Switch language"
-        >
-          <span class="lang-toggle__en">EN</span>
-          <span class="lang-toggle__knob"></span>
-          <span class="lang-toggle__ar">عر</span>
-        </div>
-        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
-          <span class="theme-toggle__sun" aria-hidden="true">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-          </span>
-          <span class="theme-toggle__moon" aria-hidden="true">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-          </span>
-        </button>
-      </div>
-      <button
-        class="nav-hamburger"
-        id="navHamburger"
-        aria-label="Toggle navigation"
-        aria-expanded="false"
-      >
-        <span class="nav-hamburger__bar"></span>
-        <span class="nav-hamburger__bar"></span>
-        <span class="nav-hamburger__bar"></span>
-      </button>
-    </nav>
-
-    <!-- Mobile nav drawer -->
-    <div class="mobile-nav" id="mobileNav" aria-hidden="true">
-      <ul class="mobile-nav__list">
-        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
-        <li>
-          <a href="listings.html" class="active" data-i18n="nav.properties"
-            >Properties</a
+        <div class="mobile-nav__cta">
+          <button data-i18n="nav.cta">Submit Property</button>
+          <a
+            href="tel:01150000727"
+            class="mobile-nav__phone"
+            aria-label="Call 01150000727"
           >
-        </li>
-        <li><a href="#" data-i18n="nav.projects">Projects</a></li>
-        <li><a href="#" data-i18n="nav.about">About</a></li>
-        <li><a href="#" data-i18n="nav.contact">Contact</a></li>
-      </ul>
-      <div class="mobile-nav__cta">
-        <button data-i18n="nav.cta">Submit Property</button>
-        <a href="tel:01150000727" class="mobile-nav__phone" aria-label="Call 01150000727">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.27-.73a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 15.5v1.42z"/>
-          </svg>
-          01150000727
-        </a>
-      </div>
-    </div>
-
-    <!-- PAGE HEADER -->
-    <div class="page-hero">
-      <div class="page-hero__inner">
-        <div>
-          <nav class="page-hero__bread" aria-label="Breadcrumb">
-            <a href="index.html">Home</a>
-            <span aria-hidden="true">›</span>
-            <span data-i18n="listings.eyebrow">Properties</span>
-          </nav>
-          <h1
-            class="page-hero__title"
-            data-i18n="listings.title"
-            data-i18n-html
-          >
-            Discover <em>Exceptional</em><br />Properties
-          </h1>
-        </div>
-        <div class="page-hero__meta">
-          <div class="page-hero__count" id="heroCount">248</div>
-          <div class="page-hero__count-label" data-i18n="listings.count">
-            Available Properties
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- FILTER BAR -->
-    <div class="filter-wrap" id="filterWrap">
-      <!-- Main filter row -->
-      <div class="filter-bar">
-        <div class="filter-search">
-          <svg
-            width="15"
-            height="15"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <circle cx="11" cy="11" r="8" />
-            <path d="m21 21-4.35-4.35" />
-          </svg>
-          <input
-            type="text"
-            placeholder="Search location, project…"
-            id="searchInput"
-          />
-        </div>
-
-        <!-- Type -->
-        <div class="csel" id="typeFilter" data-value="">
-          <button class="csel__trigger" type="button" aria-haspopup="listbox">
-            <span class="csel__val">All Types</span>
             <svg
-              class="csel__arrow"
-              width="12"
-              height="12"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2.5"
-              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
             >
-              <polyline points="6,9 12,15 18,9" />
+              <path
+                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.27-.73a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 15.5v1.42z"
+              />
             </svg>
-          </button>
-          <div class="csel__menu" role="listbox">
-            <div class="csel__opt is-selected" data-val="">All Types</div>
-            <div class="csel__opt" data-val="Apartment">Apartment</div>
-            <div class="csel__opt" data-val="Villa">Villa</div>
-            <div class="csel__opt" data-val="Townhouse">Townhouse</div>
-            <div class="csel__opt" data-val="Penthouse">Penthouse</div>
-            <div class="csel__opt" data-val="Chalet">Chalet</div>
-            <div class="csel__opt" data-val="Studio">Studio</div>
-          </div>
-        </div>
-
-        <!-- Price -->
-        <div class="csel" id="priceFilter" data-value="">
-          <button class="csel__trigger" type="button" aria-haspopup="listbox">
-            <span class="csel__val">Any Price</span>
-            <svg
-              class="csel__arrow"
-              width="12"
-              height="12"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-              viewBox="0 0 24 24"
-            >
-              <polyline points="6,9 12,15 18,9" />
-            </svg>
-          </button>
-          <div class="csel__menu" role="listbox">
-            <div class="csel__opt is-selected" data-val="">Any Price</div>
-            <div class="csel__opt" data-val="0-2">Under 2M EGP</div>
-            <div class="csel__opt" data-val="2-5">2M – 5M EGP</div>
-            <div class="csel__opt" data-val="5-10">5M – 10M EGP</div>
-            <div class="csel__opt" data-val="10-20">10M – 20M EGP</div>
-            <div class="csel__opt" data-val="20+">20M+ EGP</div>
-          </div>
-        </div>
-
-        <!-- Beds -->
-        <div class="csel" id="bedsFilter" data-value="">
-          <button class="csel__trigger" type="button" aria-haspopup="listbox">
-            <span class="csel__val">Beds</span>
-            <svg
-              class="csel__arrow"
-              width="12"
-              height="12"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-              viewBox="0 0 24 24"
-            >
-              <polyline points="6,9 12,15 18,9" />
-            </svg>
-          </button>
-          <div class="csel__menu" role="listbox">
-            <div class="csel__opt is-selected" data-val="">Any Beds</div>
-            <div class="csel__opt" data-val="1">1 Bed</div>
-            <div class="csel__opt" data-val="2">2 Beds</div>
-            <div class="csel__opt" data-val="3">3 Beds</div>
-            <div class="csel__opt" data-val="4">4 Beds</div>
-            <div class="csel__opt" data-val="5">5 Beds</div>
-            <div class="csel__opt" data-val="6+">6+ Beds</div>
-          </div>
-        </div>
-
-        <!-- Baths -->
-        <div class="csel" id="bathsFilter" data-value="">
-          <button class="csel__trigger" type="button" aria-haspopup="listbox">
-            <span class="csel__val">Baths</span>
-            <svg
-              class="csel__arrow"
-              width="12"
-              height="12"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-              viewBox="0 0 24 24"
-            >
-              <polyline points="6,9 12,15 18,9" />
-            </svg>
-          </button>
-          <div class="csel__menu" role="listbox">
-            <div class="csel__opt is-selected" data-val="">Any Baths</div>
-            <div class="csel__opt" data-val="1">1 Bath</div>
-            <div class="csel__opt" data-val="2">2 Baths</div>
-            <div class="csel__opt" data-val="3">3 Baths</div>
-            <div class="csel__opt" data-val="4">4 Baths</div>
-            <div class="csel__opt" data-val="5+">5+ Baths</div>
-          </div>
-        </div>
-
-        <div class="filter-sep"></div>
-
-        <button class="btn-adv" id="advToggle">
-          <svg
-            width="14"
-            height="14"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <line x1="4" y1="6" x2="20" y2="6" />
-            <line x1="8" y1="12" x2="16" y2="12" />
-            <line x1="11" y1="18" x2="13" y2="18" />
-          </svg>
-          Filters
-          <svg
-            width="12"
-            height="12"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            viewBox="0 0 24 24"
-          >
-            <polyline points="6,9 12,15 18,9" />
-          </svg>
-        </button>
-
-        <div class="filter-right">
-          <button
-            class="btn-clear"
-            id="clearBtn"
-            data-i18n="listings.filter.reset"
-          >
-            Clear All
-          </button>
-          <button
-            class="btn-filter-apply"
-            id="applyBtn"
-            data-i18n="listings.filter.apply"
-          >
-            Apply
-          </button>
+            01150000727
+          </a>
         </div>
       </div>
 
-      <!-- Advanced filter panel -->
-      <div class="adv-panel" id="advPanel">
-        <div class="adv-panel__inner">
-          <div class="adv-group">
-            <div class="adv-group__label">Area (m²)</div>
-            <div class="adv-range">
-              <input type="number" placeholder="Min" id="areaMin" />
-              <span class="adv-range__sep">—</span>
-              <input type="number" placeholder="Max" id="areaMax" />
-            </div>
+      <!-- PAGE HEADER -->
+      <div class="page-hero">
+        <div class="page-hero__inner">
+          <div>
+            <nav class="page-hero__bread" aria-label="Breadcrumb">
+              <a href="index.html">Home</a>
+              <span aria-hidden="true">›</span>
+              <span data-i18n="listings.eyebrow">Properties</span>
+            </nav>
+            <h1
+              class="page-hero__title"
+              data-i18n="listings.title"
+              data-i18n-html
+            >
+              Discover <em>Exceptional</em><br />Properties
+            </h1>
           </div>
-          <div class="adv-group">
-            <div class="adv-group__label">Floor</div>
-            <div class="adv-range">
-              <input type="number" placeholder="Min" id="floorMin" />
-              <span class="adv-range__sep">—</span>
-              <input type="number" placeholder="Max" id="floorMax" />
-            </div>
-          </div>
-          <div class="adv-group">
-            <div class="adv-group__label" data-i18n="listings.filter.status">
-              Status
-            </div>
-            <div class="adv-checks" id="statusChecks">
-              <label class="adv-check"
-                ><input type="checkbox" value="for-sale" /><span
-                  class="adv-check__dot"
-                ></span
-                >For Sale</label
-              >
-              <label class="adv-check"
-                ><input type="checkbox" value="for-rent" /><span
-                  class="adv-check__dot"
-                ></span
-                >For Rent</label
-              >
-              <label class="adv-check"
-                ><input type="checkbox" value="off-plan" /><span
-                  class="adv-check__dot"
-                ></span
-                >Off Plan</label
-              >
-            </div>
-          </div>
-          <div class="adv-group">
-            <div class="adv-group__label">Amenities</div>
-            <div class="adv-checks" id="amenityChecks">
-              <label class="adv-check"
-                ><input type="checkbox" value="pool" /><span
-                  class="adv-check__dot"
-                ></span
-                >Pool</label
-              >
-              <label class="adv-check"
-                ><input type="checkbox" value="gym" /><span
-                  class="adv-check__dot"
-                ></span
-                >Gym</label
-              >
-              <label class="adv-check"
-                ><input type="checkbox" value="parking" /><span
-                  class="adv-check__dot"
-                ></span
-                >Parking</label
-              >
-              <label class="adv-check"
-                ><input type="checkbox" value="garden" /><span
-                  class="adv-check__dot"
-                ></span
-                >Garden</label
-              >
+          <div class="page-hero__meta">
+            <div class="page-hero__count" id="heroCount">248</div>
+            <div class="page-hero__count-label" data-i18n="listings.count">
+              Available Properties
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- RESULTS BAR -->
-    <div class="results-bar sr" id="resultsBar">
-      <p class="results-bar__label">
-        <strong id="resultCount">18</strong> properties found
-      </p>
-      <div class="results-bar__right">
-        <div class="sort-sel">
-          <div class="csel" id="sortSel" data-value="">
+      <!-- FILTER BAR -->
+      <div class="filter-wrap" id="filterWrap">
+        <div class="filter-bar">
+          <!-- Search -->
+          <div class="filter-search">
+            <svg
+              width="14"
+              height="14"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.35-4.35" />
+            </svg>
+            <input
+              type="text"
+              placeholder="Search location, project…"
+              id="searchInput"
+            />
+          </div>
+
+          <!-- Type pill -->
+          <div class="csel" id="typeFilter" data-value="">
             <button class="csel__trigger" type="button" aria-haspopup="listbox">
-              <span class="csel__val">Newest First</span>
+              <span class="csel__icon">
+                <svg
+                  width="13"
+                  height="13"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                  <polyline points="9 22 9 12 15 12 15 22" />
+                </svg>
+              </span>
+              <span class="csel__text">
+                <span class="csel__label">Type</span>
+                <span class="csel__val">All Types</span>
+              </span>
               <svg
                 class="csel__arrow"
                 width="11"
@@ -2688,187 +2596,533 @@
               </svg>
             </button>
             <div class="csel__menu" role="listbox">
-              <div class="csel__opt is-selected" data-val="">Newest First</div>
-              <div class="csel__opt" data-val="price-asc">
-                Price: Low to High
+              <div class="csel__opt is-selected" data-val="">All Types</div>
+              <div class="csel__opt" data-val="Apartment">Apartment</div>
+              <div class="csel__opt" data-val="Villa">Villa</div>
+              <div class="csel__opt" data-val="Townhouse">Townhouse</div>
+              <div class="csel__opt" data-val="Penthouse">Penthouse</div>
+              <div class="csel__opt" data-val="Chalet">Chalet</div>
+              <div class="csel__opt" data-val="Studio">Studio</div>
+            </div>
+          </div>
+
+          <!-- Price pill -->
+          <div class="csel" id="priceFilter" data-value="">
+            <button class="csel__trigger" type="button" aria-haspopup="listbox">
+              <span class="csel__icon">
+                <svg
+                  width="13"
+                  height="13"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <line x1="12" y1="1" x2="12" y2="23" />
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                </svg>
+              </span>
+              <span class="csel__text">
+                <span class="csel__label">Price</span>
+                <span class="csel__val">Any Price</span>
+              </span>
+              <svg
+                class="csel__arrow"
+                width="11"
+                height="11"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                viewBox="0 0 24 24"
+              >
+                <polyline points="6,9 12,15 18,9" />
+              </svg>
+            </button>
+            <div class="csel__menu" role="listbox">
+              <div class="csel__opt is-selected" data-val="">Any Price</div>
+              <div class="csel__opt" data-val="0-2">Under 2M EGP</div>
+              <div class="csel__opt" data-val="2-5">2M – 5M EGP</div>
+              <div class="csel__opt" data-val="5-10">5M – 10M EGP</div>
+              <div class="csel__opt" data-val="10-20">10M – 20M EGP</div>
+              <div class="csel__opt" data-val="20+">20M+ EGP</div>
+            </div>
+          </div>
+
+          <!-- Beds pill -->
+          <div class="csel" id="bedsFilter" data-value="">
+            <button class="csel__trigger" type="button" aria-haspopup="listbox">
+              <span class="csel__icon">
+                <svg
+                  width="13"
+                  height="13"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M2 9V4a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v5" />
+                  <path d="M2 20v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5" />
+                  <path d="M2 20h20" />
+                  <path d="M2 9h20" />
+                  <rect x="7" y="9" width="4" height="4" rx="1" />
+                </svg>
+              </span>
+              <span class="csel__text">
+                <span class="csel__label">Beds</span>
+                <span class="csel__val">Any Beds</span>
+              </span>
+              <svg
+                class="csel__arrow"
+                width="11"
+                height="11"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                viewBox="0 0 24 24"
+              >
+                <polyline points="6,9 12,15 18,9" />
+              </svg>
+            </button>
+            <div class="csel__menu" role="listbox">
+              <div class="csel__opt is-selected" data-val="">Any Beds</div>
+              <div class="csel__opt" data-val="1">1 Bed</div>
+              <div class="csel__opt" data-val="2">2 Beds</div>
+              <div class="csel__opt" data-val="3">3 Beds</div>
+              <div class="csel__opt" data-val="4">4 Beds</div>
+              <div class="csel__opt" data-val="5">5 Beds</div>
+              <div class="csel__opt" data-val="6+">6+ Beds</div>
+            </div>
+          </div>
+
+          <!-- Baths pill -->
+          <div class="csel" id="bathsFilter" data-value="">
+            <button class="csel__trigger" type="button" aria-haspopup="listbox">
+              <span class="csel__icon">
+                <svg
+                  width="13"
+                  height="13"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"
+                  />
+                  <line x1="10" y1="5" x2="8" y2="7" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <line x1="7" y1="19" x2="7" y2="21" />
+                  <line x1="17" y1="19" x2="17" y2="21" />
+                </svg>
+              </span>
+              <span class="csel__text">
+                <span class="csel__label">Baths</span>
+                <span class="csel__val">Any Baths</span>
+              </span>
+              <svg
+                class="csel__arrow"
+                width="11"
+                height="11"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                viewBox="0 0 24 24"
+              >
+                <polyline points="6,9 12,15 18,9" />
+              </svg>
+            </button>
+            <div class="csel__menu" role="listbox">
+              <div class="csel__opt is-selected" data-val="">Any Baths</div>
+              <div class="csel__opt" data-val="1">1 Bath</div>
+              <div class="csel__opt" data-val="2">2 Baths</div>
+              <div class="csel__opt" data-val="3">3 Baths</div>
+              <div class="csel__opt" data-val="4">4 Baths</div>
+              <div class="csel__opt" data-val="5+">5+ Baths</div>
+            </div>
+          </div>
+
+          <div class="filter-sep"></div>
+
+          <!-- Advanced filters pill -->
+          <button class="btn-adv" id="advToggle" type="button">
+            <span class="btn-adv__icon">
+              <svg
+                width="13"
+                height="13"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <line x1="4" y1="6" x2="20" y2="6" />
+                <line x1="8" y1="12" x2="16" y2="12" />
+                <line x1="11" y1="18" x2="13" y2="18" />
+              </svg>
+            </span>
+            <span class="btn-adv__text">
+              <span class="btn-adv__sublabel">Filter</span>
+              <span class="btn-adv__main">Advanced</span>
+            </span>
+            <span class="btn-adv__badge" id="advBadge" hidden>0</span>
+          </button>
+
+          <div class="filter-right">
+            <button
+              class="btn-clear"
+              id="clearBtn"
+              type="button"
+              data-i18n="listings.filter.reset"
+            >
+              Clear All
+            </button>
+            <button
+              class="btn-filter-apply"
+              id="applyBtn"
+              type="button"
+              data-i18n="listings.filter.apply"
+            >
+              Apply
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADVANCED FILTER DRAWER -->
+      <div class="adv-drawer" id="advDrawer">
+        <div class="adv-drawer__scrim" id="advScrim"></div>
+        <aside class="adv-drawer__panel">
+          <span class="adv-drawer__edge" aria-hidden="true"></span>
+          <header class="adv-drawer__head">
+            <div>
+              <span class="adv-drawer__eyebrow">Refine</span>
+              <h2 class="adv-drawer__title">Advanced Filters</h2>
+            </div>
+            <button
+              class="adv-drawer__close"
+              id="advClose"
+              type="button"
+              aria-label="Close advanced filters"
+            >
+              <svg
+                width="14"
+                height="14"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                viewBox="0 0 24 24"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </header>
+          <div class="adv-drawer__body">
+            <div class="adv-group">
+              <div class="adv-group__label">Area (m²)</div>
+              <div class="adv-range">
+                <input type="number" placeholder="Min" id="areaMin" />
+                <span class="adv-range__sep">—</span>
+                <input type="number" placeholder="Max" id="areaMax" />
               </div>
-              <div class="csel__opt" data-val="price-desc">
-                Price: High to Low
+            </div>
+            <div class="adv-group">
+              <div class="adv-group__label">Floor</div>
+              <div class="adv-range">
+                <input type="number" placeholder="Min" id="floorMin" />
+                <span class="adv-range__sep">—</span>
+                <input type="number" placeholder="Max" id="floorMax" />
               </div>
-              <div class="csel__opt" data-val="popular">Most Popular</div>
-              <div class="csel__opt" data-val="area-desc">
-                Area: Large to Small
+            </div>
+            <div class="adv-group">
+              <div class="adv-group__label" data-i18n="listings.filter.status">
+                Status
+              </div>
+              <div class="adv-checks" id="statusChecks">
+                <label class="adv-check"
+                  ><input type="checkbox" value="for-sale" /><span
+                    class="adv-check__dot"
+                  ></span
+                  >For Sale</label
+                >
+                <label class="adv-check"
+                  ><input type="checkbox" value="for-rent" /><span
+                    class="adv-check__dot"
+                  ></span
+                  >For Rent</label
+                >
+                <label class="adv-check"
+                  ><input type="checkbox" value="off-plan" /><span
+                    class="adv-check__dot"
+                  ></span
+                  >Off Plan</label
+                >
+              </div>
+            </div>
+            <div class="adv-group">
+              <div class="adv-group__label">Amenities</div>
+              <div class="adv-checks" id="amenityChecks">
+                <label class="adv-check"
+                  ><input type="checkbox" value="pool" /><span
+                    class="adv-check__dot"
+                  ></span
+                  >Pool</label
+                >
+                <label class="adv-check"
+                  ><input type="checkbox" value="gym" /><span
+                    class="adv-check__dot"
+                  ></span
+                  >Gym</label
+                >
+                <label class="adv-check"
+                  ><input type="checkbox" value="parking" /><span
+                    class="adv-check__dot"
+                  ></span
+                  >Parking</label
+                >
+                <label class="adv-check"
+                  ><input type="checkbox" value="garden" /><span
+                    class="adv-check__dot"
+                  ></span
+                  >Garden</label
+                >
               </div>
             </div>
           </div>
-        </div>
-        <div class="view-toggle">
-          <button class="view-btn active" id="gridViewBtn" title="Grid view">
-            <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
-              <rect x="3" y="3" width="7" height="7" rx="1" />
-              <rect x="14" y="3" width="7" height="7" rx="1" />
-              <rect x="3" y="14" width="7" height="7" rx="1" />
-              <rect x="14" y="14" width="7" height="7" rx="1" />
-            </svg>
-          </button>
-          <button class="view-btn" id="listViewBtn" title="List view">
-            <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
-              <rect x="3" y="4" width="18" height="3" rx="1" />
-              <rect x="3" y="10.5" width="18" height="3" rx="1" />
-              <rect x="3" y="17" width="18" height="3" rx="1" />
-            </svg>
-          </button>
+          <footer class="adv-drawer__foot">
+            <button class="btn-clear" id="drawerResetBtn" type="button">
+              Reset
+            </button>
+            <button class="btn-filter-apply" id="drawerApplyBtn" type="button">
+              Apply Filters
+            </button>
+          </footer>
+        </aside>
+      </div>
+
+      <!-- RESULTS BAR -->
+      <div class="results-bar sr" id="resultsBar">
+        <p class="results-bar__label">
+          <strong id="resultCount">18</strong> properties found
+        </p>
+        <div class="results-bar__right">
+          <div class="sort-sel">
+            <div class="csel" id="sortSel" data-value="">
+              <button
+                class="csel__trigger"
+                type="button"
+                aria-haspopup="listbox"
+              >
+                <span class="csel__val">Newest First</span>
+                <svg
+                  class="csel__arrow"
+                  width="11"
+                  height="11"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  viewBox="0 0 24 24"
+                >
+                  <polyline points="6,9 12,15 18,9" />
+                </svg>
+              </button>
+              <div class="csel__menu" role="listbox">
+                <div class="csel__opt is-selected" data-val="">
+                  Newest First
+                </div>
+                <div class="csel__opt" data-val="price-asc">
+                  Price: Low to High
+                </div>
+                <div class="csel__opt" data-val="price-desc">
+                  Price: High to Low
+                </div>
+                <div class="csel__opt" data-val="popular">Most Popular</div>
+                <div class="csel__opt" data-val="area-desc">
+                  Area: Large to Small
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="view-toggle">
+            <button class="view-btn active" id="gridViewBtn" title="Grid view">
+              <svg
+                width="15"
+                height="15"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <rect x="3" y="3" width="7" height="7" rx="1" />
+                <rect x="14" y="3" width="7" height="7" rx="1" />
+                <rect x="3" y="14" width="7" height="7" rx="1" />
+                <rect x="14" y="14" width="7" height="7" rx="1" />
+              </svg>
+            </button>
+            <button class="view-btn" id="listViewBtn" title="List view">
+              <svg
+                width="15"
+                height="15"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <rect x="3" y="4" width="18" height="3" rx="1" />
+                <rect x="3" y="10.5" width="18" height="3" rx="1" />
+                <rect x="3" y="17" width="18" height="3" rx="1" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- PROPERTY GRID -->
-    <div class="listings-wrap">
-      <div class="listings-grid" id="listingsGrid">
-        <!-- Cards injected by JS -->
+      <!-- PROPERTY GRID -->
+      <div class="listings-wrap">
+        <div class="listings-grid" id="listingsGrid">
+          <!-- Cards injected by JS -->
+        </div>
       </div>
-    </div>
 
-    <!-- LOAD MORE -->
-    <div class="load-more-wrap">
-      <button class="btn-load-more" id="loadMoreBtn">
-        <div class="spinner"></div>
-        <span data-i18n="btn.load-more">Load More Properties</span>
-        <svg
-          width="14"
-          height="14"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-        >
-          <polyline points="6,9 12,15 18,9" />
-        </svg>
-      </button>
-    </div>
+      <!-- LOAD MORE -->
+      <div class="load-more-wrap">
+        <button class="btn-load-more" id="loadMoreBtn">
+          <div class="spinner"></div>
+          <span data-i18n="btn.load-more">Load More Properties</span>
+          <svg
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <polyline points="6,9 12,15 18,9" />
+          </svg>
+        </button>
+      </div>
 
-    <!-- COMPARE SIDEBAR -->
-    <div class="cmp-bar cmp-bar--hidden" id="cmpBar">
-      <div class="cmp-bar__panel" id="cmpPanel">
-        <div class="cmp-panel__head">
-          <h4 data-i18n="cmp.panel.title">Property Comparison</h4>
+      <!-- COMPARE SIDEBAR -->
+      <div class="cmp-bar cmp-bar--hidden" id="cmpBar">
+        <div class="cmp-bar__panel" id="cmpPanel">
+          <div class="cmp-panel__head">
+            <h4 data-i18n="cmp.panel.title">Property Comparison</h4>
+            <button
+              class="cmp-panel__close"
+              id="cmpClose"
+              aria-label="Close panel"
+            >
+              <svg
+                width="14"
+                height="14"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                viewBox="0 0 24 24"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </div>
+          <div class="cmp-panel__list" id="cmpList"></div>
+          <div class="cmp-panel__foot">
+            <button
+              class="btn-cmp-go"
+              id="cmpGoBtn"
+              disabled
+              data-i18n="cmp.go"
+            >
+              Compare Now
+            </button>
+          </div>
+        </div>
+        <div class="cmp-bar__right">
           <button
-            class="cmp-panel__close"
-            id="cmpClose"
-            aria-label="Close panel"
+            class="cmp-bar__toggle"
+            id="cmpToggle"
+            aria-label="Toggle compare panel"
           >
             <svg
-              width="14"
-              height="14"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M8 3 4 7l4 4" />
+              <path d="M4 7h16" />
+              <path d="M16 21l4-4-4-4" />
+              <path d="M20 17H4" />
+            </svg>
+            <span class="cmp-bar__label" data-i18n="cmp.toggle">Compare</span>
+            <span id="cmpCount" class="cmp-bar__count">0/4</span>
+            <svg
+              class="cmp-bar__chevron"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               stroke-width="2.5"
-              viewBox="0 0 24 24"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             >
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
+              <polyline points="18 15 12 9 6 15" />
             </svg>
           </button>
         </div>
-        <div class="cmp-panel__list" id="cmpList"></div>
-        <div class="cmp-panel__foot">
-          <button class="btn-cmp-go" id="cmpGoBtn" disabled data-i18n="cmp.go">
-            Compare Now
+      </div>
+
+      <!-- LIGHTBOX -->
+      <div
+        class="lightbox"
+        id="lightbox"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Image gallery"
+      >
+        <button class="lightbox__close" id="lbClose" aria-label="Close">
+          <svg
+            width="28"
+            height="28"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+        <div class="lightbox__stage">
+          <button class="lightbox__nav lightbox__nav--prev" id="lbPrev">
+            <svg
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <polyline points="15,18 9,12 15,6" />
+            </svg>
+          </button>
+          <img class="lightbox__img" id="lbImg" src="" alt="" />
+          <button class="lightbox__nav lightbox__nav--next" id="lbNext">
+            <svg
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <polyline points="9,18 15,12 9,6" />
+            </svg>
           </button>
         </div>
+        <div class="lightbox__counter" id="lbCounter"></div>
+        <div class="lightbox__thumbs" id="lbThumbs"></div>
       </div>
-      <div class="cmp-bar__right">
-        <button
-          class="cmp-bar__toggle"
-          id="cmpToggle"
-          aria-label="Toggle compare panel"
-        >
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M8 3 4 7l4 4" />
-            <path d="M4 7h16" />
-            <path d="M16 21l4-4-4-4" />
-            <path d="M20 17H4" />
-          </svg>
-          <span class="cmp-bar__label" data-i18n="cmp.toggle">Compare</span>
-          <span id="cmpCount" class="cmp-bar__count">0/4</span>
-          <svg
-            class="cmp-bar__chevron"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <polyline points="18 15 12 9 6 15" />
-          </svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- LIGHTBOX -->
-    <div
-      class="lightbox"
-      id="lightbox"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Image gallery"
-    >
-      <button class="lightbox__close" id="lbClose" aria-label="Close">
-        <svg
-          width="28"
-          height="28"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-        >
-          <line x1="18" y1="6" x2="6" y2="18" />
-          <line x1="6" y1="6" x2="18" y2="18" />
-        </svg>
-      </button>
-      <div class="lightbox__stage">
-        <button class="lightbox__nav lightbox__nav--prev" id="lbPrev">
-          <svg
-            width="20"
-            height="20"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <polyline points="15,18 9,12 15,6" />
-          </svg>
-        </button>
-        <img class="lightbox__img" id="lbImg" src="" alt="" />
-        <button class="lightbox__nav lightbox__nav--next" id="lbNext">
-          <svg
-            width="20"
-            height="20"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <polyline points="9,18 15,12 9,6" />
-          </svg>
-        </button>
-      </div>
-      <div class="lightbox__counter" id="lbCounter"></div>
-      <div class="lightbox__thumbs" id="lbThumbs"></div>
-    </div>
-
     </div>
     <!-- /site-wrap -->
 
@@ -3185,13 +3439,17 @@
         var pills = document.querySelectorAll("[data-pill]");
         pills.forEach(function (pill) {
           pill.addEventListener("click", function () {
-            pills.forEach(function (p) { p.classList.remove("is-active"); });
+            pills.forEach(function (p) {
+              p.classList.remove("is-active");
+            });
             pill.classList.add("is-active");
           });
         });
         var matchForm = document.getElementById("footerMatchForm");
         if (matchForm) {
-          matchForm.addEventListener("submit", function (e) { e.preventDefault(); });
+          matchForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+          });
         }
       })();
     </script>
@@ -3745,16 +4003,17 @@
         clearTimeout(window._st);
         window._st = setTimeout(applyFilters, 350);
       });
-      document.getElementById("clearBtn").addEventListener("click", () => {
+      function resetAllFilters() {
         const resetCfg = [
           { id: "typeFilter", label: "All Types" },
           { id: "priceFilter", label: "Any Price" },
-          { id: "bedsFilter", label: "Beds" },
-          { id: "bathsFilter", label: "Baths" },
+          { id: "bedsFilter", label: "Any Beds" },
+          { id: "bathsFilter", label: "Any Baths" },
           { id: "sortSel", label: "Newest First" },
         ];
         resetCfg.forEach(({ id, label }) => {
           const el = document.getElementById(id);
+          if (!el) return;
           el.dataset.value = "";
           el.classList.remove("has-value");
           const valEl = el.querySelector(".csel__val");
@@ -3765,24 +4024,57 @@
         });
         document.getElementById("searchInput").value = "";
         document
-          .querySelectorAll(".adv-panel input[type=checkbox]")
+          .querySelectorAll(".adv-drawer input[type=checkbox]")
           .forEach((c) => (c.checked = false));
         document
-          .querySelectorAll(".adv-panel input[type=number]")
+          .querySelectorAll(".adv-drawer input[type=number]")
           .forEach((i) => (i.value = ""));
         document
           .querySelectorAll(".adv-check")
           .forEach((c) => c.classList.remove("is-checked"));
         filtered = [...PROPERTIES];
         renderGrid(true);
-      });
+      }
+      document
+        .getElementById("clearBtn")
+        .addEventListener("click", resetAllFilters);
 
-      /* ── ADVANCED PANEL TOGGLE ── */
+      /* ── ADVANCED DRAWER ── */
       const advToggle = document.getElementById("advToggle");
-      const advPanel = document.getElementById("advPanel");
-      advToggle.addEventListener("click", () => {
-        const open = advPanel.classList.toggle("is-open");
-        advToggle.classList.toggle("is-open", open);
+      const advDrawer = document.getElementById("advDrawer");
+      const advScrim = document.getElementById("advScrim");
+      const advClose = document.getElementById("advClose");
+
+      function openAdvDrawer() {
+        advDrawer.classList.add("is-open");
+        advToggle.classList.add("is-open");
+        document.body.style.overflow = "hidden";
+      }
+      function closeAdvDrawer() {
+        advDrawer.classList.remove("is-open");
+        advToggle.classList.remove("is-open");
+        document.body.style.overflow = "";
+      }
+
+      advToggle.addEventListener("click", openAdvDrawer);
+      advClose.addEventListener("click", closeAdvDrawer);
+      advScrim.addEventListener("click", closeAdvDrawer);
+      document
+        .getElementById("drawerApplyBtn")
+        .addEventListener("click", () => {
+          applyFilters();
+          closeAdvDrawer();
+        });
+      document
+        .getElementById("drawerResetBtn")
+        .addEventListener("click", () => {
+          resetAllFilters();
+          closeAdvDrawer();
+        });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && advDrawer.classList.contains("is-open"))
+          closeAdvDrawer();
       });
 
       /* ── ADV CHECK STYLING ── */
@@ -4473,7 +4765,9 @@
           markText.style.fontSize = Math.min(widthFit, heightCap) + "px";
         }
         fitMark();
-        document.fonts && document.fonts.ready && document.fonts.ready.then(fitMark);
+        document.fonts &&
+          document.fonts.ready &&
+          document.fonts.ready.then(fitMark);
         var raf;
         window.addEventListener("resize", function () {
           cancelAnimationFrame(raf);

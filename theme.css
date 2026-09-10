@@ -197,7 +197,6 @@ html[data-theme="dark"] .pgal-card__loc {
 html[data-theme="dark"] .cmp-bar__panel {
   background: var(--_s2);
   border-color: var(--_border-md);
-  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.7);
 }
 
 /* ══════════════════════════════════════════════════════════════

@@ -776,7 +776,7 @@
       .adv-drawer {
         position: fixed;
         inset: 0;
-        z-index: 300;
+        z-index: 1000;
         pointer-events: none;
       }
       .adv-drawer.is-open { pointer-events: auto; }
@@ -797,8 +797,8 @@
         display: flex;
         flex-direction: column;
         width: min(420px, calc(100vw - 2.5rem));
-        background: #111;
-        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        background: #fff;
+        border-left: 1px solid rgba(0, 0, 0, 0.09);
         transform: translateX(100%);
         transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         overflow: hidden;
@@ -820,7 +820,7 @@
         justify-content: space-between;
         gap: 16px;
         padding: 28px 28px 20px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.07);
       }
       .adv-drawer__eyebrow {
         display: block;
@@ -837,7 +837,7 @@
         font-size: clamp(1.25rem, 2.5vw, 1.6rem);
         font-weight: 300;
         letter-spacing: -0.02em;
-        color: #fff;
+        color: var(--ink);
         line-height: 1.1;
       }
       .adv-drawer__close {
@@ -846,17 +846,17 @@
         width: 36px;
         height: 36px;
         border-radius: 50%;
-        border: 1px solid rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(0, 0, 0, 0.12);
         background: transparent;
-        color: rgba(255, 255, 255, 0.45);
+        color: rgba(0, 0, 0, 0.4);
         cursor: pointer;
         flex-shrink: 0;
         transition: background 0.22s, color 0.22s, border-color 0.22s, transform 0.35s;
       }
       .adv-drawer__close:hover {
-        background: rgba(200, 16, 46, 0.12);
-        color: #fff;
-        border-color: rgba(200, 16, 46, 0.4);
+        background: rgba(200, 16, 46, 0.08);
+        color: var(--ink);
+        border-color: rgba(200, 16, 46, 0.35);
         transform: rotate(90deg);
       }
       .adv-drawer__body {
@@ -864,12 +864,14 @@
         min-height: 0;
         overflow-y: auto;
         padding: 24px 28px;
+        scrollbar-width: none;
         overscroll-behavior: contain;
       }
+      .adv-drawer__body::-webkit-scrollbar { display: none; }
       .adv-group {
         padding-bottom: 22px;
         margin-bottom: 22px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.07);
       }
       .adv-group:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
       .adv-group__label {
@@ -879,19 +881,18 @@
         font-size: 10px;
         letter-spacing: 0.16em;
         text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.45);
+        color: rgba(0, 0, 0, 0.4);
         margin-bottom: 14px;
         font-weight: 600;
       }
-      .adv-group__label::after { content: ""; flex: 1; height: 1px; background: rgba(255, 255, 255, 0.08); }
 
       .adv-range {
         display: flex;
         align-items: stretch;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.12);
         border-radius: 10px;
         overflow: hidden;
-        background: rgba(255, 255, 255, 0.05);
+        background: rgba(0, 0, 0, 0.03);
         transition: border-color 0.22s;
       }
       .adv-range:focus-within { border-color: var(--gold); }
@@ -902,22 +903,22 @@
         font-size: 13px;
         background: transparent;
         outline: none;
-        color: #fff;
+        color: var(--ink);
         min-width: 0;
         text-align: center;
         font-family: inherit;
       }
-      .adv-range input::placeholder { color: rgba(255, 255, 255, 0.28); font-size: 12px; }
+      .adv-range input::placeholder { color: rgba(0, 0, 0, 0.28); font-size: 12px; }
       .adv-range__sep {
         display: flex;
         align-items: center;
         padding: 0 8px;
-        color: rgba(255, 255, 255, 0.25);
+        color: rgba(0, 0, 0, 0.28);
         font-size: 10px;
         flex-shrink: 0;
-        background: rgba(255, 255, 255, 0.03);
-        border-left: 1px solid rgba(255, 255, 255, 0.08);
-        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(0, 0, 0, 0.03);
+        border-left: 1px solid rgba(0, 0, 0, 0.07);
+        border-right: 1px solid rgba(0, 0, 0, 0.07);
       }
       .adv-checks { display: flex; flex-wrap: wrap; gap: 8px; }
       .adv-check {
@@ -925,14 +926,14 @@
         align-items: center;
         gap: 6px;
         padding: 7px 14px;
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(0, 0, 0, 0.12);
         border-radius: 100px;
         font-size: 12px;
         font-weight: 500;
         cursor: pointer;
         transition: all 0.2s var(--ease-out);
         background: transparent;
-        color: rgba(255, 255, 255, 0.6);
+        color: rgba(0, 0, 0, 0.55);
         user-select: none;
       }
       .adv-check input { display: none; }
@@ -940,13 +941,13 @@
         width: 7px;
         height: 7px;
         border-radius: 50%;
-        border: 1.5px solid rgba(255, 255, 255, 0.28);
+        border: 1.5px solid rgba(0, 0, 0, 0.25);
         flex-shrink: 0;
         transition: background 0.18s, border-color 0.18s;
       }
-      .adv-check:hover { border-color: rgba(200, 16, 46, 0.5); color: #fff; background: rgba(200, 16, 46, 0.1); }
+      .adv-check:hover { border-color: rgba(200, 16, 46, 0.5); color: var(--ink); background: rgba(200, 16, 46, 0.06); }
       .adv-check:hover .adv-check__dot { border-color: var(--gold); }
-      .adv-check.is-checked { border-color: var(--gold); background: rgba(200, 16, 46, 0.18); color: #fff; font-weight: 600; }
+      .adv-check.is-checked { border-color: var(--gold); background: rgba(200, 16, 46, 0.08); color: var(--ink); font-weight: 600; }
       .adv-check.is-checked .adv-check__dot { background: var(--gold); border-color: var(--gold); }
       .adv-drawer__foot {
         flex: none;
@@ -955,14 +956,66 @@
         justify-content: space-between;
         gap: 12px;
         padding: 16px 28px;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
-        background: rgba(0, 0, 0, 0.2);
+        border-top: 1px solid rgba(0, 0, 0, 0.07);
+        background: rgba(0, 0, 0, 0.02);
       }
       .adv-drawer__foot .btn-clear {
+        color: rgba(0, 0, 0, 0.45);
+        border-color: rgba(0, 0, 0, 0.12);
+      }
+      .adv-drawer__foot .btn-clear:hover {
+        color: var(--ink);
+        border-color: rgba(200, 16, 46, 0.4);
+      }
+
+      /* ─── DRAWER dark mode ─── */
+      html[data-theme="dark"] .adv-drawer__panel {
+        background: #111;
+        border-left-color: rgba(255, 255, 255, 0.08);
+      }
+      html[data-theme="dark"] .adv-drawer__head {
+        border-bottom-color: rgba(255, 255, 255, 0.08);
+      }
+      html[data-theme="dark"] .adv-drawer__title { color: #fff; }
+      html[data-theme="dark"] .adv-drawer__close {
+        border-color: rgba(255, 255, 255, 0.14);
+        color: rgba(255, 255, 255, 0.45);
+      }
+      html[data-theme="dark"] .adv-drawer__close:hover {
+        background: rgba(200, 16, 46, 0.12);
+        color: #fff;
+        border-color: rgba(200, 16, 46, 0.4);
+      }
+      html[data-theme="dark"] .adv-group { border-bottom-color: rgba(255, 255, 255, 0.08); }
+      html[data-theme="dark"] .adv-group__label { color: rgba(255, 255, 255, 0.45); }}
+      html[data-theme="dark"] .adv-range {
+        border-color: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
+      }
+      html[data-theme="dark"] .adv-range input { color: #fff; }
+      html[data-theme="dark"] .adv-range input::placeholder { color: rgba(255, 255, 255, 0.28); }
+      html[data-theme="dark"] .adv-range__sep {
+        color: rgba(255, 255, 255, 0.25);
+        background: rgba(255, 255, 255, 0.03);
+        border-left-color: rgba(255, 255, 255, 0.08);
+        border-right-color: rgba(255, 255, 255, 0.08);
+      }
+      html[data-theme="dark"] .adv-check {
+        border-color: rgba(255, 255, 255, 0.12);
+        color: rgba(255, 255, 255, 0.6);
+      }
+      html[data-theme="dark"] .adv-check__dot { border-color: rgba(255, 255, 255, 0.28); }
+      html[data-theme="dark"] .adv-check:hover { color: #fff; background: rgba(200, 16, 46, 0.1); }
+      html[data-theme="dark"] .adv-check.is-checked { background: rgba(200, 16, 46, 0.18); color: #fff; }
+      html[data-theme="dark"] .adv-drawer__foot {
+        border-top-color: rgba(255, 255, 255, 0.08);
+        background: rgba(0, 0, 0, 0.2);
+      }
+      html[data-theme="dark"] .adv-drawer__foot .btn-clear {
         color: rgba(255, 255, 255, 0.4);
         border-color: rgba(255, 255, 255, 0.1);
       }
-      .adv-drawer__foot .btn-clear:hover {
+      html[data-theme="dark"] .adv-drawer__foot .btn-clear:hover {
         color: #fff;
         border-color: rgba(200, 16, 46, 0.4);
       }

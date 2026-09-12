@@ -16,6 +16,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
     />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin/>
     <link rel="stylesheet" href="theme.css" />
     <script src="theme.js"></script>
     <style>
@@ -516,7 +517,101 @@
         display: flex;
         gap: 12px;
         flex-wrap: wrap;
+        align-items: center;
       }
+      /* PDF download button */
+      .btn-pdf {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 13px 26px;
+        border-radius: 100px;
+        font-size: 13px;
+        font-weight: 650;
+        letter-spacing: 0.055em;
+        line-height: 1;
+        font-family: var(--font-body-ltr);
+        cursor: pointer;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .btn-pdf:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.7);
+        transform: translateY(-2px);
+      }
+      .btn-pdf.is-loading {
+        opacity: 0.7;
+        pointer-events: none;
+      }
+      .btn-pdf__spinner {
+        display: none;
+        width: 13px;
+        height: 13px;
+        border: 2px solid rgba(255,255,255,0.35);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: pdf-spin 0.7s linear infinite;
+      }
+      .btn-pdf.is-loading .btn-pdf__spinner { display: block; }
+      .btn-pdf.is-loading .btn-pdf__icon { display: none; }
+      @keyframes pdf-spin { to { transform: rotate(360deg); } }
+
+      /* Light-mode overrides for hero PDF button */
+      html:not([data-theme="dark"]) .btn-pdf {
+        background: var(--gold, #c8102e);
+        border-color: var(--gold, #c8102e);
+        color: #fff;
+      }
+      html:not([data-theme="dark"]) .btn-pdf:hover {
+        background: #a50d26;
+        border-color: #a50d26;
+        transform: translateY(-2px);
+      }
+      html:not([data-theme="dark"]) .btn-pdf__spinner {
+        border-color: rgba(255,255,255,0.4);
+        border-top-color: #fff;
+      }
+
+      /* Sticky header PDF icon button */
+      .pd-sticky__pdf {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: rgba(255, 255, 255, 0.7);
+        transition: background 0.2s, border-color 0.2s, color 0.2s;
+        background: rgba(255, 255, 255, 0.06);
+        position: relative;
+      }
+      .pd-sticky__pdf:hover {
+        background: rgba(200, 16, 46, 0.15);
+        border-color: var(--gold);
+        color: #fff;
+      }
+      .pd-sticky__pdf svg { width: 15px; height: 15px; }
+      .pd-sticky__pdf.is-loading svg { display: none; }
+      .pd-sticky__pdf.is-loading::after {
+        content: '';
+        width: 13px;
+        height: 13px;
+        border: 2px solid rgba(255,255,255,0.3);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: pdf-spin 0.7s linear infinite;
+      }
+
       .btn-slide--outline {
         background: rgba(255, 255, 255, 0.48);
         backdrop-filter: blur(20px) saturate(200%);
@@ -1572,6 +1667,8 @@
         border: none;
         display: block;
       }
+      /* Leaflet map fills the frame */
+      #pdLeafletMap { width: 100%; height: 100%; }
 
       /* â"€â"€ MASTER PLAN â"€â"€ */
       .pd-masterplan {
@@ -3267,6 +3364,16 @@
             </svg>
             <span data-i18n="pd.schedule">Schedule a Visit</span>
           </button>
+          <button class="btn-pdf" id="btnDownloadPDF" aria-label="Download property PDF">
+            <span class="btn-pdf__spinner" aria-hidden="true"></span>
+            <svg class="btn-pdf__icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="12" y1="18" x2="12" y2="12"/>
+              <line x1="9" y1="15" x2="15" y2="15"/>
+            </svg>
+            <span>Download PDF</span>
+          </button>
         </div>
       </div>
       <!-- /prop-info -->
@@ -3492,6 +3599,19 @@
           title="Compare"
         >
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="M16 21l4-4-4-4"/><path d="M20 17H4"/></svg>
+        </button>
+        <button
+          class="pd-sticky__pdf"
+          id="btnDownloadPDFSticky"
+          aria-label="Download property PDF"
+          title="Download PDF"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="12" y1="18" x2="12" y2="12"/>
+            <line x1="9" y1="15" x2="15" y2="15"/>
+          </svg>
         </button>
         <button
           class="pd-sticky__save"
@@ -4094,14 +4214,7 @@
               </svg>
               Katameya Heights, New Cairo, Cairo, Egypt
             </div>
-            <div class="pd-map__frame">
-              <iframe
-                title="Katameya Heights location map"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=31.38%2C30.02%2C31.44%2C30.07&layer=mapnik&marker=30.045%2C31.41"
-                loading="lazy"
-                referrerpolicy="no-referrer"
-              ></iframe>
-            </div>
+            <div class="pd-map__frame" id="pdLeafletMap"></div>
           </div>
 
           <div class="pd-section-sep"></div>
@@ -5961,6 +6074,427 @@
           raf = requestAnimationFrame(fitMark);
         });
       })();
+    </script>
+
+    <!-- Leaflet — Canvas 2D map, no WebGL required -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin></script>
+    <script>
+    (() => {
+      const el = document.getElementById('pdLeafletMap');
+      if (!el || typeof L === 'undefined') return;
+      const LAT = 30.045, LNG = 31.41;
+      const map = L.map('pdLeafletMap', { zoomControl: true, scrollWheelZoom: false }).setView([LAT, LNG], 14);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 19
+      }).addTo(map);
+      const icon = L.divIcon({
+        className: '',
+        html: '<div style="width:14px;height:14px;background:#c8102e;border:2.5px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.35)"></div>',
+        iconSize: [14, 14],
+        iconAnchor: [7, 7]
+      });
+      L.marker([LAT, LNG], { icon })
+        .addTo(map)
+        .bindPopup('<strong>Katameya Heights</strong><br>New Cairo, Cairo, Egypt')
+        .openPopup();
+    })();
+    </script>
+
+    <!-- jsPDF — direct PDF generation, no print dialog -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+    <script>
+    (() => {
+      /* ── Helpers ── */
+      function q(sel) { return document.querySelector(sel); }
+      function qa(sel) { return [...document.querySelectorAll(sel)]; }
+      function txt(sel) { return (q(sel)?.textContent || '').trim(); }
+
+      async function imgToDataURL(src) {
+        return new Promise(resolve => {
+          const img = new Image();
+          img.crossOrigin = 'anonymous';
+          img.onload = () => {
+            try {
+              const canvas = document.createElement('canvas');
+              canvas.width  = img.naturalWidth;
+              canvas.height = img.naturalHeight;
+              canvas.getContext('2d').drawImage(img, 0, 0);
+              resolve(canvas.toDataURL('image/jpeg', 0.92));
+            } catch { resolve(null); }
+          };
+          img.onerror = () => resolve(null);
+          img.src = src;
+        });
+      }
+
+      function setLoading(on) {
+        [q('#btnDownloadPDF'), q('#btnDownloadPDFSticky')].forEach(btn => {
+          if (!btn) return;
+          btn.classList.toggle('is-loading', on);
+          btn.disabled = on;
+        });
+      }
+
+      /* ── PDF builder ── */
+      async function buildPDF() {
+        setLoading(true);
+        try {
+          const { jsPDF } = window.jspdf;
+          const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+          const PW   = doc.internal.pageSize.getWidth();
+          const PH   = doc.internal.pageSize.getHeight();
+          const M    = 18;                     // page margin
+          const CW   = PW - M * 2;            // content width
+          const RED  = [200, 16, 46];
+          const INK  = [13, 13, 13];
+          const GRAY = [110, 110, 110];
+          const LITE = [248, 246, 243];
+          const MID  = [185, 185, 185];
+
+          /* ── Collect data from DOM ── */
+          const propName  = txt('.pd-header__h1') || txt('.pd-sticky__name');
+          const location  = txt('.pd-header__location');
+          const price     = txt('.prop-price');
+          const ref       = txt('.pd-header__meta-item strong');
+          const badges    = qa('.pd-header__badges .badge').map(b => b.textContent.trim()).join('  ·  ');
+
+          const stats = qa('.pd-stats__item').map(el => ({
+            val:   (el.querySelector('.pd-stats__val')?.textContent  || '').trim(),
+            label: (el.querySelector('.pd-stats__label')?.textContent|| '').trim()
+          }));
+
+          const descParts = qa('.pd-desc p').map(p => p.textContent.trim());
+          const description = descParts.join('\n\n');
+
+          const details = qa('.pd-details-grid__cell').map(cell => ({
+            label: (cell.querySelector('.pd-details-grid__label')?.textContent || '').trim(),
+            val:   (cell.querySelector('.pd-details-grid__val')?.textContent   || '').trim()
+          }));
+
+          const amenities  = qa('.pd-amenity__text').map(el => el.textContent.trim());
+          const facilities = qa('.pd-facility__text').map(el => el.textContent.trim());
+
+          /* ── Try fetching hero image ── */
+          const heroSrc  = q('.gallery-slide.is-active')?.src || q('.gallery-slide')?.src;
+          const heroData = heroSrc ? await imgToDataURL(heroSrc) : null;
+
+          /* ── Shared utilities ── */
+          const sectionTitle = (doc, text, y) => {
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(9);
+            doc.setTextColor(...RED);
+            doc.text(text.toUpperCase(), M, y);
+            doc.setDrawColor(...RED);
+            doc.setLineWidth(0.6);
+            doc.line(M, y + 1.5, M + doc.getTextWidth(text.toUpperCase()) + 2, y + 1.5);
+            return y + 7;
+          };
+
+          const pageHeader = (doc) => {
+            doc.setFillColor(...RED);
+            doc.rect(0, 0, PW, 4, 'F');
+            doc.setFillColor(...INK);
+            doc.rect(0, 4, PW, 8, 'F');
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(7);
+            doc.setTextColor(255, 255, 255);
+            doc.text('AKAR TOWN', M, 9.5);
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(...MID);
+            doc.text('Property Datasheet  ·  Confidential', PW - M, 9.5, { align: 'right' });
+          };
+
+          const pageFooter = (doc, pageNum, total) => {
+            const fy = PH - 8;
+            doc.setDrawColor(...MID);
+            doc.setLineWidth(0.25);
+            doc.line(M, fy - 2, PW - M, fy - 2);
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(7);
+            doc.setTextColor(...GRAY);
+            doc.text('AKAR Town Real Estate  ·  ' + propName, M, fy + 2);
+            doc.text('Page ' + pageNum + ' / ' + total, PW - M, fy + 2, { align: 'right' });
+            doc.setTextColor(...MID);
+            doc.text('All figures are indicative and subject to change without notice.', PW / 2, fy + 2, { align: 'center' });
+          };
+
+          /* ═══════════════════════════════════════
+             PAGE 1 — Cover
+          ═══════════════════════════════════════ */
+
+          /* Header bar (0–12 mm), then hero image flush against it */
+          pageHeader(doc);          // red rect 0–4, dark rect 4–12
+          const IMG_Y = 12;         // image starts exactly where header ends
+          const imgH  = 85;
+          let y;
+          if (heroData) {
+            doc.addImage(heroData, 'JPEG', 0, IMG_Y, PW, imgH, '', 'FAST');
+            /* Gradient scrim over image bottom */
+            for (let i = 0; i < 20; i++) {
+              const a = i / 20;
+              doc.setFillColor(13, 13, 13);
+              doc.setGState(new doc.GState({ opacity: a * 0.65 }));
+              doc.rect(0, IMG_Y + imgH - (i + 1) * 3, PW, 3, 'F');
+            }
+            doc.setGState(new doc.GState({ opacity: 1 }));
+            y = IMG_Y + imgH + 5;
+          } else {
+            /* No image — dark branded banner as fallback */
+            doc.setFillColor(...INK);
+            doc.rect(0, IMG_Y, PW, imgH, 'F');
+            doc.setFillColor(...RED);
+            doc.rect(0, IMG_Y, 4, imgH, 'F');
+            y = IMG_Y + imgH + 5;
+          }
+
+          /* Property name */
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(26);
+          doc.setTextColor(...INK);
+          const nameLines = doc.splitTextToSize(propName, CW);
+          doc.text(nameLines, M, y);
+          y += nameLines.length * 9 + 1;
+
+          /* Location */
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(9);
+          doc.setTextColor(...GRAY);
+          doc.text(location.replace(/\s+/g, ' '), M, y);
+          y += 5;
+
+          /* Badges */
+          if (badges) {
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(7.5);
+            doc.setTextColor(...RED);
+            doc.text(badges.toUpperCase(), M, y);
+            y += 5;
+          }
+
+          /* Price & Ref card */
+          y += 2;
+          doc.setFillColor(...LITE);
+          doc.roundedRect(M, y, CW, 20, 2, 2, 'F');
+          doc.setFillColor(...RED);
+          doc.rect(M, y, 3, 20, 'F');
+
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(7.5);
+          doc.setTextColor(...GRAY);
+          doc.text('ASKING PRICE', M + 8, y + 6);
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(17);
+          doc.setTextColor(...INK);
+          doc.text('EGP ' + price.replace(/[^\d,\.]/g, '').trim(), M + 8, y + 15);
+
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(7.5);
+          doc.setTextColor(...GRAY);
+          doc.text('REF', PW - M - 6, y + 6, { align: 'right' });
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(10);
+          doc.setTextColor(...INK);
+          doc.text(ref || '—', PW - M - 6, y + 15, { align: 'right' });
+          y += 26;
+
+          /* Stats strip */
+          const sW = CW / stats.length;
+          doc.setFillColor(...INK);
+          doc.rect(M, y, CW, 24, 'F');
+          /* Red accent on left edge */
+          doc.setFillColor(...RED);
+          doc.rect(M, y, 3, 24, 'F');
+
+          stats.forEach((s, i) => {
+            const sx = M + 3 + i * sW + sW / 2;
+            /* Separator */
+            if (i > 0) {
+              doc.setDrawColor(50, 50, 50);
+              doc.setLineWidth(0.3);
+              doc.line(M + 3 + i * sW, y + 4, M + 3 + i * sW, y + 20);
+            }
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(13);
+            doc.setTextColor(255, 255, 255);
+            doc.text(s.val, sx, y + 12, { align: 'center' });
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(6.5);
+            doc.setTextColor(...MID);
+            doc.text(s.label.toUpperCase(), sx, y + 19, { align: 'center' });
+          });
+          y += 30;
+
+          /* ── About (first paragraph only on cover) ── */
+          y = sectionTitle(doc, 'About This Property', y);
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(9);
+          doc.setTextColor(55, 55, 55);
+          doc.setLineHeightFactor(1.5);
+          const firstPara = descParts[0] || '';
+          const paraLines = doc.splitTextToSize(firstPara, CW);
+          const maxLines  = Math.floor((PH - y - 18) / 5.5);
+          doc.text(paraLines.slice(0, maxLines), M, y);
+          doc.setLineHeightFactor(1.15);
+
+          /* ═══════════════════════════════════════
+             PAGE 2 — Full description + Details
+          ═══════════════════════════════════════ */
+          doc.addPage();
+          pageHeader(doc);
+          y = 18;
+
+          /* Full description */
+          y = sectionTitle(doc, 'Full Description', y);
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(9);
+          doc.setTextColor(55, 55, 55);
+          doc.setLineHeightFactor(1.55);
+          const allDescLines = doc.splitTextToSize(description, CW);
+          /* Paginate desc if very long */
+          let lineIdx = 0;
+          while (lineIdx < allDescLines.length) {
+            const available = Math.floor((PH - y - 16) / 5.2);
+            const chunk = allDescLines.slice(lineIdx, lineIdx + available);
+            doc.text(chunk, M, y);
+            lineIdx += available;
+            y += chunk.length * 5.2 + 4;
+            if (lineIdx < allDescLines.length) {
+              doc.addPage();
+              pageHeader(doc);
+              y = 18;
+            }
+          }
+          doc.setLineHeightFactor(1.15);
+          y += 6;
+
+          /* Property Details table */
+          if (y > PH - 60) { doc.addPage(); pageHeader(doc); y = 18; }
+          y = sectionTitle(doc, 'Property Details', y);
+
+          const tableBody = [];
+          for (let i = 0; i < details.length; i += 2) {
+            tableBody.push([
+              details[i]?.label   || '',
+              details[i]?.val     || '',
+              details[i+1]?.label || '',
+              details[i+1]?.val   || ''
+            ]);
+          }
+
+          doc.autoTable({
+            startY: y,
+            margin: { left: M, right: M },
+            body: tableBody,
+            columnStyles: {
+              0: { fontStyle: 'normal', textColor: GRAY, fontSize: 8,   cellWidth: CW * 0.22 },
+              1: { fontStyle: 'bold',   textColor: INK,  fontSize: 8.5, cellWidth: CW * 0.28 },
+              2: { fontStyle: 'normal', textColor: GRAY, fontSize: 8,   cellWidth: CW * 0.22 },
+              3: { fontStyle: 'bold',   textColor: INK,  fontSize: 8.5, cellWidth: CW * 0.28 }
+            },
+            styles: {
+              cellPadding: { top: 5, bottom: 5, left: 5, right: 4 },
+              lineColor: [225, 225, 225],
+              lineWidth: 0.25,
+              font: 'helvetica'
+            },
+            alternateRowStyles: { fillColor: LITE },
+            tableLineColor: [215, 215, 215],
+            tableLineWidth: 0.25,
+            didDrawPage: () => { pageHeader(doc); }
+          });
+          y = doc.lastAutoTable.finalY + 12;
+
+          /* ═══════════════════════════════════════
+             PAGE 3 — Amenities + Facilities + CTA
+          ═══════════════════════════════════════ */
+          if (y > PH - 80) { doc.addPage(); pageHeader(doc); y = 18; }
+
+          /* Amenities */
+          y = sectionTitle(doc, 'Amenities & Features', y);
+          const colW3 = CW / 3;
+          const rowH  = 8;
+          amenities.forEach((a, i) => {
+            const col  = i % 3;
+            const row  = Math.floor(i / 3);
+            const ax   = M + col * colW3;
+            const ay   = y + row * rowH;
+            if (ay + rowH > PH - 16) return; // overflow guard
+            doc.setFillColor(...RED);
+            doc.circle(ax + 2, ay - 1.2, 0.9, 'F');
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(8.5);
+            doc.setTextColor(45, 45, 45);
+            doc.text(a, ax + 5.5, ay);
+          });
+          y += Math.ceil(amenities.length / 3) * rowH + 10;
+
+          /* Nearby Facilities */
+          if (y > PH - 60) { doc.addPage(); pageHeader(doc); y = 18; }
+          y = sectionTitle(doc, 'Nearby Facilities', y);
+          facilities.forEach((f, i) => {
+            const col = i % 3;
+            const row = Math.floor(i / 3);
+            const fx  = M + col * colW3;
+            const fy  = y + row * rowH;
+            if (fy + rowH > PH - 16) return;
+            doc.setFillColor(...RED);
+            doc.circle(fx + 2, fy - 1.2, 0.9, 'F');
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(8.5);
+            doc.setTextColor(45, 45, 45);
+            doc.text(f, fx + 5.5, fy);
+          });
+          y += Math.ceil(facilities.length / 3) * rowH + 14;
+
+          /* Contact CTA */
+          if (y > PH - 36) { doc.addPage(); pageHeader(doc); y = PH - 50; }
+          doc.setFillColor(...INK);
+          doc.roundedRect(M, y, CW, 30, 2.5, 2.5, 'F');
+          doc.setFillColor(...RED);
+          doc.roundedRect(M, y, CW, 30, 2.5, 2.5, 'S');
+          doc.setLineWidth(0.6);
+
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(12);
+          doc.setTextColor(255, 255, 255);
+          doc.text('Interested in this property?', M + 10, y + 11);
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(8.5);
+          doc.setTextColor(200, 200, 200);
+          doc.text('Contact our advisors for a private viewing or financing consultation.', M + 10, y + 18);
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(9);
+          doc.setTextColor(...RED);
+          doc.text('+20 115 000 0727', M + 10, y + 26);
+          doc.setTextColor(160, 160, 160);
+          doc.text('info@akartown.com  ·  www.akartown.com', PW - M - 6, y + 26, { align: 'right' });
+
+          /* ── Stamp footers on every page ── */
+          const total = doc.internal.getNumberOfPages();
+          for (let p = 1; p <= total; p++) {
+            doc.setPage(p);
+            pageFooter(doc, p, total);
+          }
+
+          /* ── Download ── */
+          const filename = (propName || 'property').replace(/[^a-z0-9]/gi, '-').toLowerCase() + '-datasheet.pdf';
+          doc.save(filename);
+
+        } finally {
+          setLoading(false);
+        }
+      }
+
+      /* Wire up both buttons */
+      document.addEventListener('DOMContentLoaded', () => {
+        ['btnDownloadPDF', 'btnDownloadPDFSticky'].forEach(id => {
+          const btn = document.getElementById(id);
+          if (btn) btn.addEventListener('click', buildPDF);
+        });
+      });
+    })();
     </script>
   </body>
 </html>

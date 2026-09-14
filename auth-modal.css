@@ -33,7 +33,7 @@
   border-radius: 18px;
   border: 1px solid #4d4d4d;
   overflow: visible;
-  background: #fff;
+  background: transparent;
   transform: translateY(18px) scale(0.97);
   transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -208,6 +208,7 @@
   flex-direction: column;
   border-radius: 0 18px 18px 0;
   overflow: visible;
+  background: #fff;
 }
 .auth-modal__title {
   font-size: 20px;
@@ -675,8 +676,11 @@
 
 /* ── Dark mode ── */
 html[data-theme="dark"] .auth-modal {
-  background: #161616;
+  background: transparent;
   border-color: rgba(255, 255, 255, 0.1);
+}
+html[data-theme="dark"] .auth-modal__right {
+  background: #161616;
 }
 html[data-theme="dark"] .auth-modal__title {
   color: #f0ede8;

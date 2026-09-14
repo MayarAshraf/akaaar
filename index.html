@@ -778,6 +778,50 @@
             }
 
             /* ─────────────────────────────────────────────
+         HERO PREVIEW DECK (mouse-follower)
+      ───────────────────────────────────────────── */
+            .hero__previews {
+              position: absolute;
+              inset: 0;
+              z-index: 6;
+              pointer-events: none;
+            }
+            .hero-preview {
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: var(--hprev-w, 110px);
+              height: var(--hprev-h, 74px);
+              margin: calc(var(--hprev-h, 74px) / -2) 0 0
+                calc(var(--hprev-w, 110px) / -2);
+              border-radius: 6px;
+              overflow: hidden;
+              opacity: 0;
+              outline: 1.5px solid rgba(255, 255, 255, 0.14);
+              outline-offset: -1.5px;
+              box-shadow: 0 18px 38px -18px rgba(0, 0, 0, 0.7);
+              transition: outline-color 0.35s ease;
+              will-change: transform, opacity;
+            }
+            .hero-preview img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              display: block;
+            }
+            .hero-preview.is-active {
+              outline-color: rgba(255, 255, 255, 0.75);
+            }
+            .hero-preview.is-focused {
+              outline-width: 2px;
+              outline-offset: -2px;
+              outline-color: #fff;
+            }
+            @media (prefers-reduced-motion: reduce) {
+              .hero-preview { display: none; }
+            }
+
+            /* ─────────────────────────────────────────────
          HERO STAGE
       ───────────────────────────────────────────── */
             .hero__stage {
@@ -5075,6 +5119,9 @@
         aria-label="Featured luxury properties"
         aria-roledescription="carousel"
       >
+        <!-- Preview deck (pointer follower) -->
+        <div class="hero__previews" id="heroPreviews" aria-hidden="true"></div>
+
         <!-- Thumbnails -->
         <aside
           class="hero__thumbs"
@@ -7922,6 +7969,318 @@
         } else {
           init();
         }
+
+        /* ════════════════════════════════════
+   HERO PREVIEW DECK  (ported from Akar-Town-Light/previews.js)
+   Deck of thumbnail cards that dock on the thumb-items at rest
+   and trail the pointer across the hero while hovering.
+═════════════════════════════════════ */
+        (() => {
+          if (REDUCED) return;
+          if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+          const heroEl   = document.querySelector(".hero");
+          const layer    = document.getElementById("heroPreviews");
+          if (!heroEl || !layer) return;
+
+          /* ── Constants (mirrored from reference) ── */
+          const PREVIEW_MAX   = 5;
+          const FOLLOW_LEAD   = 0.17;
+          const FOLLOW_FALLOFF = 0.19;
+          const EASE_FLOOR    = 0.28;
+          const DOCK_LEAD     = 0.19;
+          const DOCK_FALLOFF  = 0.06;
+          const OPACITY_GAIN  = 1.8;
+          const FAN_X         = 18;
+          const FAN_Y         = 14;
+          const FAN_ROT       = -1.7;
+          const FLOAT_SCALE   = 0.94;
+          const FLOAT_OPACITY = 0.86;
+          const DOCK_OPACITY  = 0.52;
+          const COVER_RANGE   = 130;
+          const COVER_HIDE    = 20;
+          const SETTLED       = 0.25;
+
+          /* ── State ── */
+          const count = Math.min(SLIDES.length, PREVIEW_MAX);
+          let windowStart = 0;
+          let activeLocal = 0;
+          let mode = "dock";
+          let heroInside = false;
+          let introPlayed = false;
+          const client  = { x: 0, y: 0 };
+          const pointer = { x: 0, y: 0 };
+          const base    = { left: 0, top: 0 };
+          let slotPoints = [];
+          let cards = [];
+          let raf = 0, last = 0;
+          const zonesIn = new Set();
+
+          /* rest zones: the thumbs sidebar and any CTAs */
+          const restZones = [
+            document.getElementById("heroThumbs"),
+            document.querySelector(".slide-ctas"),
+          ].filter(Boolean);
+
+          /* ── Build cards ── */
+          layer.innerHTML = "";
+          cards = Array.from({ length: count }, (_, i) => {
+            const el = document.createElement("div");
+            el.className = "hero-preview";
+            el.style.zIndex = String(count - i);
+            el.innerHTML = `<img alt="" loading="lazy">`;
+            layer.appendChild(el);
+            return {
+              el,
+              img: el.querySelector("img"),
+              x: 0, y: 0, scale: 1, rot: 0, op: 0,
+              in: { x: 0, y: 0, rot: 0, scale: 1, op: 1 },
+            };
+          });
+
+          /* ── Helpers ── */
+          function readBase() {
+            const r = layer.getBoundingClientRect();
+            base.left = r.left;
+            base.top  = r.top;
+          }
+          function readPointer() {
+            pointer.x = client.x - base.left;
+            pointer.y = client.y - base.top;
+          }
+
+          function getWindowStart() {
+            const spare = SLIDES.length - count;
+            if (spare <= 0) return 0;
+            const centred = activeLocal - Math.floor((count - 1) / 2);
+            return Math.min(Math.max(centred, 0), spare);
+          }
+
+          function measureSlots() {
+            const slotEls = Array.from(
+              document.querySelectorAll("#heroThumbs .thumb-item")
+            );
+            readBase();
+            const cardH = cards[0]?.el.offsetHeight || 74;
+            slotPoints = cards.map((_, i) => {
+              const el = slotEls[windowStart + i];
+              if (!el) return { x: 0, y: 0 };
+              const r = el.getBoundingClientRect();
+              return {
+                x: r.left - base.left + r.width  / 2,
+                y: r.top  - base.top  + cardH / 2,
+              };
+            });
+          }
+
+          function syncWindow(force = false) {
+            const start = getWindowStart();
+            if (!force && start === windowStart) return;
+            windowStart = start;
+            cards.forEach((card, i) => {
+              const slide = SLIDES[start + i];
+              if (!slide) return;
+              if (card.img.getAttribute("src") !== slide.thumb)
+                card.img.setAttribute("src", slide.thumb);
+            });
+            if (!force) measureSlots();
+          }
+
+          function paint(card) {
+            const e = card.in;
+            const x     = card.x + e.x;
+            const y     = card.y + e.y;
+            const scale = card.scale * e.scale;
+            const rot   = card.rot + e.rot;
+            card.el.style.transform =
+              `translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0)` +
+              ` scale(${scale.toFixed(3)}) rotate(${rot.toFixed(2)}deg)`;
+            card.el.style.opacity = (card.op * e.op).toFixed(3);
+          }
+
+          function targetFor(i, m = mode) {
+            const isActive = windowStart + i === activeLocal;
+            let t;
+            if (m === "dock") {
+              const p = slotPoints[i] || { x: 0, y: 0 };
+              t = { x: p.x, y: p.y, scale: 1, rot: 0,
+                    op: isActive ? 1 : DOCK_OPACITY };
+            } else {
+              t = {
+                x: pointer.x + i * FAN_X,
+                y: pointer.y + i * FAN_Y,
+                scale: FLOAT_SCALE,
+                rot: i * FAN_ROT,
+                op: isActive ? 1 : FLOAT_OPACITY,
+              };
+            }
+            if (!heroInside || zonesIn.size) t.op = 0;
+            return t;
+          }
+
+          function ease(i) {
+            const docked = mode === "dock";
+            const lead    = docked ? DOCK_LEAD    : FOLLOW_LEAD;
+            const falloff = docked ? DOCK_FALLOFF : FOLLOW_FALLOFF;
+            return lead * Math.max(1 - i * falloff, EASE_FLOOR);
+          }
+
+          function seat() {
+            measureSlots();
+            mode = "dock";
+            cards.forEach((card, i) => {
+              const t = targetFor(i, "dock");
+              card.x = t.x; card.y = t.y;
+              card.scale = t.scale; card.rot = t.rot; card.op = 0;
+              paint(card);
+            });
+          }
+
+          /* ── rAF loop ── */
+          const tick = (now) => {
+            const frames = last ? Math.min((now - last) / 16.667, 4) : 1;
+            last = now;
+            readBase();
+            readPointer();
+            let moving = false;
+            cards.forEach((card, i) => {
+              const t  = targetFor(i);
+              const e  = ease(i);
+              const k  = 1 - Math.pow(1 - e, frames);
+              const ko = 1 - Math.pow(1 - Math.min(e * OPACITY_GAIN, 0.75), frames);
+              card.x     += (t.x     - card.x)     * k;
+              card.y     += (t.y     - card.y)     * k;
+              card.scale += (t.scale - card.scale) * k;
+              card.rot   += (t.rot   - card.rot)   * k;
+              card.op    += (t.op    - card.op)     * ko;
+              if (Math.abs(t.x - card.x) > SETTLED ||
+                  Math.abs(t.y - card.y) > SETTLED ||
+                  Math.abs(t.op - card.op) > 0.004 ||
+                  Math.abs(t.rot - card.rot) > 0.05 ||
+                  Math.abs(t.scale - card.scale) > 0.002) {
+                moving = true;
+              } else {
+                card.x = t.x; card.y = t.y;
+                card.scale = t.scale; card.rot = t.rot; card.op = t.op;
+              }
+              paint(card);
+            });
+            if (!moving) { raf = 0; last = 0; return; }
+            raf = requestAnimationFrame(tick);
+          };
+
+          function startLoop() {
+            if (raf) return;
+            last = 0;
+            raf = requestAnimationFrame(tick);
+          }
+
+          function setMode(next) {
+            if (mode === next) return;
+            if (next === "dock") measureSlots();
+            mode = next;
+            startLoop();
+          }
+
+          /* ── Entrance (deal-out animation via GSAP, like reference) ── */
+          function intro() {
+            measureSlots();
+            const slotEls = Array.from(
+              document.querySelectorAll("#heroThumbs .thumb-item")
+            );
+            const centre = slotPoints.reduce((s, p) => s + p.x, 0) /
+                           (slotPoints.length || 1);
+            const middle = (cards.length - 1) / 2;
+            cards.forEach((card, i) => {
+              const p = slotPoints[i] || { x: centre };
+              card.in.x     = (centre - p.x) * 0.66;
+              card.in.y     = 26 + i * 3;
+              card.in.rot   = (i - middle) * -3.2;
+              card.in.scale = 0.82 - i * 0.03;
+              card.in.op    = 0;
+              paint(card);
+            });
+            const offsets = cards.map(c => c.in);
+            gsap.timeline({
+              onUpdate: () => cards.forEach(c => paint(c)),
+              onComplete: () => { measure(); },
+            })
+            .to(offsets, { x: 0, y: 0, rot: 0, scale: 1,
+                           duration: 0.9, ease: "expo.out", stagger: 0.1 }, 0)
+            .to(offsets, { op: 1, duration: 0.55,
+                           ease: "power2.out", stagger: 0.1 }, 0);
+          }
+
+          function measure() {
+            measureSlots();
+            startLoop();
+          }
+
+          /* ── Public: called when slide changes ── */
+          function setActive(index) {
+            activeLocal = index;
+            syncWindow();
+            cards.forEach((card, i) => {
+              card.el.classList.toggle(
+                "is-active", windowStart + i === index
+              );
+            });
+            startLoop();
+          }
+
+          /* ── Events ── */
+          heroEl.addEventListener("pointerenter", () => {
+            heroInside = true;
+            if (!introPlayed) { introPlayed = true; intro(); }
+            else startLoop();
+          });
+          heroEl.addEventListener("pointermove", (e) => {
+            client.x = e.clientX;
+            client.y = e.clientY;
+            if (!raf) readBase();
+            readPointer();
+            if (!zonesIn.size) setMode("float");
+            startLoop();
+          });
+          heroEl.addEventListener("pointerleave", () => {
+            heroInside = false;
+            setMode("dock");
+            startLoop();
+          });
+
+          restZones.forEach(zone => {
+            zone.addEventListener("pointerenter", (e) => {
+              zonesIn.add(e.currentTarget);
+              setMode("dock");
+              startLoop();
+            });
+            zone.addEventListener("pointerleave", (e) => {
+              zonesIn.delete(e.currentTarget);
+              startLoop();
+            });
+          });
+
+          window.addEventListener("resize", () => {
+            cancelAnimationFrame(window._hpRevRaf);
+            window._hpRevRaf = requestAnimationFrame(() => measure());
+          });
+
+          /* ── Boot ── */
+          syncWindow(true);
+          setActive(0);
+          seat();
+
+          /* Hook into slide navigation — patch activeIdx changes */
+          let _lastActive = activeIdx;
+          const _watchActive = () => {
+            if (activeIdx !== _lastActive) {
+              _lastActive = activeIdx;
+              setActive(activeIdx);
+            }
+            requestAnimationFrame(_watchActive);
+          };
+          requestAnimationFrame(_watchActive);
+        })();
 
         /* Navbar scroll state */
         (function () {

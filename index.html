@@ -1813,6 +1813,62 @@
               color: var(--ink);
             }
 
+            /* ── Filter dropdown panel ── */
+            .qf__filter-panel {
+              position: fixed;
+              top: 0;
+              left: 0;
+              z-index: 9999;
+              min-width: 190px;
+              background: var(--bg);
+              border: 1px solid var(--ink-10);
+              border-radius: 14px;
+              padding: 8px;
+              box-shadow: 0 10px 36px rgba(0, 0, 0, 0.10), 0 2px 8px rgba(0, 0, 0, 0.06);
+              opacity: 0;
+              transform: translateY(-6px) scale(0.98);
+              pointer-events: none;
+              transition: opacity 0.18s ease, transform 0.18s ease;
+            }
+
+            .qf__filter-panel.is-open {
+              opacity: 1;
+              transform: translateY(0) scale(1);
+              pointer-events: auto;
+            }
+
+            .qf__filter-option {
+              display: flex;
+              align-items: center;
+              gap: 10px;
+              width: 100%;
+              padding: 9px 12px;
+              border-radius: 9px;
+              border: none;
+              background: none;
+              font-family: var(--font-body-ltr);
+              font-size: 13px;
+              font-weight: 400;
+              color: var(--ink-60);
+              cursor: pointer;
+              text-align: left;
+              transition: background 0.14s ease, color 0.14s ease;
+              white-space: nowrap;
+            }
+
+            .qf__filter-option:hover {
+              background: var(--ink-10);
+              color: var(--ink);
+            }
+
+            .qf__filter-option input[type="checkbox"] {
+              width: 15px;
+              height: 15px;
+              accent-color: var(--gold);
+              flex-shrink: 0;
+              cursor: pointer;
+            }
+
             /* ── Responsive ── */
             @media (max-width: 720px) {
               .qf::before {
@@ -5403,126 +5459,72 @@
 
             <!-- Filter chips: Property Type / Beds & Baths / Price / Area / Finishing -->
             <div class="qf__filters">
-              <button
-                type="button"
-                class="qf__filter-btn"
-                aria-expanded="false"
-                data-qf-filter
-              >
-                Property Type
-                <svg
-                  class="qf__filter-chevron"
-                  width="10"
-                  height="6"
-                  viewBox="0 0 10 6"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M1 1l4 4 4-4"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </button>
-              <button
-                type="button"
-                class="qf__filter-btn"
-                aria-expanded="false"
-                data-qf-filter
-              >
-                Beds &amp; Baths
-                <svg
-                  class="qf__filter-chevron"
-                  width="10"
-                  height="6"
-                  viewBox="0 0 10 6"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M1 1l4 4 4-4"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </button>
-              <button
-                type="button"
-                class="qf__filter-btn"
-                aria-expanded="false"
-                data-qf-filter
-              >
-                Price (EGP)
-                <svg
-                  class="qf__filter-chevron"
-                  width="10"
-                  height="6"
-                  viewBox="0 0 10 6"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M1 1l4 4 4-4"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </button>
-              <button
-                type="button"
-                class="qf__filter-btn"
-                aria-expanded="false"
-                data-qf-filter
-              >
-                Area (sqm)
-                <svg
-                  class="qf__filter-chevron"
-                  width="10"
-                  height="6"
-                  viewBox="0 0 10 6"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M1 1l4 4 4-4"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </button>
-              <button
-                type="button"
-                class="qf__filter-btn"
-                aria-expanded="false"
-                data-qf-filter
-              >
-                Finishing
-                <svg
-                  class="qf__filter-chevron"
-                  width="10"
-                  height="6"
-                  viewBox="0 0 10 6"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M1 1l4 4 4-4"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </button>
+              <div class="qf__filter-wrap">
+                <button type="button" class="qf__filter-btn" aria-expanded="false" data-qf-filter>
+                  Property Type
+                  <svg class="qf__filter-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="qf__filter-panel" role="listbox">
+                  <label class="qf__filter-option"><input type="checkbox"> Apartment</label>
+                  <label class="qf__filter-option"><input type="checkbox"> Villa</label>
+                  <label class="qf__filter-option"><input type="checkbox"> Penthouse</label>
+                  <label class="qf__filter-option"><input type="checkbox"> Duplex</label>
+                  <label class="qf__filter-option"><input type="checkbox"> Studio</label>
+                  <label class="qf__filter-option"><input type="checkbox"> Townhouse</label>
+                </div>
+              </div>
+              <div class="qf__filter-wrap">
+                <button type="button" class="qf__filter-btn" aria-expanded="false" data-qf-filter>
+                  Beds &amp; Baths
+                  <svg class="qf__filter-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="qf__filter-panel" role="listbox">
+                  <label class="qf__filter-option"><input type="checkbox"> Studio</label>
+                  <label class="qf__filter-option"><input type="checkbox"> 1 Bedroom</label>
+                  <label class="qf__filter-option"><input type="checkbox"> 2 Bedrooms</label>
+                  <label class="qf__filter-option"><input type="checkbox"> 3 Bedrooms</label>
+                  <label class="qf__filter-option"><input type="checkbox"> 4 Bedrooms</label>
+                  <label class="qf__filter-option"><input type="checkbox"> 5+ Bedrooms</label>
+                </div>
+              </div>
+              <div class="qf__filter-wrap">
+                <button type="button" class="qf__filter-btn" aria-expanded="false" data-qf-filter>
+                  Price (EGP)
+                  <svg class="qf__filter-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="qf__filter-panel" role="listbox">
+                  <label class="qf__filter-option"><input type="checkbox"> Under 1M</label>
+                  <label class="qf__filter-option"><input type="checkbox"> 1M – 3M</label>
+                  <label class="qf__filter-option"><input type="checkbox"> 3M – 7M</label>
+                  <label class="qf__filter-option"><input type="checkbox"> 7M – 15M</label>
+                  <label class="qf__filter-option"><input type="checkbox"> 15M+</label>
+                </div>
+              </div>
+              <div class="qf__filter-wrap">
+                <button type="button" class="qf__filter-btn" aria-expanded="false" data-qf-filter>
+                  Area (sqm)
+                  <svg class="qf__filter-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="qf__filter-panel" role="listbox">
+                  <label class="qf__filter-option"><input type="checkbox"> Under 80</label>
+                  <label class="qf__filter-option"><input type="checkbox"> 80 – 120</label>
+                  <label class="qf__filter-option"><input type="checkbox"> 120 – 200</label>
+                  <label class="qf__filter-option"><input type="checkbox"> 200 – 300</label>
+                  <label class="qf__filter-option"><input type="checkbox"> 300+</label>
+                </div>
+              </div>
+              <div class="qf__filter-wrap">
+                <button type="button" class="qf__filter-btn" aria-expanded="false" data-qf-filter>
+                  Finishing
+                  <svg class="qf__filter-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="qf__filter-panel" role="listbox">
+                  <label class="qf__filter-option"><input type="checkbox"> Fully Finished</label>
+                  <label class="qf__filter-option"><input type="checkbox"> Semi-Finished</label>
+                  <label class="qf__filter-option"><input type="checkbox"> Core &amp; Shell</label>
+                  <label class="qf__filter-option"><input type="checkbox"> Furnished</label>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -10153,15 +10155,51 @@
         });
 
         /* Quick Filters — filter chip toggle */
-        document.querySelectorAll("[data-qf-filter]").forEach(function (btn) {
-          btn.addEventListener("click", function () {
-            var isOpen = btn.getAttribute("aria-expanded") === "true";
-            document.querySelectorAll("[data-qf-filter]").forEach(function (b) {
-              b.setAttribute("aria-expanded", "false");
-            });
-            btn.setAttribute("aria-expanded", isOpen ? "false" : "true");
+        (function () {
+          var allBtns = Array.from(document.querySelectorAll("[data-qf-filter]"));
+
+          // Move every panel to <body> and store a reference back to its button
+          allBtns.forEach(function (btn) {
+            var panel = btn.parentElement.querySelector(".qf__filter-panel");
+            if (!panel) return;
+            panel._qfBtn = btn;
+            document.body.appendChild(panel);
           });
-        });
+
+          function positionPanel(panel) {
+            var r = panel._qfBtn.getBoundingClientRect();
+            panel.style.top  = (r.bottom + 8) + "px";
+            panel.style.left = r.left + "px";
+          }
+
+          function closeAll() {
+            allBtns.forEach(function (b) { b.setAttribute("aria-expanded", "false"); });
+            document.querySelectorAll(".qf__filter-panel.is-open").forEach(function (p) {
+              p.classList.remove("is-open");
+            });
+          }
+
+          allBtns.forEach(function (btn) {
+            btn.addEventListener("click", function (e) {
+              e.stopPropagation();
+              var isOpen = btn.getAttribute("aria-expanded") === "true";
+              closeAll();
+              if (!isOpen) {
+                var panel = document.querySelector(".qf__filter-panel[data-for]") ||
+                  Array.from(document.querySelectorAll(".qf__filter-panel")).find(function (p) { return p._qfBtn === btn; });
+                if (panel) {
+                  positionPanel(panel);
+                  panel.classList.add("is-open");
+                  btn.setAttribute("aria-expanded", "true");
+                }
+              }
+            });
+          });
+
+          document.addEventListener("click", closeAll);
+          window.addEventListener("resize", closeAll);
+          window.addEventListener("scroll", closeAll, true);
+        })();
       })();
     </script>
 

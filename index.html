@@ -7854,8 +7854,8 @@
             onComplete() {
               textIn(firstSlide);
               startAutoplay();
-              gsap.to(scrollHint, { opacity: 1, duration: 0.6, delay: 1.2 });
-              gsap.to(scrollHint, { opacity: 0, duration: 0.6, delay: 5 });
+              if (scrollHint) gsap.to(scrollHint, { opacity: 1, duration: 0.6, delay: 1.2 });
+              if (scrollHint) gsap.to(scrollHint, { opacity: 0, duration: 0.6, delay: 5 });
             },
           });
 
@@ -7864,8 +7864,10 @@
 
           if (firstSlide) {
             const bg = firstSlide.querySelector(".slide-bg");
-            gsap.set(bg, { scale: 1.08 });
-            tl.to(bg, { scale: 1, duration: 1.6, ease: "smooth" }, 0.3);
+            if (bg) {
+              gsap.set(bg, { scale: 1.08 });
+              tl.to(bg, { scale: 1, duration: 1.6, ease: "smooth" }, 0.3);
+            }
           }
 
           gsap.set(thumbItems, { x: -20, opacity: 0 });
@@ -8716,11 +8718,12 @@
             const type = detectType(card);
             card.dataset.type = type;
             const panel = card.querySelector(".pgal-card__panel");
+            if (!panel) return;
             const texts = panel.querySelectorAll(".pgal-text");
             const cta = panel.querySelector(".pgal-cta");
-            gsap.killTweensOf([panel, texts, cta]);
+            gsap.killTweensOf([panel, texts, cta].filter(Boolean));
             gsap.set(texts, { opacity: 0, y: 14 });
-            gsap.set(cta, { opacity: 0, y: 10 });
+            if (cta) gsap.set(cta, { opacity: 0, y: 10 });
             if (type === "landscape") {
               gsap.set(panel, {
                 x: 0,
@@ -8756,6 +8759,8 @@
             let tl = null;
 
             resetPanel(card);
+
+            if (!panel) return;
 
             card.addEventListener("mouseenter", () => {
               if (tl) tl.kill();
@@ -8821,7 +8826,7 @@
                 },
                 0.12,
               );
-              tl.to(
+              if (cta) tl.to(
                 cta,
                 { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" },
                 "+=0.02",
@@ -8836,7 +8841,7 @@
               tl = gsap.timeline();
 
               tl.to(
-                [...texts, cta],
+                [...texts, ...(cta ? [cta] : [])],
                 { opacity: 0, y: 8, duration: 0.12, ease: "power2.in" },
                 0,
               );

@@ -7172,7 +7172,7 @@
       <script>
         /* ══════════════════════════════════════════════
    AKAR TOWN — HERO SLIDER
-   Swiper.js + GSAP | Magazine Page Curl
+   Swiper.js + GSAP | Liquid Displacement Wipe
 ══════════════════════════════════════════════ */
 
         CustomEase.create("text.in", "0.16, 1, 0.3, 1");
@@ -7266,7 +7266,7 @@
         ];
 
         const AUTOPLAY_MS = 4500;
-        const CURL_MS = 1080;
+        const WIPE_MS = 1300;
         const REDUCED = window.matchMedia(
           "(prefers-reduced-motion: reduce)",
         ).matches;
@@ -7481,71 +7481,74 @@
         }
 
         /* ════════════════════════════════════
-   MAGAZINE PAGE CURL TRANSITION
+   LIQUID DISPLACEMENT WIPE TRANSITION
 
-   Four visual layers (back to front):
-   z=1  toSlide   — incoming slide, full width, revealed underneath
-   z=2  fromSlide — clipped CSS polygon to the "flat" area not yet peeled
-   z=3  curlBack  — papery back-of-page visible as the leaf curls over
-   z=4  canvas    — frame-accurate soft shadow + specular crease highlight
+   Visual layers (back to front):
+   z=1  toSlide   — incoming slide, full canvas, revealed by the wipe
+   z=2  fromSlide — clipped with a wavy diagonal polygon that sweeps
+                    from the leading edge across to the trailing edge
+   z=3  canvas    — bright liquid seam sheen rendered each frame
 
-   The fold line is intentionally diagonal: bottom-right corner leads on a
-   forward turn, top-right corner leads on reverse, matching the physics of
-   a thick glossy magazine page being turned from a corner outward.
+   The seam is a wavy, diagonally-tilted line (skew 0.18, 6 ripples)
+   that sweeps across in 1.3 s with power2.inOut easing. The outgoing
+   bg is dragged toward the departing edge; the incoming bg drifts in
+   lightly from the entry edge. Both distortions peak at mid-transition
+   and are pixel-perfect at rest (waveAmp = sin(p·π) → 0 at p=0,1).
+   At 62 % of the wipe the new slide's content fades in, hidden behind
+   the still-travelling seam.
 ═════════════════════════════════════ */
-        function doPageCurl(fromIdx, toIdx, forward) {
+        function doLiquidWipe(fromIdx, toIdx, forward) {
           const fromSlide = getSlide(fromIdx);
-          const toSlide = getSlide(toIdx);
+          const toSlide   = getSlide(toIdx);
           if (!fromSlide || !toSlide) return;
 
           const heroStage = document.getElementById("heroStage");
           let W = heroStage.offsetWidth;
           let H = heroStage.offsetHeight;
 
-          /* Layer order */
-          gsap.set(toSlide, {
-            zIndex: 1,
-            display: "block",
-            visibility: "visible",
-          });
+          const SKEW      = 0.18;
+          const WIPE_S    = WIPE_MS / 1000;
+          const REVEAL_AT = 0.62;
+          const DIR       = forward ? 1 : -1;
+          const PTS       = 96;
+
+          /* layer order */
+          gsap.set(toSlide,   { zIndex: 1, display: "block", visibility: "visible" });
           gsap.set(fromSlide, { zIndex: 2 });
 
-          /* Back-of-page element — warm paper tone, bright specular near the crease */
-          const curlBack = document.createElement("div");
-          curlBack.setAttribute("aria-hidden", "true");
-          curlBack.style.cssText =
-            "position:absolute;inset:0;z-index:3;pointer-events:none;will-change:clip-path,background;";
-          heroStage.appendChild(curlBack);
-
-          /* Canvas for shadow cast on toSlide + specular crease line */
+          /* sheen canvas — above both slides */
           const cnv = document.createElement("canvas");
           cnv.setAttribute("aria-hidden", "true");
-          cnv.width = W;
+          cnv.width  = W;
           cnv.height = H;
-          cnv.style.cssText =
-            "position:absolute;inset:0;z-index:4;pointer-events:none;";
+          cnv.style.cssText = "position:absolute;inset:0;z-index:3;pointer-events:none;mix-blend-mode:screen;";
           heroStage.appendChild(cnv);
           const ctx = cnv.getContext("2d");
 
-          /* Preload next image while animating */
+          /* preload the slide after next while animating */
           new Image().src = SLIDES[(toIdx + 1) % SLIDES.length].image;
 
+          const fromBg = fromSlide.querySelector(".slide-bg");
+          const toBg   = toSlide.querySelector(".slide-bg");
+
           const state = { p: 0 };
+          let clock   = 0;
+          let lastTs  = performance.now();
+          let revealed = false;
+
+          /* outgoing text exits immediately */
+          textOut(fromSlide);
 
           const tl = gsap.timeline({
             onComplete() {
               cnv.remove();
-              curlBack.remove();
               fromSlide.style.clipPath = "";
-              fromSlide.style.transform = "";
-              gsap.set(fromSlide, {
-                display: "none",
-                visibility: "hidden",
-                zIndex: 0,
-              });
+              if (fromBg) fromBg.style.transform = "";
+              if (toBg)   toBg.style.transform   = "";
+              gsap.set(fromSlide, { display: "none", visibility: "hidden", zIndex: 0 });
               gsap.set(toSlide, { zIndex: 2 });
               isAnimating = false;
-              textIn(toSlide);
+              if (!revealed) textIn(toSlide);
               startAutoplay();
             },
           });
@@ -7553,171 +7556,135 @@
           if (REDUCED) {
             gsap.set(toSlide, { opacity: 0 });
             tl.to(fromSlide, { opacity: 0, duration: 0.4 })
-              .to(toSlide, { opacity: 1, duration: 0.4 }, 0)
+              .to(toSlide,   { opacity: 1, duration: 0.4 }, 0)
               .add(() => gsap.set(fromSlide, { opacity: 1 }));
             return;
           }
 
           tl.to(state, {
             p: 1,
-            duration: CURL_MS / 1000,
-            /* slow corner-peel → fast sweep → gentle settle */
-            ease: "power3.inOut",
+            duration: WIPE_S,
+            ease: "power2.inOut",
             onUpdate() {
-              renderFrame(state.p);
+              const now = performance.now();
+              clock += (now - lastTs) * 0.001;
+              lastTs = now;
+
+              /* swap incoming content when seam has covered enough of the frame */
+              if (!revealed && state.p >= REVEAL_AT) {
+                revealed = true;
+                textIn(toSlide);
+              }
+
+              renderFrame(state.p, clock);
             },
           });
 
-          /* ── Fold geometry ──────────────────────────────────────────────────────
-     Larger bow (0.20×W) gives a pronounced diagonal — the corner visibly
-     leads the rest of the leaf, matching the physics of a stiff magazine page.
-  ──────────────────────────────────────────────────────────────────────── */
-          function getFold(p) {
-            const center = forward ? W * (1 - p) : W * p;
-            const bow = Math.sin(p * Math.PI) * W * 0.2;
-            const topX = forward
-              ? Math.max(0, center + bow * 0.62)
-              : Math.min(W, center - bow * 0.62);
-            const bottomX = forward
-              ? Math.max(0, center - bow * 0.55)
-              : Math.min(W, center + bow * 0.55);
-            return { topX, bottomX };
+          /* seam screen-x at normalised height ty (0..1).
+             Two smooth, broad sine waves — one large slow swell, one
+             medium secondary roll. Low frequency keeps the boundary looking
+             like a water surface, not a jagged edge.
+             waveAmp = sin(p·π) → zero distortion at rest (p=0 and p=1). */
+          function getSeamX(ty, p, t) {
+            const waveAmp = Math.sin(p * Math.PI);
+            const w1 = Math.sin(ty * 1.6 * Math.PI + t * 0.50)        * 0.060;
+            const w2 = Math.sin(ty * 3.2 * Math.PI - t * 0.80 + 1.57) * 0.028;
+            const seamUv = (1.15 - p * 1.3)
+                         + (ty - 0.5) * SKEW
+                         + (w1 + w2) * waveAmp;
+            return DIR === 1 ? seamUv * W : (1 - seamUv) * W;
           }
 
-          /* ── Master render ──────────────────────────────────────────────────── */
-          function renderFrame(p) {
+          function renderFrame(p, t) {
             W = heroStage.offsetWidth;
             H = heroStage.offsetHeight;
-            if (cnv.width !== W || cnv.height !== H) {
-              cnv.width = W;
-              cnv.height = H;
-            } else {
-              ctx.clearRect(0, 0, W, H);
+            if (cnv.width !== W || cnv.height !== H) { cnv.width = W; cnv.height = H; }
+            else ctx.clearRect(0, 0, W, H);
+
+            const waveAmp = Math.sin(p * Math.PI);
+
+            /* build seam point array, top → bottom */
+            const pts = [];
+            for (let i = 0; i <= PTS; i++) {
+              const ty = i / PTS;
+              pts.push([getSeamX(ty, p, t), ty * H]);
             }
 
-            const pk = Math.sin(p * Math.PI);
-            const { topX, bottomX } = getFold(p);
+            /* ── 1. clip the outgoing slide to the region it still occupies ──
+               forward  → left  of seam (seam sweeps right-to-left)
+               backward → right of seam (seam sweeps left-to-right)          */
+            const edge = DIR === 1 ? 0 : W;
+            const poly = [[edge, 0], ...pts, [edge, H]];
+            fromSlide.style.clipPath =
+              "polygon(" + poly.map(([x, y]) => `${x.toFixed(1)}px ${y.toFixed(1)}px`).join(",") + ")";
 
-            /* fromSlide: clip to the flat region + subtle bow warp */
-            if (forward) {
-              fromSlide.style.clipPath = `polygon(0 0,${topX}px 0,${bottomX}px 100%,0 100%)`;
-              fromSlide.style.transform = `perspective(2800px) rotateY(${pk * 3.2}deg)`;
-              fromSlide.style.transformOrigin = "left center";
-            } else {
-              fromSlide.style.clipPath = `polygon(${topX}px 0,100% 0,100% 100%,${bottomX}px 100%)`;
-              fromSlide.style.transform = `perspective(2800px) rotateY(${-pk * 3.2}deg)`;
-              fromSlide.style.transformOrigin = "right center";
+            /* ── 2. drag the outgoing bg toward the departing edge ──────────
+               peaking at mid-transition (~6 % of viewport width)            */
+            if (fromBg) {
+              const drag = waveAmp * 0.06;
+              fromBg.style.transform =
+                `translateX(${((DIR === 1 ? -1 : 1) * drag * W).toFixed(2)}px)`;
             }
 
-            /* curlBack: warm dark shadow — peaks at 0.52 alpha so the hero image
-             bleeds through and gives weight instead of a blinding white flash   */
-            const sa = (0.1 + pk * 0.42).toFixed(3);
-            if (forward) {
-              curlBack.style.clipPath = `polygon(${topX}px 0,100% 0,100% 100%,${bottomX}px 100%)`;
-              curlBack.style.background = `linear-gradient(to right,
-        rgba(210,195,178,${sa})  0%,
-        rgba(175,162,145,0.32)  24%,
-        rgba(140,130,116,0.18)  55%,
-        rgba(100,92,80,0.07)    80%,
-        rgba(60,55,48,0.02)    100%)`;
-            } else {
-              curlBack.style.clipPath = `polygon(0 0,${topX}px 0,${bottomX}px 100%,0 100%)`;
-              curlBack.style.background = `linear-gradient(to left,
-        rgba(210,195,178,${sa})  0%,
-        rgba(175,162,145,0.32)  24%,
-        rgba(140,130,116,0.18)  55%,
-        rgba(100,92,80,0.07)    80%,
-        rgba(60,55,48,0.02)    100%)`;
+            /* ── 3. ease the incoming bg in from the entry edge (~3 %) ───── */
+            if (toBg) {
+              const push = waveAmp * 0.03 * DIR;
+              toBg.style.transform = `translateX(${(push * W).toFixed(2)}px)`;
             }
 
-            drawShadow(p, pk, topX, bottomX);
-            drawSpecular(p, pk, topX, bottomX);
-            drawPageEdge(pk, topX, bottomX);
-          }
+            /* ── 4. smooth rolling water-wave surface ────────────────────────
+               Four parallel wave bands sweep across the screen.
+               Each band = the same smooth curve but slightly behind (deeper
+               into the outgoing region), drawn as wide soft glow + bright
+               crest — exactly like sunlight on rolling ocean waves.
+               mix-blend-mode:screen makes the canvas black transparent so
+               only the white light adds to the slides underneath.           */
+            if (waveAmp < 0.005) return;
 
-          /* Deep shadow on the revealed slide — wider band, steeper gradient */
-          function drawShadow(p, pk, topX, bottomX) {
-            const sw = Math.round(W * 0.13);
-            const leadX = forward
-              ? Math.min(topX, bottomX)
-              : Math.max(topX, bottomX);
-            const x0 = forward ? leadX : leadX - sw;
-            const x1 = forward ? leadX + sw : leadX;
-            const g = ctx.createLinearGradient(x0, 0, x1, 0);
-            g.addColorStop(0, `rgba(0,0,0,${(pk * 0.75).toFixed(3)})`);
-            g.addColorStop(0.15, `rgba(0,0,0,${(pk * 0.44).toFixed(3)})`);
-            g.addColorStop(0.5, `rgba(0,0,0,${(pk * 0.15).toFixed(3)})`);
-            g.addColorStop(1, "rgba(0,0,0,0)");
-            ctx.fillStyle = g;
-            ctx.fillRect(Math.min(x0, x1), 0, sw, H);
-          }
+            /* Build a wave-band point array: same shape as the seam but
+               shifted by uvOff UV units into the outgoing region, with a
+               small phase shift so each band looks slightly independent.    */
+            const makeWave = (uvOff, phShift) => {
+              const arr = [];
+              for (let i = 0; i <= PTS; i++) {
+                const ty = i / PTS;
+                const w1 = Math.sin(ty * 1.6 * Math.PI + t * 0.50 + phShift)        * 0.060 * waveAmp;
+                const w2 = Math.sin(ty * 3.2 * Math.PI - t * 0.80 + 1.57 + phShift * 0.65) * 0.028 * waveAmp;
+                const uv = (1.15 - p * 1.3) + uvOff + (ty - 0.5) * SKEW + w1 + w2;
+                arr.push([DIR === 1 ? uv * W : (1 - uv) * W, ty * H]);
+              }
+              return arr;
+            };
 
-          /* Specular strip on the flat page just before the crease */
-          function drawSpecular(p, pk, topX, bottomX) {
-            const sw = 16;
-            ctx.save();
-            ctx.beginPath();
-            if (forward) {
-              ctx.moveTo(topX, 0);
-              ctx.lineTo(topX - sw, 0);
-              ctx.lineTo(bottomX - sw, H);
-              ctx.lineTo(bottomX, H);
-            } else {
-              ctx.moveTo(topX, 0);
-              ctx.lineTo(topX + sw, 0);
-              ctx.lineTo(bottomX + sw, H);
-              ctx.lineTo(bottomX, H);
-            }
-            ctx.closePath();
-            ctx.clip();
-            const x0 = forward ? topX : topX + sw;
-            const x1 = forward ? topX - sw : topX;
-            const g = ctx.createLinearGradient(x0, 0, x1, 0);
-            g.addColorStop(0, `rgba(255,255,255,${(pk * 0.48).toFixed(3)})`);
-            g.addColorStop(0.45, `rgba(255,255,255,${(pk * 0.14).toFixed(3)})`);
-            g.addColorStop(1, "rgba(255,255,255,0)");
-            ctx.fillStyle = g;
-            ctx.fillRect(0, 0, W, H);
-            ctx.restore();
+            /* Draw a wave band: two soft glow passes only — no hard core line.
+               The light feathers out naturally from the centre of each crest
+               so the waves read as luminance, not drawn borders.            */
+            const drawWave = (arr, alpha, outerW, midW) => {
+              const path = () => {
+                ctx.beginPath();
+                ctx.moveTo(arr[0][0], arr[0][1]);
+                for (let i = 1; i < arr.length; i++) ctx.lineTo(arr[i][0], arr[i][1]);
+              };
+              ctx.save();
+              ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+              path(); ctx.strokeStyle = `rgba(255,255,255,${(alpha * 0.05).toFixed(3)})`; ctx.lineWidth = outerW; ctx.stroke();
+              path(); ctx.strokeStyle = `rgba(255,255,255,${(alpha * 0.14).toFixed(3)})`; ctx.lineWidth = midW;   ctx.stroke();
+              ctx.restore();
+            };
 
-            /* hairline crease */
-            ctx.save();
-            ctx.beginPath();
-            ctx.moveTo(topX, 0);
-            ctx.lineTo(bottomX, H);
-            ctx.strokeStyle = `rgba(255,255,255,${(pk * 0.38).toFixed(3)})`;
-            ctx.lineWidth = 1;
-            ctx.stroke();
-            ctx.restore();
-          }
-
-          /* Dark stripe at the fold line — simulates physical page thickness/edge */
-          function drawPageEdge(pk, topX, bottomX) {
-            const ew = 2 + pk * 4;
-            ctx.save();
-            ctx.beginPath();
-            if (forward) {
-              ctx.moveTo(topX, 0);
-              ctx.lineTo(topX + ew, 0);
-              ctx.lineTo(bottomX + ew, H);
-              ctx.lineTo(bottomX, H);
-            } else {
-              ctx.moveTo(topX, 0);
-              ctx.lineTo(topX - ew, 0);
-              ctx.lineTo(bottomX - ew, H);
-              ctx.lineTo(bottomX, H);
-            }
-            ctx.closePath();
-            ctx.fillStyle = `rgba(20,14,8,${(pk * 0.6).toFixed(3)})`;
-            ctx.fill();
-            ctx.restore();
+            /* Three trailing wave crests behind the main seam, then the main
+               seam itself — painted back-to-front so closer = brighter.     */
+            drawWave(makeWave(-0.26, 1.40), waveAmp * 0.28, 22,  8);
+            drawWave(makeWave(-0.17, 0.90), waveAmp * 0.44, 30, 10);
+            drawWave(makeWave(-0.09, 0.45), waveAmp * 0.62, 40, 13);
+            drawWave(pts,                   waveAmp * 0.80, 56, 18);
           }
         }
 
         /* ════════════════════════════════════
    NAVIGATE
-   forward: true  = next (curl right→left)
-            false = prev  (curl left→right)
+   forward: true  = next (wipe right→left)
+            false = prev  (wipe left→right)
             null  = infer from index delta
 ═════════════════════════════════════ */
         function navigate(toIdx, fromExternal = false, forward = null) {
@@ -7757,7 +7724,7 @@
           );
           if (swiper && !fromExternal) swiper.slideTo(toIdx, 0, false);
           clearAutoplay();
-          doPageCurl(fromIdx, toIdx, goForward);
+          doLiquidWipe(fromIdx, toIdx, goForward);
         }
 
         /* ════════════════════════════════════

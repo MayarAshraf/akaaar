@@ -3817,6 +3817,11 @@
             .site-footer__inner > * {
               flex-shrink: 0;
             }
+            /* Mark absorbs spare height and yields it first when space is tight */
+            .footer__mark {
+              flex: 1 1 auto;
+              min-height: 0;
+            }
             /* Constrain grid and bottom bar to readable width; let mark bleed full */
             .footer__grid,
             .footer__bottom {

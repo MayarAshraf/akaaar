@@ -6122,6 +6122,62 @@
       function qa(sel) { return [...document.querySelectorAll(sel)]; }
       function txt(sel) { return (q(sel)?.textContent || '').trim(); }
 
+      /* jsPDF Helvetica only supports ASCII (0x20-0x7E). Characters outside
+         that range get double-encoded as garbled garbage. We use charCodeAt()
+         numeric comparisons -- immune to any file-encoding quirks -- to convert
+         every non-ASCII character to a safe ASCII equivalent before jsPDF sees it. */
+      function sp(s) {
+        if (!s) return '';
+        var out = '';
+        for (var i = 0; i < s.length; i++) {
+          var c = s.charCodeAt(i);
+          if (c >= 0x20 && c <= 0x7E) { out += s[i]; continue; }
+          switch (c) {
+            case 0x2018: case 0x2019: case 0x201A: case 0x201B: out += "'"; break;
+            case 0x201C: case 0x201D: case 0x201E: case 0x201F: out += '"'; break;
+            case 0x2013: out += '-'; break;
+            case 0x2014: out += ' - '; break;
+            case 0x2026: out += '...'; break;
+            case 0x2022: out += '-'; break;
+            case 0x2122: out += 'TM'; break;
+            case 0x00AE: out += '(R)'; break;
+            case 0x00A9: out += '(c)'; break;
+            case 0x00A0: out += ' '; break;
+            case 0x00B7: out += '.'; break;
+            case 0x00B2: out += '2'; break;
+            case 0x00B3: out += '3'; break;
+            case 0x00B9: out += '1'; break;
+            case 0x00BD: out += '1/2'; break;
+            case 0x00BC: out += '1/4'; break;
+            case 0x00BE: out += '3/4'; break;
+            case 0x00C0: case 0x00C1: case 0x00C2: case 0x00C3:
+            case 0x00C4: case 0x00C5: out += 'A'; break;
+            case 0x00E0: case 0x00E1: case 0x00E2: case 0x00E3:
+            case 0x00E4: case 0x00E5: out += 'a'; break;
+            case 0x00C6: out += 'AE'; break;  case 0x00E6: out += 'ae'; break;
+            case 0x00C7: out += 'C'; break;   case 0x00E7: out += 'c'; break;
+            case 0x00C8: case 0x00C9: case 0x00CA: case 0x00CB: out += 'E'; break;
+            case 0x00E8: case 0x00E9: case 0x00EA: case 0x00EB: out += 'e'; break;
+            case 0x00CC: case 0x00CD: case 0x00CE: case 0x00CF: out += 'I'; break;
+            case 0x00EC: case 0x00ED: case 0x00EE: case 0x00EF: out += 'i'; break;
+            case 0x00D0: out += 'D'; break;   case 0x00F0: out += 'd'; break;
+            case 0x00D1: out += 'N'; break;   case 0x00F1: out += 'n'; break;
+            case 0x00D2: case 0x00D3: case 0x00D4: case 0x00D5:
+            case 0x00D6: case 0x00D8: out += 'O'; break;
+            case 0x00F2: case 0x00F3: case 0x00F4: case 0x00F5:
+            case 0x00F6: case 0x00F8: out += 'o'; break;
+            case 0x00D9: case 0x00DA: case 0x00DB: case 0x00DC: out += 'U'; break;
+            case 0x00F9: case 0x00FA: case 0x00FB: case 0x00FC: out += 'u'; break;
+            case 0x00DD: case 0x00FD: case 0x00FF: out += 'y'; break;
+            case 0x00DF: out += 'ss'; break;
+            default:
+              if (c >= 0xD800 && c <= 0xDBFF) i++;
+              break;
+          }
+        }
+        return out;
+      }
+
       async function imgToDataURL(src) {
         return new Promise(resolve => {
           const img = new Image();
@@ -6164,28 +6220,27 @@
           const LITE = [248, 246, 243];
           const MID  = [185, 185, 185];
 
-          /* ── Collect data from DOM ── */
-          const propName  = txt('.pd-header__h1') || txt('.pd-sticky__name');
-          const location  = txt('.pd-header__location');
-          const price     = txt('.prop-price');
-          const ref       = txt('.pd-header__meta-item strong');
-          const badges    = qa('.pd-header__badges .badge').map(b => b.textContent.trim()).join('  ·  ');
+          /* ── Collect data from DOM (sp() sanitizes non-ASCII before passing to jsPDF) ── */
+          const propName  = sp(txt('.pd-header__h1') || txt('.pd-sticky__name'));
+          const location  = sp(txt('.pd-header__location'));
+          const price     = sp(txt('.prop-price'));
+          const ref       = sp(txt('.pd-header__meta-item strong'));
+          const badges    = qa('.pd-header__badges .badge').map(b => sp(b.textContent.trim())).join('  |  ');
 
           const stats = qa('.pd-stats__item').map(el => ({
-            val:   (el.querySelector('.pd-stats__val')?.textContent  || '').trim(),
-            label: (el.querySelector('.pd-stats__label')?.textContent|| '').trim()
+            val:   sp((el.querySelector('.pd-stats__val')?.textContent  || '').trim()),
+            label: sp((el.querySelector('.pd-stats__label')?.textContent|| '').trim())
           }));
 
-          const descParts = qa('.pd-desc p').map(p => p.textContent.trim());
-          const description = descParts.join('\n\n');
+          const descParts = qa('.pd-desc p').map(p => sp(p.textContent.trim())).filter(Boolean);
 
           const details = qa('.pd-details-grid__cell').map(cell => ({
-            label: (cell.querySelector('.pd-details-grid__label')?.textContent || '').trim(),
-            val:   (cell.querySelector('.pd-details-grid__val')?.textContent   || '').trim()
+            label: sp((cell.querySelector('.pd-details-grid__label')?.textContent || '').trim()),
+            val:   sp((cell.querySelector('.pd-details-grid__val')?.textContent   || '').trim())
           }));
 
-          const amenities  = qa('.pd-amenity__text').map(el => el.textContent.trim());
-          const facilities = qa('.pd-facility__text').map(el => el.textContent.trim());
+          const amenities  = qa('.pd-amenity__text').map(el => sp(el.textContent.trim()));
+          const facilities = qa('.pd-facility__text').map(el => sp(el.textContent.trim()));
 
           /* ── Try fetching hero image ── */
           const heroSrc  = q('.gallery-slide.is-active')?.src || q('.gallery-slide')?.src;
@@ -6214,7 +6269,7 @@
             doc.text('AKAR TOWN', M, 9.5);
             doc.setFont('helvetica', 'normal');
             doc.setTextColor(...MID);
-            doc.text('Property Datasheet  ·  Confidential', PW - M, 9.5, { align: 'right' });
+            doc.text('Property Datasheet  |  Confidential', PW - M, 9.5, { align: 'right' });
           };
 
           const pageFooter = (doc, pageNum, total) => {
@@ -6225,7 +6280,7 @@
             doc.setFont('helvetica', 'normal');
             doc.setFontSize(7);
             doc.setTextColor(...GRAY);
-            doc.text('AKAR Town Real Estate  ·  ' + propName, M, fy + 2);
+            doc.text('AKAR Town Real Estate  |  ' + propName, M, fy + 2);
             doc.text('Page ' + pageNum + ' / ' + total, PW - M, fy + 2, { align: 'right' });
             doc.setTextColor(...MID);
             doc.text('All figures are indicative and subject to change without notice.', PW / 2, fy + 2, { align: 'center' });
@@ -6242,14 +6297,6 @@
           let y;
           if (heroData) {
             doc.addImage(heroData, 'JPEG', 0, IMG_Y, PW, imgH, '', 'FAST');
-            /* Gradient scrim over image bottom */
-            for (let i = 0; i < 20; i++) {
-              const a = i / 20;
-              doc.setFillColor(13, 13, 13);
-              doc.setGState(new doc.GState({ opacity: a * 0.65 }));
-              doc.rect(0, IMG_Y + imgH - (i + 1) * 3, PW, 3, 'F');
-            }
-            doc.setGState(new doc.GState({ opacity: 1 }));
             y = IMG_Y + imgH + 13;
           } else {
             /* No image — dark branded banner as fallback */
@@ -6272,7 +6319,7 @@
           doc.setFont('helvetica', 'normal');
           doc.setFontSize(9);
           doc.setTextColor(...GRAY);
-          doc.text(location.replace(/\s+/g, ' '), M, y);
+          doc.text(location.replace(/\s+/g, ' ').trim(), M, y);
           y += 5;
 
           /* Badges */
@@ -6337,19 +6384,31 @@
           });
           y += 30;
 
-          /* ── About (first paragraph only on cover) ── */
+          /* ── About (fill cover with as many paragraphs as fit) ── */
           y = sectionTitle(doc, 'About This Property', y);
           doc.setFont('helvetica', 'normal');
           doc.setFontSize(9);
           doc.setTextColor(55, 55, 55);
           const lineH1 = 5.5;
-          const firstPara = descParts[0] || '';
-          const paraLines = doc.splitTextToSize(firstPara, CW);
-          const maxLines  = Math.floor((PH - y - 18) / lineH1);
-          /* Render line-by-line: only show what fits, no re-join artefacts */
-          paraLines.slice(0, maxLines).forEach((line, li) => {
-            doc.text(line, M, y + li * lineH1);
-          });
+          for (let pi0 = 0; pi0 < descParts.length; pi0++) {
+            const para0 = (descParts[pi0] || '').trim();
+            if (!para0) continue;
+            const pLines0   = doc.splitTextToSize(para0, CW);
+            const available = Math.floor((PH - y - 20) / lineH1);
+            if (available < 2) break;
+            if (pLines0.length <= available) {
+              pLines0.forEach(function(ln, li) { doc.text(ln, M, y + li * lineH1); });
+              y += pLines0.length * lineH1;
+              if (pi0 < descParts.length - 1 && PH - y - 20 >= lineH1 * 3) y += lineH1 * 0.55;
+            } else {
+              const show = pLines0.slice(0, available - 1);
+              show.forEach((ln, li) => {
+                const last = li === show.length - 1;
+                doc.text(last ? ln.trimEnd() + '...' : ln, M, y + li * lineH1);
+              });
+              break;
+            }
+          }
 
           /* ═══════════════════════════════════════
              PAGE 2 — Full description + Details
@@ -6377,16 +6436,13 @@
             const paraH = lines.length * lineH2;
 
             if (paraH <= usableH) {
-              /* Paragraph fits on one page — pass ORIGINAL string to doc.text
-                 so jsPDF splits internally (same metrics, no re-join artefacts)
-                 and justify works correctly on non-last lines */
               if (y + paraH > PH - 16) {
                 doc.addPage(); pageHeader(doc); bodyFont(); y = 18;
               }
-              doc.text(para, M, y, { maxWidth: CW, align: 'justify' });
+              lines.forEach(function(ln, li) { doc.text(ln, M, y + li * lineH2); });
               y += paraH;
             } else {
-              /* Very long paragraph (rare) — split across pages, left-aligned */
+              /* Very long paragraph — split across pages */
               for (let li = 0; li < lines.length; li++) {
                 if (y > PH - 16) { doc.addPage(); pageHeader(doc); bodyFont(); y = 18; }
                 doc.text(lines[li], M, y);
@@ -6394,12 +6450,12 @@
               }
             }
 
-            if (pi < descParts.length - 1) y += lineH2 * 0.6;
+            if (pi < descParts.length - 1) y += lineH2 * 0.5;
           }
-          y += 8;
+          y += 5;
 
           /* Property Details table */
-          if (y > PH - 60) { doc.addPage(); pageHeader(doc); y = 18; }
+          if (y > PH - 50) { doc.addPage(); pageHeader(doc); y = 18; }
           y = sectionTitle(doc, 'Property Details', y);
 
           const tableBody = [];
@@ -6423,7 +6479,7 @@
               3: { fontStyle: 'bold',   textColor: INK,  fontSize: 8.5, cellWidth: CW * 0.28 }
             },
             styles: {
-              cellPadding: { top: 5, bottom: 5, left: 5, right: 4 },
+              cellPadding: { top: 4, bottom: 4, left: 5, right: 4 },
               lineColor: [225, 225, 225],
               lineWidth: 0.25,
               font: 'helvetica'
@@ -6433,12 +6489,12 @@
             tableLineWidth: 0.25,
             didDrawPage: () => { pageHeader(doc); }
           });
-          y = doc.lastAutoTable.finalY + 12;
+          y = doc.lastAutoTable.finalY + 8;
 
           /* ═══════════════════════════════════════
              PAGE 3 — Amenities + Facilities + CTA
           ═══════════════════════════════════════ */
-          if (y > PH - 80) { doc.addPage(); pageHeader(doc); y = 18; }
+          if (y > PH - 70) { doc.addPage(); pageHeader(doc); y = 18; }
 
           /* Amenities */
           y = sectionTitle(doc, 'Amenities & Features', y);
@@ -6478,7 +6534,7 @@
           y += Math.ceil(facilities.length / 3) * rowH + 14;
 
           /* Contact CTA */
-          if (y > PH - 36) { doc.addPage(); pageHeader(doc); y = PH - 50; }
+          if (y > PH - 36) { doc.addPage(); pageHeader(doc); y = 18; }
           doc.setFillColor(...INK);
           doc.roundedRect(M, y, CW, 30, 2.5, 2.5, 'F');
           doc.setFillColor(...RED);
@@ -6498,7 +6554,7 @@
           doc.setTextColor(...RED);
           doc.text('+20 115 000 0727', M + 10, y + 26);
           doc.setTextColor(160, 160, 160);
-          doc.text('info@akartown.com  ·  www.akartown.com', PW - M - 6, y + 26, { align: 'right' });
+          doc.text('info@akartown.com  |  www.akartown.com', PW - M - 6, y + 26, { align: 'right' });
 
           /* ── Stamp footers on every page ── */
           const total = doc.internal.getNumberOfPages();

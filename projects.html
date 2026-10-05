@@ -1,0 +1,3477 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projects — Akar Town</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Kufi+Arabic:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="theme.css" />
+    <style>
+      /* ─── TOKENS ─── */
+      :root {
+        --bg: #faf8f5;
+        --ink: #0d0d0d;
+        --ink-60: rgba(13, 13, 13, 0.6);
+        --ink-30: rgba(13, 13, 13, 0.3);
+        --ink-10: rgba(13, 13, 13, 0.1);
+        --gold: #c8102e;
+        --gold-lt: #c8102e;
+        --gold-dk: #c8102e;
+        --red: #cc2222;
+        --white: #ffffff;
+        --font-body: "Archivo", system-ui, sans-serif;
+        --font-body-ltr: "Archivo", system-ui, sans-serif;
+        --font-body-rtl: "Noto Kufi Arabic", system-ui, sans-serif;
+        --font-display: "Cormorant Garamond", Georgia, serif;
+        --nav-h: 62px;
+        --ease-smooth: cubic-bezier(0.76, 0, 0.24, 1);
+        --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        font-family: var(--font-body);
+        font-size: 16px;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        min-height: 100vh;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+      button {
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      img,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+      input,
+      select,
+      textarea {
+        font-family: inherit;
+        font-size: inherit;
+      }
+      ::selection {
+        background: var(--gold);
+        color: #fff;
+      }
+
+      /* ─── NAVBAR ─── */
+      .navbar {
+        position: fixed;
+        inset: 0 0 auto 0;
+        z-index: 200;
+        height: var(--nav-h);
+        padding: 0 48px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(8, 8, 8, 0.88);
+        backdrop-filter: blur(48px) saturate(180%);
+        -webkit-backdrop-filter: blur(48px) saturate(180%);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .navbar__logo {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+      }
+      .navbar__right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+      .navbar__nav {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        list-style: none;
+      }
+      .navbar__nav a {
+        font-family: var(--font-body-ltr);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.9);
+        position: relative;
+        transition: color 0.25s ease;
+      }
+      .navbar__nav a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--gold);
+        transition: width 0.38s var(--ease-smooth);
+      }
+      .navbar__nav a:hover::after,
+      .navbar__nav a.active::after {
+        width: 100%;
+      }
+      .navbar__nav a.active {
+        color: #fff;
+      }
+      .navbar__sep {
+        width: 1px;
+        height: 18px;
+        background: rgba(255, 255, 255, 0.15);
+        flex-shrink: 0;
+      }
+      .navbar__phone {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        color: rgba(255, 255, 255, 0.9);
+        white-space: nowrap;
+        flex-shrink: 0;
+        transition: color 0.25s ease;
+      }
+      .navbar__phone:hover {
+        color: #fff;
+      }
+      .navbar__phone svg {
+        flex-shrink: 0;
+        opacity: 0.75;
+      }
+      .btn-slide {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--font-body-ltr);
+        font-size: 13px;
+        font-weight: 650;
+        letter-spacing: 0.055em;
+        padding: 14px 30px;
+        line-height: 1;
+        border-radius: 100px;
+        white-space: nowrap;
+        cursor: pointer;
+        border: none;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        text-decoration: none;
+      }
+      .btn-slide:hover {
+        transform: translateY(-2px);
+      }
+      .btn-slide--fill {
+        background: linear-gradient(
+          135deg,
+          rgba(215, 20, 52, 0.96) 0%,
+          rgba(185, 10, 36, 1) 100%
+        );
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+      }
+      .btn-slide--fill:hover {
+        background: linear-gradient(
+          135deg,
+          rgba(225, 25, 58, 0.98) 0%,
+          rgba(200, 16, 46, 1) 100%
+        );
+      }
+      .navbar__actions {
+        display: flex;
+        align-items: center;
+      }
+      .navbar__actions .btn-slide {
+        font-size: 11px;
+        padding: 9px 20px;
+        letter-spacing: 0.06em;
+      }
+      .navbar__login {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 31px;
+        height: 31px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: transparent;
+        color: rgba(255, 255, 255, 0.88);
+        cursor: pointer;
+        flex-shrink: 0;
+        transition:
+          background 0.25s,
+          border-color 0.25s;
+      }
+      .navbar__login:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.38);
+      }
+      .navbar__user {
+        display: none;
+        align-items: center;
+        gap: 8px;
+      }
+      .lang-toggle {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 80px;
+        height: 31px;
+        border-radius: 100px;
+        background: rgba(160, 50, 72, 0.18);
+        border: 1px solid rgba(160, 50, 72, 0.45);
+        backdrop-filter: blur(10px);
+        padding: 3px;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition:
+          box-shadow 0.3s,
+          border-color 0.3s;
+      }
+      .lang-toggle:hover {
+        border-color: rgba(160, 50, 72, 0.7);
+      }
+      .lang-toggle__en,
+      .lang-toggle__ar {
+        flex: 1;
+        text-align: center;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        position: relative;
+        z-index: 1;
+        transition: color 0.3s;
+        user-select: none;
+        line-height: 1;
+      }
+      .lang-toggle__en {
+        font-family: "Archivo", sans-serif;
+        color: #fff;
+      }
+      .lang-toggle__ar {
+        font-family: "Noto Kufi Arabic", sans-serif;
+        color: rgba(255, 255, 255, 0.5);
+      }
+      html[lang="ar"] .lang-toggle__en {
+        color: rgba(255, 255, 255, 0.5);
+      }
+      html[lang="ar"] .lang-toggle__ar {
+        color: #fff;
+      }
+      .lang-toggle__knob {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: calc(50% - 3px);
+        height: calc(100% - 6px);
+        background: var(--gold);
+        border-radius: 100px;
+        transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        z-index: 0;
+      }
+      html[lang="ar"] .lang-toggle__knob {
+        transform: translateX(100%);
+      }
+      .theme-toggle {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 31px;
+        height: 31px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 50%;
+        background: transparent;
+        color: rgba(255, 255, 255, 0.88);
+        cursor: pointer;
+        flex-shrink: 0;
+        transition:
+          background 0.25s,
+          border-color 0.25s,
+          color 0.25s,
+          box-shadow 0.25s;
+      }
+      .theme-toggle:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.38);
+      }
+      .theme-toggle__sun,
+      .theme-toggle__moon {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          opacity 0.3s,
+          transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .theme-toggle__sun {
+        opacity: 0;
+        transform: rotate(90deg) scale(0.6);
+      }
+      .theme-toggle__moon {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      }
+      html[data-theme="dark"] .theme-toggle__sun {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      }
+      html[data-theme="dark"] .theme-toggle__moon {
+        opacity: 0;
+        transform: rotate(-90deg) scale(0.6);
+      }
+      html[data-theme="dark"] .theme-toggle {
+        border-color: rgba(201, 168, 76, 0.32);
+        color: rgba(237, 232, 223, 0.88);
+      }
+      html[data-theme="dark"] .theme-toggle:hover {
+        background: rgba(201, 168, 76, 0.1);
+        border-color: rgba(201, 168, 76, 0.55);
+      }
+      .nav-hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 36px;
+        height: 36px;
+        padding: 6px;
+        cursor: pointer;
+        border: none;
+        background: none;
+        flex-shrink: 0;
+      }
+      .nav-hamburger__bar {
+        display: block;
+        width: 22px;
+        height: 1.5px;
+        background: #fff;
+        border-radius: 2px;
+        transition:
+          transform 0.3s,
+          opacity 0.3s;
+        pointer-events: none;
+      }
+      .nav-hamburger.is-open .nav-hamburger__bar:nth-child(1) {
+        transform: translateY(6.5px) rotate(45deg);
+      }
+      .nav-hamburger.is-open .nav-hamburger__bar:nth-child(2) {
+        opacity: 0;
+      }
+      .nav-hamburger.is-open .nav-hamburger__bar:nth-child(3) {
+        transform: translateY(-6.5px) rotate(-45deg);
+      }
+      .mobile-nav {
+        position: fixed;
+        inset: var(--nav-h) 0 0 0;
+        z-index: 190;
+        background: rgba(8, 8, 8, 0.97);
+        backdrop-filter: blur(24px);
+        padding: 28px 24px 40px;
+        display: flex;
+        flex-direction: column;
+        transform: translateX(100%);
+        transition: transform 0.38s var(--ease-smooth);
+        overflow-y: auto;
+      }
+      .mobile-nav.is-open {
+        transform: none;
+      }
+      .mobile-nav__list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .mobile-nav__list li a {
+        display: block;
+        padding: 12px 4px;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.75);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        transition: color 0.2s;
+      }
+      .mobile-nav__list li a:hover {
+        color: #fff;
+      }
+      .mobile-nav__cta {
+        margin-top: auto;
+        padding-top: 24px;
+      }
+      .mobile-nav__cta button {
+        width: 100%;
+        padding: 15px 24px;
+        border-radius: 100px;
+        background: var(--gold);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        transition: opacity 0.2s;
+      }
+      .mobile-nav__cta button:hover {
+        opacity: 0.85;
+      }
+      .mobile-nav__phone {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 16px;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        color: rgba(255, 255, 255, 0.75);
+        transition: color 0.2s;
+      }
+      .mobile-nav__phone:hover {
+        color: #fff;
+      }
+      .mobile-nav__phone svg {
+        opacity: 0.7;
+      }
+
+      /* ─── PAGE HERO ─── */
+      .page-hero {
+        padding-top: var(--nav-h);
+        background: #06060a url("why-bg.jpeg") center 38% / cover no-repeat;
+        position: relative;
+        overflow: hidden;
+        min-height: 360px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+      .page-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background:
+          linear-gradient(
+            108deg,
+            rgba(6, 6, 10, 0.96) 0%,
+            rgba(6, 6, 10, 0.75) 32%,
+            rgba(6, 6, 10, 0.28) 58%,
+            transparent 100%
+          ),
+          linear-gradient(
+            to top,
+            rgba(6, 6, 10, 0.88) 0%,
+            rgba(6, 6, 10, 0.2) 45%,
+            transparent 70%
+          );
+        pointer-events: none;
+      }
+      .page-hero__inner {
+        position: relative;
+        z-index: 1;
+        max-width: 1320px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 56px 48px 52px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 40px;
+      }
+      .page-hero__bread {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.55);
+        margin-bottom: 16px;
+      }
+      .page-hero__bread a {
+        color: rgba(255, 255, 255, 0.55);
+        transition: color 0.2s;
+      }
+      .page-hero__bread a:hover {
+        color: var(--gold);
+      }
+      .page-hero__bread span {
+        color: rgba(255, 255, 255, 0.28);
+      }
+      .page-hero__title {
+        font-family: var(--font-body);
+        font-size: clamp(38px, 5.2vw, 68px);
+        font-weight: 300;
+        letter-spacing: -0.02em;
+        color: #fff;
+        line-height: 1.08;
+      }
+      .page-hero__title em {
+        font-style: normal;
+        font-weight: 300;
+        color: var(--gold-lt);
+      }
+      .page-hero__meta {
+        text-align: right;
+        flex-shrink: 0;
+      }
+      .page-hero__count {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 60px;
+        font-weight: 300;
+        color: #fff;
+        line-height: 1;
+        letter-spacing: -0.02em;
+      }
+      .page-hero__count-label {
+        font-size: 10px;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-top: 6px;
+        font-weight: 600;
+      }
+
+      /* ─── FILTER BAR ─── */
+      .filter-wrap {
+        position: sticky;
+        top: var(--nav-h);
+        z-index: 100;
+        background: var(--bg);
+        border-bottom: 1px solid var(--ink-10);
+      }
+      .filter-bar {
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 10px 48px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .filter-search {
+        position: relative;
+        flex: 1;
+        min-width: 160px;
+        max-width: 240px;
+      }
+      .filter-search svg {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--ink-30);
+        pointer-events: none;
+      }
+      .filter-search input {
+        width: 100%;
+        padding: 9px 14px 9px 36px;
+        border: 1px solid var(--ink-10);
+        border-radius: 100px;
+        background: transparent;
+        font-size: 13px;
+        color: var(--ink);
+        transition: border-color 0.2s;
+        outline: none;
+        font-family: inherit;
+      }
+      .filter-search input::placeholder {
+        color: var(--ink-30);
+      }
+      .filter-search input:focus {
+        border-color: var(--gold);
+      }
+      .filter-sep {
+        width: 1px;
+        height: 28px;
+        background: var(--ink-10);
+        flex-shrink: 0;
+        margin: 0 4px;
+      }
+
+      /* custom select — pill style */
+      .csel {
+        position: relative;
+        flex-shrink: 0;
+      }
+      .csel__trigger {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 10px 6px 7px;
+        border: 1px solid var(--ink-10);
+        border-radius: 100px;
+        background: transparent;
+        cursor: pointer;
+        white-space: nowrap;
+        outline: none;
+        font-family: inherit;
+        transition:
+          border-color 0.22s,
+          background 0.22s;
+      }
+      .csel__trigger:hover {
+        border-color: rgba(200, 16, 46, 0.4);
+        background: rgba(200, 16, 46, 0.04);
+      }
+      .csel.is-open .csel__trigger {
+        border-color: var(--gold);
+        background: rgba(200, 16, 46, 0.06);
+      }
+      .csel__icon {
+        display: grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: rgba(200, 16, 46, 0.08);
+        color: var(--gold);
+        flex-shrink: 0;
+      }
+      .csel__text {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        line-height: 1.2;
+        min-width: 0;
+      }
+      .csel__label {
+        font-size: 9px;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink-30);
+      }
+      .csel__val {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--ink);
+        transition: color 0.2s;
+      }
+      .csel.has-value .csel__val {
+        color: var(--gold-dk);
+      }
+      .csel__arrow {
+        flex-shrink: 0;
+        color: var(--ink-30);
+        transition:
+          transform 0.28s var(--ease-smooth),
+          color 0.2s;
+      }
+      .csel.is-open .csel__arrow {
+        transform: rotate(180deg);
+        color: var(--gold);
+      }
+      .csel__menu {
+        position: absolute;
+        top: calc(100% + 6px);
+        left: 0;
+        min-width: 100%;
+        background: var(--bg);
+        border: 1px solid var(--ink-10);
+        border-radius: 12px;
+        box-shadow:
+          0 4px 6px -1px rgba(13, 13, 13, 0.06),
+          0 16px 40px -4px rgba(13, 13, 13, 0.12);
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-6px) scaleY(0.96);
+        transform-origin: top center;
+        pointer-events: none;
+        transition:
+          opacity 0.18s var(--ease-out),
+          transform 0.18s var(--ease-out);
+        z-index: 150;
+      }
+      .csel.is-open .csel__menu {
+        opacity: 1;
+        transform: translateY(0) scaleY(1);
+        pointer-events: auto;
+      }
+      .csel__opt {
+        padding: 9px 14px;
+        font-size: 13px;
+        color: var(--ink-60);
+        cursor: pointer;
+        transition:
+          background 0.12s,
+          color 0.12s;
+      }
+      .csel__opt:hover {
+        background: rgba(200, 16, 46, 0.06);
+        color: var(--ink);
+      }
+      .csel__opt.is-selected {
+        color: var(--gold-dk);
+        font-weight: 500;
+        background: rgba(200, 16, 46, 0.08);
+      }
+
+      .filter-right {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+      }
+      .btn-clear {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink-30);
+        padding: 7px 14px;
+        border-radius: 100px;
+        border: 1px solid transparent;
+        font-family: inherit;
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+      }
+      .btn-clear:hover {
+        color: var(--red);
+        border-color: rgba(200, 16, 46, 0.2);
+      }
+      .btn-filter-apply {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 20px;
+        border-radius: 100px;
+        background: linear-gradient(
+          135deg,
+          rgba(215, 20, 52, 0.96) 0%,
+          rgba(185, 10, 36, 1) 100%
+        );
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .btn-filter-apply:hover {
+        background: linear-gradient(
+          135deg,
+          rgba(225, 25, 58, 0.98) 0%,
+          rgba(200, 16, 46, 1) 100%
+        );
+        transform: translateY(-2px);
+      }
+
+      /* ─── RESULTS WRAP ─── */
+      .results-wrap {
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 36px 48px 80px;
+      }
+
+      /* ─── PROJECT GRID ─── */
+      .proj-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+      }
+
+      /* ─── PROJECT CARD ─── */
+      .proj-card {
+        background: var(--white);
+        border-radius: 18px;
+        border: 1px solid var(--ink-10);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition:
+          transform 0.35s var(--ease-out),
+          box-shadow 0.35s var(--ease-out),
+          border-color 0.35s;
+        cursor: pointer;
+      }
+      .proj-card:hover {
+        border-color: rgba(200, 16, 46, 0.15);
+      }
+
+      /* card image */
+      .proj-card__img {
+        position: relative;
+        aspect-ratio: 16/10;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+      .proj-card__img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .proj-card:hover .proj-card__img img {
+        transform: scale(1.06);
+      }
+      .proj-card__img-scrim {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          0deg,
+          rgba(8, 8, 8, 0.72) 0%,
+          rgba(8, 8, 8, 0.1) 45%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+
+      /* status badge */
+      .proj-card__status {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 5px 10px;
+        border-radius: 100px;
+        backdrop-filter: blur(12px);
+      }
+      .proj-card__status::before {
+        content: "";
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        display: block;
+      }
+      .proj-card__status--offplan {
+        background: rgba(200, 16, 46, 0.88);
+        color: #fff;
+      }
+      .proj-card__status--offplan::before {
+        background: #ffb3b3;
+      }
+      .proj-card__status--construction {
+        background: rgba(255, 152, 0, 0.9);
+        color: #fff;
+      }
+      .proj-card__status--construction::before {
+        background: #fff3cd;
+      }
+      .proj-card__status--ready {
+        background: rgba(22, 163, 74, 0.9);
+        color: #fff;
+      }
+      .proj-card__status--ready::before {
+        background: #bbf7d0;
+      }
+
+      /* featured ribbon */
+      .proj-card__featured {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        padding: 4px 10px;
+        border-radius: 100px;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #fff;
+      }
+
+      /* developer pill on image */
+      .proj-card__dev {
+        position: absolute;
+        bottom: 14px;
+        left: 14px;
+        right: 14px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+      }
+      .proj-card__dev-name {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.65);
+      }
+      .proj-card__price-tag {
+        text-align: right;
+      }
+      .proj-card__price-from {
+        font-size: 9px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+        display: block;
+      }
+      .proj-card__price-val {
+        font-size: 15px;
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.2;
+      }
+
+      /* card body */
+      .proj-card__body {
+        padding: 20px 22px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        flex: 1;
+      }
+      .proj-card__loc {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--ink-60);
+        margin-bottom: 6px;
+      }
+      .proj-card__loc svg {
+        color: var(--gold);
+        flex-shrink: 0;
+      }
+      .proj-card__name {
+        font-family: var(--font-display);
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--ink);
+        line-height: 1.2;
+        margin-bottom: 8px;
+        transition: color 0.2s;
+      }
+      .proj-card:hover .proj-card__name {
+        color: var(--gold);
+      }
+      .proj-card__desc {
+        font-size: 13px;
+        line-height: 1.65;
+        color: var(--ink-60);
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        margin-bottom: 16px;
+      }
+
+      /* stats row */
+      .proj-card__stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border-top: 1px solid var(--ink-10);
+        margin: 0 -22px;
+      }
+      .proj-card__stat {
+        padding: 14px 16px;
+        text-align: center;
+        border-right: 1px solid var(--ink-10);
+      }
+      .proj-card__stat:last-child {
+        border-right: none;
+      }
+      .proj-card__stat-val {
+        display: block;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--ink);
+        line-height: 1;
+      }
+      .proj-card__stat-key {
+        display: block;
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--ink-30);
+        margin-top: 3px;
+      }
+
+      /* features chips */
+      .proj-card__features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        padding: 14px 22px 0;
+      }
+      .proj-card__feat {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        padding: 4px 9px;
+        border-radius: 100px;
+        background: var(--ink-10);
+        color: var(--ink-60);
+        text-transform: uppercase;
+      }
+      .proj-card__feat--more {
+        background: transparent;
+        border: 1px solid var(--ink-10);
+        color: var(--ink-30);
+      }
+
+      /* card actions */
+      .proj-card__actions {
+        display: flex;
+        gap: 8px;
+        padding: 14px 22px 20px;
+      }
+      .btn-proj-details {
+        flex: 1;
+        height: 40px;
+        border-radius: 100px;
+        background: linear-gradient(
+          135deg,
+          rgba(215, 20, 52, 0.96) 0%,
+          rgba(185, 10, 36, 1) 100%
+        );
+        color: #fff;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        transition: all 0.3s var(--ease-out);
+      }
+      .btn-proj-details:hover {
+        transform: translateY(-2px);
+        filter: brightness(1.08);
+      }
+      .btn-proj-units {
+        height: 40px;
+        padding: 0 18px;
+        border-radius: 100px;
+        background: transparent;
+        color: var(--ink);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        border: 1.5px solid var(--ink-10);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        transition: all 0.3s var(--ease-out);
+        white-space: nowrap;
+      }
+      .btn-proj-units:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+        background: rgba(200, 16, 46, 0.04);
+      }
+
+      /* ─── LOAD MORE ─── */
+      .load-more-wrap {
+        display: flex;
+        justify-content: center;
+        padding: 40px 0 60px;
+      }
+      .btn-load-more {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 36px;
+        border-radius: 100px;
+        border: 1.5px solid rgba(13, 13, 13, 0.18);
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        color: var(--gold-dk);
+        background: rgba(255, 255, 255, 0.48);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        box-shadow:
+          0 2px 16px rgba(0, 0, 0, 0.08),
+          0 1px 4px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s var(--ease-out);
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .btn-load-more:hover {
+        border-color: rgba(200, 16, 46, 0.35);
+        color: var(--gold-dk);
+        background: rgba(255, 255, 255, 0.65);
+        box-shadow:
+          0 6px 24px rgba(0, 0, 0, 0.12),
+          0 2px 6px rgba(0, 0, 0, 0.07);
+        transform: translateY(-2px);
+      }
+      .btn-load-more .spinner {
+        width: 14px;
+        height: 14px;
+        border: 2px solid var(--ink-10);
+        border-top-color: var(--gold);
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+        display: none;
+      }
+      .btn-load-more.is-loading .spinner {
+        display: block;
+      }
+      .btn-load-more.is-loading span {
+        opacity: 0.5;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      html[data-theme="dark"] .btn-load-more {
+        background: rgba(28, 25, 18, 0.8);
+        border-color: rgba(237, 232, 223, 0.13);
+        color: var(--ink);
+      }
+      html[data-theme="dark"] .btn-load-more:hover {
+        background: rgba(40, 35, 24, 0.9);
+        border-color: rgba(200, 16, 46, 0.35);
+        color: var(--gold);
+      }
+
+      /* ─── EMPTY STATE ─── */
+      .proj-empty {
+        grid-column: 1/-1;
+        text-align: center;
+        padding: 80px 20px;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+      .proj-empty.is-visible {
+        display: flex;
+      }
+      .proj-empty svg {
+        color: var(--ink-10);
+      }
+      .proj-empty h3 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--ink-60);
+      }
+      .proj-empty p {
+        font-size: 13px;
+        color: var(--ink-30);
+        max-width: 30ch;
+      }
+
+      /* ─── CTA BANNER ─── */
+      .cta-banner {
+        position: relative;
+        overflow: hidden;
+        padding: 100px 48px;
+        background: linear-gradient(
+          135deg,
+          #0d0b08 0%,
+          #110e0a 60%,
+          #160c0d 100%
+        );
+      }
+      .cta-banner::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(
+          ellipse 60% 80% at 0% 50%,
+          rgba(200, 16, 46, 0.1) 0%,
+          transparent 70%
+        );
+      }
+      .cta-banner::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background: radial-gradient(
+          ellipse 40% 60% at 100% 50%,
+          rgba(200, 16, 46, 0.05) 0%,
+          transparent 70%
+        );
+      }
+      .cta-banner__inner {
+        position: relative;
+        z-index: 1;
+        max-width: 1320px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+      }
+      .cta-banner__eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 24px;
+      }
+      .cta-banner__title {
+        font-family: var(--font-display);
+        font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+        font-weight: 300;
+        color: #fff;
+        line-height: 1.1;
+        margin-bottom: 20px;
+      }
+      .cta-banner__title em {
+        font-style: italic;
+        color: var(--gold);
+      }
+      .cta-banner__desc {
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.5);
+        line-height: 1.8;
+      }
+      .cta-banner__cards {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .cta-banner__card {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        padding: 20px 22px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.04);
+        backdrop-filter: blur(24px);
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        text-decoration: none;
+        transition:
+          background 0.28s var(--ease-out),
+          border-color 0.28s,
+          transform 0.28s var(--ease-out);
+      }
+      .cta-banner__card:hover {
+        background: rgba(200, 16, 46, 0.1);
+        border-color: rgba(200, 16, 46, 0.32);
+        transform: translateX(5px);
+      }
+      .cta-banner__card-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        flex-shrink: 0;
+        display: grid;
+        place-items: center;
+        background: rgba(200, 16, 46, 0.14);
+        color: var(--gold);
+        transition: background 0.28s;
+      }
+      .cta-banner__card:hover .cta-banner__card-icon {
+        background: rgba(200, 16, 46, 0.24);
+      }
+      .cta-banner__card-body {
+        flex: 1;
+        min-width: 0;
+      }
+      .cta-banner__card-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 3px;
+      }
+      .cta-banner__card-sub {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.38);
+        letter-spacing: 0.02em;
+      }
+      .cta-banner__card-arrow {
+        color: rgba(255, 255, 255, 0.25);
+        flex-shrink: 0;
+        transition:
+          color 0.22s,
+          transform 0.22s var(--ease-out);
+      }
+      .cta-banner__card:hover .cta-banner__card-arrow {
+        color: var(--gold);
+        transform: translateX(3px);
+      }
+
+      /* ─── FOOTER ─── */
+      .site-footer {
+        position: relative;
+        width: 100%;
+        min-height: 100dvh;
+        overflow: hidden;
+        background: #080808;
+        color: #fff;
+      }
+      .footer__bg {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        filter: grayscale(0.35) brightness(0.42) contrast(1.1);
+      }
+      .footer__scrim {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(0deg, #080808 12%, rgba(8, 8, 8, 0.05) 72%);
+        pointer-events: none;
+      }
+      .site-footer__inner {
+        position: relative;
+        z-index: 1;
+        padding: clamp(1.5rem, 3.5vh, 2.5rem) 0 clamp(1rem, 2vh, 1.5rem);
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .footer__grid,
+      .footer__bottom {
+        max-width: 1320px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 48px;
+        padding-right: 48px;
+        box-sizing: border-box;
+      }
+      .footer__grid {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 1fr 1.6fr;
+        gap: clamp(1.5rem, 3vw, 2.5rem);
+      }
+      .footer__mark {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin: clamp(1.5rem, 4vh, 3rem) 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .footer__mark-text {
+        display: inline-block;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 0.86;
+        white-space: nowrap;
+        font-size: clamp(4.5rem, 16vw, 13rem);
+        color: transparent;
+        background-image: linear-gradient(
+          180deg,
+          rgba(246, 245, 242, 0.5) 0%,
+          rgba(246, 245, 242, 0.4) 45%,
+          rgba(246, 245, 242, 0.1) 72%,
+          rgba(246, 245, 242, 0) 88%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .footer__label {
+        display: block;
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(246, 245, 242, 0.55);
+        margin-bottom: 0.9rem;
+      }
+      .footer__brand-logo {
+        display: block;
+        margin-bottom: 1rem;
+      }
+      .footer__brand-logo svg {
+        height: 26px;
+        width: auto;
+        display: block;
+      }
+      .footer__tagline {
+        font-size: 0.85rem;
+        line-height: 1.65;
+        color: rgba(246, 245, 242, 0.78);
+        max-width: 30ch;
+        margin: 0 0 1.4rem;
+      }
+      .footer__stats {
+        display: flex;
+        gap: clamp(1rem, 2.5vw, 1.75rem);
+        margin-bottom: 1.4rem;
+      }
+      .footer__stat-value {
+        display: block;
+        font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+        font-weight: 700;
+        color: #c8102e;
+        line-height: 1;
+        margin-bottom: 0.28rem;
+      }
+      .footer__stat-label {
+        display: block;
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(246, 245, 242, 0.6);
+      }
+      .footer__socials {
+        display: flex;
+        gap: 0.5rem;
+      }
+      .footer__social-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid rgba(246, 245, 242, 0.35);
+        color: rgba(246, 245, 242, 0.8);
+        transition:
+          border-color 0.3s,
+          color 0.3s;
+      }
+      .footer__social-btn:hover {
+        border-color: #f6f5f2;
+        color: #f6f5f2;
+      }
+      .footer__links {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.55rem;
+      }
+      .footer__links a {
+        font-size: 0.92rem;
+        font-weight: 500;
+        color: rgba(246, 245, 242, 0.85);
+        transition: color 0.3s;
+      }
+      .footer__links a:hover {
+        color: #f6f5f2;
+      }
+      .footer__match-title {
+        font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+        font-weight: 700;
+        line-height: 1.2;
+        color: #f6f5f2;
+        margin: 0 0 0.5rem;
+      }
+      .footer__match-title em {
+        font-style: normal;
+        color: #c8102e;
+      }
+      .footer__match-desc {
+        font-size: 0.82rem;
+        line-height: 1.55;
+        color: rgba(246, 245, 242, 0.75);
+        margin: 0 0 1rem;
+      }
+      .footer__type-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-bottom: 1rem;
+      }
+      .footer__type-pill {
+        padding: 0.38rem 0.9rem;
+        border-radius: 99px;
+        border: 1px solid rgba(246, 245, 242, 0.38);
+        font-size: 0.78rem;
+        font-weight: 500;
+        color: rgba(246, 245, 242, 0.88);
+        background: transparent;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          border-color 0.2s,
+          color 0.2s;
+        font-family: inherit;
+        line-height: 1;
+      }
+      .footer__type-pill.is-active,
+      .footer__type-pill:hover {
+        background: #c8102e;
+        border-color: #c8102e;
+        color: #fff;
+      }
+      .footer__field-label {
+        display: block;
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(246, 245, 242, 0.6);
+        margin-bottom: 0.45rem;
+      }
+      .footer__budget-row {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        margin-bottom: 0.85rem;
+      }
+      .footer__budget-input {
+        flex: 1;
+        min-width: 0;
+        padding: 0.6rem 0.7rem;
+        border-radius: 3px;
+        border: 1px solid rgba(246, 245, 242, 0.12);
+        background: rgba(246, 245, 242, 0.05);
+        color: #f6f5f2;
+        font-size: 0.8rem;
+        font-family: inherit;
+      }
+      .footer__budget-input::placeholder {
+        color: rgba(246, 245, 242, 0.42);
+      }
+      .footer__budget-sep {
+        color: rgba(246, 245, 242, 0.55);
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+      .footer__email-row {
+        display: flex;
+        gap: 0.45rem;
+        align-items: stretch;
+      }
+      .footer__email-input {
+        flex: 1;
+        min-width: 0;
+        padding: 0.6rem 0.7rem;
+        border-radius: 3px;
+        border: 1px solid rgba(246, 245, 242, 0.12);
+        background: rgba(246, 245, 242, 0.05);
+        color: #f6f5f2;
+        font-size: 0.8rem;
+        font-family: inherit;
+      }
+      .footer__email-input::placeholder {
+        color: rgba(246, 245, 242, 0.42);
+      }
+      .footer__match-submit {
+        flex-shrink: 0;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: #c8102e;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.25s;
+      }
+      .footer__match-submit:hover {
+        background: #a60d24;
+      }
+      .footer__bottom {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        padding-top: clamp(1rem, 2.5vh, 1.5rem);
+        border-top: 1px solid rgba(246, 245, 242, 0.12);
+        font-size: 0.75rem;
+        color: rgba(246, 245, 242, 0.6);
+      }
+      .footer__credit-link {
+        color: #f6f5f2;
+        font-weight: 600;
+        text-decoration: underline;
+      }
+      .footer__legal {
+        display: flex;
+        gap: 1.25rem;
+      }
+      .footer__legal a {
+        color: rgba(246, 245, 242, 0.6);
+        transition: color 0.3s;
+      }
+      .footer__legal a:hover {
+        color: #f6f5f2;
+      }
+
+      /* ─── SCROLL REVEAL ─── */
+      .sr {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.65s var(--ease-out),
+          transform 0.65s var(--ease-out);
+      }
+      .sr.in-view {
+        opacity: 1;
+        transform: none;
+      }
+
+      /* ─── DARK MODE ─── */
+      html[data-theme="dark"] .filter-bar {
+        background: rgba(13, 11, 8, 0.95);
+        border-bottom-color: rgba(237, 232, 223, 0.07);
+      }
+      html[data-theme="dark"] .filter-search input,
+      html[data-theme="dark"] .csel__trigger {
+        background: #1c1912;
+        border-color: rgba(237, 232, 223, 0.13);
+        color: var(--ink);
+      }
+      html[data-theme="dark"] .filter-search input::placeholder {
+        color: var(--ink-30);
+      }
+      html[data-theme="dark"] .csel__menu {
+        background: #1c1912;
+        border-color: rgba(237, 232, 223, 0.13);
+      }
+      html[data-theme="dark"] .csel__opt {
+        color: var(--ink-60);
+      }
+      html[data-theme="dark"] .csel__opt:hover {
+        background: rgba(237, 232, 223, 0.06);
+        color: var(--ink);
+      }
+      html[data-theme="dark"] .csel__opt.is-selected {
+        background: rgba(212, 20, 44, 0.12);
+        color: var(--gold);
+      }
+      html[data-theme="dark"] .proj-card {
+        background: #1c1912;
+        border-color: rgba(237, 232, 223, 0.07);
+      }
+      html[data-theme="dark"] .proj-card:hover {
+        border-color: rgba(212, 20, 44, 0.25);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      }
+      html[data-theme="dark"] .proj-card__name {
+        color: var(--ink);
+      }
+      html[data-theme="dark"] .proj-card__desc {
+        color: var(--ink-60);
+      }
+      html[data-theme="dark"] .proj-card__stats {
+        border-top-color: rgba(237, 232, 223, 0.07);
+      }
+      html[data-theme="dark"] .proj-card__stat {
+        border-right-color: rgba(237, 232, 223, 0.07);
+      }
+      html[data-theme="dark"] .proj-card__stat-val {
+        color: var(--ink);
+      }
+      html[data-theme="dark"] .proj-card__feat {
+        background: rgba(237, 232, 223, 0.07);
+        color: var(--ink-60);
+      }
+      html[data-theme="dark"] .btn-proj-units {
+        border-color: rgba(237, 232, 223, 0.13);
+        color: var(--ink);
+      }
+      html[data-theme="dark"] .btn-proj-units:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+      html[data-theme="dark"] .btn-clear {
+        color: var(--ink-60);
+      }
+      html[data-theme="dark"] .btn-clear:hover {
+        color: var(--gold);
+        border-color: rgba(212, 20, 44, 0.25);
+      }
+      html[data-theme="dark"] .filter-sep {
+        background: rgba(237, 232, 223, 0.1);
+      }
+      html[data-theme="dark"] .proj-card__loc {
+        color: var(--ink-60);
+      }
+
+      /* ─── RESPONSIVE ─── */
+      @media (max-width: 1100px) {
+        .proj-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .results-wrap {
+          padding-left: 28px;
+          padding-right: 28px;
+        }
+        .page-hero__inner {
+          padding: 0 28px 40px;
+        }
+      }
+      @media (max-width: 768px) {
+        .proj-grid {
+          grid-template-columns: 1fr;
+        }
+        .navbar {
+          padding: 0 20px;
+        }
+        .navbar__nav,
+        .navbar__sep,
+        .navbar__actions,
+        .navbar__phone {
+          display: none;
+        }
+        .nav-hamburger {
+          display: flex;
+        }
+        .page-hero {
+          height: 320px;
+        }
+        .page-hero__title {
+          font-size: 2rem;
+        }
+        .filter-search input {
+          width: 160px;
+        }
+        .results-wrap {
+          padding: 24px 20px 60px;
+        }
+        .cta-banner {
+          padding: 60px 24px;
+        }
+        .cta-banner__inner {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        .cta-banner__card:hover {
+          transform: none;
+        }
+        .footer__grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .footer__grid,
+        .footer__bottom {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+      }
+      @media (max-width: 480px) {
+        .page-hero__meta {
+          display: none;
+        }
+      }
+
+      /* ─── RTL ─── */
+      [dir="rtl"] .navbar__right {
+        flex-direction: row-reverse;
+      }
+      [dir="rtl"] .navbar__nav {
+        flex-direction: row-reverse;
+      }
+      [dir="rtl"] .filter-bar {
+        flex-direction: row-reverse;
+      }
+      [dir="rtl"] .filter-right {
+        margin-left: 0;
+        margin-right: auto;
+      }
+      [dir="rtl"] .filter-search svg {
+        left: auto;
+        right: 12px;
+      }
+      [dir="rtl"] .filter-search input {
+        padding: 0 36px 0 14px;
+      }
+      [dir="rtl"] .csel__menu {
+        left: auto;
+        right: 0;
+      }
+      [dir="rtl"] .proj-card__loc {
+        flex-direction: row-reverse;
+      }
+      [dir="rtl"] .proj-card__dev {
+        flex-direction: row-reverse;
+      }
+      [dir="rtl"] .proj-card__price-tag {
+        text-align: left;
+      }
+      [dir="rtl"] .proj-card__stats {
+        direction: rtl;
+      }
+      [dir="rtl"] .proj-card__stat {
+        border-right: none;
+        border-left: 1px solid var(--ink-10);
+      }
+      [dir="rtl"] .proj-card__stat:last-child {
+        border-left: none;
+      }
+      [dir="rtl"] .proj-card__actions {
+        flex-direction: row-reverse;
+      }
+      [dir="rtl"] .page-hero__bread {
+        flex-direction: row-reverse;
+      }
+      [dir="rtl"] .page-hero__meta {
+        text-align: left;
+      }
+      [dir="rtl"] .footer__label {
+        letter-spacing: 0.04em;
+      }
+      [dir="rtl"] .cta-banner__inner {
+        direction: rtl;
+      }
+      [dir="rtl"] .cta-banner__card {
+        flex-direction: row-reverse;
+      }
+      [dir="rtl"] .cta-banner__card:hover {
+        transform: translateX(-5px);
+      }
+      [dir="rtl"] .cta-banner__card-arrow {
+        transform: scaleX(-1);
+      }
+      [dir="rtl"] .filter-bar {
+        direction: rtl;
+      }
+
+      /* tooltip */
+      [data-tooltip] {
+        position: relative;
+      }
+      [data-tooltip]::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 50%;
+        transform: translateX(-50%) translateY(-4px);
+        background: rgba(13, 13, 13, 0.88);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 500;
+        white-space: nowrap;
+        padding: 4px 9px;
+        border-radius: 6px;
+        pointer-events: none;
+        opacity: 0;
+        transition:
+          opacity 0.18s,
+          transform 0.18s;
+        letter-spacing: 0.02em;
+      }
+      [data-tooltip]:hover::after {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    </style>
+    <script src="theme.js"></script>
+  </head>
+  <body>
+    <!-- ─── NAVBAR ─── -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+      <a href="index.html" class="navbar__logo" aria-label="Akar Town — Home">
+        <svg
+          width="230"
+          viewBox="0 0 2185 380"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M90.97 258.84H160.93L236.12 169.2V379.42H296.66V5.21997L90.97 258.84Z"
+            fill="white"
+          />
+          <path
+            d="M64.78 291.12L0 371H66.84L133.85 291.12H64.78Z"
+            fill="#C8102E"
+          />
+          <path
+            d="M390.87 186.6L544.58 373.2H472.34L339.38 212.73L317.86 187.07L339.38 160.95L472.34 0.00999451H544.58L390.87 186.61V186.6Z"
+            fill="white"
+          />
+          <path
+            d="M772.951 153.462L752.741 160.698C739.129 146.227 720.111 138.991 695.632 138.991C677.085 138.991 661.976 143.759 650.277 153.268C638.606 162.805 632.756 174.92 632.756 189.613C632.756 204.306 638.55 217.086 650.111 226.429C661.671 235.772 677.279 240.429 696.935 240.429C720.665 240.429 739.351 233.082 752.935 218.362L772.036 228.924C762.388 240.179 751.465 248.302 739.295 253.32C727.125 258.338 712.57 260.833 695.632 260.833C671.901 260.833 652.162 254.9 636.471 243.035C618.534 229.423 609.58 211.625 609.58 189.613C609.58 167.601 618.673 150.302 636.831 136.579C652.661 124.575 672.261 118.587 695.632 118.587C729.259 118.587 755.042 130.203 772.978 153.462H772.951Z"
+            fill="white"
+          />
+          <path
+            d="M1015.47 189.71C1015.47 211.722 1006.43 229.52 988.385 243.132C972.555 254.997 952.899 260.93 929.418 260.93C905.937 260.93 885.893 254.942 870.064 242.938C852.016 229.326 842.978 211.611 842.978 189.71C842.978 167.809 852.127 150.51 870.424 136.676C886.503 124.561 906.159 118.49 929.391 118.49C952.622 118.49 972.361 124.561 988.191 136.676C1006.38 150.538 1015.44 168.197 1015.44 189.71H1015.47ZM992.294 189.71C992.294 174.019 985.612 161.266 972.278 151.508C960.773 143.108 946.495 138.894 929.446 138.894C910.761 138.894 895.569 143.69 883.814 153.255C872.06 162.847 866.21 174.989 866.21 189.71C866.21 204.431 871.949 217.183 883.454 226.526C894.959 235.869 910.289 240.526 929.446 240.526C948.602 240.526 963.711 235.841 975.161 226.443C986.583 217.045 992.321 204.791 992.321 189.71H992.294Z"
+            fill="white"
+          />
+          <path
+            d="M1269.99 256.841H1247.73V147.058H1247.18L1177.45 234.607L1108.29 147.058H1107.73V256.841H1085.47V122.579H1113.28L1177.62 203.724L1242.24 122.579H1269.97V256.841H1269.99Z"
+            fill="white"
+          />
+          <path
+            d="M1446.45 122.607C1460.17 122.607 1471.04 126.405 1479.11 134.001C1487.15 141.597 1491.17 151.771 1491.17 164.496C1491.17 177.858 1486.98 188.06 1478.64 195.102C1470.29 202.144 1458.15 205.664 1442.18 205.664H1362.25V256.841H1339.99V122.579H1446.45V122.607ZM1442.57 185.676C1459.76 185.676 1468.35 178.746 1468.35 164.912C1468.35 150.08 1459.26 142.65 1441.1 142.65H1362.28V185.676H1442.6H1442.57Z"
+            fill="white"
+          />
+          <path
+            d="M1731.22 256.841H1706.88L1691.41 226.789H1600.98L1585.51 256.841H1561.17L1632.19 122.579H1660.19L1731.22 256.841ZM1680.6 206.773L1646.39 141.708L1611.76 206.773H1680.6Z"
+            fill="white"
+          />
+          <path
+            d="M1953.67 256.841H1925.97L1823.48 146.726V256.841H1801.22V122.579H1828.86L1931.43 232.75V122.579H1953.69V256.841H1953.67Z"
+            fill="white"
+          />
+          <path
+            d="M2192.83 122.579L2119.39 203.807V256.841H2097.13V203.807L2023.69 122.579H2051.44L2108.39 185.288L2165.08 122.579H2192.83Z"
+            fill="white"
+          />
+        </svg>
+      </a>
+      <div class="navbar__right">
+        <ul class="navbar__nav" role="list">
+          <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+          <li>
+            <a href="listings.html" data-i18n="nav.properties">Properties</a>
+          </li>
+          <li>
+            <a href="projects.html" class="active" data-i18n="nav.projects"
+              >Projects</a
+            >
+          </li>
+          <li><a href="#" data-i18n="nav.about">About</a></li>
+          <li><a href="#" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+        <a
+          href="tel:01150000727"
+          class="navbar__phone"
+          aria-label="Call 01150000727"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path
+              d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.27-.73a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 15.5v1.42z"
+            />
+          </svg>
+          <span>01150000727</span>
+        </a>
+        <div class="navbar__sep" aria-hidden="true"></div>
+        <div class="navbar__actions">
+          <button class="btn-slide btn-slide--fill" data-i18n="nav.cta">
+            Submit Property
+          </button>
+        </div>
+        <div
+          id="langToggle"
+          class="lang-toggle"
+          role="switch"
+          aria-checked="false"
+          tabindex="0"
+          aria-label="Switch language"
+        >
+          <span class="lang-toggle__en">EN</span>
+          <span class="lang-toggle__knob"></span>
+          <span class="lang-toggle__ar">عر</span>
+        </div>
+        <button
+          class="navbar__login"
+          id="navbar-login"
+          type="button"
+          aria-label="Sign in or register"
+          data-tooltip="Sign in"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+        </button>
+        <div class="navbar__user" id="navbar-user" aria-label="Account">
+          <span class="navbar__user-avatar"></span>
+          <span class="navbar__user-name"></span>
+        </div>
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-label="Switch to dark mode"
+          aria-pressed="false"
+          data-tooltip="Theme"
+        >
+          <span class="theme-toggle__sun" aria-hidden="true">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="5" />
+              <line x1="12" y1="1" x2="12" y2="3" />
+              <line x1="12" y1="21" x2="12" y2="23" />
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+              <line x1="1" y1="12" x2="3" y2="12" />
+              <line x1="21" y1="12" x2="23" y2="12" />
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </svg>
+          </span>
+          <span class="theme-toggle__moon" aria-hidden="true">
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+            </svg>
+          </span>
+        </button>
+      </div>
+      <button
+        class="nav-hamburger"
+        id="navHamburger"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+      >
+        <span class="nav-hamburger__bar"></span>
+        <span class="nav-hamburger__bar"></span>
+        <span class="nav-hamburger__bar"></span>
+      </button>
+    </nav>
+
+    <!-- Mobile nav -->
+    <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+      <ul class="mobile-nav__list">
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li>
+          <a href="listings.html" data-i18n="nav.properties">Properties</a>
+        </li>
+        <li>
+          <a href="projects.html" class="active" data-i18n="nav.projects"
+            >Projects</a
+          >
+        </li>
+        <li><a href="#" data-i18n="nav.about">About</a></li>
+        <li><a href="#" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <div class="mobile-nav__cta">
+        <button data-i18n="nav.cta">Submit Property</button>
+        <a
+          href="tel:01150000727"
+          class="mobile-nav__phone"
+          aria-label="Call 01150000727"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path
+              d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.27-.73a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 15.5v1.42z"
+            />
+          </svg>
+          01150000727
+        </a>
+      </div>
+    </div>
+
+    <!-- ─── PAGE HERO ─── -->
+    <div class="page-hero">
+      <div class="page-hero__inner">
+        <div>
+          <nav class="page-hero__bread" aria-label="Breadcrumb">
+            <a href="index.html" data-i18n="hero.bread.home">Home</a>
+            <span aria-hidden="true">›</span>
+            <span data-i18n="hero.bread.projects">Projects</span>
+          </nav>
+          <h1 class="page-hero__title" data-i18n="hero.title" data-i18n-html>Explore <em>Exceptional</em> Projects</h1>
+        </div>
+        <div class="page-hero__meta">
+          <div class="page-hero__count" id="heroCount">42</div>
+          <div class="page-hero__count-label" data-i18n="hero.count-label">Active Projects</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── FILTER BAR ─── -->
+    <div class="filter-wrap" id="filterWrap">
+      <div class="filter-bar">
+        <!-- Search -->
+        <div class="filter-search">
+          <svg
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.35-4.35" />
+          </svg>
+          <input type="text" placeholder="Search projects…" id="searchInput" data-i18n-placeholder="filter.search" />
+        </div>
+
+        <!-- Location pill -->
+        <div class="csel" id="cselLocation" data-value="">
+          <button class="csel__trigger" type="button" aria-haspopup="listbox">
+            <span class="csel__icon">
+              <svg
+                width="13"
+                height="13"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </span>
+            <span class="csel__text">
+              <span class="csel__label" data-i18n="filter.location.label">Location</span>
+              <span class="csel__val">All Locations</span>
+            </span>
+            <svg
+              class="csel__arrow"
+              width="11"
+              height="11"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              viewBox="0 0 24 24"
+            >
+              <polyline points="6,9 12,15 18,9" />
+            </svg>
+          </button>
+          <div class="csel__menu" role="listbox">
+            <div class="csel__opt is-selected" data-val="" data-i18n="filter.location.all">All Locations</div>
+            <div class="csel__opt" data-val="new-cairo" data-i18n="filter.location.new-cairo">New Cairo</div>
+            <div class="csel__opt" data-val="sheikh-zayed" data-i18n="filter.location.sheikh-zayed">Sheikh Zayed</div>
+            <div class="csel__opt" data-val="north-coast" data-i18n="filter.location.north-coast">North Coast</div>
+            <div class="csel__opt" data-val="6th-october" data-i18n="filter.location.6th-october">6th of October</div>
+            <div class="csel__opt" data-val="madinaty" data-i18n="filter.location.madinaty">Madinaty</div>
+            <div class="csel__opt" data-val="ain-sokhna" data-i18n="filter.location.ain-sokhna">Ain Sokhna</div>
+          </div>
+        </div>
+
+        <!-- Type pill -->
+        <div class="csel" id="cselType" data-value="">
+          <button class="csel__trigger" type="button" aria-haspopup="listbox">
+            <span class="csel__icon">
+              <svg
+                width="13"
+                height="13"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+            </span>
+            <span class="csel__text">
+              <span class="csel__label" data-i18n="filter.type.label">Type</span>
+              <span class="csel__val">All Types</span>
+            </span>
+            <svg
+              class="csel__arrow"
+              width="11"
+              height="11"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              viewBox="0 0 24 24"
+            >
+              <polyline points="6,9 12,15 18,9" />
+            </svg>
+          </button>
+          <div class="csel__menu" role="listbox">
+            <div class="csel__opt is-selected" data-val="" data-i18n="filter.type.all">All Types</div>
+            <div class="csel__opt" data-val="compound" data-i18n="filter.type.compound">Compound</div>
+            <div class="csel__opt" data-val="tower" data-i18n="filter.type.tower">Tower</div>
+            <div class="csel__opt" data-val="mixed-use" data-i18n="filter.type.mixed-use">Mixed-Use</div>
+            <div class="csel__opt" data-val="resort" data-i18n="filter.type.resort">Resort</div>
+            <div class="csel__opt" data-val="standalone" data-i18n="filter.type.standalone">Standalone Villa</div>
+          </div>
+        </div>
+
+        <!-- Status pill -->
+        <div class="csel" id="cselStatus" data-value="">
+          <button class="csel__trigger" type="button" aria-haspopup="listbox">
+            <span class="csel__icon">
+              <svg
+                width="13"
+                height="13"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </span>
+            <span class="csel__text">
+              <span class="csel__label" data-i18n="filter.status.label">Status</span>
+              <span class="csel__val">All Status</span>
+            </span>
+            <svg
+              class="csel__arrow"
+              width="11"
+              height="11"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              viewBox="0 0 24 24"
+            >
+              <polyline points="6,9 12,15 18,9" />
+            </svg>
+          </button>
+          <div class="csel__menu" role="listbox">
+            <div class="csel__opt is-selected" data-val="" data-i18n="filter.status.all">All Status</div>
+            <div class="csel__opt" data-val="offplan" data-i18n="filter.status.offplan">Off-Plan</div>
+            <div class="csel__opt" data-val="construction" data-i18n="filter.status.construction">
+              Under Construction
+            </div>
+            <div class="csel__opt" data-val="ready" data-i18n="filter.status.ready">Ready to Move</div>
+          </div>
+        </div>
+
+        <!-- Developer pill -->
+        <div class="csel" id="cselDeveloper" data-value="">
+          <button class="csel__trigger" type="button" aria-haspopup="listbox">
+            <span class="csel__icon">
+              <svg
+                width="13"
+                height="13"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <rect x="2" y="7" width="20" height="14" rx="2" />
+                <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+              </svg>
+            </span>
+            <span class="csel__text">
+              <span class="csel__label" data-i18n="filter.developer.label">Developer</span>
+              <span class="csel__val">All Developers</span>
+            </span>
+            <svg
+              class="csel__arrow"
+              width="11"
+              height="11"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              viewBox="0 0 24 24"
+            >
+              <polyline points="6,9 12,15 18,9" />
+            </svg>
+          </button>
+          <div class="csel__menu" role="listbox">
+            <div class="csel__opt is-selected" data-val="" data-i18n="filter.developer.all">All Developers</div>
+            <div class="csel__opt" data-val="emaar">Emaar Misr</div>
+            <div class="csel__opt" data-val="sodic">SODIC</div>
+            <div class="csel__opt" data-val="palm-hills">Palm Hills</div>
+            <div class="csel__opt" data-val="ora">ORA Developers</div>
+            <div class="csel__opt" data-val="hassan-allam">Hassan Allam</div>
+            <div class="csel__opt" data-val="mnhd">MNHD</div>
+          </div>
+        </div>
+
+        <div class="filter-sep"></div>
+
+        <!-- Sort pill -->
+        <div class="csel" id="cselSort" data-value="featured">
+          <button class="csel__trigger" type="button" aria-haspopup="listbox">
+            <span class="csel__icon">
+              <svg
+                width="13"
+                height="13"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <line x1="4" y1="6" x2="20" y2="6" />
+                <line x1="8" y1="12" x2="16" y2="12" />
+                <line x1="11" y1="18" x2="13" y2="18" />
+              </svg>
+            </span>
+            <span class="csel__text">
+              <span class="csel__label" data-i18n="filter.sort.label">Sort</span>
+              <span class="csel__val">Featured First</span>
+            </span>
+            <svg
+              class="csel__arrow"
+              width="11"
+              height="11"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              viewBox="0 0 24 24"
+            >
+              <polyline points="6,9 12,15 18,9" />
+            </svg>
+          </button>
+          <div class="csel__menu" role="listbox">
+            <div class="csel__opt is-selected" data-val="featured" data-i18n="filter.sort.featured">Featured First</div>
+            <div class="csel__opt" data-val="newest" data-i18n="filter.sort.newest">Newest</div>
+            <div class="csel__opt" data-val="price-asc" data-i18n="filter.sort.price-asc">Price: Low to High</div>
+            <div class="csel__opt" data-val="price-desc" data-i18n="filter.sort.price-desc">Price: High to Low</div>
+            <div class="csel__opt" data-val="completion" data-i18n="filter.sort.completion">Completion Date</div>
+          </div>
+        </div>
+
+        <div class="filter-right">
+          <button class="btn-clear" id="clearBtn" type="button" data-i18n="filter.clear">Reset</button>
+          <button class="btn-filter-apply" id="applyBtn" type="button" data-i18n="filter.apply">Apply</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── RESULTS ─── -->
+    <main class="results-wrap" id="projGrid" aria-label="Project listings">
+      <div class="proj-grid" id="projGridInner">
+        <!-- Cards injected by JS -->
+      </div>
+    </main>
+    <div class="load-more-wrap" id="loadMoreWrap">
+      <button class="btn-load-more" id="loadMoreBtn">
+        <div class="spinner"></div>
+        <span data-i18n="load.more">Load More Projects</span>
+        <svg
+          width="14"
+          height="14"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <line x1="12" y1="5" x2="12" y2="19" />
+          <polyline points="19 12 12 19 5 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- ─── CTA BANNER ─── -->
+    <section class="cta-banner" aria-label="Get in touch">
+      <div class="cta-banner__inner">
+        <div class="cta-banner__left">
+          <span class="cta-banner__eyebrow" data-i18n="cta.eyebrow">Personalised Service</span>
+          <h2 class="cta-banner__title" data-i18n="cta.title" data-i18n-html>
+            Can't Find Your<br /><em>Dream Project?</em>
+          </h2>
+          <p class="cta-banner__desc" data-i18n="cta.desc">
+            Our specialists curate exclusive off-market opportunities tailored
+            to your investment goals and lifestyle preferences.
+          </p>
+        </div>
+        <div class="cta-banner__cards">
+          <a href="tel:01150000727" class="cta-banner__card">
+            <div class="cta-banner__card-icon">
+              <svg
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.27-.73a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 15.5v1.42z"
+                />
+              </svg>
+            </div>
+            <div class="cta-banner__card-body">
+              <div class="cta-banner__card-label" data-i18n="cta.card1.label">Speak to an Expert</div>
+              <div class="cta-banner__card-sub" data-i18n="cta.card1.sub">Available daily 9 AM – 9 PM</div>
+            </div>
+            <svg
+              class="cta-banner__card-arrow"
+              width="16"
+              height="16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              viewBox="0 0 24 24"
+            >
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </a>
+          <a
+            href="https://wa.me/201150000727"
+            class="cta-banner__card"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="cta-banner__card-icon">
+              <svg
+                width="18"
+                height="18"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                />
+              </svg>
+            </div>
+            <div class="cta-banner__card-body">
+              <div class="cta-banner__card-label" data-i18n="cta.card2.label">WhatsApp Us</div>
+              <div class="cta-banner__card-sub" data-i18n="cta.card2.sub">Get a response within minutes</div>
+            </div>
+            <svg
+              class="cta-banner__card-arrow"
+              width="16"
+              height="16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              viewBox="0 0 24 24"
+            >
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </a>
+          <a href="#" class="cta-banner__card">
+            <div class="cta-banner__card-icon">
+              <svg
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <line x1="4" y1="6" x2="20" y2="6" />
+                <line x1="8" y1="12" x2="16" y2="12" />
+                <line x1="11" y1="18" x2="13" y2="18" />
+              </svg>
+            </div>
+            <div class="cta-banner__card-body">
+              <div class="cta-banner__card-label" data-i18n="cta.card3.label">Request Custom Search</div>
+              <div class="cta-banner__card-sub" data-i18n="cta.card3.sub">Tell us exactly what you need</div>
+            </div>
+            <svg
+              class="cta-banner__card-arrow"
+              width="16"
+              height="16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              viewBox="0 0 24 24"
+            >
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── FOOTER ─── -->
+    <footer class="site-footer" id="footer">
+      <div
+        class="footer__bg"
+        style="
+          background-image: url(&quot;https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1920&auto=format&fit=crop&q=90&quot;);
+        "
+        aria-hidden="true"
+      ></div>
+      <div class="footer__scrim" aria-hidden="true"></div>
+      <div class="site-footer__inner">
+        <div class="footer__grid">
+          <div class="footer__col footer__col--brand" data-reveal>
+            <a
+              href="/"
+              class="footer__brand-logo"
+              aria-label="Akar Town — Home"
+            >
+              <svg
+                viewBox="0 0 2185 380"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M90.97 258.84H160.93L236.12 169.2V379.42H296.66V5.21997L90.97 258.84Z"
+                  fill="white"
+                />
+                <path
+                  d="M64.78 291.12L0 371H66.84L133.85 291.12H64.78Z"
+                  fill="#C8102E"
+                />
+                <path
+                  d="M390.87 186.6L544.58 373.2H472.34L339.38 212.73L317.86 187.07L339.38 160.95L472.34 0.00999451H544.58L390.87 186.61V186.6Z"
+                  fill="white"
+                />
+                <path
+                  d="M772.951 153.462L752.741 160.698C739.129 146.227 720.111 138.991 695.632 138.991C677.085 138.991 661.976 143.759 650.277 153.268C638.606 162.805 632.756 174.92 632.756 189.613C632.756 204.306 638.55 217.086 650.111 226.429C661.671 235.772 677.279 240.429 696.935 240.429C720.665 240.429 739.351 233.082 752.935 218.362L772.036 228.924C762.388 240.179 751.465 248.302 739.295 253.32C727.125 258.338 712.57 260.833 695.632 260.833C671.901 260.833 652.162 254.9 636.471 243.035C618.534 229.423 609.58 211.625 609.58 189.613C609.58 167.601 618.673 150.302 636.831 136.579C652.661 124.575 672.261 118.587 695.632 118.587C729.259 118.587 755.042 130.203 772.978 153.462H772.951Z"
+                  fill="white"
+                />
+                <path
+                  d="M1015.47 189.71C1015.47 211.722 1006.43 229.52 988.385 243.132C972.555 254.997 952.899 260.93 929.418 260.93C905.937 260.93 885.893 254.942 870.064 242.938C852.016 229.326 842.978 211.611 842.978 189.71C842.978 167.809 852.127 150.51 870.424 136.676C886.503 124.561 906.159 118.49 929.391 118.49C952.622 118.49 972.361 124.561 988.191 136.676C1006.38 150.538 1015.44 168.197 1015.44 189.71H1015.47ZM992.294 189.71C992.294 174.019 985.612 161.266 972.278 151.508C960.773 143.108 946.495 138.894 929.446 138.894C910.761 138.894 895.569 143.69 883.814 153.255C872.06 162.847 866.21 174.989 866.21 189.71C866.21 204.431 871.949 217.183 883.454 226.526C894.959 235.869 910.289 240.526 929.446 240.526C948.602 240.526 963.711 235.841 975.161 226.443C986.583 217.045 992.321 204.791 992.321 189.71H992.294Z"
+                  fill="white"
+                />
+                <path
+                  d="M1269.99 256.841H1247.73V147.058H1247.18L1177.45 234.607L1108.29 147.058H1107.73V256.841H1085.47V122.579H1113.28L1177.62 203.724L1242.24 122.579H1269.97V256.841H1269.99Z"
+                  fill="white"
+                />
+                <path
+                  d="M1446.45 122.607C1460.17 122.607 1471.04 126.405 1479.11 134.001C1487.15 141.597 1491.17 151.771 1491.17 164.496C1491.17 177.858 1486.98 188.06 1478.64 195.102C1470.29 202.144 1458.15 205.664 1442.18 205.664H1362.25V256.841H1339.99V122.579H1446.45V122.607ZM1442.57 185.676C1459.76 185.676 1468.35 178.746 1468.35 164.912C1468.35 150.08 1459.26 142.65 1441.1 142.65H1362.28V185.676H1442.6H1442.57Z"
+                  fill="white"
+                />
+                <path
+                  d="M1731.22 256.841H1706.88L1691.41 226.789H1600.98L1585.51 256.841H1561.17L1632.19 122.579H1660.19L1731.22 256.841ZM1680.6 206.773L1646.39 141.708L1611.76 206.773H1680.6Z"
+                  fill="white"
+                />
+                <path
+                  d="M1953.67 256.841H1925.97L1823.48 146.726V256.841H1801.22V122.579H1828.86L1931.43 232.75V122.579H1953.69V256.841H1953.67Z"
+                  fill="white"
+                />
+                <path
+                  d="M2192.83 122.579L2119.39 203.807V256.841H2097.13V203.807L2023.69 122.579H2051.44L2108.39 185.288L2165.08 122.579H2192.83Z"
+                  fill="white"
+                />
+              </svg>
+            </a>
+            <p class="footer__tagline" data-i18n="footer.tagline">
+              Egypt's premier luxury real estate destination. Curating
+              exceptional properties for discerning clients since 2004.
+            </p>
+            <div class="footer__stats">
+              <div class="footer__stat">
+                <span class="footer__stat-value">42</span
+                ><span class="footer__stat-label" data-i18n="footer.stat.projects">Projects</span>
+              </div>
+              <div class="footer__stat">
+                <span class="footer__stat-value">18</span
+                ><span class="footer__stat-label" data-i18n="footer.stat.devs">Developers</span>
+              </div>
+              <div class="footer__stat">
+                <span class="footer__stat-value">12+</span
+                ><span class="footer__stat-label" data-i18n="footer.stat.years">Years</span>
+              </div>
+            </div>
+            <div class="footer__socials">
+              <a
+                href="https://www.instagram.com/akar.town.real.estate/"
+                class="footer__social-btn"
+                aria-label="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  aria-hidden="true"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" />
+                  <circle cx="12" cy="12" r="4.5" />
+                  <circle
+                    cx="17.5"
+                    cy="6.5"
+                    r="1"
+                    fill="currentColor"
+                    stroke="none"
+                  />
+                </svg>
+              </a>
+              <a
+                href="https://www.facebook.com/AkarTownEG"
+                class="footer__social-btn"
+                aria-label="Facebook"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                  />
+                </svg>
+              </a>
+              <a
+                href="https://www.linkedin.com/company/akar-town/"
+                class="footer__social-btn"
+                aria-label="LinkedIn"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                  />
+                  <rect x="2" y="9" width="4" height="12" />
+                  <circle cx="4" cy="4" r="2" />
+                </svg>
+              </a>
+              <a
+                href="https://youtube.com/@mohamedelhemaly.akrealestate"
+                class="footer__social-btn"
+                aria-label="YouTube"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg
+                  width="17"
+                  height="12"
+                  viewBox="0 0 24 17"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M22.54 2.42A2.78 2.78 0 0 0 20.59.46C18.88 0 12 0 12 0S5.12 0 3.41.46A2.78 2.78 0 0 0 1.46 2.42 29 29 0 0 0 1 8.5a29 29 0 0 0 .46 6.08 2.78 2.78 0 0 0 1.95 1.96C5.12 17 12 17 12 17s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 8.5a29 29 0 0 0-.46-6.08z"
+                  />
+                  <polygon
+                    points="9.75 12.02 15.5 8.5 9.75 4.98 9.75 12.02"
+                    fill="white"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="footer__col" data-reveal>
+            <span class="footer__label" data-i18n="footer.col.projects">Projects</span>
+            <ul class="footer__links">
+              <li><a href="#" data-i18n="footer.link.all">All Projects</a></li>
+              <li><a href="#" data-i18n="footer.link.offplan">Off-Plan</a></li>
+              <li><a href="#" data-i18n="footer.link.construction">Under Construction</a></li>
+              <li><a href="#" data-i18n="footer.link.ready">Ready to Move</a></li>
+              <li><a href="#" data-i18n="footer.link.north-coast">North Coast</a></li>
+              <li><a href="listings.html" data-i18n="footer.link.browse-units">Browse Units</a></li>
+            </ul>
+          </div>
+          <div class="footer__col" data-reveal>
+            <span class="footer__label" data-i18n="footer.col.company">Company</span>
+            <ul class="footer__links">
+              <li><a href="#" data-i18n="footer.link.about">About Us</a></li>
+              <li><a href="#" data-i18n="footer.link.team">Our Team</a></li>
+              <li><a href="#" data-i18n="footer.link.success">Success Stories</a></li>
+              <li><a href="#" data-i18n="footer.link.careers">Careers</a></li>
+              <li><a href="#" data-i18n="footer.link.press">Press &amp; Media</a></li>
+              <li><a href="#" data-i18n="footer.link.contact">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer__col footer__col--match" data-reveal>
+            <span class="footer__label" data-i18n="footer.match.label">Property Matching</span>
+            <h3 class="footer__match-title" data-i18n="footer.match.title" data-i18n-html>Find Your <em>Perfect</em> Unit</h3>
+            <p class="footer__match-desc" data-i18n="footer.match.desc">
+              Tell us what you need — we'll alert you the moment it's listed.
+            </p>
+            <div
+              class="footer__type-pills"
+              role="group"
+              aria-label="Property type"
+            >
+              <button type="button" class="footer__type-pill is-active" data-pill data-i18n="footer.pill.apt">Apartment</button>
+              <button type="button" class="footer__type-pill" data-pill data-i18n="footer.pill.villa">Villa</button>
+              <button type="button" class="footer__type-pill" data-pill data-i18n="footer.pill.pent">Penthouse</button>
+              <button type="button" class="footer__type-pill" data-pill data-i18n="footer.pill.chalet">Chalet</button>
+            </div>
+            <form class="footer__match-form" id="footerMatchForm" novalidate>
+              <span class="footer__field-label" data-i18n="footer.budget.label">Budget Range (EGP)</span>
+              <div class="footer__budget-row">
+                <input
+                  type="number"
+                  class="footer__budget-input"
+                  placeholder="Minimum"
+                  aria-label="Minimum budget"
+                  data-i18n-placeholder="footer.budget.min"
+                  min="0"
+                />
+                <span class="footer__budget-sep" aria-hidden="true">—</span>
+                <input
+                  type="number"
+                  class="footer__budget-input"
+                  placeholder="Maximum"
+                  aria-label="Maximum budget"
+                  data-i18n-placeholder="footer.budget.max"
+                  min="0"
+                />
+              </div>
+              <span class="footer__field-label" data-i18n="footer.email.label">Your Email</span>
+              <div class="footer__email-row">
+                <input
+                  type="email"
+                  class="footer__email-input"
+                  placeholder="you@example.com"
+                  required
+                  aria-label="Your email"
+                />
+                <button
+                  type="submit"
+                  class="footer__match-submit"
+                  aria-label="Submit"
+                >
+                  <svg
+                    width="16"
+                    height="14"
+                    viewBox="0 0 16 14"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M7.99997 0.414307C7.99997 1.11051 8.68991 2.15231 9.38737 3.02724C10.2855 4.15371 11.3574 5.13777 12.5873 5.88911C13.5087 6.45171 14.6276 6.99177 15.5264 6.99177M7.99997 13.5855C7.99997 12.8893 8.68991 11.8475 9.38737 10.9726C10.2855 9.84617 11.3574 8.86204 12.5873 8.11071C13.5087 7.54811 14.6276 7.00804 15.5264 7.00804M15.5264 6.99991H0.473572"
+                      stroke="currentColor"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="footer__mark" data-reveal aria-hidden="true">
+          <span class="footer__mark-text">AKAR TOWN</span>
+        </div>
+        <div class="footer__bottom" data-reveal>
+          <span class="footer__credit" data-i18n="footer.credit"
+            >&copy; Copyright 2026. All Rights Reserved To
+            <a
+              class="footer__credit-link"
+              href="https://www.8worx.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >8WORX</a
+            ></span
+          >
+          <div class="footer__legal">
+            <a href="#" data-i18n="footer.privacy">Privacy Policy</a><a href="#" data-i18n="footer.terms">Terms</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        /* ── DATA ── */
+        var PROJECTS = [
+          {
+            id: 1,
+            featured: true,
+            name: "Al Noor Garden Villas",
+            dev: "Palm Hills Developments",
+            location: "New Cairo",
+            loc: "new-cairo",
+            type: "Compound",
+            typeVal: "compound",
+            status: "offplan",
+            statusLabel: "Off-Plan",
+            price: "EGP 4.2M",
+            priceNum: 4200000,
+            units: 320,
+            phases: 3,
+            completion: "Q4 2027",
+            progress: 0,
+            desc: "A gated sanctuary of 320 garden villas set across 180 acres of landscaped parkland. Private pools, tennis courts, and a dedicated commercial strip.",
+            features: ["Private Pool", "Smart Home", "Golf View", "Concierge"],
+            img: "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=900&auto=format&fit=crop&q=80",
+          },
+          {
+            id: 2,
+            featured: false,
+            name: "Altos Sky Residences",
+            dev: "SODIC",
+            location: "Sheikh Zayed",
+            loc: "sheikh-zayed",
+            type: "Tower",
+            typeVal: "tower",
+            status: "construction",
+            statusLabel: "Under Construction",
+            price: "EGP 2.8M",
+            priceNum: 2800000,
+            units: 180,
+            phases: 1,
+            completion: "Q2 2026",
+            progress: 62,
+            desc: "A landmark 38-floor tower redefining vertical luxury in Sheikh Zayed. Sky lounge, panoramic pool deck, and concierge services on demand.",
+            features: ["Sky Lounge", "Infinity Pool", "Gym", "Concierge"],
+            img: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&auto=format&fit=crop&q=80",
+          },
+          {
+            id: 3,
+            featured: false,
+            name: "The Palm Estate",
+            dev: "Emaar Misr",
+            location: "North Coast",
+            loc: "north-coast",
+            type: "Resort",
+            typeVal: "resort",
+            status: "offplan",
+            statusLabel: "Off-Plan",
+            price: "EGP 3.5M",
+            priceNum: 3500000,
+            units: 450,
+            phases: 4,
+            completion: "Q3 2028",
+            progress: 0,
+            desc: "Six kilometres of private Mediterranean coastline, 450 chalets and villas, two beach clubs, and a world-class marina.",
+            features: ["Beachfront", "Marina", "Beach Club", "Water Sports"],
+            img: "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=900&auto=format&fit=crop&q=80",
+          },
+          {
+            id: 4,
+            featured: false,
+            name: "Skyline Towers",
+            dev: "ORA Developers",
+            location: "6th of October",
+            loc: "6th-october",
+            type: "Mixed-Use",
+            typeVal: "mixed-use",
+            status: "ready",
+            statusLabel: "Ready to Move",
+            price: "EGP 1.9M",
+            priceNum: 1900000,
+            units: 240,
+            phases: 2,
+            completion: "Ready",
+            progress: 100,
+            desc: "A mixed-use urban village anchored by two residential towers, a boutique hotel, retail promenade, and rooftop garden terraces.",
+            features: [
+              "Retail Promenade",
+              "Hotel Services",
+              "Rooftop Garden",
+              "Co-working",
+            ],
+            img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&auto=format&fit=crop&q=80",
+          },
+          {
+            id: 5,
+            featured: false,
+            name: "Laguna Bay",
+            dev: "Hassan Allam Properties",
+            location: "Ain Sokhna",
+            loc: "ain-sokhna",
+            type: "Resort",
+            typeVal: "resort",
+            status: "construction",
+            statusLabel: "Under Construction",
+            price: "EGP 2.1M",
+            priceNum: 2100000,
+            units: 380,
+            phases: 3,
+            completion: "Q1 2027",
+            progress: 41,
+            desc: "A crystalline lagoon resort on the Red Sea coast. Floating cabanas, aqua park, private beach strips, and a curated dining village.",
+            features: [
+              "Crystal Lagoon",
+              "Aqua Park",
+              "Private Beach",
+              "Dining Village",
+            ],
+            img: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=900&auto=format&fit=crop&q=80",
+          },
+          {
+            id: 6,
+            featured: false,
+            name: "Green Valley Compound",
+            dev: "MNHD",
+            location: "Madinaty",
+            loc: "madinaty",
+            type: "Compound",
+            typeVal: "compound",
+            status: "ready",
+            statusLabel: "Ready to Move",
+            price: "EGP 2.4M",
+            priceNum: 2400000,
+            units: 500,
+            phases: 5,
+            completion: "Ready",
+            progress: 100,
+            desc: "500 twin houses and standalone villas set within 240 acres of English-style gardens. Fully operational community with schools, clinics and retail.",
+            features: ["Club House", "School", "24/7 Security", "Green Parks"],
+            img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&auto=format&fit=crop&q=80",
+          },
+        ];
+
+        /* ── STATE ── */
+        var BATCH = 6;
+        var visibleCount = BATCH;
+        var state = {
+          search: "",
+          location: "",
+          type: "",
+          status: "",
+          developer: "",
+          sort: "featured",
+        };
+        var lastFiltered = [];
+
+        /* ── RENDER ── */
+        function statusClass(s) {
+          if (s === "offplan") return "proj-card__status--offplan";
+          if (s === "construction") return "proj-card__status--construction";
+          return "proj-card__status--ready";
+        }
+
+        function renderCard(p) {
+          return (
+            '<article class="proj-card sr" data-id="' +
+            p.id +
+            '">' +
+            '<div class="proj-card__img">' +
+            '<img src="' +
+            p.img +
+            '" alt="' +
+            p.name +
+            '" loading="lazy" />' +
+            '<div class="proj-card__img-scrim"></div>' +
+            '<span class="proj-card__status ' +
+            statusClass(p.status) +
+            '">' +
+            p.statusLabel +
+            "</span>" +
+            (p.featured
+              ? '<span class="proj-card__featured">Featured</span>'
+              : "") +
+            '<div class="proj-card__dev">' +
+            '<span class="proj-card__dev-name">' +
+            p.dev +
+            "</span>" +
+            '<div class="proj-card__price-tag">' +
+            '<span class="proj-card__price-from">Starting from</span>' +
+            '<span class="proj-card__price-val">' +
+            p.price +
+            "</span>" +
+            "</div>" +
+            "</div>" +
+            "</div>" +
+            '<div class="proj-card__body">' +
+            '<div class="proj-card__loc"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>' +
+            p.location +
+            "</div>" +
+            '<h2 class="proj-card__name">' +
+            p.name +
+            "</h2>" +
+            '<p class="proj-card__desc">' +
+            p.desc +
+            "</p>" +
+            "</div>" +
+            '<div class="proj-card__stats">' +
+            '<div class="proj-card__stat"><span class="proj-card__stat-val">' +
+            p.units +
+            '</span><span class="proj-card__stat-key">Units</span></div>' +
+            '<div class="proj-card__stat"><span class="proj-card__stat-val">' +
+            p.phases +
+            '</span><span class="proj-card__stat-key">Phases</span></div>' +
+            '<div class="proj-card__stat"><span class="proj-card__stat-val">' +
+            p.completion +
+            '</span><span class="proj-card__stat-key">Delivery</span></div>' +
+            "</div>" +
+            '<div class="proj-card__features">' +
+            p.features
+              .slice(0, 2)
+              .map(function (f) {
+                return '<span class="proj-card__feat">' + f + "</span>";
+              })
+              .join("") +
+            (p.features.length > 2
+              ? '<span class="proj-card__feat proj-card__feat--more">+' +
+                (p.features.length - 2) +
+                " more</span>"
+              : "") +
+            "</div>" +
+            '<div class="proj-card__actions">' +
+            '<button class="btn-proj-details">View Project<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>' +
+            '<button class="btn-proj-units">Browse Units</button>' +
+            "</div>" +
+            "</article>"
+          );
+        }
+
+        function observeSR(grid) {
+          var cards = grid.querySelectorAll(".sr:not(.in-view)");
+          if ("IntersectionObserver" in window) {
+            var io = new IntersectionObserver(
+              function (entries) {
+                entries.forEach(function (e) {
+                  if (e.isIntersecting) {
+                    e.target.classList.add("in-view");
+                    io.unobserve(e.target);
+                  }
+                });
+              },
+              { threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
+            );
+            cards.forEach(function (c) {
+              io.observe(c);
+            });
+          } else {
+            cards.forEach(function (c) {
+              c.classList.add("in-view");
+            });
+          }
+        }
+
+        function renderPage(append) {
+          var grid = document.getElementById("projGridInner");
+          var slice = lastFiltered.slice(0, visibleCount);
+          if (!append) {
+            grid.innerHTML = slice.map(renderCard).join("");
+          } else {
+            var prev = lastFiltered.slice(0, visibleCount - BATCH).length;
+            var newCards = slice.slice(prev).map(renderCard).join("");
+            grid.insertAdjacentHTML("beforeend", newCards);
+          }
+          observeSR(grid);
+          document.getElementById("loadMoreWrap").style.display =
+            visibleCount >= lastFiltered.length ? "none" : "flex";
+        }
+
+        function applyFilters() {
+          var s = state;
+          lastFiltered = PROJECTS.filter(function (p) {
+            if (
+              s.search &&
+              p.name.toLowerCase().indexOf(s.search.toLowerCase()) === -1 &&
+              p.dev.toLowerCase().indexOf(s.search.toLowerCase()) === -1
+            )
+              return false;
+            if (s.location && p.loc !== s.location) return false;
+            if (s.type && p.typeVal !== s.type) return false;
+            if (s.status && p.status !== s.status) return false;
+            return true;
+          });
+
+          if (s.sort === "price-asc")
+            lastFiltered.sort(function (a, b) {
+              return a.priceNum - b.priceNum;
+            });
+          else if (s.sort === "price-desc")
+            lastFiltered.sort(function (a, b) {
+              return b.priceNum - a.priceNum;
+            });
+          else if (s.sort === "featured")
+            lastFiltered.sort(function (a, b) {
+              return (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
+            });
+
+          var hc = document.getElementById("heroCount");
+          if (hc) hc.textContent = lastFiltered.length;
+          visibleCount = BATCH;
+
+          if (lastFiltered.length === 0) {
+            document.getElementById("projGridInner").innerHTML =
+              '<div class="proj-empty is-visible"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><h3>No projects found</h3><p>Try adjusting your filters to see more results.</p></div>';
+            document.getElementById("loadMoreWrap").style.display = "none";
+            return;
+          }
+
+          renderPage(false);
+        }
+
+        /* ── SEARCH ── */
+        var searchInput = document.getElementById("searchInput");
+        searchInput.addEventListener("input", function () {
+          state.search = this.value.trim();
+          applyFilters();
+        });
+
+        /* ── CUSTOM SELECTS ── */
+        function initCsel(el, stateKey) {
+          var trigger = el.querySelector(".csel__trigger");
+          var valEl = el.querySelector(".csel__val");
+          var menu = el.querySelector(".csel__menu");
+          var opts = el.querySelectorAll(".csel__opt");
+
+          trigger.addEventListener("click", function (e) {
+            e.stopPropagation();
+            var willOpen = !el.classList.contains("is-open");
+            document.querySelectorAll(".csel.is-open").forEach(function (c) {
+              c.classList.remove("is-open");
+            });
+            if (willOpen) el.classList.add("is-open");
+          });
+
+          opts.forEach(function (opt) {
+            opt.addEventListener("click", function () {
+              var val = opt.getAttribute("data-val");
+              el.dataset.value = val;
+              valEl.textContent = opt.textContent.trim();
+              el.classList.toggle("has-value", !!val);
+              opts.forEach(function (o) {
+                o.classList.remove("is-selected");
+              });
+              opt.classList.add("is-selected");
+              el.classList.remove("is-open");
+              if (stateKey) state[stateKey] = val;
+              applyFilters();
+            });
+          });
+
+          menu.addEventListener("click", function (e) {
+            e.stopPropagation();
+          });
+        }
+
+        initCsel(document.getElementById("cselLocation"), "location");
+        initCsel(document.getElementById("cselType"), "type");
+        initCsel(document.getElementById("cselStatus"), "status");
+        initCsel(document.getElementById("cselDeveloper"), "developer");
+        initCsel(document.getElementById("cselSort"), "sort");
+
+        /* close on outside click */
+        document.addEventListener("click", function () {
+          document.querySelectorAll(".csel.is-open").forEach(function (c) {
+            c.classList.remove("is-open");
+          });
+        });
+
+        /* ── APPLY ── */
+        document
+          .getElementById("applyBtn")
+          .addEventListener("click", applyFilters);
+
+        /* ── LOAD MORE ── */
+        document
+          .getElementById("loadMoreBtn")
+          .addEventListener("click", function () {
+            var btn = this;
+            btn.classList.add("is-loading");
+            setTimeout(function () {
+              visibleCount += BATCH;
+              renderPage(true);
+              btn.classList.remove("is-loading");
+            }, 600);
+          });
+
+        /* ── CLEAR ── */
+        document
+          .getElementById("clearBtn")
+          .addEventListener("click", function () {
+            state = {
+              search: "",
+              location: "",
+              type: "",
+              status: "",
+              developer: "",
+              sort: "featured",
+            };
+            searchInput.value = "";
+            [
+              { id: "cselLocation", label: "All Locations" },
+              { id: "cselType", label: "All Types" },
+              { id: "cselStatus", label: "All Status" },
+              { id: "cselDeveloper", label: "All Developers" },
+              { id: "cselSort", label: "Featured First" },
+            ].forEach(function (cfg) {
+              var el = document.getElementById(cfg.id);
+              if (!el) return;
+              el.dataset.value = cfg.id === "cselSort" ? "featured" : "";
+              el.classList.remove("has-value");
+              var v = el.querySelector(".csel__val");
+              if (v) v.textContent = cfg.label;
+              el.querySelectorAll(".csel__opt").forEach(function (o, i) {
+                o.classList.toggle("is-selected", i === 0);
+              });
+            });
+            applyFilters();
+          });
+
+        /* ── NAVBAR ── */
+        var ham = document.getElementById("navHamburger");
+        var mobileNav = document.getElementById("mobileNav");
+        ham.addEventListener("click", function () {
+          var open = mobileNav.classList.toggle("is-open");
+          ham.classList.toggle("is-open", open);
+          mobileNav.setAttribute("aria-hidden", !open);
+          ham.setAttribute("aria-expanded", open);
+        });
+
+        /* ── LANG (i18n) ── */
+        var LANG_KEY = "akar_lang";
+        var T = {
+          en: {
+            "nav.home": "Home", "nav.properties": "Properties",
+            "nav.projects": "Projects", "nav.about": "About",
+            "nav.contact": "Contact", "nav.cta": "Submit Property",
+            "hero.bread.home": "Home", "hero.bread.projects": "Projects",
+            "hero.title": "Explore <em>Exceptional</em> Projects",
+            "hero.count-label": "Active Projects",
+            "filter.search": "Search projects…",
+            "filter.location.label": "Location",
+            "filter.location.all": "All Locations",
+            "filter.location.new-cairo": "New Cairo",
+            "filter.location.sheikh-zayed": "Sheikh Zayed",
+            "filter.location.north-coast": "North Coast",
+            "filter.location.6th-october": "6th of October",
+            "filter.location.madinaty": "Madinaty",
+            "filter.location.ain-sokhna": "Ain Sokhna",
+            "filter.type.label": "Type", "filter.type.all": "All Types",
+            "filter.type.compound": "Compound", "filter.type.tower": "Tower",
+            "filter.type.mixed-use": "Mixed-Use", "filter.type.resort": "Resort",
+            "filter.type.standalone": "Standalone Villa",
+            "filter.status.label": "Status", "filter.status.all": "All Status",
+            "filter.status.offplan": "Off-Plan",
+            "filter.status.construction": "Under Construction",
+            "filter.status.ready": "Ready to Move",
+            "filter.developer.label": "Developer",
+            "filter.developer.all": "All Developers",
+            "filter.sort.label": "Sort",
+            "filter.sort.featured": "Featured First",
+            "filter.sort.newest": "Newest",
+            "filter.sort.price-asc": "Price: Low to High",
+            "filter.sort.price-desc": "Price: High to Low",
+            "filter.sort.completion": "Completion Date",
+            "filter.clear": "Reset", "filter.apply": "Apply",
+            "load.more": "Load More Projects",
+            "cta.eyebrow": "Personalised Service",
+            "cta.title": "Can’t Find Your<br><em>Dream Project?</em>",
+            "cta.desc": "Our specialists curate exclusive off-market opportunities tailored to your investment goals and lifestyle preferences.",
+            "cta.card1.label": "Speak to an Expert",
+            "cta.card1.sub": "Available daily 9 AM – 9 PM",
+            "cta.card2.label": "WhatsApp Us",
+            "cta.card2.sub": "Get a response within minutes",
+            "cta.card3.label": "Request Custom Search",
+            "cta.card3.sub": "Tell us exactly what you need",
+            "footer.tagline": "Egypt’s premier luxury real estate destination. Curating exceptional properties for discerning clients since 2004.",
+            "footer.stat.projects": "Projects", "footer.stat.devs": "Developers",
+            "footer.stat.years": "Years",
+            "footer.col.projects": "Projects", "footer.col.company": "Company",
+            "footer.link.all": "All Projects", "footer.link.offplan": "Off-Plan",
+            "footer.link.construction": "Under Construction",
+            "footer.link.ready": "Ready to Move",
+            "footer.link.north-coast": "North Coast",
+            "footer.link.browse-units": "Browse Units",
+            "footer.link.about": "About Us", "footer.link.team": "Our Team",
+            "footer.link.success": "Success Stories",
+            "footer.link.careers": "Careers",
+            "footer.link.press": "Press & Media",
+            "footer.link.contact": "Contact Us",
+            "footer.match.label": "Property Matching",
+            "footer.match.title": "Find Your <em>Perfect</em> Unit",
+            "footer.match.desc": "Tell us what you need — we’ll alert you the moment it’s listed.",
+            "footer.pill.apt": "Apartment", "footer.pill.villa": "Villa",
+            "footer.pill.pent": "Penthouse", "footer.pill.chalet": "Chalet",
+            "footer.budget.label": "Budget Range (EGP)",
+            "footer.budget.min": "Minimum", "footer.budget.max": "Maximum",
+            "footer.email.label": "Your Email",
+            "footer.credit": "© Copyright 2026. All Rights Reserved To 8WORX",
+            "footer.privacy": "Privacy Policy", "footer.terms": "Terms",
+          },
+          ar: {
+            "nav.home": "الرئيسية",
+            "nav.properties": "العقارات",
+            "nav.projects": "المشاريع",
+            "nav.about": "من نحن",
+            "nav.contact": "تواصل",
+            "nav.cta": "أضف عقارك",
+            "hero.bread.home": "الرئيسية",
+            "hero.bread.projects": "المشاريع",
+            "hero.title": "استكشف <em>مشاريع استثنائية</em>",
+            "hero.count-label": "مشروع نشط",
+            "filter.search": "ابحث عن مشاريع…",
+            "filter.location.label": "الموقع",
+            "filter.location.all": "جميع المواقع",
+            "filter.location.new-cairo": "القاهرة الجديدة",
+            "filter.location.sheikh-zayed": "الشيخ زايد",
+            "filter.location.north-coast": "الساحل الشمالي",
+            "filter.location.6th-october": "6 أكتوبر",
+            "filter.location.madinaty": "مدينتي",
+            "filter.location.ain-sokhna": "العين السخنة",
+            "filter.type.label": "النوع",
+            "filter.type.all": "جميع الأنواع",
+            "filter.type.compound": "كمبوند",
+            "filter.type.tower": "برج",
+            "filter.type.mixed-use": "متعدد الاستخدام",
+            "filter.type.resort": "منتجع",
+            "filter.type.standalone": "فيلا مستقلة",
+            "filter.status.label": "الحالة",
+            "filter.status.all": "جميع الحالات",
+            "filter.status.offplan": "على الخارطة",
+            "filter.status.construction": "تحت الإنشاء",
+            "filter.status.ready": "جاهز للتسليم",
+            "filter.developer.label": "المطور",
+            "filter.developer.all": "جميع المطورين",
+            "filter.sort.label": "ترتيب",
+            "filter.sort.featured": "المميزة أولاً",
+            "filter.sort.newest": "الأحدث",
+            "filter.sort.price-asc": "السعر: الأقل أولاً",
+            "filter.sort.price-desc": "السعر: الأعلى أولاً",
+            "filter.sort.completion": "تاريخ التسليم",
+            "filter.clear": "مسح الكل",
+            "filter.apply": "تطبيق",
+            "load.more": "تحميل المزيد",
+            "cta.eyebrow": "خدمة مخصصة",
+            "cta.title": "لم تجد<br><em>مشروعك المثالي؟</em>",
+            "cta.desc": "يختار متخصصونا فرصاً حصرية خارج السوق مصممة خصيصاً لأهدافك الاستثمارية وأسلوب حياتك.",
+            "cta.card1.label": "تحدث مع خبير",
+            "cta.card1.sub": "متاح يومياً من 9 ص حتى 9 م",
+            "cta.card2.label": "تواصل عبر واتساب",
+            "cta.card2.sub": "احصل على رد في دقائق",
+            "cta.card3.label": "طلب بحث مخصص",
+            "cta.card3.sub": "أخبرنا بما تحتاجه بالضبط",
+            "footer.tagline": "الوجهة الأولى للعقارات الفاخرة في مصر. نختار لعملائنا المميزين أفضل العقارات منذ عام 2004.",
+            "footer.stat.projects": "مشروع",
+            "footer.stat.devs": "مطور",
+            "footer.stat.years": "سنة",
+            "footer.col.projects": "المشاريع",
+            "footer.col.company": "الشركة",
+            "footer.link.all": "جميع المشاريع",
+            "footer.link.offplan": "على الخارطة",
+            "footer.link.construction": "تحت الإنشاء",
+            "footer.link.ready": "جاهز للتسليم",
+            "footer.link.north-coast": "الساحل الشمالي",
+            "footer.link.browse-units": "تصفح الوحدات",
+            "footer.link.about": "من نحن",
+            "footer.link.team": "فريقنا",
+            "footer.link.success": "قصص النجاح",
+            "footer.link.careers": "الوظائف",
+            "footer.link.press": "الصحافة والإعلام",
+            "footer.link.contact": "تواصل معنا",
+            "footer.match.label": "مطابقة العقارات",
+            "footer.match.title": "اعثر على <em>وحدتك المثالية</em>",
+            "footer.match.desc": "أخبرنا بما تحتاجه — سنُنبهك فور إدراجه.",
+            "footer.pill.apt": "شقة",
+            "footer.pill.villa": "فيلا",
+            "footer.pill.pent": "بنتهاوس",
+            "footer.pill.chalet": "شاليه",
+            "footer.budget.label": "نطاق الميزانية (جنيه مصري)",
+            "footer.budget.min": "الحد الأدنى",
+            "footer.budget.max": "الحد الأقصى",
+            "footer.email.label": "بريدك الإلكتروني",
+            "footer.credit": "حقوق النشر محفوظة 2026 لشركة 8WORX",
+            "footer.privacy": "سياسة الخصوصية",
+            "footer.terms": "الشروط",
+          },
+        };
+
+        function applyLang(lang) {
+          var html = document.documentElement;
+          html.setAttribute("lang", lang);
+          html.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+          var t = T[lang] || T.en;
+
+          document.querySelectorAll("[data-i18n]").forEach(function(el) {
+            var key = el.getAttribute("data-i18n");
+            var val = t[key] !== undefined ? t[key] : (T.en[key] || "");
+            if (el.hasAttribute("data-i18n-html")) {
+              el.innerHTML = val;
+            } else {
+              el.textContent = val;
+            }
+          });
+
+          document.querySelectorAll("[data-i18n-placeholder]").forEach(function(el) {
+            var key = el.getAttribute("data-i18n-placeholder");
+            el.placeholder = t[key] !== undefined ? t[key] : (T.en[key] || "");
+          });
+
+          /* sync csel displayed values to translated selected option text */
+          document.querySelectorAll(".csel").forEach(function(csel) {
+            var selected = csel.querySelector(".csel__opt.is-selected");
+            var valEl = csel.querySelector(".csel__val");
+            if (selected && valEl) valEl.textContent = selected.textContent.trim();
+          });
+
+          var btn = document.getElementById("langToggle");
+          if (btn) btn.setAttribute("aria-checked", lang === "ar" ? "true" : "false");
+          try { localStorage.setItem(LANG_KEY, lang); } catch(_) {}
+        }
+
+        var savedLang = "en";
+        try { savedLang = localStorage.getItem(LANG_KEY) || "en"; } catch(_) {}
+        applyLang(savedLang);
+
+        var toggleLangBtn = document.getElementById("langToggle");
+        if (toggleLangBtn) {
+          function doLangToggle() {
+            applyLang(document.documentElement.getAttribute("lang") === "ar" ? "en" : "ar");
+          }
+          toggleLangBtn.addEventListener("click", doLangToggle);
+          toggleLangBtn.addEventListener("keydown", function(e) {
+            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); doLangToggle(); }
+          });
+        }
+
+        /* ── FOOTER PILLS ── */
+        document.querySelectorAll("[data-pill]").forEach(function (pill) {
+          pill.addEventListener("click", function () {
+            var group = pill.closest(".footer__type-pills");
+            if (!group) return;
+            group.querySelectorAll("[data-pill]").forEach(function (p) {
+              p.classList.remove("is-active");
+            });
+            pill.classList.add("is-active");
+          });
+        });
+
+        /* ── INIT ── */
+        applyFilters();
+      })();
+    </script>
+    <link rel="stylesheet" href="auth-modal.css" />
+    <script src="auth-modal.js"></script>
+  </body>
+</html>

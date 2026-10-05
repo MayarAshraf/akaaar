@@ -192,11 +192,101 @@ html[data-theme="dark"] .pgal-card__loc {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   COMPARE PANEL (index.html)
+   COMPARE PANEL — full dark luxury treatment
    ══════════════════════════════════════════════════════════════ */
+
+/* Panel container */
 html[data-theme="dark"] .cmp-bar__panel {
-  background: var(--_s2);
+  background: linear-gradient(160deg, #1c1912 0%, #131008 100%);
   border-color: var(--_border-md);
+  box-shadow:
+    0 0 0 1px rgba(212, 20, 44, 0.06),
+    0 8px 40px rgba(0, 0, 0, 0.65),
+    0 0 60px rgba(212, 20, 44, 0.04) inset;
+}
+
+/* Header */
+html[data-theme="dark"] .cmp-panel__head {
+  background: rgba(212, 20, 44, 0.07);
+  border-bottom-color: var(--_border);
+}
+html[data-theme="dark"] .cmp-panel__head h4 {
+  color: var(--ink);
+}
+
+/* Close button */
+html[data-theme="dark"] .cmp-panel__close {
+  border-color: var(--_border-md);
+  background: rgba(237, 232, 223, 0.05);
+  color: var(--ink-60);
+}
+html[data-theme="dark"] .cmp-panel__close:hover {
+  background: rgba(212, 20, 44, 0.18);
+  border-color: var(--_crimson-edge);
+  color: var(--ink);
+}
+
+/* List items */
+html[data-theme="dark"] .cmp-item {
+  border-bottom-color: var(--_border);
+}
+html[data-theme="dark"] .cmp-item:hover {
+  background: rgba(237, 232, 223, 0.04);
+}
+html[data-theme="dark"] .cmp-item__thumb {
+  border-color: var(--_border-md);
+}
+html[data-theme="dark"] .cmp-item__title {
+  color: var(--ink);
+}
+html[data-theme="dark"] .cmp-item__rm {
+  color: var(--ink-30);
+}
+html[data-theme="dark"] .cmp-item__rm:hover {
+  color: #ff4466;
+  background: rgba(212, 20, 44, 0.15);
+}
+
+/* Empty slots */
+html[data-theme="dark"] .cmp-panel__slot {
+  color: var(--ink-30);
+  border-bottom-color: var(--_border);
+}
+
+/* Scrollbar */
+html[data-theme="dark"] .cmp-panel__list::-webkit-scrollbar-thumb {
+  background: rgba(237, 232, 223, 0.12);
+}
+
+/* Footer */
+html[data-theme="dark"] .cmp-panel__foot {
+  background: rgba(0, 0, 0, 0.25);
+  border-top-color: var(--_border);
+}
+
+/* Toggle pill */
+html[data-theme="dark"] .cmp-bar__toggle {
+  background: linear-gradient(135deg, #1c1912 0%, #131008 100%);
+  color: var(--ink);
+  border-color: var(--_border-md);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(212, 20, 44, 0.06);
+}
+html[data-theme="dark"] .cmp-bar__toggle::before {
+  background: linear-gradient(135deg, rgba(212, 20, 44, 0.14) 0%, transparent 55%);
+}
+html[data-theme="dark"] .cmp-bar__toggle:hover {
+  border-color: var(--_crimson-edge);
+  box-shadow:
+    0 6px 28px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(212, 20, 44, 0.14);
+}
+html[data-theme="dark"] .cmp-bar__label {
+  color: var(--ink);
+}
+html[data-theme="dark"] .cmp-bar__chevron {
+  color: var(--ink-60);
 }
 
 /* ══════════════════════════════════════════════════════════════

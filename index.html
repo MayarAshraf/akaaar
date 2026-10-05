@@ -3295,9 +3295,9 @@
             }
             .cmp-bar__panel {
               width: 300px;
-              background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 100%);
+              background: linear-gradient(160deg, #ffffff 0%, #f5f5f5 100%);
               border-radius: 14px;
-              border: 1px solid rgba(255, 255, 255, 0.08);
+              border: 1px solid rgba(0, 0, 0, 0.08);
               display: flex;
               flex-direction: column;
               overflow: hidden;
@@ -3311,6 +3311,7 @@
               max-height: 420px;
               backdrop-filter: blur(24px);
               -webkit-backdrop-filter: blur(24px);
+              box-shadow: 0 8px 32px rgba(0,0,0,0.12);
             }
             .cmp-bar__panel.is-open {
               transform: scale(1) translateY(0);
@@ -3319,20 +3320,20 @@
             }
             .cmp-panel__head {
               padding: 12px 14px;
-              border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+              border-bottom: 1px solid rgba(0, 0, 0, 0.07);
               display: flex;
               align-items: center;
               justify-content: space-between;
               flex-shrink: 0;
               gap: 8px;
-              background: rgba(200, 16, 46, 0.06);
+              background: rgba(200, 16, 46, 0.05);
             }
             .cmp-panel__head h4 {
               font-size: 14px;
               font-weight: 600;
               text-align: center;
               flex: 1;
-              color: #fff;
+              color: #1a1a1a;
               letter-spacing: 0.02em;
             }
             .cmp-panel__close {
@@ -3342,9 +3343,9 @@
               width: 28px;
               height: 28px;
               border-radius: 50%;
-              border: 1px solid rgba(255, 255, 255, 0.1);
-              background: rgba(255, 255, 255, 0.06);
-              color: rgba(255, 255, 255, 0.5);
+              border: 1px solid rgba(0, 0, 0, 0.12);
+              background: rgba(0, 0, 0, 0.05);
+              color: rgba(0, 0, 0, 0.45);
               cursor: pointer;
               flex-shrink: 0;
               transition:
@@ -3353,9 +3354,9 @@
                 border-color 0.2s;
             }
             .cmp-panel__close:hover {
-              background: rgba(200, 16, 46, 0.18);
-              border-color: rgba(200, 16, 46, 0.35);
-              color: #fff;
+              background: rgba(200, 16, 46, 0.12);
+              border-color: rgba(200, 16, 46, 0.3);
+              color: #c8102e;
             }
             .cmp-panel__list {
               flex: 1;
@@ -3365,17 +3366,17 @@
             }
             .cmp-panel__list::-webkit-scrollbar { width: 4px; }
             .cmp-panel__list::-webkit-scrollbar-track { background: transparent; }
-            .cmp-panel__list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 4px; }
+            .cmp-panel__list::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 4px; }
             .cmp-item {
               display: flex;
               align-items: center;
               gap: 10px;
               padding: 12px 16px;
-              border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+              border-bottom: 1px solid rgba(0, 0, 0, 0.06);
               background: transparent;
               transition: background 0.2s;
             }
-            .cmp-item:hover { background: rgba(255, 255, 255, 0.03); }
+            .cmp-item:hover { background: rgba(0, 0, 0, 0.03); }
             .cmp-item:last-child {
               border-bottom: none;
             }
@@ -3385,7 +3386,7 @@
               border-radius: 8px;
               object-fit: cover;
               flex-shrink: 0;
-              border: 1px solid rgba(255, 255, 255, 0.08);
+              border: 1px solid rgba(0, 0, 0, 0.08);
             }
             .cmp-item__title {
               font-size: 13px;
@@ -3394,10 +3395,10 @@
               min-width: 0;
               line-height: 1.45;
               white-space: normal;
-              color: rgba(255, 255, 255, 0.82);
+              color: rgba(0, 0, 0, 0.75);
             }
             .cmp-item__rm {
-              color: rgba(255, 255, 255, 0.28);
+              color: rgba(0, 0, 0, 0.28);
               transition: color 0.2s, background 0.2s;
               flex-shrink: 0;
               border: none;
@@ -3408,15 +3409,15 @@
               border-radius: 50%;
             }
             .cmp-item__rm:hover {
-              color: #ff4466;
-              background: rgba(200, 16, 46, 0.15);
+              color: #c8102e;
+              background: rgba(200, 16, 46, 0.1);
             }
             .cmp-panel__slot {
               padding: 14px 16px;
               font-size: 12px;
-              color: rgba(255, 255, 255, 0.25);
+              color: rgba(0, 0, 0, 0.35);
               text-align: center;
-              border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+              border-bottom: 1px solid rgba(0, 0, 0, 0.06);
               letter-spacing: 0.03em;
             }
             .cmp-panel__slot:last-child {
@@ -3435,28 +3436,29 @@
               align-items: center;
               gap: 10px;
               padding: 10px 18px 10px 14px;
-              background: linear-gradient(135deg, #1c1c1c 0%, #0d0d0d 100%);
-              color: #fff;
+              background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+              color: #1a1a1a;
               border-radius: 100px;
               cursor: pointer;
-              border: 1px solid rgba(255, 255, 255, 0.1);
+              border: 1px solid rgba(0, 0, 0, 0.1);
               white-space: nowrap;
               backdrop-filter: blur(20px);
               -webkit-backdrop-filter: blur(20px);
               transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
               position: relative;
               overflow: hidden;
+              box-shadow: 0 4px 16px rgba(0,0,0,0.1);
             }
             .cmp-bar__toggle::before {
               content: "";
               position: absolute;
               inset: 0;
               border-radius: inherit;
-              background: linear-gradient(135deg, rgba(200, 16, 46, 0.18) 0%, transparent 55%);
+              background: linear-gradient(135deg, rgba(200, 16, 46, 0.08) 0%, transparent 55%);
               pointer-events: none;
             }
             .cmp-bar__toggle:hover {
-              border-color: rgba(200, 16, 46, 0.4);
+              border-color: rgba(200, 16, 46, 0.35);
               transform: translateY(-3px);
             }
             .cmp-bar__count {
@@ -3473,12 +3475,12 @@
               font-size: 13px;
               font-weight: 600;
               letter-spacing: 0.02em;
-              color: rgba(255, 255, 255, 0.92);
+              color: rgba(0, 0, 0, 0.8);
             }
             .cmp-bar__chevron {
               transition: transform 0.3s cubic-bezier(0.32, 0, 0.15, 1);
               opacity: 0.5;
-              color: rgba(255, 255, 255, 0.7);
+              color: rgba(0, 0, 0, 0.6);
             }
             .cmp-bar__toggle:hover .cmp-bar__chevron { opacity: 0.9; }
             .cmp-bar__panel.is-open ~ .cmp-bar__right .cmp-bar__chevron {
@@ -3486,9 +3488,9 @@
             }
             .cmp-panel__foot {
               padding: 14px 16px 16px;
-              border-top: 1px solid rgba(255, 255, 255, 0.07);
+              border-top: 1px solid rgba(0, 0, 0, 0.07);
               flex-shrink: 0;
-              background: rgba(0, 0, 0, 0.2);
+              background: transparent;
             }
             .btn-cmp-go {
               width: 100%;
@@ -5063,11 +5065,26 @@
             <span class="lang-toggle__knob"></span>
             <span class="lang-toggle__ar">عر</span>
           </div>
-          <button class="navbar__login" id="navbar-login" type="button" aria-label="Sign in or register" data-tooltip="Sign in">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-              <circle cx="12" cy="7" r="4"/>
+          <button
+            class="navbar__login"
+            id="navbar-login"
+            type="button"
+            aria-label="Sign in or register"
+            data-tooltip="Sign in"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
             </svg>
           </button>
           <div class="navbar__user" id="navbar-user" aria-label="Account">
@@ -5465,69 +5482,221 @@
             <!-- Filter chips: Property Type / Beds & Baths / Price / Area / Finishing -->
             <div class="qf__filters">
               <div class="qf__filter-wrap">
-                <button type="button" class="qf__filter-btn" aria-expanded="false" data-qf-filter>
+                <button
+                  type="button"
+                  class="qf__filter-btn"
+                  aria-expanded="false"
+                  data-qf-filter
+                >
                   Property Type
-                  <svg class="qf__filter-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <svg
+                    class="qf__filter-chevron"
+                    width="10"
+                    height="6"
+                    viewBox="0 0 10 6"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M1 1l4 4 4-4"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
                 </button>
                 <div class="qf__filter-panel" role="listbox">
-                  <label class="qf__filter-option"><input type="checkbox"> Apartment</label>
-                  <label class="qf__filter-option"><input type="checkbox"> Villa</label>
-                  <label class="qf__filter-option"><input type="checkbox"> Penthouse</label>
-                  <label class="qf__filter-option"><input type="checkbox"> Duplex</label>
-                  <label class="qf__filter-option"><input type="checkbox"> Studio</label>
-                  <label class="qf__filter-option"><input type="checkbox"> Townhouse</label>
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> Apartment</label
+                  >
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> Villa</label
+                  >
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> Penthouse</label
+                  >
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> Duplex</label
+                  >
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> Studio</label
+                  >
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> Townhouse</label
+                  >
                 </div>
               </div>
               <div class="qf__filter-wrap">
-                <button type="button" class="qf__filter-btn" aria-expanded="false" data-qf-filter>
+                <button
+                  type="button"
+                  class="qf__filter-btn"
+                  aria-expanded="false"
+                  data-qf-filter
+                >
                   Beds &amp; Baths
-                  <svg class="qf__filter-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <svg
+                    class="qf__filter-chevron"
+                    width="10"
+                    height="6"
+                    viewBox="0 0 10 6"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M1 1l4 4 4-4"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
                 </button>
                 <div class="qf__filter-panel" role="listbox">
-                  <label class="qf__filter-option"><input type="checkbox"> Studio</label>
-                  <label class="qf__filter-option"><input type="checkbox"> 1 Bedroom</label>
-                  <label class="qf__filter-option"><input type="checkbox"> 2 Bedrooms</label>
-                  <label class="qf__filter-option"><input type="checkbox"> 3 Bedrooms</label>
-                  <label class="qf__filter-option"><input type="checkbox"> 4 Bedrooms</label>
-                  <label class="qf__filter-option"><input type="checkbox"> 5+ Bedrooms</label>
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> Studio</label
+                  >
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> 1 Bedroom</label
+                  >
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> 2 Bedrooms</label
+                  >
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> 3 Bedrooms</label
+                  >
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> 4 Bedrooms</label
+                  >
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> 5+ Bedrooms</label
+                  >
                 </div>
               </div>
               <div class="qf__filter-wrap">
-                <button type="button" class="qf__filter-btn" aria-expanded="false" data-qf-filter>
+                <button
+                  type="button"
+                  class="qf__filter-btn"
+                  aria-expanded="false"
+                  data-qf-filter
+                >
                   Price (EGP)
-                  <svg class="qf__filter-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <svg
+                    class="qf__filter-chevron"
+                    width="10"
+                    height="6"
+                    viewBox="0 0 10 6"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M1 1l4 4 4-4"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
                 </button>
                 <div class="qf__filter-panel" role="listbox">
-                  <label class="qf__filter-option"><input type="checkbox"> Under 1M</label>
-                  <label class="qf__filter-option"><input type="checkbox"> 1M – 3M</label>
-                  <label class="qf__filter-option"><input type="checkbox"> 3M – 7M</label>
-                  <label class="qf__filter-option"><input type="checkbox"> 7M – 15M</label>
-                  <label class="qf__filter-option"><input type="checkbox"> 15M+</label>
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> Under 1M</label
+                  >
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> 1M – 3M</label
+                  >
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> 3M – 7M</label
+                  >
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> 7M – 15M</label
+                  >
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> 15M+</label
+                  >
                 </div>
               </div>
               <div class="qf__filter-wrap">
-                <button type="button" class="qf__filter-btn" aria-expanded="false" data-qf-filter>
+                <button
+                  type="button"
+                  class="qf__filter-btn"
+                  aria-expanded="false"
+                  data-qf-filter
+                >
                   Area (sqm)
-                  <svg class="qf__filter-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <svg
+                    class="qf__filter-chevron"
+                    width="10"
+                    height="6"
+                    viewBox="0 0 10 6"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M1 1l4 4 4-4"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
                 </button>
                 <div class="qf__filter-panel" role="listbox">
-                  <label class="qf__filter-option"><input type="checkbox"> Under 80</label>
-                  <label class="qf__filter-option"><input type="checkbox"> 80 – 120</label>
-                  <label class="qf__filter-option"><input type="checkbox"> 120 – 200</label>
-                  <label class="qf__filter-option"><input type="checkbox"> 200 – 300</label>
-                  <label class="qf__filter-option"><input type="checkbox"> 300+</label>
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> Under 80</label
+                  >
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> 80 – 120</label
+                  >
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> 120 – 200</label
+                  >
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> 200 – 300</label
+                  >
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> 300+</label
+                  >
                 </div>
               </div>
               <div class="qf__filter-wrap">
-                <button type="button" class="qf__filter-btn" aria-expanded="false" data-qf-filter>
+                <button
+                  type="button"
+                  class="qf__filter-btn"
+                  aria-expanded="false"
+                  data-qf-filter
+                >
                   Finishing
-                  <svg class="qf__filter-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <svg
+                    class="qf__filter-chevron"
+                    width="10"
+                    height="6"
+                    viewBox="0 0 10 6"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M1 1l4 4 4-4"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
                 </button>
                 <div class="qf__filter-panel" role="listbox">
-                  <label class="qf__filter-option"><input type="checkbox"> Fully Finished</label>
-                  <label class="qf__filter-option"><input type="checkbox"> Semi-Finished</label>
-                  <label class="qf__filter-option"><input type="checkbox"> Core &amp; Shell</label>
-                  <label class="qf__filter-option"><input type="checkbox"> Furnished</label>
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> Fully Finished</label
+                  >
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> Semi-Finished</label
+                  >
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> Core &amp; Shell</label
+                  >
+                  <label class="qf__filter-option"
+                    ><input type="checkbox" /> Furnished</label
+                  >
                 </div>
               </div>
             </div>
@@ -5561,7 +5730,18 @@
               data-i18n="btn.view-all"
             >
               View All Properties
-              <svg width="16" height="14" viewBox="0 0 16 14" fill="none" aria-hidden="true"><path d="M7.99997 0.414307C7.99997 1.11051 8.68991 2.15231 9.38737 3.02724C10.2855 4.15371 11.3574 5.13777 12.5873 5.88911C13.5087 6.45171 14.6276 6.99177 15.5264 6.99177M7.99997 13.5855C7.99997 12.8893 8.68991 11.8475 9.38737 10.9726C10.2855 9.84617 11.3574 8.86204 12.5873 8.11071C13.5087 7.54811 14.6276 7.00804 15.5264 7.00804M15.5264 6.99991H0.473572" stroke="currentColor" /></svg>
+              <svg
+                width="16"
+                height="14"
+                viewBox="0 0 16 14"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M7.99997 0.414307C7.99997 1.11051 8.68991 2.15231 9.38737 3.02724C10.2855 4.15371 11.3574 5.13777 12.5873 5.88911C13.5087 6.45171 14.6276 6.99177 15.5264 6.99177M7.99997 13.5855C7.99997 12.8893 8.68991 11.8475 9.38737 10.9726C10.2855 9.84617 11.3574 8.86204 12.5873 8.11071C13.5087 7.54811 14.6276 7.00804 15.5264 7.00804M15.5264 6.99991H0.473572"
+                  stroke="currentColor"
+                />
+              </svg>
             </a>
           </header>
 
@@ -5773,7 +5953,18 @@
                   </div>
                   <a href="property-details.html" class="btn-explore">
                     Explore
-                    <svg width="16" height="14" viewBox="0 0 16 14" fill="none" aria-hidden="true"><path d="M7.99997 0.414307C7.99997 1.11051 8.68991 2.15231 9.38737 3.02724C10.2855 4.15371 11.3574 5.13777 12.5873 5.88911C13.5087 6.45171 14.6276 6.99177 15.5264 6.99177M7.99997 13.5855C7.99997 12.8893 8.68991 11.8475 9.38737 10.9726C10.2855 9.84617 11.3574 8.86204 12.5873 8.11071C13.5087 7.54811 14.6276 7.00804 15.5264 7.00804M15.5264 6.99991H0.473572" stroke="currentColor" /></svg>
+                    <svg
+                      width="16"
+                      height="14"
+                      viewBox="0 0 16 14"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M7.99997 0.414307C7.99997 1.11051 8.68991 2.15231 9.38737 3.02724C10.2855 4.15371 11.3574 5.13777 12.5873 5.88911C13.5087 6.45171 14.6276 6.99177 15.5264 6.99177M7.99997 13.5855C7.99997 12.8893 8.68991 11.8475 9.38737 10.9726C10.2855 9.84617 11.3574 8.86204 12.5873 8.11071C13.5087 7.54811 14.6276 7.00804 15.5264 7.00804M15.5264 6.99991H0.473572"
+                        stroke="currentColor"
+                      />
+                    </svg>
                   </a>
                 </div>
               </div>
@@ -6493,7 +6684,18 @@
             <div class="pgal__header-right pgal-reveal">
               <a href="#" class="btn-view-all">
                 View All
-                <svg width="16" height="14" viewBox="0 0 16 14" fill="none" aria-hidden="true"><path d="M7.99997 0.414307C7.99997 1.11051 8.68991 2.15231 9.38737 3.02724C10.2855 4.15371 11.3574 5.13777 12.5873 5.88911C13.5087 6.45171 14.6276 6.99177 15.5264 6.99177M7.99997 13.5855C7.99997 12.8893 8.68991 11.8475 9.38737 10.9726C10.2855 9.84617 11.3574 8.86204 12.5873 8.11071C13.5087 7.54811 14.6276 7.00804 15.5264 7.00804M15.5264 6.99991H0.473572" stroke="currentColor" /></svg>
+                <svg
+                  width="16"
+                  height="14"
+                  viewBox="0 0 16 14"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M7.99997 0.414307C7.99997 1.11051 8.68991 2.15231 9.38737 3.02724C10.2855 4.15371 11.3574 5.13777 12.5873 5.88911C13.5087 6.45171 14.6276 6.99177 15.5264 6.99177M7.99997 13.5855C7.99997 12.8893 8.68991 11.8475 9.38737 10.9726C10.2855 9.84617 11.3574 8.86204 12.5873 8.11071C13.5087 7.54811 14.6276 7.00804 15.5264 7.00804M15.5264 6.99991H0.473572"
+                    stroke="currentColor"
+                  />
+                </svg>
               </a>
             </div>
           </header>
@@ -6530,7 +6732,18 @@
                 </p>
                 <a href="property-detail.html" class="pgal-card__cta pgal-cta"
                   >Explore Project
-                  <svg width="16" height="14" viewBox="0 0 16 14" fill="none" aria-hidden="true"><path d="M7.99997 0.414307C7.99997 1.11051 8.68991 2.15231 9.38737 3.02724C10.2855 4.15371 11.3574 5.13777 12.5873 5.88911C13.5087 6.45171 14.6276 6.99177 15.5264 6.99177M7.99997 13.5855C7.99997 12.8893 8.68991 11.8475 9.38737 10.9726C10.2855 9.84617 11.3574 8.86204 12.5873 8.11071C13.5087 7.54811 14.6276 7.00804 15.5264 7.00804M15.5264 6.99991H0.473572" stroke="currentColor" /></svg></a>
+                  <svg
+                    width="16"
+                    height="14"
+                    viewBox="0 0 16 14"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M7.99997 0.414307C7.99997 1.11051 8.68991 2.15231 9.38737 3.02724C10.2855 4.15371 11.3574 5.13777 12.5873 5.88911C13.5087 6.45171 14.6276 6.99177 15.5264 6.99177M7.99997 13.5855C7.99997 12.8893 8.68991 11.8475 9.38737 10.9726C10.2855 9.84617 11.3574 8.86204 12.5873 8.11071C13.5087 7.54811 14.6276 7.00804 15.5264 7.00804M15.5264 6.99991H0.473572"
+                      stroke="currentColor"
+                    /></svg
+                ></a>
               </div>
               <div class="pgal-card__actions">
                 <button
@@ -6590,7 +6803,18 @@
                 </p>
                 <a href="property-detail.html" class="pgal-card__cta pgal-cta"
                   >Explore Project
-                  <svg width="16" height="14" viewBox="0 0 16 14" fill="none" aria-hidden="true"><path d="M7.99997 0.414307C7.99997 1.11051 8.68991 2.15231 9.38737 3.02724C10.2855 4.15371 11.3574 5.13777 12.5873 5.88911C13.5087 6.45171 14.6276 6.99177 15.5264 6.99177M7.99997 13.5855C7.99997 12.8893 8.68991 11.8475 9.38737 10.9726C10.2855 9.84617 11.3574 8.86204 12.5873 8.11071C13.5087 7.54811 14.6276 7.00804 15.5264 7.00804M15.5264 6.99991H0.473572" stroke="currentColor" /></svg></a>
+                  <svg
+                    width="16"
+                    height="14"
+                    viewBox="0 0 16 14"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M7.99997 0.414307C7.99997 1.11051 8.68991 2.15231 9.38737 3.02724C10.2855 4.15371 11.3574 5.13777 12.5873 5.88911C13.5087 6.45171 14.6276 6.99177 15.5264 6.99177M7.99997 13.5855C7.99997 12.8893 8.68991 11.8475 9.38737 10.9726C10.2855 9.84617 11.3574 8.86204 12.5873 8.11071C13.5087 7.54811 14.6276 7.00804 15.5264 7.00804M15.5264 6.99991H0.473572"
+                      stroke="currentColor"
+                    /></svg
+                ></a>
               </div>
               <div class="pgal-card__actions">
                 <button
@@ -6650,7 +6874,18 @@
                 </p>
                 <a href="property-detail.html" class="pgal-card__cta pgal-cta"
                   >Explore Project
-                  <svg width="16" height="14" viewBox="0 0 16 14" fill="none" aria-hidden="true"><path d="M7.99997 0.414307C7.99997 1.11051 8.68991 2.15231 9.38737 3.02724C10.2855 4.15371 11.3574 5.13777 12.5873 5.88911C13.5087 6.45171 14.6276 6.99177 15.5264 6.99177M7.99997 13.5855C7.99997 12.8893 8.68991 11.8475 9.38737 10.9726C10.2855 9.84617 11.3574 8.86204 12.5873 8.11071C13.5087 7.54811 14.6276 7.00804 15.5264 7.00804M15.5264 6.99991H0.473572" stroke="currentColor" /></svg></a>
+                  <svg
+                    width="16"
+                    height="14"
+                    viewBox="0 0 16 14"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M7.99997 0.414307C7.99997 1.11051 8.68991 2.15231 9.38737 3.02724C10.2855 4.15371 11.3574 5.13777 12.5873 5.88911C13.5087 6.45171 14.6276 6.99177 15.5264 6.99177M7.99997 13.5855C7.99997 12.8893 8.68991 11.8475 9.38737 10.9726C10.2855 9.84617 11.3574 8.86204 12.5873 8.11071C13.5087 7.54811 14.6276 7.00804 15.5264 7.00804M15.5264 6.99991H0.473572"
+                      stroke="currentColor"
+                    /></svg
+                ></a>
               </div>
               <div class="pgal-card__actions">
                 <button
@@ -6710,7 +6945,18 @@
                 </p>
                 <a href="property-detail.html" class="pgal-card__cta pgal-cta"
                   >Explore Project
-                  <svg width="16" height="14" viewBox="0 0 16 14" fill="none" aria-hidden="true"><path d="M7.99997 0.414307C7.99997 1.11051 8.68991 2.15231 9.38737 3.02724C10.2855 4.15371 11.3574 5.13777 12.5873 5.88911C13.5087 6.45171 14.6276 6.99177 15.5264 6.99177M7.99997 13.5855C7.99997 12.8893 8.68991 11.8475 9.38737 10.9726C10.2855 9.84617 11.3574 8.86204 12.5873 8.11071C13.5087 7.54811 14.6276 7.00804 15.5264 7.00804M15.5264 6.99991H0.473572" stroke="currentColor" /></svg></a>
+                  <svg
+                    width="16"
+                    height="14"
+                    viewBox="0 0 16 14"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M7.99997 0.414307C7.99997 1.11051 8.68991 2.15231 9.38737 3.02724C10.2855 4.15371 11.3574 5.13777 12.5873 5.88911C13.5087 6.45171 14.6276 6.99177 15.5264 6.99177M7.99997 13.5855C7.99997 12.8893 8.68991 11.8475 9.38737 10.9726C10.2855 9.84617 11.3574 8.86204 12.5873 8.11071C13.5087 7.54811 14.6276 7.00804 15.5264 7.00804M15.5264 6.99991H0.473572"
+                      stroke="currentColor"
+                    /></svg
+                ></a>
               </div>
               <div class="pgal-card__actions">
                 <button
@@ -7118,7 +7364,6 @@
         </div>
       </section>
 
-
       <!-- ─── LIGHTBOX ─── -->
       <div
         class="pgal-lb"
@@ -7506,29 +7751,34 @@
 ═════════════════════════════════════ */
         function doLiquidWipe(fromIdx, toIdx, forward) {
           const fromSlide = getSlide(fromIdx);
-          const toSlide   = getSlide(toIdx);
+          const toSlide = getSlide(toIdx);
           if (!fromSlide || !toSlide) return;
 
           const heroStage = document.getElementById("heroStage");
           let W = heroStage.offsetWidth;
           let H = heroStage.offsetHeight;
 
-          const SKEW      = 0.18;
-          const WIPE_S    = WIPE_MS / 1000;
+          const SKEW = 0.18;
+          const WIPE_S = WIPE_MS / 1000;
           const REVEAL_AT = 0.62;
-          const DIR       = forward ? 1 : -1;
-          const PTS       = 96;
+          const DIR = forward ? 1 : -1;
+          const PTS = 96;
 
           /* layer order */
-          gsap.set(toSlide,   { zIndex: 1, display: "block", visibility: "visible" });
+          gsap.set(toSlide, {
+            zIndex: 1,
+            display: "block",
+            visibility: "visible",
+          });
           gsap.set(fromSlide, { zIndex: 2 });
 
           /* sheen canvas — above both slides */
           const cnv = document.createElement("canvas");
           cnv.setAttribute("aria-hidden", "true");
-          cnv.width  = W;
+          cnv.width = W;
           cnv.height = H;
-          cnv.style.cssText = "position:absolute;inset:0;z-index:3;pointer-events:none;mix-blend-mode:screen;";
+          cnv.style.cssText =
+            "position:absolute;inset:0;z-index:3;pointer-events:none;mix-blend-mode:screen;";
           heroStage.appendChild(cnv);
           const ctx = cnv.getContext("2d");
 
@@ -7536,11 +7786,11 @@
           new Image().src = SLIDES[(toIdx + 1) % SLIDES.length].image;
 
           const fromBg = fromSlide.querySelector(".slide-bg");
-          const toBg   = toSlide.querySelector(".slide-bg");
+          const toBg = toSlide.querySelector(".slide-bg");
 
           const state = { p: 0 };
-          let clock   = 0;
-          let lastTs  = performance.now();
+          let clock = 0;
+          let lastTs = performance.now();
           let revealed = false;
 
           /* outgoing text exits immediately */
@@ -7551,8 +7801,12 @@
               cnv.remove();
               fromSlide.style.clipPath = "";
               if (fromBg) fromBg.style.transform = "";
-              if (toBg)   toBg.style.transform   = "";
-              gsap.set(fromSlide, { display: "none", visibility: "hidden", zIndex: 0 });
+              if (toBg) toBg.style.transform = "";
+              gsap.set(fromSlide, {
+                display: "none",
+                visibility: "hidden",
+                zIndex: 0,
+              });
               gsap.set(toSlide, { zIndex: 2 });
               isAnimating = false;
               if (!revealed) textIn(toSlide);
@@ -7563,7 +7817,7 @@
           if (REDUCED) {
             gsap.set(toSlide, { opacity: 0 });
             tl.to(fromSlide, { opacity: 0, duration: 0.4 })
-              .to(toSlide,   { opacity: 1, duration: 0.4 }, 0)
+              .to(toSlide, { opacity: 1, duration: 0.4 }, 0)
               .add(() => gsap.set(fromSlide, { opacity: 1 }));
             return;
           }
@@ -7594,19 +7848,20 @@
              waveAmp = sin(p·π) → zero distortion at rest (p=0 and p=1). */
           function getSeamX(ty, p, t) {
             const waveAmp = Math.sin(p * Math.PI);
-            const w1 = Math.sin(ty * 1.6 * Math.PI + t * 0.50)        * 0.060;
-            const w2 = Math.sin(ty * 3.2 * Math.PI - t * 0.80 + 1.57) * 0.028;
-            const seamUv = (1.15 - p * 1.3)
-                         + (ty - 0.5) * SKEW
-                         + (w1 + w2) * waveAmp;
+            const w1 = Math.sin(ty * 1.6 * Math.PI + t * 0.5) * 0.06;
+            const w2 = Math.sin(ty * 3.2 * Math.PI - t * 0.8 + 1.57) * 0.028;
+            const seamUv =
+              1.15 - p * 1.3 + (ty - 0.5) * SKEW + (w1 + w2) * waveAmp;
             return DIR === 1 ? seamUv * W : (1 - seamUv) * W;
           }
 
           function renderFrame(p, t) {
             W = heroStage.offsetWidth;
             H = heroStage.offsetHeight;
-            if (cnv.width !== W || cnv.height !== H) { cnv.width = W; cnv.height = H; }
-            else ctx.clearRect(0, 0, W, H);
+            if (cnv.width !== W || cnv.height !== H) {
+              cnv.width = W;
+              cnv.height = H;
+            } else ctx.clearRect(0, 0, W, H);
 
             const waveAmp = Math.sin(p * Math.PI);
 
@@ -7623,14 +7878,17 @@
             const edge = DIR === 1 ? 0 : W;
             const poly = [[edge, 0], ...pts, [edge, H]];
             fromSlide.style.clipPath =
-              "polygon(" + poly.map(([x, y]) => `${x.toFixed(1)}px ${y.toFixed(1)}px`).join(",") + ")";
+              "polygon(" +
+              poly
+                .map(([x, y]) => `${x.toFixed(1)}px ${y.toFixed(1)}px`)
+                .join(",") +
+              ")";
 
             /* ── 2. drag the outgoing bg toward the departing edge ──────────
                peaking at mid-transition (~6 % of viewport width)            */
             if (fromBg) {
               const drag = waveAmp * 0.06;
-              fromBg.style.transform =
-                `translateX(${((DIR === 1 ? -1 : 1) * drag * W).toFixed(2)}px)`;
+              fromBg.style.transform = `translateX(${((DIR === 1 ? -1 : 1) * drag * W).toFixed(2)}px)`;
             }
 
             /* ── 3. ease the incoming bg in from the entry edge (~3 %) ───── */
@@ -7655,9 +7913,17 @@
               const arr = [];
               for (let i = 0; i <= PTS; i++) {
                 const ty = i / PTS;
-                const w1 = Math.sin(ty * 1.6 * Math.PI + t * 0.50 + phShift)        * 0.060 * waveAmp;
-                const w2 = Math.sin(ty * 3.2 * Math.PI - t * 0.80 + 1.57 + phShift * 0.65) * 0.028 * waveAmp;
-                const uv = (1.15 - p * 1.3) + uvOff + (ty - 0.5) * SKEW + w1 + w2;
+                const w1 =
+                  Math.sin(ty * 1.6 * Math.PI + t * 0.5 + phShift) *
+                  0.06 *
+                  waveAmp;
+                const w2 =
+                  Math.sin(
+                    ty * 3.2 * Math.PI - t * 0.8 + 1.57 + phShift * 0.65,
+                  ) *
+                  0.028 *
+                  waveAmp;
+                const uv = 1.15 - p * 1.3 + uvOff + (ty - 0.5) * SKEW + w1 + w2;
                 arr.push([DIR === 1 ? uv * W : (1 - uv) * W, ty * H]);
               }
               return arr;
@@ -7670,21 +7936,29 @@
               const path = () => {
                 ctx.beginPath();
                 ctx.moveTo(arr[0][0], arr[0][1]);
-                for (let i = 1; i < arr.length; i++) ctx.lineTo(arr[i][0], arr[i][1]);
+                for (let i = 1; i < arr.length; i++)
+                  ctx.lineTo(arr[i][0], arr[i][1]);
               };
               ctx.save();
-              ctx.lineJoin = 'round'; ctx.lineCap = 'round';
-              path(); ctx.strokeStyle = `rgba(255,255,255,${(alpha * 0.05).toFixed(3)})`; ctx.lineWidth = outerW; ctx.stroke();
-              path(); ctx.strokeStyle = `rgba(255,255,255,${(alpha * 0.14).toFixed(3)})`; ctx.lineWidth = midW;   ctx.stroke();
+              ctx.lineJoin = "round";
+              ctx.lineCap = "round";
+              path();
+              ctx.strokeStyle = `rgba(255,255,255,${(alpha * 0.05).toFixed(3)})`;
+              ctx.lineWidth = outerW;
+              ctx.stroke();
+              path();
+              ctx.strokeStyle = `rgba(255,255,255,${(alpha * 0.14).toFixed(3)})`;
+              ctx.lineWidth = midW;
+              ctx.stroke();
               ctx.restore();
             };
 
             /* Three trailing wave crests behind the main seam, then the main
                seam itself — painted back-to-front so closer = brighter.     */
-            drawWave(makeWave(-0.26, 1.40), waveAmp * 0.28, 22,  8);
-            drawWave(makeWave(-0.17, 0.90), waveAmp * 0.44, 30, 10);
+            drawWave(makeWave(-0.26, 1.4), waveAmp * 0.28, 22, 8);
+            drawWave(makeWave(-0.17, 0.9), waveAmp * 0.44, 30, 10);
             drawWave(makeWave(-0.09, 0.45), waveAmp * 0.62, 40, 13);
-            drawWave(pts,                   waveAmp * 0.80, 56, 18);
+            drawWave(pts, waveAmp * 0.8, 56, 18);
           }
         }
 
@@ -7859,8 +8133,10 @@
             onComplete() {
               textIn(firstSlide);
               startAutoplay();
-              if (scrollHint) gsap.to(scrollHint, { opacity: 1, duration: 0.6, delay: 1.2 });
-              if (scrollHint) gsap.to(scrollHint, { opacity: 0, duration: 0.6, delay: 5 });
+              if (scrollHint)
+                gsap.to(scrollHint, { opacity: 1, duration: 0.6, delay: 1.2 });
+              if (scrollHint)
+                gsap.to(scrollHint, { opacity: 0, duration: 0.6, delay: 5 });
             },
           });
 
@@ -7935,29 +8211,30 @@
 ═════════════════════════════════════ */
         (() => {
           if (REDUCED) return;
-          if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+          if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches)
+            return;
 
-          const heroEl   = document.querySelector(".hero");
-          const layer    = document.getElementById("heroPreviews");
+          const heroEl = document.querySelector(".hero");
+          const layer = document.getElementById("heroPreviews");
           if (!heroEl || !layer) return;
 
           /* ── Constants (mirrored from reference) ── */
-          const PREVIEW_MAX   = 5;
-          const FOLLOW_LEAD   = 0.17;
+          const PREVIEW_MAX = 5;
+          const FOLLOW_LEAD = 0.17;
           const FOLLOW_FALLOFF = 0.19;
-          const EASE_FLOOR    = 0.28;
-          const DOCK_LEAD     = 0.19;
-          const DOCK_FALLOFF  = 0.06;
-          const OPACITY_GAIN  = 1.8;
-          const FAN_X         = 18;
-          const FAN_Y         = 14;
-          const FAN_ROT       = -1.7;
-          const FLOAT_SCALE   = 0.94;
+          const EASE_FLOOR = 0.28;
+          const DOCK_LEAD = 0.19;
+          const DOCK_FALLOFF = 0.06;
+          const OPACITY_GAIN = 1.8;
+          const FAN_X = 18;
+          const FAN_Y = 14;
+          const FAN_ROT = -1.7;
+          const FLOAT_SCALE = 0.94;
           const FLOAT_OPACITY = 0.86;
-          const DOCK_OPACITY  = 0.52;
-          const COVER_RANGE   = 130;
-          const COVER_HIDE    = 20;
-          const SETTLED       = 0.25;
+          const DOCK_OPACITY = 0.52;
+          const COVER_RANGE = 130;
+          const COVER_HIDE = 20;
+          const SETTLED = 0.25;
 
           /* ── State ── */
           const count = Math.min(SLIDES.length, PREVIEW_MAX);
@@ -7966,12 +8243,13 @@
           let mode = "dock";
           let heroInside = false;
           let introPlayed = false;
-          const client  = { x: 0, y: 0 };
+          const client = { x: 0, y: 0 };
           const pointer = { x: 0, y: 0 };
-          const base    = { left: 0, top: 0 };
+          const base = { left: 0, top: 0 };
           let slotPoints = [];
           let cards = [];
-          let raf = 0, last = 0;
+          let raf = 0,
+            last = 0;
           const zonesIn = new Set();
 
           /* rest zones: the thumbs sidebar and any CTAs */
@@ -7991,7 +8269,11 @@
             return {
               el,
               img: el.querySelector("img"),
-              x: 0, y: 0, scale: 1, rot: 0, op: 0,
+              x: 0,
+              y: 0,
+              scale: 1,
+              rot: 0,
+              op: 0,
               in: { x: 0, y: 0, rot: 0, scale: 1, op: 1 },
             };
           });
@@ -8000,7 +8282,7 @@
           function readBase() {
             const r = layer.getBoundingClientRect();
             base.left = r.left;
-            base.top  = r.top;
+            base.top = r.top;
           }
           function readPointer() {
             pointer.x = client.x - base.left;
@@ -8016,7 +8298,7 @@
 
           function measureSlots() {
             const slotEls = Array.from(
-              document.querySelectorAll("#heroThumbs .thumb-item")
+              document.querySelectorAll("#heroThumbs .thumb-item"),
             );
             readBase();
             const cardH = cards[0]?.el.offsetHeight || 74;
@@ -8025,8 +8307,8 @@
               if (!el) return { x: 0, y: 0 };
               const r = el.getBoundingClientRect();
               return {
-                x: r.left - base.left + r.width  / 2,
-                y: r.top  - base.top  + cardH / 2,
+                x: r.left - base.left + r.width / 2,
+                y: r.top - base.top + cardH / 2,
               };
             });
           }
@@ -8046,10 +8328,10 @@
 
           function paint(card) {
             const e = card.in;
-            const x     = card.x + e.x;
-            const y     = card.y + e.y;
+            const x = card.x + e.x;
+            const y = card.y + e.y;
             const scale = card.scale * e.scale;
-            const rot   = card.rot + e.rot;
+            const rot = card.rot + e.rot;
             card.el.style.transform =
               `translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0)` +
               ` scale(${scale.toFixed(3)}) rotate(${rot.toFixed(2)}deg)`;
@@ -8061,8 +8343,13 @@
             let t;
             if (m === "dock") {
               const p = slotPoints[i] || { x: 0, y: 0 };
-              t = { x: p.x, y: p.y, scale: 1, rot: 0,
-                    op: isActive ? 1 : DOCK_OPACITY };
+              t = {
+                x: p.x,
+                y: p.y,
+                scale: 1,
+                rot: 0,
+                op: isActive ? 1 : DOCK_OPACITY,
+              };
             } else {
               t = {
                 x: pointer.x + i * FAN_X,
@@ -8078,7 +8365,7 @@
 
           function ease(i) {
             const docked = mode === "dock";
-            const lead    = docked ? DOCK_LEAD    : FOLLOW_LEAD;
+            const lead = docked ? DOCK_LEAD : FOLLOW_LEAD;
             const falloff = docked ? DOCK_FALLOFF : FOLLOW_FALLOFF;
             return lead * Math.max(1 - i * falloff, EASE_FLOOR);
           }
@@ -8088,8 +8375,11 @@
             mode = "dock";
             cards.forEach((card, i) => {
               const t = targetFor(i, "dock");
-              card.x = t.x; card.y = t.y;
-              card.scale = t.scale; card.rot = t.rot; card.op = 0;
+              card.x = t.x;
+              card.y = t.y;
+              card.scale = t.scale;
+              card.rot = t.rot;
+              card.op = 0;
               paint(card);
             });
           }
@@ -8102,28 +8392,38 @@
             readPointer();
             let moving = false;
             cards.forEach((card, i) => {
-              const t  = targetFor(i);
-              const e  = ease(i);
-              const k  = 1 - Math.pow(1 - e, frames);
-              const ko = 1 - Math.pow(1 - Math.min(e * OPACITY_GAIN, 0.75), frames);
-              card.x     += (t.x     - card.x)     * k;
-              card.y     += (t.y     - card.y)     * k;
+              const t = targetFor(i);
+              const e = ease(i);
+              const k = 1 - Math.pow(1 - e, frames);
+              const ko =
+                1 - Math.pow(1 - Math.min(e * OPACITY_GAIN, 0.75), frames);
+              card.x += (t.x - card.x) * k;
+              card.y += (t.y - card.y) * k;
               card.scale += (t.scale - card.scale) * k;
-              card.rot   += (t.rot   - card.rot)   * k;
-              card.op    += (t.op    - card.op)     * ko;
-              if (Math.abs(t.x - card.x) > SETTLED ||
-                  Math.abs(t.y - card.y) > SETTLED ||
-                  Math.abs(t.op - card.op) > 0.004 ||
-                  Math.abs(t.rot - card.rot) > 0.05 ||
-                  Math.abs(t.scale - card.scale) > 0.002) {
+              card.rot += (t.rot - card.rot) * k;
+              card.op += (t.op - card.op) * ko;
+              if (
+                Math.abs(t.x - card.x) > SETTLED ||
+                Math.abs(t.y - card.y) > SETTLED ||
+                Math.abs(t.op - card.op) > 0.004 ||
+                Math.abs(t.rot - card.rot) > 0.05 ||
+                Math.abs(t.scale - card.scale) > 0.002
+              ) {
                 moving = true;
               } else {
-                card.x = t.x; card.y = t.y;
-                card.scale = t.scale; card.rot = t.rot; card.op = t.op;
+                card.x = t.x;
+                card.y = t.y;
+                card.scale = t.scale;
+                card.rot = t.rot;
+                card.op = t.op;
               }
               paint(card);
             });
-            if (!moving) { raf = 0; last = 0; return; }
+            if (!moving) {
+              raf = 0;
+              last = 0;
+              return;
+            }
             raf = requestAnimationFrame(tick);
           };
 
@@ -8144,29 +8444,47 @@
           function intro() {
             measureSlots();
             const slotEls = Array.from(
-              document.querySelectorAll("#heroThumbs .thumb-item")
+              document.querySelectorAll("#heroThumbs .thumb-item"),
             );
-            const centre = slotPoints.reduce((s, p) => s + p.x, 0) /
-                           (slotPoints.length || 1);
+            const centre =
+              slotPoints.reduce((s, p) => s + p.x, 0) /
+              (slotPoints.length || 1);
             const middle = (cards.length - 1) / 2;
             cards.forEach((card, i) => {
               const p = slotPoints[i] || { x: centre };
-              card.in.x     = (centre - p.x) * 0.66;
-              card.in.y     = 26 + i * 3;
-              card.in.rot   = (i - middle) * -3.2;
+              card.in.x = (centre - p.x) * 0.66;
+              card.in.y = 26 + i * 3;
+              card.in.rot = (i - middle) * -3.2;
               card.in.scale = 0.82 - i * 0.03;
-              card.in.op    = 0;
+              card.in.op = 0;
               paint(card);
             });
-            const offsets = cards.map(c => c.in);
-            gsap.timeline({
-              onUpdate: () => cards.forEach(c => paint(c)),
-              onComplete: () => { measure(); },
-            })
-            .to(offsets, { x: 0, y: 0, rot: 0, scale: 1,
-                           duration: 0.9, ease: "expo.out", stagger: 0.1 }, 0)
-            .to(offsets, { op: 1, duration: 0.55,
-                           ease: "power2.out", stagger: 0.1 }, 0);
+            const offsets = cards.map((c) => c.in);
+            gsap
+              .timeline({
+                onUpdate: () => cards.forEach((c) => paint(c)),
+                onComplete: () => {
+                  measure();
+                },
+              })
+              .to(
+                offsets,
+                {
+                  x: 0,
+                  y: 0,
+                  rot: 0,
+                  scale: 1,
+                  duration: 0.9,
+                  ease: "expo.out",
+                  stagger: 0.1,
+                },
+                0,
+              )
+              .to(
+                offsets,
+                { op: 1, duration: 0.55, ease: "power2.out", stagger: 0.1 },
+                0,
+              );
           }
 
           function measure() {
@@ -8179,9 +8497,7 @@
             activeLocal = index;
             syncWindow();
             cards.forEach((card, i) => {
-              card.el.classList.toggle(
-                "is-active", windowStart + i === index
-              );
+              card.el.classList.toggle("is-active", windowStart + i === index);
             });
             startLoop();
           }
@@ -8189,8 +8505,10 @@
           /* ── Events ── */
           heroEl.addEventListener("pointerenter", () => {
             heroInside = true;
-            if (!introPlayed) { introPlayed = true; intro(); }
-            else startLoop();
+            if (!introPlayed) {
+              introPlayed = true;
+              intro();
+            } else startLoop();
           });
           heroEl.addEventListener("pointermove", (e) => {
             client.x = e.clientX;
@@ -8206,7 +8524,7 @@
             startLoop();
           });
 
-          restZones.forEach(zone => {
+          restZones.forEach((zone) => {
             zone.addEventListener("pointerenter", (e) => {
               zonesIn.add(e.currentTarget);
               setMode("dock");
@@ -9143,11 +9461,12 @@
                 },
                 0.12,
               );
-              if (cta) tl.to(
-                cta,
-                { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" },
-                "+=0.02",
-              );
+              if (cta)
+                tl.to(
+                  cta,
+                  { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" },
+                  "+=0.02",
+                );
             });
 
             card.addEventListener("mouseleave", () => {
@@ -9402,12 +9721,12 @@
           }
 
           function initCmpBar() {
-            cmpPanel  = document.getElementById("cmpPanel");
+            cmpPanel = document.getElementById("cmpPanel");
             cmpToggle = document.getElementById("cmpToggle");
-            cmpClose  = document.getElementById("cmpClose");
-            cmpList   = document.getElementById("cmpList");
-            cmpCount  = document.getElementById("cmpCount");
-            cmpGoBtn  = document.getElementById("cmpGoBtn");
+            cmpClose = document.getElementById("cmpClose");
+            cmpList = document.getElementById("cmpList");
+            cmpCount = document.getElementById("cmpCount");
+            cmpGoBtn = document.getElementById("cmpGoBtn");
             if (!cmpToggle) return;
             cmpToggle.addEventListener("click", () => {
               cmpPanel.classList.toggle("is-open");
@@ -9747,12 +10066,7 @@
         </div>
         <div class="cmp-panel__list" id="cmpList"></div>
         <div class="cmp-panel__foot">
-          <button
-            class="btn-cmp-go"
-            id="cmpGoBtn"
-            disabled
-            data-i18n="cmp.go"
-          >
+          <button class="btn-cmp-go" id="cmpGoBtn" disabled data-i18n="cmp.go">
             Compare Now
           </button>
         </div>
@@ -10161,7 +10475,9 @@
 
         /* Quick Filters — filter chip toggle */
         (function () {
-          var allBtns = Array.from(document.querySelectorAll("[data-qf-filter]"));
+          var allBtns = Array.from(
+            document.querySelectorAll("[data-qf-filter]"),
+          );
 
           // Move every panel to <body> and store a reference back to its button
           allBtns.forEach(function (btn) {
@@ -10173,15 +10489,19 @@
 
           function positionPanel(panel) {
             var r = panel._qfBtn.getBoundingClientRect();
-            panel.style.top  = (r.bottom + 8) + "px";
+            panel.style.top = r.bottom + 8 + "px";
             panel.style.left = r.left + "px";
           }
 
           function closeAll() {
-            allBtns.forEach(function (b) { b.setAttribute("aria-expanded", "false"); });
-            document.querySelectorAll(".qf__filter-panel.is-open").forEach(function (p) {
-              p.classList.remove("is-open");
+            allBtns.forEach(function (b) {
+              b.setAttribute("aria-expanded", "false");
             });
+            document
+              .querySelectorAll(".qf__filter-panel.is-open")
+              .forEach(function (p) {
+                p.classList.remove("is-open");
+              });
           }
 
           allBtns.forEach(function (btn) {
@@ -10190,8 +10510,13 @@
               var isOpen = btn.getAttribute("aria-expanded") === "true";
               closeAll();
               if (!isOpen) {
-                var panel = document.querySelector(".qf__filter-panel[data-for]") ||
-                  Array.from(document.querySelectorAll(".qf__filter-panel")).find(function (p) { return p._qfBtn === btn; });
+                var panel =
+                  document.querySelector(".qf__filter-panel[data-for]") ||
+                  Array.from(
+                    document.querySelectorAll(".qf__filter-panel"),
+                  ).find(function (p) {
+                    return p._qfBtn === btn;
+                  });
                 if (panel) {
                   positionPanel(panel);
                   panel.classList.add("is-open");
@@ -10701,7 +11026,7 @@
         });
       })();
     </script>
-  <link rel="stylesheet" href="auth-modal.css">
-  <script src="auth-modal.js"></script>
+    <link rel="stylesheet" href="auth-modal.css" />
+    <script src="auth-modal.js"></script>
   </body>
 </html>

@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About Us — Akar Town</title>
+    <title>Careers — Akar Town</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Kufi+Arabic:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Noto+Kufi+Arabic:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="theme.css" />
@@ -22,9 +22,6 @@
         --ink-30: rgba(13, 13, 13, 0.3);
         --ink-10: rgba(13, 13, 13, 0.1);
         --gold: #c8102e;
-        --gold-lt: #c8102e;
-        --gold-dk: #c8102e;
-        --red: #cc2222;
         --white: #ffffff;
         --font-body: "Archivo", system-ui, sans-serif;
         --font-body-ltr: "Archivo", system-ui, sans-serif;
@@ -65,7 +62,9 @@
         text-decoration: none;
         color: inherit;
       }
-      em { font-style: normal; }
+      em {
+        font-style: normal;
+      }
       img,
       svg {
         display: block;
@@ -105,8 +104,7 @@
         border-bottom: 1px solid transparent;
         transition:
           background 0.5s var(--ease-out),
-          border-color 0.5s ease,
-          box-shadow 0.5s ease;
+          border-color 0.5s ease;
       }
       .navbar.is-scrolled {
         background: rgba(8, 8, 8, 0.88);
@@ -138,7 +136,7 @@
         text-transform: uppercase;
         color: rgba(255, 255, 255, 0.9);
         position: relative;
-        transition: color 0.25s ease;
+        transition: color 0.25s;
       }
       .navbar__nav a::after {
         content: "";
@@ -173,7 +171,7 @@
         color: rgba(255, 255, 255, 0.9);
         white-space: nowrap;
         flex-shrink: 0;
-        transition: color 0.25s ease;
+        transition: color 0.25s;
       }
       .navbar__phone:hover {
         color: #fff;
@@ -218,6 +216,10 @@
           rgba(225, 25, 58, 0.98) 0%,
           rgba(200, 16, 46, 1) 100%
         );
+        box-shadow: 0 12px 40px rgba(200, 16, 46, 0.35);
+      }
+      .af-modal-footer .btn-slide--fill:hover {
+        box-shadow: none;
       }
       .navbar__actions {
         display: flex;
@@ -483,9 +485,6 @@
       .mobile-nav__phone:hover {
         color: #fff;
       }
-      .mobile-nav__phone svg {
-        opacity: 0.7;
-      }
 
       /* ─── TOOLTIP ─── */
       [data-tooltip] {
@@ -537,14 +536,11 @@
       [data-reveal][data-delay="3"] {
         transition-delay: 0.36s;
       }
-      [data-reveal][data-delay="4"] {
-        transition-delay: 0.48s;
-      }
 
       /* ══════════════════════════════════
-         ABOUT HERO
+         CAREER HERO
       ══════════════════════════════════ */
-      .about-hero {
+      .career-hero {
         position: relative;
         height: 100vh;
         min-height: 680px;
@@ -553,17 +549,17 @@
         flex-direction: column;
         background: #07060a;
       }
-      .about-hero__bg {
+      .career-hero__bg {
         position: absolute;
         inset: 0;
         background: #07060a
-          url("https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1920&auto=format&fit=crop&q=90")
+          url("https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1920&auto=format&fit=crop&q=90")
           center / cover no-repeat;
         will-change: transform;
         transition: transform 0.05s linear;
-        filter: grayscale(0.2) brightness(0.52);
+        filter: grayscale(0.2) brightness(0.48);
       }
-      .about-hero__grain {
+      .career-hero__grain {
         position: absolute;
         inset: 0;
         z-index: 1;
@@ -572,7 +568,7 @@
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
         background-size: 200px;
       }
-      .about-hero__overlay {
+      .career-hero__overlay {
         position: absolute;
         inset: 0;
         z-index: 2;
@@ -590,45 +586,7 @@
             rgba(7, 6, 10, 0.68) 100%
           );
       }
-      /* Corner labels */
-      .about-hero__corner {
-        position: absolute;
-        z-index: 5;
-        font-size: 9px;
-        font-weight: 700;
-        letter-spacing: 0.26em;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.38);
-        line-height: 1;
-      }
-      .about-hero__corner a {
-        color: inherit;
-        transition: color 0.2s;
-        text-decoration: none;
-      }
-      .about-hero__corner a:hover {
-        color: var(--gold);
-      }
-      .about-hero__corner--tl {
-        top: 52px;
-        left: 52px;
-      }
-      .about-hero__corner--tr {
-        top: 52px;
-        right: 52px;
-      }
-      .about-hero__corner--bl {
-        bottom: 100px;
-        left: 52px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .about-hero__corner--br {
-        display: none;
-      }
-      /* Center editorial block */
-      .about-hero__center {
+      .career-hero__center {
         position: relative;
         z-index: 5;
         flex: 1;
@@ -638,9 +596,8 @@
         justify-content: center;
         text-align: center;
         padding: var(--nav-h) 48px 20px;
-        gap: 0;
       }
-      .about-hero__eyebrow {
+      .career-hero__eyebrow {
         font-size: 9px;
         font-weight: 700;
         letter-spacing: 0.35em;
@@ -648,8 +605,7 @@
         color: var(--gold);
         margin-bottom: 28px;
       }
-      /* Decorative rule with diamond ornament */
-      .about-hero__rule {
+      .career-hero__rule {
         display: flex;
         align-items: center;
         gap: 18px;
@@ -657,8 +613,8 @@
         max-width: 700px;
         margin-bottom: 32px;
       }
-      .about-hero__rule::before,
-      .about-hero__rule::after {
+      .career-hero__rule::before,
+      .career-hero__rule::after {
         content: "";
         flex: 1;
         height: 1px;
@@ -669,7 +625,7 @@
           transparent
         );
       }
-      .about-hero__diamond {
+      .career-hero__diamond {
         width: 7px;
         height: 7px;
         border: 1px solid rgba(200, 16, 46, 0.7);
@@ -677,7 +633,7 @@
         flex-shrink: 0;
         background: rgba(200, 16, 46, 0.15);
       }
-      .about-hero__title {
+      .career-hero__title {
         font-family: var(--font-body-ltr);
         font-size: clamp(62px, 8.5vw, 128px);
         font-weight: 300;
@@ -686,11 +642,11 @@
         color: #fff;
         margin-bottom: 32px;
       }
-      .about-hero__title em {
-        display: block;
+      .career-hero__title em {
+        font-style: normal;
         color: rgba(255, 255, 255, 0.58);
       }
-      .about-hero__sub {
+      .career-hero__sub {
         font-size: clamp(14px, 1.1vw, 16px);
         font-weight: 300;
         line-height: 1.85;
@@ -699,15 +655,15 @@
       }
 
       /* ══════════════════════════════════
-         ABOUT BRIEF
+         CAREERS SECTION
       ══════════════════════════════════ */
-      .about-brief {
+      .careers-section {
         background: var(--bg);
         position: relative;
-        padding: clamp(80px, 10vw, 130px) 0 clamp(80px, 10vw, 130px);
+        padding: clamp(80px, 10vw, 130px) 0;
         overflow: hidden;
       }
-      .about-brief::before {
+      .careers-section::before {
         content: "";
         position: absolute;
         top: 0;
@@ -721,186 +677,424 @@
           transparent 100%
         );
       }
-      .about-brief__inner {
+      .careers-section__inner {
         max-width: 1320px;
         margin: 0 auto;
         padding: 0 48px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: clamp(48px, 7vw, 100px);
+      }
+
+      /* ── Right: Job listings ── */
+      .careers-right__header {
+        display: flex;
         align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 12px;
       }
-      .about-brief__left {
-        position: relative;
-      }
-      .about-brief__ghost {
-        position: absolute;
-        top: -24px;
-        left: -12px;
-        z-index: 0;
-        font-family: var(--font-body-ltr);
-        font-size: clamp(110px, 14vw, 210px);
-        font-weight: 700;
-        letter-spacing: -0.06em;
-        line-height: 1;
-        color: transparent;
-        -webkit-text-stroke: 1px var(--ink-10);
-        pointer-events: none;
-        user-select: none;
-      }
-      .about-brief__heading {
-        font-family: var(--font-body-ltr);
-        font-size: clamp(44px, 5.5vw, 80px);
-        font-weight: 300;
-        letter-spacing: -0.022em;
-        line-height: 1.06;
-        color: var(--ink);
-        margin-bottom: 28px;
-        position: relative;
-        z-index: 1;
-      }
-      .about-brief__heading em {
-        font-style: normal;
-        color: var(--gold);
-      }
-      .about-brief__body {
-        font-size: 16px;
-        line-height: 1.85;
-        color: var(--ink-60);
-        max-width: 42ch;
-        margin-bottom: 40px;
-        position: relative;
-        z-index: 1;
-      }
-      .about-brief__cta {
-        display: inline-flex;
-        align-items: center;
-        gap: 16px;
-        font-size: 10px;
+      .careers-right__title {
+        font-size: 11px;
         font-weight: 700;
         letter-spacing: 0.22em;
         text-transform: uppercase;
-        color: var(--ink);
-        text-decoration: none;
-        position: relative;
-        z-index: 1;
-        transition: color 0.25s;
+        color: var(--ink-30);
       }
-      .about-brief__cta-line {
-        display: block;
-        width: 40px;
-        height: 1px;
-        background: currentColor;
-        transition: width 0.38s var(--ease-out);
-      }
-      .about-brief__cta:hover {
-        color: var(--gold);
-      }
-      .about-brief__cta:hover .about-brief__cta-line {
-        width: 64px;
-      }
-      /* CTA pill button */
-      .about-brief__cta-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        padding: 14px 32px;
-        border-radius: 100px;
-        background: var(--ink);
-        color: #fff;
+      .careers-right__count {
         font-size: 11px;
+        font-weight: 600;
+        color: var(--gold);
+        background: rgba(200, 16, 46, 0.08);
+        padding: 4px 12px;
+        border-radius: 100px;
+      }
+      /* Filter pills */
+      .careers-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 28px;
+      }
+      .careers-filter {
+        padding: 7px 16px;
+        border-radius: 100px;
+        border: 1px solid var(--ink-10);
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        color: var(--ink-60);
+        background: #fff;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all 0.2s;
+      }
+      .careers-filter:hover {
+        border-color: rgba(200, 16, 46, 0.3);
+        color: var(--ink);
+      }
+      .careers-filter.is-active {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: #fff;
+      }
+      /* Job cards */
+      .job-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .job-card {
+        background: #fff;
+        border: 1px solid var(--ink-10);
+        border-radius: 16px;
+        padding: 26px 28px;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        transition:
+          border-color 0.28s,
+          box-shadow 0.28s,
+          transform 0.28s var(--ease-out);
+        cursor: pointer;
+      }
+      .job-card:hover {
+        border-color: rgba(200, 16, 46, 0.28);
+      }
+      .job-card__dept-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: rgba(200, 16, 46, 0.08);
+        color: var(--gold);
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        transition: background 0.25s;
+      }
+      .job-card:hover .job-card__dept-icon {
+        background: rgba(200, 16, 46, 0.15);
+      }
+      .job-card__body {
+        flex: 1;
+        min-width: 0;
+      }
+      .job-card__title {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--ink);
+        letter-spacing: -0.01em;
+        margin-bottom: 6px;
+      }
+      .job-card__meta {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .job-card__badge {
+        font-size: 10px;
         font-weight: 700;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        text-decoration: none;
-        transition:
-          background 0.3s,
-          transform 0.3s var(--ease-out),
-          box-shadow 0.3s;
+        padding: 3px 10px;
+        border-radius: 100px;
       }
-      .about-brief__cta-btn:hover {
-        background: var(--gold);
-        transform: translateY(-2px);
-        box-shadow: 0 10px 32px rgba(200, 16, 46, 0.3);
+      .job-card__badge--dept {
+        background: rgba(200, 16, 46, 0.08);
+        color: var(--gold);
       }
-      /* Right: circular image */
-      .about-brief__right {
+      .job-card__badge--type {
+        background: var(--ink-10);
+        color: var(--ink-60);
+      }
+      .job-card__location {
+        font-size: 12px;
+        color: var(--ink-30);
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .job-card__desc {
+        font-size: 13px;
+        color: var(--ink-60);
+        line-height: 1.6;
+        margin-top: 10px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .job-card__action {
+        flex-shrink: 0;
+      }
+      .job-card__apply {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        padding: 10px 20px;
+        border-radius: 100px;
+        background: linear-gradient(
+          135deg,
+          rgba(215, 20, 52, 0.96) 0%,
+          rgba(185, 10, 36, 1) 100%
+        );
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all 0.25s var(--ease-out);
+        white-space: nowrap;
+      }
+      .job-card__apply:hover {
+        transform: translateY(-1px);
+      }
+      /* No results state */
+      .job-list--empty {
+        text-align: center;
+        padding: 48px 24px;
+        color: var(--ink-30);
+        font-size: 14px;
+      }
+
+      /* ══════════════════════════════════
+         APPLY MODAL
+      ══════════════════════════════════ */
+      .apply-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 500;
         display: flex;
         align-items: center;
         justify-content: center;
-        position: relative;
-      }
-      .about-brief__circle-wrap {
-        position: relative;
-      }
-      /* Decorative outer ring */
-      .about-brief__circle-ring {
-        position: absolute;
-        inset: -16px;
-        border-radius: 50%;
-        border: 1px solid rgba(200, 16, 46, 0.22);
+        padding: 24px;
+        opacity: 0;
         pointer-events: none;
-        animation: ringPulse 4s ease-in-out infinite;
+        transition: opacity 0.3s var(--ease-out);
       }
-      @keyframes ringPulse {
-        0%,
-        100% {
-          opacity: 0.5;
-          transform: scale(1);
-        }
-        50% {
-          opacity: 1;
-          transform: scale(1.015);
-        }
+      .apply-modal.is-open {
+        opacity: 1;
+        pointer-events: auto;
       }
-      .about-brief__img-mask {
-        width: clamp(300px, 36vw, 460px);
-        height: clamp(300px, 36vw, 460px);
-        border-radius: 50%;
-        overflow: hidden;
-        position: relative;
-        flex-shrink: 0;
-      }
-      .about-brief__img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        transition: transform 0.9s var(--ease-out);
-      }
-      .about-brief__img-mask:hover .about-brief__img {
-        transform: scale(1.06);
-      }
-      /* Floating badge */
-      .about-brief__badge {
+      .apply-modal__backdrop {
         position: absolute;
-        bottom: 12px;
-        right: -16px;
-        background: #fff;
-        border: 1px solid var(--ink-10);
+        inset: 0;
+        background: rgba(7, 6, 10, 0.72);
+        backdrop-filter: blur(6px);
+      }
+      .apply-modal__box {
+        position: relative;
+        z-index: 1;
+        background: var(--bg);
+        border-radius: 28px;
+        border: 1px solid rgba(13, 13, 13, 0.07);
+        width: 100%;
+        max-width: 580px;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 24px 80px rgba(7, 6, 10, 0.4), 0 0 0 1px rgba(255,255,255,0.06);
+        transform: translateY(20px) scale(0.97);
+        transition: transform 0.35s var(--ease-out);
+      }
+      .apply-modal.is-open .apply-modal__box {
+        transform: translateY(0) scale(1);
+      }
+      .apply-modal__box::-webkit-scrollbar {
+        width: 4px;
+      }
+      .apply-modal__box::-webkit-scrollbar-track {
+        background: transparent;
+        margin: 28px 0;
+      }
+      .apply-modal__box::-webkit-scrollbar-thumb {
+        background: rgba(13, 13, 13, 0.14);
         border-radius: 100px;
-        padding: 12px 20px;
+      }
+      .apply-modal__box::-webkit-scrollbar-thumb:hover {
+        background: rgba(13, 13, 13, 0.28);
+      }
+      .apply-modal__head {
+        padding: 32px 36px 0;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .apply-modal__role {
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 8px;
+      }
+      .apply-modal__title {
+        font-family: var(--font-body-ltr);
+        font-size: clamp(22px, 3vw, 30px);
+        font-weight: 300;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+        line-height: 1.1;
+      }
+      .apply-modal__close {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(13, 13, 13, 0.12);
+        background: transparent;
+        color: var(--ink-60);
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        margin-top: 4px;
+        transition:
+          background 0.2s,
+          border-color 0.2s,
+          color 0.2s;
+      }
+      .apply-modal__close:hover {
+        background: rgba(200, 16, 46, 0.07);
+        border-color: rgba(200, 16, 46, 0.35);
+        color: var(--gold);
+      }
+      .apply-modal__divider {
+        margin: 24px 36px 0;
+        height: 1px;
+        background: var(--ink-10);
+      }
+      .apply-modal__body {
+        padding: 28px 36px 36px;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      /* Form fields */
+      .af-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .af-field {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 22px;
+      }
+      .af-label {
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--ink-30);
+        margin-bottom: 8px;
+        transition: color 0.2s;
+      }
+      .af-field:focus-within .af-label {
+        color: var(--gold);
+      }
+      .af-input,
+      .af-textarea {
+        width: 100%;
+        background: #fff;
+        border: 1.5px solid rgba(13, 13, 13, 0.1);
+        border-radius: 14px;
+        padding: 13px 16px;
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--ink);
+        outline: none;
+        appearance: none;
+        -webkit-appearance: none;
+        transition:
+          border-color 0.25s,
+          box-shadow 0.25s;
+      }
+      .af-input::placeholder,
+      .af-textarea::placeholder {
+        color: var(--ink-30);
+        font-weight: 300;
+      }
+      .af-input:hover,
+      .af-textarea:hover {
+        border-color: rgba(13, 13, 13, 0.22);
+      }
+      .af-input:focus,
+      .af-textarea:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 4px rgba(200, 16, 46, 0.09);
+      }
+      .af-textarea {
+        resize: none;
+        height: 100px;
+        line-height: 1.65;
+      }
+      /* File upload */
+      .af-upload {
+        width: 100%;
+        border: 1.5px dashed rgba(13, 13, 13, 0.18);
+        border-radius: 16px;
+        padding: 28px 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 2px;
-        box-shadow: 0 8px 32px rgba(13, 13, 13, 0.1);
-        white-space: nowrap;
+        justify-content: center;
+        gap: 8px;
+        cursor: pointer;
+        transition:
+          border-color 0.25s,
+          background 0.25s;
+        position: relative;
       }
-      .about-brief__badge-num {
-        font-family: var(--font-body-ltr);
-        font-size: 28px;
-        font-weight: 300;
-        line-height: 1;
-        letter-spacing: -0.025em;
+      .af-upload:hover {
+        border-color: rgba(200, 16, 46, 0.4);
+        background: rgba(200, 16, 46, 0.025);
+      }
+      .af-upload input[type="file"] {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+      }
+      .af-upload__icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        background: rgba(200, 16, 46, 0.08);
         color: var(--gold);
+        display: grid;
+        place-items: center;
       }
-      .about-brief__badge-lbl {
-        font-size: 8px;
-        font-weight: 700;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
+      .af-upload__label {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--ink);
+      }
+      .af-upload__sub {
+        font-size: 11px;
         color: var(--ink-30);
+      }
+      .af-upload__filename {
+        font-size: 11px;
+        color: var(--gold);
+        font-weight: 600;
+        display: none;
+      }
+      .af-modal-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 4px;
+        flex-wrap: wrap;
+      }
+      .af-note {
+        font-size: 11px;
+        color: var(--ink-30);
+        line-height: 1.5;
+        max-width: 28ch;
       }
 
       /* ══════════════════════════════════
@@ -970,6 +1164,7 @@
         margin-bottom: 20px;
       }
       .cta-banner__title em {
+        font-style: normal;
         color: var(--gold);
       }
       .cta-banner__desc {
@@ -1155,8 +1350,7 @@
           border-color 0.3s,
           color 0.3s;
       }
-      .footer__social-btn:hover,
-      .footer__social-btn:focus-visible {
+      .footer__social-btn:hover {
         border-color: #f6f5f2;
         color: #f6f5f2;
       }
@@ -1173,10 +1367,9 @@
         font-weight: 500;
         color: rgba(246, 245, 242, 0.85);
         text-decoration: none;
-        transition: color 0.3s ease;
+        transition: color 0.3s;
       }
-      .footer__links a:hover,
-      .footer__links a:focus-visible {
+      .footer__links a:hover {
         color: #f6f5f2;
       }
       .footer__match-title {
@@ -1277,11 +1470,6 @@
       .footer__email-input::placeholder {
         color: rgba(246, 245, 242, 0.42);
       }
-      .footer__email-input:focus-visible,
-      .footer__budget-input:focus-visible {
-        outline: 1px solid rgba(246, 245, 242, 0.5);
-        outline-offset: 2px;
-      }
       .footer__match-submit {
         flex-shrink: 0;
         width: 38px;
@@ -1347,7 +1535,7 @@
         background-repeat: no-repeat;
         background-position: 0 100%;
         background-size: 100% 1px;
-        transition: background-size 0.35s ease;
+        transition: background-size 0.35s;
         text-decoration: none;
       }
       .footer__credit-link:hover {
@@ -1361,35 +1549,79 @@
       .footer__legal a {
         color: rgba(246, 245, 242, 0.6);
         text-decoration: none;
-        transition: color 0.3s ease;
+        transition: color 0.3s;
       }
-      .footer__legal a:hover,
-      .footer__legal a:focus-visible {
+      .footer__legal a:hover {
         color: #f6f5f2;
       }
 
       /* ══════════════════════════════════
          DARK MODE
       ══════════════════════════════════ */
-      html[data-theme="dark"] .about-brief {
+      html[data-theme="dark"] .careers-section {
         background: #100f0d;
       }
-      html[data-theme="dark"] .about-brief__heading {
-        color: #f6f5f2;
+      html[data-theme="dark"] .careers-right__title {
+        color: rgba(246, 245, 242, 0.3);
       }
-      html[data-theme="dark"] .about-brief__body {
-        color: rgba(246, 245, 242, 0.6);
-      }
-      html[data-theme="dark"] .about-brief__cta-btn {
-        background: #f6f5f2;
-        color: #0d0d0d;
-      }
-      html[data-theme="dark"] .about-brief__badge {
+      html[data-theme="dark"] .careers-filter {
         background: #1a1916;
         border-color: rgba(246, 245, 242, 0.1);
+        color: rgba(246, 245, 242, 0.5);
       }
-      html[data-theme="dark"] .about-brief__badge-lbl {
-        color: rgba(246, 245, 242, 0.4);
+      html[data-theme="dark"] .careers-filter:hover {
+        border-color: rgba(200, 16, 46, 0.4);
+        color: #f6f5f2;
+      }
+      html[data-theme="dark"] .job-card {
+        background: #1a1916;
+        border-color: rgba(246, 245, 242, 0.08);
+      }
+      html[data-theme="dark"] .job-card:hover {
+        border-color: rgba(200, 16, 46, 0.3);
+        box-shadow: 0 8px 36px rgba(0, 0, 0, 0.4);
+      }
+      html[data-theme="dark"] .job-card__title {
+        color: #f6f5f2;
+      }
+      html[data-theme="dark"] .job-card__badge--type {
+        background: rgba(246, 245, 242, 0.08);
+        color: rgba(246, 245, 242, 0.5);
+      }
+      html[data-theme="dark"] .job-card__location {
+        color: rgba(246, 245, 242, 0.3);
+      }
+      html[data-theme="dark"] .job-card__desc {
+        color: rgba(246, 245, 242, 0.5);
+      }
+      html[data-theme="dark"] .apply-modal__box {
+        background: #131108;
+      }
+      html[data-theme="dark"] .apply-modal__title {
+        color: #f6f5f2;
+      }
+      html[data-theme="dark"] .apply-modal__divider {
+        background: rgba(246, 245, 242, 0.08);
+      }
+      html[data-theme="dark"] .af-input,
+      html[data-theme="dark"] .af-textarea {
+        background: rgba(246, 245, 242, 0.05);
+        border-color: rgba(246, 245, 242, 0.1);
+        color: #f6f5f2;
+      }
+      html[data-theme="dark"] .af-input:focus,
+      html[data-theme="dark"] .af-textarea:focus {
+        background: rgba(246, 245, 242, 0.07);
+        border-color: var(--gold);
+      }
+      html[data-theme="dark"] .af-upload {
+        border-color: rgba(246, 245, 242, 0.1);
+      }
+      html[data-theme="dark"] .af-upload:hover {
+        background: rgba(200, 16, 46, 0.05);
+      }
+      html[data-theme="dark"] .af-upload__label {
+        color: #f6f5f2;
       }
 
       /* ══════════════════════════════════
@@ -1401,34 +1633,19 @@
       [dir="rtl"] .navbar__nav {
         flex-direction: row-reverse;
       }
-      [dir="rtl"] .about-hero__corner--tl {
-        left: auto;
-        right: 52px;
-      }
-      [dir="rtl"] .about-hero__corner--tr {
-        right: auto;
-        left: 52px;
-      }
-      [dir="rtl"] .about-brief__ghost {
-        left: auto;
-        right: -12px;
-      }
-      [dir="rtl"] .about-brief__img-frame::after {
-        left: -20px;
-        right: 20px;
-      }
-      [dir="rtl"] .about-brief__right {
-        padding-right: 0;
-        padding-left: 24px;
+      [dir="rtl"] .careers-section::before {
+        background: linear-gradient(
+          to left,
+          var(--gold) 0%,
+          rgba(200, 16, 46, 0.18) 45%,
+          transparent 100%
+        );
       }
       [dir="rtl"] .cta-banner__card:hover {
         transform: translateX(-5px);
       }
       [dir="rtl"] .footer__grid {
         direction: rtl;
-      }
-      [dir="rtl"] .footer__label {
-        letter-spacing: 0.04em;
       }
 
       /* ══════════════════════════════════
@@ -1438,23 +1655,8 @@
         .navbar {
           padding: 0 24px;
         }
-        .navbar__nav {
-          gap: 10px;
-        }
-        .about-hero__center {
-          padding-left: 24px;
-          padding-right: 24px;
-        }
-        .about-hero__corner--tl,
-        .about-hero__corner--tr {
-          display: none;
-        }
-        .about-brief__inner {
+        .careers-section__inner {
           padding: 0 24px;
-          gap: 40px;
-        }
-        .about-brief__stat {
-          padding: 28px 24px;
         }
         .cta-banner {
           padding: 80px 24px;
@@ -1463,29 +1665,6 @@
         .footer__bottom {
           padding-left: 24px;
           padding-right: 24px;
-        }
-      }
-      @media (max-width: 860px) {
-        .about-brief__inner {
-          grid-template-columns: 1fr;
-        }
-        .about-brief__img-mask {
-          width: clamp(260px, 72vw, 380px);
-          height: clamp(260px, 72vw, 380px);
-        }
-        .about-brief__badge {
-          bottom: 8px;
-          right: 0;
-        }
-        .cta-banner__inner {
-          grid-template-columns: 1fr;
-          gap: 48px;
-        }
-        .footer__grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-        .footer__col--match {
-          grid-column: 1 / -1;
         }
       }
       @media (max-width: 768px) {
@@ -1501,25 +1680,49 @@
         .nav-hamburger {
           display: flex;
         }
-        .about-hero__title {
+        .career-hero__title {
           font-size: clamp(46px, 10vw, 72px);
         }
-        .about-hero__center {
+        .career-hero__center {
           padding-left: 24px;
           padding-right: 24px;
         }
-        .about-brief__inner {
+        .careers-section__inner {
           padding: 0 20px;
+        }
+        .job-card {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .job-card__action {
+          align-self: flex-start;
+        }
+        .apply-modal__body {
+          padding: 24px;
+        }
+        .apply-modal__head {
+          padding: 24px 24px 0;
+        }
+        .apply-modal__divider {
+          margin: 20px 24px 0;
+        }
+        .af-row {
+          grid-template-columns: 1fr;
+        }
+        .cta-banner__inner {
+          grid-template-columns: 1fr;
+          gap: 48px;
+        }
+        .footer__grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .footer__col--match {
+          grid-column: 1 / -1;
         }
       }
       @media (max-width: 520px) {
         .footer__grid {
           grid-template-columns: 1fr;
-        }
-      }
-      @media (max-width: 380px) {
-        .footer__budget-row {
-          flex-wrap: wrap;
         }
       }
     </style>
@@ -1578,14 +1781,10 @@
       </a>
       <div class="navbar__right">
         <ul class="navbar__nav" role="list">
-          <li><a href="index.html" data-i18n="nav.home">Home</a></li>
-          <li>
-            <a href="listings.html" data-i18n="nav.properties">Properties</a>
-          </li>
-          <li><a href="projects.html" data-i18n="nav.projects">Projects</a></li>
-          <li>
-            <a href="developers.html" data-i18n="nav.developers">Developers</a>
-          </li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="listings.html">Properties</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="developers.html">Developers</a></li>
         </ul>
         <a
           href="tel:01150000727"
@@ -1611,9 +1810,7 @@
         </a>
         <div class="navbar__sep" aria-hidden="true"></div>
         <div class="navbar__actions">
-          <button class="btn-slide btn-slide--fill" data-i18n="nav.cta">
-            Submit Property
-          </button>
+          <button class="btn-slide btn-slide--fill">Submit Property</button>
         </div>
         <div
           id="langToggle"
@@ -1631,7 +1828,7 @@
           class="navbar__login"
           id="navbar-login"
           type="button"
-          aria-label="Sign in or register"
+          aria-label="Sign in"
           data-tooltip="Sign in"
         >
           <svg
@@ -1661,8 +1858,8 @@
           aria-pressed="false"
           data-tooltip="Theme"
         >
-          <span class="theme-toggle__sun" aria-hidden="true">
-            <svg
+          <span class="theme-toggle__sun" aria-hidden="true"
+            ><svg
               width="14"
               height="14"
               viewBox="0 0 24 24"
@@ -1680,11 +1877,10 @@
               <line x1="1" y1="12" x2="3" y2="12" />
               <line x1="21" y1="12" x2="23" y2="12" />
               <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-            </svg>
-          </span>
-          <span class="theme-toggle__moon" aria-hidden="true">
-            <svg
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" /></svg
+          ></span>
+          <span class="theme-toggle__moon" aria-hidden="true"
+            ><svg
               width="13"
               height="13"
               viewBox="0 0 24 24"
@@ -1694,9 +1890,8 @@
               stroke-linecap="round"
               stroke-linejoin="round"
             >
-              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
-            </svg>
-          </span>
+              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" /></svg
+          ></span>
         </button>
       </div>
       <button
@@ -1747,62 +1942,726 @@
     </div>
 
     <!-- ─── HERO ─── -->
-    <section class="about-hero" aria-label="About Akar Town">
-      <div class="about-hero__bg" id="heroBg" aria-hidden="true"></div>
-      <div class="about-hero__grain" aria-hidden="true"></div>
-      <div class="about-hero__overlay" aria-hidden="true"></div>
-
-      <!-- Centered editorial block -->
-      <div class="about-hero__center" data-reveal>
-        <span class="about-hero__eyebrow"
-          >Egypt's Premier Luxury Real Estate</span
+    <section class="career-hero" aria-label="Careers at Akar Town">
+      <div class="career-hero__bg" id="heroBg" aria-hidden="true"></div>
+      <div class="career-hero__grain" aria-hidden="true"></div>
+      <div class="career-hero__overlay" aria-hidden="true"></div>
+      <div class="career-hero__center" data-reveal>
+        <span class="career-hero__eyebrow"
+          >Shape the Future of Real Estate</span
         >
-        <div class="about-hero__rule" aria-hidden="true">
-          <div class="about-hero__diamond"></div>
+        <div class="career-hero__rule" aria-hidden="true">
+          <div class="career-hero__diamond"></div>
         </div>
-        <h1 class="about-hero__title">
-          Our Story,
-          <em>Our Legacy</em>
+        <h1 class="career-hero__title">
+          Build Something<br />
+          <em>Remarkable</em>
         </h1>
-        <div class="about-hero__rule" aria-hidden="true">
-          <div class="about-hero__diamond"></div>
+        <div class="career-hero__rule" aria-hidden="true">
+          <div class="career-hero__diamond"></div>
         </div>
-        <p class="about-hero__sub">
-          Two decades of curating exceptional properties and forging lasting
-          partnerships across Egypt's most coveted destinations.
+        <p class="career-hero__sub">
+          Join a team of passionate professionals redefining luxury real estate
+          across Egypt's most prestigious destinations.
         </p>
       </div>
     </section>
 
-    <!-- ─── ABOUT BRIEF ─── -->
-    <section class="about-brief" id="about-brief" aria-label="About Akar Town">
-      <div class="about-brief__inner">
-        <!-- Left: editorial text -->
-        <div class="about-brief__left" data-reveal>
-          <h2 class="about-brief__heading">
-            Egypt's Most <em>Trusted</em> Luxury Real Estate Partner
-          </h2>
-          <p class="about-brief__body">
-            Born from a singular conviction that every family deserves access to
-            Egypt's finest homes, Akar Town has grown from a boutique
-            consultancy into the nation's most trusted luxury property platform
-            — connecting discerning buyers with developments from the country's
-            premier developers.
-          </p>
-          <p class="about-brief__body">
-            We don't simply list properties. We study communities, evaluate
-            developers, and handpick only those projects that meet our rigorous
-            standards of design, construction quality, and lifestyle value.
-          </p>
-          <a href="listings.html" class="btn-slide btn-slide--fill">
-            Explore Properties
+    <!-- ─── CAREERS SECTION ─── -->
+    <section class="careers-section" id="careers" aria-label="Open Positions">
+      <div class="careers-section__inner">
+        <!-- Job listings -->
+        <div data-reveal>
+          <div class="careers-right__header">
+            <span class="careers-right__title">Open Positions</span>
+            <span class="careers-right__count" id="jobCount">6 Roles</span>
+          </div>
+          <div
+            class="careers-filters"
+            role="group"
+            aria-label="Filter by department"
+          >
+            <button class="careers-filter is-active" data-filter="all">
+              All
+            </button>
+            <button class="careers-filter" data-filter="sales">Sales</button>
+            <button class="careers-filter" data-filter="marketing">
+              Marketing
+            </button>
+            <button class="careers-filter" data-filter="technology">
+              Technology
+            </button>
+            <button class="careers-filter" data-filter="operations">
+              Operations
+            </button>
+          </div>
+          <div class="job-list" id="jobList">
+            <div
+              class="job-card"
+              data-dept="sales"
+              data-job="Senior Property Consultant"
+            >
+              <div class="job-card__dept-icon" aria-hidden="true">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                  <polyline points="9 22 9 12 15 12 15 22" />
+                </svg>
+              </div>
+              <div class="job-card__body">
+                <p class="job-card__title">Senior Property Consultant</p>
+                <div class="job-card__meta">
+                  <span class="job-card__badge job-card__badge--dept"
+                    >Sales</span
+                  >
+                  <span class="job-card__badge job-card__badge--type"
+                    >Full-time</span
+                  >
+                  <span class="job-card__location"
+                    ><svg
+                      width="11"
+                      height="11"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                      <circle cx="12" cy="10" r="3" /></svg
+                    >New Cairo</span
+                  >
+                </div>
+                <p class="job-card__desc">
+                  Guide high-net-worth clients through Egypt's premier
+                  residential and commercial developments. Build lasting
+                  relationships and exceed sales targets in our flagship New
+                  Cairo office.
+                </p>
+              </div>
+              <div class="job-card__action">
+                <button
+                  class="job-card__apply"
+                  data-job="Senior Property Consultant"
+                  data-dept="Sales"
+                >
+                  Apply Now
+                  <svg
+                    width="11"
+                    height="9"
+                    viewBox="0 0 16 12"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M1 6h14M9 1l6 5-6 5" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="job-card"
+              data-dept="marketing"
+              data-job="Digital Marketing Specialist"
+            >
+              <div class="job-card__dept-icon" aria-hidden="true">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                </svg>
+              </div>
+              <div class="job-card__body">
+                <p class="job-card__title">Digital Marketing Specialist</p>
+                <div class="job-card__meta">
+                  <span class="job-card__badge job-card__badge--dept"
+                    >Marketing</span
+                  >
+                  <span class="job-card__badge job-card__badge--type"
+                    >Full-time</span
+                  >
+                  <span class="job-card__location"
+                    ><svg
+                      width="11"
+                      height="11"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                      <circle cx="12" cy="10" r="3" /></svg
+                    >Cairo</span
+                  >
+                </div>
+                <p class="job-card__desc">
+                  Own our paid and organic digital channels. Drive lead
+                  generation through innovative campaigns across social media,
+                  search, and email for Egypt's top luxury real estate brand.
+                </p>
+              </div>
+              <div class="job-card__action">
+                <button
+                  class="job-card__apply"
+                  data-job="Digital Marketing Specialist"
+                  data-dept="Marketing"
+                >
+                  Apply Now
+                  <svg
+                    width="11"
+                    height="9"
+                    viewBox="0 0 16 12"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M1 6h14M9 1l6 5-6 5" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="job-card"
+              data-dept="technology"
+              data-job="UI/UX Designer"
+            >
+              <div class="job-card__dept-icon" aria-hidden="true">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="3" width="18" height="18" rx="2" />
+                  <path d="M3 9h18M9 21V9" />
+                </svg>
+              </div>
+              <div class="job-card__body">
+                <p class="job-card__title">UI/UX Designer</p>
+                <div class="job-card__meta">
+                  <span class="job-card__badge job-card__badge--dept"
+                    >Technology</span
+                  >
+                  <span class="job-card__badge job-card__badge--type"
+                    >Full-time</span
+                  >
+                  <span class="job-card__location"
+                    ><svg
+                      width="11"
+                      height="11"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                      <circle cx="12" cy="10" r="3" /></svg
+                    >Remote</span
+                  >
+                </div>
+                <p class="job-card__desc">
+                  Craft exceptional digital experiences for our property
+                  platform. Collaborate closely with engineers to deliver
+                  pixel-perfect interfaces that serve thousands of property
+                  seekers daily.
+                </p>
+              </div>
+              <div class="job-card__action">
+                <button
+                  class="job-card__apply"
+                  data-job="UI/UX Designer"
+                  data-dept="Technology"
+                >
+                  Apply Now
+                  <svg
+                    width="11"
+                    height="9"
+                    viewBox="0 0 16 12"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M1 6h14M9 1l6 5-6 5" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="job-card"
+              data-dept="sales"
+              data-job="Client Relations Manager"
+            >
+              <div class="job-card__dept-icon" aria-hidden="true">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                </svg>
+              </div>
+              <div class="job-card__body">
+                <p class="job-card__title">Client Relations Manager</p>
+                <div class="job-card__meta">
+                  <span class="job-card__badge job-card__badge--dept"
+                    >Sales</span
+                  >
+                  <span class="job-card__badge job-card__badge--type"
+                    >Full-time</span
+                  >
+                  <span class="job-card__location"
+                    ><svg
+                      width="11"
+                      height="11"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                      <circle cx="12" cy="10" r="3" /></svg
+                    >Cairo</span
+                  >
+                </div>
+                <p class="job-card__desc">
+                  Manage post-sale relationships for our premium client
+                  portfolio. Ensure white-glove service and identify upsell
+                  opportunities across our growing inventory of luxury
+                  developments.
+                </p>
+              </div>
+              <div class="job-card__action">
+                <button
+                  class="job-card__apply"
+                  data-job="Client Relations Manager"
+                  data-dept="Sales"
+                >
+                  Apply Now
+                  <svg
+                    width="11"
+                    height="9"
+                    viewBox="0 0 16 12"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M1 6h14M9 1l6 5-6 5" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="job-card"
+              data-dept="operations"
+              data-job="Property Operations Coordinator"
+            >
+              <div class="job-card__dept-icon" aria-hidden="true">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="3" />
+                  <path
+                    d="M19.07 4.93l-1.41 1.41M4.93 19.07l1.41-1.41M20 12h2M2 12h2M19.07 19.07l-1.41-1.41M4.93 4.93l1.41 1.41M12 20v2M12 2v2"
+                  />
+                </svg>
+              </div>
+              <div class="job-card__body">
+                <p class="job-card__title">Property Operations Coordinator</p>
+                <div class="job-card__meta">
+                  <span class="job-card__badge job-card__badge--dept"
+                    >Operations</span
+                  >
+                  <span class="job-card__badge job-card__badge--type"
+                    >Full-time</span
+                  >
+                  <span class="job-card__location"
+                    ><svg
+                      width="11"
+                      height="11"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                      <circle cx="12" cy="10" r="3" /></svg
+                    >New Cairo</span
+                  >
+                </div>
+                <p class="job-card__desc">
+                  Coordinate listings, property inspections, developer liaison
+                  and CRM data quality. Be the operational backbone ensuring our
+                  consultants close deals efficiently and on time.
+                </p>
+              </div>
+              <div class="job-card__action">
+                <button
+                  class="job-card__apply"
+                  data-job="Property Operations Coordinator"
+                  data-dept="Operations"
+                >
+                  Apply Now
+                  <svg
+                    width="11"
+                    height="9"
+                    viewBox="0 0 16 12"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M1 6h14M9 1l6 5-6 5" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="job-card"
+              data-dept="marketing"
+              data-job="Content & Photography Lead"
+            >
+              <div class="job-card__dept-icon" aria-hidden="true">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"
+                  />
+                  <circle cx="12" cy="13" r="4" />
+                </svg>
+              </div>
+              <div class="job-card__body">
+                <p class="job-card__title">Content & Photography Lead</p>
+                <div class="job-card__meta">
+                  <span class="job-card__badge job-card__badge--dept"
+                    >Marketing</span
+                  >
+                  <span class="job-card__badge job-card__badge--type"
+                    >Full-time</span
+                  >
+                  <span class="job-card__location"
+                    ><svg
+                      width="11"
+                      height="11"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                      <circle cx="12" cy="10" r="3" /></svg
+                    >Cairo</span
+                  >
+                </div>
+                <p class="job-card__desc">
+                  Produce world-class visual and written content for Egypt's
+                  premier luxury property platform. Shoot, edit, and narrate
+                  developments that command multi-million EGP price tags.
+                </p>
+              </div>
+              <div class="job-card__action">
+                <button
+                  class="job-card__apply"
+                  data-job="Content & Photography Lead"
+                  data-dept="Marketing"
+                >
+                  Apply Now
+                  <svg
+                    width="11"
+                    height="9"
+                    viewBox="0 0 16 12"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M1 6h14M9 1l6 5-6 5" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── APPLY MODAL ─── -->
+    <div
+      class="apply-modal"
+      id="applyModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalTitle"
+    >
+      <div class="apply-modal__backdrop" id="modalBackdrop"></div>
+      <div class="apply-modal__box">
+        <div class="apply-modal__head">
+          <div>
+            <p class="apply-modal__role" id="modalDept">Sales</p>
+            <h2 class="apply-modal__title" id="modalTitle">
+              Senior Property Consultant
+            </h2>
+          </div>
+          <button class="apply-modal__close" id="modalClose" aria-label="Close">
             <svg
               width="14"
-              height="10"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+        <div class="apply-modal__divider"></div>
+        <div class="apply-modal__body">
+          <form id="applyForm" novalidate>
+            <div class="af-row">
+              <div class="af-field">
+                <label class="af-label" for="af-name">Full Name</label>
+                <input
+                  class="af-input"
+                  type="text"
+                  id="af-name"
+                  name="name"
+                  placeholder="Your full name"
+                  autocomplete="name"
+                  required
+                />
+              </div>
+              <div class="af-field">
+                <label class="af-label" for="af-phone">Phone</label>
+                <input
+                  class="af-input"
+                  type="tel"
+                  id="af-phone"
+                  name="phone"
+                  placeholder="+20 100 000 0000"
+                  autocomplete="tel"
+                />
+              </div>
+            </div>
+            <div class="af-field">
+              <label class="af-label" for="af-email">Email Address</label>
+              <input
+                class="af-input"
+                type="email"
+                id="af-email"
+                name="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required
+              />
+            </div>
+            <div class="af-field">
+              <label class="af-label" for="af-experience"
+                >Years of Experience</label
+              >
+              <input
+                class="af-input"
+                type="text"
+                id="af-experience"
+                name="experience"
+                placeholder="e.g. 3 years in real estate"
+              />
+            </div>
+            <div class="af-field">
+              <label class="af-label">Resume / CV</label>
+              <div class="af-upload" id="afUploadZone">
+                <input
+                  type="file"
+                  id="af-resume"
+                  name="resume"
+                  accept=".pdf,.doc,.docx"
+                  aria-label="Upload your CV"
+                />
+                <div class="af-upload__icon" aria-hidden="true">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                    <polyline points="17 8 12 3 7 8" />
+                    <line x1="12" y1="3" x2="12" y2="15" />
+                  </svg>
+                </div>
+                <p class="af-upload__label">Upload your CV</p>
+                <p class="af-upload__sub">PDF, DOC or DOCX · Max 5MB</p>
+                <p class="af-upload__filename" id="afFilename"></p>
+              </div>
+            </div>
+            <div class="af-field">
+              <label class="af-label" for="af-note"
+                >Cover Note
+                <span
+                  style="
+                    opacity: 0.5;
+                    font-weight: 400;
+                    text-transform: none;
+                    letter-spacing: 0;
+                  "
+                  >(optional)</span
+                ></label
+              >
+              <textarea
+                class="af-textarea"
+                id="af-note"
+                name="note"
+                placeholder="Tell us why you're the right fit for this role…"
+              ></textarea>
+            </div>
+            <div class="af-modal-footer">
+              <p class="af-note">
+                Your application will be reviewed within 5 business days.
+              </p>
+              <button type="submit" class="btn-slide btn-slide--fill">
+                Submit Application
+                <svg
+                  width="13"
+                  height="10"
+                  viewBox="0 0 16 12"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M1 6h14M9 1l6 5-6 5" />
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── CTA BANNER ─── -->
+    <section class="cta-banner" aria-label="Contact Akar Town">
+      <div class="cta-banner__inner">
+        <div data-reveal>
+          <span class="cta-banner__eyebrow">Don't See Your Role?</span>
+          <h2 class="cta-banner__title">Send Us Your <em>CV Anyway</em></h2>
+          <p class="cta-banner__desc">
+            We're always on the lookout for exceptional talent. Drop us your
+            resume and we'll reach out when the right opportunity opens.
+          </p>
+        </div>
+        <div class="cta-banner__cards" data-reveal data-delay="1">
+          <a href="mailto:careers@akartown.com" class="cta-banner__card">
+            <div class="cta-banner__card-icon" aria-hidden="true">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+            </div>
+            <div class="cta-banner__card-body">
+              <p class="cta-banner__card-label">Email Your CV</p>
+              <p class="cta-banner__card-sub">careers@akartown.com</p>
+            </div>
+            <svg
+              class="cta-banner__card-arrow"
+              width="16"
+              height="16"
               viewBox="0 0 16 12"
               fill="none"
               stroke="currentColor"
-              stroke-width="1.8"
+              stroke-width="1.6"
               stroke-linecap="round"
               stroke-linejoin="round"
               aria-hidden="true"
@@ -1810,50 +2669,7 @@
               <path d="M1 6h14M9 1l6 5-6 5" />
             </svg>
           </a>
-        </div>
-        <!-- Right: circular image -->
-        <div class="about-brief__right" data-reveal data-delay="1">
-          <div class="about-brief__circle-wrap">
-            <div class="about-brief__circle-ring" aria-hidden="true"></div>
-            <div class="about-brief__img-mask">
-              <img
-                class="about-brief__img"
-                src="https://images.unsplash.com/photo-1560185127-6ed189bf02f4?w=900&auto=format&fit=crop&q=90"
-                alt="Luxury property in Egypt"
-                loading="lazy"
-              />
-            </div>
-            <div
-              class="about-brief__badge"
-              aria-label="12 plus years of excellence"
-            >
-              <span class="about-brief__badge-num">12+</span>
-              <span class="about-brief__badge-lbl">Years of Excellence</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ─── CTA BANNER ─── -->
-    <section class="cta-banner" aria-label="Contact Akar Town">
-      <div class="cta-banner__inner">
-        <div class="cta-banner__left" data-reveal>
-          <span class="cta-banner__eyebrow">Begin Your Journey</span>
-          <h2 class="cta-banner__title">
-            Can't Find Your<br /><em>Dream</em> Property?
-          </h2>
-          <p class="cta-banner__desc">
-            Our expert consultants are ready to guide you through Egypt's finest
-            developments — personally, and at your pace.
-          </p>
-        </div>
-        <div class="cta-banner__cards" data-reveal data-delay="1">
-          <a
-            href="tel:01150000727"
-            class="cta-banner__card"
-            aria-label="Call us"
-          >
+          <a href="tel:01150000727" class="cta-banner__card">
             <div class="cta-banner__card-icon" aria-hidden="true">
               <svg
                 width="20"
@@ -1871,10 +2687,8 @@
               </svg>
             </div>
             <div class="cta-banner__card-body">
-              <p class="cta-banner__card-label">Call Us Directly</p>
-              <p class="cta-banner__card-sub">
-                01150000727 · Available 9am–9pm
-              </p>
+              <p class="cta-banner__card-label">Call HR Directly</p>
+              <p class="cta-banner__card-sub">01150000727 · Sun–Thu 9am–5pm</p>
             </div>
             <svg
               class="cta-banner__card-arrow"
@@ -1891,13 +2705,7 @@
               <path d="M1 6h14M9 1l6 5-6 5" />
             </svg>
           </a>
-          <a
-            href="https://wa.me/201150000727"
-            class="cta-banner__card"
-            aria-label="Message on WhatsApp"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href="contact.html" class="cta-banner__card">
             <div class="cta-banner__card-icon" aria-hidden="true">
               <svg
                 width="20"
@@ -1910,58 +2718,13 @@
                 stroke-linejoin="round"
               >
                 <path
-                  d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"
+                  d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"
                 />
               </svg>
             </div>
             <div class="cta-banner__card-body">
-              <p class="cta-banner__card-label">WhatsApp Us</p>
-              <p class="cta-banner__card-sub">
-                Instant replies · Send photos &amp; requirements
-              </p>
-            </div>
-            <svg
-              class="cta-banner__card-arrow"
-              width="16"
-              height="16"
-              viewBox="0 0 16 12"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.6"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M1 6h14M9 1l6 5-6 5" />
-            </svg>
-          </a>
-          <a
-            href="listings.html"
-            class="cta-banner__card"
-            aria-label="Browse all properties"
-          >
-            <div class="cta-banner__card-icon" aria-hidden="true">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect x="3" y="3" width="7" height="7" />
-                <rect x="14" y="3" width="7" height="7" />
-                <rect x="14" y="14" width="7" height="7" />
-                <rect x="3" y="14" width="7" height="7" />
-              </svg>
-            </div>
-            <div class="cta-banner__card-body">
-              <p class="cta-banner__card-label">Browse All Properties</p>
-              <p class="cta-banner__card-sub">
-                Explore curated listings across Egypt
-              </p>
+              <p class="cta-banner__card-label">General Enquiry</p>
+              <p class="cta-banner__card-sub">Visit our contact page</p>
             </div>
             <svg
               class="cta-banner__card-arrow"
@@ -2072,8 +2835,7 @@
                 aria-label="Instagram"
                 target="_blank"
                 rel="noopener noreferrer"
-              >
-                <svg
+                ><svg
                   width="16"
                   height="16"
                   viewBox="0 0 24 24"
@@ -2090,17 +2852,15 @@
                     r="1"
                     fill="currentColor"
                     stroke="none"
-                  />
-                </svg>
-              </a>
+                  /></svg
+              ></a>
               <a
                 href="https://www.facebook.com/AkarTownEG"
                 class="footer__social-btn"
                 aria-label="Facebook"
                 target="_blank"
                 rel="noopener noreferrer"
-              >
-                <svg
+                ><svg
                   width="16"
                   height="16"
                   viewBox="0 0 24 24"
@@ -2109,17 +2869,15 @@
                 >
                   <path
                     d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
-                  />
-                </svg>
-              </a>
+                  /></svg
+              ></a>
               <a
                 href="https://www.linkedin.com/company/akar-town/"
                 class="footer__social-btn"
                 aria-label="LinkedIn"
                 target="_blank"
                 rel="noopener noreferrer"
-              >
-                <svg
+                ><svg
                   width="16"
                   height="16"
                   viewBox="0 0 24 24"
@@ -2130,17 +2888,15 @@
                     d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
                   />
                   <rect x="2" y="9" width="4" height="12" />
-                  <circle cx="4" cy="4" r="2" />
-                </svg>
-              </a>
+                  <circle cx="4" cy="4" r="2" /></svg
+              ></a>
               <a
                 href="https://youtube.com/@mohamedelhemaly.akrealestate"
                 class="footer__social-btn"
                 aria-label="YouTube"
                 target="_blank"
                 rel="noopener noreferrer"
-              >
-                <svg
+                ><svg
                   width="17"
                   height="12"
                   viewBox="0 0 24 17"
@@ -2153,9 +2909,8 @@
                   <polygon
                     points="9.75 12.02 15.5 8.5 9.75 4.98 9.75 12.02"
                     fill="white"
-                  />
-                </svg>
-              </a>
+                  /></svg
+              ></a>
             </div>
           </div>
           <div class="footer__col" data-reveal>
@@ -2174,7 +2929,6 @@
             <ul class="footer__links">
               <li><a href="about.html">About Us</a></li>
               <li><a href="#">Our Team</a></li>
-              <li><a href="#">Success Stories</a></li>
               <li><a href="career.html">Careers</a></li>
               <li><a href="#">Press &amp; Media</a></li>
               <li><a href="contact.html">Contact Us</a></li>
@@ -2293,8 +3047,8 @@
         );
 
         /* ── HAMBURGER ── */
-        var ham = document.getElementById("navHamburger");
-        var mobileNav = document.getElementById("mobileNav");
+        var ham = document.getElementById("navHamburger"),
+          mobileNav = document.getElementById("mobileNav");
         if (ham && mobileNav) {
           ham.addEventListener("click", function () {
             var open = mobileNav.classList.toggle("is-open");
@@ -2346,9 +3100,8 @@
             "scroll",
             function () {
               var y = window.scrollY;
-              if (y < window.innerHeight) {
+              if (y < window.innerHeight)
                 heroBg.style.transform = "translateY(" + y * 0.35 + "px)";
-              }
             },
             { passive: true },
           );
@@ -2376,41 +3129,87 @@
           });
         }
 
-        /* ── STAT COUNTERS ── */
-        function easeOutQuart(t) {
-          return 1 - Math.pow(1 - t, 4);
-        }
-        function animateCounter(el, target, duration) {
-          var start = null;
-          function step(ts) {
-            if (!start) start = ts;
-            var progress = Math.min((ts - start) / duration, 1);
-            var eased = easeOutQuart(progress);
-            el.textContent = Math.round(eased * target).toLocaleString();
-            if (progress < 1) requestAnimationFrame(step);
-          }
-          requestAnimationFrame(step);
-        }
-        if ("IntersectionObserver" in window) {
-          var statsObs = new IntersectionObserver(
-            function (entries) {
-              entries.forEach(function (e) {
-                if (e.isIntersecting) {
-                  var el = e.target;
-                  var target = parseInt(el.dataset.count, 10);
-                  animateCounter(el, target, 1800);
-                  statsObs.unobserve(el);
-                }
-              });
-            },
-            { threshold: 0.5 },
-          );
-          document.querySelectorAll("[data-count]").forEach(function (el) {
-            statsObs.observe(el);
+        /* ── JOB FILTER ── */
+        var filterBtns = document.querySelectorAll(".careers-filter");
+        var jobCards = document.querySelectorAll(".job-card");
+        var jobCount = document.getElementById("jobCount");
+        filterBtns.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            filterBtns.forEach(function (b) {
+              b.classList.remove("is-active");
+            });
+            btn.classList.add("is-active");
+            var filter = btn.getAttribute("data-filter");
+            var visible = 0;
+            jobCards.forEach(function (card) {
+              var match =
+                filter === "all" || card.getAttribute("data-dept") === filter;
+              card.style.display = match ? "" : "none";
+              if (match) visible++;
+            });
+            if (jobCount)
+              jobCount.textContent =
+                visible + (visible === 1 ? " Role" : " Roles");
           });
-        } else {
-          document.querySelectorAll("[data-count]").forEach(function (el) {
-            el.textContent = parseInt(el.dataset.count, 10).toLocaleString();
+        });
+
+        /* ── APPLY MODAL ── */
+        var modal = document.getElementById("applyModal");
+        var modalTitle = document.getElementById("modalTitle");
+        var modalDept = document.getElementById("modalDept");
+        var modalClose = document.getElementById("modalClose");
+        var modalBackdrop = document.getElementById("modalBackdrop");
+
+        function openModal(jobTitle, dept) {
+          if (modalTitle) modalTitle.textContent = jobTitle;
+          if (modalDept) modalDept.textContent = dept;
+          modal.classList.add("is-open");
+          document.body.style.overflow = "hidden";
+          setTimeout(function () {
+            if (modalClose) modalClose.focus();
+          }, 100);
+        }
+        function closeModal() {
+          modal.classList.remove("is-open");
+          document.body.style.overflow = "";
+        }
+
+        document.querySelectorAll(".job-card__apply").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            openModal(
+              btn.getAttribute("data-job"),
+              btn.getAttribute("data-dept"),
+            );
+          });
+        });
+        if (modalClose) modalClose.addEventListener("click", closeModal);
+        if (modalBackdrop) modalBackdrop.addEventListener("click", closeModal);
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && modal.classList.contains("is-open"))
+            closeModal();
+        });
+
+        /* ── FILE UPLOAD LABEL ── */
+        var resumeInput = document.getElementById("af-resume");
+        var afFilename = document.getElementById("afFilename");
+        var afUploadSub = document.querySelector(".af-upload__sub");
+        if (resumeInput) {
+          resumeInput.addEventListener("change", function () {
+            var file = resumeInput.files[0];
+            if (file && afFilename) {
+              afFilename.textContent = file.name;
+              afFilename.style.display = "block";
+              if (afUploadSub) afUploadSub.style.display = "none";
+            }
+          });
+        }
+
+        /* ── APPLY FORM ── */
+        var applyForm = document.getElementById("applyForm");
+        if (applyForm) {
+          applyForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            closeModal();
           });
         }
 

@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About Us — Akar Town</title>
+    <title>Contact Us — Akar Town</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Kufi+Arabic:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Noto+Kufi+Arabic:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="theme.css" />
@@ -218,6 +218,7 @@
           rgba(225, 25, 58, 0.98) 0%,
           rgba(200, 16, 46, 1) 100%
         );
+        box-shadow: 0 12px 40px rgba(200, 16, 46, 0.35);
       }
       .navbar__actions {
         display: flex;
@@ -542,9 +543,9 @@
       }
 
       /* ══════════════════════════════════
-         ABOUT HERO
+         CONTACT HERO
       ══════════════════════════════════ */
-      .about-hero {
+      .contact-hero {
         position: relative;
         height: 100vh;
         min-height: 680px;
@@ -553,17 +554,17 @@
         flex-direction: column;
         background: #07060a;
       }
-      .about-hero__bg {
+      .contact-hero__bg {
         position: absolute;
         inset: 0;
         background: #07060a
-          url("https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1920&auto=format&fit=crop&q=90")
+          url("https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&auto=format&fit=crop&q=90")
           center / cover no-repeat;
         will-change: transform;
         transition: transform 0.05s linear;
-        filter: grayscale(0.2) brightness(0.52);
+        filter: grayscale(0.25) brightness(0.5);
       }
-      .about-hero__grain {
+      .contact-hero__grain {
         position: absolute;
         inset: 0;
         z-index: 1;
@@ -572,7 +573,7 @@
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
         background-size: 200px;
       }
-      .about-hero__overlay {
+      .contact-hero__overlay {
         position: absolute;
         inset: 0;
         z-index: 2;
@@ -590,45 +591,7 @@
             rgba(7, 6, 10, 0.68) 100%
           );
       }
-      /* Corner labels */
-      .about-hero__corner {
-        position: absolute;
-        z-index: 5;
-        font-size: 9px;
-        font-weight: 700;
-        letter-spacing: 0.26em;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.38);
-        line-height: 1;
-      }
-      .about-hero__corner a {
-        color: inherit;
-        transition: color 0.2s;
-        text-decoration: none;
-      }
-      .about-hero__corner a:hover {
-        color: var(--gold);
-      }
-      .about-hero__corner--tl {
-        top: 52px;
-        left: 52px;
-      }
-      .about-hero__corner--tr {
-        top: 52px;
-        right: 52px;
-      }
-      .about-hero__corner--bl {
-        bottom: 100px;
-        left: 52px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .about-hero__corner--br {
-        display: none;
-      }
-      /* Center editorial block */
-      .about-hero__center {
+      .contact-hero__center {
         position: relative;
         z-index: 5;
         flex: 1;
@@ -640,7 +603,7 @@
         padding: var(--nav-h) 48px 20px;
         gap: 0;
       }
-      .about-hero__eyebrow {
+      .contact-hero__eyebrow {
         font-size: 9px;
         font-weight: 700;
         letter-spacing: 0.35em;
@@ -648,8 +611,7 @@
         color: var(--gold);
         margin-bottom: 28px;
       }
-      /* Decorative rule with diamond ornament */
-      .about-hero__rule {
+      .contact-hero__rule {
         display: flex;
         align-items: center;
         gap: 18px;
@@ -657,8 +619,8 @@
         max-width: 700px;
         margin-bottom: 32px;
       }
-      .about-hero__rule::before,
-      .about-hero__rule::after {
+      .contact-hero__rule::before,
+      .contact-hero__rule::after {
         content: "";
         flex: 1;
         height: 1px;
@@ -669,7 +631,7 @@
           transparent
         );
       }
-      .about-hero__diamond {
+      .contact-hero__diamond {
         width: 7px;
         height: 7px;
         border: 1px solid rgba(200, 16, 46, 0.7);
@@ -677,7 +639,7 @@
         flex-shrink: 0;
         background: rgba(200, 16, 46, 0.15);
       }
-      .about-hero__title {
+      .contact-hero__title {
         font-family: var(--font-body-ltr);
         font-size: clamp(62px, 8.5vw, 128px);
         font-weight: 300;
@@ -686,11 +648,11 @@
         color: #fff;
         margin-bottom: 32px;
       }
-      .about-hero__title em {
+      .contact-hero__title em {
         display: block;
         color: rgba(255, 255, 255, 0.58);
       }
-      .about-hero__sub {
+      .contact-hero__sub {
         font-size: clamp(14px, 1.1vw, 16px);
         font-weight: 300;
         line-height: 1.85;
@@ -699,15 +661,15 @@
       }
 
       /* ══════════════════════════════════
-         ABOUT BRIEF
+         CONTACT SECTION
       ══════════════════════════════════ */
-      .about-brief {
+      .contact-section {
         background: var(--bg);
         position: relative;
-        padding: clamp(80px, 10vw, 130px) 0 clamp(80px, 10vw, 130px);
+        padding: clamp(80px, 10vw, 130px) 0;
         overflow: hidden;
       }
-      .about-brief::before {
+      .contact-section::before {
         content: "";
         position: absolute;
         top: 0;
@@ -721,186 +683,337 @@
           transparent 100%
         );
       }
-      .about-brief__inner {
+      .contact-section__inner {
         max-width: 1320px;
         margin: 0 auto;
         padding: 0 48px;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: clamp(48px, 7vw, 100px);
-        align-items: center;
+        gap: clamp(48px, 7vw, 90px);
+        align-items: start;
       }
-      .about-brief__left {
-        position: relative;
-      }
-      .about-brief__ghost {
-        position: absolute;
-        top: -24px;
-        left: -12px;
-        z-index: 0;
+
+      /* ── Left: Form ── */
+      .contact-form__heading {
         font-family: var(--font-body-ltr);
-        font-size: clamp(110px, 14vw, 210px);
-        font-weight: 700;
-        letter-spacing: -0.06em;
-        line-height: 1;
-        color: transparent;
-        -webkit-text-stroke: 1px var(--ink-10);
-        pointer-events: none;
-        user-select: none;
-      }
-      .about-brief__heading {
-        font-family: var(--font-body-ltr);
-        font-size: clamp(44px, 5.5vw, 80px);
+        font-size: clamp(36px, 4.5vw, 62px);
         font-weight: 300;
         letter-spacing: -0.022em;
         line-height: 1.06;
         color: var(--ink);
-        margin-bottom: 28px;
-        position: relative;
-        z-index: 1;
+        margin-bottom: 12px;
       }
-      .about-brief__heading em {
-        font-style: normal;
+      .contact-form__heading em {
         color: var(--gold);
       }
-      .about-brief__body {
-        font-size: 16px;
-        line-height: 1.85;
+      .contact-form__sub {
+        font-size: 15px;
+        line-height: 1.75;
         color: var(--ink-60);
-        max-width: 42ch;
+        max-width: 38ch;
         margin-bottom: 40px;
-        position: relative;
-        z-index: 1;
       }
-      .about-brief__cta {
-        display: inline-flex;
-        align-items: center;
-        gap: 16px;
-        font-size: 10px;
+      .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      .contact-form__row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .contact-form__field {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 24px;
+      }
+      .contact-form__label {
+        font-size: 9px;
         font-weight: 700;
         letter-spacing: 0.22em;
         text-transform: uppercase;
-        color: var(--ink);
-        text-decoration: none;
-        position: relative;
-        z-index: 1;
-        transition: color 0.25s;
+        color: var(--ink-30);
+        margin-bottom: 8px;
+        transition: color 0.2s;
       }
-      .about-brief__cta-line {
-        display: block;
-        width: 40px;
-        height: 1px;
-        background: currentColor;
-        transition: width 0.38s var(--ease-out);
-      }
-      .about-brief__cta:hover {
+      .contact-form__field:focus-within .contact-form__label {
         color: var(--gold);
       }
-      .about-brief__cta:hover .about-brief__cta-line {
-        width: 64px;
-      }
-      /* CTA pill button */
-      .about-brief__cta-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        padding: 14px 32px;
-        border-radius: 100px;
-        background: var(--ink);
-        color: #fff;
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        text-decoration: none;
+      .contact-form__input,
+      .contact-form__select,
+      .contact-form__textarea {
+        width: 100%;
+        background: #fff;
+        border: 1px solid var(--ink-10);
+        border-radius: 10px;
+        padding: 13px 16px;
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--ink);
+        outline: none;
+        -webkit-appearance: none;
+        appearance: none;
         transition:
-          background 0.3s,
-          transform 0.3s var(--ease-out),
-          box-shadow 0.3s;
+          border-color 0.25s var(--ease-out),
+          box-shadow 0.25s var(--ease-out),
+          background 0.25s;
       }
-      .about-brief__cta-btn:hover {
-        background: var(--gold);
-        transform: translateY(-2px);
-        box-shadow: 0 10px 32px rgba(200, 16, 46, 0.3);
+      .contact-form__input::placeholder,
+      .contact-form__textarea::placeholder {
+        color: var(--ink-30);
+        font-weight: 300;
       }
-      /* Right: circular image */
-      .about-brief__right {
+      .contact-form__input:hover,
+      .contact-form__select:hover,
+      .contact-form__textarea:hover {
+        border-color: rgba(13, 13, 13, 0.2);
+      }
+      .contact-form__input:focus,
+      .contact-form__select:focus,
+      .contact-form__textarea:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(200, 16, 46, 0.1);
+        background: #fff;
+      }
+      .contact-form__select {
+        display: none;
+      }
+      /* ── Custom dropdown ── */
+      .cf-dropdown {
+        position: relative;
+        width: 100%;
+        user-select: none;
+      }
+      .cf-dropdown__trigger {
+        width: 100%;
         display: flex;
         align-items: center;
-        justify-content: center;
-        position: relative;
+        justify-content: space-between;
+        gap: 10px;
+        background: #fff;
+        border: 1px solid var(--ink-10);
+        border-radius: 10px;
+        padding: 13px 16px;
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--ink-30);
+        cursor: pointer;
+        font-family: inherit;
+        text-align: left;
+        transition:
+          border-color 0.25s var(--ease-out),
+          box-shadow 0.25s var(--ease-out);
       }
-      .about-brief__circle-wrap {
-        position: relative;
+      .cf-dropdown__trigger.has-value {
+        color: var(--ink);
       }
-      /* Decorative outer ring */
-      .about-brief__circle-ring {
+      .cf-dropdown__trigger:hover {
+        border-color: rgba(13, 13, 13, 0.2);
+      }
+      .cf-dropdown.is-open .cf-dropdown__trigger {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(200, 16, 46, 0.1);
+      }
+      .cf-dropdown__chevron {
+        flex-shrink: 0;
+        color: var(--ink-30);
+        transition: transform 0.3s var(--ease-out);
+      }
+      .cf-dropdown.is-open .cf-dropdown__chevron {
+        transform: rotate(180deg);
+        color: var(--gold);
+      }
+      .cf-dropdown__panel {
         position: absolute;
-        inset: -16px;
-        border-radius: 50%;
-        border: 1px solid rgba(200, 16, 46, 0.22);
+        top: calc(100% + 6px);
+        left: 0;
+        right: 0;
+        z-index: 50;
+        background: #fff;
+        border: 1px solid var(--ink-10);
+        border-radius: 12px;
+        box-shadow:
+          0 4px 16px rgba(13, 13, 13, 0.06),
+          0 16px 48px rgba(13, 13, 13, 0.1);
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-6px) scale(0.98);
+        transform-origin: top center;
         pointer-events: none;
-        animation: ringPulse 4s ease-in-out infinite;
+        transition:
+          opacity 0.22s var(--ease-out),
+          transform 0.22s var(--ease-out);
       }
-      @keyframes ringPulse {
+      .cf-dropdown.is-open .cf-dropdown__panel {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+      }
+      .cf-dropdown__option {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 13px 16px;
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--ink-60);
+        cursor: pointer;
+        transition:
+          background 0.15s,
+          color 0.15s;
+        border-bottom: 1px solid var(--ink-10);
+      }
+      .cf-dropdown__option:last-child {
+        border-bottom: none;
+      }
+      .cf-dropdown__option:hover {
+        background: rgba(200, 16, 46, 0.04);
+        color: var(--ink);
+      }
+      .cf-dropdown__option.is-selected {
+        color: var(--gold);
+        font-weight: 600;
+        background: rgba(200, 16, 46, 0.04);
+      }
+      .cf-dropdown__check {
+        opacity: 0;
+        flex-shrink: 0;
+        color: var(--gold);
+        transition: opacity 0.15s;
+      }
+      .cf-dropdown__option.is-selected .cf-dropdown__check {
+        opacity: 1;
+      }
+      .contact-form__textarea {
+        resize: none;
+        height: 120px;
+        line-height: 1.65;
+      }
+      .contact-form__submit {
+        margin-top: 8px;
+        align-self: flex-start;
+      }
+      .contact-form__note {
+        margin-top: 14px;
+        font-size: 11px;
+        color: var(--ink-30);
+        line-height: 1.6;
+      }
+
+      /* ── Right: Map + Info ── */
+      .contact-map {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+      }
+      .contact-map__frame {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow:
+          0 2px 6px rgba(13, 13, 13, 0.04),
+          0 12px 40px rgba(13, 13, 13, 0.1);
+        aspect-ratio: 4 / 3.2;
+        background: #e8e4de;
+      }
+      .contact-map__frame iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: block;
+        filter: saturate(0.8) contrast(1.05);
+      }
+      .contact-map__badge {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(16px);
+        border-radius: 100px;
+        padding: 8px 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--ink);
+        box-shadow: 0 4px 16px rgba(13, 13, 13, 0.12);
+        pointer-events: none;
+      }
+      .contact-map__badge-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--gold);
+        flex-shrink: 0;
+        animation: dotPulse 2.2s ease-in-out infinite;
+      }
+      @keyframes dotPulse {
         0%,
         100% {
-          opacity: 0.5;
+          opacity: 1;
           transform: scale(1);
         }
         50% {
-          opacity: 1;
-          transform: scale(1.015);
+          opacity: 0.5;
+          transform: scale(0.7);
         }
       }
-      .about-brief__img-mask {
-        width: clamp(300px, 36vw, 460px);
-        height: clamp(300px, 36vw, 460px);
-        border-radius: 50%;
-        overflow: hidden;
-        position: relative;
-        flex-shrink: 0;
+      .contact-map__info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
       }
-      .about-brief__img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        transition: transform 0.9s var(--ease-out);
-      }
-      .about-brief__img-mask:hover .about-brief__img {
-        transform: scale(1.06);
-      }
-      /* Floating badge */
-      .about-brief__badge {
-        position: absolute;
-        bottom: 12px;
-        right: -16px;
+      .contact-info-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 20px;
+        border-radius: 14px;
         background: #fff;
         border: 1px solid var(--ink-10);
-        border-radius: 100px;
-        padding: 12px 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 2px;
-        box-shadow: 0 8px 32px rgba(13, 13, 13, 0.1);
-        white-space: nowrap;
+        text-decoration: none;
+        transition:
+          border-color 0.25s,
+          box-shadow 0.25s,
+          transform 0.25s var(--ease-out);
       }
-      .about-brief__badge-num {
-        font-family: var(--font-body-ltr);
-        font-size: 28px;
-        font-weight: 300;
-        line-height: 1;
-        letter-spacing: -0.025em;
+      .contact-info-card:hover {
+        border-color: rgba(200, 16, 46, 0.25);
+        box-shadow: 0 8px 32px rgba(200, 16, 46, 0.08);
+        transform: translateY(-2px);
+      }
+      .contact-info-card__icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: rgba(200, 16, 46, 0.08);
         color: var(--gold);
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        transition: background 0.25s;
       }
-      .about-brief__badge-lbl {
-        font-size: 8px;
+      .contact-info-card:hover .contact-info-card__icon {
+        background: rgba(200, 16, 46, 0.16);
+      }
+      .contact-info-card__body {
+        min-width: 0;
+      }
+      .contact-info-card__label {
+        font-size: 9px;
         font-weight: 700;
-        letter-spacing: 0.18em;
+        letter-spacing: 0.2em;
         text-transform: uppercase;
         color: var(--ink-30);
+        margin-bottom: 4px;
+      }
+      .contact-info-card__value {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--ink);
+        line-height: 1.4;
       }
 
       /* ══════════════════════════════════
@@ -1371,25 +1484,90 @@
       /* ══════════════════════════════════
          DARK MODE
       ══════════════════════════════════ */
-      html[data-theme="dark"] .about-brief {
+      html[data-theme="dark"] .contact-section {
         background: #100f0d;
       }
-      html[data-theme="dark"] .about-brief__heading {
+      html[data-theme="dark"] .contact-form__heading {
         color: #f6f5f2;
       }
-      html[data-theme="dark"] .about-brief__body {
+      html[data-theme="dark"] .contact-form__sub {
         color: rgba(246, 245, 242, 0.6);
       }
-      html[data-theme="dark"] .about-brief__cta-btn {
-        background: #f6f5f2;
-        color: #0d0d0d;
+      html[data-theme="dark"] .contact-form__input,
+      html[data-theme="dark"] .contact-form__select,
+      html[data-theme="dark"] .contact-form__textarea {
+        background: rgba(246, 245, 242, 0.05);
+        border-color: rgba(246, 245, 242, 0.1);
+        color: #f6f5f2;
       }
-      html[data-theme="dark"] .about-brief__badge {
+      html[data-theme="dark"] .contact-form__input:hover,
+      html[data-theme="dark"] .contact-form__select:hover,
+      html[data-theme="dark"] .contact-form__textarea:hover {
+        border-color: rgba(246, 245, 242, 0.22);
+      }
+      html[data-theme="dark"] .contact-form__input:focus,
+      html[data-theme="dark"] .contact-form__select:focus,
+      html[data-theme="dark"] .contact-form__textarea:focus {
+        background: rgba(246, 245, 242, 0.07);
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(200, 16, 46, 0.15);
+      }
+      html[data-theme="dark"] .cf-dropdown__trigger {
+        background: rgba(246, 245, 242, 0.05);
+        border-color: rgba(246, 245, 242, 0.1);
+        color: rgba(246, 245, 242, 0.35);
+      }
+      html[data-theme="dark"] .cf-dropdown__trigger.has-value {
+        color: #f6f5f2;
+      }
+      html[data-theme="dark"] .cf-dropdown__trigger:hover {
+        border-color: rgba(246, 245, 242, 0.22);
+      }
+      html[data-theme="dark"] .cf-dropdown.is-open .cf-dropdown__trigger {
+        background: rgba(246, 245, 242, 0.07);
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(200, 16, 46, 0.15);
+      }
+      html[data-theme="dark"] .cf-dropdown__panel {
         background: #1a1916;
         border-color: rgba(246, 245, 242, 0.1);
+        box-shadow:
+          0 4px 16px rgba(0, 0, 0, 0.3),
+          0 16px 48px rgba(0, 0, 0, 0.4);
       }
-      html[data-theme="dark"] .about-brief__badge-lbl {
-        color: rgba(246, 245, 242, 0.4);
+      html[data-theme="dark"] .cf-dropdown__option {
+        color: rgba(246, 245, 242, 0.6);
+        border-bottom-color: rgba(246, 245, 242, 0.06);
+      }
+      html[data-theme="dark"] .cf-dropdown__option:hover {
+        background: rgba(200, 16, 46, 0.08);
+        color: #f6f5f2;
+      }
+      html[data-theme="dark"] .cf-dropdown__option.is-selected {
+        background: rgba(200, 16, 46, 0.08);
+      }
+      html[data-theme="dark"] .contact-form__select option {
+        background: #1a1916;
+        color: #f6f5f2;
+      }
+      html[data-theme="dark"] .contact-map__frame {
+        box-shadow:
+          0 2px 6px rgba(0, 0, 0, 0.2),
+          0 12px 40px rgba(0, 0, 0, 0.4);
+      }
+      html[data-theme="dark"] .contact-map__badge {
+        background: rgba(26, 25, 22, 0.92);
+        color: #f6f5f2;
+      }
+      html[data-theme="dark"] .contact-info-card {
+        background: #1a1916;
+        border-color: rgba(246, 245, 242, 0.08);
+      }
+      html[data-theme="dark"] .contact-info-card__value {
+        color: #f6f5f2;
+      }
+      html[data-theme="dark"] .contact-form__note {
+        color: rgba(246, 245, 242, 0.3);
       }
 
       /* ══════════════════════════════════
@@ -1401,25 +1579,13 @@
       [dir="rtl"] .navbar__nav {
         flex-direction: row-reverse;
       }
-      [dir="rtl"] .about-hero__corner--tl {
-        left: auto;
-        right: 52px;
-      }
-      [dir="rtl"] .about-hero__corner--tr {
-        right: auto;
-        left: 52px;
-      }
-      [dir="rtl"] .about-brief__ghost {
-        left: auto;
-        right: -12px;
-      }
-      [dir="rtl"] .about-brief__img-frame::after {
-        left: -20px;
-        right: 20px;
-      }
-      [dir="rtl"] .about-brief__right {
-        padding-right: 0;
-        padding-left: 24px;
+      [dir="rtl"] .contact-section::before {
+        background: linear-gradient(
+          to left,
+          var(--gold) 0%,
+          rgba(200, 16, 46, 0.18) 45%,
+          transparent 100%
+        );
       }
       [dir="rtl"] .cta-banner__card:hover {
         transform: translateX(-5px);
@@ -1441,20 +1607,17 @@
         .navbar__nav {
           gap: 10px;
         }
-        .about-hero__center {
+        .contact-hero__center {
           padding-left: 24px;
           padding-right: 24px;
         }
-        .about-hero__corner--tl,
-        .about-hero__corner--tr {
-          display: none;
-        }
-        .about-brief__inner {
+        .contact-section__inner {
           padding: 0 24px;
           gap: 40px;
         }
-        .about-brief__stat {
-          padding: 28px 24px;
+        .contact-section::before {
+          left: 24px;
+          right: 24px;
         }
         .cta-banner {
           padding: 80px 24px;
@@ -1466,16 +1629,14 @@
         }
       }
       @media (max-width: 860px) {
-        .about-brief__inner {
+        .contact-section__inner {
           grid-template-columns: 1fr;
         }
-        .about-brief__img-mask {
-          width: clamp(260px, 72vw, 380px);
-          height: clamp(260px, 72vw, 380px);
+        .contact-map {
+          order: -1;
         }
-        .about-brief__badge {
-          bottom: 8px;
-          right: 0;
+        .contact-map__info {
+          grid-template-columns: 1fr 1fr;
         }
         .cta-banner__inner {
           grid-template-columns: 1fr;
@@ -1501,18 +1662,25 @@
         .nav-hamburger {
           display: flex;
         }
-        .about-hero__title {
+        .contact-hero__title {
           font-size: clamp(46px, 10vw, 72px);
         }
-        .about-hero__center {
+        .contact-hero__center {
           padding-left: 24px;
           padding-right: 24px;
         }
-        .about-brief__inner {
+        .contact-section__inner {
           padding: 0 20px;
+        }
+        .contact-form__row {
+          grid-template-columns: 1fr;
+          gap: 0;
         }
       }
       @media (max-width: 520px) {
+        .contact-map__info {
+          grid-template-columns: 1fr;
+        }
         .footer__grid {
           grid-template-columns: 1fr;
         }
@@ -1747,88 +1915,421 @@
     </div>
 
     <!-- ─── HERO ─── -->
-    <section class="about-hero" aria-label="About Akar Town">
-      <div class="about-hero__bg" id="heroBg" aria-hidden="true"></div>
-      <div class="about-hero__grain" aria-hidden="true"></div>
-      <div class="about-hero__overlay" aria-hidden="true"></div>
-
-      <!-- Centered editorial block -->
-      <div class="about-hero__center" data-reveal>
-        <span class="about-hero__eyebrow"
-          >Egypt's Premier Luxury Real Estate</span
-        >
-        <div class="about-hero__rule" aria-hidden="true">
-          <div class="about-hero__diamond"></div>
+    <section class="contact-hero" aria-label="Contact Akar Town">
+      <div class="contact-hero__bg" id="heroBg" aria-hidden="true"></div>
+      <div class="contact-hero__grain" aria-hidden="true"></div>
+      <div class="contact-hero__overlay" aria-hidden="true"></div>
+      <div class="contact-hero__center" data-reveal>
+        <span class="contact-hero__eyebrow">We'd Love to Hear From You</span>
+        <div class="contact-hero__rule" aria-hidden="true">
+          <div class="contact-hero__diamond"></div>
         </div>
-        <h1 class="about-hero__title">
-          Our Story,
-          <em>Our Legacy</em>
+        <h1 class="contact-hero__title">
+          Let's Start a
+          <em>Conversation</em>
         </h1>
-        <div class="about-hero__rule" aria-hidden="true">
-          <div class="about-hero__diamond"></div>
+        <div class="contact-hero__rule" aria-hidden="true">
+          <div class="contact-hero__diamond"></div>
         </div>
-        <p class="about-hero__sub">
-          Two decades of curating exceptional properties and forging lasting
-          partnerships across Egypt's most coveted destinations.
+        <p class="contact-hero__sub">
+          Whether you're searching for your first home or expanding your
+          investment portfolio — our experts are here to guide every step.
         </p>
       </div>
     </section>
 
-    <!-- ─── ABOUT BRIEF ─── -->
-    <section class="about-brief" id="about-brief" aria-label="About Akar Town">
-      <div class="about-brief__inner">
-        <!-- Left: editorial text -->
-        <div class="about-brief__left" data-reveal>
-          <h2 class="about-brief__heading">
-            Egypt's Most <em>Trusted</em> Luxury Real Estate Partner
-          </h2>
-          <p class="about-brief__body">
-            Born from a singular conviction that every family deserves access to
-            Egypt's finest homes, Akar Town has grown from a boutique
-            consultancy into the nation's most trusted luxury property platform
-            — connecting discerning buyers with developments from the country's
-            premier developers.
+    <!-- ─── CONTACT SECTION ─── -->
+    <section
+      class="contact-section"
+      id="contact"
+      aria-label="Contact Akar Town"
+    >
+      <div class="contact-section__inner">
+        <!-- Left: Form -->
+        <div data-reveal>
+          <h2 class="contact-form__heading">Send Us a <em>Message</em></h2>
+          <p class="contact-form__sub">
+            Fill out the form and a member of our team will be in touch within
+            one business day.
           </p>
-          <p class="about-brief__body">
-            We don't simply list properties. We study communities, evaluate
-            developers, and handpick only those projects that meet our rigorous
-            standards of design, construction quality, and lifestyle value.
-          </p>
-          <a href="listings.html" class="btn-slide btn-slide--fill">
-            Explore Properties
-            <svg
-              width="14"
-              height="10"
-              viewBox="0 0 16 12"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M1 6h14M9 1l6 5-6 5" />
-            </svg>
-          </a>
-        </div>
-        <!-- Right: circular image -->
-        <div class="about-brief__right" data-reveal data-delay="1">
-          <div class="about-brief__circle-wrap">
-            <div class="about-brief__circle-ring" aria-hidden="true"></div>
-            <div class="about-brief__img-mask">
-              <img
-                class="about-brief__img"
-                src="https://images.unsplash.com/photo-1560185127-6ed189bf02f4?w=900&auto=format&fit=crop&q=90"
-                alt="Luxury property in Egypt"
-                loading="lazy"
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="contact-form__row">
+              <div class="contact-form__field">
+                <label class="contact-form__label" for="cf-name"
+                  >Full Name</label
+                >
+                <input
+                  class="contact-form__input"
+                  type="text"
+                  id="cf-name"
+                  name="name"
+                  placeholder="John Doe"
+                  autocomplete="name"
+                  required
+                />
+              </div>
+              <div class="contact-form__field">
+                <label class="contact-form__label" for="cf-phone"
+                  >Phone Number</label
+                >
+                <input
+                  class="contact-form__input"
+                  type="tel"
+                  id="cf-phone"
+                  name="phone"
+                  placeholder="+20 100 000 0000"
+                  autocomplete="tel"
+                />
+              </div>
+            </div>
+            <div class="contact-form__field">
+              <label class="contact-form__label" for="cf-email"
+                >Email Address</label
+              >
+              <input
+                class="contact-form__input"
+                type="email"
+                id="cf-email"
+                name="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required
               />
             </div>
-            <div
-              class="about-brief__badge"
-              aria-label="12 plus years of excellence"
+            <div class="contact-form__field">
+              <label class="contact-form__label" for="cf-interest"
+                >I'm Interested In</label
+              >
+              <select
+                class="contact-form__select"
+                id="cf-interest"
+                name="interest"
+                aria-hidden="true"
+                tabindex="-1"
+              >
+                <option value="" disabled selected>Select an option</option>
+                <option value="buy">Buying a Property</option>
+                <option value="invest">Investment Opportunities</option>
+                <option value="sell">Listing / Selling</option>
+                <option value="rent">Renting</option>
+                <option value="consult">General Consultation</option>
+              </select>
+              <div
+                class="cf-dropdown"
+                id="cfDropdown"
+                role="combobox"
+                aria-expanded="false"
+                aria-haspopup="listbox"
+                aria-labelledby="cf-interest-label"
+                aria-controls="cfDropdownPanel"
+              >
+                <button
+                  type="button"
+                  class="cf-dropdown__trigger"
+                  id="cfDropdownTrigger"
+                  aria-label="Select interest"
+                >
+                  <span class="cf-dropdown__value">Select an option</span>
+                  <svg
+                    class="cf-dropdown__chevron"
+                    width="12"
+                    height="8"
+                    viewBox="0 0 12 8"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M1 1l5 5 5-5"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+                <div
+                  class="cf-dropdown__panel"
+                  id="cfDropdownPanel"
+                  role="listbox"
+                  aria-label="Interest options"
+                >
+                  <div
+                    class="cf-dropdown__option"
+                    role="option"
+                    data-value="buy"
+                    aria-selected="false"
+                  >
+                    Buying a Property
+                    <svg
+                      class="cf-dropdown__check"
+                      width="14"
+                      height="11"
+                      viewBox="0 0 14 11"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M1 5.5l4 4L13 1"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <div
+                    class="cf-dropdown__option"
+                    role="option"
+                    data-value="invest"
+                    aria-selected="false"
+                  >
+                    Investment Opportunities
+                    <svg
+                      class="cf-dropdown__check"
+                      width="14"
+                      height="11"
+                      viewBox="0 0 14 11"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M1 5.5l4 4L13 1"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <div
+                    class="cf-dropdown__option"
+                    role="option"
+                    data-value="sell"
+                    aria-selected="false"
+                  >
+                    Listing / Selling
+                    <svg
+                      class="cf-dropdown__check"
+                      width="14"
+                      height="11"
+                      viewBox="0 0 14 11"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M1 5.5l4 4L13 1"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <div
+                    class="cf-dropdown__option"
+                    role="option"
+                    data-value="rent"
+                    aria-selected="false"
+                  >
+                    Renting
+                    <svg
+                      class="cf-dropdown__check"
+                      width="14"
+                      height="11"
+                      viewBox="0 0 14 11"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M1 5.5l4 4L13 1"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <div
+                    class="cf-dropdown__option"
+                    role="option"
+                    data-value="consult"
+                    aria-selected="false"
+                  >
+                    General Consultation
+                    <svg
+                      class="cf-dropdown__check"
+                      width="14"
+                      height="11"
+                      viewBox="0 0 14 11"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M1 5.5l4 4L13 1"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="contact-form__field">
+              <label class="contact-form__label" for="cf-message"
+                >Your Message</label
+              >
+              <textarea
+                class="contact-form__textarea"
+                id="cf-message"
+                name="message"
+                placeholder="Tell us about your requirements, budget, preferred location…"
+                required
+              ></textarea>
+            </div>
+            <div class="contact-form__submit">
+              <button type="submit" class="btn-slide btn-slide--fill">
+                Send Message
+                <svg
+                  width="14"
+                  height="10"
+                  viewBox="0 0 16 12"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M1 6h14M9 1l6 5-6 5" />
+                </svg>
+              </button>
+            </div>
+            <p class="contact-form__note">
+              By submitting this form, you agree to be contacted by Akar Town
+              regarding your inquiry. We respect your privacy.
+            </p>
+          </form>
+        </div>
+
+        <!-- Right: Map + Info -->
+        <div class="contact-map" data-reveal data-delay="1">
+          <div class="contact-map__frame">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d110502.78!2d31.2357!3d30.0444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583fa60b21beeb%3A0x79dfb296e8423bba!2sCairo%2C%20Egypt!5e0!3m2!1sen!2seg!4v1700000000000"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Akar Town Office Location"
+            ></iframe>
+            <div class="contact-map__badge" aria-hidden="true">
+              <span class="contact-map__badge-dot"></span>
+              Akar Town HQ
+            </div>
+          </div>
+          <div class="contact-map__info">
+            <a
+              href="tel:01150000727"
+              class="contact-info-card"
+              aria-label="Call us"
             >
-              <span class="about-brief__badge-num">12+</span>
-              <span class="about-brief__badge-lbl">Years of Excellence</span>
+              <div class="contact-info-card__icon" aria-hidden="true">
+                <svg
+                  width="17"
+                  height="17"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.27-.73a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 15.5v1.42z"
+                  />
+                </svg>
+              </div>
+              <div class="contact-info-card__body">
+                <p class="contact-info-card__label">Phone</p>
+                <p class="contact-info-card__value">011 5000 0727</p>
+              </div>
+            </a>
+            <a
+              href="mailto:info@akartown.com"
+              class="contact-info-card"
+              aria-label="Email us"
+            >
+              <div class="contact-info-card__icon" aria-hidden="true">
+                <svg
+                  width="17"
+                  height="17"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                  />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+              </div>
+              <div class="contact-info-card__body">
+                <p class="contact-info-card__label">Email</p>
+                <p class="contact-info-card__value">info@akartown.com</p>
+              </div>
+            </a>
+            <a
+              href="https://wa.me/201150000727"
+              class="contact-info-card"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+            >
+              <div class="contact-info-card__icon" aria-hidden="true">
+                <svg
+                  width="17"
+                  height="17"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"
+                  />
+                </svg>
+              </div>
+              <div class="contact-info-card__body">
+                <p class="contact-info-card__label">WhatsApp</p>
+                <p class="contact-info-card__value">Available 9am – 9pm</p>
+              </div>
+            </a>
+            <div class="contact-info-card" style="cursor: default">
+              <div class="contact-info-card__icon" aria-hidden="true">
+                <svg
+                  width="17"
+                  height="17"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </div>
+              <div class="contact-info-card__body">
+                <p class="contact-info-card__label">Office</p>
+                <p class="contact-info-card__value">New Cairo, Egypt</p>
+              </div>
             </div>
           </div>
         </div>
@@ -2346,9 +2847,8 @@
             "scroll",
             function () {
               var y = window.scrollY;
-              if (y < window.innerHeight) {
+              if (y < window.innerHeight)
                 heroBg.style.transform = "translateY(" + y * 0.35 + "px)";
-              }
             },
             { passive: true },
           );
@@ -2376,41 +2876,77 @@
           });
         }
 
-        /* ── STAT COUNTERS ── */
-        function easeOutQuart(t) {
-          return 1 - Math.pow(1 - t, 4);
-        }
-        function animateCounter(el, target, duration) {
-          var start = null;
-          function step(ts) {
-            if (!start) start = ts;
-            var progress = Math.min((ts - start) / duration, 1);
-            var eased = easeOutQuart(progress);
-            el.textContent = Math.round(eased * target).toLocaleString();
-            if (progress < 1) requestAnimationFrame(step);
+        /* ── CUSTOM DROPDOWN ── */
+        (function () {
+          var dropdown = document.getElementById("cfDropdown");
+          var trigger = document.getElementById("cfDropdownTrigger");
+          var panel = document.getElementById("cfDropdownPanel");
+          var valueEl = trigger && trigger.querySelector(".cf-dropdown__value");
+          var nativeSelect = document.getElementById("cf-interest");
+          if (!dropdown || !trigger || !panel) return;
+
+          function openDropdown() {
+            dropdown.classList.add("is-open");
+            dropdown.setAttribute("aria-expanded", "true");
           }
-          requestAnimationFrame(step);
-        }
-        if ("IntersectionObserver" in window) {
-          var statsObs = new IntersectionObserver(
-            function (entries) {
-              entries.forEach(function (e) {
-                if (e.isIntersecting) {
-                  var el = e.target;
-                  var target = parseInt(el.dataset.count, 10);
-                  animateCounter(el, target, 1800);
-                  statsObs.unobserve(el);
-                }
-              });
-            },
-            { threshold: 0.5 },
-          );
-          document.querySelectorAll("[data-count]").forEach(function (el) {
-            statsObs.observe(el);
+          function closeDropdown() {
+            dropdown.classList.remove("is-open");
+            dropdown.setAttribute("aria-expanded", "false");
+          }
+          function toggleDropdown() {
+            dropdown.classList.contains("is-open")
+              ? closeDropdown()
+              : openDropdown();
+          }
+
+          trigger.addEventListener("click", function (e) {
+            e.stopPropagation();
+            toggleDropdown();
           });
-        } else {
-          document.querySelectorAll("[data-count]").forEach(function (el) {
-            el.textContent = parseInt(el.dataset.count, 10).toLocaleString();
+
+          panel
+            .querySelectorAll(".cf-dropdown__option")
+            .forEach(function (opt) {
+              opt.addEventListener("click", function () {
+                var val = opt.getAttribute("data-value");
+                var label = opt.firstChild.textContent.trim();
+                panel
+                  .querySelectorAll(".cf-dropdown__option")
+                  .forEach(function (o) {
+                    o.classList.remove("is-selected");
+                    o.setAttribute("aria-selected", "false");
+                  });
+                opt.classList.add("is-selected");
+                opt.setAttribute("aria-selected", "true");
+                if (valueEl) {
+                  valueEl.textContent = label;
+                }
+                trigger.classList.add("has-value");
+                if (nativeSelect) {
+                  nativeSelect.value = val;
+                }
+                closeDropdown();
+              });
+            });
+
+          document.addEventListener("click", function (e) {
+            if (!dropdown.contains(e.target)) closeDropdown();
+          });
+
+          document.addEventListener("keydown", function (e) {
+            if (!dropdown.classList.contains("is-open")) return;
+            if (e.key === "Escape") {
+              closeDropdown();
+              trigger.focus();
+            }
+          });
+        })();
+
+        /* ── CONTACT FORM ── */
+        var contactForm = document.getElementById("contactForm");
+        if (contactForm) {
+          contactForm.addEventListener("submit", function (e) {
+            e.preventDefault();
           });
         }
 

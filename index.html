@@ -115,6 +115,7 @@
               text-decoration: none;
               color: inherit;
             }
+      em { font-style: normal; }
             img,
             svg,
             video {
@@ -431,6 +432,7 @@
               left: auto;
               right: 0;
               padding: calc(var(--nav-h) + 5px) 48px 20px 12px;
+              box-shadow:
                 inset 1px 0 0 color-mix(in oklab, #fff 10%, transparent),
                 -4px 0 24px rgba(0, 0, 0, 0.1);
             }
@@ -544,6 +546,7 @@
               );
               backdrop-filter: blur(24px) saturate(120%) brightness(0.82);
               -webkit-backdrop-filter: blur(24px) saturate(120%) brightness(0.82);
+              box-shadow:
                 inset -1px 0 0 color-mix(in oklab, #fff 10%, transparent),
                 4px 0 24px rgba(0, 0, 0, 0.1);
             }
@@ -624,6 +627,7 @@
             .thumb-item.is-active .thumb-item__img-wrap {
               width: 54px;
               height: 54px;
+              box-shadow:
                 0 4px 16px rgba(0, 0, 0, 0.55),
                 0 0 0 2px var(--gold);
             }
@@ -749,6 +753,7 @@
             }
 
             .thumb-more:hover .thumb-more__img-wrap {
+              box-shadow:
                 0 4px 16px rgba(0, 0, 0, 0.55),
                 0 0 0 2px color-mix(in oklab, var(--gold) 60%, transparent);
               background: color-mix(in oklab, var(--gold) 18%, rgba(10, 8, 6, 0.85));
@@ -10311,7 +10316,7 @@
               <li><a href="#">Success Stories</a></li>
               <li><a href="#">Careers</a></li>
               <li><a href="#">Press &amp; Media</a></li>
-              <li><a href="#">Contact Us</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
             </ul>
           </div>
 

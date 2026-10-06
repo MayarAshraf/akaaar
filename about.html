@@ -29,7 +29,6 @@
         --font-body: "Archivo", system-ui, sans-serif;
         --font-body-ltr: "Archivo", system-ui, sans-serif;
         --font-body-rtl: "Noto Kufi Arabic", system-ui, sans-serif;
-        --font-display: "Cormorant Garamond", Georgia, serif;
         --nav-h: 62px;
         --ease-smooth: cubic-bezier(0.76, 0, 0.24, 1);
         --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -678,7 +677,7 @@
         background: rgba(200, 16, 46, 0.15);
       }
       .about-hero__title {
-        font-family: var(--font-display);
+        font-family: var(--font-body-ltr);
         font-size: clamp(62px, 8.5vw, 128px);
         font-weight: 300;
         letter-spacing: -0.028em;
@@ -721,14 +720,14 @@
       .about-brief__left { position: relative; }
       .about-brief__ghost {
         position: absolute; top: -24px; left: -12px; z-index: 0;
-        font-family: var(--font-display);
+        font-family: var(--font-body-ltr);
         font-size: clamp(110px,14vw,210px);
         font-weight: 700; letter-spacing: -0.06em; line-height: 1;
         color: transparent; -webkit-text-stroke: 1px var(--ink-10);
         pointer-events: none; user-select: none;
       }
       .about-brief__heading {
-        font-family: var(--font-display);
+        font-family: var(--font-body-ltr);
         font-size: clamp(44px,5.5vw,80px);
         font-weight: 300; letter-spacing: -0.022em; line-height: 1.06;
         color: var(--ink); margin-bottom: 28px; position: relative; z-index: 1;
@@ -803,7 +802,7 @@
         white-space: nowrap;
       }
       .about-brief__badge-num {
-        font-family: var(--font-display);
+        font-family: var(--font-body-ltr);
         font-size: 28px; font-weight: 300; line-height: 1;
         letter-spacing: -0.025em; color: var(--gold);
       }
@@ -871,7 +870,7 @@
         margin-bottom: 24px;
       }
       .cta-banner__title {
-        font-family: var(--font-display);
+        font-family: var(--font-body-ltr);
         font-size: clamp(2.2rem, 4.5vw, 3.8rem);
         font-weight: 300;
         color: #fff;

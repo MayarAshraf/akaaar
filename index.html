@@ -914,13 +914,6 @@
               will-change: transform, opacity, filter;
             }
 
-            .slide-eyebrow__rule {
-              width: 28px;
-              height: 1px;
-              background: var(--gold);
-              flex-shrink: 0;
-            }
-
             .slide-eyebrow__label {
               font-family: var(--font-body-ltr);
               font-size: 10px;
@@ -5021,8 +5014,14 @@
             <li>
               <a href="listings.html" data-i18n="nav.properties">Properties</a>
             </li>
-            <li><a href="projects.html" data-i18n="nav.projects">Projects</a></li>
-            <li><a href="developers.html" data-i18n="nav.developers">Developers</a></li>
+            <li>
+              <a href="projects.html" data-i18n="nav.projects">Projects</a>
+            </li>
+            <li>
+              <a href="developers.html" data-i18n="nav.developers"
+                >Developers</a
+              >
+            </li>
           </ul>
           <a
             href="tel:01150000727"
@@ -5158,7 +5157,9 @@
             <a href="listings.html" data-i18n="nav.properties">Properties</a>
           </li>
           <li><a href="projects.html" data-i18n="nav.projects">Projects</a></li>
-          <li><a href="developers.html" data-i18n="nav.developers">Developers</a></li>
+          <li>
+            <a href="developers.html" data-i18n="nav.developers">Developers</a>
+          </li>
         </ul>
         <div class="mobile-nav__cta">
           <button data-i18n="nav.cta">Submit Property</button>
@@ -7553,7 +7554,6 @@
       <div class="slide-overlay" aria-hidden="true"></div>
       <div class="slide-content">
         <div class="slide-eyebrow">
-          <span class="slide-eyebrow__rule"></span>
           <span class="slide-eyebrow__label" data-i18n="slide.eyebrow">Exclusive Property</span>
         </div>
         <h2 class="slide-title"><span class="txt-en">${data.title}</span><span class="txt-ar">${data.title_ar}</span></h2>

@@ -2478,7 +2478,6 @@
             .prop-action-btn:hover {
               border-color: var(--ink-30);
               color: var(--ink);
-              transform: scale(1.08);
             }
             .prop-action-btn--fav.is-active {
               border-color: #e74c3c;
@@ -2503,6 +2502,7 @@
               display: flex;
               align-items: center;
               justify-content: center;
+              overflow-y: auto;
               opacity: 0;
               pointer-events: none;
               transition: opacity 0.32s;
@@ -8594,69 +8594,6 @@
         })();
       </script>
 
-      <!-- ── Gallery Lightbox ── -->
-      <div
-        class="gallery-lb"
-        id="galleryLb"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Property gallery"
-      >
-        <button
-          class="gallery-lb__close"
-          id="galleryLbClose"
-          aria-label="Close gallery"
-        >
-          <svg viewBox="0 0 24 24">
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg>
-        </button>
-        <div class="gallery-lb__wrap">
-          <button
-            class="gallery-lb__nav gallery-lb__nav--prev"
-            id="galleryLbPrev"
-            aria-label="Previous image"
-          >
-            <svg
-              width="16"
-              height="14"
-              viewBox="0 0 16 14"
-              fill="none"
-              aria-hidden="true"
-            >
-              <g transform="scale(-1,1) translate(-16,0)">
-                <path
-                  d="M7.99997 0.414307C7.99997 1.11051 8.68991 2.15231 9.38737 3.02724C10.2855 4.15371 11.3574 5.13777 12.5873 5.88911C13.5087 6.45171 14.6276 6.99177 15.5264 6.99177M7.99997 13.5855C7.99997 12.8893 8.68991 11.8475 9.38737 10.9726C10.2855 9.84617 11.3574 8.86204 12.5873 8.11071C13.5087 7.54811 14.6276 7.00804 15.5264 7.00804M15.5264 6.99991H0.473572"
-                  stroke="currentColor"
-                />
-              </g>
-            </svg>
-          </button>
-          <img class="gallery-lb__img" id="galleryLbImg" src="" alt="" />
-          <button
-            class="gallery-lb__nav gallery-lb__nav--next"
-            id="galleryLbNext"
-            aria-label="Next image"
-          >
-            <svg
-              width="16"
-              height="14"
-              viewBox="0 0 16 14"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M7.99997 0.414307C7.99997 1.11051 8.68991 2.15231 9.38737 3.02724C10.2855 4.15371 11.3574 5.13777 12.5873 5.88911C13.5087 6.45171 14.6276 6.99177 15.5264 6.99177M7.99997 13.5855C7.99997 12.8893 8.68991 11.8475 9.38737 10.9726C10.2855 9.84617 11.3574 8.86204 12.5873 8.11071C13.5087 7.54811 14.6276 7.00804 15.5264 7.00804M15.5264 6.99991H0.473572"
-                stroke="currentColor"
-              />
-            </svg>
-          </button>
-          <div class="gallery-lb__strip" id="galleryLbStrip"></div>
-          <p class="gallery-lb__counter" id="galleryLbCounter">1 / 5</p>
-        </div>
-      </div>
-
       <!-- Shared compare state — accessible by all IIFEs on this page -->
       <script>
         window.MAX_CMP = 4;
@@ -9066,18 +9003,37 @@
             syncActionBtns();
           });
 
-          /* ── Gallery Lightbox ── */
-          const galleryLb = document.getElementById("galleryLb");
-          const galleryLbImg = document.getElementById("galleryLbImg");
-          const galleryLbStrip = document.getElementById("galleryLbStrip");
-          const galleryLbCounter = document.getElementById("galleryLbCounter");
-          const galleryLbPrev = document.getElementById("galleryLbPrev");
-          const galleryLbNext = document.getElementById("galleryLbNext");
-          const galleryLbClose = document.getElementById("galleryLbClose");
-          let glImages = [],
-            glIdx = 0;
+          /* ── Gallery Lightbox — elements live outside site-wrap, resolved lazily ── */
+          let galleryLb, galleryLbImg, galleryLbStrip, galleryLbCounter,
+              galleryLbPrev, galleryLbNext, galleryLbClose;
+          let glImages = [], glIdx = 0;
+          let galleryLbBound = false;
+
+          function resolveGalleryEls() {
+            if (galleryLb) return true;
+            galleryLb = document.getElementById("galleryLb");
+            if (!galleryLb) return false;
+            galleryLbImg     = document.getElementById("galleryLbImg");
+            galleryLbStrip   = document.getElementById("galleryLbStrip");
+            galleryLbCounter = document.getElementById("galleryLbCounter");
+            galleryLbPrev    = document.getElementById("galleryLbPrev");
+            galleryLbNext    = document.getElementById("galleryLbNext");
+            galleryLbClose   = document.getElementById("galleryLbClose");
+            galleryLbPrev.addEventListener("click", () => {
+              if (glIdx > 0) { glIdx--; renderGallery(); }
+            });
+            galleryLbNext.addEventListener("click", () => {
+              if (glIdx < glImages.length - 1) { glIdx++; renderGallery(); }
+            });
+            galleryLbClose.addEventListener("click", closeGallery);
+            galleryLb.addEventListener("click", (e) => {
+              if (e.target === galleryLb) closeGallery();
+            });
+            return true;
+          }
 
           function openGallery(images, startIdx) {
+            if (!resolveGalleryEls()) return;
             glImages = images;
             glIdx = startIdx || 0;
             renderGallery();
@@ -9085,6 +9041,7 @@
             document.body.style.overflow = "hidden";
           }
           function closeGallery() {
+            if (!galleryLb) return;
             galleryLb.classList.remove("is-open");
             document.body.style.overflow = "";
           }
@@ -9110,24 +9067,8 @@
               });
           }
 
-          galleryLbPrev.addEventListener("click", () => {
-            if (glIdx > 0) {
-              glIdx--;
-              renderGallery();
-            }
-          });
-          galleryLbNext.addEventListener("click", () => {
-            if (glIdx < glImages.length - 1) {
-              glIdx++;
-              renderGallery();
-            }
-          });
-          galleryLbClose.addEventListener("click", closeGallery);
-          galleryLb.addEventListener("click", (e) => {
-            if (e.target === galleryLb) closeGallery();
-          });
           document.addEventListener("keydown", (e) => {
-            if (!galleryLb.classList.contains("is-open")) return;
+            if (!galleryLb || !galleryLb.classList.contains("is-open")) return;
             if (e.key === "Escape") closeGallery();
             if (e.key === "ArrowLeft" && glIdx > 0) {
               glIdx--;
@@ -10043,6 +9984,69 @@
       <div class="footer-spacer" id="footer-spacer" aria-hidden="true"></div>
     </div>
     <!-- /site-wrap -->
+
+    <!-- ── Gallery Lightbox — outside site-wrap so GSAP transforms don't trap position:fixed ── -->
+    <div
+      class="gallery-lb"
+      id="galleryLb"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Property gallery"
+    >
+      <button
+        class="gallery-lb__close"
+        id="galleryLbClose"
+        aria-label="Close gallery"
+      >
+        <svg viewBox="0 0 24 24">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+      <div class="gallery-lb__wrap">
+        <button
+          class="gallery-lb__nav gallery-lb__nav--prev"
+          id="galleryLbPrev"
+          aria-label="Previous image"
+        >
+          <svg
+            width="16"
+            height="14"
+            viewBox="0 0 16 14"
+            fill="none"
+            aria-hidden="true"
+          >
+            <g transform="scale(-1,1) translate(-16,0)">
+              <path
+                d="M7.99997 0.414307C7.99997 1.11051 8.68991 2.15231 9.38737 3.02724C10.2855 4.15371 11.3574 5.13777 12.5873 5.88911C13.5087 6.45171 14.6276 6.99177 15.5264 6.99177M7.99997 13.5855C7.99997 12.8893 8.68991 11.8475 9.38737 10.9726C10.2855 9.84617 11.3574 8.86204 12.5873 8.11071C13.5087 7.54811 14.6276 7.00804 15.5264 7.00804M15.5264 6.99991H0.473572"
+                stroke="currentColor"
+              />
+            </g>
+          </svg>
+        </button>
+        <img class="gallery-lb__img" id="galleryLbImg" src="" alt="" />
+        <button
+          class="gallery-lb__nav gallery-lb__nav--next"
+          id="galleryLbNext"
+          aria-label="Next image"
+        >
+          <svg
+            width="16"
+            height="14"
+            viewBox="0 0 16 14"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M7.99997 0.414307C7.99997 1.11051 8.68991 2.15231 9.38737 3.02724C10.2855 4.15371 11.3574 5.13777 12.5873 5.88911C13.5087 6.45171 14.6276 6.99177 15.5264 6.99177M7.99997 13.5855C7.99997 12.8893 8.68991 11.8475 9.38737 10.9726C10.2855 9.84617 11.3574 8.86204 12.5873 8.11071C13.5087 7.54811 14.6276 7.00804 15.5264 7.00804M15.5264 6.99991H0.473572"
+              stroke="currentColor"
+            />
+          </svg>
+        </button>
+        <div class="gallery-lb__strip" id="galleryLbStrip"></div>
+        <p class="gallery-lb__counter" id="galleryLbCounter">1 / 5</p>
+      </div>
+    </div>
 
     <!-- ─── COMPARE SIDEBAR — outside site-wrap so GSAP transforms don't trap position:fixed ─── -->
     <div class="cmp-bar cmp-bar--hidden" id="cmpBar">

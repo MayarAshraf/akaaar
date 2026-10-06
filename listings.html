@@ -328,6 +328,24 @@
         transform: translateX(100%);
       }
 
+      .btn-slide {
+        display: inline-flex; align-items: center; gap: 8px;
+        font-family: var(--font-body-ltr); font-size: 13px; font-weight: 650;
+        letter-spacing: 0.055em; padding: 14px 30px; line-height: 1;
+        border-radius: 100px; white-space: nowrap; cursor: pointer;
+        border: none; transition: all 0.3s var(--ease-out); text-decoration: none;
+      }
+      .btn-slide:hover { transform: translateY(-2px); }
+      .btn-slide--fill {
+        background: linear-gradient(135deg, rgba(215,20,52,0.96) 0%, rgba(185,10,36,1) 100%);
+        backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.2); color: #fff;
+      }
+      .btn-slide--fill:hover {
+        background: linear-gradient(135deg, rgba(225,25,58,0.98) 0%, rgba(200,16,46,1) 100%);
+      }
+      .navbar__actions { display: flex; align-items: center; }
+      .navbar__actions .btn-slide { font-size: 11px; padding: 9px 20px; letter-spacing: 0.06em; }
+
       /* ── RTL overrides ── */
       [dir="rtl"] .navbar__nav a {
         font-family: var(--font-body-rtl);
@@ -368,15 +386,27 @@
       [dir="rtl"] .prop-card__specs {
         flex-direction: row-reverse;
       }
-      [dir="rtl"] .prop-spec + .prop-spec::before {
-        display: none;
-      }
       [dir="rtl"] .prop-spec {
-        border-right: 1px solid var(--ink-10);
-        border-left: none;
+        border-right: none;
+        border-left: 1px solid var(--ink-10);
       }
       [dir="rtl"] .prop-spec:last-child {
-        border-right: none;
+        border-left: none;
+      }
+      html[data-theme="dark"] .prop-card__specs {
+        border-color: rgba(237, 232, 223, 0.07);
+      }
+      html[data-theme="dark"] .prop-spec {
+        border-right-color: rgba(237, 232, 223, 0.07);
+      }
+      html[data-theme="dark"] .prop-spec__val {
+        color: var(--ink);
+      }
+      html[data-theme="dark"] .prop-spec__key {
+        color: var(--ink-30);
+      }
+      html[data-theme="dark"] [dir="rtl"] .prop-spec {
+        border-left-color: rgba(237, 232, 223, 0.07);
       }
       [dir="rtl"] .prop-card__actions {
         flex-direction: row-reverse;
@@ -1102,7 +1132,7 @@
         position: relative;
       }
       .prop-card:hover {
-        transform: translateY(-4px);
+        border-color: rgba(200, 16, 46, 0.2);
       }
 
       /* image area */
@@ -1280,11 +1310,10 @@
       /* specs */
       .prop-card__specs {
         display: flex;
-        align-items: center;
-        gap: 0;
-        border-top: 1px solid var(--ink-10);
-        border-bottom: 1px solid var(--ink-10);
-        padding: 10px 0;
+        align-items: stretch;
+        border: 1px solid var(--ink-10);
+        border-radius: 8px;
+        overflow: hidden;
         margin-bottom: 12px;
       }
       .prop-spec {
@@ -1293,28 +1322,25 @@
         flex-direction: column;
         align-items: center;
         gap: 3px;
-        position: relative;
+        padding: 8px 6px;
+        border-right: 1px solid var(--ink-10);
       }
-      .prop-spec + .prop-spec::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 10%;
-        height: 80%;
-        width: 1px;
-        background: var(--ink-10);
+      .prop-spec:last-child {
+        border-right: none;
       }
       .prop-spec__val {
-        font-size: 14px;
-        font-weight: 600;
+        font-family: var(--font-display);
+        font-size: 1.15rem;
+        font-weight: 400;
         color: var(--ink);
         line-height: 1;
       }
       .prop-spec__key {
-        font-size: 10px;
+        font-size: 8px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
         color: var(--ink-30);
+        margin-top: 2px;
       }
 
       /* actions */
@@ -2469,9 +2495,14 @@
                 >Properties</a
               >
             </li>
-            <li><a href="projects.html" data-i18n="nav.projects">Projects</a></li>
-            <li><a href="#" data-i18n="nav.about">About</a></li>
-            <li><a href="#" data-i18n="nav.contact">Contact</a></li>
+            <li>
+              <a href="projects.html" data-i18n="nav.projects">Projects</a>
+            </li>
+            <li>
+              <a href="developers.html" data-i18n="nav.developers"
+                >Developers</a
+              >
+            </li>
           </ul>
           <a
             href="tel:01150000727"
@@ -2497,7 +2528,7 @@
           </a>
           <div class="navbar__sep" aria-hidden="true"></div>
           <div class="navbar__actions">
-            <button class="btn-pill btn-pill--fill" data-i18n="nav.cta">
+            <button class="btn-slide btn-slide--fill" data-i18n="nav.cta">
               Submit Property
             </button>
           </div>
@@ -2607,8 +2638,9 @@
             >
           </li>
           <li><a href="projects.html" data-i18n="nav.projects">Projects</a></li>
-          <li><a href="#" data-i18n="nav.about">About</a></li>
-          <li><a href="#" data-i18n="nav.contact">Contact</a></li>
+          <li>
+            <a href="developers.html" data-i18n="nav.developers">Developers</a>
+          </li>
         </ul>
         <div class="mobile-nav__cta">
           <button data-i18n="nav.cta">Submit Property</button>
@@ -3436,6 +3468,7 @@
               <li><a href="#">Penthouse Collection</a></li>
               <li><a href="#">Off-Plan Projects</a></li>
               <li><a href="#">North Coast</a></li>
+              <li><a href="developers.html">Developers</a></li>
               <li><a href="listings.html">Compare Units</a></li>
             </ul>
           </div>
@@ -3444,7 +3477,7 @@
           <div class="footer__col" data-reveal>
             <span class="footer__label">Company</span>
             <ul class="footer__links">
-              <li><a href="#">About Us</a></li>
+              <li><a href="about.html">About Us</a></li>
               <li><a href="#">Our Team</a></li>
               <li><a href="#">Success Stories</a></li>
               <li><a href="#">Careers</a></li>
@@ -4493,6 +4526,7 @@
             "nav.home": "Home",
             "nav.properties": "Properties",
             "nav.projects": "Projects",
+            "nav.developers": "Developers",
             "nav.about": "About",
             "nav.contact": "Contact",
             "nav.cta": "Submit Property",
@@ -4654,6 +4688,7 @@
             "nav.home": "الرئيسية",
             "nav.properties": "العقارات",
             "nav.projects": "المشاريع",
+            "nav.developers": "المطورون",
             "nav.about": "من نحن",
             "nav.contact": "تواصل",
             "nav.cta": "تقديم عقار",

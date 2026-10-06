@@ -993,11 +993,13 @@
       .proj-card__stats {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        border-top: 1px solid var(--ink-10);
-        margin: 0 -22px;
+        border: 1px solid var(--ink-10);
+        border-radius: 8px;
+        overflow: hidden;
+        margin: 0 22px 14px;
       }
       .proj-card__stat {
-        padding: 14px 16px;
+        padding: 8px 6px;
         text-align: center;
         border-right: 1px solid var(--ink-10);
       }
@@ -1006,16 +1008,16 @@
       }
       .proj-card__stat-val {
         display: block;
-        font-size: 15px;
-        font-weight: 700;
+        font-family: var(--font-display);
+        font-size: 1.15rem;
+        font-weight: 400;
         color: var(--ink);
         line-height: 1;
       }
       .proj-card__stat-key {
         display: block;
-        font-size: 10px;
-        font-weight: 500;
-        letter-spacing: 0.06em;
+        font-size: 8px;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
         color: var(--ink-30);
         margin-top: 3px;
@@ -1026,7 +1028,7 @@
         display: flex;
         flex-wrap: wrap;
         gap: 5px;
-        padding: 14px 22px 0;
+        padding-inline: 22px;
       }
       .proj-card__feat {
         font-size: 10px;
@@ -1051,52 +1053,80 @@
         padding: 14px 22px 20px;
       }
       .btn-proj-details {
-        flex: 1;
-        height: 40px;
-        border-radius: 100px;
-        background: linear-gradient(
-          135deg,
-          rgba(215, 20, 52, 0.96) 0%,
-          rgba(185, 10, 36, 1) 100%
-        );
-        color: #fff;
-        font-size: 12px;
-        font-weight: 600;
-        letter-spacing: 0.05em;
-        border: none;
-        cursor: pointer;
+        margin-left: auto;
         display: flex;
         align-items: center;
-        justify-content: center;
         gap: 6px;
-        transition: all 0.3s var(--ease-out);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        color: var(--gold-dk);
+        padding: 7px 16px;
+        border-radius: 100px;
+        border: 1.5px solid rgba(255, 255, 255, 0.65);
+        background: rgba(255, 255, 255, 0.48);
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        box-shadow:
+          0 2px 16px rgba(0, 0, 0, 0.08),
+          0 1px 4px rgba(0, 0, 0, 0.05);
+        cursor: pointer;
+        font-family: inherit;
+        transition: all 0.28s var(--ease-out);
+        white-space: nowrap;
       }
       .btn-proj-details:hover {
-        transform: translateY(-2px);
-        filter: brightness(1.08);
+        background: rgba(200, 16, 46, 0.08);
+        border-color: rgba(200, 16, 46, 0.35);
+        box-shadow:
+          0 6px 24px rgba(0, 0, 0, 0.12),
+          0 2px 6px rgba(0, 0, 0, 0.07);
+      }
+      .btn-proj-details svg {
+        transition: transform 0.25s var(--ease-out);
+      }
+      .btn-proj-details:hover svg {
+        transform: translateX(3px);
       }
       .btn-proj-units {
-        height: 40px;
-        padding: 0 18px;
-        border-radius: 100px;
-        background: transparent;
-        color: var(--ink);
-        font-size: 12px;
-        font-weight: 600;
-        letter-spacing: 0.05em;
-        border: 1.5px solid var(--ink-10);
-        cursor: pointer;
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        border: 1px solid var(--ink-10);
+        background: #fff;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 6px;
-        transition: all 0.3s var(--ease-out);
+        color: var(--ink-60);
+        cursor: pointer;
+        font-family: inherit;
+        position: relative;
+        transition: all 0.22s var(--ease-out);
+      }
+      .btn-proj-units[data-tip]::after {
+        content: attr(data-tip);
+        position: absolute;
+        bottom: calc(100% + 7px);
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--ink);
+        color: #fff;
+        font-size: 10px;
+        letter-spacing: 0.08em;
         white-space: nowrap;
+        padding: 4px 8px;
+        border-radius: 4px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.18s;
+      }
+      .btn-proj-units[data-tip]:hover::after {
+        opacity: 1;
       }
       .btn-proj-units:hover {
         border-color: var(--gold);
         color: var(--gold);
-        background: rgba(200, 16, 46, 0.04);
+        background: rgba(200, 16, 46, 0.08);
       }
 
       /* ─── LOAD MORE ─── */
@@ -1111,7 +1141,7 @@
         gap: 10px;
         padding: 14px 36px;
         border-radius: 100px;
-        border: 1.5px solid rgba(13, 13, 13, 0.18);
+        border: 1.5px solid rgba(255, 255, 255, 0.65);
         font-size: 12px;
         font-weight: 500;
         letter-spacing: 0.04em;
@@ -1691,7 +1721,7 @@
         color: var(--ink-60);
       }
       html[data-theme="dark"] .proj-card__stats {
-        border-top-color: rgba(237, 232, 223, 0.07);
+        border-color: rgba(237, 232, 223, 0.07);
       }
       html[data-theme="dark"] .proj-card__stat {
         border-right-color: rgba(237, 232, 223, 0.07);
@@ -1703,13 +1733,25 @@
         background: rgba(237, 232, 223, 0.07);
         color: var(--ink-60);
       }
-      html[data-theme="dark"] .btn-proj-units {
+      html[data-theme="dark"] .btn-proj-details {
+        background: rgba(28, 25, 18, 0.8);
         border-color: rgba(237, 232, 223, 0.13);
         color: var(--ink);
+      }
+      html[data-theme="dark"] .btn-proj-details:hover {
+        background: rgba(40, 35, 24, 0.9);
+        border-color: rgba(200, 16, 46, 0.35);
+        color: var(--gold);
+      }
+      html[data-theme="dark"] .btn-proj-units {
+        background: rgba(28, 25, 18, 0.8);
+        border-color: rgba(237, 232, 223, 0.13);
+        color: var(--ink-60);
       }
       html[data-theme="dark"] .btn-proj-units:hover {
         border-color: var(--gold);
         color: var(--gold);
+        background: rgba(200, 16, 46, 0.1);
       }
       html[data-theme="dark"] .btn-clear {
         color: var(--ink-60);
@@ -1957,8 +1999,9 @@
               >Projects</a
             >
           </li>
-          <li><a href="#" data-i18n="nav.about">About</a></li>
-          <li><a href="#" data-i18n="nav.contact">Contact</a></li>
+          <li>
+            <a href="developers.html" data-i18n="nav.developers">Developers</a>
+          </li>
         </ul>
         <a
           href="tel:01150000727"
@@ -2096,8 +2139,9 @@
             >Projects</a
           >
         </li>
-        <li><a href="#" data-i18n="nav.about">About</a></li>
-        <li><a href="#" data-i18n="nav.contact">Contact</a></li>
+        <li>
+          <a href="developers.html" data-i18n="nav.developers">Developers</a>
+        </li>
       </ul>
       <div class="mobile-nav__cta">
         <button data-i18n="nav.cta">Submit Property</button>
@@ -2135,11 +2179,15 @@
             <span aria-hidden="true">›</span>
             <span data-i18n="hero.bread.projects">Projects</span>
           </nav>
-          <h1 class="page-hero__title" data-i18n="hero.title" data-i18n-html>Explore <em>Exceptional</em> Projects</h1>
+          <h1 class="page-hero__title" data-i18n="hero.title" data-i18n-html>
+            Explore <em>Exceptional</em> Projects
+          </h1>
         </div>
         <div class="page-hero__meta">
           <div class="page-hero__count" id="heroCount">42</div>
-          <div class="page-hero__count-label" data-i18n="hero.count-label">Active Projects</div>
+          <div class="page-hero__count-label" data-i18n="hero.count-label">
+            Active Projects
+          </div>
         </div>
       </div>
     </div>
@@ -2160,7 +2208,12 @@
             <circle cx="11" cy="11" r="8" />
             <path d="m21 21-4.35-4.35" />
           </svg>
-          <input type="text" placeholder="Search projects…" id="searchInput" data-i18n-placeholder="filter.search" />
+          <input
+            type="text"
+            placeholder="Search projects…"
+            id="searchInput"
+            data-i18n-placeholder="filter.search"
+          />
         </div>
 
         <!-- Location pill -->
@@ -2180,7 +2233,9 @@
               </svg>
             </span>
             <span class="csel__text">
-              <span class="csel__label" data-i18n="filter.location.label">Location</span>
+              <span class="csel__label" data-i18n="filter.location.label"
+                >Location</span
+              >
               <span class="csel__val">All Locations</span>
             </span>
             <svg
@@ -2196,13 +2251,55 @@
             </svg>
           </button>
           <div class="csel__menu" role="listbox">
-            <div class="csel__opt is-selected" data-val="" data-i18n="filter.location.all">All Locations</div>
-            <div class="csel__opt" data-val="new-cairo" data-i18n="filter.location.new-cairo">New Cairo</div>
-            <div class="csel__opt" data-val="sheikh-zayed" data-i18n="filter.location.sheikh-zayed">Sheikh Zayed</div>
-            <div class="csel__opt" data-val="north-coast" data-i18n="filter.location.north-coast">North Coast</div>
-            <div class="csel__opt" data-val="6th-october" data-i18n="filter.location.6th-october">6th of October</div>
-            <div class="csel__opt" data-val="madinaty" data-i18n="filter.location.madinaty">Madinaty</div>
-            <div class="csel__opt" data-val="ain-sokhna" data-i18n="filter.location.ain-sokhna">Ain Sokhna</div>
+            <div
+              class="csel__opt is-selected"
+              data-val=""
+              data-i18n="filter.location.all"
+            >
+              All Locations
+            </div>
+            <div
+              class="csel__opt"
+              data-val="new-cairo"
+              data-i18n="filter.location.new-cairo"
+            >
+              New Cairo
+            </div>
+            <div
+              class="csel__opt"
+              data-val="sheikh-zayed"
+              data-i18n="filter.location.sheikh-zayed"
+            >
+              Sheikh Zayed
+            </div>
+            <div
+              class="csel__opt"
+              data-val="north-coast"
+              data-i18n="filter.location.north-coast"
+            >
+              North Coast
+            </div>
+            <div
+              class="csel__opt"
+              data-val="6th-october"
+              data-i18n="filter.location.6th-october"
+            >
+              6th of October
+            </div>
+            <div
+              class="csel__opt"
+              data-val="madinaty"
+              data-i18n="filter.location.madinaty"
+            >
+              Madinaty
+            </div>
+            <div
+              class="csel__opt"
+              data-val="ain-sokhna"
+              data-i18n="filter.location.ain-sokhna"
+            >
+              Ain Sokhna
+            </div>
           </div>
         </div>
 
@@ -2223,7 +2320,9 @@
               </svg>
             </span>
             <span class="csel__text">
-              <span class="csel__label" data-i18n="filter.type.label">Type</span>
+              <span class="csel__label" data-i18n="filter.type.label"
+                >Type</span
+              >
               <span class="csel__val">All Types</span>
             </span>
             <svg
@@ -2239,12 +2338,48 @@
             </svg>
           </button>
           <div class="csel__menu" role="listbox">
-            <div class="csel__opt is-selected" data-val="" data-i18n="filter.type.all">All Types</div>
-            <div class="csel__opt" data-val="compound" data-i18n="filter.type.compound">Compound</div>
-            <div class="csel__opt" data-val="tower" data-i18n="filter.type.tower">Tower</div>
-            <div class="csel__opt" data-val="mixed-use" data-i18n="filter.type.mixed-use">Mixed-Use</div>
-            <div class="csel__opt" data-val="resort" data-i18n="filter.type.resort">Resort</div>
-            <div class="csel__opt" data-val="standalone" data-i18n="filter.type.standalone">Standalone Villa</div>
+            <div
+              class="csel__opt is-selected"
+              data-val=""
+              data-i18n="filter.type.all"
+            >
+              All Types
+            </div>
+            <div
+              class="csel__opt"
+              data-val="compound"
+              data-i18n="filter.type.compound"
+            >
+              Compound
+            </div>
+            <div
+              class="csel__opt"
+              data-val="tower"
+              data-i18n="filter.type.tower"
+            >
+              Tower
+            </div>
+            <div
+              class="csel__opt"
+              data-val="mixed-use"
+              data-i18n="filter.type.mixed-use"
+            >
+              Mixed-Use
+            </div>
+            <div
+              class="csel__opt"
+              data-val="resort"
+              data-i18n="filter.type.resort"
+            >
+              Resort
+            </div>
+            <div
+              class="csel__opt"
+              data-val="standalone"
+              data-i18n="filter.type.standalone"
+            >
+              Standalone Villa
+            </div>
           </div>
         </div>
 
@@ -2265,7 +2400,9 @@
               </svg>
             </span>
             <span class="csel__text">
-              <span class="csel__label" data-i18n="filter.status.label">Status</span>
+              <span class="csel__label" data-i18n="filter.status.label"
+                >Status</span
+              >
               <span class="csel__val">All Status</span>
             </span>
             <svg
@@ -2281,12 +2418,34 @@
             </svg>
           </button>
           <div class="csel__menu" role="listbox">
-            <div class="csel__opt is-selected" data-val="" data-i18n="filter.status.all">All Status</div>
-            <div class="csel__opt" data-val="offplan" data-i18n="filter.status.offplan">Off-Plan</div>
-            <div class="csel__opt" data-val="construction" data-i18n="filter.status.construction">
+            <div
+              class="csel__opt is-selected"
+              data-val=""
+              data-i18n="filter.status.all"
+            >
+              All Status
+            </div>
+            <div
+              class="csel__opt"
+              data-val="offplan"
+              data-i18n="filter.status.offplan"
+            >
+              Off-Plan
+            </div>
+            <div
+              class="csel__opt"
+              data-val="construction"
+              data-i18n="filter.status.construction"
+            >
               Under Construction
             </div>
-            <div class="csel__opt" data-val="ready" data-i18n="filter.status.ready">Ready to Move</div>
+            <div
+              class="csel__opt"
+              data-val="ready"
+              data-i18n="filter.status.ready"
+            >
+              Ready to Move
+            </div>
           </div>
         </div>
 
@@ -2307,7 +2466,9 @@
               </svg>
             </span>
             <span class="csel__text">
-              <span class="csel__label" data-i18n="filter.developer.label">Developer</span>
+              <span class="csel__label" data-i18n="filter.developer.label"
+                >Developer</span
+              >
               <span class="csel__val">All Developers</span>
             </span>
             <svg
@@ -2323,7 +2484,13 @@
             </svg>
           </button>
           <div class="csel__menu" role="listbox">
-            <div class="csel__opt is-selected" data-val="" data-i18n="filter.developer.all">All Developers</div>
+            <div
+              class="csel__opt is-selected"
+              data-val=""
+              data-i18n="filter.developer.all"
+            >
+              All Developers
+            </div>
             <div class="csel__opt" data-val="emaar">Emaar Misr</div>
             <div class="csel__opt" data-val="sodic">SODIC</div>
             <div class="csel__opt" data-val="palm-hills">Palm Hills</div>
@@ -2353,7 +2520,9 @@
               </svg>
             </span>
             <span class="csel__text">
-              <span class="csel__label" data-i18n="filter.sort.label">Sort</span>
+              <span class="csel__label" data-i18n="filter.sort.label"
+                >Sort</span
+              >
               <span class="csel__val">Featured First</span>
             </span>
             <svg
@@ -2369,17 +2538,61 @@
             </svg>
           </button>
           <div class="csel__menu" role="listbox">
-            <div class="csel__opt is-selected" data-val="featured" data-i18n="filter.sort.featured">Featured First</div>
-            <div class="csel__opt" data-val="newest" data-i18n="filter.sort.newest">Newest</div>
-            <div class="csel__opt" data-val="price-asc" data-i18n="filter.sort.price-asc">Price: Low to High</div>
-            <div class="csel__opt" data-val="price-desc" data-i18n="filter.sort.price-desc">Price: High to Low</div>
-            <div class="csel__opt" data-val="completion" data-i18n="filter.sort.completion">Completion Date</div>
+            <div
+              class="csel__opt is-selected"
+              data-val="featured"
+              data-i18n="filter.sort.featured"
+            >
+              Featured First
+            </div>
+            <div
+              class="csel__opt"
+              data-val="newest"
+              data-i18n="filter.sort.newest"
+            >
+              Newest
+            </div>
+            <div
+              class="csel__opt"
+              data-val="price-asc"
+              data-i18n="filter.sort.price-asc"
+            >
+              Price: Low to High
+            </div>
+            <div
+              class="csel__opt"
+              data-val="price-desc"
+              data-i18n="filter.sort.price-desc"
+            >
+              Price: High to Low
+            </div>
+            <div
+              class="csel__opt"
+              data-val="completion"
+              data-i18n="filter.sort.completion"
+            >
+              Completion Date
+            </div>
           </div>
         </div>
 
         <div class="filter-right">
-          <button class="btn-clear" id="clearBtn" type="button" data-i18n="filter.clear">Reset</button>
-          <button class="btn-filter-apply" id="applyBtn" type="button" data-i18n="filter.apply">Apply</button>
+          <button
+            class="btn-clear"
+            id="clearBtn"
+            type="button"
+            data-i18n="filter.clear"
+          >
+            Reset
+          </button>
+          <button
+            class="btn-filter-apply"
+            id="applyBtn"
+            type="button"
+            data-i18n="filter.apply"
+          >
+            Apply
+          </button>
         </div>
       </div>
     </div>
@@ -2412,7 +2625,9 @@
     <section class="cta-banner" aria-label="Get in touch">
       <div class="cta-banner__inner">
         <div class="cta-banner__left">
-          <span class="cta-banner__eyebrow" data-i18n="cta.eyebrow">Personalised Service</span>
+          <span class="cta-banner__eyebrow" data-i18n="cta.eyebrow"
+            >Personalised Service</span
+          >
           <h2 class="cta-banner__title" data-i18n="cta.title" data-i18n-html>
             Can't Find Your<br /><em>Dream Project?</em>
           </h2>
@@ -2438,8 +2653,12 @@
               </svg>
             </div>
             <div class="cta-banner__card-body">
-              <div class="cta-banner__card-label" data-i18n="cta.card1.label">Speak to an Expert</div>
-              <div class="cta-banner__card-sub" data-i18n="cta.card1.sub">Available daily 9 AM – 9 PM</div>
+              <div class="cta-banner__card-label" data-i18n="cta.card1.label">
+                Speak to an Expert
+              </div>
+              <div class="cta-banner__card-sub" data-i18n="cta.card1.sub">
+                Available daily 9 AM – 9 PM
+              </div>
             </div>
             <svg
               class="cta-banner__card-arrow"
@@ -2473,8 +2692,12 @@
               </svg>
             </div>
             <div class="cta-banner__card-body">
-              <div class="cta-banner__card-label" data-i18n="cta.card2.label">WhatsApp Us</div>
-              <div class="cta-banner__card-sub" data-i18n="cta.card2.sub">Get a response within minutes</div>
+              <div class="cta-banner__card-label" data-i18n="cta.card2.label">
+                WhatsApp Us
+              </div>
+              <div class="cta-banner__card-sub" data-i18n="cta.card2.sub">
+                Get a response within minutes
+              </div>
             </div>
             <svg
               class="cta-banner__card-arrow"
@@ -2506,8 +2729,12 @@
               </svg>
             </div>
             <div class="cta-banner__card-body">
-              <div class="cta-banner__card-label" data-i18n="cta.card3.label">Request Custom Search</div>
-              <div class="cta-banner__card-sub" data-i18n="cta.card3.sub">Tell us exactly what you need</div>
+              <div class="cta-banner__card-label" data-i18n="cta.card3.label">
+                Request Custom Search
+              </div>
+              <div class="cta-banner__card-sub" data-i18n="cta.card3.sub">
+                Tell us exactly what you need
+              </div>
             </div>
             <svg
               class="cta-banner__card-arrow"
@@ -2598,15 +2825,23 @@
             <div class="footer__stats">
               <div class="footer__stat">
                 <span class="footer__stat-value">42</span
-                ><span class="footer__stat-label" data-i18n="footer.stat.projects">Projects</span>
+                ><span
+                  class="footer__stat-label"
+                  data-i18n="footer.stat.projects"
+                  >Projects</span
+                >
               </div>
               <div class="footer__stat">
                 <span class="footer__stat-value">18</span
-                ><span class="footer__stat-label" data-i18n="footer.stat.devs">Developers</span>
+                ><span class="footer__stat-label" data-i18n="footer.stat.devs"
+                  >Developers</span
+                >
               </div>
               <div class="footer__stat">
                 <span class="footer__stat-value">12+</span
-                ><span class="footer__stat-label" data-i18n="footer.stat.years">Years</span>
+                ><span class="footer__stat-label" data-i18n="footer.stat.years"
+                  >Years</span
+                >
               </div>
             </div>
             <div class="footer__socials">
@@ -2703,30 +2938,65 @@
             </div>
           </div>
           <div class="footer__col" data-reveal>
-            <span class="footer__label" data-i18n="footer.col.projects">Projects</span>
+            <span class="footer__label" data-i18n="footer.col.projects"
+              >Projects</span
+            >
             <ul class="footer__links">
               <li><a href="#" data-i18n="footer.link.all">All Projects</a></li>
               <li><a href="#" data-i18n="footer.link.offplan">Off-Plan</a></li>
-              <li><a href="#" data-i18n="footer.link.construction">Under Construction</a></li>
-              <li><a href="#" data-i18n="footer.link.ready">Ready to Move</a></li>
-              <li><a href="#" data-i18n="footer.link.north-coast">North Coast</a></li>
-              <li><a href="listings.html" data-i18n="footer.link.browse-units">Browse Units</a></li>
+              <li>
+                <a href="#" data-i18n="footer.link.construction"
+                  >Under Construction</a
+                >
+              </li>
+              <li>
+                <a href="#" data-i18n="footer.link.ready">Ready to Move</a>
+              </li>
+              <li>
+                <a href="#" data-i18n="footer.link.north-coast">North Coast</a>
+              </li>
+              <li>
+                <a href="developers.html" data-i18n="footer.link.developers"
+                  >Developers</a
+                >
+              </li>
+              <li>
+                <a href="listings.html" data-i18n="footer.link.browse-units"
+                  >Browse Units</a
+                >
+              </li>
             </ul>
           </div>
           <div class="footer__col" data-reveal>
-            <span class="footer__label" data-i18n="footer.col.company">Company</span>
+            <span class="footer__label" data-i18n="footer.col.company"
+              >Company</span
+            >
             <ul class="footer__links">
-              <li><a href="#" data-i18n="footer.link.about">About Us</a></li>
+              <li><a href="about.html" data-i18n="footer.link.about">About Us</a></li>
               <li><a href="#" data-i18n="footer.link.team">Our Team</a></li>
-              <li><a href="#" data-i18n="footer.link.success">Success Stories</a></li>
+              <li>
+                <a href="#" data-i18n="footer.link.success">Success Stories</a>
+              </li>
               <li><a href="#" data-i18n="footer.link.careers">Careers</a></li>
-              <li><a href="#" data-i18n="footer.link.press">Press &amp; Media</a></li>
-              <li><a href="#" data-i18n="footer.link.contact">Contact Us</a></li>
+              <li>
+                <a href="#" data-i18n="footer.link.press">Press &amp; Media</a>
+              </li>
+              <li>
+                <a href="#" data-i18n="footer.link.contact">Contact Us</a>
+              </li>
             </ul>
           </div>
           <div class="footer__col footer__col--match" data-reveal>
-            <span class="footer__label" data-i18n="footer.match.label">Property Matching</span>
-            <h3 class="footer__match-title" data-i18n="footer.match.title" data-i18n-html>Find Your <em>Perfect</em> Unit</h3>
+            <span class="footer__label" data-i18n="footer.match.label"
+              >Property Matching</span
+            >
+            <h3
+              class="footer__match-title"
+              data-i18n="footer.match.title"
+              data-i18n-html
+            >
+              Find Your <em>Perfect</em> Unit
+            </h3>
             <p class="footer__match-desc" data-i18n="footer.match.desc">
               Tell us what you need — we'll alert you the moment it's listed.
             </p>
@@ -2735,13 +3005,43 @@
               role="group"
               aria-label="Property type"
             >
-              <button type="button" class="footer__type-pill is-active" data-pill data-i18n="footer.pill.apt">Apartment</button>
-              <button type="button" class="footer__type-pill" data-pill data-i18n="footer.pill.villa">Villa</button>
-              <button type="button" class="footer__type-pill" data-pill data-i18n="footer.pill.pent">Penthouse</button>
-              <button type="button" class="footer__type-pill" data-pill data-i18n="footer.pill.chalet">Chalet</button>
+              <button
+                type="button"
+                class="footer__type-pill is-active"
+                data-pill
+                data-i18n="footer.pill.apt"
+              >
+                Apartment
+              </button>
+              <button
+                type="button"
+                class="footer__type-pill"
+                data-pill
+                data-i18n="footer.pill.villa"
+              >
+                Villa
+              </button>
+              <button
+                type="button"
+                class="footer__type-pill"
+                data-pill
+                data-i18n="footer.pill.pent"
+              >
+                Penthouse
+              </button>
+              <button
+                type="button"
+                class="footer__type-pill"
+                data-pill
+                data-i18n="footer.pill.chalet"
+              >
+                Chalet
+              </button>
             </div>
             <form class="footer__match-form" id="footerMatchForm" novalidate>
-              <span class="footer__field-label" data-i18n="footer.budget.label">Budget Range (EGP)</span>
+              <span class="footer__field-label" data-i18n="footer.budget.label"
+                >Budget Range (EGP)</span
+              >
               <div class="footer__budget-row">
                 <input
                   type="number"
@@ -2761,7 +3061,9 @@
                   min="0"
                 />
               </div>
-              <span class="footer__field-label" data-i18n="footer.email.label">Your Email</span>
+              <span class="footer__field-label" data-i18n="footer.email.label"
+                >Your Email</span
+              >
               <div class="footer__email-row">
                 <input
                   type="email"
@@ -2807,7 +3109,8 @@
             ></span
           >
           <div class="footer__legal">
-            <a href="#" data-i18n="footer.privacy">Privacy Policy</a><a href="#" data-i18n="footer.terms">Terms</a>
+            <a href="#" data-i18n="footer.privacy">Privacy Policy</a
+            ><a href="#" data-i18n="footer.terms">Terms</a>
           </div>
         </div>
       </div>
@@ -3043,8 +3346,8 @@
               : "") +
             "</div>" +
             '<div class="proj-card__actions">' +
-            '<button class="btn-proj-details">View Project<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>' +
-            '<button class="btn-proj-units">Browse Units</button>' +
+            '<button class="btn-proj-units" data-tip="Browse Units" aria-label="Browse Units" onclick="event.stopPropagation()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></button>' +
+            '<button class="btn-proj-details">View Project <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>' +
             "</div>" +
             "</article>"
           );
@@ -3253,10 +3556,15 @@
         var LANG_KEY = "akar_lang";
         var T = {
           en: {
-            "nav.home": "Home", "nav.properties": "Properties",
-            "nav.projects": "Projects", "nav.about": "About",
-            "nav.contact": "Contact", "nav.cta": "Submit Property",
-            "hero.bread.home": "Home", "hero.bread.projects": "Projects",
+            "nav.home": "Home",
+            "nav.properties": "Properties",
+            "nav.projects": "Projects",
+            "nav.developers": "Developers",
+            "nav.about": "About",
+            "nav.contact": "Contact",
+            "nav.cta": "Submit Property",
+            "hero.bread.home": "Home",
+            "hero.bread.projects": "Projects",
             "hero.title": "Explore <em>Exceptional</em> Projects",
             "hero.count-label": "Active Projects",
             "filter.search": "Search projects…",
@@ -3268,11 +3576,15 @@
             "filter.location.6th-october": "6th of October",
             "filter.location.madinaty": "Madinaty",
             "filter.location.ain-sokhna": "Ain Sokhna",
-            "filter.type.label": "Type", "filter.type.all": "All Types",
-            "filter.type.compound": "Compound", "filter.type.tower": "Tower",
-            "filter.type.mixed-use": "Mixed-Use", "filter.type.resort": "Resort",
+            "filter.type.label": "Type",
+            "filter.type.all": "All Types",
+            "filter.type.compound": "Compound",
+            "filter.type.tower": "Tower",
+            "filter.type.mixed-use": "Mixed-Use",
+            "filter.type.resort": "Resort",
             "filter.type.standalone": "Standalone Villa",
-            "filter.status.label": "Status", "filter.status.all": "All Status",
+            "filter.status.label": "Status",
+            "filter.status.all": "All Status",
             "filter.status.offplan": "Off-Plan",
             "filter.status.construction": "Under Construction",
             "filter.status.ready": "Ready to Move",
@@ -3284,46 +3596,59 @@
             "filter.sort.price-asc": "Price: Low to High",
             "filter.sort.price-desc": "Price: High to Low",
             "filter.sort.completion": "Completion Date",
-            "filter.clear": "Reset", "filter.apply": "Apply",
+            "filter.clear": "Reset",
+            "filter.apply": "Apply",
             "load.more": "Load More Projects",
             "cta.eyebrow": "Personalised Service",
             "cta.title": "Can’t Find Your<br><em>Dream Project?</em>",
-            "cta.desc": "Our specialists curate exclusive off-market opportunities tailored to your investment goals and lifestyle preferences.",
+            "cta.desc":
+              "Our specialists curate exclusive off-market opportunities tailored to your investment goals and lifestyle preferences.",
             "cta.card1.label": "Speak to an Expert",
             "cta.card1.sub": "Available daily 9 AM – 9 PM",
             "cta.card2.label": "WhatsApp Us",
             "cta.card2.sub": "Get a response within minutes",
             "cta.card3.label": "Request Custom Search",
             "cta.card3.sub": "Tell us exactly what you need",
-            "footer.tagline": "Egypt’s premier luxury real estate destination. Curating exceptional properties for discerning clients since 2004.",
-            "footer.stat.projects": "Projects", "footer.stat.devs": "Developers",
+            "footer.tagline":
+              "Egypt’s premier luxury real estate destination. Curating exceptional properties for discerning clients since 2004.",
+            "footer.stat.projects": "Projects",
+            "footer.stat.devs": "Developers",
             "footer.stat.years": "Years",
-            "footer.col.projects": "Projects", "footer.col.company": "Company",
-            "footer.link.all": "All Projects", "footer.link.offplan": "Off-Plan",
+            "footer.col.projects": "Projects",
+            "footer.col.company": "Company",
+            "footer.link.all": "All Projects",
+            "footer.link.offplan": "Off-Plan",
             "footer.link.construction": "Under Construction",
             "footer.link.ready": "Ready to Move",
             "footer.link.north-coast": "North Coast",
             "footer.link.browse-units": "Browse Units",
-            "footer.link.about": "About Us", "footer.link.team": "Our Team",
+            "footer.link.about": "About Us",
+            "footer.link.team": "Our Team",
             "footer.link.success": "Success Stories",
             "footer.link.careers": "Careers",
             "footer.link.press": "Press & Media",
             "footer.link.contact": "Contact Us",
             "footer.match.label": "Property Matching",
             "footer.match.title": "Find Your <em>Perfect</em> Unit",
-            "footer.match.desc": "Tell us what you need — we’ll alert you the moment it’s listed.",
-            "footer.pill.apt": "Apartment", "footer.pill.villa": "Villa",
-            "footer.pill.pent": "Penthouse", "footer.pill.chalet": "Chalet",
+            "footer.match.desc":
+              "Tell us what you need — we’ll alert you the moment it’s listed.",
+            "footer.pill.apt": "Apartment",
+            "footer.pill.villa": "Villa",
+            "footer.pill.pent": "Penthouse",
+            "footer.pill.chalet": "Chalet",
             "footer.budget.label": "Budget Range (EGP)",
-            "footer.budget.min": "Minimum", "footer.budget.max": "Maximum",
+            "footer.budget.min": "Minimum",
+            "footer.budget.max": "Maximum",
             "footer.email.label": "Your Email",
             "footer.credit": "© Copyright 2026. All Rights Reserved To 8WORX",
-            "footer.privacy": "Privacy Policy", "footer.terms": "Terms",
+            "footer.privacy": "Privacy Policy",
+            "footer.terms": "Terms",
           },
           ar: {
             "nav.home": "الرئيسية",
             "nav.properties": "العقارات",
             "nav.projects": "المشاريع",
+            "nav.developers": "المطورون",
             "nav.about": "من نحن",
             "nav.contact": "تواصل",
             "nav.cta": "أضف عقارك",
@@ -3365,14 +3690,16 @@
             "load.more": "تحميل المزيد",
             "cta.eyebrow": "خدمة مخصصة",
             "cta.title": "لم تجد<br><em>مشروعك المثالي؟</em>",
-            "cta.desc": "يختار متخصصونا فرصاً حصرية خارج السوق مصممة خصيصاً لأهدافك الاستثمارية وأسلوب حياتك.",
+            "cta.desc":
+              "يختار متخصصونا فرصاً حصرية خارج السوق مصممة خصيصاً لأهدافك الاستثمارية وأسلوب حياتك.",
             "cta.card1.label": "تحدث مع خبير",
             "cta.card1.sub": "متاح يومياً من 9 ص حتى 9 م",
             "cta.card2.label": "تواصل عبر واتساب",
             "cta.card2.sub": "احصل على رد في دقائق",
             "cta.card3.label": "طلب بحث مخصص",
             "cta.card3.sub": "أخبرنا بما تحتاجه بالضبط",
-            "footer.tagline": "الوجهة الأولى للعقارات الفاخرة في مصر. نختار لعملائنا المميزين أفضل العقارات منذ عام 2004.",
+            "footer.tagline":
+              "الوجهة الأولى للعقارات الفاخرة في مصر. نختار لعملائنا المميزين أفضل العقارات منذ عام 2004.",
             "footer.stat.projects": "مشروع",
             "footer.stat.devs": "مطور",
             "footer.stat.years": "سنة",
@@ -3413,9 +3740,9 @@
           html.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
           var t = T[lang] || T.en;
 
-          document.querySelectorAll("[data-i18n]").forEach(function(el) {
+          document.querySelectorAll("[data-i18n]").forEach(function (el) {
             var key = el.getAttribute("data-i18n");
-            var val = t[key] !== undefined ? t[key] : (T.en[key] || "");
+            var val = t[key] !== undefined ? t[key] : T.en[key] || "";
             if (el.hasAttribute("data-i18n-html")) {
               el.innerHTML = val;
             } else {
@@ -3423,35 +3750,50 @@
             }
           });
 
-          document.querySelectorAll("[data-i18n-placeholder]").forEach(function(el) {
-            var key = el.getAttribute("data-i18n-placeholder");
-            el.placeholder = t[key] !== undefined ? t[key] : (T.en[key] || "");
-          });
+          document
+            .querySelectorAll("[data-i18n-placeholder]")
+            .forEach(function (el) {
+              var key = el.getAttribute("data-i18n-placeholder");
+              el.placeholder = t[key] !== undefined ? t[key] : T.en[key] || "";
+            });
 
           /* sync csel displayed values to translated selected option text */
-          document.querySelectorAll(".csel").forEach(function(csel) {
+          document.querySelectorAll(".csel").forEach(function (csel) {
             var selected = csel.querySelector(".csel__opt.is-selected");
             var valEl = csel.querySelector(".csel__val");
-            if (selected && valEl) valEl.textContent = selected.textContent.trim();
+            if (selected && valEl)
+              valEl.textContent = selected.textContent.trim();
           });
 
           var btn = document.getElementById("langToggle");
-          if (btn) btn.setAttribute("aria-checked", lang === "ar" ? "true" : "false");
-          try { localStorage.setItem(LANG_KEY, lang); } catch(_) {}
+          if (btn)
+            btn.setAttribute("aria-checked", lang === "ar" ? "true" : "false");
+          try {
+            localStorage.setItem(LANG_KEY, lang);
+          } catch (_) {}
         }
 
         var savedLang = "en";
-        try { savedLang = localStorage.getItem(LANG_KEY) || "en"; } catch(_) {}
+        try {
+          savedLang = localStorage.getItem(LANG_KEY) || "en";
+        } catch (_) {}
         applyLang(savedLang);
 
         var toggleLangBtn = document.getElementById("langToggle");
         if (toggleLangBtn) {
           function doLangToggle() {
-            applyLang(document.documentElement.getAttribute("lang") === "ar" ? "en" : "ar");
+            applyLang(
+              document.documentElement.getAttribute("lang") === "ar"
+                ? "en"
+                : "ar",
+            );
           }
           toggleLangBtn.addEventListener("click", doLangToggle);
-          toggleLangBtn.addEventListener("keydown", function(e) {
-            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); doLangToggle(); }
+          toggleLangBtn.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              doLangToggle();
+            }
           });
         }
 

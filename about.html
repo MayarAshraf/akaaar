@@ -1,0 +1,2284 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us — Akar Town</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Kufi+Arabic:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="theme.css" />
+    <script src="theme.js"></script>
+    <style>
+      /* ─── TOKENS ─── */
+      :root {
+        --bg: #faf8f5;
+        --ink: #0d0d0d;
+        --ink-60: rgba(13, 13, 13, 0.6);
+        --ink-30: rgba(13, 13, 13, 0.3);
+        --ink-10: rgba(13, 13, 13, 0.1);
+        --gold: #c8102e;
+        --gold-lt: #c8102e;
+        --gold-dk: #c8102e;
+        --red: #cc2222;
+        --white: #ffffff;
+        --font-body: "Archivo", system-ui, sans-serif;
+        --font-body-ltr: "Archivo", system-ui, sans-serif;
+        --font-body-rtl: "Noto Kufi Arabic", system-ui, sans-serif;
+        --font-display: "Cormorant Garamond", Georgia, serif;
+        --nav-h: 62px;
+        --ease-smooth: cubic-bezier(0.76, 0, 0.24, 1);
+        --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      /* ─── RESET ─── */
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        font-family: var(--font-body);
+        font-size: 16px;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        min-height: 100vh;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+      button {
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      img,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+      input,
+      select,
+      textarea {
+        font-family: inherit;
+        font-size: inherit;
+      }
+      ::selection {
+        background: var(--gold);
+        color: #fff;
+      }
+      [dir="rtl"],
+      [lang="ar"],
+      :lang(ar) {
+        font-family: var(--font-body-rtl);
+        direction: rtl;
+        text-align: right;
+        letter-spacing: 0;
+        text-transform: none;
+      }
+
+      /* ─── NAVBAR ─── */
+      .navbar {
+        position: fixed;
+        inset: 0 0 auto 0;
+        z-index: 200;
+        height: var(--nav-h);
+        padding: 0 48px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: transparent;
+        border-bottom: 1px solid transparent;
+        transition:
+          background 0.5s var(--ease-out),
+          border-color 0.5s ease,
+          box-shadow 0.5s ease;
+      }
+      .navbar.is-scrolled {
+        background: rgba(8, 8, 8, 0.88);
+        backdrop-filter: blur(48px) saturate(180%);
+        -webkit-backdrop-filter: blur(48px) saturate(180%);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .navbar__logo {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+      }
+      .navbar__right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+      .navbar__nav {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        list-style: none;
+      }
+      .navbar__nav a {
+        font-family: var(--font-body-ltr);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.9);
+        position: relative;
+        transition: color 0.25s ease;
+      }
+      .navbar__nav a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--gold);
+        transition: width 0.38s var(--ease-smooth);
+      }
+      .navbar__nav a:hover::after,
+      .navbar__nav a.active::after {
+        width: 100%;
+      }
+      .navbar__nav a.active {
+        color: #fff;
+      }
+      .navbar__sep {
+        width: 1px;
+        height: 18px;
+        background: rgba(255, 255, 255, 0.15);
+        flex-shrink: 0;
+      }
+      .navbar__phone {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        color: rgba(255, 255, 255, 0.9);
+        white-space: nowrap;
+        flex-shrink: 0;
+        transition: color 0.25s ease;
+      }
+      .navbar__phone:hover {
+        color: #fff;
+      }
+      .navbar__phone svg {
+        flex-shrink: 0;
+        opacity: 0.75;
+      }
+      .btn-slide {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--font-body-ltr);
+        font-size: 13px;
+        font-weight: 650;
+        letter-spacing: 0.055em;
+        padding: 14px 30px;
+        line-height: 1;
+        border-radius: 100px;
+        white-space: nowrap;
+        cursor: pointer;
+        border: none;
+        transition: all 0.3s var(--ease-out);
+        text-decoration: none;
+      }
+      .btn-slide:hover {
+        transform: translateY(-2px);
+      }
+      .btn-slide--fill {
+        background: linear-gradient(
+          135deg,
+          rgba(215, 20, 52, 0.96) 0%,
+          rgba(185, 10, 36, 1) 100%
+        );
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+      }
+      .btn-slide--fill:hover {
+        background: linear-gradient(
+          135deg,
+          rgba(225, 25, 58, 0.98) 0%,
+          rgba(200, 16, 46, 1) 100%
+        );
+      }
+      .navbar__actions {
+        display: flex;
+        align-items: center;
+      }
+      .navbar__actions .btn-slide {
+        font-size: 11px;
+        padding: 9px 20px;
+        letter-spacing: 0.06em;
+      }
+      .navbar__login {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 31px;
+        height: 31px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: transparent;
+        color: rgba(255, 255, 255, 0.88);
+        cursor: pointer;
+        flex-shrink: 0;
+        transition:
+          background 0.25s,
+          border-color 0.25s;
+      }
+      .navbar__login:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.38);
+      }
+      .navbar__user {
+        display: none;
+        align-items: center;
+        gap: 8px;
+      }
+
+      /* ─── LANG TOGGLE ─── */
+      .lang-toggle {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 80px;
+        height: 31px;
+        border-radius: 100px;
+        background: rgba(160, 50, 72, 0.18);
+        border: 1px solid rgba(160, 50, 72, 0.45);
+        backdrop-filter: blur(10px);
+        padding: 3px;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition:
+          box-shadow 0.3s,
+          border-color 0.3s;
+      }
+      .lang-toggle:hover {
+        border-color: rgba(160, 50, 72, 0.7);
+      }
+      .lang-toggle__en,
+      .lang-toggle__ar {
+        flex: 1;
+        text-align: center;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        position: relative;
+        z-index: 1;
+        transition: color 0.3s;
+        user-select: none;
+        line-height: 1;
+      }
+      .lang-toggle__en {
+        font-family: "Archivo", sans-serif;
+        color: #fff;
+      }
+      .lang-toggle__ar {
+        font-family: "Noto Kufi Arabic", sans-serif;
+        color: rgba(255, 255, 255, 0.5);
+      }
+      html[lang="ar"] .lang-toggle__en {
+        color: rgba(255, 255, 255, 0.5);
+      }
+      html[lang="ar"] .lang-toggle__ar {
+        color: #fff;
+      }
+      .lang-toggle__knob {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: calc(50% - 3px);
+        height: calc(100% - 6px);
+        background: var(--gold);
+        border-radius: 100px;
+        transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        z-index: 0;
+      }
+      html[lang="ar"] .lang-toggle__knob {
+        transform: translateX(100%);
+      }
+
+      /* ─── THEME TOGGLE ─── */
+      .theme-toggle {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 31px;
+        height: 31px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 50%;
+        background: transparent;
+        color: rgba(255, 255, 255, 0.88);
+        cursor: pointer;
+        flex-shrink: 0;
+        transition:
+          background 0.25s,
+          border-color 0.25s;
+      }
+      .theme-toggle:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.38);
+      }
+      .theme-toggle__sun,
+      .theme-toggle__moon {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          opacity 0.3s,
+          transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .theme-toggle__sun {
+        opacity: 0;
+        transform: rotate(90deg) scale(0.6);
+      }
+      .theme-toggle__moon {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      }
+      html[data-theme="dark"] .theme-toggle__sun {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      }
+      html[data-theme="dark"] .theme-toggle__moon {
+        opacity: 0;
+        transform: rotate(-90deg) scale(0.6);
+      }
+      html[data-theme="dark"] .theme-toggle {
+        border-color: rgba(201, 168, 76, 0.32);
+        color: rgba(237, 232, 223, 0.88);
+      }
+      html[data-theme="dark"] .theme-toggle:hover {
+        background: rgba(201, 168, 76, 0.1);
+        border-color: rgba(201, 168, 76, 0.55);
+      }
+
+      /* ─── HAMBURGER ─── */
+      .nav-hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 36px;
+        height: 36px;
+        padding: 6px;
+        cursor: pointer;
+        border: none;
+        background: none;
+        flex-shrink: 0;
+      }
+      .nav-hamburger__bar {
+        display: block;
+        width: 22px;
+        height: 1.5px;
+        background: #fff;
+        border-radius: 2px;
+        transition:
+          transform 0.3s,
+          opacity 0.3s;
+        pointer-events: none;
+      }
+      .nav-hamburger.is-open .nav-hamburger__bar:nth-child(1) {
+        transform: translateY(6.5px) rotate(45deg);
+      }
+      .nav-hamburger.is-open .nav-hamburger__bar:nth-child(2) {
+        opacity: 0;
+      }
+      .nav-hamburger.is-open .nav-hamburger__bar:nth-child(3) {
+        transform: translateY(-6.5px) rotate(-45deg);
+      }
+
+      /* ─── MOBILE NAV ─── */
+      .mobile-nav {
+        position: fixed;
+        inset: var(--nav-h) 0 0 0;
+        z-index: 190;
+        background: rgba(8, 8, 8, 0.97);
+        backdrop-filter: blur(24px);
+        padding: 28px 24px 40px;
+        display: flex;
+        flex-direction: column;
+        transform: translateX(100%);
+        transition: transform 0.38s var(--ease-smooth);
+        overflow-y: auto;
+      }
+      .mobile-nav.is-open {
+        transform: none;
+      }
+      .mobile-nav__list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .mobile-nav__list li a {
+        display: block;
+        padding: 12px 4px;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.75);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        transition: color 0.2s;
+      }
+      .mobile-nav__list li a:hover,
+      .mobile-nav__list li a.active {
+        color: #fff;
+      }
+      .mobile-nav__cta {
+        margin-top: auto;
+        padding-top: 24px;
+      }
+      .mobile-nav__cta button {
+        width: 100%;
+        padding: 15px 24px;
+        border-radius: 100px;
+        background: var(--gold);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        transition: opacity 0.2s;
+      }
+      .mobile-nav__cta button:hover {
+        opacity: 0.85;
+      }
+      .mobile-nav__phone {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 16px;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        color: rgba(255, 255, 255, 0.75);
+        transition: color 0.2s;
+      }
+      .mobile-nav__phone:hover {
+        color: #fff;
+      }
+      .mobile-nav__phone svg {
+        opacity: 0.7;
+      }
+
+      /* ─── TOOLTIP ─── */
+      [data-tooltip] {
+        position: relative;
+      }
+      [data-tooltip]::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 50%;
+        transform: translateX(-50%) translateY(-4px);
+        background: rgba(13, 13, 13, 0.88);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 500;
+        white-space: nowrap;
+        padding: 4px 9px;
+        border-radius: 6px;
+        pointer-events: none;
+        opacity: 0;
+        transition:
+          opacity 0.18s,
+          transform 0.18s;
+        letter-spacing: 0.02em;
+      }
+      [data-tooltip]:hover::after {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      /* ─── SCROLL REVEAL ─── */
+      [data-reveal] {
+        opacity: 0;
+        transform: translateY(32px);
+        transition:
+          opacity 0.9s var(--ease-out),
+          transform 0.9s var(--ease-out);
+      }
+      [data-reveal].in-view {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      [data-reveal][data-delay="1"] {
+        transition-delay: 0.12s;
+      }
+      [data-reveal][data-delay="2"] {
+        transition-delay: 0.24s;
+      }
+      [data-reveal][data-delay="3"] {
+        transition-delay: 0.36s;
+      }
+      [data-reveal][data-delay="4"] {
+        transition-delay: 0.48s;
+      }
+
+      /* ══════════════════════════════════
+         ABOUT HERO
+      ══════════════════════════════════ */
+      .about-hero {
+        position: relative;
+        height: 100vh;
+        min-height: 680px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        background: #07060a;
+      }
+      .about-hero__bg {
+        position: absolute;
+        inset: 0;
+        background: #07060a
+          url("https://images.unsplash.com/photo-1600607687939-ce8a6c349db?w=1920&auto=format&fit=crop&q=90")
+          center / cover no-repeat;
+        will-change: transform;
+        transition: transform 0.05s linear;
+        filter: grayscale(0.2) brightness(0.55);
+      }
+      .about-hero__grain {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        opacity: 0.04;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-size: 200px;
+      }
+      .about-hero__overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        pointer-events: none;
+        background:
+          radial-gradient(
+            ellipse 75% 75% at 50% 45%,
+            rgba(7, 6, 10, 0.35) 0%,
+            rgba(7, 6, 10, 0.72) 100%
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(7, 6, 10, 0.65) 0%,
+            rgba(7, 6, 10, 0.22) 40%,
+            rgba(7, 6, 10, 0.68) 100%
+          );
+      }
+      /* Corner labels */
+      .about-hero__corner {
+        position: absolute;
+        z-index: 5;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.38);
+        line-height: 1;
+      }
+      .about-hero__corner a {
+        color: inherit;
+        transition: color 0.2s;
+        text-decoration: none;
+      }
+      .about-hero__corner a:hover {
+        color: var(--gold);
+      }
+      .about-hero__corner--tl {
+        top: 52px;
+        left: 52px;
+      }
+      .about-hero__corner--tr {
+        top: 52px;
+        right: 52px;
+      }
+      .about-hero__corner--bl {
+        bottom: 100px;
+        left: 52px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .about-hero__corner--br {
+        display: none;
+      }
+      /* Center editorial block */
+      .about-hero__center {
+        position: relative;
+        z-index: 5;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: var(--nav-h) 48px 20px;
+        gap: 0;
+      }
+      .about-hero__eyebrow {
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 28px;
+      }
+      /* Decorative rule with diamond ornament */
+      .about-hero__rule {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        width: 100%;
+        max-width: 700px;
+        margin-bottom: 32px;
+      }
+      .about-hero__rule::before,
+      .about-hero__rule::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          rgba(255, 255, 255, 0.18),
+          transparent
+        );
+      }
+      .about-hero__diamond {
+        width: 7px;
+        height: 7px;
+        border: 1px solid rgba(200, 16, 46, 0.7);
+        transform: rotate(45deg);
+        flex-shrink: 0;
+        background: rgba(200, 16, 46, 0.15);
+      }
+      .about-hero__title {
+        font-family: var(--font-display);
+        font-size: clamp(62px, 8.5vw, 128px);
+        font-weight: 300;
+        letter-spacing: -0.028em;
+        line-height: 0.96;
+        color: #fff;
+        margin-bottom: 32px;
+      }
+      .about-hero__title em {
+        display: block;
+        font-style: italic;
+        color: rgba(255, 255, 255, 0.58);
+      }
+      .about-hero__sub {
+        font-size: clamp(14px, 1.1vw, 16px);
+        font-weight: 300;
+        line-height: 1.85;
+        color: rgba(255, 255, 255, 0.48);
+        max-width: 50ch;
+      }
+
+      /* ══════════════════════════════════
+         ABOUT BRIEF
+      ══════════════════════════════════ */
+      .about-brief {
+        background: var(--bg);
+        position: relative;
+        padding: clamp(80px,10vw,130px) 0 clamp(80px,10vw,130px);
+        overflow: hidden;
+      }
+      .about-brief::before {
+        content: ''; position: absolute;
+        top: 0; left: 48px; right: 48px; height: 1px;
+        background: linear-gradient(to right, var(--gold) 0%, rgba(200,16,46,0.18) 45%, transparent 100%);
+      }
+      .about-brief__inner {
+        max-width: 1320px; margin: 0 auto; padding: 0 48px;
+        display: grid; grid-template-columns: 1fr 1fr;
+        gap: clamp(48px,7vw,100px); align-items: center;
+      }
+      .about-brief__left { position: relative; }
+      .about-brief__ghost {
+        position: absolute; top: -24px; left: -12px; z-index: 0;
+        font-family: var(--font-display);
+        font-size: clamp(110px,14vw,210px);
+        font-weight: 700; letter-spacing: -0.06em; line-height: 1;
+        color: transparent; -webkit-text-stroke: 1px var(--ink-10);
+        pointer-events: none; user-select: none;
+      }
+      .about-brief__heading {
+        font-family: var(--font-display);
+        font-size: clamp(44px,5.5vw,80px);
+        font-weight: 300; letter-spacing: -0.022em; line-height: 1.06;
+        color: var(--ink); margin-bottom: 28px; position: relative; z-index: 1;
+      }
+      .about-brief__heading em { font-style: italic; color: var(--gold); }
+      .about-brief__body {
+        font-size: 16px; line-height: 1.85; color: var(--ink-60);
+        max-width: 42ch; margin-bottom: 40px; position: relative; z-index: 1;
+      }
+      .about-brief__cta {
+        display: inline-flex; align-items: center; gap: 16px;
+        font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+        color: var(--ink); text-decoration: none;
+        position: relative; z-index: 1; transition: color 0.25s;
+      }
+      .about-brief__cta-line {
+        display: block; width: 40px; height: 1px; background: currentColor;
+        transition: width 0.38s var(--ease-out);
+      }
+      .about-brief__cta:hover { color: var(--gold); }
+      .about-brief__cta:hover .about-brief__cta-line { width: 64px; }
+      /* CTA pill button */
+      .about-brief__cta-btn {
+        display: inline-flex; align-items: center; gap: 10px;
+        padding: 14px 32px; border-radius: 100px;
+        background: var(--ink); color: #fff;
+        font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+        text-decoration: none;
+        transition: background 0.3s, transform 0.3s var(--ease-out), box-shadow 0.3s;
+      }
+      .about-brief__cta-btn:hover {
+        background: var(--gold); transform: translateY(-2px);
+        box-shadow: 0 10px 32px rgba(200,16,46,0.3);
+      }
+      /* Right: circular image */
+      .about-brief__right {
+        display: flex; align-items: center; justify-content: center;
+        position: relative;
+      }
+      .about-brief__circle-wrap { position: relative; }
+      /* Decorative outer ring */
+      .about-brief__circle-ring {
+        position: absolute;
+        inset: -16px; border-radius: 50%;
+        border: 1px solid rgba(200,16,46,0.22);
+        pointer-events: none;
+        animation: ringPulse 4s ease-in-out infinite;
+      }
+      @keyframes ringPulse {
+        0%, 100% { opacity: 0.5; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.015); }
+      }
+      .about-brief__img-mask {
+        width: clamp(300px, 36vw, 460px);
+        height: clamp(300px, 36vw, 460px);
+        border-radius: 50%; overflow: hidden;
+        position: relative; flex-shrink: 0;
+      }
+      .about-brief__img {
+        width: 100%; height: 100%;
+        object-fit: cover; display: block;
+        transition: transform 0.9s var(--ease-out);
+      }
+      .about-brief__img-mask:hover .about-brief__img { transform: scale(1.06); }
+      /* Floating badge */
+      .about-brief__badge {
+        position: absolute; bottom: 12px; right: -16px;
+        background: #fff; border: 1px solid var(--ink-10);
+        border-radius: 100px; padding: 12px 20px;
+        display: flex; flex-direction: column; align-items: center; gap: 2px;
+        box-shadow: 0 8px 32px rgba(13,13,13,0.1);
+        white-space: nowrap;
+      }
+      .about-brief__badge-num {
+        font-family: var(--font-display);
+        font-size: 28px; font-weight: 300; line-height: 1;
+        letter-spacing: -0.025em; color: var(--gold);
+      }
+      .about-brief__badge-lbl {
+        font-size: 8px; font-weight: 700;
+        letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-30);
+      }
+
+      /* ══════════════════════════════════
+         CTA BANNER
+      ══════════════════════════════════ */
+      .cta-banner {
+        position: relative;
+        overflow: hidden;
+        padding: 100px 48px;
+        background: linear-gradient(
+          135deg,
+          #0d0b08 0%,
+          #110e0a 60%,
+          #160c0d 100%
+        );
+      }
+      .cta-banner::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(
+          ellipse 60% 80% at 0% 50%,
+          rgba(200, 16, 46, 0.12) 0%,
+          transparent 70%
+        );
+      }
+      .cta-banner::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background: radial-gradient(
+          ellipse 40% 60% at 100% 50%,
+          rgba(200, 16, 46, 0.06) 0%,
+          transparent 70%
+        );
+      }
+      .cta-banner__inner {
+        position: relative;
+        z-index: 1;
+        max-width: 1320px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+      }
+      .cta-banner__eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 24px;
+      }
+      .cta-banner__title {
+        font-family: var(--font-display);
+        font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+        font-weight: 300;
+        color: #fff;
+        line-height: 1.1;
+        margin-bottom: 20px;
+      }
+      .cta-banner__title em {
+        font-style: italic;
+        color: var(--gold);
+      }
+      .cta-banner__desc {
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.5);
+        line-height: 1.8;
+      }
+      .cta-banner__cards {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .cta-banner__card {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        padding: 20px 22px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.04);
+        backdrop-filter: blur(24px);
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        text-decoration: none;
+        transition:
+          background 0.28s var(--ease-out),
+          border-color 0.28s,
+          transform 0.28s var(--ease-out);
+      }
+      .cta-banner__card:hover {
+        background: rgba(200, 16, 46, 0.1);
+        border-color: rgba(200, 16, 46, 0.32);
+        transform: translateX(5px);
+      }
+      .cta-banner__card-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        flex-shrink: 0;
+        display: grid;
+        place-items: center;
+        background: rgba(200, 16, 46, 0.14);
+        color: var(--gold);
+        transition: background 0.28s;
+      }
+      .cta-banner__card:hover .cta-banner__card-icon {
+        background: rgba(200, 16, 46, 0.24);
+      }
+      .cta-banner__card-body {
+        flex: 1;
+        min-width: 0;
+      }
+      .cta-banner__card-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 3px;
+      }
+      .cta-banner__card-sub {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.38);
+        letter-spacing: 0.02em;
+      }
+      .cta-banner__card-arrow {
+        color: rgba(255, 255, 255, 0.25);
+        flex-shrink: 0;
+        transition:
+          color 0.22s,
+          transform 0.22s var(--ease-out);
+      }
+      .cta-banner__card:hover .cta-banner__card-arrow {
+        color: var(--gold);
+        transform: translateX(3px);
+      }
+
+      /* ══════════════════════════════════
+         FOOTER
+      ══════════════════════════════════ */
+      .site-footer {
+        background: #080808;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+        min-height: 100dvh;
+      }
+      .footer__bg {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        filter: grayscale(0.35) brightness(0.42) contrast(1.1);
+      }
+      .footer__scrim {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(0deg, #080808 12%, rgba(8, 8, 8, 0.05) 72%);
+        pointer-events: none;
+      }
+      .site-footer__inner {
+        position: relative;
+        z-index: 1;
+        padding: clamp(1.5rem, 3.5vh, 2.5rem) 0 clamp(1rem, 2vh, 1.5rem);
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .footer__grid,
+      .footer__bottom {
+        max-width: 1320px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 48px;
+        padding-right: 48px;
+        box-sizing: border-box;
+      }
+      .footer__grid {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 1fr 1.6fr;
+        gap: clamp(1.5rem, 3vw, 2.5rem);
+      }
+      .footer__label {
+        display: block;
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(246, 245, 242, 0.55);
+        margin-bottom: 0.9rem;
+      }
+      .footer__brand-logo {
+        display: block;
+        margin-bottom: 1rem;
+        text-decoration: none;
+      }
+      .footer__brand-logo svg {
+        height: 26px;
+        width: auto;
+        display: block;
+      }
+      .footer__tagline {
+        font-size: 0.85rem;
+        line-height: 1.65;
+        color: rgba(246, 245, 242, 0.78);
+        max-width: 30ch;
+        margin: 0 0 1.4rem;
+      }
+      .footer__stats {
+        display: flex;
+        gap: clamp(1rem, 2.5vw, 1.75rem);
+        margin-bottom: 1.4rem;
+      }
+      .footer__stat-value {
+        display: block;
+        font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+        font-weight: 700;
+        color: #c8102e;
+        line-height: 1;
+        margin-bottom: 0.28rem;
+      }
+      .footer__stat-label {
+        display: block;
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(246, 245, 242, 0.6);
+      }
+      .footer__socials {
+        display: flex;
+        gap: 0.5rem;
+      }
+      .footer__social-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid rgba(246, 245, 242, 0.35);
+        color: rgba(246, 245, 242, 0.8);
+        text-decoration: none;
+        transition:
+          border-color 0.3s,
+          color 0.3s;
+      }
+      .footer__social-btn:hover,
+      .footer__social-btn:focus-visible {
+        border-color: #f6f5f2;
+        color: #f6f5f2;
+      }
+      .footer__links {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.55rem;
+      }
+      .footer__links a {
+        font-size: 0.92rem;
+        font-weight: 500;
+        color: rgba(246, 245, 242, 0.85);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+      .footer__links a:hover,
+      .footer__links a:focus-visible {
+        color: #f6f5f2;
+      }
+      .footer__match-title {
+        font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+        font-weight: 700;
+        line-height: 1.2;
+        color: #f6f5f2;
+        margin: 0 0 0.5rem;
+      }
+      .footer__match-title em {
+        font-style: normal;
+        color: #c8102e;
+      }
+      .footer__match-desc {
+        font-size: 0.82rem;
+        line-height: 1.55;
+        color: rgba(246, 245, 242, 0.75);
+        margin: 0 0 1rem;
+      }
+      .footer__type-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-bottom: 1rem;
+      }
+      .footer__type-pill {
+        padding: 0.38rem 0.9rem;
+        border-radius: 99px;
+        border: 1px solid rgba(246, 245, 242, 0.38);
+        font-size: 0.78rem;
+        font-weight: 500;
+        color: rgba(246, 245, 242, 0.88);
+        background: transparent;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          border-color 0.2s,
+          color 0.2s;
+        font-family: inherit;
+        line-height: 1;
+      }
+      .footer__type-pill.is-active,
+      .footer__type-pill:hover {
+        background: #c8102e;
+        border-color: #c8102e;
+        color: #fff;
+      }
+      .footer__field-label {
+        display: block;
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(246, 245, 242, 0.6);
+        margin-bottom: 0.45rem;
+      }
+      .footer__budget-row {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        margin-bottom: 0.85rem;
+      }
+      .footer__budget-input {
+        flex: 1;
+        min-width: 0;
+        padding: 0.6rem 0.7rem;
+        border-radius: 3px;
+        border: 1px solid rgba(246, 245, 242, 0.12);
+        background: rgba(246, 245, 242, 0.05);
+        color: #f6f5f2;
+        font-size: 0.8rem;
+        font-family: inherit;
+      }
+      .footer__budget-input::placeholder {
+        color: rgba(246, 245, 242, 0.42);
+      }
+      .footer__budget-sep {
+        color: rgba(246, 245, 242, 0.55);
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+      .footer__email-row {
+        display: flex;
+        gap: 0.45rem;
+        align-items: stretch;
+      }
+      .footer__email-input {
+        flex: 1;
+        min-width: 0;
+        padding: 0.6rem 0.7rem;
+        border-radius: 3px;
+        border: 1px solid rgba(246, 245, 242, 0.12);
+        background: rgba(246, 245, 242, 0.05);
+        color: #f6f5f2;
+        font-size: 0.8rem;
+        font-family: inherit;
+      }
+      .footer__email-input::placeholder {
+        color: rgba(246, 245, 242, 0.42);
+      }
+      .footer__email-input:focus-visible,
+      .footer__budget-input:focus-visible {
+        outline: 1px solid rgba(246, 245, 242, 0.5);
+        outline-offset: 2px;
+      }
+      .footer__match-submit {
+        flex-shrink: 0;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: #c8102e;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.25s;
+      }
+      .footer__match-submit:hover {
+        background: #a60d24;
+      }
+      .footer__mark {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin: clamp(1.5rem, 4vh, 3rem) 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .footer__mark-text {
+        display: inline-block;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 0.86;
+        white-space: nowrap;
+        font-size: clamp(4.5rem, 16vw, 13rem);
+        color: transparent;
+        background-image: linear-gradient(
+          180deg,
+          rgba(246, 245, 242, 0.5) 0%,
+          rgba(246, 245, 242, 0.4) 45%,
+          rgba(246, 245, 242, 0.1) 72%,
+          rgba(246, 245, 242, 0) 88%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        user-select: none;
+      }
+      .footer__bottom {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        padding-top: clamp(1rem, 2.5vh, 1.5rem);
+        border-top: 1px solid rgba(246, 245, 242, 0.12);
+        font-size: 0.75rem;
+        color: rgba(246, 245, 242, 0.6);
+      }
+      .footer__credit-link {
+        color: #f6f5f2;
+        font-weight: 600;
+        background-image: linear-gradient(currentColor, currentColor);
+        background-repeat: no-repeat;
+        background-position: 0 100%;
+        background-size: 100% 1px;
+        transition: background-size 0.35s ease;
+        text-decoration: none;
+      }
+      .footer__credit-link:hover {
+        background-size: 0 1px;
+        background-position: 100% 100%;
+      }
+      .footer__legal {
+        display: flex;
+        gap: 1.25rem;
+      }
+      .footer__legal a {
+        color: rgba(246, 245, 242, 0.6);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+      .footer__legal a:hover,
+      .footer__legal a:focus-visible {
+        color: #f6f5f2;
+      }
+
+      /* ══════════════════════════════════
+         DARK MODE
+      ══════════════════════════════════ */
+      html[data-theme="dark"] .about-brief { background: #100f0d; }
+      html[data-theme="dark"] .about-brief__heading { color: #f6f5f2; }
+      html[data-theme="dark"] .about-brief__body { color: rgba(246,245,242,0.6); }
+      html[data-theme="dark"] .about-brief__cta-btn { background: #f6f5f2; color: #0d0d0d; }
+      html[data-theme="dark"] .about-brief__badge { background: #1a1916; border-color: rgba(246,245,242,0.1); }
+      html[data-theme="dark"] .about-brief__badge-lbl { color: rgba(246,245,242,0.4); }
+
+      /* ══════════════════════════════════
+         RTL
+      ══════════════════════════════════ */
+      [dir="rtl"] .navbar__right {
+        flex-direction: row-reverse;
+      }
+      [dir="rtl"] .navbar__nav {
+        flex-direction: row-reverse;
+      }
+      [dir="rtl"] .about-hero__corner--tl {
+        left: auto;
+        right: 52px;
+      }
+      [dir="rtl"] .about-hero__corner--tr {
+        right: auto;
+        left: 52px;
+      }
+      [dir="rtl"] .about-brief__ghost { left: auto; right: -12px; }
+      [dir="rtl"] .about-brief__img-frame::after { left: -20px; right: 20px; }
+      [dir="rtl"] .about-brief__right { padding-right: 0; padding-left: 24px; }
+      [dir="rtl"] .cta-banner__card:hover {
+        transform: translateX(-5px);
+      }
+      [dir="rtl"] .footer__grid {
+        direction: rtl;
+      }
+      [dir="rtl"] .footer__label {
+        letter-spacing: 0.04em;
+      }
+
+      /* ══════════════════════════════════
+         RESPONSIVE
+      ══════════════════════════════════ */
+      @media (max-width: 1100px) {
+        .navbar {
+          padding: 0 24px;
+        }
+        .navbar__nav {
+          gap: 10px;
+        }
+        .about-hero__center {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+        .about-hero__corner--tl,
+        .about-hero__corner--tr {
+          display: none;
+        }
+        .about-brief__inner { padding: 0 24px; gap: 40px; }
+        .about-brief__stat { padding: 28px 24px; }
+        .cta-banner {
+          padding: 80px 24px;
+        }
+        .footer__grid,
+        .footer__bottom {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+      }
+      @media (max-width: 860px) {
+        .about-brief__inner { grid-template-columns: 1fr; }
+        .about-brief__img-mask {
+          width: clamp(260px, 72vw, 380px);
+          height: clamp(260px, 72vw, 380px);
+        }
+        .about-brief__badge { bottom: 8px; right: 0; }
+        .cta-banner__inner {
+          grid-template-columns: 1fr;
+          gap: 48px;
+        }
+        .footer__grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .footer__col--match {
+          grid-column: 1 / -1;
+        }
+      }
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 0 20px;
+        }
+        .navbar__nav,
+        .navbar__sep,
+        .navbar__phone,
+        .navbar__actions {
+          display: none;
+        }
+        .nav-hamburger {
+          display: flex;
+        }
+        .about-hero__title {
+          font-size: clamp(46px, 10vw, 72px);
+        }
+        .about-hero__center {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+        .about-brief__inner { padding: 0 20px; }
+      }
+      @media (max-width: 520px) {
+        .footer__grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 380px) {
+        .footer__budget-row {
+          flex-wrap: wrap;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ─── NAVBAR ─── -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+      <a href="index.html" class="navbar__logo" aria-label="Akar Town — Home">
+        <svg
+          width="230"
+          viewBox="0 0 2185 380"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M90.97 258.84H160.93L236.12 169.2V379.42H296.66V5.21997L90.97 258.84Z"
+            fill="white"
+          />
+          <path
+            d="M64.78 291.12L0 371H66.84L133.85 291.12H64.78Z"
+            fill="#C8102E"
+          />
+          <path
+            d="M390.87 186.6L544.58 373.2H472.34L339.38 212.73L317.86 187.07L339.38 160.95L472.34 0.00999451H544.58L390.87 186.61V186.6Z"
+            fill="white"
+          />
+          <path
+            d="M772.951 153.462L752.741 160.698C739.129 146.227 720.111 138.991 695.632 138.991C677.085 138.991 661.976 143.759 650.277 153.268C638.606 162.805 632.756 174.92 632.756 189.613C632.756 204.306 638.55 217.086 650.111 226.429C661.671 235.772 677.279 240.429 696.935 240.429C720.665 240.429 739.351 233.082 752.935 218.362L772.036 228.924C762.388 240.179 751.465 248.302 739.295 253.32C727.125 258.338 712.57 260.833 695.632 260.833C671.901 260.833 652.162 254.9 636.471 243.035C618.534 229.423 609.58 211.625 609.58 189.613C609.58 167.601 618.673 150.302 636.831 136.579C652.661 124.575 672.261 118.587 695.632 118.587C729.259 118.587 755.042 130.203 772.978 153.462H772.951Z"
+            fill="white"
+          />
+          <path
+            d="M1015.47 189.71C1015.47 211.722 1006.43 229.52 988.385 243.132C972.555 254.997 952.899 260.93 929.418 260.93C905.937 260.93 885.893 254.942 870.064 242.938C852.016 229.326 842.978 211.611 842.978 189.71C842.978 167.809 852.127 150.51 870.424 136.676C886.503 124.561 906.159 118.49 929.391 118.49C952.622 118.49 972.361 124.561 988.191 136.676C1006.38 150.538 1015.44 168.197 1015.44 189.71H1015.47ZM992.294 189.71C992.294 174.019 985.612 161.266 972.278 151.508C960.773 143.108 946.495 138.894 929.446 138.894C910.761 138.894 895.569 143.69 883.814 153.255C872.06 162.847 866.21 174.989 866.21 189.71C866.21 204.431 871.949 217.183 883.454 226.526C894.959 235.869 910.289 240.526 929.446 240.526C948.602 240.526 963.711 235.841 975.161 226.443C986.583 217.045 992.321 204.791 992.321 189.71H992.294Z"
+            fill="white"
+          />
+          <path
+            d="M1269.99 256.841H1247.73V147.058H1247.18L1177.45 234.607L1108.29 147.058H1107.73V256.841H1085.47V122.579H1113.28L1177.62 203.724L1242.24 122.579H1269.97V256.841H1269.99Z"
+            fill="white"
+          />
+          <path
+            d="M1446.45 122.607C1460.17 122.607 1471.04 126.405 1479.11 134.001C1487.15 141.597 1491.17 151.771 1491.17 164.496C1491.17 177.858 1486.98 188.06 1478.64 195.102C1470.29 202.144 1458.15 205.664 1442.18 205.664H1362.25V256.841H1339.99V122.579H1446.45V122.607ZM1442.57 185.676C1459.76 185.676 1468.35 178.746 1468.35 164.912C1468.35 150.08 1459.26 142.65 1441.1 142.65H1362.28V185.676H1442.6H1442.57Z"
+            fill="white"
+          />
+          <path
+            d="M1731.22 256.841H1706.88L1691.41 226.789H1600.98L1585.51 256.841H1561.17L1632.19 122.579H1660.19L1731.22 256.841ZM1680.6 206.773L1646.39 141.708L1611.76 206.773H1680.6Z"
+            fill="white"
+          />
+          <path
+            d="M1953.67 256.841H1925.97L1823.48 146.726V256.841H1801.22V122.579H1828.86L1931.43 232.75V122.579H1953.69V256.841H1953.67Z"
+            fill="white"
+          />
+          <path
+            d="M2192.83 122.579L2119.39 203.807V256.841H2097.13V203.807L2023.69 122.579H2051.44L2108.39 185.288L2165.08 122.579H2192.83Z"
+            fill="white"
+          />
+        </svg>
+      </a>
+      <div class="navbar__right">
+        <ul class="navbar__nav" role="list">
+          <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+          <li>
+            <a href="listings.html" data-i18n="nav.properties">Properties</a>
+          </li>
+          <li><a href="projects.html" data-i18n="nav.projects">Projects</a></li>
+          <li>
+            <a href="developers.html" data-i18n="nav.developers">Developers</a>
+          </li>
+        </ul>
+        <a
+          href="tel:01150000727"
+          class="navbar__phone"
+          aria-label="Call 01150000727"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path
+              d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.27-.73a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 15.5v1.42z"
+            />
+          </svg>
+          <span>01150000727</span>
+        </a>
+        <div class="navbar__sep" aria-hidden="true"></div>
+        <div class="navbar__actions">
+          <button class="btn-slide btn-slide--fill" data-i18n="nav.cta">
+            Submit Property
+          </button>
+        </div>
+        <div
+          id="langToggle"
+          class="lang-toggle"
+          role="switch"
+          aria-checked="false"
+          tabindex="0"
+          aria-label="Switch language"
+        >
+          <span class="lang-toggle__en">EN</span>
+          <span class="lang-toggle__knob"></span>
+          <span class="lang-toggle__ar">عر</span>
+        </div>
+        <button
+          class="navbar__login"
+          id="navbar-login"
+          type="button"
+          aria-label="Sign in or register"
+          data-tooltip="Sign in"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+        </button>
+        <div class="navbar__user" id="navbar-user" aria-label="Account">
+          <span class="navbar__user-avatar"></span
+          ><span class="navbar__user-name"></span>
+        </div>
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-label="Switch to dark mode"
+          aria-pressed="false"
+          data-tooltip="Theme"
+        >
+          <span class="theme-toggle__sun" aria-hidden="true">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="5" />
+              <line x1="12" y1="1" x2="12" y2="3" />
+              <line x1="12" y1="21" x2="12" y2="23" />
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+              <line x1="1" y1="12" x2="3" y2="12" />
+              <line x1="21" y1="12" x2="23" y2="12" />
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </svg>
+          </span>
+          <span class="theme-toggle__moon" aria-hidden="true">
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+            </svg>
+          </span>
+        </button>
+      </div>
+      <button
+        class="nav-hamburger"
+        id="navHamburger"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+      >
+        <span class="nav-hamburger__bar"></span>
+        <span class="nav-hamburger__bar"></span>
+        <span class="nav-hamburger__bar"></span>
+      </button>
+    </nav>
+
+    <!-- ─── MOBILE NAV ─── -->
+    <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+      <ul class="mobile-nav__list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="listings.html">Properties</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="developers.html">Developers</a></li>
+      </ul>
+      <div class="mobile-nav__cta">
+        <button>Submit Property</button>
+        <a
+          href="tel:01150000727"
+          class="mobile-nav__phone"
+          aria-label="Call 01150000727"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path
+              d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.27-.73a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 15.5v1.42z"
+            />
+          </svg>
+          01150000727
+        </a>
+      </div>
+    </div>
+
+    <!-- ─── HERO ─── -->
+    <section class="about-hero" aria-label="About Akar Town">
+      <div class="about-hero__bg" id="heroBg" aria-hidden="true"></div>
+      <div class="about-hero__grain" aria-hidden="true"></div>
+      <div class="about-hero__overlay" aria-hidden="true"></div>
+
+      <!-- Centered editorial block -->
+      <div class="about-hero__center" data-reveal>
+        <span class="about-hero__eyebrow"
+          >Egypt's Premier Luxury Real Estate</span
+        >
+        <div class="about-hero__rule" aria-hidden="true">
+          <div class="about-hero__diamond"></div>
+        </div>
+        <h1 class="about-hero__title">
+          Our Story,
+          <em>Our Legacy</em>
+        </h1>
+        <div class="about-hero__rule" aria-hidden="true">
+          <div class="about-hero__diamond"></div>
+        </div>
+        <p class="about-hero__sub">
+          Two decades of curating exceptional properties and forging lasting
+          partnerships across Egypt's most coveted destinations.
+        </p>
+      </div>
+    </section>
+
+    <!-- ─── ABOUT BRIEF ─── -->
+    <section class="about-brief" id="about-brief" aria-label="About Akar Town">
+      <div class="about-brief__inner">
+        <!-- Left: editorial text -->
+        <div class="about-brief__left" data-reveal>
+          <h2 class="about-brief__heading">Egypt's Most <em>Trusted</em> Luxury Real Estate Partner</h2>
+          <p class="about-brief__body">Born from a singular conviction that every family deserves access to Egypt's finest homes, Akar Town has grown from a boutique consultancy into the nation's most trusted luxury property platform — connecting discerning buyers with developments from the country's premier developers.</p>
+          <p class="about-brief__body">We don't simply list properties. We study communities, evaluate developers, and handpick only those projects that meet our rigorous standards of design, construction quality, and lifestyle value.</p>
+          <a href="listings.html" class="btn-slide btn-slide--fill">
+            Explore Properties
+            <svg width="14" height="10" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 6h14M9 1l6 5-6 5"/></svg>
+          </a>
+        </div>
+        <!-- Right: circular image -->
+        <div class="about-brief__right" data-reveal data-delay="1">
+          <div class="about-brief__circle-wrap">
+            <div class="about-brief__circle-ring" aria-hidden="true"></div>
+            <div class="about-brief__img-mask">
+              <img class="about-brief__img" src="https://images.unsplash.com/photo-1560185127-6ed189bf02f4?w=900&auto=format&fit=crop&q=90" alt="Luxury property in Egypt" loading="lazy" />
+            </div>
+            <div class="about-brief__badge" aria-label="12 plus years of excellence">
+              <span class="about-brief__badge-num">12+</span>
+              <span class="about-brief__badge-lbl">Years of Excellence</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── CTA BANNER ─── -->
+    <section class="cta-banner" aria-label="Contact Akar Town">
+      <div class="cta-banner__inner">
+        <div class="cta-banner__left" data-reveal>
+          <span class="cta-banner__eyebrow">Begin Your Journey</span>
+          <h2 class="cta-banner__title">
+            Can't Find Your<br /><em>Dream</em> Property?
+          </h2>
+          <p class="cta-banner__desc">
+            Our expert consultants are ready to guide you through Egypt's finest
+            developments — personally, and at your pace.
+          </p>
+        </div>
+        <div class="cta-banner__cards" data-reveal data-delay="1">
+          <a
+            href="tel:01150000727"
+            class="cta-banner__card"
+            aria-label="Call us"
+          >
+            <div class="cta-banner__card-icon" aria-hidden="true">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.27-.73a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 15.5v1.42z"
+                />
+              </svg>
+            </div>
+            <div class="cta-banner__card-body">
+              <p class="cta-banner__card-label">Call Us Directly</p>
+              <p class="cta-banner__card-sub">
+                01150000727 · Available 9am–9pm
+              </p>
+            </div>
+            <svg
+              class="cta-banner__card-arrow"
+              width="16"
+              height="16"
+              viewBox="0 0 16 12"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M1 6h14M9 1l6 5-6 5" />
+            </svg>
+          </a>
+          <a
+            href="https://wa.me/201150000727"
+            class="cta-banner__card"
+            aria-label="Message on WhatsApp"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="cta-banner__card-icon" aria-hidden="true">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"
+                />
+              </svg>
+            </div>
+            <div class="cta-banner__card-body">
+              <p class="cta-banner__card-label">WhatsApp Us</p>
+              <p class="cta-banner__card-sub">
+                Instant replies · Send photos &amp; requirements
+              </p>
+            </div>
+            <svg
+              class="cta-banner__card-arrow"
+              width="16"
+              height="16"
+              viewBox="0 0 16 12"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M1 6h14M9 1l6 5-6 5" />
+            </svg>
+          </a>
+          <a
+            href="listings.html"
+            class="cta-banner__card"
+            aria-label="Browse all properties"
+          >
+            <div class="cta-banner__card-icon" aria-hidden="true">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="3" y="3" width="7" height="7" />
+                <rect x="14" y="3" width="7" height="7" />
+                <rect x="14" y="14" width="7" height="7" />
+                <rect x="3" y="14" width="7" height="7" />
+              </svg>
+            </div>
+            <div class="cta-banner__card-body">
+              <p class="cta-banner__card-label">Browse All Properties</p>
+              <p class="cta-banner__card-sub">
+                Explore curated listings across Egypt
+              </p>
+            </div>
+            <svg
+              class="cta-banner__card-arrow"
+              width="16"
+              height="16"
+              viewBox="0 0 16 12"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M1 6h14M9 1l6 5-6 5" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── FOOTER ─── -->
+    <footer class="site-footer" id="footer">
+      <div
+        class="footer__bg"
+        style="
+          background-image: url(&quot;https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1920&auto=format&fit=crop&q=90&quot;);
+        "
+        aria-hidden="true"
+      ></div>
+      <div class="footer__scrim" aria-hidden="true"></div>
+      <div class="site-footer__inner">
+        <div class="footer__grid">
+          <div class="footer__col footer__col--brand" data-reveal>
+            <a
+              href="/"
+              class="footer__brand-logo"
+              aria-label="Akar Town — Home"
+            >
+              <svg
+                viewBox="0 0 2185 380"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M90.97 258.84H160.93L236.12 169.2V379.42H296.66V5.21997L90.97 258.84Z"
+                  fill="white"
+                />
+                <path
+                  d="M64.78 291.12L0 371H66.84L133.85 291.12H64.78Z"
+                  fill="#C8102E"
+                />
+                <path
+                  d="M390.87 186.6L544.58 373.2H472.34L339.38 212.73L317.86 187.07L339.38 160.95L472.34 0.00999451H544.58L390.87 186.61V186.6Z"
+                  fill="white"
+                />
+                <path
+                  d="M772.951 153.462L752.741 160.698C739.129 146.227 720.111 138.991 695.632 138.991C677.085 138.991 661.976 143.759 650.277 153.268C638.606 162.805 632.756 174.92 632.756 189.613C632.756 204.306 638.55 217.086 650.111 226.429C661.671 235.772 677.279 240.429 696.935 240.429C720.665 240.429 739.351 233.082 752.935 218.362L772.036 228.924C762.388 240.179 751.465 248.302 739.295 253.32C727.125 258.338 712.57 260.833 695.632 260.833C671.901 260.833 652.162 254.9 636.471 243.035C618.534 229.423 609.58 211.625 609.58 189.613C609.58 167.601 618.673 150.302 636.831 136.579C652.661 124.575 672.261 118.587 695.632 118.587C729.259 118.587 755.042 130.203 772.978 153.462H772.951Z"
+                  fill="white"
+                />
+                <path
+                  d="M1015.47 189.71C1015.47 211.722 1006.43 229.52 988.385 243.132C972.555 254.997 952.899 260.93 929.418 260.93C905.937 260.93 885.893 254.942 870.064 242.938C852.016 229.326 842.978 211.611 842.978 189.71C842.978 167.809 852.127 150.51 870.424 136.676C886.503 124.561 906.159 118.49 929.391 118.49C952.622 118.49 972.361 124.561 988.191 136.676C1006.38 150.538 1015.44 168.197 1015.44 189.71H1015.47ZM992.294 189.71C992.294 174.019 985.612 161.266 972.278 151.508C960.773 143.108 946.495 138.894 929.446 138.894C910.761 138.894 895.569 143.69 883.814 153.255C872.06 162.847 866.21 174.989 866.21 189.71C866.21 204.431 871.949 217.183 883.454 226.526C894.959 235.869 910.289 240.526 929.446 240.526C948.602 240.526 963.711 235.841 975.161 226.443C986.583 217.045 992.321 204.791 992.321 189.71H992.294Z"
+                  fill="white"
+                />
+                <path
+                  d="M1269.99 256.841H1247.73V147.058H1247.18L1177.45 234.607L1108.29 147.058H1107.73V256.841H1085.47V122.579H1113.28L1177.62 203.724L1242.24 122.579H1269.97V256.841H1269.99Z"
+                  fill="white"
+                />
+                <path
+                  d="M1446.45 122.607C1460.17 122.607 1471.04 126.405 1479.11 134.001C1487.15 141.597 1491.17 151.771 1491.17 164.496C1491.17 177.858 1486.98 188.06 1478.64 195.102C1470.29 202.144 1458.15 205.664 1442.18 205.664H1362.25V256.841H1339.99V122.579H1446.45V122.607ZM1442.57 185.676C1459.76 185.676 1468.35 178.746 1468.35 164.912C1468.35 150.08 1459.26 142.65 1441.1 142.65H1362.28V185.676H1442.6H1442.57Z"
+                  fill="white"
+                />
+                <path
+                  d="M1731.22 256.841H1706.88L1691.41 226.789H1600.98L1585.51 256.841H1561.17L1632.19 122.579H1660.19L1731.22 256.841ZM1680.6 206.773L1646.39 141.708L1611.76 206.773H1680.6Z"
+                  fill="white"
+                />
+                <path
+                  d="M1953.67 256.841H1925.97L1823.48 146.726V256.841H1801.22V122.579H1828.86L1931.43 232.75V122.579H1953.69V256.841H1953.67Z"
+                  fill="white"
+                />
+                <path
+                  d="M2192.83 122.579L2119.39 203.807V256.841H2097.13V203.807L2023.69 122.579H2051.44L2108.39 185.288L2165.08 122.579H2192.83Z"
+                  fill="white"
+                />
+              </svg>
+            </a>
+            <p class="footer__tagline">
+              Egypt's premier luxury real estate destination. Curating
+              exceptional properties for discerning clients since 2004.
+            </p>
+            <div class="footer__stats">
+              <div class="footer__stat">
+                <span class="footer__stat-value">42</span
+                ><span class="footer__stat-label">Projects</span>
+              </div>
+              <div class="footer__stat">
+                <span class="footer__stat-value">18</span
+                ><span class="footer__stat-label">Developers</span>
+              </div>
+              <div class="footer__stat">
+                <span class="footer__stat-value">12+</span
+                ><span class="footer__stat-label">Years</span>
+              </div>
+            </div>
+            <div class="footer__socials">
+              <a
+                href="https://www.instagram.com/akar.town.real.estate/"
+                class="footer__social-btn"
+                aria-label="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  aria-hidden="true"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" />
+                  <circle cx="12" cy="12" r="4.5" />
+                  <circle
+                    cx="17.5"
+                    cy="6.5"
+                    r="1"
+                    fill="currentColor"
+                    stroke="none"
+                  />
+                </svg>
+              </a>
+              <a
+                href="https://www.facebook.com/AkarTownEG"
+                class="footer__social-btn"
+                aria-label="Facebook"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                  />
+                </svg>
+              </a>
+              <a
+                href="https://www.linkedin.com/company/akar-town/"
+                class="footer__social-btn"
+                aria-label="LinkedIn"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                  />
+                  <rect x="2" y="9" width="4" height="12" />
+                  <circle cx="4" cy="4" r="2" />
+                </svg>
+              </a>
+              <a
+                href="https://youtube.com/@mohamedelhemaly.akrealestate"
+                class="footer__social-btn"
+                aria-label="YouTube"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg
+                  width="17"
+                  height="12"
+                  viewBox="0 0 24 17"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M22.54 2.42A2.78 2.78 0 0 0 20.59.46C18.88 0 12 0 12 0S5.12 0 3.41.46A2.78 2.78 0 0 0 1.46 2.42 29 29 0 0 0 1 8.5a29 29 0 0 0 .46 6.08 2.78 2.78 0 0 0 1.95 1.96C5.12 17 12 17 12 17s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 8.5a29 29 0 0 0-.46-6.08z"
+                  />
+                  <polygon
+                    points="9.75 12.02 15.5 8.5 9.75 4.98 9.75 12.02"
+                    fill="white"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="footer__col" data-reveal>
+            <span class="footer__label">Explore</span>
+            <ul class="footer__links">
+              <li><a href="developers.html">All Developers</a></li>
+              <li><a href="projects.html">Browse Projects</a></li>
+              <li><a href="listings.html">Browse Units</a></li>
+              <li><a href="#">New Cairo</a></li>
+              <li><a href="#">North Coast</a></li>
+              <li><a href="#">Ain Sokhna</a></li>
+            </ul>
+          </div>
+          <div class="footer__col" data-reveal>
+            <span class="footer__label">Company</span>
+            <ul class="footer__links">
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="#">Our Team</a></li>
+              <li><a href="#">Success Stories</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Press &amp; Media</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer__col footer__col--match" data-reveal>
+            <span class="footer__label">Property Matching</span>
+            <h3 class="footer__match-title">Find Your <em>Perfect</em> Unit</h3>
+            <p class="footer__match-desc">
+              Tell us what you need — we'll alert you the moment it's listed.
+            </p>
+            <div
+              class="footer__type-pills"
+              role="group"
+              aria-label="Property type"
+            >
+              <button
+                type="button"
+                class="footer__type-pill is-active"
+                data-pill
+              >
+                Apartment
+              </button>
+              <button type="button" class="footer__type-pill" data-pill>
+                Villa
+              </button>
+              <button type="button" class="footer__type-pill" data-pill>
+                Penthouse
+              </button>
+              <button type="button" class="footer__type-pill" data-pill>
+                Chalet
+              </button>
+            </div>
+            <form class="footer__match-form" id="footerMatchForm" novalidate>
+              <span class="footer__field-label">Budget Range (EGP)</span>
+              <div class="footer__budget-row">
+                <input
+                  type="number"
+                  class="footer__budget-input"
+                  placeholder="Minimum"
+                  aria-label="Minimum budget"
+                  min="0"
+                />
+                <span class="footer__budget-sep" aria-hidden="true">—</span>
+                <input
+                  type="number"
+                  class="footer__budget-input"
+                  placeholder="Maximum"
+                  aria-label="Maximum budget"
+                  min="0"
+                />
+              </div>
+              <span class="footer__field-label">Your Email</span>
+              <div class="footer__email-row">
+                <input
+                  type="email"
+                  class="footer__email-input"
+                  placeholder="you@example.com"
+                  required
+                  aria-label="Your email"
+                />
+                <button
+                  type="submit"
+                  class="footer__match-submit"
+                  aria-label="Submit"
+                >
+                  <svg
+                    width="16"
+                    height="14"
+                    viewBox="0 0 16 14"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M7.99997 0.414307C7.99997 1.11051 8.68991 2.15231 9.38737 3.02724C10.2855 4.15371 11.3574 5.13777 12.5873 5.88911C13.5087 6.45171 14.6276 6.99177 15.5264 6.99177M7.99997 13.5855C7.99997 12.8893 8.68991 11.8475 9.38737 10.9726C10.2855 9.84617 11.3574 8.86204 12.5873 8.11071C13.5087 7.54811 14.6276 7.00804 15.5264 7.00804M15.5264 6.99991H0.473572"
+                      stroke="currentColor"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="footer__mark" data-reveal aria-hidden="true">
+          <span class="footer__mark-text">AKAR TOWN</span>
+        </div>
+        <div class="footer__bottom" data-reveal>
+          <span class="footer__credit"
+            >&copy; Copyright 2026. All Rights Reserved To
+            <a
+              class="footer__credit-link"
+              href="https://www.8worx.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >8WORX</a
+            ></span
+          >
+          <div class="footer__legal">
+            <a href="#">Privacy Policy</a><a href="#">Terms</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        /* ── NAVBAR SCROLL ── */
+        var navbar = document.querySelector(".navbar");
+        window.addEventListener(
+          "scroll",
+          function () {
+            if (navbar)
+              navbar.classList.toggle("is-scrolled", window.scrollY > 10);
+          },
+          { passive: true },
+        );
+
+        /* ── HAMBURGER ── */
+        var ham = document.getElementById("navHamburger");
+        var mobileNav = document.getElementById("mobileNav");
+        if (ham && mobileNav) {
+          ham.addEventListener("click", function () {
+            var open = mobileNav.classList.toggle("is-open");
+            ham.classList.toggle("is-open", open);
+            mobileNav.setAttribute("aria-hidden", !open);
+            ham.setAttribute("aria-expanded", open);
+          });
+        }
+
+        /* ── LANG TOGGLE ── */
+        var LANG_KEY = "akar_lang";
+        function applyLang(lang) {
+          document.documentElement.setAttribute("lang", lang);
+          document.documentElement.setAttribute(
+            "dir",
+            lang === "ar" ? "rtl" : "ltr",
+          );
+          var btn = document.getElementById("langToggle");
+          if (btn)
+            btn.setAttribute("aria-checked", lang === "ar" ? "true" : "false");
+          try {
+            localStorage.setItem(LANG_KEY, lang);
+          } catch (_) {}
+        }
+        try {
+          applyLang(localStorage.getItem(LANG_KEY) || "en");
+        } catch (_) {
+          applyLang("en");
+        }
+        var lt = document.getElementById("langToggle");
+        if (lt) {
+          function doLangToggle() {
+            var cur = document.documentElement.getAttribute("lang") || "en";
+            applyLang(cur === "ar" ? "en" : "ar");
+          }
+          lt.addEventListener("click", doLangToggle);
+          lt.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              doLangToggle();
+            }
+          });
+        }
+
+        /* ── HERO PARALLAX ── */
+        var heroBg = document.getElementById("heroBg");
+        if (heroBg) {
+          window.addEventListener(
+            "scroll",
+            function () {
+              var y = window.scrollY;
+              if (y < window.innerHeight) {
+                heroBg.style.transform = "translateY(" + y * 0.35 + "px)";
+              }
+            },
+            { passive: true },
+          );
+        }
+
+        /* ── SCROLL REVEAL ── */
+        if ("IntersectionObserver" in window) {
+          var revealObs = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (e) {
+                if (e.isIntersecting) {
+                  e.target.classList.add("in-view");
+                  revealObs.unobserve(e.target);
+                }
+              });
+            },
+            { threshold: 0.12 },
+          );
+          document.querySelectorAll("[data-reveal]").forEach(function (el) {
+            revealObs.observe(el);
+          });
+        } else {
+          document.querySelectorAll("[data-reveal]").forEach(function (el) {
+            el.style.opacity = "1";
+          });
+        }
+
+        /* ── STAT COUNTERS ── */
+        function easeOutQuart(t) {
+          return 1 - Math.pow(1 - t, 4);
+        }
+        function animateCounter(el, target, duration) {
+          var start = null;
+          function step(ts) {
+            if (!start) start = ts;
+            var progress = Math.min((ts - start) / duration, 1);
+            var eased = easeOutQuart(progress);
+            el.textContent = Math.round(eased * target).toLocaleString();
+            if (progress < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        }
+        if ("IntersectionObserver" in window) {
+          var statsObs = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (e) {
+                if (e.isIntersecting) {
+                  var el = e.target;
+                  var target = parseInt(el.dataset.count, 10);
+                  animateCounter(el, target, 1800);
+                  statsObs.unobserve(el);
+                }
+              });
+            },
+            { threshold: 0.5 },
+          );
+          document.querySelectorAll("[data-count]").forEach(function (el) {
+            statsObs.observe(el);
+          });
+        } else {
+          document.querySelectorAll("[data-count]").forEach(function (el) {
+            el.textContent = parseInt(el.dataset.count, 10).toLocaleString();
+          });
+        }
+
+        /* ── FOOTER PILLS ── */
+        document.querySelectorAll("[data-pill]").forEach(function (pill) {
+          pill.addEventListener("click", function () {
+            var group = pill.closest(".footer__type-pills");
+            if (!group) return;
+            group.querySelectorAll("[data-pill]").forEach(function (p) {
+              p.classList.remove("is-active");
+            });
+            pill.classList.add("is-active");
+          });
+        });
+
+        /* ── FOOTER FORM ── */
+        var matchForm = document.getElementById("footerMatchForm");
+        if (matchForm) {
+          matchForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+          });
+        }
+      })();
+    </script>
+    <link rel="stylesheet" href="auth-modal.css" />
+    <script src="auth-modal.js"></script>
+  </body>
+</html>
